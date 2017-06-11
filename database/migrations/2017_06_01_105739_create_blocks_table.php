@@ -17,6 +17,7 @@ class CreateBlocksTable extends Migration
             $table->increments('id');
             $table->integer('page_id');
             $table->string('title');
+            $table->text('preview');
             $table->text('body');
             $table->string('image')->nullable();
             $table->timestamps();

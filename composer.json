@@ -15,17 +15,17 @@
         "barryvdh/laravel-ide-helper": "^2.3",
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "gazsp/baum": "~1.1",
         "guzzlehttp/guzzle": "^6.2",
         "hieu-le/active": "~3.0",
+        "jbzoo/image": "^3.0",
         "laravel/framework": "5.4.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.*",
         "mews/purifier": "^2.0",
         "yajra/laravel-datatables-buttons": "^1.1",
-        "yajra/laravel-datatables-oracle": "^7.0",
-        "gazsp/baum": "~1.1"
-
+        "yajra/laravel-datatables-oracle": "^7.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^2.1",

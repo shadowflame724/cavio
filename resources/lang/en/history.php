@@ -23,15 +23,35 @@ return [
             'deleted' => 'deleted role',
             'updated' => 'updated role',
         ],
+        'page' => [
+            'created' => 'created page',
+            'deleted' => 'deleted page',
+            'updated' => 'updated page',
+        ],
+        'block' => [
+            'created' => 'created block',
+            'deleted' => 'deleted block',
+            'updated' => 'updated block',
+        ],
         'news' => [
             'created' => 'created news',
             'deleted' => 'deleted news',
             'updated' => 'updated news',
         ],
+        'category' => [
+            'created' => 'created category',
+            'deleted' => 'deleted category',
+            'updated' => 'updated category',
+        ],
         'collection' => [
             'created' => 'created collection',
             'deleted' => 'deleted collection',
             'updated' => 'updated collection',
+        ],
+        'faq' => [
+            'created' => 'created question',
+            'deleted' => 'deleted question',
+            'updated' => 'updated question',
         ],
         'users' => [
             'changed_password' => 'changed password for user',

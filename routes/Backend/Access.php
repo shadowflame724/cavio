@@ -17,6 +17,16 @@ Route::group([
         'middleware' => 'access.routeNeedsRole:1'
     ], function () {
 
+        /*
+        Route::group(['namespace' => 'Image'], function () {
+
+            /*
+             * For ImageUploader
+
+            Route::post('image/upload', 'ImageController@upload');
+        });
+*/
+
         Route::group(['namespace' => 'User'], function () {
             /*
              * For DataTables
@@ -72,77 +82,6 @@ Route::group([
 
             //For DataTables
             Route::post('role/get', 'RoleTableController')->name('role.get');
-        });
-
-        /*
-        * Page Management
-        */
-        Route::group(['namespace' => 'Page'], function () {
-            Route::resource('page', 'PageController', ['except' => ['show']]);
-
-            //For DataTables
-            Route::post('page/get', 'PageTableController')->name('page.get');
-        });
-
-        /*
-        * Block Management
-
-        Route::group(['namespace' => 'Block'], function () {
-            Route::resource('page.block', 'BlockController', ['except' => ['show']]);
-
-            //For DataTables
-            Route::post('block/get/{page}', 'BlockTableController')->name('block.get');
-        });
-
-        /*
-        * Categories Management
-        */
-        Route::group(['namespace' => 'Category'], function () {
-
-            Route::get('category',
-                [
-                    'as' => 'category.index',
-                    'uses' => 'CategoryController@index'
-                ]);
-
-            Route::match(['GET', 'POST'], 'category/create/{p_id?}',
-                [
-                    'as' => 'category.create',
-                    'uses' => 'CategoryController@create'
-                ]);
-
-            Route::match(['GET', 'POST'], 'category/edit/{id?}',
-                [
-                    'as' => 'category.edit',
-                    'uses' => 'CategoryController@edit'
-                ]);
-
-            Route::get('category/delete/{id}',
-                [
-                    'as' => 'category.delete',
-                    'uses' => 'CategoryController@destroy'
-                ]);
-        });
-
-        /*
-        * News Management
-        */
-        Route::group(['namespace' => 'News'], function () {
-            Route::resource('news', 'NewsController', ['except' => ['show']]);
-
-            //For DataTables
-            Route::post('news/get', 'NewsTableController')->name('news.get');
-        });
-
-        /*
-        * Collections Management
-        */
-        Route::group(['namespace' => 'Collection'], function () {
-            Route::resource('collection', 'CollectionController', ['except' => ['show']]);
-
-
-            //For DataTables
-            Route::post('collection/get', 'CollectionTableController')->name('collection.get');
         });
 
     });

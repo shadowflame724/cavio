@@ -142,12 +142,47 @@ return [
                     'name'                   => 'Name',
                     'sort'                   => 'Sort',
                 ],
+                'page' => [
+                    'pageKey' => 'Page key',
+                    'title' => 'Title',
+                    'description' => 'Description',
+                    'body' => 'Content',
+                ],
+                'block' => [
+                    'title' => 'Title',
+                    'preview' => 'Preview',
+                    'body' => 'Content',
+                    'image' => 'Image',
+                    'image_select' => 'Select image',
+                ],
+                'image' => [
+                    'error' =>[
+                        'dictFileTooBig' => 'File is too big',
+                        'dictFallbackMessage' => 'Your browser does not support drag & drop',
+                        'dictInvalidFileType' => 'Invalid file type',
+                        'dictMaxFilesExceeded' => 'The maximum number of uploaded files has been exceeded.',
+                        'default_error' => 'Try uploading a different file format',
+                        'title' => 'Loading an object',
+                        'text' => 'There was an error uploading the file.'
+                    ],
+                ],
 
                 'news' => [
+                    'type' => 'Type',
+                    'type_news' => 'News',
+                    'type_press' => 'Press',
+                    'type_presentation' => 'Presentation',
+                    'type_video' => 'Video',
+                    'type_showroom' => 'Showroom',
                     'title' => 'Title',
                     'description' => 'Description',
                     'preview' => 'Preview',
-                    'body' => 'Body',
+                    'body' => 'Content',
+                    'image' => 'Image',
+                    'image_select' => 'Select image',
+                ],
+                'category' => [
+                    'name' => 'Name',
                     'image' => 'Image',
                     'image_select' => 'Select image',
                 ],
@@ -158,6 +193,12 @@ return [
                     'image' => 'Image',
                     'image_select' => 'Select image',
                 ],
+
+                'faq' => [
+                    'question' => 'Question',
+                    'answer' => 'Answer',
+                ],
+
 
                 'users' => [
                     'active'                  => 'Active',

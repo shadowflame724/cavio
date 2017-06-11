@@ -37,6 +37,41 @@
                 </a>
             </li>
 
+            <li class="{{ active_class(Active::checkUriPattern('admin/page')) }}">
+                <a href="{{ route('admin.page.index') }}">
+                    <i class="fa fa-address-card"></i>
+                    <span>{{ trans('menus.backend.access.page.management') }}</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/news')) }}">
+                <a href="{{ route('admin.news.index') }}">
+                    <i class="fa fa-address-card"></i>
+                    <span>{{ trans('menus.backend.access.news.management') }}</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/faq')) }}">
+                <a href="{{ route('admin.faq.index') }}">
+                    <i class="fa fa-address-card"></i>
+                    <span>{{ trans('menus.backend.access.faq.management') }}</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/category')) }}">
+                <a href="{{ route('admin.category.index') }}">
+                    <i class="fa fa-address-card"></i>
+                    <span>{{ trans('menus.backend.access.category.management') }}</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/collection')) }}">
+                <a href="{{ route('admin.collection.index') }}">
+                    <i class="fa fa-address-card"></i>
+                    <span>{{ trans('menus.backend.access.collection.management') }}</span>
+                </a>
+            </li>
+
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
             @role(1)
@@ -59,34 +94,6 @@
                         <a href="{{ route('admin.access.role.index') }}">
                             <i class="fa fa-circle-o"></i>
                             <span>{{ trans('labels.backend.access.roles.management') }}</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ active_class(Active::checkUriPattern('admin/access/page*')) }}">
-                        <a href="{{ route('admin.access.page.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>Pages</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ active_class(Active::checkUriPattern('admin/access/category*')) }}">
-                        <a href="{{ route('admin.access.category.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>Categories</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ active_class(Active::checkUriPattern('admin/access/news*')) }}">
-                        <a href="{{ route('admin.access.news.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('labels.backend.access.news.management') }}</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ active_class(Active::checkUriPattern('admin/access/collection*')) }}">
-                        <a href="{{ route('admin.access.collection.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('labels.backend.access.collection.management') }}</span>
                         </a>
                     </li>
 

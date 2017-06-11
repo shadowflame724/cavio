@@ -35,7 +35,20 @@ return [
                 'main'            => 'Users',
                 'view'            => 'View User',
             ],
-
+            'page' => [
+                'all'        => 'All Pages',
+                'create'     => 'Create Page',
+                'edit'       => 'Edit Page',
+                'management' => 'Pages Management',
+                'main'       => 'Pages',
+            ],
+            'block' => [
+                'all'        => 'All Blocks',
+                'create'     => 'Create Block',
+                'edit'       => 'Edit Block',
+                'management' => 'Blocks Management',
+                'main'       => 'Blocks',
+            ],
             'news' => [
                 'all'        => 'All News',
                 'create'     => 'Create News',
@@ -43,12 +56,27 @@ return [
                 'management' => 'News Management',
                 'main'       => 'News',
             ],
+            'category' => [
+                'all'        => 'All Categories',
+                'create'     => 'Create Category',
+                'create_root'     => 'Create root Category',
+                'edit'       => 'Edit Category',
+                'management' => 'Categories Management',
+                'main'       => 'Categories',
+            ],
             'collection' => [
                 'all'        => 'All Collections',
                 'create'     => 'Create Collection',
                 'edit'       => 'Edit Collection',
                 'management' => 'Collections Management',
                 'main'       => 'Collections',
+            ],
+            'faq' => [
+                'all'        => 'All Questions',
+                'create'     => 'Create Question',
+                'edit'       => 'Edit Question',
+                'management' => 'FAQs Management',
+                'main'       => 'Questions',
             ],
         ],
 

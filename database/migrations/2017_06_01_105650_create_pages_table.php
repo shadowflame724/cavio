@@ -18,9 +18,7 @@ class CreatePagesTable extends Migration
             $table->string('pageKey');
             $table->string('title');
             $table->text('description');
-            $table->text('prev');
             $table->text('body');
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
