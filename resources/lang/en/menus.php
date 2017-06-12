@@ -71,6 +71,13 @@ return [
                 'management' => 'Collections Management',
                 'main'       => 'Collections',
             ],
+            'marker' => [
+                'all'        => 'All Markers',
+                'create'     => 'Create Marker',
+                'edit'       => 'Edit Marker',
+                'management' => 'Marker\'s Management',
+                'main'       => 'Markers',
+            ],
             'faq' => [
                 'all'        => 'All Questions',
                 'create'     => 'Create Question',

@@ -8,7 +8,7 @@
 ;(function($) {
 	$.widget("wgm.imgNotes", $.wgm.imgViewer, {
 		options: {
-			canEdit: false,
+			canEdit: true,
 			vAll: "middle",
 			hAll: "middle",
 			onEdit: $.noop,
@@ -21,7 +21,7 @@
 				this.options.vAll = "bottom";
 				this.options.hAll = "middle";
 				var elem = $(document.createElement('div')).addClass("marker").append($('<p class="marker-text">'+(this.notes.length+1)+'</p>'))
-																			  .prepend($('<img>',{src: './lib/images/marker_black.png', width:'100%'})).attr("title","");
+																			  .prepend($('<img>',{src: '/js/backend/collection/lib/images/marker_black.png', width:'100%'})).attr("title","");
 				$(elem).tooltip({
 					content: function() {
 						return $(elem).data("note").note;
@@ -77,13 +77,13 @@
 									};
 			this._super();
 		},
-		
+
 		_destroy: function() {
 			this.clear();
 			this._super();
 		},
 /*
- *	Add a note 
+ *	Add a note
  */
 		addNote: function(note) {
 			var self = this,
@@ -91,7 +91,7 @@
 				$elem = $(elem);
 			$(this.view).append(elem);
 			$elem.data("note", note);
-			
+
 			switch (this.options.vAll) {
 				case "top": $elem.data("yOffset", 0); break;
 				case "bottom": $elem.data("yOffset", $elem.height()); break;
@@ -118,7 +118,7 @@
 			this.notes.push(elem);
 			this.update();
 			return elem;
-			
+
 		},
 /*
  *	Number of notes

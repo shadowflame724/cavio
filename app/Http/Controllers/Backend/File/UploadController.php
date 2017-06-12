@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\File;
+    namespace App\Http\Controllers\Backend\File;
 
 use JBZoo\Image\Image;
 use Illuminate\Http\Request;

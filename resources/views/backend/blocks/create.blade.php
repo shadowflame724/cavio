@@ -9,14 +9,6 @@
             z-index: 999;
         }
 
-        #add_logo {
-            display: inline-block;
-            width: 320px;
-            height: 290px;
-            float: left;
-            margin-right: 10px;
-        }
-
         #add_image {
             max-width: 650px;
         }
@@ -29,7 +21,7 @@
             display: none !important;
         }
 
-        .logo, .image {
+        .image {
             position: relative;
             display: inline-block;
             visibility: hidden;
@@ -39,16 +31,11 @@
             margin: 30px 0 50px;
         }
 
-        .logo {
-            width: 320px;
-            height: 290px;
-        }
-
-        .logo.active, .image.active {
+        .image.active {
             visibility: visible;
         }
 
-        .dlt_logo, .dlt_image {
+        .dlt_image {
             position: absolute;
             top: 0;
             right: 0;
@@ -107,9 +94,9 @@
 
 
             <div class="form-group">
-                {{ Form::label('image', trans('validation.attributes.backend.access.block.image'), ['class' => 'col-lg-2 control-label']) }}
+                {{ Form::label('image', trans('validation.attributes.backend.access.news.image'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::hidden('image', null, ['id' => 'image-cropper']) }}
+                    {{ Form::hidden('image', null) }}
                     <div class="dropzone" id="add_image"></div>
                     <div class="image">
                         <div class="btn glyphicon glyphicon-remove dlt_image"></div>
@@ -141,10 +128,10 @@
 @endsection
 
 @section('after-scripts')
-    {{ Html::script('js/backend/cropit/dist/jquery.cropit.js') }}
+    {{ Html::script('js/backend/ImgUtil/cropper.min.js') }}
     {{ Html::script('js/backend/redactor/redactor.js') }}
     {{ Html::script('js/backend/ImgUtil/dropzone.js') }}
-    {{ Html::script('js/backend/blocks/script.js') }}
+    {{ Html::script('js/backend/block/script.js') }}
     <script>
         function imageDropzone(id, url) {
             $('#add_' + id).dropzone({
@@ -222,6 +209,5 @@
         }
         imageDropzone('image', "{!! route('admin.file.upload') !!}");
         Dropzone.autoDiscover = false;
-
     </script>
 @endsection

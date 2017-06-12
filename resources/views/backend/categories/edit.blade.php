@@ -3,6 +3,62 @@
 @section ('title', "Category management")
 
 @section('page-header')
+    {{ Html::style('/css/backend/redactor/redactor.css') }}
+    {{ Html::style('css/backend/cropit/cropit.css') }}
+    {{ HTML::style('/css/backend/dropzone/dropzone.css') }}
+    <style>
+        .sweet-alert {
+            z-index: 999;
+        }
+
+        #add_logo {
+            display: inline-block;
+            width: 320px;
+            height: 290px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        #add_image {
+            max-width: 650px;
+        }
+
+        .dropzone.dz-started .dz-message {
+            display: block !important;
+        }
+
+        .dz-preview {
+            display: none !important;
+        }
+
+        .logo, .image {
+            position: relative;
+            display: inline-block;
+            visibility: hidden;
+        }
+
+        .image {
+            margin: 30px 0 50px;
+        }
+
+        .logo {
+            width: 320px;
+            height: 290px;
+        }
+
+        .logo.active, .image.active {
+            visibility: visible;
+        }
+
+        .dlt_logo, .dlt_image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: red;
+            font-size: 25px;
+        }
+
+    </style>
     <h1>
         Edit Category
         <small>Edit Category</small>
@@ -31,70 +87,126 @@
             </div><!--form control-->
 
             <div class="form-group">
-                {{ Form::label('image', 'image', ['class' => 'col-lg-2 control-label']) }}
-
+                {{ Form::label('image', trans('validation.attributes.backend.access.news.image'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    @if($category->image != null)
-                        <img src="/img/backend/categories/{{$category->image}}" width="300" height="300">
+                    {{ Form::hidden('image', null) }}
+                    <div class="dropzone" id="add_image"></div>
+                    @if($category->image)
+                        <div class="image active">
+                            <div class="btn glyphicon glyphicon-remove dlt_image"></div>
+                            <img src="/upload/images/{{ $category->image  }}" alt="">
+                        </div>
+                    @else
+                        <div class="image">
+                            <div class="btn glyphicon glyphicon-remove dlt_image"></div>
+                        </div>
                     @endif
-                    <div id="image-cropper">
-                        <!-- This is where the preview image is displayed -->
-                        <div class="cropit-image-preview"></div>
-
-                        <!-- This range input controls zoom -->
-                        <!-- You can add additional elements here, e.g. the image icons -->
-                        <input type="range" class="cropit-image-zoom-input"/>
-
-                        <!-- This is where user selects new image -->
-                        <input name='file' type="file" class="cropit-image-input"/>
-
-                        <!-- The cropit- classes above are needed so cropit can identify these elements -->
-                    </div>
-
                 </div><!--col-lg-10-->
             </div><!--form control-->
-        </div>
+
+        </div><!-- /.box-body -->
+    </div><!--box-->
 
 
-        <div class="box box-success">
-            <div class="box-body">
-                <div class="pull-left">
-                    {{ link_to_route('admin.category.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
-                </div><!--pull-left-->
+    <div class="box box-success">
+        <div class="box-body">
+            <div class="pull-left">
+                {{ link_to_route('admin.category.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+            </div><!--pull-left-->
 
-                <div class="pull-right">
-                    {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
-                </div><!--pull-right-->
+            <div class="pull-right">
+                {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+            </div><!--pull-right-->
 
-                <div class="clearfix"></div>
-            </div><!-- /.box-body -->
-        </div><!--box-->
+            <div class="clearfix"></div>
+        </div><!-- /.box-body -->
+    </div><!--box-->
     </div>
     {{ Form::close() }}
 
 @endsection
 
 @section('after-scripts')
-    {{ Html::script('js/backend/pages/redactor/redactor.js') }}
+    {{ Html::script('js/backend/ImgUtil/cropper.min.js') }}
+    {{ Html::script('js/backend/redactor/redactor.js') }}
+    {{ Html::script('js/backend/ImgUtil/dropzone.js') }}
     {{ Html::script('js/backend/category/script.js') }}
-    {{ Html::script('js/backend/dropzone/dropzone.js') }}
-    {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js') }}
-    {{ Html::script('../dist/jquery.cropit.js') }}
     <script>
-        $('#image-cropper').dropzone().cropit();
+        function imageDropzone(id, url) {
+            $('#add_' + id).dropzone({
+                url: url,
+                paramName: "file",
+                acceptedFiles: "image/jpeg,image/png,image/jpg",
+                clickable: true,
+                uploadMultiple: false,
+                dictFileTooBig: "{{trans('validation.attributes.backend.access.image.error.dictFileTooBig')}}",
+                dictFallbackMessage: "{{trans('validation.attributes.backend.access.image.error.dictFallbackMessage')}}",
+                dictInvalidFileType: "{{trans('validation.attributes.backend.access.image.error.dictInvalidFileType')}}",
+                dictMaxFilesExceeded: "{{trans('validation.attributes.backend.access.image.error.dictMaxFilesExceeded')}}",
+                addRemoveLinks: false,
+                maxFiles: 1,
+                parallelUploads: 1,
+                sending: function (file, xhr, form) {
+                    form.append('_token', $('meta[name=csrf-token]').attr('content'));
+                },
+                success: function (file, res) {
+                    this.removeFile(file);
 
-        // When user clicks select image button,
-        // open select file dialog programmatically
-        $('.select-image-btn').click(function () {
-            $('.cropit-image-input').click();
-        });
+                    if (res['error']) {
+                        console.log(res['error']);
+                        swal({
+                            title: res['error']['title'],
+                            text: res['error']['text'],
+                            type: "warning",
+                            confirmButtonColor: "#DD6B55 ",
+                            confirmButtonText: 'Ok',
+                            closeOnConfirm: true
+                        });
 
-        // Handle rotation
-        $('.rotate-cw-btn').click(function () {
-            $('#image-cropper').cropit('rotateCW');
-        });
-        $('.rotate-ccw-btn').click(function () {
-            $('#image-cropper').cropit('rotateCCW');
-        });
+                    } else {
+                        console.log(res['success']['path']);
+                        console.log(res['success']['imgName']);
+                        if ($('.' + id).hasClass('active')) {
+                            $('.' + id + '>img').replaceWith('<img src="/' + res['success']['path'] + '">');
+                        } else {
+                            $('.' + id).append('<img src="/' + res['success']['path'] + '">');
+                            $('.' + id).addClass('active');
+                        }
+                        $('input#' + id).val(res['success']['imgName']);
+                        swal({
+                            title: res['success']['title'],
+                            text: res['success']['text'],
+                            type: "success",
+                            confirmButtonColor: "#DD6B55 ",
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true
+                        });
+                    }
+
+                },
+                error: function (file, errorMessage, xhr) {
+                    var self = this,
+                        default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
+                    swal({
+                        title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
+                        text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: 'ОК',
+                        closeOnConfirm: true
+                    });
+                    self.removeFile(file);
+                },
+                maxFilesize: 2
+            });
+            $('.dlt_' + id).on('click', function () {
+                $('.' + id + '>img').remove();
+                $('.' + id).removeClass('active');
+                $('input#' + id).val('');
+            });
+        }
+        imageDropzone('image', "{!! route('admin.file.upload') !!}");
+        Dropzone.autoDiscover = false;
     </script>
 @endsection

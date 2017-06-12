@@ -53,6 +53,7 @@ class CollectionController extends Controller
     public function store(StoreCollectionRequest $request)
     {
         $this->collection->create($request->only('title', 'description', 'image'));
+        $this->moveImg($request->image);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.created'));
     }
@@ -66,7 +67,7 @@ class CollectionController extends Controller
     public function edit(Collection $collection, ManageCollectionRequest $request)
     {
         return view('backend.collection.edit', [
-            'Collection' => $collection,
+            'collection' => $collection,
         ]);
     }
 
@@ -78,7 +79,9 @@ class CollectionController extends Controller
      */
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
+        $oldName = $collection->image;
         $this->collection->update($collection, $request->only('title', 'description', 'image'));
+        $this->moveImg($request->image, $oldName);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.updated'));
     }
@@ -91,7 +94,9 @@ class CollectionController extends Controller
      */
     public function destroy(Collection $collection, ManageCollectionRequest $request)
     {
+        $imgName = $collection->image;
         $this->collection->delete($collection);
+        $this->deleteImg($imgName);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.deleted'));
     }

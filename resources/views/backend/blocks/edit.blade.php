@@ -72,9 +72,6 @@
         <div class="box-header with-border">
             <h3 class="box-title">{{ trans('labels.backend.access.block.edit') }}</h3>
 
-            <div class="box-tools pull-right">
-                @include('backend.blocks.block-header-buttons')
-            </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
 
         <div class="form-group">
@@ -114,9 +111,16 @@
             <div class="col-lg-10">
                 {{ Form::hidden('image', null) }}
                 <div class="dropzone" id="add_image"></div>
-                <div class="image">
-                    <div class="btn glyphicon glyphicon-remove dlt_image"></div>
-                </div>
+                @if($block->image)
+                    <div class="image active">
+                        <div class="btn glyphicon glyphicon-remove dlt_image"></div>
+                        <img src="/upload/images/{{ $block->image  }}" alt="">
+                    </div>
+                @else
+                    <div class="image">
+                        <div class="btn glyphicon glyphicon-remove dlt_image"></div>
+                    </div>
+                @endif
             </div><!--col-lg-10-->
         </div><!--form control-->
 
@@ -125,7 +129,7 @@
     <div class="box box-success">
         <div class="box-body">
             <div class="pull-left">
-                {{ link_to_route('admin.page.edit', trans('buttons.general.cancel'), [$block->page], ['class' => 'btn btn-danger btn-xs']) }}
+                {{ link_to_route('admin.page.edit', trans('buttons.general.cancel'), [$block->page->id], ['class' => 'btn btn-danger btn-xs']) }}
             </div><!--pull-left-->
 
             <div class="pull-right">

@@ -101,6 +101,12 @@ return [
                     'created_at' => 'Created at'
                 ],
             ],
+            'marker' => [
+                'create' => 'Create Marker',
+                'edit' => 'Edit Marker',
+                'delete' => 'Delete Marker',
+                'management' => 'Marker\'s Management',
+            ],
             'faq' => [
                 'create' => 'Create Question',
                 'edit' => 'Edit Question',

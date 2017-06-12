@@ -3,10 +3,62 @@
 @section ('title', trans('labels.backend.access.collection.management') . ' | ' . trans('labels.backend.access.collection.edit'))
 
 @section('page-header')
-    {{ Html::style('css/backend/redactor/redactor.css') }}
+    {{ Html::style('/css/backend/redactor/redactor.css') }}
     {{ Html::style('css/backend/cropit/cropit.css') }}
-    {{ Html::style('css/backend/dropzone/dropzone.css') }}
-    {{ Html::style('css/backend/dropzone/basic.css') }}
+    {{ HTML::style('/css/backend/dropzone/dropzone.css') }}
+    <style>
+        .sweet-alert {
+            z-index: 999;
+        }
+
+        #add_logo {
+            display: inline-block;
+            width: 320px;
+            height: 290px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        #add_image {
+            max-width: 650px;
+        }
+
+        .dropzone.dz-started .dz-message {
+            display: block !important;
+        }
+
+        .dz-preview {
+            display: none !important;
+        }
+
+        .logo, .image {
+            position: relative;
+            display: inline-block;
+            visibility: hidden;
+        }
+
+        .image {
+            margin: 30px 0 50px;
+        }
+
+        .logo {
+            width: 320px;
+            height: 290px;
+        }
+
+        .logo.active, .image.active {
+            visibility: visible;
+        }
+
+        .dlt_logo, .dlt_image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: red;
+            font-size: 25px;
+        }
+
+    </style>
     <h1>
         {{ trans('labels.backend.access.collection.management') }}
         <small>{{ trans('labels.backend.access.collection.edit') }}</small>
@@ -31,7 +83,7 @@
                 {{ Form::label('title', trans('validation.attributes.backend.access.collection.title'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
-                    {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus') }}
+                    {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
@@ -44,17 +96,23 @@
             </div><!--form control-->
 
             <div class="form-group">
-                {{ Form::label('image', trans('validation.attributes.backend.access.collection.image'), ['class' => 'col-lg-2 control-label']) }}
-
+                {{ Form::label('image', trans('validation.attributes.backend.access.news.image'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    <div class="dropzone-previews"></div>
-
-                    <div class="dropzone" id="myDropzone"></div>
-                    <!-- And clicking on this button will open up select file dialog -->
-                </div>
-            </div><!--col-lg-10-->
-
+                    {{ Form::hidden('image', null) }}
+                    <div class="dropzone" id="add_image"></div>
+                    @if($collection->image)
+                        <div class="image active">
+                            <div class="btn glyphicon glyphicon-remove dlt_image"></div>
+                            <img src="/upload/images/{{ $collection->image  }}" alt="">
+                        </div>
+                    @else
+                        <div class="image">
+                            <div class="btn glyphicon glyphicon-remove dlt_image"></div>
+                        </div>
+                    @endif
+                </div><!--col-lg-10-->
             </div><!--form control-->
+
         </div><!-- /.box-body -->
     </div><!--box-->
 
@@ -76,58 +134,86 @@
 @endsection
 
 @section('after-scripts')
+    {{ Html::script('js/backend/ImgUtil/cropper.min.js') }}
     {{ Html::script('js/backend/redactor/redactor.js') }}
-    {{ Html::script('js/backend/collection/script.js') }}
     {{ Html::script('js/backend/ImgUtil/dropzone.js') }}
-    {{ Html::script('../dist/jquery.cropit.js') }}
+    {{ Html::script('js/backend/collection/script.js') }}
     <script>
+        function imageDropzone(id, url) {
+            $('#add_' + id).dropzone({
+                url: url,
+                paramName: "file",
+                acceptedFiles: "image/jpeg,image/png,image/jpg",
+                clickable: true,
+                uploadMultiple: false,
+                dictFileTooBig: "{{trans('validation.attributes.backend.access.image.error.dictFileTooBig')}}",
+                dictFallbackMessage: "{{trans('validation.attributes.backend.access.image.error.dictFallbackMessage')}}",
+                dictInvalidFileType: "{{trans('validation.attributes.backend.access.image.error.dictInvalidFileType')}}",
+                dictMaxFilesExceeded: "{{trans('validation.attributes.backend.access.image.error.dictMaxFilesExceeded')}}",
+                addRemoveLinks: false,
+                maxFiles: 1,
+                parallelUploads: 1,
+                sending: function (file, xhr, form) {
+                    form.append('_token', $('meta[name=csrf-token]').attr('content'));
+                },
+                success: function (file, res) {
+                    this.removeFile(file);
 
-        Dropzone.options.myDropzone = {
-            url: "",
-            autoProcessQueue: false,
-            uploadMultiple: true,
-            parallelUploads: 100,
-            maxFiles: 100,
-            acceptedFiles: "image/*",
+                    if (res['error']) {
+                        console.log(res['error']);
+                        swal({
+                            title: res['error']['title'],
+                            text: res['error']['text'],
+                            type: "warning",
+                            confirmButtonColor: "#DD6B55 ",
+                            confirmButtonText: 'Ok',
+                            closeOnConfirm: true
+                        });
 
-            init: function () {
+                    } else {
+                        console.log(res['success']['path']);
+                        console.log(res['success']['imgName']);
+                        if ($('.' + id).hasClass('active')) {
+                            $('.' + id + '>img').replaceWith('<img src="/' + res['success']['path'] + '">');
+                        } else {
+                            $('.' + id).append('<img src="/' + res['success']['path'] + '">');
+                            $('.' + id).addClass('active');
+                        }
+                        $('input#' + id).val(res['success']['imgName']);
+                        swal({
+                            title: res['success']['title'],
+                            text: res['success']['text'],
+                            type: "success",
+                            confirmButtonColor: "#DD6B55 ",
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true
+                        });
+                    }
 
-                var submitButton = document.querySelector("#submit-all");
-                var wrapperThis = this;
-
-                submitButton.addEventListener("click", function () {
-                    wrapperThis.processQueue();
-                });
-
-                this.on("addedfile", function (file) {
-
-                    // Create the remove button
-                    var removeButton = Dropzone.createElement("<button class='btn btn-lg dark'>Remove File</button>");
-
-                    // Listen to the click event
-                    removeButton.addEventListener("click", function (e) {
-                        // Make sure the button click doesn't submit the form:
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        // Remove the file preview.
-                        wrapperThis.removeFile(file);
-                        // If you want to the delete the file on the server as well,
-                        // you can do the AJAX request here.
+                },
+                error: function (file, errorMessage, xhr) {
+                    var self = this,
+                        default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
+                    swal({
+                        title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
+                        text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: 'ОК',
+                        closeOnConfirm: true
                     });
-
-                    // Add the button to the file preview element.
-                    file.previewElement.appendChild(removeButton);
-                });
-
-                this.on('sendingmultiple', function (data, xhr, formData) {
-
-                    formData.append("title", $("#title").val());
-                    formData.append("description", $("#description").val());
-
-                });
-            }
-        };
-
+                    self.removeFile(file);
+                },
+                maxFilesize: 2
+            });
+            $('.' + id).on('click', function () {
+                $('.' + id + '>img').remove();
+                $('.' + id).removeClass('active');
+                $('input#' + id).val('');
+            });
+        }
+        imageDropzone('image', "{!! route('admin.file.upload') !!}");
+        Dropzone.autoDiscover = false;
     </script>
 @endsection

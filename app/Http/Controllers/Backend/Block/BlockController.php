@@ -11,7 +11,7 @@ use App\Models\Page\Page;
 use App\Repositories\Backend\Block\BlockRepository;
 
 /**
- * Class RoleController.
+ * Class BlockController.
  */
 class BlockController extends Controller
 {
@@ -61,6 +61,8 @@ class BlockController extends Controller
     {
         $this->block->create($request->only('page', 'title', 'preview', 'body', 'image'), $page);
 
+        $this->moveImg($request->image);
+
         return redirect()->route('admin.page.edit', $page)->withFlashSuccess(trans('alerts.backend.block.created'));
     }
 
@@ -75,7 +77,7 @@ class BlockController extends Controller
     {
         return view('backend.blocks.edit', [
             'block' => $block,
-            'page' => $block->page(),
+            'page' => $page,
         ]);
     }
 
@@ -88,9 +90,13 @@ class BlockController extends Controller
      */
     public function update(Page $page, Block $block, UpdateBlockRequest $request)
     {
+        $oldName = $block->image;
+
         $this->block->update($block, $request->only('title', 'preview', 'body', 'image'));
 
-        return redirect()->route('admin.page.edit', $block->page)->withFlashSuccess(trans('alerts.backend.block.updated'));
+        $this->moveImg($request->image, $oldName);
+
+        return redirect()->route('admin.page.edit', $block->page())->withFlashSuccess(trans('alerts.backend.block.updated'));
     }
 
     /**
@@ -102,8 +108,11 @@ class BlockController extends Controller
      */
     public function destroy(Page $page, Block $block, ManageBlockRequest $request)
     {
-        $this->block->delete($block);
+        $imgName = $block->image;
 
-        return redirect()->route('admin.page.edit', $block->page)->withFlashSuccess(trans('alerts.backend.block.deleted'));
+        $this->block->delete($block);
+        $this->deleteImg($imgName);
+
+        return redirect()->route('admin.page.edit', $block->page())->withFlashSuccess(trans('alerts.backend.block.deleted'));
     }
 }

@@ -48,19 +48,15 @@ class CategoryController extends Controller
                 'name' => "required|min:3|max:191",
                 'file' => 'image|mimes:jpeg,bmp,png',
             ]);
-            $imageName = null;
-
-            if(\request('file') != null) {
-                $imageName = time() . '.' . $request->file->getClientOriginalExtension();
-                $request->file->move(public_path('img/backend/categories/'), $imageName);
-            }
             $catName = \request('name');
             $p_id = \request('p_id');
+            $imageName = $request->image;
             if (Category::isValidNestedSet() == true) {
 
                 $cat = Category::create([
                     'name' => $catName,
-                    'image' => $imageName
+                    'image' => $imageName,
+                    $this->moveImg($imageName)
                 ]);
                 if ($p_id != null) {
                     $root = Category::find($p_id);
@@ -82,25 +78,21 @@ class CategoryController extends Controller
     public function edit(Request $request, $p_id)
     {
         $cat = Category::find($p_id);
+        $oldName = $cat->image;
 
         if ($request->isMethod("POST")) {
             $this->validate(\request(), [
                 'name' => "required|min:3|max:191",
                 'file' => 'image|mimes:jpeg,bmp,png',
             ]);
-            $imageName = $cat->image;
-            if(\request('file') != null) {
-                if($imageName == null){
-                    $imageName = time() . '.' . $request->file->getClientOriginalExtension();
-                }
-                $request->file->move(public_path('img/backend/categories/'), $imageName);
-            }
+            $imageName = $request->image;
 
             $cat->name = \request('name');
             $cat->image = $imageName;
             $cat->save();
+            $this->moveImg($request->image, $oldName);
 
-            return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.edited'));
+            return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.updated'));
         }
 
         return view('backend.categories.edit', ['category' => $cat]);
@@ -115,8 +107,10 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $cat = Category::find($id);
-
+        $imgName = $cat->image;
         $cat->delete();
+        $this->deleteImg($imgName);
+
         return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.deleted'));
     }
 }
