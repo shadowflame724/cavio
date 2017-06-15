@@ -3,6 +3,7 @@
 namespace App\Repositories\Backend\Collection;
 
 use App\Models\Collection\Collection;
+use App\Models\Marker\Marker;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Events\Backend\Collection\CollectionCreated;
 use App\Events\Backend\Collection\CollectionDeleted;
 use App\Events\Backend\Collection\CollectionUpdated;
+use App\Http\Controllers\Controller;
 
 /**
  * Class CollectionRepository.
@@ -63,9 +65,18 @@ class CollectionRepository extends BaseRepository
             $collection = new $collection();
             $collection->title = $input['title'];
             $collection->description = $input['description'];
-            $collection->image = $input['image'];
+            $collection->image = $input['photo'];
 
             if ($collection->save()) {
+                for ($i = 0; $i < 5; $i++) {
+                    Marker::create([
+                        'collection_id' => $collection->id,
+                        'title' => 'Default title',
+                        'code' => '#00001',
+                        'x' => '679',
+                        'y' => '149',
+                    ]);
+                }
                 event(new CollectionCreated($collection));
 
                 return true;
@@ -87,7 +98,7 @@ class CollectionRepository extends BaseRepository
     {
         $collection->title = $input['title'];
         $collection->description = $input['description'];
-        $collection->image = $input['image'];
+        $collection->image = $input['photo'];
 
         DB::transaction(function () use ($collection, $input) {
             if ($collection->save()) {
@@ -113,10 +124,7 @@ class CollectionRepository extends BaseRepository
         DB::transaction(function () use ($collection) {
 
             if ($collection->delete()) {
-                $fileName = public_path('img/backend/upload') . $collection->image;
-                if (file_exists($fileName) AND $collection->image != null) {
-                    unlink($fileName);
-                }
+
                 event(new CollectionDeleted($collection));
 
                 return true;

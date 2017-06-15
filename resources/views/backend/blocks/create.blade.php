@@ -76,7 +76,6 @@
 
             {{ Form::hidden('page', $page->id, ['id' => 'page','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
 
-
             <div class="form-group">
                 {{ Form::label('preview', trans('validation.attributes.backend.access.block.preview'), ['class' => 'col-lg-2 control-label']) }}
 

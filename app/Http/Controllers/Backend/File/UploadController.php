@@ -44,7 +44,6 @@ class UploadController extends Controller
 
     public function uploadImage(Request $request)
     {
-
         $json = $this->uploadImg($request->file('file'), 650, 360);
         return response()->json($json);
     }
@@ -54,4 +53,5 @@ class UploadController extends Controller
         $json = $this->uploadImg($request->file('file'), 1366, 768);
         return response()->json($json);
     }
+
 }

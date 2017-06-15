@@ -5,7 +5,7 @@ namespace App\Http\Requests\Backend\Marker;
 use App\Http\Requests\Request;
 
 /**
- * Class UpdatePageRequest.
+ * Class UpdateMarkerRequest.
  */
 class UpdateMarkerRequest extends Request
 {
@@ -27,7 +27,8 @@ class UpdateMarkerRequest extends Request
     public function rules()
     {
         return [
-
+            'code' => 'required|max:10',
+            'title' => 'required|max:32',
         ];
     }
 }

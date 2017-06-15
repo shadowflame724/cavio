@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Block extends Model
 {
-    protected $fillable = ['title', 'body', 'image', 'page_id'];
+    protected $fillable = ['title', 'preview', 'body', 'image', 'page_id'];
 
     public function page()
     {

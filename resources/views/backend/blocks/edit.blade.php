@@ -66,11 +66,14 @@
 @endsection
 
 @section('content')
-    {{ Form::model($block, ['route' => ['admin.page.block.update', $block->page , $block], 'class' => 'form-horizontal', 'page' => 'form', 'method' => 'PATCH', 'id' => 'edit-block', 'enctype' => "multipart/form-data"]) }}
+    {{ Form::model($block, ['route' => ['admin.page.block.update', $page, $block], 'class' => 'form-horizontal', 'page' => 'form', 'method' => 'PATCH', 'id' => 'edit-block', 'enctype' => "multipart/form-data"]) }}
 
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">{{ trans('labels.backend.access.block.edit') }}</h3>
+            <div class="box-tools pull-right">
+                @include('backend.blocks.block-header-buttons')
+            </div><!--box-tools pull-right-->
 
         </div><!-- /.box-header -->
 
@@ -94,14 +97,14 @@
             {{ Form::label('preview', trans('validation.attributes.backend.access.block.preview'), ['class' => 'col-lg-2 control-label']) }}
 
             <div class="col-lg-10">
-                {{ Form::textarea('preview', null, ['class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                {{ Form::textarea('preview', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
             </div><!--col-lg-10-->
         </div><!--form control-->
 
         <div class="form-group">
             {{ Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">
-                {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                {{ Form::textarea('body', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
             </div><!--col-lg-10-->
         </div><!--form control-->
 
@@ -129,7 +132,7 @@
     <div class="box box-success">
         <div class="box-body">
             <div class="pull-left">
-                {{ link_to_route('admin.page.edit', trans('buttons.general.cancel'), [$block->page->id], ['class' => 'btn btn-danger btn-xs']) }}
+                {{ link_to_route('admin.page.edit', trans('buttons.general.cancel'), [$page], ['class' => 'btn btn-danger btn-xs']) }}
             </div><!--pull-left-->
 
             <div class="pull-right">

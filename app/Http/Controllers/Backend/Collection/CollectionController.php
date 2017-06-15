@@ -52,8 +52,8 @@ class CollectionController extends Controller
      */
     public function store(StoreCollectionRequest $request)
     {
-        $this->collection->create($request->only('title', 'description', 'image'));
-        $this->moveImg($request->image);
+        $this->collection->create($request->only('title', 'description', 'photo'));
+        $this->moveImg($request->photo);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.created'));
     }
@@ -80,8 +80,8 @@ class CollectionController extends Controller
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
         $oldName = $collection->image;
-        $this->collection->update($collection, $request->only('title', 'description', 'image'));
-        $this->moveImg($request->image, $oldName);
+        $this->collection->update($collection, $request->only('title', 'description', 'photo'));
+        $this->moveImg($request->photo, $oldName);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.updated'));
     }

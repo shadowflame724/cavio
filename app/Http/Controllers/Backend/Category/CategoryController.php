@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Category;
 use App\Models\Category\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -44,13 +45,13 @@ class CategoryController extends Controller
     public function create(Request $request, $p_id = null)
     {
         if ($request->isMethod("POST")) {
+
             $this->validate(\request(), [
-                'name' => "required|min:3|max:191",
-                'file' => 'image|mimes:jpeg,bmp,png',
+                'name' => "required|min:3|max:191"
             ]);
             $catName = \request('name');
             $p_id = \request('p_id');
-            $imageName = $request->image;
+            $imageName = $request->photo;
             if (Category::isValidNestedSet() == true) {
 
                 $cat = Category::create([
@@ -81,16 +82,17 @@ class CategoryController extends Controller
         $oldName = $cat->image;
 
         if ($request->isMethod("POST")) {
+
             $this->validate(\request(), [
-                'name' => "required|min:3|max:191",
-                'file' => 'image|mimes:jpeg,bmp,png',
+                'name' => "required|min:3|max:191"
             ]);
-            $imageName = $request->image;
+            $imageName = $request->photo;
 
             $cat->name = \request('name');
-            $cat->image = $imageName;
+            $cat->image = $request->photo;
+
             $cat->save();
-            $this->moveImg($request->image, $oldName);
+            $this->moveImg($imageName, $oldName);
 
             return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.updated'));
         }

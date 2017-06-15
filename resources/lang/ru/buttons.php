@@ -36,7 +36,7 @@ return [
     'general'   => [
         'cancel'    => 'Отменa',
         'crud'      => [
-            'create'    => 'Создать',
+            'create'    => 'Сохранить',
             'delete'    => 'Удалить',
             'edit'      => 'Редактировать',
             'update'    => 'Применить',

@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "cropit": "^0.5.1",
+    "cropper": "^3.0.0-rc.2",
+    "cropperjs": "^1.0.0-rc.2",
     "jquery-hotspot": "^1.0.2",
     "sortablejs": "^1.6.0"
   }

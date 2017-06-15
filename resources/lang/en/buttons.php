@@ -40,7 +40,7 @@ return [
         'continue' => 'Continue',
 
         'crud' => [
-            'create' => 'Create',
+            'create' => 'Save',
             'delete' => 'Delete',
             'edit'   => 'Edit',
             'update' => 'Update',

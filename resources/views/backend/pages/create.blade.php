@@ -53,7 +53,7 @@
             <div class="form-group">
                 {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                    {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 

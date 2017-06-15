@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Backend\Page;
 
+use App\Models\Block\Block;
 use App\Models\Page\Page;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
@@ -10,9 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Events\Backend\Page\PageCreated;
 use App\Events\Backend\Page\PageDeleted;
 use App\Events\Backend\Page\PageUpdated;
+use EMT\EMTypograph;
 
 /**
- * Class PageRepository.
+ * Class PageRepository
  */
 class PageRepository extends BaseRepository
 {
@@ -64,9 +66,17 @@ class PageRepository extends BaseRepository
             $page->title = $input['title'];
             $page->pageKey = $input['pageKey'];
             $page->description = $input['description'];
-            $page->body = $input['body'];
+            $page->body = /*EMTypograph::fast_apply(*/clean($input['body']);
 
             if ($page->save()) {
+                for ($i = 0; $i < 5; $i++) {
+                    Block::create([
+                        'page_id' => $page->id,
+                        'title' => 'Default title',
+                        'preview' => 'Default preview',
+                        'body' => 'Default body',
+                    ]);
+                }
                 event(new PageCreated($page));
 
                 return true;
@@ -89,7 +99,7 @@ class PageRepository extends BaseRepository
         $page->title = $input['title'];
         $page->pageKey = $input['pageKey'];
         $page->description = $input['description'];
-        $page->body = $input['body'];
+        $page->body = /*EMTypograph::fast_apply(*/clean($input['body']);
 
         DB::transaction(function () use ($page, $input) {
             if ($page->save()) {

@@ -67,7 +67,7 @@ class NewsRepository extends BaseRepository
             $news->description = $input['description'];
             $news->preview = clean($input['preview']);
             $news->body = clean($input['body']);
-            $news->image = $input['image'];
+            $news->image = $input['photo'];
 
             if ($news->save()) {
                 event(new NewsCreated($news));
@@ -95,7 +95,7 @@ class NewsRepository extends BaseRepository
         $news->preview = clean($input['preview']);
         $news->body = clean($input['body']);
         $news->type = $input['type'];
-        $news->image = $input['image'];
+        $news->image = $input['photo'];
 
         DB::transaction(function () use ($news, $input) {
             if ($news->save()) {

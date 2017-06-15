@@ -20,7 +20,7 @@ class Controller extends BaseController
             unlink(public_path('upload/images/' . $oldName));
         }
 
-        if ($newName != null) {
+        if ($newName != null AND file_exists($tmpFile)) {
             rename($tmpFile, $file);
         }
 
@@ -35,4 +35,5 @@ class Controller extends BaseController
 
         return true;
     }
+
 }
