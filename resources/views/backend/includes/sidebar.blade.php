@@ -37,45 +37,58 @@
                 </a>
             </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/page')) }}">
-                <a href="{{ route('admin.page.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>{{ trans('menus.backend.access.page.management') }}</span>
+            <li class="{{ active_class(Active::checkUriPattern('admin/')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-archive"></i>
+                    <span>{{ trans('menus.backend.sidebar.content') }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
-            </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/news')) }}">
-                <a href="{{ route('admin.news.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>{{ trans('menus.backend.access.news.management') }}</span>
-                </a>
-            </li>
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/page'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/access/*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/access/user*')) }}">
+                        <a href="{{ route('admin.page.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.page.management') }}</span>
+                        </a>
+                    </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/faq')) }}">
-                <a href="{{ route('admin.faq.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>{{ trans('menus.backend.access.faq.management') }}</span>
-                </a>
-            </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/news')) }}">
+                        <a href="{{ route('admin.news.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.news.management') }}</span>
+                        </a>
+                    </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/category')) }}">
-                <a href="{{ route('admin.category.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>{{ trans('menus.backend.access.category.management') }}</span>
-                </a>
-            </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/faq')) }}">
+                        <a href="{{ route('admin.faq.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.faq.management') }}</span>
+                        </a>
+                    </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/collection')) }}">
-                <a href="{{ route('admin.collection.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>{{ trans('menus.backend.access.collection.management') }}</span>
-                </a>
-            </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/category')) }}">
+                        <a href="{{ route('admin.category.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.category.management') }}</span>
+                        </a>
+                    </li>
 
-            <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/collection')) }}">
+                        <a href="{{ route('admin.collection.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.collection.management') }}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
 
             @role(1)
-            <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
+        <ul class="sidebar-menu">
+        <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
+
+        <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-users"></i>
                     <span>{{ trans('menus.backend.access.title') }}</span>

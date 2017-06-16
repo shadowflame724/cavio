@@ -97,6 +97,7 @@ return [
             'dashboard' => 'Dashboard',
             'general'   => 'General',
             'system'    => 'System',
+            'content'    => 'Content',
         ],
     ],
 

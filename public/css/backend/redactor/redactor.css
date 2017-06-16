@@ -165,7 +165,7 @@
   z-index: 99; }
 
 .redactor-toolbar {
-  z-index: 100; }
+  z-index: inherit; }
 
 .redactor-box-fullscreen {
   z-index: 1051; }

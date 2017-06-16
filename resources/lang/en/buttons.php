@@ -41,6 +41,7 @@ return [
 
         'crud' => [
             'create' => 'Save',
+            'create_new' => 'Create new',
             'delete' => 'Delete',
             'edit'   => 'Edit',
             'update' => 'Update',

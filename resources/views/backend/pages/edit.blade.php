@@ -7,48 +7,10 @@
     {{ Html::style('css/backend/plugin/dropzone/basic.css') }}
     {{ Html::style('css/backend/redactor/redactor.css') }}
 @endsection
+
 @section('after-styles')
+    @include('backend.includes.dropzone_cropper_css')
 
-    <style>
-        .sweet-alert {
-            z-index: 999;
-        }
-
-        #add_photo {
-            max-width: 650px;
-        }
-
-        .dropzone.dz-started .dz-message {
-            display: block !important;
-        }
-
-        .dz-preview {
-            display: none !important;
-        }
-
-        .logo, .dz-photo {
-            position: relative;
-            display: inline-block;
-            visibility: hidden;
-        }
-
-        .dz-photo {
-            margin: 30px 0 50px;
-        }
-
-        .dlt_photo.active {
-            visibility: visible;
-        }
-
-        .dlt_photo {
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: red;
-            font-size: 25px;
-        }
-
-    </style>
 @endsection
 @section('page-header')
     {{ Html::style('css/backend/redactor/redactor.css') }}
@@ -156,7 +118,7 @@
                                         {{ Form::label('blocks['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
                                         <div class="col-lg-10">
                                             {{ Form::hidden('blocks['.$i.'][photo]', null) }}
-                                            <div class="dropzone"></div>
+                                            <div class="dropzone" id="add_photo"></div>
                                             @if($block->image)
                                                 <div class="photo active">
                                                     <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
@@ -195,8 +157,6 @@
             {{ Form::close() }}
         </div>
     </div>
-
-
 @endsection
 
 @section('after-scripts')
@@ -226,7 +186,6 @@
             '</div>' +
             '';
 
-        // transform cropper dataURI output to a Blob which Dropzone accepts
         function dataURItoBlob(dataURI) {
             var byteString = atob(dataURI.split(',')[1]);
             var ab = new ArrayBuffer(byteString.length);
@@ -237,24 +196,9 @@
             return new Blob([ab], {type: 'image/jpeg'});
         }
 
-
-        $('.panel-group').on('click', function (e) {
-            $(this).toggleClass('acc-open');
-            if ($(this).hasClass('acc-open')) {
-                currMarkerId = $(this).index() + 1;
-                //console.log(currMarkerId);
-
-            }
-            else {
-                currMarkerId = undefined;
-                $("#marker-" + $(this).index()).remove();
-            }
-        });
-
-
         var myDropzone = [];
 
-        $('.panel-group').each(function(key, el){
+        $('.panel-group').each(function (key, el) {
             myDropzone[key] = new Dropzone($(".dropzone")[key], {
                     autoProcessQueue: false,
                     dictDefaultMessage: "Drop files here",
@@ -267,7 +211,6 @@
                         this.removeFile(file);
 
                         if (res['error']) {
-//                            console.log(res['error']);
                             swal({
                                 title: res['error']['title'],
                                 text: res['error']['text'],
@@ -278,21 +221,17 @@
                             });
 
                         } else {
-//                            console.log(res['success']['path']);
-//                            console.log(res['success']['imgName']);
+
                             if ($('.photo').eq(key).hasClass('active')) {
-                                $('.photo >img').replaceWith('<img src="/' + res['success']['path'] + '">');
+                                $('.photo >img').replaceWith('<img id="dz_photo" src="/' + res['success']['path'] + '">');
                             } else {
-                                $('.photo').eq(key).append('<img src="/' + res['success']['path'] + '">');
+                                $('.photo').eq(key).append('<img id="dz_photo" src="/' + res['success']['path'] + '">');
                                 $('.photo').eq(key).addClass('active');
                             }
 
-
-//                            console.log('-------',key, res['success']['imgName']);
-                            var inp  = $('input#blocks\\['+(key+1)+'\\]\\[photo\\]');
+                            var inp = $('input#blocks\\[' + (key + 1) + '\\]\\[photo\\]');
                             inp.val(res['success']['imgName']);
 
-                            console.log('inp', inp)
                             swal({
                                 title: res['success']['title'],
                                 text: res['success']['text'],
@@ -325,7 +264,6 @@
                 if (file.cropped) {
                     return;
                 }
-//                console.log(this['clickableElements'], selfAccId);
                 var cachedFilename = file.name;
                 myDropzone[selfAccId].removeFile(file);
 
@@ -358,127 +296,19 @@
                     newFile.name = cachedFilename;
                     myDropzone[selfAccId].addFile(newFile);
                     myDropzone[selfAccId].processQueue();
-//                    console.log(newFile);
                     $cropperModal.modal('hide');
                 });
             });
         })
 
-
-
-
-//        $('#edit-page').on('submit', function(event){
-//            event.preventDefault();
-//        });
-
         Dropzone.autoDiscover = false;
-        {{--var myDropzone = new Dropzone($(".dropzone")[0], {--}}
-                {{--autoProcessQueue: false,--}}
-                {{--dictDefaultMessage: "Drop files here",--}}
-                {{--url: "{{route('admin.file.upload')}}",--}}
-                {{--maxFiles: 1,--}}
-                {{--headers: {--}}
-                    {{--'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value--}}
-                {{--},--}}
-                {{--success: function (file, res) {--}}
-                    {{--this.removeFile(file);--}}
 
-                    {{--if (res['error']) {--}}
-                        {{--console.log(res['error']);--}}
-                        {{--swal({--}}
-                            {{--title: res['error']['title'],--}}
-                            {{--text: res['error']['text'],--}}
-                            {{--type: "warning",--}}
-                            {{--confirmButtonColor: "#DD6B55 ",--}}
-                            {{--confirmButtonText: 'Ok',--}}
-                            {{--closeOnConfirm: true--}}
-                        {{--});--}}
-
-                    {{--} else {--}}
-                        {{--console.log(res['success']['path']);--}}
-                        {{--console.log(res['success']['imgName']);--}}
-                        {{--if ($('.photo').hasClass('active')) {--}}
-                            {{--$('.photo >img').replaceWith('<img src="/' + res['success']['path'] + '">');--}}
-                        {{--} else {--}}
-                            {{--$('.photo').append('<img src="/' + res['success']['path'] + '">');--}}
-                            {{--$('.photo').addClass('active');--}}
-                        {{--}--}}
-
-
-                        {{--console.log(currMarkerId, res['success']['imgName']);--}}
-                        {{--$('input#blocks['+currMarkerId+'][photo]').val(res['success']['imgName']);--}}
-                        {{--swal({--}}
-                            {{--title: res['success']['title'],--}}
-                            {{--text: res['success']['text'],--}}
-                            {{--type: "success",--}}
-                            {{--confirmButtonColor: "#DD6B55 ",--}}
-                            {{--confirmButtonText: 'Ок',--}}
-                            {{--closeOnConfirm: true--}}
-                        {{--});--}}
-                    {{--}--}}
-                {{--},--}}
-                {{--error: function (file, errorMessage, xhr) {--}}
-                    {{--var self = this,--}}
-                        {{--default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';--}}
-                    {{--swal({--}}
-                        {{--title: '{{trans('validation.attributes.backend.access.image.error.title')}}',--}}
-                        {{--text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),--}}
-                        {{--type: "warning",--}}
-                        {{--showCancelButton: false,--}}
-                        {{--confirmButtonColor: "#DD6B55",--}}
-                        {{--confirmButtonText: 'ОК',--}}
-                        {{--closeOnConfirm: true--}}
-                    {{--});--}}
-                    {{--self.removeFile(file);--}}
-                {{--}--}}
-            {{--}--}}
-        {{--);--}}
         $('.dlt_photo').on('click', function () {
             $('.photo>img').remove();
             $('.photo').removeClass('active');
             $('input#photo').val('');
         });
 
-
-//        myDropzone.on('thumbnail', function (file) {
-//            if (file.cropped) {
-//                return;
-//            }
-//            console.log(435345)
-//            var cachedFilename = file.name;
-//            myDropzone.removeFile(file);
-//
-//            var $cropperModal = $(modalTemplate);
-//            var $uploadCrop = $cropperModal.find('.crop-upload');
-//            var $img = $('<img />');
-//            var reader = new FileReader();
-//            reader.onloadend = function () {
-//                $cropperModal.find('.image-container').html($img);
-//                $img.attr('src', reader.result);
-//                cropper = new Cropper($img[0], {
-//                    aspectRatio: 16 / 9,
-//                    preview: '.image-preview',
-//                    autoCropArea: 1,
-//                    movable: false,
-//                    cropBoxResizable: true,
-//                    minContainerHeight: 320,
-//                    minContainerWidth: 568
-//                });
-//            };
-//
-//            reader.readAsDataURL(file);
-//            $cropperModal.modal('show');
-//            $uploadCrop.on('click', function () {
-//                var blob = cropper.getCroppedCanvas().toDataURL();
-//                var newFile = dataURItoBlob(blob);
-//                newFile.cropped = true;
-//                newFile.name = cachedFilename;
-//                myDropzone.addFile(newFile);
-//                myDropzone.processQueue();
-//                console.log(newFile);
-//                $cropperModal.modal('hide');
-//            });
-//        });
         $('.panel-group').on('click', function (e) {
             $(this).toggleClass('acc-open');
             if ($(this).hasClass('acc-open')) {

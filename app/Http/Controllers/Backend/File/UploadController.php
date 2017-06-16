@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Http\Controllers\Backend\File;
+namespace App\Http\Controllers\Backend\File;
 
 use JBZoo\Image\Image;
 use Illuminate\Http\Request;
@@ -11,7 +11,6 @@ class UploadController extends Controller
 {
     public function uploadImg($file, $width, $height)
     {
-
         $imgName = time() . '.' . $file->getClientOriginalExtension();
         $path = $file->getRealPath();
         $img = new Image($path);

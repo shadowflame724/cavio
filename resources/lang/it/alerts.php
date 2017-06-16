@@ -19,6 +19,36 @@ return [
             'deleted' => 'Ruolo cancellato con successo.',
             'updated' => 'Ruolo aggiornato con successo.',
         ],
+        'category' => [
+            'created' => 'Categoria creato con successo.',
+            'deleted' => 'Categoria cancellato con successo.',
+            'updated' => 'Categoria aggiornato con successo.',
+        ],
+        'page' => [
+            'created' => 'Pagine creato con successo.',
+            'deleted' => 'Pagine cancellato con successo.',
+            'updated' => 'Pagine aggiornato con successo.',
+        ],
+        'block' => [
+            'created' => 'Bloccare creato con successo.',
+            'deleted' => 'Bloccare cancellato con successo.',
+            'updated' => 'Bloccare aggiornato con successo.',
+        ],
+        'news' => [
+            'created' => 'Notizia creato con successo.',
+            'deleted' => 'Notizia cancellato con successo.',
+            'updated' => 'Notizia aggiornato con successo.',
+        ],
+        'collection' => [
+            'created' => 'Collezione creato con successo.',
+            'deleted' => 'Collezione cancellato con successo.',
+            'updated' => 'Collezione aggiornato con successo.',
+        ],
+        'faq' => [
+            'created' => 'Domanda was successfully created.',
+            'deleted' => 'Domanda was successfully deleted.',
+            'updated' => 'Domanda was successfully updated.',
+        ],
 
         'users' => [
             'confirmation_email'  => "Una nuova e-mail di conferma è stata inviata all'indirizzo registrato.",

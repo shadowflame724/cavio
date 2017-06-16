@@ -21,6 +21,7 @@
     "webpack-rtl-plugin": "^1.5.0"
   },
   "dependencies": {
+    "blob-util": "^1.2.1",
     "cropit": "^0.5.1",
     "cropper": "^3.0.0-rc.2",
     "cropperjs": "^1.0.0-rc.2",

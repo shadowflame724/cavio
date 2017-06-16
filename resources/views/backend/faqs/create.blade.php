@@ -4,6 +4,7 @@
 
 @section('page-header')
     {{ Html::style('css/backend/redactor/redactor.css') }}
+
     <h1>
         {{ trans('labels.backend.access.faq.management') }}
         <small>{{ trans('labels.backend.access.faq.create') }}

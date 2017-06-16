@@ -52,7 +52,7 @@
             </div><!--pull-left-->
 
             <div class="pull-right">
-                {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+                {{ Form::submit(trans('buttons.general.crud.update'), ['class' => 'btn btn-success btn-xs']) }}
             </div><!--pull-right-->
 
             <div class="clearfix"></div>

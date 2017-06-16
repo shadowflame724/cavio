@@ -21,34 +21,34 @@ class NewsTableSeeder extends Seeder
     public function run()
     {
         $this->disableForeignKeys();
-        $this->truncate(config('news_table'));
+        $this->truncate('news');
 
         $news = [
             [
-                'title'       => 'About us',
+                'title' => 'Default news',
                 'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
-                'description'       => '<head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+                'description' => '<head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content=""><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">',
                 'type' => 'news',
-                'body'       => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
+                'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
                 'image' => '1111.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'title'       => 'Contact us',
+                'title' => 'Default news',
                 'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
                 'type' => 'news',
-                'description'       => '<head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+                'description' => '<head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content=""><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">',
-                'body'       => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
+                'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
                 'image' => '1111.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
         ];
 
-        DB::table(config('news_table'))->insert($news);
+        DB::table('news')->insert($news);
 
         $this->enableForeignKeys();
     }

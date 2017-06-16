@@ -1,53 +1,19 @@
 @extends ('backend.layouts.app')
 
 @section ('title', trans('labels.backend.access.collection.management') . ' | ' . trans('labels.backend.access.collection.edit'))
-
-@section('page-header')
-    {{ Html::style('css/backend/redactor/redactor.css') }}
+@section('before-styles')
     {{ Html::style('css/backend/plugin/cropper/cropper.css') }}
     {{ Html::style('css/backend/plugin/dropzone/dropzone.css') }}
     {{ Html::style('css/backend/plugin/dropzone/basic.css') }}
-    <style>
-        .sweet-alert {
-            z-index: 999;
-        }
+@endsection
 
-        #add_photo {
-            max-width: 650px;
-        }
+@section('after-styles')
+    @include('backend.includes.dropzone_cropper_css')
 
-        .dropzone.dz-started .dz-message {
-            display: block !important;
-        }
+@endsection
 
-        .dz-preview {
-            display: none !important;
-        }
+@section('page-header')
 
-        .logo, .dz-photo {
-            position: relative;
-            display: inline-block;
-            visibility: hidden;
-        }
-
-        .dz-photo {
-            margin: 30px 0 50px;
-        }
-
-
-        .dlt_photo.active {
-            visibility: visible;
-        }
-
-        .dlt_photo {
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: red;
-            font-size: 25px;
-        }
-
-    </style>
     <h1>
         {{ trans('labels.backend.access.collection.management') }}
         <small>{{ trans('labels.backend.access.collection.edit') }}</small>
@@ -112,7 +78,7 @@
             </div><!--pull-left-->
 
             <div class="pull-right">
-                {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+                {{ Form::submit(trans('buttons.general.crud.update'), ['class' => 'btn btn-success btn-xs']) }}
             </div><!--pull-right-->
 
             <div class="clearfix"></div>

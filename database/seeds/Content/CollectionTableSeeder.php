@@ -21,28 +21,40 @@ class CollectionTableSeeder extends Seeder
     public function run()
     {
         $this->disableForeignKeys();
-        $this->truncate(config('collections_table'));
+        $this->truncate('collections');
 
         $collections = [
             [
-                'title'       => 'About us',
-                'description'       => '<head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content=""><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">',
+                'title' => 'Some collection',
+                'description' => 'Some description',
                 'image' => '1111.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'title'       => 'Contact us',
-                'description'       => '<head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content=""><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">',
+                'title' => 'Some collection',
+                'description' => 'Some description',
+                'image' => '1111.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'title' => 'Some collection',
+                'description' => 'Some description',
+                'image' => '1111.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'title' => 'Some collection',
+                'description' => 'Some description',
                 'image' => '1111.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
         ];
 
-        DB::table(config('collections_table'))->insert($collections);
+        DB::table('collections')->insert($collections);
 
         $this->enableForeignKeys();
     }

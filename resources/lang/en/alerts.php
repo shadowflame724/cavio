@@ -44,6 +44,11 @@ return [
             'deleted' => 'The collection was successfully deleted.',
             'updated' => 'The collection was successfully updated.',
         ],
+        'marker' => [
+            'created' => 'The marker was successfully created.',
+            'deleted' => 'The marker was successfully deleted.',
+            'updated' => 'The marker was successfully updated.',
+        ],
         'faq' => [
             'created' => 'The question was successfully created.',
             'deleted' => 'The question was successfully deleted.',

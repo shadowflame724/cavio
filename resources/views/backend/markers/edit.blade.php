@@ -1,8 +1,5 @@
 @extends ('backend.layouts.app')
 @section('after-styles')
-    {{ Html::style('/css/backend/redactor/redactor.css') }}
-    {{ HTML::style('/css/backend/dropzone/dropzone.css') }}
-
     <style>
         #map {
             position: relative;
@@ -23,69 +20,15 @@
             height: auto;
             width: 100%;
         }
-
-        .sweet-alert {
-            z-index: 999;
-        }
-
-        .redactor-toolbar {
-            z-index: 20;
-        }
-
-        #add_cont_IMG {
-            display: inline-block;
-            max-width: 320px;
-            height: 300px;
-            float: left;
-            margin-right: 10px;
-        }
-
-        .dropzone.dz-started .dz-message {
-            display: block !important;
-        }
-
-        .dz-preview {
-            display: none !important;
-        }
-
-        .cont_IMG {
-            position: relative;
-            display: inline-block;
-            visibility: hidden;
-        }
-
-        .cont_IMG {
-            max-width: 560px;
-            width: auto;
-            height: auto;
-        }
-
-        .cont_IMG img {
-            width: 100%;
-            height: auto;
-        }
-
-        .cont_IMG.active {
-            visibility: visible;
-        }
-
-        .dlt_cont_IMG {
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: red;
-            font-size: 25px;
-        }
-
     </style>
 @endsection
 
-@section ('title', 'Collections' . ' | '  . 'Create collection marker')
+@section ('title', trans('menus.backend.access.marker.management') . ' | '  . trans('menus.backend.access.marker.edit'))
 
 @section('page-header')
     <h1>
-        Contacts
-        <small>Create collection marker</small>
+        {{trans('menus.backend.access.marker.management')}}
+        <small>{{trans('menus.backend.access.marker.edit')}}</small>
     </h1>
 @endsection
 
@@ -93,7 +36,7 @@
 
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">Create contact marker
+            <h3 class="box-title">{{trans('menus.backend.access.marker.edit')}}
             </h3>
         </div>
         <!-- /.box-header -->
@@ -143,13 +86,15 @@
                                 {{ Form::hidden('markers['.$i.'][x]', $marker->x, ['class' => 'form-control', 'id' => 'markers['.$i.'][x]']) }}
                                 {{ Form::hidden('markers['.$i.'][y]', $marker->y, ['class' => 'form-control', 'id' => 'markers['.$i.'][y]']) }}
 
-                                <a href="{{route('admin.marker.destroy', $marker)}}" class = 'btn btn-danger btn-xs'>Delete</a>
+                                <a href="{{route('admin.marker.destroy', $marker)}}"
+                                   class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
-            <a href="{{route('admin.collection.marker.store', $collection)}}" class = 'btn btn-success btn-xs'>Create new marker</a>
+            <a href="{{route('admin.collection.marker.store', $collection)}}"
+               class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create')}}</a>
 
         </div>
 
@@ -159,11 +104,11 @@
     <div class="box box-success">
         <div class="box-body">
             <div class="pull-left">
-                {{ link_to_route('admin.collection.index', 'Cancel', [], ['class' => 'btn btn-danger btn-xs']) }}
+                {{ link_to_route('admin.collection.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
             </div><!--pull-left-->
 
             <div class="pull-right">
-                {{ Form::submit('Create', ['class' => 'btn btn-success btn-xs']) }}
+                {{ Form::submit(trans('buttons.general.crud.update'), ['class' => 'btn btn-success btn-xs']) }}
             </div><!--pull-right-->
 
             <div class="clearfix"></div>

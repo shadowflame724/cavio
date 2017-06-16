@@ -8,47 +8,8 @@
     {{ Html::style('css/backend/redactor/redactor.css') }}
 @endsection
 @section('after-styles')
-    <style>
-        .sweet-alert {
-            z-index: 999;
-        }
+    @include('backend.includes.dropzone_cropper_css')
 
-        #add_photo {
-            max-width: 650px;
-        }
-
-        .dropzone.dz-started .dz-message {
-            display: block !important;
-        }
-
-        .dz-preview {
-            display: none !important;
-        }
-
-        .logo, .dz-photo {
-            position: relative;
-            display: inline-block;
-            visibility: hidden;
-        }
-
-        .dz-photo {
-            margin: 30px 0 50px;
-        }
-
-
-        .dlt_photo.active {
-            visibility: visible;
-        }
-
-        .dlt_photo {
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: red;
-            font-size: 25px;
-        }
-
-    </style>
 @endsection
 @section('page-header')
     <h1>

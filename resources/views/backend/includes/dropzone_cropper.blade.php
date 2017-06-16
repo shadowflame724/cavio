@@ -22,26 +22,40 @@
 
     // transform cropper dataURI output to a Blob which Dropzone accepts
     function dataURItoBlob(dataURI) {
+        // convert base64 to raw binary data held in a string
+        // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
         var byteString = atob(dataURI.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+        // write the bytes of the string to an ArrayBuffer
         var ab = new ArrayBuffer(byteString.length);
+
+        // create a view into the buffer
         var ia = new Uint8Array(ab);
+
+        // set the bytes of the buffer to the correct values
         for (var i = 0; i < byteString.length; i++) {
             ia[i] = byteString.charCodeAt(i);
         }
-        return new Blob([ab], {type: 'image/jpeg'});
+
+        // write the ArrayBuffer to a blob, and you're done
+        var blob = new Blob([ab], {type: mimeString});
+        return blob;
+
     }
 
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone(".dropzone", {
             autoProcessQueue: false,
-            dictDefaultMessage: "",
             url: "{{route('admin.file.upload')}}",
             maxFiles: 1,
             headers: {
                 'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
             },
             success: function (file, res) {
-                console.log()
+                console.log(res);
                 this.removeFile(file);
 
                 if (res['error']) {
@@ -59,9 +73,9 @@
                     console.log(res['success']['path']);
                     console.log(res['success']['imgName']);
                     if ($('.photo').hasClass('active')) {
-                        $('.photo >img').replaceWith('<img src="/' + res['success']['path'] + '">');
+                        $('.photo >img').replaceWith('<img id="dz_photo" src="/' + res['success']['path'] + '">');
                     } else {
-                        $('.photo').append('<img src="/' + res['success']['path'] + '">');
+                        $('.photo').append('<img id="dz_photo" src="/' + res['success']['path'] + '">');
                         $('.photo').addClass('active');
                     }
 
@@ -77,6 +91,8 @@
                 }
             },
             error: function (file, errorMessage, xhr) {
+                console.log(errorMessage);
+
                 var self = this,
                     default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
                 swal({
@@ -133,7 +149,7 @@
             newFile.name = cachedFilename;
             myDropzone.addFile(newFile);
             myDropzone.processQueue();
-            console.log(newFile);
+            console.log('newFIle' + newFile);
             $cropperModal.modal('hide');
         });
     });

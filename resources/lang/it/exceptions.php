@@ -25,7 +25,36 @@ return [
                 'not_found'         => 'Questo ruolo non esiste.',
                 'update_error'      => "C'è stato un problema durante l'aggiornamento di questo ruolo. Si prega di riprovare più tardi.",
             ],
-
+            'faq' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo domanda. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo domanda. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo domanda. Si prega di riprovare più tardi.",
+            ],
+            'news' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo notizia. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo notizia. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo notizia. Si prega di riprovare più tardi.",
+            ],
+            'page' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo pagine. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo pagine. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo pagine. Si prega di riprovare più tardi.",
+            ],
+            'block' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo bloccare. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo bloccare. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo bloccare. Si prega di riprovare più tardi.",
+            ],
+            'category' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo categoria. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo categoria. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo categoria. Si prega di riprovare più tardi.",
+            ],
+            'collection' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo collezione. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo collezione. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo collezione. Si prega di riprovare più tardi.",
+            ],
             'users' => [
                 'cant_deactivate_self'  => 'Non puoi eseguire questa operazione su te stesso.',
                 'cant_delete_admin'  => 'You can not delete the super administrator.',

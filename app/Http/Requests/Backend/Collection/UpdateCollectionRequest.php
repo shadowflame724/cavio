@@ -29,7 +29,7 @@ class UpdateCollectionRequest extends Request
         return [
             'title' => "required|min:3|max:191",
             'description' => "required|min:3",
-            'file' => 'image|mimes:jpeg,bmp,png'
+            'photo' => 'required'
         ];
     }
 }

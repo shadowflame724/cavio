@@ -94,6 +94,7 @@ return [
             'dashboard' => 'Системная панель',
             'general'   => 'Общие',
             'system'    => 'Система',
+            'content'    => 'Содержимое',
         ],
     ],
     'language-picker'   => [

@@ -21,30 +21,60 @@ class MarkerTableSeeder extends Seeder
     public function run()
     {
         $this->disableForeignKeys();
-        $this->truncate(config('markers_table'));
+        $this->truncate('markers');
 
-        $markers = [
-            [
-                'collection_id'       => 1,
-                'title'       => 'About us',
-                'code'       => 11111,
-                'x'       => '0.3',
-                'y'       => '0.5',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'collection_id'       => 1,
-                'title'       => 'About us',
-                'code'       => 11111,
-                'x'       => '0.3',
-                'y'       => '0.5',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]
-        ];
+        for ($i = 1; $i < 6; $i++) {
 
-        DB::table(config('markers_table'))->insert($markers);
+            $markers = [
+                [
+                    'collection_id' => $i,
+                    'title' => 'Default title',
+                    'code' => 11111,
+                    'x' => '0.3',
+                    'y' => '0.5',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
+                [
+                    'collection_id' => $i,
+                    'title' => 'Default title',
+                    'code' => 11111,
+                    'x' => '0.3',
+                    'y' => '0.5',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
+                [
+                    'collection_id' => $i,
+                    'title' => 'Default title',
+                    'code' => 11111,
+                    'x' => '0.3',
+                    'y' => '0.5',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
+                [
+                    'collection_id' => $i,
+                    'title' => 'Default title',
+                    'code' => 11111,
+                    'x' => '0.3',
+                    'y' => '0.5',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
+                [
+                    'collection_id' => $i,
+                    'title' => 'Default title',
+                    'code' => 11111,
+                    'x' => '0.3',
+                    'y' => '0.5',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]
+            ];
+            DB::table('markers')->insert($markers);
+        }
+
 
         $this->enableForeignKeys();
     }

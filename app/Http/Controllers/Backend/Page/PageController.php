@@ -9,7 +9,6 @@ use App\Http\Requests\Backend\Page\StorePageRequest;
 use App\Http\Requests\Backend\Page\ManagePageRequest;
 use App\Http\Requests\Backend\Page\UpdatePageRequest;
 use App\Repositories\Backend\Page\PageRepository;
-use Illuminate\Support\Facades\Input;
 use EMT\EMTypograph;
 
 

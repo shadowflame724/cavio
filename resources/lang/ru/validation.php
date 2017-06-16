@@ -175,6 +175,10 @@ return [
                     'question' => 'Вопрос',
                     'answer' => 'Ответ',
                 ],
+                'marker' => [
+                    'title' => 'Заголовок',
+                    'code' => 'Артикул',
+                ],
                 'users' => [
                     'active' => 'Активный',
                     'associated_roles' => 'Роли',

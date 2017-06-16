@@ -19,10 +19,9 @@ class ContentTableSeeder extends Seeder
     {
         $this->disableForeignKeys();
 
-        $this->call(BlockTableSeeder::class);
         $this->call(PageTableSeeder::class);
+        $this->call(BlockTableSeeder::class);
         $this->call(NewsTableSeeder::class);
-        $this->call(CategoryTableSeeder::class);
         $this->call(CollectionTableSeeder::class);
         $this->call(MarkerTableSeeder::class);
 

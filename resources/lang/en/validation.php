@@ -198,7 +198,10 @@ return [
                     'question' => 'Question',
                     'answer' => 'Answer',
                 ],
-
+                'marker' => [
+                    'title' => 'Title',
+                    'code' => 'Code',
+                ],
 
                 'users' => [
                     'active'                  => 'Active',
