@@ -95,10 +95,7 @@
             @endforeach
             <a href="{{route('admin.collection.marker.store', $collection)}}"
                class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create')}}</a>
-
         </div>
-
-
     </div>
 
     <div class="box box-success">

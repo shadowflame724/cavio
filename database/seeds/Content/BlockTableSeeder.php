@@ -30,7 +30,6 @@ class BlockTableSeeder extends Seeder
                     'title' => 'Default block',
                     'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
                     'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
-                    'image' => '1111.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ],
@@ -39,7 +38,6 @@ class BlockTableSeeder extends Seeder
                     'title' => 'Default block',
                     'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
                     'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
-                    'image' => '1111.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ],
@@ -48,7 +46,6 @@ class BlockTableSeeder extends Seeder
                     'title' => 'Default block',
                     'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
                     'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
-                    'image' => '1111.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ],
@@ -57,7 +54,6 @@ class BlockTableSeeder extends Seeder
                     'title' => 'Default block',
                     'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
                     'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
-                    'image' => '1111.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ],
@@ -66,7 +62,6 @@ class BlockTableSeeder extends Seeder
                     'title' => 'Default block',
                     'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
                     'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
-                    'image' => '1111.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ],
@@ -75,7 +70,6 @@ class BlockTableSeeder extends Seeder
                     'title' => 'Default block',
                     'preview' => 'PREVIEWWWWWWWWWWWWWWWWWw',
                     'body' => 'The collection is inspired by the Renaissance town of Verona, symbol of the classic and highly appreciated Italian style, romantic and elegant at a time. Special care is devoted to details, the selection of tissues, and the coordination of color nuances.',
-                    'image' => '1111.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ]
@@ -83,7 +77,6 @@ class BlockTableSeeder extends Seeder
             DB::table('blocks')->insert($blocks);
 
         }
-
 
         $this->enableForeignKeys();
     }

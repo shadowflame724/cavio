@@ -27,28 +27,28 @@ class CollectionTableSeeder extends Seeder
             [
                 'title' => 'Some collection',
                 'description' => 'Some description',
-                'image' => '1111.jpg',
+                'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
                 'title' => 'Some collection',
                 'description' => 'Some description',
-                'image' => '1111.jpg',
+                'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
                 'title' => 'Some collection',
                 'description' => 'Some description',
-                'image' => '1111.jpg',
+                'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
                 'title' => 'Some collection',
                 'description' => 'Some description',
-                'image' => '1111.jpg',
+                'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]

@@ -45,7 +45,7 @@
             </div><!-- /.box tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-            {{--{!! history()->renderType('Page') !!}--}}
+            {!! history()->renderType('Page') !!}
         </div><!-- /.box-body -->
     </div><!--box box-success-->
 @endsection

@@ -19,7 +19,7 @@ class CategoryEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->category->id)
-            ->withText('trans("history.backend.category.created") <strong>'.$event->category->id.'</strong>')
+            ->withText('trans("history.backend.category.created") <strong>'.$event->category->name.'</strong>')
             ->withIcon('plus')
             ->withClass('bg-green')
             ->log();
@@ -32,7 +32,7 @@ class CategoryEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->category->id)
-            ->withText('trans("history.backend.category.updated") <strong>'.$event->category->id.'</strong>')
+            ->withText('trans("history.backend.category.updated") <strong>'.$event->category->name.'</strong>')
             ->withIcon('save')
             ->withClass('bg-aqua')
             ->log();
@@ -45,7 +45,7 @@ class CategoryEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->category->id)
-            ->withText('trans("history.backend.category.deleted") <strong>'.$event->category->id.'</strong>')
+            ->withText('trans("history.backend.category.deleted") <strong>'.$event->category->name.'</strong>')
             ->withIcon('trash')
             ->withClass('bg-maroon')
             ->log();

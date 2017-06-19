@@ -44,12 +44,13 @@ class EventServiceProvider extends ServiceProvider
 
         /*
         * Content Subscribers
-
+        */
         \App\Listeners\Backend\Page\PageEventListener::class,
         \App\Listeners\Backend\FAQ\FAQEventListener::class,
         \App\Listeners\Backend\Category\CategoryEventListener::class,
         \App\Listeners\Backend\Collection\CollectionEventListener::class,
-        */
+        \App\Listeners\Backend\News\NewsEventListener::class,
+
     ];
 
     /**
