@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\News;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\Backend\News\NewsRepository;
 use App\Http\Requests\Backend\News\ManageNewsRequest;
@@ -33,6 +34,12 @@ class NewsTableController extends Controller
     public function __invoke(ManageNewsRequest $request)
     {
         return Datatables::of($this->news->getForDataTable())
+            ->editColumn('created_at', function ($news) {
+                return $news->created_at ? with(new Carbon($news->created_at))->format('m/d/Y') : '';
+            })
+            ->filterColumn('created_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
+            })
             ->addColumn('actions', function ($news) {
                 return '<a href="'.route('admin.news.edit', array('news' => $news->id)).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i></a>
                 

@@ -88,7 +88,7 @@
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
 
-    @include('backend.includes.dropzone_cropper')
+    @include('backend.includes.dropzone_cropper_collection')
 @endsection
 
 

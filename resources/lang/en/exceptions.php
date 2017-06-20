@@ -49,6 +49,8 @@ return [
                 'create_error' => 'There was a problem creating this category. Please try again.',
                 'delete_error' => 'There was a problem deleting this category. Please try again.',
                 'update_error' => 'There was a problem updating this category. Please try again.',
+                'delete_with_children' => 'This category have children categories. Please delete them first.',
+
             ],
             'collection' => [
                 'create_error' => 'There was a problem creating this collection. Please try again.',

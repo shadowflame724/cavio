@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\FAQ;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\Backend\FAQ\FAQRepository;
 use App\Http\Requests\Backend\FAQ\ManageFAQRequest;
@@ -33,6 +34,12 @@ class FAQTableController extends Controller
     public function __invoke(ManageFAQRequest $request)
     {
         return Datatables::of($this->faq->getForDataTable())
+            ->editColumn('created_at', function ($faq) {
+                return $faq->created_at ? with(new Carbon($faq->created_at))->format('m/d/Y') : '';
+            })
+            ->filterColumn('created_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
+            })
             ->addColumn('actions', function ($faq) {
                 return '<a href="'.route('admin.faq.edit', array('faq' => $faq->id)).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i></a>
                 

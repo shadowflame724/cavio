@@ -85,7 +85,7 @@
                     @if($news->image)
                         <div class="photo active">
                             <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                            <img id="dlt_photo" src="/upload/images/{{ $news->image  }}" alt="">
+                            <img id="add_photo" src="/upload/images/{{ $news->image  }}" alt="">
                         </div>
                     @else
                         <div class="photo">

@@ -88,13 +88,15 @@ class PageController extends Controller
     {
         $blocks = $request->blocks;
 
-        foreach ($blocks as $key => $newblock){
+        foreach ($blocks as $key => $newblock) {
             $oldBlock = Block::find($key);
             $oldBlock->title = $newblock['title'];
-            $oldBlock->preview = /*EMTypograph::fast_apply(*/clean($newblock['preview']);
-            $oldBlock->body = /*EMTypograph::fast_apply(*/clean($newblock['body']);
+            $oldBlock->preview = /*EMTypograph::fast_apply(*/
+                clean($newblock['preview']);
+            $oldBlock->body = /*EMTypograph::fast_apply(*/
+                clean($newblock['body']);
             $oldBlock->image = $newblock['photo'];
-            if($oldBlock->save()){
+            if ($oldBlock->save()) {
                 $this->moveImg($newblock['photo']);
             }
         }

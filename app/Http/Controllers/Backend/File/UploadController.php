@@ -25,7 +25,7 @@ class UploadController extends Controller
             ];
             return $json;
         } else {
-            $img->thumbnail($width, $height)->saveAs(public_path('/upload/tmp/' . $imgName));
+            $img->saveAs(public_path('/upload/tmp/' . $imgName));
 
             $json = [
                 'success' => [

@@ -58,7 +58,7 @@
                     @if($collection->image)
                         <div class="photo active">
                             <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                            <img id="dlt_photo" src="/upload/images/{{ $collection->image  }}" alt="">
+                            <img id="add_photo" src="/upload/images/{{ $collection->image  }}" alt="">
                         </div>
                     @else
                         <div class="photo">
@@ -93,5 +93,5 @@
     {{ Html::script('js/backend/collection/script.js') }}
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
-    @include('backend.includes.dropzone_cropper')
+    @include('backend.includes.dropzone_cropper_collection')
 @endsection

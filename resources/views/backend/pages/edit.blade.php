@@ -82,8 +82,8 @@
                             <div class="panel-heading" role="tab" id="heading{{$i}}">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                       href="#collapse{{$block->id}}"
-                                       aria-expanded="true" aria-controls="collapseOne">
+                                       href="#collapse{{$i}}"
+                                       aria-expanded="true" aria-controls="collapse{{$i}}">
                                         {{$i}}. {{$block->title}}
                                     </a>
                                 </h4>
@@ -122,7 +122,7 @@
                                             @if($block->image)
                                                 <div class="photo active">
                                                     <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                    <img id="dlt_photo" src="/upload/images/{{ $block->image }}"
+                                                    <img id="add_photo" src="/upload/images/{{ $block->image }}"
                                                          alt="">
                                                 </div>
                                             @else
@@ -173,6 +173,14 @@
             '<div class="modal-header">' +
             '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
             '<h4 class="modal-title">Crop Image</h4>' +
+            '<div class="input-group input-group-sm">' +
+            '<label class="input-group-addon" for="dataWidth">Width</label>' +
+            '<input type="text" class="form-control" id="dataWidth" placeholder="Width">'+
+            '<span class="input-group-addon">px</span>' +
+            '<label class="input-group-addon" for="dataHeight">Height</label>' +
+            '<input type="text" class="form-control" id="dataHeight" placeholder="height">'+
+            '<span class="input-group-addon">px</span>' +
+            '</div>' +
             '</div>' +
             '<div class="modal-body">' +
             '<div class="image-container"></div>' +
@@ -282,7 +290,11 @@
                         movable: false,
                         cropBoxResizable: true,
                         minContainerHeight: 320,
-                        minContainerWidth: 568
+                        minContainerWidth: 568,
+                        crop: function (e) {
+                            $('input#dataWidth').val(e.detail.width);
+                            $('input#dataHeight').val(e.detail.height);
+                        }
                     });
                 };
 

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Category;
 
+use App\Events\Backend\Category\CategoryCreated;
+use App\Events\Backend\Category\CategoryDeleted;
+use App\Events\Backend\Category\CategoryUpdated;
+use App\Exceptions\GeneralException;
 use App\Models\Category\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -63,9 +67,10 @@ class CategoryController extends Controller
                     $root = Category::find($p_id);
                     $cat->makeChildOf($root);
                 }
-            };
+                event(new CategoryCreated($cat));
+                return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.created'));
+            }
 
-            return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.created'));
         }
         return view('backend.categories.create', ['p_id' => $p_id]);
     }
@@ -91,8 +96,11 @@ class CategoryController extends Controller
             $cat->name = \request('name');
             $cat->image = $request->photo;
 
-            $cat->save();
-            $this->moveImg($imageName, $oldName);
+            if ($cat->save()) {
+                event(new CategoryUpdated($cat));
+                $this->moveImg($imageName, $oldName);
+
+            }
 
             return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.updated'));
         }
@@ -110,9 +118,15 @@ class CategoryController extends Controller
     {
         $cat = Category::find($id);
         $imgName = $cat->image;
-        $cat->delete();
-        $this->deleteImg($imgName);
+        if ($cat->children()->get()->isEmpty()) {
+            $cat->delete();
+            event(new CategoryDeleted($cat));
+            $this->deleteImg($imgName);
+            return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.deleted'));
+        } else {
+            throw new GeneralException(trans('exceptions.backend.access.category.delete_with_children'));
+        }
 
-        return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.deleted'));
+
     }
 }

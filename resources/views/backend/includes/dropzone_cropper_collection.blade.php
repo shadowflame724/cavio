@@ -104,7 +104,7 @@
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone(".dropzone", {
             autoProcessQueue: false,
-            url: "{{route('admin.file.upload')}}",
+            url: "{{route('admin.file.upload.collection')}}",
             maxFiles: 1,
             headers: {
                 'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value

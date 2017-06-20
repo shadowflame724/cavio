@@ -47,7 +47,7 @@
                     @if($category->image)
                         <div class="photo active">
                             <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                            <img id="dlt_photo" src="/upload/images/{{ $category->image  }}" alt="">
+                            <img id="add_photo" src="/upload/images/{{ $category->image  }}" alt="">
                         </div>
                     @else
                         <div class="photo">
