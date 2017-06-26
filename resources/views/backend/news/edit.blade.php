@@ -81,7 +81,7 @@
                 {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
                     {{ Form::hidden('photo', null) }}
-                    <div class="dropzone" id="add_photo"></div>
+                    <div class="dropzone" id="dz_photo"></div>
                     @if($news->image)
                         <div class="photo active">
                             <div class="btn glyphicon glyphicon-remove dlt_photo"></div>

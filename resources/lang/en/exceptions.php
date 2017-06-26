@@ -57,6 +57,11 @@ return [
                 'delete_error' => 'There was a problem deleting this collection. Please try again.',
                 'update_error' => 'There was a problem updating this collection. Please try again.',
             ],
+            'zone' => [
+                'create_error' => 'There was a problem creating this zone. Please try again.',
+                'delete_error' => 'There was a problem deleting this zone. Please try again.',
+                'update_error' => 'There was a problem updating this zone. Please try again.',
+            ],
             'users' => [
                 'cant_deactivate_self' => 'You can not do that to yourself.',
                 'cant_delete_admin' => 'You can not delete the super administrator.',

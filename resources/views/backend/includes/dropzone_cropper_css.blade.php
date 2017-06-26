@@ -6,6 +6,9 @@
     #add_photo {
         max-width: 650px;
     }
+    .add_photo {
+        max-width: 650px;
+    }
 
     #dz_photo {
         max-width: 650px;

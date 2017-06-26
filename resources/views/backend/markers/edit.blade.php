@@ -134,8 +134,8 @@
             markerY = y / mapMainH * 100;
             //mapMain.find('.marker').remove();
 //            mapMain.append('<div class="marker" style="position: absolute; top: ' + (y) + 'px; left: ' + (x) + 'px"></div>');
-            $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val(x.toFixed(2));
-            $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val(y.toFixed(2));
+            $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val(markerX);
+            $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val(markerY);
             $('#marker-' + currMarkerId).css({top: y + 'px', left: x + 'px'});
         };
 
@@ -147,7 +147,7 @@
 
                 var x = $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val();
                 var y = $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val();
-                mapMain.append('<div id=' + "marker-" + currMarkerId + ' class="marker" style="position: absolute; top: ' + (y) + 'px; left: ' + (x) + 'px"></div>');
+                mapMain.append('<div id=' + "marker-" + currMarkerId + ' class="marker" style="position: absolute; top: ' + (y) + '%; left: ' + (x) + '%"></div>');
             }
             else {
                 currMarkerId = undefined;

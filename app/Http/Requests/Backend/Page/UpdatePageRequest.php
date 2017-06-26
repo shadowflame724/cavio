@@ -27,10 +27,7 @@ class UpdatePageRequest extends Request
     public function rules()
     {
         return [
-            'pageKey' => "required|min:3|max:191",
             'title' => "required|min:3|max:191",
-            'description' => "required|min:6",
-            'body' => "required|min:6"
         ];
     }
 }

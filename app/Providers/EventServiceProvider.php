@@ -50,6 +50,8 @@ class EventServiceProvider extends ServiceProvider
         \App\Listeners\Backend\Category\CategoryEventListener::class,
         \App\Listeners\Backend\Collection\CollectionEventListener::class,
         \App\Listeners\Backend\News\NewsEventListener::class,
+        \App\Listeners\Backend\Zone\ZoneEventListener::class,
+
 
     ];
 

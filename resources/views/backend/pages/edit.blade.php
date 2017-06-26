@@ -1,6 +1,6 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.access.news.management') . ' | ' . trans('labels.backend.access.news.edit'))
+@section ('title', trans('labels.backend.access.page.management') . ' | ' . trans('labels.backend.access.page.edit'))
 @section('before-styles')
     {{ Html::style('css/backend/plugin/cropper/cropper.css') }}
     {{ Html::style('css/backend/plugin/dropzone/dropzone.css') }}
@@ -38,7 +38,7 @@
                 {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
-                    {{ Form::text('pageKey', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    {{ Form::text('slug', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '191' ]) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
@@ -46,7 +46,7 @@
                 {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
-                    {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
@@ -54,14 +54,14 @@
                 {{ Form::label('description', trans('validation.attributes.backend.access.page.description'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
-                    {{ Form::textarea('description', null, ['id' => 'description', 'class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    {{ Form::textarea('description', null, ['id' => 'description', 'class' => 'form-control' ]) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                    {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3' ]) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
@@ -91,11 +91,13 @@
                             <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
                                  aria-labelledby="heading{{$i}}">
                                 <div class="panel-body">
+                                    {{ Form::hidden('blocks['.$i.'][id]', $block->id) }}
+
                                     <div class="form-group">
                                         {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
                                         <div class="col-lg-10">
-                                            {{ Form::text('blocks['.$i.'][title]', $block->title, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                            {{ Form::text('blocks['.$i.'][title]', $block->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
                                         </div><!--col-lg-10-->
                                     </div><!--form control-->
 
@@ -103,14 +105,14 @@
                                         {{ Form::label('preview', trans('validation.attributes.backend.access.block.preview'), ['class' => 'col-lg-2 control-label']) }}
 
                                         <div class="col-lg-10">
-                                            {{ Form::textarea('blocks['.$i.'][preview]', $block->preview, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                            {{ Form::textarea('blocks['.$i.'][preview]', $block->preview, ['class' => 'form-control redactor', 'minlength' => '3']) }}
                                         </div><!--col-lg-10-->
                                     </div><!--form control-->
 
                                     <div class="form-group">
-                                        {{ Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) }}
+                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
                                         <div class="col-lg-10">
-                                            {{ Form::textarea('blocks['.$i.'][body]', $block->body, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                                            {!! Form::textarea('blocks['.$i.'][body]', $block->body, ['class' => 'form-control redactor', 'minlength' => '3' ]) !!}
                                         </div><!--col-lg-10-->
                                     </div><!--form control-->
 
@@ -122,7 +124,7 @@
                                             @if($block->image)
                                                 <div class="photo active">
                                                     <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                    <img id="add_photo" src="/upload/images/{{ $block->image }}"
+                                                    <img class="add_photo" id="add_photo{{$key}}" src="/upload/images/{{ $block->image }}"
                                                          alt="">
                                                 </div>
                                             @else
@@ -207,6 +209,14 @@
         var myDropzone = [];
 
         $('.panel-group').each(function (key, el) {
+            var inp = $('input#blocks\\[' + (key + 1) + '\\]\\[photo\\]');
+            console.log('add_photo' + key);
+            if (document.getElementById('add_photo' + key).getAttribute('src')) {
+                var pathname = document.getElementById('add_photo'+ key).getAttribute('src');
+                console.log(pathname);
+                var leafname = pathname.split('\\').pop().split('/').pop();
+                inp.val(leafname);
+            }
             myDropzone[key] = new Dropzone($(".dropzone")[key], {
                     autoProcessQueue: false,
                     dictDefaultMessage: "Drop files here",
@@ -237,7 +247,6 @@
                                 $('.photo').eq(key).addClass('active');
                             }
 
-                            var inp = $('input#blocks\\[' + (key + 1) + '\\]\\[photo\\]');
                             inp.val(res['success']['imgName']);
 
                             swal({
@@ -284,7 +293,6 @@
                     $cropperModal.find('.image-container').html($img);
                     $img.attr('src', reader.result);
                     cropper = new Cropper($img[0], {
-                        aspectRatio: 16 / 9,
                         preview: '.image-preview',
                         autoCropArea: 1,
                         movable: false,

@@ -85,6 +85,13 @@ return [
                 'management' => 'FAQs Management',
                 'main'       => 'Questions',
             ],
+            'zone' => [
+                'all'        => 'All Zones',
+                'create'     => 'Create Zone',
+                'edit'       => 'Edit Zone',
+                'management' => 'Zone\'s Management',
+                'main'       => 'Zones',
+            ],
         ],
 
         'log-viewer' => [

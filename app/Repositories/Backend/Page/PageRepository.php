@@ -44,7 +44,7 @@ class PageRepository extends BaseRepository
         return $this->query()
             ->select([
                 config('pages_table') . '.id',
-                config('pages_table') . '.pageKey',
+                config('pages_table') . '.slug',
                 config('pages_table') . '.title',
                 config('pages_table') . '.created_at',
             ]);
@@ -64,19 +64,14 @@ class PageRepository extends BaseRepository
             $page = self::MODEL;
             $page = new $page();
             $page->title = $input['title'];
-            $page->pageKey = $input['pageKey'];
+            if ($input['pageKey']) {
+                $page->slug = $input['pageKey'];
+            }
             $page->description = $input['description'];
             $page->body = /*EMTypograph::fast_apply(*/clean($input['body']);
 
             if ($page->save()) {
-                for ($i = 0; $i < 5; $i++) {
-                    Block::create([
-                        'page_id' => $page->id,
-                        'title' => 'Default title',
-                        'preview' => 'Default preview',
-                        'body' => 'Default body',
-                    ]);
-                }
+
                 event(new PageCreated($page));
 
                 return true;
@@ -97,8 +92,9 @@ class PageRepository extends BaseRepository
     public function update(Model $page, array $input)
     {
         $page->title = $input['title'];
-        $page->pageKey = $input['pageKey'];
-        $page->description = $input['description'];
+        if ($input['pageKey']) {
+            $page->slug = $input['pageKey'];
+        }        $page->description = $input['description'];
         $page->body = /*EMTypograph::fast_apply(*/clean($input['body']);
 
         DB::transaction(function () use ($page, $input) {

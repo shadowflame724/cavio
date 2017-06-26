@@ -45,7 +45,14 @@ class CollectionTableController extends Controller
                 <a href="'.route('admin.collection.marker.edit', array('collection' => $collection->id)).'" class="btn btn-xs btn-primary"><i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Marker\'s editor"></i></a>
                 ';
             })
-            ->rawColumns(['actions'])
+            ->editColumn('banner', '
+            @if($banner == 1)
+            <span class="glyphicon glyphicon-ok"></span>
+            @else
+            <span class="glyphicon glyphicon-remove"></span>
+            @endif
+            ')
+            ->rawColumns(['actions', 'banner'])
             ->make(true);
     }
 }

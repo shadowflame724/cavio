@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class UploadController extends Controller
 {
-    public function uploadImg($file, $width, $height)
+    public function uploadImg($file, $width, $height, $flug = false)
     {
         $imgName = time() . '.' . $file->getClientOriginalExtension();
         $path = $file->getRealPath();
@@ -25,7 +25,11 @@ class UploadController extends Controller
             ];
             return $json;
         } else {
-            $img->saveAs(public_path('/upload/tmp/' . $imgName));
+            if ($flug == false) {
+                $img->thumbnail($width, $height)->saveAs(public_path('/upload/tmp/' . $imgName));
+            } else {
+                $img->saveAs(public_path('/upload/tmp/' . $imgName));
+            }
 
             $json = [
                 'success' => [
@@ -44,12 +48,14 @@ class UploadController extends Controller
     public function uploadImage(Request $request)
     {
         $json = $this->uploadImg($request->file('file'), 650, 360);
+
         return response()->json($json);
     }
 
     public function uploadCollection(Request $request)
     {
-        $json = $this->uploadImg($request->file('file'), 1366, 768);
+        $json = $this->uploadImg($request->file('file'), 1920, 1103, true);
+
         return response()->json($json);
     }
 

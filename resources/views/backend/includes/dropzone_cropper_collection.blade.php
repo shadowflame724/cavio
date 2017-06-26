@@ -1,4 +1,9 @@
 <script>
+    if (document.getElementById('add_photo').getAttribute('src')) {
+        var pathname = document.getElementById('add_photo').getAttribute('src');
+        var leafname = pathname.split('\\').pop().split('/').pop();
+        $('input#photo').val(leafname);
+    }
     var mimeType;
     var cropper;
     var modalTemplate = '' +
@@ -180,7 +185,6 @@
             $img.attr('src', reader.result);
             mimeType = dataURLtoMimeType(reader.result);
             cropper = new Cropper($img[0], {
-                aspectRatio: 16 / 9,
                 preview: '.image-preview',
                 autoCropArea: 1,
                 movable: false,

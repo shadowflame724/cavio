@@ -98,6 +98,7 @@ return [
                     'id' => 'Id',
                     'title' => 'Title',
                     'image' => 'Image Name',
+                    'banner' => 'Banner',
                     'created_at' => 'Created at'
                 ],
             ],
@@ -116,6 +117,18 @@ return [
                     'id' => 'Id',
                     'question' => 'Question',
                     'answer' => 'Answer',
+                    'created_at' => 'Created at'
+                ],
+            ],
+            'zone' => [
+                'create' => 'Create Zone',
+                'edit' => 'Edit Zone',
+                'management' => 'Zone\'s Management',
+
+                'table' => [
+                    'id' => 'Id',
+                    'title' => 'Title',
+                    'image' => 'Image Name',
                     'created_at' => 'Created at'
                 ],
             ],

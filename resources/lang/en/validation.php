@@ -202,6 +202,10 @@ return [
                     'title' => 'Title*',
                     'code' => 'Code*',
                 ],
+                'zone' => [
+                    'title' => 'Title*',
+                    'image' => 'Image',
+                ],
 
                 'users' => [
                     'active'                  => 'Active',

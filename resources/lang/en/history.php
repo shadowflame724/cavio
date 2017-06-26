@@ -53,6 +53,11 @@ return [
             'deleted' => 'deleted question',
             'updated' => 'updated question',
         ],
+        'zone' => [
+            'created' => 'created zone',
+            'deleted' => 'deleted zone',
+            'updated' => 'updated zone',
+        ],
         'users' => [
             'changed_password' => 'changed password for user',
             'created' => 'created user',

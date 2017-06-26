@@ -89,7 +89,8 @@ class PageController extends Controller
         $blocks = $request->blocks;
 
         foreach ($blocks as $key => $newblock) {
-            $oldBlock = Block::find($key);
+            $oldBlock = Block::find($newblock['id']);
+            $oldImage = $oldBlock->image;
             $oldBlock->title = $newblock['title'];
             $oldBlock->preview = /*EMTypograph::fast_apply(*/
                 clean($newblock['preview']);
@@ -97,7 +98,7 @@ class PageController extends Controller
                 clean($newblock['body']);
             $oldBlock->image = $newblock['photo'];
             if ($oldBlock->save()) {
-                $this->moveImg($newblock['photo']);
+                $this->moveImg($newblock['photo'], $oldImage);
             }
         }
 

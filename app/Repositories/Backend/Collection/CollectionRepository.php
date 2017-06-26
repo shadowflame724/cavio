@@ -46,6 +46,7 @@ class CollectionRepository extends BaseRepository
                 config('collections_table') . '.id',
                 config('collections_table') . '.title',
                 config('collections_table') . '.image',
+                config('collections_table') . '.banner',
                 config('collections_table') . '.created_at',
             ]);
     }

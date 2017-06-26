@@ -63,7 +63,7 @@
                 },
                 columns: [
                     {data: 'id', name: 'id' },
-                    {data: 'pageKey', name: 'pageKey' },
+                    {data: 'slug', name: 'slug' },
                     {data: 'title', name: 'title'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}

@@ -54,6 +54,11 @@ return [
             'deleted' => 'The question was successfully deleted.',
             'updated' => 'The question was successfully updated.',
         ],
+        'zone' => [
+            'created' => 'The zone was successfully created.',
+            'deleted' => 'The zone was successfully deleted.',
+            'updated' => 'The zone was successfully updated.',
+        ],
         'users' => [
             'confirmation_email'  => 'A new confirmation e-mail has been sent to the address on file.',
             'created'             => 'The user was successfully created.',

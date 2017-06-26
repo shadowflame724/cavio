@@ -16,7 +16,7 @@ class Controller extends BaseController
     {
         $tmpFile = public_path('upload/tmp/') . $newName;
         $file = public_path('upload/images/') . $newName;
-        if ($oldName != null AND file_exists('upload/images/' . $oldName)) {
+        if ($newName != $oldName AND $oldName != null AND file_exists('upload/images/' . $oldName)) {
             unlink(public_path('upload/images/' . $oldName));
         }
 

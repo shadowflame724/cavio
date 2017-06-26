@@ -28,6 +28,7 @@
                         <th>{{ trans('labels.backend.access.collection.table.id') }}</th>
                         <th>{{ trans('labels.backend.access.collection.table.title') }}</th>
                         <th>{{ trans('labels.backend.access.collection.table.image') }}</th>
+                        <th>{{ trans('labels.backend.access.collection.table.banner') }}</th>
                         <th>{{ trans('labels.backend.access.collection.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
@@ -66,6 +67,7 @@
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
                     {data: 'image', name: 'image'},
+                    {data: 'banner', name: 'banner'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],

@@ -24,6 +24,9 @@ class ContentTableSeeder extends Seeder
         $this->call(NewsTableSeeder::class);
         $this->call(CollectionTableSeeder::class);
         $this->call(MarkerTableSeeder::class);
+        $this->call(FaqTableSeeder::class);
+        $this->call(CategoryTableSeeder::class);
+        $this->call(ZoneTableSeeder::class);
 
 
         $this->enableForeignKeys();

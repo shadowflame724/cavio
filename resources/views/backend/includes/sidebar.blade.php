@@ -80,6 +80,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ active_class(Active::checkUriPattern('admin/zone')) }}">
+                        <a href="{{ route('admin.zone.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.zone.management') }}</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
         </ul>
