@@ -62,6 +62,24 @@ return [
                 'delete_error' => 'There was a problem deleting this zone. Please try again.',
                 'update_error' => 'There was a problem updating this zone. Please try again.',
             ],
+            'good' => [
+                'create_error' => 'There was a problem creating this goods. Please try again.',
+                'delete_error' => 'There was a problem deleting this goods. Please try again.',
+                'update_error' => 'There was a problem updating this goods. Please try again.',
+            ],
+            'showroom' => [
+                'create_error' => 'There was a problem creating this dealers. Please try again.',
+                'delete_error' => 'There was a problem deleting this dealers. Please try again.',
+                'update_error' => 'There was a problem updating this dealers. Please try again.',
+            ],
+            'finishtissue' => [
+                'create_error' => 'There was a problem creating this tissues. Please try again.',
+                'delete_error' => 'There was a problem deleting this tissues. Please try again.',
+                'update_error' => 'There was a problem updating this tissues. Please try again.',
+            ],
+            'popup' => [
+                'update_error' => 'There was a problem updating this popup. Please try again.'
+            ],
             'users' => [
                 'cant_deactivate_self' => 'You can not do that to yourself.',
                 'cant_delete_admin' => 'You can not delete the super administrator.',

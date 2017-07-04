@@ -47,6 +47,134 @@ return [
                 ],
             ],
 
+
+            'page' => [
+                'create'     => 'Crea pagina',
+                'edit'       => 'Modifica pagina',
+                'management' => 'Gestione pagina',
+
+                'table' => [
+                    'id' => 'Id',
+                    'pageKey' => 'Page Key',
+                    'title' => 'Titulo',
+                    'created_at' => 'Creato a'
+                ],
+            ],
+            'block' => [
+                'create'     => 'Crea bloccare',
+                'edit'       => 'Modifica bloccare',
+                'management' => 'Gestione bloccare',
+
+                'table' => [
+                    'id' => 'Id',
+                    'title' => 'Titulo',
+                    'image' => 'Immagine',
+                    'created_at' => 'Creato a'
+                ],
+            ],
+            'news' => [
+                'create'     => 'Crea notizia',
+                'edit'       => 'Modifica notizia',
+                'management' => 'Gestione notizia',
+
+                'table' => [
+                    'id' => 'Id',
+                    'title' => 'Titulo',
+                    'type' => 'Tipo',
+                    'image' => 'Immagine',
+                    'created_at' => 'Creato a'
+                ],
+            ],
+            'category' => [
+                'create'     => 'Crea categoria',
+                'edit'       => 'Modifica categoria',
+                'management' => 'Gestione categoria',
+                'delete' => 'Elimina categoria',
+            ],
+            'collection' => [
+                'create'     => 'Crea collezione',
+                'edit'       => 'Modifica collezione',
+                'management' => 'Gestione collezione',
+
+                'table' => [
+                    'id' => 'Id',
+                    'title' => 'Titulo',
+                    'image' => 'Immagine',
+                    'banner' => 'bandiera',
+                    'created_at' => 'Creato a'
+                ],
+                'zones' => [
+                    'management' => 'Collection-Zones Management'
+                ]
+            ],
+            'marker' => [
+                'create'     => 'Crea marcatore',
+                'edit'       => 'Modifica marcatore',
+                'management' => 'Gestione marcatore',
+            ],
+            'faq' => [
+                'create'     => 'Crea FAQ',
+                'edit'       => 'Modifica FAQ',
+                'management' => 'Gestione FAQ',
+
+                'table' => [
+                    'id' => 'Id',
+                    'question' => 'Domanda',
+                    'answer' => 'Risposta',
+                    'created_at' => 'Creato a'
+                ],
+            ],
+            'zone' => [
+                'create'     => 'Crea zone',
+                'edit'       => 'Modifica zone',
+                'management' => 'Gestione zone',
+
+                'table' => [
+                    'id' => 'Id',
+                    'title' => 'Titulo',
+                    'image' => 'Immagine',
+                    'created_at' => 'Creato a'
+                ],
+            ],
+            'good' => [
+                'create'     => 'Crea merce',
+                'edit'       => 'Modifica merce',
+                'management' => 'Gestione merce',
+
+                'table' => [
+                    'id' => 'Id',
+                    'name' => 'Nome',
+                    'created_at' => 'Creato a'
+                ],
+            ],
+            'showroom' => [
+                'create'     => 'Crea showroom',
+                'edit'       => 'Modifica showroom',
+                'management' => 'Gestione showroom',
+
+                'table' => [
+                    'id' => 'Id',
+                    'country' => 'Nazione',
+                    'name' => 'Nome',
+                ],
+            ],
+            'finishtissue' => [
+                'create'     => 'Crea fazzoletto di carta',
+                'edit'       => 'Modifica fazzoletto di carta',
+                'management' => 'Gestione fazzoletto di carta',
+
+                'table' => [
+                    'id' => 'Id',
+                    'title' => 'Titulo',
+                    'type' => 'Tipo'
+                ],
+            ],
+            'popup' => [
+                'edit'       => 'Modifica apparire',
+                'management' => 'Gestione apparire',
+            ],
+
+
             'users' => [
                 'active'              => 'Utenti attivi',
                 'all_permissions'     => 'Tutti i permessi',
@@ -84,7 +212,7 @@ return [
                         'overview' => [
                             'avatar'       => 'Avatar',
                             'confirmed'    => 'Confirmed',
-                            'created_at'   => 'Created At',
+                            'created_at'   => 'Creato a',
                             'deleted_at'   => 'Deleted At',
                             'email'        => 'E-mail',
                             'last_updated' => 'Last Updated',

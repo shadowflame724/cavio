@@ -71,7 +71,7 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
-                order: [[3, "asc"]],
+                order: [[0, "asc"]],
                 searchDelay: 500
             });
         });

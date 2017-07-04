@@ -59,6 +59,26 @@ return [
             'deleted' => 'The zone was successfully deleted.',
             'updated' => 'The zone was successfully updated.',
         ],
+        'goods' => [
+            'created' => 'The goods was successfully created.',
+            'deleted' => 'The goods was successfully deleted.',
+            'updated' => 'The goods was successfully updated.',
+        ],
+        'popup' => [
+            'updated' => 'The popup was successfully updated.'
+        ],
+        'finishtissue' => [
+            'created' => 'The tissue was successfully created.',
+            'deleted' => 'The tissue was successfully deleted.',
+            'updated' => 'The tissue was successfully updated.',
+        ],
+        'showroom' => [
+            'created' => 'The dealer was successfully created.',
+            'deleted' => 'The dealer was successfully deleted.',
+            'updated' => 'The dealer was successfully updated.',
+        ],
+
+
         'users' => [
             'confirmation_email'  => 'A new confirmation e-mail has been sent to the address on file.',
             'created'             => 'The user was successfully created.',

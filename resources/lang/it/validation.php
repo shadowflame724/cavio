@@ -139,6 +139,113 @@ return [
                     'sort'                   => 'Ordina',
                 ],
 
+                'page' => [
+                    'pageKey' => 'Page key',
+                    'title' => 'Titolo*',
+                    'description' => 'Descrizione*',
+                    'body' => 'Soddisfare*',
+                ],
+                'block' => [
+                    'title' => 'Titolo*',
+                    'preview' => 'Anteprima*',
+                    'body' => 'Soddisfare*',
+                    'image' => 'Immagine*',
+                    'image_select' => 'Selezionare l\'immagine',
+                ],
+                'image' => [
+                    'error' =>[
+                        'dictFileTooBig' => 'Il file è troppo grande',
+                        'dictFallbackMessage' => 'Il tuo browser non supporta il drag & drop',
+                        'dictInvalidFileType' => 'tipo di file non valido',
+                        'dictMaxFilesExceeded' => 'È stato superato il numero massimo di file caricati.',
+                        'default_error' => 'Prova a caricare un formato di file diverso',
+                        'title' => 'Caricamento di un oggetto',
+                        'text' => 'Si è verificato un errore durante il caricamento del file.'
+                    ],
+                ],
+
+                'news' => [
+                    'type' => 'Tipo',
+                    'type_news' => 'Notizia',
+                    'type_press' => 'Presss',
+                    'type_presentation' => 'Presentazione',
+                    'type_video' => 'Video',
+                    'type_showroom' => 'Showroom',
+                    'title' => 'Titolo*',
+                    'description' => 'Descrizione*',
+                    'preview' => 'Anteprima*',
+                    'body' => 'Soddisfare*',
+                    'image' => 'Immagine',
+                    'image_select' => 'Selezionare l\'immagine',
+                ],
+                'category' => [
+                    'name' => 'Nome*',
+                    'image' => 'Immagine',
+                    'image_select' => 'Selezionare l\'immagine',
+                ],
+
+                'collection' => [
+                    'title' => 'Titolo*',
+                    'description' => 'Descrizione*',
+                    'banner' => 'Bandiera ?',
+                    'image' => 'Immagine*',
+                    'image_select' => '',
+                    'zones' => [
+                        'mainZones' => 'Zona principale',
+                        'title' => 'Titolo',
+                        'management' => 'Collezione-zone gestione',
+                        'mainPhoto' => 'Foto principale?'
+                    ]
+                ],
+
+                'faq' => [
+                    'question' => 'Domanda*',
+                    'answer' => 'Risposta*',
+                ],
+                'marker' => [
+                    'title' => 'Titolo*',
+                    'code' => 'Codice*',
+                ],
+                'zone' => [
+                    'title' => 'Titolo*',
+                    'image' => 'Immagine',
+                ],
+                'good' => [
+                    'category_id' => 'Categoria*',
+                    'collection_id' => 'Collezione*',
+                    'zone_id' => 'Zone*',
+                    'code' => 'Codice*',
+                    'name' => 'Nome',
+                    'dimensions' => 'Dimensioni',
+                    'tissue' => 'Fazzoletto di carta',
+                    'finish' => 'Finish',
+                    'description' => 'Descrizione',
+                ],
+                'showroom' => [
+                    'country' => 'Nazione*',
+                    'city' => 'Città*',
+                    'name' => 'Nome*',
+                    'address' => 'Indirizzo',
+                    'phone' => 'Telefono',
+                    'phone2' => 'Telefono aggiuntivo',
+                    'fax' => 'Fax',
+                    'email' => 'E-mail'
+                ],
+                'finishtissue' => [
+                    'title' => 'Titolo*',
+                    'type' => 'Tipo',
+                    'type_finish' => 'Fazzoletto di carta',
+                    'type_tissue' => 'Tissue',
+                    'image' => 'Immagine',
+                ],
+                'popup' => [
+                    'title' => 'Titolo*',
+                    'show' => 'Mostrare*',
+                    'body' => 'Soddisfare*',
+                    'image' => 'Immagine*',
+                    'link' => 'Collegamento*'
+                ],
+
                 'users' => [
                     'active'                  => 'Attivo',
                     'associated_roles'        => 'Ruoli associati',

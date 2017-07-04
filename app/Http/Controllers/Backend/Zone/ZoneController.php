@@ -52,7 +52,7 @@ class zoneController extends Controller
      */
     public function store(StoreZoneRequest $request)
     {
-        $this->zone->create($request->only('title', 'photo'));
+        $this->zone->create($request->only('title', 'title_ru', 'title_it', 'photo'));
         $this->moveImg($request->photo);
 
         return redirect()->route('admin.zone.index')->withFlashSuccess(trans('alerts.backend.zone.created'));
@@ -80,7 +80,7 @@ class zoneController extends Controller
     public function update(Zone $zone, UpdateZoneRequest $request)
     {
         $oldName = $zone->image;
-        $this->zone->update($zone, $request->only('title', 'photo'));
+        $this->zone->update($zone, $request->only('title', 'title_ru', 'title_it', 'photo'));
         $this->moveImg($request->photo, $oldName);
 
         return redirect()->route('admin.zone.index')->withFlashSuccess(trans('alerts.backend.zone.updated'));

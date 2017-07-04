@@ -44,7 +44,6 @@ class ZoneRepository extends BaseRepository
             ->select([
                 config('zones_table') . '.id',
                 config('zones_table') . '.title',
-                config('zones_table') . '.image',
                 config('zones_table') . '.created_at',
             ]);
     }
@@ -63,7 +62,9 @@ class ZoneRepository extends BaseRepository
             $zone = self::MODEL;
             $zone = new $zone();
             $zone->title = $input['title'];
-            $zone->image = $input['photo'];
+            $zone->title_ru = $input['title_ru'];
+            $zone->title_it = $input['title_it'];
+
 
             if ($zone->save()) {
 
@@ -87,7 +88,8 @@ class ZoneRepository extends BaseRepository
     public function update(Model $zone, array $input)
     {
         $zone->title = $input['title'];
-        $zone->image = $input['photo'];
+        $zone->title_ru = $input['title_ru'];
+        $zone->title_it = $input['title_it'];
 
         DB::transaction(function () use ($zone, $input) {
             if ($zone->save()) {

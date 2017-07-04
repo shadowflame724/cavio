@@ -27,6 +27,8 @@ class CreateCategoriesTable extends Migration
 
             // Add needed columns here (f.ex: name, slug, path, etc.)
             $table->string('name', 191);
+            $table->string('name_ru', 191)->nullable();
+            $table->string('name_it', 191)->nullable();
             $table->text('image')->nullable();
 
             $table->timestamps();

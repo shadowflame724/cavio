@@ -60,7 +60,7 @@ class PageController extends Controller
     public function store(StorePageRequest $request)
     {
 
-        $this->page->create($request->only('pageKey', 'title', 'description', 'body'));
+        $this->page->create($request->only('pageKey', 'title', 'title_ru', 'title_it', 'description', 'body', 'body_ru', 'body_it'));
 
         return redirect()->route('admin.page.index')->withFlashSuccess(trans('alerts.backend.page.created'));
     }
@@ -86,23 +86,27 @@ class PageController extends Controller
      */
     public function update(Page $page, UpdatePageRequest $request)
     {
-        $blocks = $request->blocks;
+        $blocks = $request['blocks'];
 
         foreach ($blocks as $key => $newblock) {
             $oldBlock = Block::find($newblock['id']);
             $oldImage = $oldBlock->image;
             $oldBlock->title = $newblock['title'];
-            $oldBlock->preview = /*EMTypograph::fast_apply(*/
-                clean($newblock['preview']);
+            $oldBlock->title_ru = $newblock['title_ru'];
+            $oldBlock->title_it = $newblock['title_it'];
             $oldBlock->body = /*EMTypograph::fast_apply(*/
                 clean($newblock['body']);
+            $oldBlock->body = /*EMTypograph::fast_apply(*/
+                clean($newblock['body_ru']);
+            $oldBlock->body = /*EMTypograph::fast_apply(*/
+                clean($newblock['body_it']);
             $oldBlock->image = $newblock['photo'];
             if ($oldBlock->save()) {
                 $this->moveImg($newblock['photo'], $oldImage);
             }
         }
 
-        $this->page->update($page, $request->only('pageKey', 'title', 'description', 'body'));
+        $this->page->update($page, $request->only('pageKey', 'title', 'title_ru', 'title_it', 'description', 'body', 'body_ru', 'body_it'));
 
         return redirect()->route('admin.page.index')->withFlashSuccess(trans('alerts.backend.page.updated'));
     }

@@ -28,7 +28,10 @@ class StoreCategoryRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:191',
+            'name' => 'required|min:3|max:30',
+            'name_ru' => 'required|min:3|max:30',
+            'name_it' => 'required|min:3|max:30',
+            'image' => 'required|min:3'
         ];
 
     }

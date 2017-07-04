@@ -23,25 +23,79 @@
                 </div><!--box-tools pull-right-->
             </div><!-- /.box-header -->
 
-            <div class="box-body">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab"
+                                                          data-toggle="tab">EN</a>
+                </li>
+                <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
+                <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="en">
+                    <div class="box-body">
 
-                <div class="form-group">
-                    {{ Form::label('question', trans('validation.attributes.backend.access.faq.question'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="form-group">
+                            {{ Form::label('question', trans('validation.attributes.backend.access.faq.question'), ['class' => 'col-lg-2 control-label']) }}
 
-                    <div class="col-lg-10">
-                        {{ Form::textarea('question', null, [ 'class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
+                            <div class="col-lg-10">
+                                {{ Form::textarea('question', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-                <div class="form-group">
-                    {{ Form::label('answer', trans('validation.attributes.backend.access.faq.answer'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="form-group">
+                            {{ Form::label('answer', trans('validation.attributes.backend.access.faq.answer'), ['class' => 'col-lg-2 control-label']) }}
 
-                    <div class="col-lg-10">
-                        {{ Form::textarea('answer', null, ['class' => 'form-control', 'required' => 'required', 'minlength' => '3','autofocus' => 'autofocus']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
+                            <div class="col-lg-10">
+                                {{ Form::textarea('answer', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3','autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+                    </div><!--form control-->
+                </div>
 
-            </div><!--form control-->
+                <div role="tabpanel" class="tab-pane fade " id="ru">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            {{ Form::label('question_ru', trans('validation.attributes.backend.access.faq.question'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::textarea('question_ru', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('answer_ru', trans('validation.attributes.backend.access.faq.answer'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::textarea('answer_ru', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3','autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+                    </div><!--form control-->
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="it">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            {{ Form::label('question_it', trans('validation.attributes.backend.access.faq.question'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::textarea('question_it', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('answer_it', trans('validation.attributes.backend.access.faq.answer'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::textarea('answer_it', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3','autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+                    </div><!--form control-->
+                </div>
+            </div>
+
+
         </div><!-- /.box-body -->
     </div><!--box-->
 

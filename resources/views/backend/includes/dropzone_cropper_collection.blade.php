@@ -1,5 +1,5 @@
 <script>
-    if (document.getElementById('add_photo').getAttribute('src')) {
+    if (document.getElementById('add_photo')) {
         var pathname = document.getElementById('add_photo').getAttribute('src');
         var leafname = pathname.split('\\').pop().split('/').pop();
         $('input#photo').val(leafname);

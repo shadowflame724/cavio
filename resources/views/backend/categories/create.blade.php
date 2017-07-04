@@ -1,15 +1,7 @@
 @extends ('backend.layouts.app')
 
 @section ('title', trans('labels.backend.access.category.management') . ' | ' . trans('labels.backend.access.category.edit'))
-@section('before-styles')
-    {{ Html::style('css/backend/plugin/cropper/cropper.css') }}
-    {{ Html::style('css/backend/plugin/dropzone/dropzone.css') }}
-    {{ Html::style('css/backend/plugin/dropzone/basic.css') }}
-@endsection
-@section('after-styles')
-    @include('backend.includes.dropzone_cropper_css')
 
-@endsection
 @section('page-header')
     <h1>
         {{ trans('labels.backend.access.category.management') }}
@@ -21,7 +13,7 @@
 
 @section('content')
 
-    {!! Form::open(['route' => 'admin.category.create', $p_id, 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'create-category', 'enctype' => "multipart/form-data"]) !!}
+    {!! Form::open(['route' => 'admin.category.store', $p_id, 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'create-category', 'enctype' => "multipart/form-data"]) !!}
 
     <div class="box box-success">
         <div class="box-header with-border">
@@ -31,30 +23,57 @@
                 @include('backend.categories.category-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab" data-toggle="tab">EN</a>
+            </li>
+            <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
+            <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="en">
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ Form::label('name', trans('validation.attributes.backend.access.category.name'), ['class' => 'col-lg-2 control-label']) }}
 
-        <div class="box-body">
-            <div class="form-group">
-                {{ Form::label('name', trans('validation.attributes.backend.access.category.name'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::text('name', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                    <input type="text" hidden name="p_id" value="{{$p_id}}">
 
-                <div class="col-lg-10">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
-            <input type="text" hidden name="p_id" value="{{$p_id}}">
+                    <div class="form-group">
+                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{Form::textarea('image', null, [ 'class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div><!-- /.box-body -->
+            </div>
 
-            <div class="form-group">
-                {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::hidden('photo', null) }}
-                    <div class="dropzone" id="add_photo"></div>
-                    <div class="photo">
-                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                    </div>
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+            <div role="tabpanel" class="tab-pane fade" id="ru">
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ Form::label('name_ru', trans('validation.attributes.backend.access.category.name'), ['class' => 'col-lg-2 control-label']) }}
 
-            <!--box-->
-        </div><!-- /.box-body -->
+                        <div class="col-lg-10">
+                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div><!-- /.box-body -->
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="it">
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ Form::label('name_it', trans('validation.attributes.backend.access.category.name'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('name_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div><!-- /.box-body -->
+            </div>
+        </div>
     </div><!--box-->
 
     <div class="box box-success">
@@ -71,13 +90,7 @@
         </div><!-- /.box-body -->
     </div><!--box-->
 
-
     {!! Form::close() !!}
 
 @endsection
 
-@section('after-scripts')
-    {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
-    {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
-    @include('backend.includes.dropzone_cropper')
-@endsection

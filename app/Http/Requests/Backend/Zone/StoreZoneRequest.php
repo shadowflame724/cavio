@@ -29,6 +29,8 @@ class StoreZoneRequest extends Request
     {
         return [
             'title' => "required|min:3|max:191",
+            'title_ru' => "required|min:3|max:191",
+            'title_it' => "required|min:3|max:191",
         ];
 
     }

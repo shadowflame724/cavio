@@ -64,9 +64,17 @@ class NewsRepository extends BaseRepository
             $news = new $news();
             $news->type = $input['type'];
             $news->title = $input['title'];
+            $news->title_ru = $input['title_ru'];
+            $news->title_it = $input['title_it'];
             $news->description = $input['description'];
+            $news->description_ru = $input['description_ru'];
+            $news->description_it = $input['description_it'];
             $news->preview = clean($input['preview']);
+            $news->preview_ru = clean($input['preview_ru']);
+            $news->preview_it = clean($input['preview_it']);
             $news->body = clean($input['body']);
+            $news->body_ru = clean($input['body_ru']);
+            $news->body_it = clean($input['body_it']);
             $news->image = $input['photo'];
 
             if ($news->save()) {
@@ -91,10 +99,17 @@ class NewsRepository extends BaseRepository
     {
         $news->type = $input['type'];
         $news->title = $input['title'];
+        $news->title_ru = $input['title_ru'];
+        $news->title_it = $input['title_it'];
         $news->description = $input['description'];
+        $news->description_ru = $input['description_ru'];
+        $news->description_it = $input['description_it'];
         $news->preview = clean($input['preview']);
+        $news->preview_ru = clean($input['preview_ru']);
+        $news->preview_it = clean($input['preview_it']);
         $news->body = clean($input['body']);
-        $news->type = $input['type'];
+        $news->body_ru = clean($input['body_ru']);
+        $news->body_it = clean($input['body_it']);
         $news->image = $input['photo'];
 
         DB::transaction(function () use ($news, $input) {

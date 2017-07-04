@@ -56,7 +56,8 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
-        $this->news->create($request->only('type', 'title', 'description', 'preview', 'body', 'type', 'photo'));
+        $this->news->create($request->only('type', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it',
+            'preview', 'preview_ru', 'preview_it', 'body', 'body_ru', 'body_it', 'type', 'photo'));
 
         $this->moveImg($request->photo);
 
@@ -85,7 +86,8 @@ class NewsController extends Controller
     public function update(News $news, UpdateNewsRequest $request)
     {
         $oldName = $news->image;
-        $this->news->update($news, $request->only('type', 'title', 'description', 'preview', 'body', 'type', 'photo'));
+        $this->news->update($news, $request->only('type', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it',
+            'preview', 'preview_ru', 'preview_it', 'body', 'body_ru', 'body_it', 'type', 'photo'));
         $this->moveImg($request->photo, $oldName);
 
         return redirect()->route('admin.news.index')->withFlashSuccess(trans('alerts.backend.news.updated'));

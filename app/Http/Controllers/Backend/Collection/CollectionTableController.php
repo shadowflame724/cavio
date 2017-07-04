@@ -41,9 +41,7 @@ class CollectionTableController extends Controller
                 $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
             })
             ->addColumn('actions', function ($collection) {
-                return '<a href="'.route('admin.collection.edit', array('collection' => $collection->id)).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i></a>
-                <a href="'.route('admin.collection.marker.edit', array('collection' => $collection->id)).'" class="btn btn-xs btn-primary"><i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Marker\'s editor"></i></a>
-                ';
+                return view('backend.collection.collectionTableButtons', ['collection' => $collection]);
             })
             ->editColumn('banner', '
             @if($banner == 1)

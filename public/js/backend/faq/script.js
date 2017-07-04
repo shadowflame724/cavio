@@ -15,7 +15,7 @@ associated.change(function() {
 });
 $(function()
 {
-    $('#question, #answer').redactor({
+    $('.redactor').redactor({
         buttons: ['format', 'bold', 'italic', 'link']
     });
 });

@@ -29,6 +29,9 @@ class UpdateCollectionRequest extends Request
         return [
             'title' => "required|min:3|max:191",
             'description' => "required|min:3",
+            'zones.*.title' => "required|max:40",
+            'zones.*.photo' => "required",
+            'zones.*.zone_id' => "required",
         ];
     }
 }

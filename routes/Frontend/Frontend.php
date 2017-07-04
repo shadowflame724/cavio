@@ -9,16 +9,23 @@ Route::get('/', 'FrontendController@index')->name('index');
 Route::get('about', 'FrontendController@about')->name('about');
 Route::get('faq', 'FrontendController@faq')->name('faq');
 Route::get('news', 'FrontendController@news')->name('news');
+
 Route::get('contacts', 'FrontendController@contacts')->name('contacts');
+Route::post('message', 'MessageController@store')->name('message.store');
+
 Route::get('payments', 'FrontendController@payments')->name('payments');
 Route::get('showrooms', 'FrontendController@showrooms')->name('showrooms');
-Route::get('collections', 'FrontendController@collections')->name('collections');
 Route::get('privacy-policy', 'FrontendController@privacyPolicy')->name('privacy-policy');
 Route::get('stash', 'FrontendController@stash')->name('stash');
 Route::get('catalogue', 'FrontendController@catalogue')->name('catalogue');
+Route::get('finish-tissue', 'FrontendController@finishTissue')->name('finish-tissue');
 
 
+Route::get('collections', 'CollectionController@index')->name('collections');
+Route::get('collections/{collection}', 'CollectionController@show')->name('collections.show');
 
+Route::get('zones', 'ZoneController@index')->name('zones');
+Route::get('zones/{zone}', 'ZoneController@show')->name('zones.show');
 
 
 

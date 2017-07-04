@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 return [
 
@@ -101,6 +101,9 @@ return [
                     'banner' => 'Banner',
                     'created_at' => 'Created at'
                 ],
+                'zones' => [
+                    'management' => 'Collection-Zones Management'
+                ]
             ],
             'marker' => [
                 'create' => 'Create Marker',
@@ -132,6 +135,44 @@ return [
                     'created_at' => 'Created at'
                 ],
             ],
+            'good' => [
+                'create' => 'Create Goods',
+                'edit' => 'Edit Goods',
+                'management' => 'Goods Management',
+
+                'table' => [
+                    'id' => 'Id',
+                    'name' => 'Name',
+                    'created_at' => 'Created at'
+                ],
+            ],
+            'showroom' => [
+                'create' => 'Create Showroom',
+                'edit' => 'Edit Showroom',
+                'management' => 'Showrooms Management',
+
+                'table' => [
+                    'id' => 'Id',
+                    'country' => 'Country',
+                    'name' => 'Name',
+                ],
+            ],
+            'finishtissue' => [
+                'create' => 'Create tissue',
+                'edit' => 'Edit tissue',
+                'management' => 'Tissues Management',
+
+                'table' => [
+                    'id' => 'Id',
+                    'title' => 'Title',
+                    'type' => 'Type'
+                ],
+            ],
+            'popup' => [
+                'edit' => 'Edit popup',
+                'management' => 'Popups Management'
+            ],
+
 
             'users' => [
                 'active' => 'Active Users',

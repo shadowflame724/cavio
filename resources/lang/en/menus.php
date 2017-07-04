@@ -92,6 +92,32 @@ return [
                 'management' => 'Zone\'s Management',
                 'main'       => 'Zones',
             ],
+            'good' => [
+                'all'        => 'All Goods',
+                'create'     => 'Create Goods',
+                'edit'       => 'Edit Goods',
+                'management' => 'Goods Management',
+                'main'       => 'Goods',
+            ],
+            'showroom' => [
+                'all'        => 'All Showrooms',
+                'create'     => 'Create Showrooms',
+                'edit'       => 'Edit Showrooms',
+                'management' => 'Showrooms Management',
+                'main'       => 'Showrooms',
+            ],
+            'finishtissue' => [
+                'all'        => 'All Tissues',
+                'create'     => 'Create Tissues',
+                'edit'       => 'Edit Tissues',
+                'management' => 'Tissues Management',
+                'main'       => 'Tissues',
+            ],
+            'popup' => [
+                'edit'       => 'Edit Popup',
+                'management' => 'GoodPopup Management',
+                'main'       => 'Popup',
+            ],
         ],
 
         'log-viewer' => [

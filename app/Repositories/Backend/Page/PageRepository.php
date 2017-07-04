@@ -64,11 +64,19 @@ class PageRepository extends BaseRepository
             $page = self::MODEL;
             $page = new $page();
             $page->title = $input['title'];
+            $page->title_ru = $input['title_ru'];
+            $page->title_it = $input['title_it'];
+
             if ($input['pageKey']) {
                 $page->slug = $input['pageKey'];
             }
             $page->description = $input['description'];
-            $page->body = /*EMTypograph::fast_apply(*/clean($input['body']);
+            $page->body = /*EMTypograph::fast_apply(*/
+                clean($input['body']);
+            $page->body_ru = /*EMTypograph::fast_apply(*/
+                clean($input['body_ru']);
+            $page->body_it = /*EMTypograph::fast_apply(*/
+                clean($input['body_it']);
 
             if ($page->save()) {
 
@@ -92,10 +100,19 @@ class PageRepository extends BaseRepository
     public function update(Model $page, array $input)
     {
         $page->title = $input['title'];
+        $page->title_ru = $input['title_ru'];
+        $page->title_it = $input['title_it'];
+
         if ($input['pageKey']) {
             $page->slug = $input['pageKey'];
-        }        $page->description = $input['description'];
-        $page->body = /*EMTypograph::fast_apply(*/clean($input['body']);
+        }
+        $page->description = $input['description'];
+        $page->body = /*EMTypograph::fast_apply(*/
+            clean($input['body']);
+        $page->body_ru = /*EMTypograph::fast_apply(*/
+            clean($input['body_ru']);
+        $page->body_it = /*EMTypograph::fast_apply(*/
+            clean($input['body_it']);
 
         DB::transaction(function () use ($page, $input) {
             if ($page->save()) {

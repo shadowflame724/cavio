@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Marker;
 
+use App\Http\Requests\Backend\Marker\UpdateMarkerRequest;
 use App\Models\Collection\Collection;
 use App\Models\Marker\Marker;
 use App\Http\Controllers\Controller;
@@ -41,7 +42,10 @@ class MarkerController extends Controller
     {
         Marker::create([
             'collection_id' => $collection->id,
-            'title' => "Default tile",
+            'title' => "Default title",
+            'title_ru' => "Default title",
+            'title_it' => "Default title",
+
             'code' => "#00001",
             'x' => 0.3,
             'y' => 0.5,
@@ -65,22 +69,22 @@ class MarkerController extends Controller
 
     /**
      * @param Collection $collection
-     * @param Request $request
+     * @param UpdateMarkerRequest $request
      *
      * @return mixed
      */
-    public function update(Collection $collection, Request $request)
+    public function update(Collection $collection, UpdateMarkerRequest $request)
     {
         $markers = $request->markers;
 
         foreach ($markers as $key => $newMarker) {
-            validator($newMarker, [
-                $newMarker['code'] => 'required|max:10',
-                $newMarker['title'] => 'required|max:32'
-            ]);
-
             $oldMarker = Marker::find($newMarker['id']);
-            $oldMarker->update($newMarker);
+            $oldMarker->code = $newMarker['code'];
+            $oldMarker->title = $newMarker['title'];
+            $oldMarker->title_ru = $newMarker['title_ru'];
+            $oldMarker->title_it = $newMarker['title_it'];
+            $oldMarker->x = $newMarker['x'];
+            $oldMarker->y = $newMarker['y'];
             $oldMarker->save();
         }
 

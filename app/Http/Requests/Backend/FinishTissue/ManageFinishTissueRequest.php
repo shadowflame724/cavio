@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Backend\Block;
+namespace App\Http\Requests\Backend\FinishTissue;
 
 use App\Http\Requests\Request;
 
+
 /**
- * Class UpdatePageRequest.
+ * Class ManageFinishTissueRequest.
  */
-class UpdateBlockRequest extends Request
+class ManageFinishTissueRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +28,7 @@ class UpdateBlockRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:191',
-            'preview' => 'required|min:6',
-            'body' => 'required|min:6'
+            //
         ];
     }
 }

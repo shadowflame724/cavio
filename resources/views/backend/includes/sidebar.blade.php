@@ -52,6 +52,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ active_class(Active::checkUriPattern('admin/popup')) }}">
+                        <a href="{{ route('admin.popup.edit') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.popup.management') }}</span>
+                        </a>
+                    </li>
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/news')) }}">
                         <a href="{{ route('admin.news.index') }}">
                             <i class="fa fa-circle-o"></i>
@@ -73,6 +80,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ active_class(Active::checkUriPattern('admin/finish-tissue')) }}">
+                        <a href="{{ route('admin.finish-tissue.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.finishtissue.management') }}</span>
+                        </a>
+                    </li>
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/collection')) }}">
                         <a href="{{ route('admin.collection.index') }}">
                             <i class="fa fa-circle-o"></i>
@@ -84,6 +98,20 @@
                         <a href="{{ route('admin.zone.index') }}">
                             <i class="fa fa-circle-o"></i>
                             <span>{{ trans('labels.backend.access.zone.management') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/showroom')) }}">
+                        <a href="{{ route('admin.showroom.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.showroom.management') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/good')) }}">
+                        <a href="{{ route('admin.good.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.access.good.management') }}</span>
                         </a>
                     </li>
 

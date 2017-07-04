@@ -27,7 +27,6 @@
                     <tr>
                         <th>{{ trans('labels.backend.access.zone.table.id') }}</th>
                         <th>{{ trans('labels.backend.access.zone.table.title') }}</th>
-                        <th>{{ trans('labels.backend.access.zone.table.image') }}</th>
                         <th>{{ trans('labels.backend.access.zone.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
@@ -65,7 +64,6 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
-                    {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],

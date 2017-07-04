@@ -63,6 +63,11 @@ class FAQRepository extends BaseRepository
             $faq = new $faq();
             $faq->question = $input['question'];
             $faq->answer = $input['answer'];
+            $faq->question_ru = $input['question_ru'];
+            $faq->answer_ru = $input['answer_ru'];
+            $faq->question_it = $input['question_it'];
+            $faq->answer_it = $input['answer_it'];
+
 
             if ($faq->save()) {
                 event(new FAQCreated($faq));
@@ -87,6 +92,10 @@ class FAQRepository extends BaseRepository
 
         $faq->question = $input['question'];
         $faq->answer = $input['answer'];
+        $faq->question_ru = $input['question_ru'];
+        $faq->answer_ru = $input['answer_ru'];
+        $faq->question_it = $input['question_it'];
+        $faq->answer_it = $input['answer_it'];
 
         DB::transaction(function () use ($faq, $input) {
             if ($faq->save()) {

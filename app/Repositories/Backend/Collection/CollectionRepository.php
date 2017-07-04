@@ -65,19 +65,17 @@ class CollectionRepository extends BaseRepository
             $collection = self::MODEL;
             $collection = new $collection();
             $collection->title = $input['title'];
+            $collection->title_ru = $input['title_ru'];
+            $collection->title_it = $input['title_it'];
+            if (isset($input['banner'])) {
+                $collection->banner = 1;
+            }
             $collection->description = $input['description'];
+            $collection->description_ru = $input['description_ru'];
+            $collection->description_it = $input['description_it'];
             $collection->image = $input['photo'];
 
             if ($collection->save()) {
-                for ($i = 0; $i < 5; $i++) {
-                    Marker::create([
-                        'collection_id' => $collection->id,
-                        'title' => 'Default title',
-                        'code' => '#00001',
-                        'x' => '679',
-                        'y' => '149',
-                    ]);
-                }
                 event(new CollectionCreated($collection));
 
                 return true;
@@ -95,11 +93,18 @@ class CollectionRepository extends BaseRepository
      *
      * @return bool
      */
-    public function update(Model $collection, array $input)
+    public function update(Model $collection, array $input, $mainPhoto)
     {
         $collection->title = $input['title'];
+        $collection->title_ru = $input['title_ru'];
+        $collection->title_it = $input['title_it'];
         $collection->description = $input['description'];
-        $collection->image = $input['photo'];
+        $collection->description_ru = $input['description_ru'];
+        $collection->description_it = $input['description_it'];
+
+        if ($mainPhoto) {
+            $collection->image = $mainPhoto;
+        }
 
         DB::transaction(function () use ($collection, $input) {
             if ($collection->save()) {

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category\Category;
 use App\Models\Collection\Collection;
+use App\Models\Message\Message;
 use App\Models\Zone\Zone;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
@@ -57,11 +58,13 @@ class AppServiceProvider extends ServiceProvider
         $collections = Collection::all();
         $categories = Category::all();
         $zones = Zone::all();
+        $messages = Message::all();
 
         View::share([
             'collections' => $collections,
             'categories' => $categories,
-            'zones' => $zones
+            'zones' => $zones,
+            'messages' => $messages
         ]);
 
     }

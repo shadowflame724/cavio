@@ -52,7 +52,7 @@ class FAQController extends Controller
      */
     public function store(StoreFAQRequest $request)
     {
-        $this->faq->create($request->only('question', 'answer'));
+        $this->faq->create($request->only('question', 'answer', 'question_ru', 'answer_ru', 'question_it', 'answer_it'));
 
         return redirect()->route('admin.faq.index')->withFlashSuccess(trans('alerts.backend.faq.created'));
     }
@@ -78,7 +78,7 @@ class FAQController extends Controller
      */
     public function update(FAQ $faq, UpdateFAQRequest $request)
     {
-        $this->faq->update($faq, $request->only('question', 'answer'));
+        $this->faq->update($faq, $request->only('question', 'answer', 'question_ru', 'answer_ru', 'question_it', 'answer_it'));
 
         return redirect()->route('admin.faq.index')->withFlashSuccess(trans('alerts.backend.faq.updated'));
     }

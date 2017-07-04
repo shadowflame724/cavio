@@ -27,8 +27,10 @@ class UpdateMarkerRequest extends Request
     public function rules()
     {
         return [
-            'code' => 'required|max:10',
-            'title' => 'required|max:32',
+            'markers.*.code' => 'required',
+            'markers.*.title' => 'required|min:3|max:30',
+            'markers.*.title_ru' => 'required|min:3|max:30',
+            'markers.*.title_it' => 'required|min:3|max:30',
         ];
     }
 }

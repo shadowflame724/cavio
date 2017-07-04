@@ -5,27 +5,13 @@
 */
 Route::group(['namespace' => 'Category'], function () {
 
-    Route::get('category',
-        [
-            'as' => 'category.index',
-            'uses' => 'CategoryController@index'
-        ]);
+    Route::get('category', 'CategoryController@index')->name('category.index');
 
-    Route::match(['GET', 'POST'], 'category/create/{p_id?}',
-        [
-            'as' => 'category.create',
-            'uses' => 'CategoryController@create'
-        ]);
+    Route::get('category/create/{p_id?}', 'CategoryController@create')->name('category.create');
+    Route::post('category/store/{p_id?}', 'CategoryController@store')->name('category.store');
 
-    Route::match(['GET', 'POST'], 'category/edit/{id?}',
-        [
-            'as' => 'category.edit',
-            'uses' => 'CategoryController@edit'
-        ]);
+    Route::get('category/category/edit/{id?}', 'CategoryController@edit')->name('category.edit');
+    Route::post('category/category/edit/{id?}', 'CategoryController@update')->name('category.update');
 
-    Route::get('category/delete/{id?}',
-        [
-            'as' => 'category.delete',
-            'uses' => 'CategoryController@destroy'
-        ]);
+    Route::get('category/delete/{id?}', 'CategoryController@destroy')->name('category.delete');
 });

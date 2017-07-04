@@ -6,6 +6,8 @@ use App\Events\Backend\Category\CategoryCreated;
 use App\Events\Backend\Category\CategoryDeleted;
 use App\Events\Backend\Category\CategoryUpdated;
 use App\Exceptions\GeneralException;
+use App\Http\Requests\Backend\Category\StoreCategoryRequest;
+use App\Http\Requests\Backend\Category\UpdateCategoryRequest;
 use App\Models\Category\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -46,33 +48,40 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $p_id = null)
+    public function create($p_id = null)
     {
-        if ($request->isMethod("POST")) {
 
-            $this->validate(\request(), [
-                'name' => "required|min:3|max:191"
-            ]);
-            $catName = \request('name');
-            $p_id = \request('p_id');
-            $imageName = $request->photo;
-            if (Category::isValidNestedSet() == true) {
-
-                $cat = Category::create([
-                    'name' => $catName,
-                    'image' => $imageName,
-                    $this->moveImg($imageName)
-                ]);
-                if ($p_id != null) {
-                    $root = Category::find($p_id);
-                    $cat->makeChildOf($root);
-                }
-                event(new CategoryCreated($cat));
-                return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.created'));
-            }
-
-        }
         return view('backend.categories.create', ['p_id' => $p_id]);
+    }
+
+    /**
+     * @param StoreCategoryRequest $request
+     *
+     * @return mixed
+     */
+    public function store(StoreCategoryRequest $request)
+    {
+        $catName = $request->name;
+        $catNameRu = $request->name_ru;
+        $catNameIt = $request->name_it;
+        $p_id = $request->p_id;
+        $imageName = $request->image;
+        if (Category::isValidNestedSet() == true) {
+            $cat = Category::create([
+                'name' => $catName,
+                'name_ru' => $catNameRu,
+                'name_it' => $catNameIt,
+                'image' => $imageName,
+            ]);
+            if ($p_id != null) {
+                $root = Category::find($p_id);
+                $cat->makeChildOf($root);
+            }
+            event(new CategoryCreated($cat));
+            return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.created'));
+        }
+
+        throw new GeneralException(trans('exceptions.backend.access.category.create_error'));
     }
 
     /**
@@ -81,36 +90,36 @@ class CategoryController extends Controller
      * @param  int $p_id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $p_id)
+    public function edit($p_id)
     {
         $cat = Category::find($p_id);
-        $oldName = $cat->image;
-
-        if ($request->isMethod("POST")) {
-
-            $this->validate(\request(), [
-                'name' => "required|min:3|max:191"
-            ]);
-            $imageName = $request->photo;
-
-            $cat->name = \request('name');
-            $cat->image = $request->photo;
-
-            if ($cat->save()) {
-                event(new CategoryUpdated($cat));
-                $this->moveImg($imageName, $oldName);
-
-            }
-
-            return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.updated'));
-        }
 
         return view('backend.categories.edit', ['category' => $cat]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param UpdateCategoryRequest $request
+     * @param Category $cat
      *
+     * @return mixed
+     */
+    public function update(UpdateCategoryRequest $request, Category $cat)
+    {
+        $cat->name = $request->name;
+        $cat->name_ru = $request->name_ru;
+        $cat->name_it = $request->name_it;
+        $cat->image = $request->image;
+
+        if ($cat->save()) {
+            event(new CategoryUpdated($cat));
+        }
+
+        return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.updated'));
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
      * @param  int $id
      * @return \Illuminate\Http\Response
      */

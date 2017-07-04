@@ -40,8 +40,6 @@
             </h3>
         </div>
         <!-- /.box-header -->
-
-
         {{ Form::open(['route' => ['admin.marker.update'], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'POST']) }}
 
         <div class="box-body">
@@ -67,27 +65,60 @@
                         <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="heading{{$i}}">
                             <div class="panel-body">
-                                <div class="form-group">
-                                    {{ Form::hidden('markers['.$i.'][id]', $marker->id, ['class' => 'form-control', 'id' => 'markers['.$i.'][id]']) }}
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#en{{$i}}" aria-controls="en" role="tab"
+                                                                              data-toggle="tab">EN</a>
+                                    </li>
+                                    <li role="presentation"><a href="#ru{{$i}}" aria-controls="ru" role="tab"
+                                                               data-toggle="tab">RU</a></li>
+                                    <li role="presentation"><a href="#it{{$i}}" aria-controls="it" role="tab"
+                                                               data-toggle="tab">IT</a></li>
+                                </ul>
 
-                                    {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="en{{$i}}">
+                                        <div class="form-group">
+                                            {{ Form::hidden('markers['.$i.'][id]', $marker->id, ['class' => 'form-control', 'id' => 'markers['.$i.'][id]']) }}
 
-                                    <div class="col-lg-10">
-                                        {{ Form::text('markers['.$i.'][title]', $marker->title, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                    </div><!--col-lg-10-->
-                                </div><!--form control-->
+                                            {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
+                                            <div class="col-lg-10">
+                                                {{ Form::text('markers['.$i.'][title]', $marker->title, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
 
-                                <div class="form-group">
-                                    {{ Form::label('code', trans('validation.attributes.backend.access.marker.code'), ['class' => 'col-lg-2 control-label']) }}
-                                    <div class="col-lg-10">
-                                        {{ Form::text('markers['.$i.'][code]', $marker->code, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                    </div><!--col-lg-10-->
-                                </div><!--form control-->
-                                {{ Form::hidden('markers['.$i.'][x]', $marker->x, ['class' => 'form-control', 'id' => 'markers['.$i.'][x]']) }}
-                                {{ Form::hidden('markers['.$i.'][y]', $marker->y, ['class' => 'form-control', 'id' => 'markers['.$i.'][y]']) }}
+                                        <div class="form-group">
+                                            {{ Form::label('code', trans('validation.attributes.backend.access.marker.code'), ['class' => 'col-lg-2 control-label']) }}
+                                            <div class="col-lg-10">
+                                                {{ Form::text('markers['.$i.'][code]', $marker->code, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
+                                        {{ Form::hidden('markers['.$i.'][x]', $marker->x, ['class' => 'form-control', 'id' => 'markers['.$i.'][x]']) }}
+                                        {{ Form::hidden('markers['.$i.'][y]', $marker->y, ['class' => 'form-control', 'id' => 'markers['.$i.'][y]']) }}
 
-                                <a href="{{route('admin.marker.destroy', $marker)}}"
-                                   class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
+                                        <a href="{{route('admin.marker.destroy', $marker)}}"
+                                           class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
+                                    </div>
+
+
+                                    <div role="tabpanel" class="tab-pane fade" id="ru{{$i}}">
+                                        <div class="form-group">
+                                            {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
+                                            <div class="col-lg-10">
+                                                {{ Form::text('markers['.$i.'][title_ru]', $marker->title_ru, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane fade" id="it{{$i}}">
+                                        <div class="form-group">
+                                            {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
+                                            <div class="col-lg-10">
+                                                {{ Form::text('markers['.$i.'][title_it]', $marker->title_it, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -143,7 +143,7 @@ return [
                     'sort'                   => 'Sort',
                 ],
                 'page' => [
-                    'pageKey' => 'Page key*',
+                    'pageKey' => 'Page key',
                     'title' => 'Title*',
                     'description' => 'Description*',
                     'body' => 'Content*',
@@ -190,8 +190,15 @@ return [
                 'collection' => [
                     'title' => 'Title*',
                     'description' => 'Description*',
+                    'banner' => 'Banner ?',
                     'image' => 'Image*',
                     'image_select' => 'Select image',
+                    'zones' => [
+                        'mainZones' => 'Main Zone',
+                        'title' => 'Title',
+                        'management' => 'Collection-zones management',
+                        'mainPhoto' => 'Main photo?'
+                    ]
                 ],
 
                 'faq' => [
@@ -206,7 +213,41 @@ return [
                     'title' => 'Title*',
                     'image' => 'Image',
                 ],
-
+                'good' => [
+                    'category_id' => 'Category*',
+                    'collection_id' => 'Collection*',
+                    'zone_id' => 'Zone*',
+                    'code' => 'Code*',
+                    'name' => 'Name',
+                    'dimensions' => 'Dimensions',
+                    'tissue' => 'Tissue',
+                    'finish' => 'Finish',
+                    'description' => 'Description',
+                ],
+                'showroom' => [
+                    'country' => 'Country*',
+                    'city' => 'City*',
+                    'name' => 'Name*',
+                    'address' => 'Address',
+                    'phone' => 'Phone',
+                    'phone2' => 'Additional phone',
+                    'fax' => 'Fax',
+                    'email' => 'Email'
+                ],
+                'finishtissue' => [
+                    'title' => 'Title*',
+                    'type' => 'Type',
+                    'type_finish' => 'Finish',
+                    'type_tissue' => 'Tissue',
+                    'image' => 'Image',
+                ],
+                'popup' => [
+                    'title' => 'Title*',
+                    'show' => 'Show*',
+                    'body' => 'Content*',
+                    'image' => 'Image*',
+                    'link' => 'Link*'
+                ],
                 'users' => [
                     'active'                  => 'Active',
                     'associated_roles'        => 'Associated Roles',

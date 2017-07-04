@@ -25,53 +25,60 @@ class HistoryTypeTableSeeder extends Seeder
 
         $types = [
             [
-                'id'         => 1,
                 'name'       => 'User',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id'         => 2,
                 'name'       => 'Role',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id'         => 3,
                 'name'       => 'Page',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id'         => 4,
                 'name'       => 'News',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id'         => 5,
                 'name'       => 'Collection',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id'         => 6,
                 'name'       => 'Category',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id'         => 7,
                 'name'       => 'FAQ',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id'         => 8,
                 'name'       => 'Zone',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'name'       => 'Good',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name'       => 'Showroom',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name'       => 'FinishTissue',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
         ];
 
         DB::table('history_types')->insert($types);

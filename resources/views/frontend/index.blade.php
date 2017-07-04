@@ -30,7 +30,46 @@
 <div id="wrapper-bg" class="wrapper-bg"></div>
 @include('frontend.includes.header')
 @include('frontend.includes.login_modal')
-@include('frontend.includes.zones_modal')
+{{--@include('frontend.includes.zones_modal')--}}
+@if($popup->show == 1)
+    <section id="index-popup" class="zone-col-modal modal-log_reg show">
+        <div class="wrapper-zone-col-modal">
+            <div class="scroller scroller-zc-modal">
+                <div class="scroller-inner">
+                    <div class="close-modal"></div>
+                    <div class="wrap-swiper-log_reg inner-zone-col-modal ind_pop relative"><h3
+                                class="section-title modal ind_pop show">
+                            @if (App::getLocale() == 'ru')
+                                {{ $popup->title_ru }}
+                            @elseif(App::getLocale() == 'it')
+                                {{ $popup->title_it }}
+                            @else
+                                {{ $popup->title }}
+                            @endif
+                        </h3>
+                        <div class="wrap-content-ind_pop clearfix">
+                            <div class="wrap-media-ind_pop"><img src="/upload/images/{{ $popup->image }}" alt=""></div>
+                            <div class="wrap-text-ind_pop">
+                                @if (App::getLocale() == 'ru')
+                                    {!! $popup->body_ru !!}
+                                @elseif(App::getLocale() == 'it')
+                                    {!! $popup->body_it !!}
+                                @else
+                                    {!! $popup->body !!}
+                                @endif
+                            </div>
+                        </div>
+                        <div class="wrap-ind_pop-btn">
+                                <a href="/{{ $popup->link }}">
+                                    <button class="btn small" content="okay">{{ trans('frontend.index.okay') }}</button>
+                                </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endif
 <main id="main-scrollbar" data-scrollbar="" tabindex="1" style="overflow: hidden; outline: none;">
     <article class="scroll-content">
         <section id="banner" class="wrap-banner-main">
@@ -57,7 +96,15 @@
                                         <div class="banner-popup">
                                             <div class="banner-popup-relate">
                                                 <div class="banner-popup-code">{{ $marker->code }}</div>
-                                                <div class="banner-popup-text">{{ $marker->title }}</div>
+                                                <div class="banner-popup-text">
+                                                    @if (App::getLocale() == 'ru')
+                                                        {{ $marker->title_ru }}
+                                                    @elseif(App::getLocale() == 'it')
+                                                        {{ $marker->title_it }}
+                                                    @else
+                                                        {{ $marker->title }}
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </a>
@@ -84,7 +131,14 @@
                                         <div class="banner-popup">
                                             <div class="banner-popup-relate">
                                                 <div class="banner-popup-code">{{ $marker->code }}</div>
-                                                <div class="banner-popup-text">{{ $marker->title }}</div>
+                                                <div class="banner-popup-text">
+                                                    @if (App::getLocale() == 'ru')
+                                                        {{ $marker->title_ru }}
+                                                    @elseif(App::getLocale() == 'it')
+                                                        {{ $marker->title_it }}
+                                                    @else
+                                                        {{ $marker->title }}
+                                                    @endif                                                </div>
                                             </div>
                                         </div>
                                     </a>
@@ -96,7 +150,6 @@
                 @endforeach
             </div>
 
-
             <img class="banner-shadow-top" src="/upload/images/banner-shadow-top.png" alt="">
         </section>
         <section id="new-products">
@@ -104,7 +157,7 @@
                 <div class="new-products-left-side">
                     <div class="new-products-left-item">
                         <div class="head clearfix">
-                            <div class="new-label">new</div>
+                            <div class="new-label">{{ trans('frontend.index.new')}}</div>
                             <div class="new-products-dots">
                                 @php($k=0)
                                 @foreach($collections as $collection)
@@ -125,16 +178,46 @@
                                 @if($collection->banner == 1)
                                     @if($u==0)
                                         <div class="slidebox">
-                                            <div class="title">{!! $collection->title !!}</div>
-                                            <p class="descr">{!! $collection->description !!} <a href=#
-                                                                                                 class="link-arrow">→</a>
+                                            <div class="title">
+                                                @if (App::getLocale() == 'ru')
+                                                    {!! $collection->title_ru !!}
+                                                @elseif(App::getLocale() == 'it')
+                                                    {!! $collection->title_it !!}
+                                                @else
+                                                    {!! $collection->title !!}
+                                                @endif
+                                            </div>
+                                            <p class="descr">
+                                                @if (App::getLocale() == 'ru')
+                                                    {!! $collection->description_ru !!}
+                                                @elseif(App::getLocale() == 'it')
+                                                    {!! $collection->description_it !!}
+                                                @else
+                                                    {!! $collection->description !!}
+                                                @endif
+                                                <a href=#
+                                                   class="link-arrow">→</a>
                                         </div>
                                         @php($u++)
                                     @else
                                         <div class="slidebox hide">
-                                            <div class="title">{!! $collection->title !!}</div>
-                                            <p class="descr">{!! $collection->description !!} <a href=#
-                                                                                                 class="link-arrow">→</a>
+                                            <div class="title">
+                                                @if (App::getLocale() == 'ru')
+                                                    {!! $collection->title_ru !!}
+                                                @elseif(App::getLocale() == 'it')
+                                                    {!! $collection->title_it !!}
+                                                @else
+                                                    {!! $collection->title !!}
+                                                @endif                                            </div>
+                                            <p class="descr">
+                                                @if (App::getLocale() == 'ru')
+                                                    {!! $collection->description_ru !!}
+                                                @elseif(App::getLocale() == 'it')
+                                                    {!! $collection->description_it !!}
+                                                @else
+                                                    {!! $collection->description !!}
+                                                @endif <a href=#
+                                                          class="link-arrow">→</a>
                                         </div>
                                     @endif
                                 @endif
@@ -209,10 +292,12 @@
                             </div>
                             <a class="new-products-right-inner-item" href="#">
                                 <div class="new-products-more-center">
-                                    <div class="new-products-more-widt"><span class="show-all-prod anim-underline">Show All <span
+                                    <div class="new-products-more-widt"><span class="show-all-prod anim-underline">{{ trans('frontend.index.showAll')}}
+                                            <span
                                                     class="wrap-coll-name-arrow"><span
                                                         class="coll-name-arrow">→</span></span></span>
-                                        <div class="show-all-prod-numb"><span>124 products</span></div>
+                                        <div class="show-all-prod-numb">
+                                            <span>124 {{ trans('frontend.header.products')}}</span></div>
                                     </div>
                                 </div>
                             </a></div>
@@ -268,10 +353,12 @@
                             </div>
                             <a class="new-products-right-inner-item" href="#">
                                 <div class="new-products-more-center">
-                                    <div class="new-products-more-widt"><span class="show-all-prod anim-underline">Show All <span
+                                    <div class="new-products-more-widt"><span class="show-all-prod anim-underline">{{ trans('frontend.index.showAll')}}
+                                            <span
                                                     class="wrap-coll-name-arrow"><span
                                                         class="coll-name-arrow">→</span></span></span>
-                                        <div class="show-all-prod-numb"><span>124 products</span></div>
+                                        <div class="show-all-prod-numb">
+                                            <span>124 {{ trans('frontend.header.products')}}</span></div>
                                     </div>
                                 </div>
                             </a></div>
@@ -316,10 +403,12 @@
                             </div>
                             <a class="new-products-right-inner-item" href="#">
                                 <div class="new-products-more-center">
-                                    <div class="new-products-more-widt"><span class="show-all-prod anim-underline">Show All <span
+                                    <div class="new-products-more-widt"><span class="show-all-prod anim-underline">{{ trans('frontend.index.showAll')}}
+                                            <span
                                                     class="wrap-coll-name-arrow"><span
                                                         class="coll-name-arrow">→</span></span></span>
-                                        <div class="show-all-prod-numb"><span>124 products</span></div>
+                                        <div class="show-all-prod-numb">
+                                            <span>124 {{ trans('frontend.header.products')}}</span></div>
                                     </div>
                                 </div>
                             </a></div>
@@ -329,7 +418,15 @@
             </div>
         </section>
         <section id="our-philosophy">
-            <div class="container"><h3 class="section-title show">{!! $page->blocks->get(0)->title !!}</h3>
+            <div class="container"><h3 class="section-title show">
+                    @if (App::getLocale() == 'ru')
+                        {!! $page->blocks->get(0)->title_ru !!}
+                    @elseif(App::getLocale() == 'it')
+                        {!! $page->blocks->get(0)->title_it !!}
+                    @else
+                        {!! $page->blocks->get(0)->title !!}
+                    @endif
+                </h3>
                 <div class="wrap-philosophy a clearfix">
                     <svg class="title-wave wave-phil" viewBox="0 0 1395.63 1237.68">
                         <use xlink:href=wave.svg#wave></use>
@@ -346,7 +443,13 @@
                     <div class="phil-right">
                         <div class="phil-text">
                             <div class="phil-text-nosvg">
-                                {!! $page->blocks->get(0)->body !!}
+                                @if (App::getLocale() == 'ru')
+                                    {!! $page->blocks->get(0)->body_ru !!}
+                                @elseif(App::getLocale() == 'it')
+                                    {!! $page->blocks->get(0)->body_it !!}
+                                @else
+                                    {!! $page->blocks->get(0)->body !!}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -354,7 +457,7 @@
             </div>
         </section>
         <section id="shop-by-collection">
-            <div class=cont-coll><h3 class="section-title small show">Shop by Collection</h3>
+            <div class=cont-coll><h3 class="section-title small show">{{ trans('frontend.index.shopByCollection')}}</h3>
                 <div class="collection-carousel">
                     <div class="swiper-wrapper">
                         @foreach($collections as $collection)
@@ -374,10 +477,18 @@
                                         </div>
                                         <div class="wrap-coll-item-footer">
                                             <div class="wrap-coll-item-data">
-                                                <div class="coll-name">{{ $collection->title }} <span
+                                                <div class="coll-name">
+                                                    @if (App::getLocale() == 'ru')
+                                                        {{ $collection->title_ru }}
+                                                    @elseif(App::getLocale() == 'it')
+                                                        {{ $collection->title_it }}
+                                                    @else
+                                                        {{ $collection->title }}
+                                                    @endif
+                                                    <span
                                                             class="wrap-coll-name-arrow"><span
                                                                 class="coll-name-arrow">→</span></span></div>
-                                                <div class="numb-prod">69 products</div>
+                                                <div class="numb-prod">69 {{ trans('frontend.header.products')}}</div>
                                             </div>
                                         </div>
                                     </a>
@@ -393,7 +504,7 @@
             </div>
         </section>
         <section id="shop-by-cat">
-            <div class="container"><h3 class="section-title small show">Shop by Category</h3>
+            <div class="container"><h3 class="section-title small show">{{ trans('frontend.index.shopByCategory')}}</h3>
                 <div class="cat-wrapper clearfix">
 
                     @php($count=0)
@@ -416,20 +527,34 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="cat-name" content="{{ $category->name }}">
-                                        "{{ $category->name }}</div>
+                                    <div class="cat-name" content="
+                                    @if (App::getLocale() == 'ru')
+                                    {{ $category->name_ru }}
+                                    @elseif(App::getLocale() == 'it')
+                                    {{ $category->name_it }}
+                                    @else
+                                    {{ $category->name }}
+                                    @endif
+                                            ">
+                                        @if (App::getLocale() == 'ru')
+                                            {{ $category->name_ru }}
+                                        @elseif(App::getLocale() == 'it')
+                                            {{ $category->name_it }}
+                                        @else
+                                            {{ $category->name }}
+                                        @endif
+                                    </div>
                                 </a></div>
                             @php($count = $count+1)
                         @endif
                     @endforeach
                 </div>
                 <div class=wrap-btn-more><a href="{{ route('frontend.catalogue') }}" class="btn more-10-cat"
-                                            content="10 more categories">10 more
-                        categories</a> <a href="{{ route('frontend.catalogue') }}" class="btn more-12-cat"
-                                          content="12 more categories">12 more
-                        categories</a> <a href="{{ route('frontend.catalogue') }}" class="btn more-14-cat"
-                                          content="14 more categories">14 more
-                        categories</a></div>
+                                            content="10 {{ trans('frontend.index.moreCategories')}}">10 {{ trans('frontend.index.moreCategories')}}</a>
+                    <a href="{{ route('frontend.catalogue') }}" class="btn more-12-cat"
+                       content="12 more categories">12 {{ trans('frontend.index.moreCategories')}}</a> <a
+                            href="{{ route('frontend.catalogue') }}" class="btn more-14-cat"
+                            content="14 more categories">14 {{ trans('frontend.index.moreCategories')}}</a></div>
             </div>
         </section>
         @include('frontend.includes.footer')
@@ -467,7 +592,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
-{{ Html::script('js/frontend/main.min.js') }}
+{{ Html::script('js/frontend/main.js') }}
 <script>Scrollbar.initAll();
 
     (function (i, s, o, g, r, a, m) {

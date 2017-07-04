@@ -23,22 +23,30 @@
                 @if (config('locale.status') && count(config('locale.languages')) > 1)
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="fa fa-language"></i> {{ trans('menus.language-picker.language') }} <span class="caret"></span>
+                            <i class="fa fa-language"></i> {{ trans('menus.language-picker.language') }} <span
+                                    class="caret"></span>
                         </a>
                         @include('includes.partials.lang')
                     </li>
                 @endif
 
+                    @php($count = 0)
+                    @foreach($messages as $message)
+                        @if($message->status == 0)
+                            @php($count++)
+                        @endif
+                    @endforeach
+
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-default">0</span>
+                        <span class="label label-default">{{ $count }}</span>
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li class="header">{{ trans_choice('strings.backend.general.you_have.messages', 0, ['number' => 0]) }}</li>
+                        {{--<li class="header">{{ trans_choice('strings.backend.general.you_have.messages', $count, ['number' => $count]) }}</li>--}}
                         <li class="footer">
-                            {{ link_to('#', trans('strings.backend.general.see_all.messages')) }}
+                            {{ link_to('admin/messages', trans('strings.backend.general.see_all.messages')) }}
                         </li>
                     </ul>
                 </li><!-- /.messages-menu -->
@@ -46,7 +54,9 @@
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-default">0</span>
+                        <span class="label label-default">
+                            0
+                        </span>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -79,7 +89,7 @@
 
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img src="{{ access()->user()->picture }}" class="img-circle" alt="User Avatar" />
+                            <img src="{{ access()->user()->picture }}" class="img-circle" alt="User Avatar"/>
                             <p>
                                 {{-- access()->user()->full_name }} - {{ implode(", ", access()->user()->roles->lists('name')->toArray()) --}}
                                 <small>{{ trans('strings.backend.general.member_since') }} {{ access()->user()->created_at->format("m/d/Y") }}</small>

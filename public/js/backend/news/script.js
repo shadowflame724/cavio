@@ -16,7 +16,6 @@ associated.change(function() {
 
 $(function()
 {
-    $('#body').redactor();
-    $('#preview').redactor();
+    $('.redactor').redactor();
 });
 

@@ -17,8 +17,14 @@ class CreateBlocksTable extends Migration
             $table->increments('id');
             $table->integer('page_id');
             $table->string('title')->nullable();
+            $table->string('title_ru')->nullable();
+            $table->string('title_it')->nullable();
             $table->text('preview')->nullable();
+            $table->text('preview_ru')->nullable();
+            $table->text('preview_it')->nullable();
             $table->text('body')->nullable();
+            $table->text('body_ru')->nullable();
+            $table->text('body_it')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

@@ -16,7 +16,10 @@ class CreateZonesTable extends Migration
         Schema::create('zones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('image')->nullable();
+            $table->string('title_ru')->nullable();
+            $table->string('title_it')->nullable();
+
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

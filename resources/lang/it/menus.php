@@ -35,6 +35,88 @@ return [
                 'main'            => 'Utenti',
                 'view'            => 'View User',
             ],
+
+            'page' => [
+                'all'        => 'Tutti i pagina',
+                'create'     => 'Crea pagina',
+                'edit'       => 'Modifica pagina',
+                'management' => 'Gestione pagina',
+                'main'       => 'Pagine'
+            ],
+            'block' => [
+                'all'        => 'Tutti i bloccare',
+                'create'     => 'Crea bloccare',
+                'edit'       => 'Modifica bloccare',
+                'management' => 'Gestione bloccare',
+                'main'       => 'Blocchi'
+            ],
+            'news' => [
+                'all'        => 'Tutti i notizia',
+                'create'     => 'Crea notizia',
+                'edit'       => 'Modifica notizia',
+                'management' => 'Gestione notizia',
+                'main'       => 'Notizia'
+            ],
+            'category' => [
+                'all'        => 'Tutti i categoria',
+                'create'     => 'Crea categoria',
+                'create_root' => 'Creare categorie di root',
+                'edit'       => 'Modifica categoria',
+                'management' => 'Gestione categoria',
+           ],
+            'collection' => [
+                'all'        => 'Tutti i collezione',
+                'create'     => 'Crea collezione',
+                'edit'       => 'Modifica collezione',
+                'management' => 'Gestione collezione',
+                'main'       => 'Collezioni'
+            ],
+            'marker' => [
+                'all'        => 'Tutti i marcatore',
+                'create'     => 'Crea marcatore',
+                'edit'       => 'Modifica marcatore',
+                'management' => 'Gestione marcatore',
+                'main'       => 'Marcatori'
+            ],
+            'faq' => [
+                'all'        => 'Tutti i FAQ',
+                'create'     => 'Crea FAQ',
+                'edit'       => 'Modifica FAQ',
+                'management' => 'Gestione FAQ',
+                'main'       => 'FAQ\'s'
+            ],
+            'zone' => [
+                'all'        => 'Tutti i zone',
+                'create'     => 'Crea zone',
+                'edit'       => 'Modifica zone',
+                'management' => 'Gestione zone',
+                'main'       => 'Zone'
+            ],
+            'good' => [
+                'all'        => 'Tutti i ruoli',
+                'create'     => 'Crea ruolo',
+                'edit'       => 'Modifica ruolo',
+                'management' => 'Gestione ruoli',
+                'main'       => 'Ruoli'
+            ],
+            'showroom' => [
+                'all'        => 'Tutti i merce',
+                'create'     => 'Crea merce',
+                'edit'       => 'Modifica merce',
+                'management' => 'Gestione merce',
+                'main'       => 'Merce'
+            ],
+            'finishtissue' => [
+                'all'        => 'Tutti i tessuti',
+                'create'     => 'Crea fazzoletto di carta',
+                'edit'       => 'Modifica fazzoletto di carta',
+                'management' => 'Gestione fazzoletto di carta',
+                'main'       => 'Tessuti'
+            ],
+            'popup' => [
+                'edit'       => 'Modifica ruolo',
+                'management' => 'Gestione ruoli',
+            ],
         ],
 
         'log-viewer' => [

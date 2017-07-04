@@ -2,6 +2,7 @@
 
 namespace App\Models\Category;
 
+use App\Models\Good\Good;
 use Illuminate\Database\Eloquent\Model;
 use Baum\Node;
 
@@ -23,4 +24,9 @@ class Category extends Node {
 
     // guard attributes from mass-assignment
     protected $guarded = array('id', 'parent_id', 'lft', 'rgt', 'depth');
+
+    public function goods()
+    {
+        return $this->hasMany(Good::class);
+    }
 }

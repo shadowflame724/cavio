@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page\Page;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -34,6 +35,13 @@ class Controller extends BaseController
         }
 
         return true;
+    }
+
+    public function page($pageKey)
+    {
+        $page = Page::where('slug', $pageKey)->get();
+
+        return $page[0];
     }
 
 }

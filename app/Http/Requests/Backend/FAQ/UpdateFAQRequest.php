@@ -27,8 +27,8 @@ class UpdateFAQRequest extends Request
     public function rules()
     {
         return [
-            'question' => "required|min:3",
-            'answer' => "required|min:3",
+            'question' => "required|min:3|max:200",
+            'answer' => "required|min:3|max:400",
         ];
     }
 }

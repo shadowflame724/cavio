@@ -55,6 +55,30 @@ return [
                 'delete_error'      => "C'è stato un problema durante l'eliminazione di questo collezione. Si prega di riprovare più tardi.",
                 'update_error'      => "C'è stato un problema durante l'aggiornamento di questo collezione. Si prega di riprovare più tardi.",
             ],
+
+            'zone' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo collezione. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo collezione. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo collezione. Si prega di riprovare più tardi.",
+            ],
+            'good' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo merce. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo merce. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo merce. Si prega di riprovare più tardi.",
+            ],
+            'showroom' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo showroom. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo showroom. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo showroom. Si prega di riprovare più tardi.",
+            ],
+            'finishtissue' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo fazzoletto di carta. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo fazzoletto di carta. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo fazzoletto di carta. Si prega di riprovare più tardi.",
+            ],
+            'popup' => [
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo apparire. Si prega di riprovare più tardi.",
+            ],
             'users' => [
                 'cant_deactivate_self'  => 'Non puoi eseguire questa operazione su te stesso.',
                 'cant_delete_admin'  => 'You can not delete the super administrator.',

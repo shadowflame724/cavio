@@ -7,6 +7,8 @@ use App\Http\Requests\Backend\Collection\UpdateCollectionRequest;
 use App\Http\Requests\Backend\Collection\StoreCollectionRequest;
 use App\Models\Collection\Collection;
 use App\Http\Controllers\Controller;
+use App\Models\CollectionZone\CollectionZone;
+use App\Models\Zone\Zone;
 use App\Repositories\Backend\Collection\CollectionRepository;
 
 class CollectionController extends Controller
@@ -52,8 +54,8 @@ class CollectionController extends Controller
      */
     public function store(StoreCollectionRequest $request)
     {
-        $this->collection->create($request->only('title', 'description', 'photo'));
-        $this->moveImg($request->photo);
+        $this->collection->create($request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo', 'zones_id'));
+        //$this->moveImg($request->photo);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.created'));
     }
@@ -66,8 +68,11 @@ class CollectionController extends Controller
      */
     public function edit(Collection $collection, ManageCollectionRequest $request)
     {
+        $zones = Zone::pluck('title', 'id');
+
         return view('backend.collection.edit', [
             'collection' => $collection,
+            'zones' => $zones
         ]);
     }
 
@@ -79,9 +84,30 @@ class CollectionController extends Controller
      */
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
+        $zones = $request->zones;
+
+        foreach ($zones as $key => $newzone) {
+            $oldzone = CollectionZone::find($newzone['id']);
+            if (isset($newzone['mainPhoto'] )) {
+                $mainPhoto = $newzone['photo'];
+            }
+            $oldzone->mainZones()->detach();
+            foreach ($newzone['zone_id'] as $mainZone) {
+                $oldzone->mainZones()->attach($mainZone);
+            }
+            $oldzone->mainZones();
+            $oldImage = $oldzone->image;
+            $oldzone->title = $newzone['title'];
+            $oldzone->title_ru = $newzone['title_ru'];
+            $oldzone->title_it = $newzone['title_it'];
+            $oldzone->image = $newzone['photo'];
+            if ($oldzone->save()) {
+                $this->moveImg($newzone['photo']);
+            }
+        }
         $oldName = $collection->image;
-        $this->collection->update($collection, $request->only('title', 'description', 'photo'));
-        $this->moveImg($request->photo, $oldName);
+        $this->collection->update($collection, $request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo'), $mainPhoto);
+        $this->moveImg($mainPhoto);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.updated'));
     }

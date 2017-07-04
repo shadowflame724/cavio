@@ -30,6 +30,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 14,
                 'depth' => 0,
                 'name' => 'STORAGE & CABINETS',
+                'name_ru' => 'ХРАНЕНИЕ И ШКАФЫ',
+                'name_it' => 'IMMAGAZZINAGGIO E CABINET',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -40,6 +42,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 26,
                 'depth' => 0,
                 'name' => 'TABLES & CONSOLES',
+                'name_ru' => 'ТАБЛИЦЫ И КОНСОЛИ',
+                'name_it' => 'TABELLE E CONSOLLE',
                 'image' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -50,6 +54,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 38,
                 'depth' => 0,
                 'name' => 'BEDS, SOFAS & SITTINGS',
+                'name_ru' => 'КРОВАТИ, СОФИЯ И САЙТЫ',
+                'name_it' => 'LETTI, SOFAS E SITTING',
                 'image' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -60,6 +66,9 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 50,
                 'depth' => 0,
                 'name' => 'ACCESSORIES',
+                'name_ru' => 'АКСЕССУАРЫ',
+                'name_it' => 'ACCESSORI
+',
                 'image' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -70,6 +79,9 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 3,
                 'depth' => 1,
                 'name' => 'Cabinets',
+                'name_ru' => 'Кабинет',
+                'name_it' => 'Armadietti
+',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -80,6 +92,9 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 5,
                 'depth' => 1,
                 'name' => 'Wardrobes',
+                'name_ru' => 'Шкафы
+',
+                'name_it' => 'Armadi',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -90,6 +105,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 7,
                 'depth' => 1,
                 'name' => 'Sideboards',
+                'name_ru' => 'Бачки',
+                'name_it' => 'Basette',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -100,6 +117,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 9,
                 'depth' => 1,
                 'name' => 'TV-stands',
+                'name_ru' => 'Столы для телевизоров',
+                'name_it' => 'TV-stands',
                 'image' => 'M164,109.8l-2.6,6l-1,4.5v16.3h0.7l2.9,6.7h-0.6c-0.1,0.8-0.4,1.6-0.9,2.3v2c0,1.3-1.1,2.4-2.4,2.4H155
 	c-1.3,0-2.4-1.1-2.4-2.4v-2c-0.5-0.7-0.7-1.5-0.9-2.3H47.3c-0.1,0.8-0.4,1.6-0.9,2.3v2c0,1.3-1.1,2.4-2.4,2.4h-5.1
 	c-1.3,0-2.4-1.1-2.4-2.4v-2c-0.5-0.7-0.7-1.5-0.9-2.3H35l2.9-6.7h0.7v-16.3l-1-4.5l-2.6-6h50.2v-3.8H50.9V50h97.3v56.1h-34.3v3.8
@@ -121,7 +140,9 @@ class CategoryTableSeeder extends Seeder
                 'lft' => 10,
                 'rgt' => 11,
                 'depth' => 1,
-                'name' => 'Commodes & Bedisdes',
+                'name' => 'Commodes & Bedsides',
+                'name_ru' => 'Комоды и постельные принадлежности',
+                'name_it' => 'Commodes & Bedisdes',
                 'image' => 'M154.4,57.3v77.6l1,4.4l2.6,5.9h-0.6c-0.1,0.8-0.4,1.6-0.9,2.2v2c0,1.3-1.1,2.4-2.4,2.4h-5.1c-1.3,0-2.4-1.1-2.4-2.4v-2
 	c-0.5-0.7-0.8-1.5-0.9-2.2H54.4c-0.1,0.8-0.4,1.6-0.9,2.2v2c0,1.3-1.1,2.4-2.4,2.4h-5.1c-1.3,0-2.4-1.1-2.4-2.4v-2
 	c-0.5-0.7-0.8-1.5-0.9-2.2H42l2.6-5.9l1-4.4V57.3l-1-4.4L42,46.9h116l-2.6,5.9L154.4,57.3z M148.3,146.6l0.2,0.3v2.6
@@ -151,7 +172,9 @@ class CategoryTableSeeder extends Seeder
                 'lft' => 12,
                 'rgt' => 13,
                 'depth' => 1,
-                'name' => ' Drink Cabinets',
+                'name' => 'Drink Cabinets',
+                'name_ru' => 'Шкафы для напитков',
+                'name_it' => 'Armadietti per bevande',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -162,6 +185,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 17,
                 'depth' => 1,
                 'name' => 'Dining Tables',
+                'name_ru' => 'Обеденные столы',
+                'name_it' => 'Tavoli da pranzo',
                 'image' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -172,6 +197,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 19,
                 'depth' => 1,
                 'name' => 'Consoles',
+                'name_ru' => 'Консоли',
+                'name_it' => 'Console',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -182,6 +209,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 21,
                 'depth' => 1,
                 'name' => 'Coffee Tables',
+                'name_ru' => 'Журнальные столики',
+                'name_it' => 'Tavolini da caffè',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -191,7 +220,9 @@ class CategoryTableSeeder extends Seeder
                 'lft' => 22,
                 'rgt' => 23,
                 'depth' => 1,
-                'name' => 'Toiletes',
+                'name' => 'Toilets',
+                'name_ru' => 'Ванная',
+                'name_it' => 'Servizi igienici',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -202,6 +233,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 25,
                 'depth' => 1,
                 'name' => 'Writing Desks',
+                'name_ru' => 'Письменные столы',
+                'name_it' => 'Scrivere scrivanie',
                 'image' => 'M30,64.9v7.7h6v11.8h2.4c-0.4,0.6-0.6,1.4-0.6,2.2c0,1.3,0.6,2.4,1.5,3.2c-0.9,0.8-1.5,1.9-1.5,3.2
 	c0,1.1,0.5,2.2,1.2,2.9c-0.4,0.3-0.8,0.6-1.2,1c-1,1.1-1.4,2.5-1.3,4l2.2,19.5c0.1,0.9,0.5,1.6,1.1,2.2c-0.9,0.8-1.5,1.9-1.5,3.2
 	c0,0,0.1,3.6,0.6,5v1.2c0,1.1,0.9,1.9,1.9,1.9h3.3c1.1,0,1.9-0.9,1.9-1.9v-1.2c0.5-1.4,0.6-5,0.6-5c0-1.4-0.7-2.6-1.7-3.3
@@ -233,6 +266,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 29,
                 'depth' => 1,
                 'name' => 'Beds',
+                'name_ru' => 'Кровати',
+                'name_it' => 'Letti',
                 'image' => 'M166.5,61.7h-3.7c-1.3,0-2.4,1.1-2.4,2.5v0.7c-8-3.1-47.1-17.9-52.2-17.9c-2.1,0-3.6,0.5-4.6,1.5
 	c-1.4,1.4-1.4,3.5-1.4,5.3l0,0.7c0,1.9-1.8,2-2.2,2c-0.2,0-2.2-0.1-2.2-2l0-0.7c0-1.8,0-3.9-1.4-5.3c-1-1-2.5-1.5-4.6-1.5
 	c-5.1,0-44.3,14.9-52.2,17.9v-0.7c0-1.4-1.1-2.5-2.4-2.5h-3.7c-1.3,0-2.4,1.1-2.4,2.5v85.3c0,1.4,1.1,2.5,2.4,2.5h3.7
@@ -261,6 +296,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 31,
                 'depth' => 1,
                 'name' => 'Benches & Poufs',
+                'name_ru' => 'Скамейки и пуфы',
+                'name_it' => 'Panche e Pouf',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -271,6 +308,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 33,
                 'depth' => 1,
                 'name' => 'Sofas & Armchairs',
+                'name_ru' => 'Диваны и кресла',
+                'name_it' => 'Divani e poltrone',
                 'image' => 'M145.9,103.9v37.5h-0.1c-0.1,0.8-0.4,1.6-0.9,2.3v2c0,1.3-1.1,2.4-2.4,2.4h-5.1c-1.3,0-2.4-1.1-2.4-2.4v-2
 	c-0.5-0.7-0.7-1.5-0.9-2.3H63.8c-0.1,0.8-0.4,1.6-0.9,2.3v2c0,1.3-1.1,2.4-2.4,2.4h-5.1c-1.3,0-2.4-1.1-2.4-2.4v-2
 	c-0.5-0.7-0.7-1.5-0.9-2.3H52v-37.6h0.3C45.3,102.2,40,95.9,40,88.3c0-8.7,7.1-15.7,15.7-15.7c1.8,0,3.5,0.3,5.1,0.9
@@ -299,6 +338,9 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 35,
                 'depth' => 1,
                 'name' => 'Chairs',
+                'name_ru' => 'Cтулья',
+                'name_it' => 'Sedie
+',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -309,6 +351,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 37,
                 'depth' => 1,
                 'name' => 'Work Chairs',
+                'name_ru' => 'Рабочие стулья',
+                'name_it' => 'Sedie da lavoro',
                 'image' => 'M133.9,163c-2.8,0-5.1-2.3-5.1-5.1c0-1.3,0.5-2.4,1.2-3.3c-0.7-0.1-1.5-0.2-2.2-0.4l-24.3-5.9v6.2h-0.1
 	c0.8,0.9,1.3,2.1,1.3,3.3c0,2.8-2.3,5.1-5.1,5.1c-2.8,0-5.1-2.3-5.1-5.1c0-1.3,0.5-2.4,1.3-3.3h-0.1v-6.2l-24.3,5.9
 	c-0.7,0.2-1.5,0.3-2.2,0.4c0.8,0.9,1.2,2,1.2,3.3c0,2.8-2.3,5.1-5.1,5.1c-2.8,0-5.1-2.3-5.1-5.1c0-1.4,0.6-2.6,1.4-3.5v-0.6
@@ -370,6 +414,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 41,
                 'depth' => 1,
                 'name' => 'Mirrors',
+                'name_ru' => 'Зеркала',
+                'name_it' => 'Specchi',
                 'image' => 'M122.4,154H77.6L46,122.3V77.6l31.6-31.6h44.7L154,77.6v44.7L122.4,154z M152,78.4l-30.5-30.5H78.4L48,78.4
 	v43.1L78.4,152h43.1l30.5-30.5V78.4z M79.1,150.5l-29.6-29.6V79l29.6-29.6h41.8L150.5,79v41.8l-29.6,29.6H79.1z M148.5,79.9
 	l-28.4-28.4H79.9L51.5,79.9V120l28.4,28.4h40.2l28.4-28.4V79.9z M83.8,139.1l-23-23V83.7l23-23h32.5l23,23v32.5l-23,23H83.8z
@@ -384,6 +430,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 43,
                 'depth' => 1,
                 'name' => 'Lighting',
+                'name_ru' => 'Осветительные приборы',
+                'name_it' => 'Illuminazione',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -394,6 +442,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 45,
                 'depth' => 1,
                 'name' => 'Art & Frames Tables',
+                'name_ru' => 'Художественные и рамочные таблицы',
+                'name_it' => 'Tavole di arte e cornici',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -404,6 +454,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 47,
                 'depth' => 1,
                 'name' => 'Textiles',
+                'name_ru' => 'Текстиль',
+                'name_it' => 'Tessile',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -414,6 +466,8 @@ class CategoryTableSeeder extends Seeder
                 'rgt' => 49,
                 'depth' => 1,
                 'name' => 'Carpets',
+                'name_ru' => 'Ковры',
+                'name_it' => 'Tappet',
                 'image' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

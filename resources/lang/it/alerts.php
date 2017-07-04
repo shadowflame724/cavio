@@ -50,6 +50,25 @@ return [
             'updated' => 'Domanda was successfully updated.',
         ],
 
+        'goods' => [
+            'created' => 'Merce creato con successo.',
+            'deleted' => 'Merce cancellato con successo.',
+            'updated' => 'Merce aggiornato con successo.',
+        ],
+        'popup' => [
+            'updated' => 'Apparire aggiornato con successo.',
+        ],
+        'finishtissue' => [
+            'created' => 'Fazzoletto di carta creato con successo.',
+            'deleted' => 'Fazzoletto di carta cancellato con successo.',
+            'updated' => 'Fazzoletto di carta aggiornato con successo.',
+        ],
+        'showroom' => [
+            'created' => 'Showroom creato con successo.',
+            'deleted' => 'Showroom cancellato con successo.',
+            'updated' => 'Showroom aggiornato con successo.',
+        ],
+
         'users' => [
             'confirmation_email'  => "Una nuova e-mail di conferma è stata inviata all'indirizzo registrato.",
             'created'             => "L'utente è stato creato con successo",

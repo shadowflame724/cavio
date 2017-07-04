@@ -29,72 +29,149 @@
                 @include('backend.news.news-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab"
+                                                      data-toggle="tab">EN</a>
+            </li>
+            <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
+            <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="en">
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ Form::label('type', trans('validation.attributes.backend.access.news.type'), ['class' => 'col-lg-2 control-label']) }}
 
-        <div class="box-body">
+                        <div class="col-lg-10">
+                            {{ Form::select('type', [
+                             "news" =>
+                            trans("validation.attributes.backend.access.news.type_news"),
+                            "press" =>
+                            trans("validation.attributes.backend.access.news.type_press"),
+                            "presentation" =>
+                            trans("validation.attributes.backend.access.news.type_presentation"),
+                            "video" =>
+                            trans("validation.attributes.backend.access.news.type_video"),
+                            "showroom" =>
+                            trans("validation.attributes.backend.access.news.type_showroom")
+                            ],
+                            ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('type', trans('validation.attributes.backend.access.news.type'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="form-group">
+                        {{ Form::label('title', trans('validation.attributes.backend.access.news.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                <div class="col-lg-10">
-                    {{ Form::select('type',
-                     ['news' => trans("validation.attributes.backend.access.news.type_news"),
-                    'press' => trans("validation.attributes.backend.access.news.type_press"),
-                     'presentation' => trans("validation.attributes.backend.access.news.type_presentation"),
-                     'video' => trans("validation.attributes.backend.access.news.type_video"),
-                     'showroom' => trans("validation.attributes.backend.access.news.type_showroom")],
-                   ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="col-lg-10">
+                            {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('title', trans('validation.attributes.backend.access.news.title'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="form-group">
+                        {{ Form::label('description', trans('validation.attributes.backend.access.news.description'), ['class' => 'col-lg-2 control-label']) }}
 
-                <div class="col-lg-10">
-                    {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="col-lg-10">
+                            {{ Form::text('description', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('description', trans('validation.attributes.backend.access.news.description'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="form-group">
+                        {{ Form::label('preview', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
 
-                <div class="col-lg-10">
-                    {{ Form::text('description', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="col-lg-10">
+                            {{ Form::textarea('preview', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('preview', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="form-group">
+                        {{ Form::label('body', trans('validation.attributes.backend.access.news.body'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::textarea('body', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-                <div class="col-lg-10">
-                    {{ Form::textarea('preview', null, ['class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::hidden('photo', null) }}
+                            <div class="dropzone" id="add_photo"></div>
+                            <div class="photo">
+                                <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                            </div>
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+            </div>
 
-            <div class="form-group">
-                {{ Form::label('body', trans('validation.attributes.backend.access.news.body'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+            <div role="tabpanel" class="tab-pane fade" id="ru">
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ Form::label('title_ru', trans('validation.attributes.backend.access.news.title'), ['class' => 'col-lg-2 control-label']) }}
 
-            <div class="form-group">
-                {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::hidden('photo', null) }}
-                    <div class="dropzone" id="dz_photo"></div>
-                    @if($news->image)
-                        <div class="photo active">
-                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                            <img id="add_photo" src="/upload/images/{{ $news->image  }}" alt="">
-                        </div>
-                    @else
-                        <div class="photo">
-                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                        </div>
-                    @endif
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="col-lg-10">
+                            {{ Form::text('title_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
+                    <div class="form-group">
+                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.news.description'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('description_ru', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('preview_ru', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('preview_ru', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('body_ru', trans('validation.attributes.backend.access.news.body'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::textarea('body_ru', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="it">
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ Form::label('title_it', trans('validation.attributes.backend.access.news.title'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_it', trans('validation.attributes.backend.access.news.description'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('description_it', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('preview_it', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('preview_it', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('body_it', trans('validation.attributes.backend.access.news.body'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::textarea('body_it', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+            </div>
         </div><!-- /.box-body -->
     </div><!--box-->
 

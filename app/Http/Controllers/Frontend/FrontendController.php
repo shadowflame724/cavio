@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\FAQ\FAQ;
+use App\Models\FinishTissue\FinishTissue;
 use App\Models\News\News;
 use App\Models\Page\Page;
+use App\Models\Popup\Popup;
+use App\Models\Showroom\Showroom;
 use App\Models\Zone\Zone;
 
 /**
@@ -21,9 +24,11 @@ class FrontendController extends Controller
     public function index()
     {
         $page = $this->page('index');
+        $popup = Popup::find(1);
 
         return view('frontend.index', [
             'page' => $page,
+            'popup' => $popup
         ]);
     }
 
@@ -117,10 +122,23 @@ class FrontendController extends Controller
      */
     public function showrooms()
     {
+        $showrooms = Showroom::all();
         $page = $this->page('showrooms');
+        $coordinates = [];
+        foreach ($showrooms as $showroom) {
+            $coordinates[] = [
+                'lat' => $showroom->lat,
+                'lng' => $showroom->lng,
+            ];
+        }
+        $countries = ($showrooms->groupBy('country'));
+        $showrooms = $showrooms->groupBy('country');
 
         return view('frontend.pages.showrooms', [
-            'page' => $page
+            'showrooms' => $showrooms,
+            'page' => $page,
+            'coordinates' => json_encode($coordinates),
+            'countries' => $countries
         ]);
     }
 
@@ -139,20 +157,15 @@ class FrontendController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function collections()
+    public function finishTissue()
     {
-        $page = $this->page('collections');
+        $page = $this->page('finish-tissue');
+        $finishTissues = FinishTissue::all();
 
-        return view('frontend.pages.zones_collections', [
+        return view('frontend.pages.finish-tissue', [
             'page' => $page,
+            'finishTissues' => $finishTissues
         ]);
     }
 
-
-    public function page($pageKey)
-    {
-        $page = Page::where('slug', $pageKey)->get();
-
-        return $page[0];
-    }
 }

@@ -16,7 +16,12 @@ class CreateFAQsTable extends Migration
         Schema::create('f_a_q_s', function (Blueprint $table) {
             $table->increments('id');
             $table->text('question');
+            $table->text('question_ru')->nullable();
+            $table->text('question_it')->nullable();
             $table->text('answer');
+            $table->text('answer_ru')->nullable();
+            $table->text('answer_it')->nullable();
+
             $table->timestamps();
         });
     }

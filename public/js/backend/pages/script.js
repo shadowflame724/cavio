@@ -16,5 +16,15 @@ associated.change(function() {
 
 $(function()
 {
-    $('.redactor').redactor();
+    $('.page').redactor({
+        buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule']
+    });
+});
+$(function()
+{
+    $('.block').redactor({
+        linkify: false,
+        buttons: ['format', 'bold', 'italic', 'deleted'],
+        buttonsHide: ['image']
+    });
 });

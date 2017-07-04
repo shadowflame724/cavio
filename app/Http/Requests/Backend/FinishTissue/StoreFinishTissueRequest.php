@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Backend\Block;
+namespace App\Http\Requests\Backend\FinishTissue;
 
 use App\Http\Requests\Request;
 use Illuminate\Validation\Rule;
 
 /**
- * Class StoreBlockRequest.
+ * Class StorePageRequest.
  */
-class StoreBlockRequest extends Request
+class StoreFinishTissueRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,7 @@ class StoreBlockRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:191',
-            'preview' => 'required|min:6',
-            'body' => 'required|min:6'
+            'title' => "required|max:30"
         ];
 
     }

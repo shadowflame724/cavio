@@ -31,134 +31,276 @@
                 @include('backend.pages.page-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab"
+                                                      data-toggle="tab">EN</a>
+            </li>
+            <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
+            <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="en">
+                <div class="box-body">
 
-        <div class="box-body">
+                    <div class="form-group">
+                        {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
 
-            <div class="form-group">
-                {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::text('slug', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '191' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-                <div class="col-lg-10">
-                    {{ Form::text('slug', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '191' ]) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
-            <div class="form-group">
-                {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-                <div class="col-lg-10">
-                    {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('description', trans('validation.attributes.backend.access.page.description'), ['class' => 'col-lg-2 control-label']) }}
 
-            <div class="form-group">
-                {{ Form::label('description', trans('validation.attributes.backend.access.page.description'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::textarea('description', null, ['id' => 'description', 'class' => 'form-control', 'required' => 'required']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-                <div class="col-lg-10">
-                    {{ Form::textarea('description', null, ['id' => 'description', 'class' => 'form-control' ]) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3' ]) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ trans('labels.backend.access.block.management') }}</h3>
 
-            <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('labels.backend.access.block.management') }}</h3>
+                        <div class="box-tools pull-right">
+                        </div><!--box-tools pull-right-->
+                    </div><!-- /.box-header -->
 
-                <div class="box-tools pull-right">
-                </div><!--box-tools pull-right-->
-            </div><!-- /.box-header -->
+                    <div class="box-body">
 
-            <div class="box-body">
+                        @foreach($page->blocks as $key => $block)
+                            @php ($i = $key+1)
 
-                @foreach($page->blocks as $key => $block)
-                    @php ($i = $key+1)
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="heading{{$i}}">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapse{{$i}}"
+                                               aria-expanded="true" aria-controls="collapse{{$i}}">
+                                                {{$i}}. {{$block->title}}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="heading{{$i}}">
+                                        <div class="panel-body">
+                                            {{ Form::hidden('blocks['.$i.'][id]', $block->id) }}
 
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="heading{{$i}}">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                       href="#collapse{{$i}}"
-                                       aria-expanded="true" aria-controls="collapse{{$i}}">
-                                        {{$i}}. {{$block->title}}
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
-                                 aria-labelledby="heading{{$i}}">
-                                <div class="panel-body">
-                                    {{ Form::hidden('blocks['.$i.'][id]', $block->id) }}
+                                            <div class="form-group">
+                                                {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                                    <div class="form-group">
-                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+                                                <div class="col-lg-10">
+                                                    {{ Form::text('blocks['.$i.'][title]', $block->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
 
-                                        <div class="col-lg-10">
-                                            {{ Form::text('blocks['.$i.'][title]', $block->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
-                                        </div><!--col-lg-10-->
-                                    </div><!--form control-->
+                                            <div class="form-group">
+                                                {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
+                                                <div class="col-lg-10">
+                                                    {!! Form::textarea('blocks['.$i.'][body]', $block->body, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
 
-                                    <div class="form-group">
-                                        {{ Form::label('preview', trans('validation.attributes.backend.access.block.preview'), ['class' => 'col-lg-2 control-label']) }}
-
-                                        <div class="col-lg-10">
-                                            {{ Form::textarea('blocks['.$i.'][preview]', $block->preview, ['class' => 'form-control redactor', 'minlength' => '3']) }}
-                                        </div><!--col-lg-10-->
-                                    </div><!--form control-->
-
-                                    <div class="form-group">
-                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
-                                        <div class="col-lg-10">
-                                            {!! Form::textarea('blocks['.$i.'][body]', $block->body, ['class' => 'form-control redactor', 'minlength' => '3' ]) !!}
-                                        </div><!--col-lg-10-->
-                                    </div><!--form control-->
-
-                                    <div class="form-group">
-                                        {{ Form::label('blocks['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                                        <div class="col-lg-10">
-                                            {{ Form::hidden('blocks['.$i.'][photo]', null) }}
-                                            <div class="dropzone" id="add_photo"></div>
-                                            @if($block->image)
-                                                <div class="photo active">
-                                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                    <img class="add_photo" id="add_photo{{$key}}" src="/upload/images/{{ $block->image }}"
-                                                         alt="">
-                                                </div>
-                                            @else
-                                                <div class="photo">
-                                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                </div>
-                                            @endif
-                                        </div><!--col-lg-10-->
-                                    </div><!--form control-->
+                                            <div class="form-group">
+                                                {{ Form::label('blocks['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                                                <div class="col-lg-10">
+                                                    {{ Form::hidden('blocks['.$i.'][photo]', null) }}
+                                                    <div class="dropzone" id="add_photo"></div>
+                                                    @if($block->image)
+                                                        <div class="photo active">
+                                                            <div id="dlt_photo{{$key}}"
+                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                                            <img class="add_photo" id="add_photo{{$key}}"
+                                                                 src="/upload/images/{{ $block->image }}"
+                                                                 alt="">
+                                                        </div>
+                                                    @else
+                                                        <div class="photo">
+                                                            <div id="dlt_photo{{$key}}"
+                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                                        </div>
+                                                    @endif
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-
-                @endforeach
+                </div>
             </div>
-
-            <div class="box box-success">
+            <div role="tabpanel" class="tab-pane fade" id="ru">
                 <div class="box-body">
-                    <div class="pull-left">
-                        {{ link_to_route('admin.page.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
-                    </div><!--pull-left-->
 
-                    <div class="pull-right">
-                        {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
-                    </div><!--pull-right-->
+                    <div class="form-group">
+                        {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                    <div class="clearfix"></div>
-                </div><!-- /.box-body -->
-            </div><!--box-->
+                        <div class="col-lg-10">
+                            {{ Form::text('title_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
 
-            {{ Form::close() }}
+
+                    <div class="form-group">
+                        {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::textarea('body_ru', null, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ trans('labels.backend.access.block.management') }}</h3>
+
+                        <div class="box-tools pull-right">
+                        </div><!--box-tools pull-right-->
+                    </div><!-- /.box-header -->
+
+                    <div class="box-body">
+
+                        @foreach($page->blocks as $key => $block)
+                            @php ($i = $key+1)
+
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingRU{{$i}}">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapseRU{{$i}}"
+                                               aria-expanded="true" aria-controls="collapseRU{{$i}}">
+                                                {{$i}}. {{$block->title_ru}}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseRU{{$i}}" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingRU{{$i}}">
+                                        <div class="panel-body">
+                                            {{ Form::hidden('blocks['.$i.'][id]', $block->id) }}
+
+                                            <div class="form-group">
+                                                {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                <div class="col-lg-10">
+                                                    {{ Form::text('blocks['.$i.'][title_ru]', $block->title_ru, ['class' => 'form-control', 'maxlength' => '191' ]) }}
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
+
+                                            <div class="form-group">
+                                                {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
+                                                <div class="col-lg-10">
+                                                    {!! Form::textarea('blocks['.$i.'][body_ru]', $block->body_ru, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="it">
+                <div class="box-body">
+
+                    <div class="form-group">
+                        {{ Form::label('title_it', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('body_it', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::textarea('body_it', null, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ trans('labels.backend.access.block.management') }}</h3>
+
+                        <div class="box-tools pull-right">
+                        </div><!--box-tools pull-right-->
+                    </div><!-- /.box-header -->
+
+                    <div class="box-body">
+
+                        @foreach($page->blocks as $key => $block)
+                            @php ($i = $key+1)
+
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingIT{{$i}}">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapseIT{{$i}}"
+                                               aria-expanded="true" aria-controls="collapseIT{{$i}}">
+                                                {{$i}}. {{$block->title_it}}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseIT{{$i}}" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingIT{{$i}}">
+                                        <div class="panel-body">
+
+                                            <div class="form-group">
+                                                {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                <div class="col-lg-10">
+                                                    {{ Form::text('blocks['.$i.'][title_it]', $block->title_it, ['class' => 'form-control', 'maxlength' => '191' ]) }}
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
+
+                                            <div class="form-group">
+                                                {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
+                                                <div class="col-lg-10">
+                                                    {!! Form::textarea('blocks['.$i.'][body_it]', $block->body_it, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="box box-success">
+        <div class="box-body">
+            <div class="pull-left">
+                {{ link_to_route('admin.page.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+            </div><!--pull-left-->
+
+            <div class="pull-right">
+                {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+            </div><!--pull-right-->
+
+            <div class="clearfix"></div>
+        </div><!-- /.box-body -->
+    </div><!--box-->
+
+    {{ Form::close() }}
 @endsection
 
 @section('after-scripts')
@@ -177,10 +319,10 @@
             '<h4 class="modal-title">Crop Image</h4>' +
             '<div class="input-group input-group-sm">' +
             '<label class="input-group-addon" for="dataWidth">Width</label>' +
-            '<input type="text" class="form-control" id="dataWidth" placeholder="Width">'+
+            '<input type="text" class="form-control" id="dataWidth" placeholder="Width">' +
             '<span class="input-group-addon">px</span>' +
             '<label class="input-group-addon" for="dataHeight">Height</label>' +
-            '<input type="text" class="form-control" id="dataHeight" placeholder="height">'+
+            '<input type="text" class="form-control" id="dataHeight" placeholder="height">' +
             '<span class="input-group-addon">px</span>' +
             '</div>' +
             '</div>' +
@@ -210,10 +352,8 @@
 
         $('.panel-group').each(function (key, el) {
             var inp = $('input#blocks\\[' + (key + 1) + '\\]\\[photo\\]');
-            console.log('add_photo' + key);
-            if (document.getElementById('add_photo' + key).getAttribute('src')) {
-                var pathname = document.getElementById('add_photo'+ key).getAttribute('src');
-                console.log(pathname);
+            if (document.getElementById('add_photo' + key)) {
+                var pathname = document.getElementById('add_photo' + key).getAttribute('src');
                 var leafname = pathname.split('\\').pop().split('/').pop();
                 inp.val(leafname);
             }
@@ -319,28 +459,12 @@
                     $cropperModal.modal('hide');
                 });
             });
-        })
-
-        Dropzone.autoDiscover = false;
-
-        $('.dlt_photo').on('click', function () {
-            $('.photo>img').remove();
-            $('.photo').removeClass('active');
-            $('input#photo').val('');
+            $('#dlt_photo' + key).on('click', function () {
+                $('#add_photo' + key).remove();
+                $('.photo').eq(key).removeClass('active');
+                inp.val('');
+            });
         });
-
-        $('.panel-group').on('click', function (e) {
-            $(this).toggleClass('acc-open');
-            if ($(this).hasClass('acc-open')) {
-                currMarkerId = $(this).index();
-                console.log(currMarkerId);
-
-            }
-            else {
-                currMarkerId = undefined;
-                $("#marker-" + $(this).index()).remove();
-            }
-        })
-
+        Dropzone.autoDiscover = false;
     </script>
 @endsection

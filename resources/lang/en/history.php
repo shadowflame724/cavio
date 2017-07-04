@@ -58,6 +58,25 @@ return [
             'deleted' => 'deleted zone',
             'updated' => 'updated zone',
         ],
+        'good' => [
+            'created' => 'created goods',
+            'deleted' => 'deleted goods',
+            'updated' => 'updated goods',
+        ],
+        'showroom' => [
+            'created' => 'created showrooms',
+            'deleted' => 'deleted showrooms',
+            'updated' => 'updated showrooms',
+        ],
+        'finishtissue' => [
+            'created' => 'created tissues',
+            'deleted' => 'deleted tissues',
+            'updated' => 'updated tissues',
+        ],
+        'popup' => [
+            'updated' => 'updated popups',
+        ],
+
         'users' => [
             'changed_password' => 'changed password for user',
             'created' => 'created user',

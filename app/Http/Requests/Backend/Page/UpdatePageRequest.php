@@ -28,6 +28,17 @@ class UpdatePageRequest extends Request
     {
         return [
             'title' => "required|min:3|max:191",
+            'title_ru' => "required|min:3|max:191",
+            'title_it' => "required|min:3|max:191",
+            'description' => "required",
+            'blocks.*.title' => "max:191",
+            'blocks.*.title_ru' => "max:191",
+            'blocks.*.title_it' => "max:191",
+            'blocks.*.body' => "max:500",
+            'blocks.*.body_ru' => "max:500",
+            'blocks.*.body_it' => "max:500",
+
+
         ];
     }
 }

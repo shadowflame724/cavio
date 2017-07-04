@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app_dev')
 @section('head')
-    <body class=contacts>
+    <body class="contacts">
     @endsection
     @section('content')
         <div id=wrapper-bg-contacts class=wrapper-bg></div>
@@ -8,7 +8,7 @@
             <section class=wrap-banner>
                 <div class="banner-center v-centering">
                     <div class=wrap-banner-cont>
-                        <h3 class=section-title>Contacts
+                        <h3 class=section-title>{{ trans('frontend.contacts.title') }}
                             <svg class=title-wave viewBox="0 0 1395.63 1237.68">
                                 <use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href=wave.svg#wave></use>
                             </svg>
@@ -21,8 +21,23 @@
                     <div class="cont-top clearfix">
                         <div class="cont-col right">
                             <div id=cont-text-r-t class="anim-under-history wrap-text-under-history-right">
-                                <div class=title-under-history>{!! $page->blocks->get(0)->title !!}</div>
-                                <div class="text-upline und-history">{!! $page->blocks->get(0)->body !!}
+                                <div class=title-under-history>
+                                    @if (App::getLocale() == 'ru')
+                                        {!! $page->blocks->get(0)->title_ru !!}
+                                    @elseif(App::getLocale() == 'it')
+                                        {!! $page->blocks->get(0)->title_it !!}
+                                    @else
+                                        {!! $page->blocks->get(0)->title !!}
+                                    @endif
+                                </div>
+                                <div class="text-upline und-history">
+                                    @if (App::getLocale() == 'ru')
+                                        {!! $page->blocks->get(0)->body_ru !!}
+                                    @elseif(App::getLocale() == 'it')
+                                        {!! $page->blocks->get(0)->body_it !!}
+                                    @else
+                                        {!! $page->blocks->get(0)->body !!}
+                                    @endif
                                 </div>
                             </div>
                             <div class=wrap-cont-col-r>
@@ -50,14 +65,20 @@
                                 </div>
                             </div>
                             <div id=form-mail class="form-mail anim-under-history">
-                                <div class=form-mail-title>Say hello!</div>
-                                <form action="" class=clearfix>
+                                <div class=form-mail-title>
+                                    {{ trans('frontend.contacts.sayHello') }}!
+                                </div>
+
+                                <form action="{{ route('frontend.message.store') }}" method="post" class=clearfix>
                                     <div class=clearfix>
-                                        <div class=cont-input-wrap><input name=name placeholder=Name></div>
-                                        <div class=cont-input-wrap><input name=email placeholder=E-mail></div>
+                                        <div class=cont-input-wrap><input name=name placeholder={{ trans('frontend.contacts.name') }}></div>
+                                        <div class=cont-input-wrap><input name=email placeholder={{ trans('frontend.contacts.email') }}></div>
                                     </div>
-                                    <textarea name=message placeholder=Message></textarea>
-                                    <button class="btn small-txt p-0" content="Send Message">Send Message</button>
+
+                                    <textarea name=message placeholder={{ trans('frontend.contacts.message') }}></textarea>
+                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+
+                                    <button class="btn small-txt p-0" content="{{ trans('frontend.contacts.sendMessage') }}">{{ trans('frontend.contacts.sendMessage') }}</button>
                                 </form>
                             </div>
                         </div>
@@ -76,6 +97,8 @@
             </section>
             @endsection
             @section('after_footer')
+
                 <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1xLO3VGBa4uCTPirOZAU0TpDGC3s7lzE&callback"></script>
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1xLO3VGBa4uCTPirOZAU0TpDGC3s7lzE&callback">
+                </script>
 @endsection

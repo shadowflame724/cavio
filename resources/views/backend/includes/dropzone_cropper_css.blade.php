@@ -22,7 +22,7 @@
         display: none !important;
     }
 
-    .logo, .photo {
+    .photo {
         position: relative;
         display: inline-block;
         visibility: hidden;
