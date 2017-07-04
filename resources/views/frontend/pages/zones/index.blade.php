@@ -94,7 +94,7 @@
 <script src=https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js></script>
-{{ Html::script('main.js') }}
+{{ Html::script('js/frontend/main.js') }}
 <script>(function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {

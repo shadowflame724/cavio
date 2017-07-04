@@ -23,7 +23,6 @@
                     <tr>
                         <th>{{ trans('labels.backend.access.message.table.name') }}</th>
                         <th>{{ trans('labels.backend.access.message.table.created_at') }}</th>
-                        <th>{{ trans('labels.backend.access.message.table.status') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
                     </thead>
@@ -49,7 +48,6 @@
                 },
                 columns: [
                     {data: 'name', name: 'title'},
-                    {data: 'status', name: 'title'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
