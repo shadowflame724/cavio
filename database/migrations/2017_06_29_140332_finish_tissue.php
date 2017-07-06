@@ -16,11 +16,11 @@ class FinishTissue extends Migration
         Schema::create('finish_tissues', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('parent_id')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title_ru')->nullable();
-            $table->string('title_it')->nullable();
+            $table->string('title', 35)->nullable();
+            $table->string('title_ru', 35)->nullable();
+            $table->string('title_it', 35)->nullable();
 
-            $table->string('type',15)->nullable();
+            $table->string('type', 35)->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

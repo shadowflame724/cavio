@@ -17,10 +17,9 @@ class ZonesCollections extends Migration
             $table->increments('id');
             $table->tinyInteger('zone_id')->nullable();
             $table->tinyInteger('collection_id');
-            $table->string('title')->nullable();
-            $table->string('title_ru')->nullable();
-            $table->string('title_it')->nullable();
-
+            $table->string('title', 35)->nullable();
+            $table->string('title_ru', 35)->nullable();
+            $table->string('title_it', 35)->nullable();
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

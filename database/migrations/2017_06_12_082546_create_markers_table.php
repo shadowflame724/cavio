@@ -16,10 +16,10 @@ class CreateMarkersTable extends Migration
         Schema::create('markers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('collection_id');
-            $table->string('code')->nullable();
-            $table->string('title');
-            $table->string('title_ru')->nullable();
-            $table->string('title_it')->nullable();
+            $table->string('code', 20)->nullable();
+            $table->string('title', 35);
+            $table->string('title_ru', 35)->nullable();
+            $table->string('title_it', 35)->nullable();
             $table->float('x');
             $table->float('y');
             $table->timestamps();

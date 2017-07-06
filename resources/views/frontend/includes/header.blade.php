@@ -106,10 +106,21 @@
                                                  xlink:href="images/icons/social.svg#login"></use>
                                         </svg>
                                         <span>{{ trans('frontend.header.login') }}</span></a></div>
-                                <div class="side-lang-panel clearfix"><a href="/lang/en" class="lang-item active">en</a>
-                                    <a
-                                            href="/lang/it" class="lang-item">it</a> <a href="/lang/ru"
-                                                                                        class="lang-item">ru</a></div>
+                                <div class="side-lang-panel clearfix">
+                                    @if (App::getLocale() == 'ru')
+                                        <a href="/lang/en" class="lang-item">en</a>
+                                        <a href="/lang/it" class="lang-item">it</a>
+                                        <a href="/lang/ru" class="lang-item active">ru</a>
+                                    @elseif(App::getLocale() == 'it')
+                                        <a href="/lang/en" class="lang-item">en</a>
+                                        <a href="/lang/it" class="lang-item active">it</a>
+                                        <a href="/lang/ru" class="lang-item">ru</a>
+                                    @else
+                                        <a href="/lang/en" class="lang-item active">en</a>
+                                        <a href="/lang/it" class="lang-item">it</a>
+                                        <a href="/lang/ru" class="lang-item">ru</a>
+                                    @endif
+                                </div>
                             </div>
                             <div class="wrap-search">
                                 <form action=""><input class="menu-search"
@@ -135,9 +146,20 @@
                         </svg>
                     </a>
                     <div class="lang-panel clearfix">
-                        <a href="/lang/en" class="lang-item active">en</a>
-                        <a href="/lang/it" class="lang-item">it</a>
-                        <a href="/lang/ru" class="lang-item">ru</a>
+                        @if (App::getLocale() == 'ru')
+                            <a href="/lang/en" class="lang-item">en</a>
+                            <a href="/lang/it" class="lang-item">it</a>
+                            <a href="/lang/ru" class="lang-item active">ru</a>
+                        @elseif(App::getLocale() == 'it')
+                            <a href="/lang/en" class="lang-item">en</a>
+                            <a href="/lang/it" class="lang-item active">it</a>
+                            <a href="/lang/ru" class="lang-item">ru</a>
+                        @else
+                            <a href="/lang/en" class="lang-item active">en</a>
+                            <a href="/lang/it" class="lang-item">it</a>
+                            <a href="/lang/ru" class="lang-item">ru</a>
+                        @endif
+
                     </div>
                 </div>
             </div>

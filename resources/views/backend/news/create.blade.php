@@ -80,7 +80,7 @@
                         {{ Form::label('preview', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('preview', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('preview', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'maxlength' => '250', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -126,7 +126,7 @@
                         {{ Form::label('preview_ru', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('preview_ru', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('preview_ru', null, ['class' => 'form-control redactor', 'minlength' => '3', 'maxlength' => '250', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -161,7 +161,7 @@
                         {{ Form::label('preview_it', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('preview_it', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('preview_it', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required',  'maxlength' => '250', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 

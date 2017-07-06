@@ -27,9 +27,9 @@ class UpdateCategoryRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:30',
-            'name_ru' => 'required|min:3|max:30',
-            'name_it' => 'required|min:3|max:30',
+            'name' => 'required|min:3|max:35',
+            'name_ru' => 'required|min:3|max:35',
+            'name_it' => 'required|min:3|max:35',
             'image' => 'required|min:3'
         ];
     }

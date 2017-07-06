@@ -2,6 +2,11 @@
 
 namespace App\Models\Good;
 
+use App\Models\Category\Category;
+use App\Models\CollectionZone\CollectionZone;
+use App\Models\Dimensions\Dimensions;
+use App\Models\FinishTissue\FinishTissue;
+use App\Models\GoodsPhotos\GoodsPhotos;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,17 +14,18 @@ class Good extends Model
 {
     use Sluggable;
 
-    protected $fillable=[
+    protected $fillable = [
         'category_id',
-        'collection_id',
-        'zone_id',
         'code',
+        'price',
         'name',
-        'dimensions',
-        'tissue',
+        'name_ru',
+        'name_it',
         'slug',
-        'finish',
-        'description'
+        'description',
+        'description_ru',
+        'description_it',
+
     ];
 
     /**
@@ -38,16 +44,26 @@ class Good extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category','category_id','id');
+        return $this->belongsTo(Category::class);
     }
 
-    public function collection()
+    public function collectionZone()
     {
-        return $this->belongsTo('App\Models\Collection','collection_id','id');
+        return $this->belongsToMany(CollectionZone::class);
     }
 
-    public function zone()
+    public function dimensions()
     {
-        return $this->belongsTo('App\Models\Zone','zone_id','id');
+        return $this->hasMany(Dimensions::class);
+    }
+
+    public function finishTissues()
+    {
+        return $this->belongsToMany(FinishTissue::class);
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(GoodsPhotos::class);
     }
 }

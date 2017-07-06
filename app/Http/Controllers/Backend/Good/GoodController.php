@@ -7,6 +7,8 @@ use App\Http\Requests\Backend\Good\UpdateGoodRequest;
 use App\Http\Requests\Backend\Good\StoreGoodRequest;
 use App\Models\Category\Category;
 use App\Models\Collection\Collection;
+use App\Models\CollectionZone\CollectionZone;
+use App\Models\FinishTissue\FinishTissue;
 use App\Models\Good\Good;
 use App\Http\Controllers\Controller;
 use App\Models\Zone\Zone;
@@ -46,13 +48,13 @@ class GoodController extends Controller
     public function create(ManageGoodRequest $request)
     {
         $categories = Category::allLeaves()->get()->pluck('name', 'id');
-        $collections = Collection::pluck('title', 'id');
-        $zones = Zone::pluck('title', 'id');
+        $collectionZones = CollectionZone::pluck('title', 'id');
+        $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
         return view('backend.goods.create', [
             'categories' => $categories,
-            'collections' => $collections,
-            'zones' => $zones
+            'collectionZones' => $collectionZones,
+            'finishTissues' => $finishTissues,
         ]);
     }
 
@@ -63,8 +65,10 @@ class GoodController extends Controller
      */
     public function store(StoreGoodRequest $request)
     {
-        $this->good->create($request->only('category_id', 'collection_id', 'zone_id', 'code', 'name',
-            'dimensions', 'tissue', 'finish', 'description'));
+        $this->good->create($request->all());
+        foreach ($request->images as $image) {
+            $this->moveImg($image);
+        }
 
         return redirect()->route('admin.good.index')->withFlashSuccess(trans('alerts.backend.goods.created'));
     }
@@ -78,14 +82,14 @@ class GoodController extends Controller
     public function edit(Good $good, ManageGoodRequest $request)
     {
         $categories = Category::allLeaves()->get()->pluck('name', 'id');
-        $collections = Collection::pluck('title', 'id');
-        $zones = Zone::pluck('title', 'id');
+        $collectionZones = CollectionZone::pluck('title', 'id');
+        $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
         return view('backend.goods.edit', [
             'good' => $good,
             'categories' => $categories,
-            'collections' => $collections,
-            'zones' => $zones
+            'collectionZones' => $collectionZones,
+            'finishTissues' => $finishTissues,
         ]);
     }
 
@@ -97,8 +101,12 @@ class GoodController extends Controller
      */
     public function update(Good $good, UpdateGoodRequest $request)
     {
-        $this->good->update($good, $request->only('category_id', 'collection_id', 'zone_id', 'code', 'name',
-            'dimensions', 'tissue', 'finish', 'description'));
+        dd($request->all());
+        $this->good->update($good, $request->all());
+
+        foreach ($request->images as $image) {
+            $this->moveImg($image);
+        }
 
         return redirect()->route('admin.good.index')->withFlashSuccess(trans('alerts.backend.goods.updated'));
     }

@@ -97,6 +97,7 @@ class FinishTissueController extends Controller
      */
     public function update(FinishTissue $finishTissue, UpdateFinishTissueRequest $request)
     {
+        dd($request->all());
         $children = $request['children'];
 
         foreach ($children as $key => $newChild) {
@@ -104,8 +105,6 @@ class FinishTissueController extends Controller
             $oldImage = $oldChild->image;
             $oldChild->parent_id = $finishTissue->id;
             $oldChild->title = $newChild['title'];
-            $oldChild->title_ru = $newChild['title_ru'];
-            $oldChild->title_it = $newChild['title_it'];
 
             $oldChild->image = $newChild['photo'];
             if ($oldChild->save()) {

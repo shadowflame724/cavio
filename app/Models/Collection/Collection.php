@@ -13,7 +13,9 @@ class Collection extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['title', 'description', 'image'];
+    protected $fillable = ['title', 'title_ru', 'title_it',
+        'description', 'description_ru', 'description_it',
+        'image'];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -32,11 +34,6 @@ class Collection extends Model
     public function markers()
     {
         return $this->hasMany(Marker::class);
-    }
-
-    public function goods()
-    {
-        return $this->hasMany(Good::class);
     }
 
     public function collectionZones()

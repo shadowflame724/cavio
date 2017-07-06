@@ -27,18 +27,20 @@ class UpdatePageRequest extends Request
     public function rules()
     {
         return [
-            'title' => "required|min:3|max:191",
-            'title_ru' => "required|min:3|max:191",
-            'title_it' => "required|min:3|max:191",
-            'description' => "required",
-            'blocks.*.title' => "max:191",
-            'blocks.*.title_ru' => "max:191",
-            'blocks.*.title_it' => "max:191",
+            'title' => "required|min:3|max:35",
+            'title_ru' => "required|min:3|max:35",
+            'title_it' => "required|min:3|max:35",
+            'description' => "required|min:3",
+            'pageKey' => "max:40",
+            'body' => "required|min:3",
+            'body_ru' => "required|min:3",
+            'body_it' => "required|min:3",
+            'blocks.*.title' => "max:35",
+            'blocks.*.title_ru' => "max:35",
+            'blocks.*.title_it' => "max:35",
             'blocks.*.body' => "max:500",
             'blocks.*.body_ru' => "max:500",
             'blocks.*.body_it' => "max:500",
-
-
         ];
     }
 }

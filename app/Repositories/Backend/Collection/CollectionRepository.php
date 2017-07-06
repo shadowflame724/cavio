@@ -93,7 +93,7 @@ class CollectionRepository extends BaseRepository
      *
      * @return bool
      */
-    public function update(Model $collection, array $input, $mainPhoto)
+    public function update(Model $collection, array $input)
     {
         $collection->title = $input['title'];
         $collection->title_ru = $input['title_ru'];
@@ -101,10 +101,12 @@ class CollectionRepository extends BaseRepository
         $collection->description = $input['description'];
         $collection->description_ru = $input['description_ru'];
         $collection->description_it = $input['description_it'];
+        $collection->photo= $input['photo'];
 
-        if ($mainPhoto) {
-            $collection->image = $mainPhoto;
+        if (isset($input['banner'])) {
+            $collection->banner = 1;
         }
+
 
         DB::transaction(function () use ($collection, $input) {
             if ($collection->save()) {

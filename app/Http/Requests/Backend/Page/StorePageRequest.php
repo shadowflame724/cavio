@@ -28,9 +28,14 @@ class StorePageRequest extends Request
     public function rules()
     {
         return [
-            'title' => "required|min:3|max:191",
-            'title_ru' => "required|min:3|max:191",
-            'title_it' => "required|min:3|max:191",
+            'title' => "required|min:3|max:35",
+            'title_ru' => "required|min:3|max:35",
+            'title_it' => "required|min:3|max:35",
+            'pageKey' => "max:40",
+            'description' => "required|min:3",
+            'body' => "required|min:3",
+            'body_ru' => "required|min:3",
+            'body_it' => "required|min:3",
         ];
 
     }

@@ -29,8 +29,15 @@ class StoreNewsRequest extends Request
     {
         return [
             'title' => "required|min:3|max:191",
-            'preview' => "required|min:3",
-            'body' => "required|min:3"
+            'title_ru' => "required|min:3|max:191",
+            'title_it' => "required|min:3|max:191",
+            'preview' => "required|min:3|max:250",
+            'preview_ru' => "required|min:3|max:250",
+            'preview_it' => "required|min:3|max:250",
+            'body' => "required|min:3",
+            'body_ru' => "required|min:3",
+            'body_it' => "required|min:3",
+
         ];
 
     }

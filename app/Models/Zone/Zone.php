@@ -12,7 +12,7 @@ class Zone extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['title', 'image'];
+    protected $fillable = ['title', 'title_ru', 'title_it', 'image'];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -28,10 +28,6 @@ class Zone extends Model
         ];
     }
 
-    public function goods()
-    {
-        return $this->hasMany(Good::class);
-    }
 
     public function collectionZones()
     {

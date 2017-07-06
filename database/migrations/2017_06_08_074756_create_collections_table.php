@@ -15,13 +15,13 @@ class CreateCollectionsTable extends Migration
     {
         Schema::create('collections', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('title_ru')->nullable();
-            $table->string('title_it')->nullable();
+            $table->string('title', 35);
+            $table->string('title_ru', 35)->nullable();
+            $table->string('title_it', 35)->nullable();
             $table->string('slug')->nullable();
-            $table->text('description');
-            $table->text('description_ru')->nullable();
-            $table->text('description_it')->nullable();
+            $table->text('description', 400);
+            $table->text('description_ru', 400)->nullable();
+            $table->text('description_it', 400)->nullable();
             $table->string('image')->nullable();
             $table->integer('banner')->nullable();
             $table->timestamps();

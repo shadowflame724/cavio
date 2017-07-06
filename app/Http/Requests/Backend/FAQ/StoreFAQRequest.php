@@ -29,7 +29,12 @@ class StoreFAQRequest extends Request
     {
         return [
             'question' => "required|min:3|max:200",
+            'question_ru' => "required|min:3|max:200",
+            'question_it' => "required|min:3|max:200",
             'answer' => "required|min:3|max:400",
+            'answer_ru' => "required|min:3|max:400",
+            'answer_it' => "required|min:3|max:400",
+
         ];
 
     }

@@ -39,7 +39,7 @@
                             {{ Form::label('question', trans('validation.attributes.backend.access.faq.question'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
-                                {{ Form::textarea('question', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                {{ Form::textarea('question', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'maxlength' => '200', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
 
@@ -47,7 +47,7 @@
                             {{ Form::label('answer', trans('validation.attributes.backend.access.faq.answer'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
-                                {{ Form::textarea('answer', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3','autofocus' => 'autofocus']) }}
+                                {{ Form::textarea('answer', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'maxlength' => '400', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
                     </div><!--form control-->
@@ -60,7 +60,7 @@
                             {{ Form::label('question_ru', trans('validation.attributes.backend.access.faq.question'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
-                                {{ Form::textarea('question_ru', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                {{ Form::textarea('question_ru', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'maxlength' => '200', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
 
@@ -68,7 +68,7 @@
                             {{ Form::label('answer_ru', trans('validation.attributes.backend.access.faq.answer'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
-                                {{ Form::textarea('answer_ru', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3','autofocus' => 'autofocus']) }}
+                                {{ Form::textarea('answer_ru', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'maxlength' => '400', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
                     </div><!--form control-->
@@ -81,7 +81,7 @@
                             {{ Form::label('question_it', trans('validation.attributes.backend.access.faq.question'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
-                                {{ Form::textarea('question_it', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                {{ Form::textarea('question_it', null, [ 'class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'maxlength' => '200', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
 
@@ -89,7 +89,7 @@
                             {{ Form::label('answer_it', trans('validation.attributes.backend.access.faq.answer'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
-                                {{ Form::textarea('answer_it', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3','autofocus' => 'autofocus']) }}
+                                {{ Form::textarea('answer_it', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'maxlength' => '400', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
                     </div><!--form control-->

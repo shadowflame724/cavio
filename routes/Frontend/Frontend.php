@@ -20,6 +20,8 @@ Route::get('stash', 'FrontendController@stash')->name('stash');
 Route::get('catalogue', 'FrontendController@catalogue')->name('catalogue');
 Route::get('finish-tissue', 'FrontendController@finishTissue')->name('finish-tissue');
 
+Route::get('product/{good}', 'GoodsController@show')->name('goods.show');
+
 
 Route::get('collections', 'CollectionController@index')->name('collections');
 Route::get('collections/{collection}', 'CollectionController@show')->name('collections.show');

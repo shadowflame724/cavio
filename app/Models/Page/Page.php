@@ -10,7 +10,12 @@ class Page extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['pageKey', 'title', 'description', 'prev', 'body', 'image'];
+    protected $fillable = ['pageKey',
+        'title', 'title_ru', 'title_it',
+        'description', 'description_ru', 'description_it',
+        'prev', 'prev_ru', 'prev_it',
+        'body', 'body_ru', 'body_it',
+        'image'];
 
     /**
      * Return the sluggable configuration array for this model.

@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Backend\Good;
 
+use App\Models\Dimensions\Dimensions;
 use App\Models\Good\Good;
+use App\Models\GoodsPhotos\GoodsPhotos;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -60,23 +62,52 @@ class GoodRepository extends BaseRepository
         DB::transaction(function () use ($input) {
             $good = self::MODEL;
             $good = new $good();
+            $good->save();
+
+            foreach ($input['collectionZone_id'] as $collectionZone) {
+                $good->collectionZone()->attach($collectionZone);
+            }
+
+            foreach ($input['dimensions'] as $dimension) {
+                Dimensions::create([
+                    'good_id' => $good->id,
+                    'length' => $dimension['length'],
+                    'width' => $dimension['width'],
+                    'height' => $dimension['height'],
+                    'mattress' => $dimension['mattress'],
+                    'weight' => $dimension['weight']
+                ]);
+            }
+
+            foreach ($input['finishTissues_id'] as $finishTissue) {
+                $good->finishTissues()->attach($finishTissue);
+            }
+
+            foreach ($input['images'] as $photo) {
+                GoodsPhotos::create([
+                    'good_id' => $good->id,
+                    'image' => $photo,
+                    'type' => 0
+                ]);
+            }
+
             $good->category_id = $input['category_id'];
-            $good->collection_id = $input['collection_id'];
-            $good->zone_id = $input['zone_id'];
-
             $good->code = $input['code'];
+            $good->price = $input['price'];
             $good->name = $input['name'];
-
-            $good->dimensions = $input['dimensions'];
-            $good->tissue = $input['tissue'];
-            $good->finish = $input['finish'];
+            $good->name_ru = $input['name_ru'];
+            $good->name_it = $input['name_it'];
             $good->description = $input['description'];
+            $good->description_ru = $input['description_ru'];
+            $good->description_it = $input['description_it'];
 
             if ($good->save()) {
                 event(new GoodCreated($good));
 
                 return true;
             }
+
+            $good->delete();
 
             throw new GeneralException(trans('exceptions.backend.good.create_error'));
         });
@@ -92,17 +123,46 @@ class GoodRepository extends BaseRepository
      */
     public function update(Model $good, array $input)
     {
+        $good->collectionZone()->detach();
+        foreach ($input['collectionZone_id'] as $collectionZone) {
+            $good->collectionZone()->attach($collectionZone);
+        }
+
+        Dimensions::where('good_id', $good->id)->delete();
+        foreach ($input['dimensions'] as $dimension) {
+            Dimensions::create([
+                'good_id' => $good->id,
+                'length' => $dimension['length'],
+                'width' => $dimension['width'],
+                'height' => $dimension['height'],
+                'mattress' => $dimension['mattress'],
+                'weight' => $dimension['weight']
+            ]);
+        }
+
+        $good->finishTissues()->detach();
+        foreach ($input['finishTissues_id'] as $finishTissue) {
+            $good->finishTissues()->attach($finishTissue);
+        }
+
+        GoodsPhotos::where('good_id', $good->id)->delete();
+        foreach ($input['images'] as $photo) {
+            GoodsPhotos::create([
+                'good_id' => $good->id,
+                'image' => $photo,
+                'type' => 0
+            ]);
+        }
+
         $good->category_id = $input['category_id'];
-        $good->collection_id = $input['collection_id'];
-        $good->zone_id = $input['zone_id'];
-
         $good->code = $input['code'];
+        $good->price = $input['price'];
         $good->name = $input['name'];
-
-        $good->dimensions = $input['dimensions'];
-        $good->tissue = $input['tissue'];
-        $good->finish = $input['finish'];
+        $good->name_ru = $input['name_ru'];
+        $good->name_it = $input['name_it'];
         $good->description = $input['description'];
+        $good->description_ru = $input['description_ru'];
+        $good->description_it = $input['description_it'];
 
         DB::transaction(function () use ($good, $input) {
             if ($good->save()) {

@@ -27,8 +27,11 @@ class UpdateFinishTissueRequest extends Request
     public function rules()
     {
         return [
-            'title' => "required|max:30",
-            'children.*.title' => "required|max:30",
+            'title' => "required|max:35",
+            'title_ru' => "required|max:35",
+            'title_it' => "required|max:35",
+            'children.*.title' => "required|max:35",
+            'children.*.photo' => "required",
         ];
     }
 }

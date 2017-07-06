@@ -30,12 +30,12 @@
                     </li>
                 @endif
 
-                    @php($count = 0)
-                    @foreach($messages as $message)
-                        @if($message->status == 0)
-                            @php($count++)
-                        @endif
-                    @endforeach
+                @php($count = 0)
+                @foreach($messages as $message)
+                    @if($message->status == 0)
+                        @php($count++)
+                    @endif
+                @endforeach
 
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -44,7 +44,34 @@
                     </a>
 
                     <ul class="dropdown-menu">
-                        {{--<li class="header">{{ trans_choice('strings.backend.general.you_have.messages', $count, ['number' => $count]) }}</li>--}}
+                        <li class="header">{{ trans_choice('strings.backend.general.you_have.messages', $count , ['number' => 2]) }}</li>
+
+                        @if($count > 0)
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    @foreach($messages as $message)
+                                        @if($message->status == 0)
+                                            <li><!-- start message -->
+                                                <a href="{{ route('admin.message.show', $message->id) }}">
+                                                    <h4>
+                                                        {{ $message->name }}
+                                                        <small>
+                                                            <i class="fa fa-clock-o"></i> {{ $message->created_at->diffForHumans() }}
+                                                        </small>
+                                                    </h4>
+                                                    <p>
+                                                        {{ str_limit($message->message, $limit = 30, $end = '...') }}
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <!-- end message -->
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
+
                         <li class="footer">
                             {{ link_to('admin/messages', trans('strings.backend.general.see_all.messages')) }}
                         </li>

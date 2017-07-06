@@ -15,14 +15,14 @@ class Showrooms extends Migration
     {
         Schema::create('showrooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('country');
-            $table->string('city');
-            $table->string('name')->nullable();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('phone2')->nullable();
-            $table->string('fax')->nullable();
-            $table->string('email')->nullable();
+            $table->string('country', 35);
+            $table->string('city', 35);
+            $table->string('name', 191)->nullable();
+            $table->string('address', 191)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->string('phone2', 20)->nullable();
+            $table->string('fax', 20)->nullable();
+            $table->string('email', 35)->nullable();
             $table->float('lat')->nullable();
             $table->float('lng')->nullable();
             $table->timestamps();

@@ -4,6 +4,11 @@
 
 @section('page-header')
     {{ Html::style('css/backend/redactor/redactor.css') }}
+    <style>
+        .jumbotron {
+            word-wrap:break-word;
+        }
+    </style>
 
     <h1>
         {{ trans('labels.backend.access.message.management') }}
@@ -19,11 +24,13 @@
             </div><!-- /.box-header -->
 
             <div class="box-body">
-                <div class="jumbotron">
-                    <div class="container">
-                        <h3>{{ trans('labels.backend.access.message.from') }}: {!! $message->name !!}</h3>
-                        {{ trans('labels.backend.access.message.date') }}: {{ $message->created_at->diffForHumans() }}
-                        <p>{!! $message->message !!}</p>
+                <div class="form-group">
+                    <h3>{{ trans('labels.backend.access.message.from') }}: {!! $message->name !!}</h3>
+
+                    {{ trans('labels.backend.access.message.date') }}: {{ $message->created_at->diffForHumans() }}
+
+                    <div class="jumbotron col-lg-12" style="margin-bottom:0px">
+                            <p>{{ $message->message }}</p>
                     </div>
                 </div>
 

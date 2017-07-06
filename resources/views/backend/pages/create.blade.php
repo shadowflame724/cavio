@@ -39,7 +39,7 @@
                         {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('pageKey', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('pageKey', null, ['id' => 'pageKey', 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -47,7 +47,7 @@
                         {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -73,7 +73,7 @@
                         {{ Form::label('title_ru', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title_ru', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('title_ru', null, ['id' => 'title','class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -91,7 +91,7 @@
                         {{ Form::label('title_it', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title_it', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('title_it', null, ['id' => 'title','class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 

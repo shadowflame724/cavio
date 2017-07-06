@@ -154,6 +154,7 @@ return [
                 'table' => [
                     'id' => 'Id',
                     'country' => 'Country',
+                    'city' => 'City',
                     'name' => 'Name',
                 ],
             ],
@@ -171,6 +172,18 @@ return [
             'popup' => [
                 'edit' => 'Edit popup',
                 'management' => 'Popups Management'
+            ],
+            'message' => [
+                'show' => 'Show Message',
+                'management' => 'All messages',
+                'from' => 'From',
+                'date' => 'Date',
+
+                'table' => [
+                    'name' => 'Name',
+                    'new' => 'New',
+                    'created_at' => 'Posted'
+                ]
             ],
 
 

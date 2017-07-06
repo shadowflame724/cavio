@@ -155,6 +155,7 @@ return [
                 'table' => [
                     'id' => 'Id',
                     'country' => 'Nazione',
+                    'city' => 'Città',
                     'name' => 'Nome',
                 ],
             ],
@@ -173,7 +174,18 @@ return [
                 'edit'       => 'Modifica apparire',
                 'management' => 'Gestione apparire',
             ],
+            'message' => [
+                'show' => 'Mostra il messaggio',
+                'management' => 'Tutti i messaggi',
+                'from' => 'A partire dal',
+                'date' => 'Data',
 
+                'table' => [
+                    'name' => 'Nome',
+                    'new' => 'Nuovo',
+                    'created_at' => 'Postato'
+                ]
+            ],
 
             'users' => [
                 'active'              => 'Utenti attivi',

@@ -38,56 +38,56 @@
             <div class="form-group">
                 {{ Form::label('country', trans('validation.attributes.backend.access.showroom.country'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('country', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::text('country', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('city', trans('validation.attributes.backend.access.showroom.city'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('city', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::text('city', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('name', trans('validation.attributes.backend.access.showroom.name'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('address', trans('validation.attributes.backend.access.showroom.address'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('address', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::text('address', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('phone', trans('validation.attributes.backend.access.showroom.phone'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('phone', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::number('phone', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('phone2', trans('validation.attributes.backend.access.showroom.phone2'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('phone2', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::number('phone2', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('fax', trans('validation.attributes.backend.access.showroom.fax'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('fax', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::number('fax', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('email', trans('validation.attributes.backend.access.showroom.email'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('email', null, ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']) }}
+                    {{ Form::email('email', null, ['class' => 'form-control', 'maxlength' => '35', 'autofocus' => 'autofocus']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
 
@@ -96,7 +96,6 @@
 
         </div>
     </div><!-- /.box-body -->
-    </div><!--box-->
     <div class="box box-success">
         <div class="box-body">
             <div class="pull-left">

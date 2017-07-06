@@ -25,8 +25,8 @@
     @include('frontend.includes.physics_script')
     {{ Html::script('js/frontend/two.js') }}
 </head>
-<body class=showrooms>
-<div id=wrapper-bg class=wrapper-bg></div>
+<body class="showrooms">
+<div id="wrapper-bg" class="wrapper-bg"></div>
 @include('frontend.includes.header')
 @include('frontend.includes.login_modal')
 <main id="main-scrollbar">
@@ -45,7 +45,8 @@
         <div id="waves-content"></div>
         <div class="container">
             <div class="small-page-title"><span class="text-title">{{ trans('frontend.showrooms.title') }}</span></div>
-            <div id="wrap-letter-list" class="wrap-news-types-list drop-down show_r show"><span class="curr-news-type">{{ trans('frontend.showrooms.all') }}</span>
+            <div id="wrap-letter-list" class="wrap-news-types-list drop-down show_r show"><span
+                        class="curr-news-type">{{ trans('frontend.showrooms.all') }}</span>
                 <ul class="news-types-list">
                     <li class="active"><a href="#">{{ trans('frontend.showrooms.all') }}</a></li>
                     @php($count=1)
@@ -69,10 +70,12 @@
                                     <div class="deal-addr-row">{{ $item->city }}</div>
                                     <div class="deal-addr-row">{{ $item->address }}</div>
                                     @if($item->phone)
-                                        <a href="tel:{{ $item->phone }}" class="deal-addr-row">T. {{ $item->phone }}</a><br>
+                                        <a href="tel:{{ $item->phone }}" class="deal-addr-row">T. {{ $item->phone }}</a>
+                                        <br>
                                     @endif
                                     @if($item->phone2)
-                                        <a href="tel:{{ $item->phone2 }}" class="deal-addr-row">T. {{ $item->phone2 }}</a><br>
+                                        <a href="tel:{{ $item->phone2 }}"
+                                           class="deal-addr-row">T. {{ $item->phone2 }}</a><br>
                                     @endif
                                     @if($item->fax)
                                         <a href="tel:{{ $item->fax }}" class="deal-addr-row">F. {{ $item->fax }}</a><br>
@@ -94,13 +97,13 @@
             <div class="wrap-carousel-show_r">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide show_r-slide">
-                        <img src=/upload/images/{{ $page->blocks->get(0)->image }} alt="">
+                        <img src="/upload/images/{{ $page->blocks->get(0)->image }}" alt="">
                     </div>
                     <div class="swiper-slide show_r-slide">
-                        <img src=/upload/images/{{ $page->blocks->get(1)->image }} alt="">
+                        <img src="/upload/images/{{ $page->blocks->get(1)->image }}" alt="">
                     </div>
                     <div class="swiper-slide show_r-slide">
-                        <img src=/upload/images/{{ $page->blocks->get(2)->image }} alt="">
+                        <img src="/upload/images/{{ $page->blocks->get(2)->image }}" alt="">
                     </div>
                 </div>
             </div>
@@ -128,7 +131,7 @@
                     @endif
                 </div>
             </div>
-            <div class="wrap-philosophy a main_show_r clearfix show">
+            <div id="main-show_r" class="wrap-philosophy a main_show_r clearfix show">
                 <div class="phil-left">
                     <div class="wrap-img-bg philosophy-img">
                         <div class="img-back wave-dark">
@@ -176,8 +179,7 @@
 </svg>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery-color/2.1.2/jquery.color.min.js></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/7.3.1/smooth-scrollbar.js></script>
-<script src=https://cdn.jsdelivr.net/jquery.bez/1.0.11/jquery.bez.min.js></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/7.3.1/smooth-scrollbar.js"></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js></script>

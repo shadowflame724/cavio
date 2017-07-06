@@ -163,6 +163,14 @@ class PageTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'slug' => 'product-card',
+                'title' => 'Product card',
+                'description' => ' ',
+                'body' => ' ',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ];
 
         DB::table('pages')->insert($pages);

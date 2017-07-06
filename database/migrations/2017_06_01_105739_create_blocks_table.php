@@ -15,10 +15,10 @@ class CreateBlocksTable extends Migration
     {
         Schema::create('blocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('page_id');
-            $table->string('title')->nullable();
-            $table->string('title_ru')->nullable();
-            $table->string('title_it')->nullable();
+            $table->tinyInteger('page_id');
+            $table->string('title', 35)->nullable();
+            $table->string('title_ru', 35)->nullable();
+            $table->string('title_it', 35)->nullable();
             $table->text('preview')->nullable();
             $table->text('preview_ru')->nullable();
             $table->text('preview_it')->nullable();

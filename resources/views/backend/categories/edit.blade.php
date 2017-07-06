@@ -35,7 +35,7 @@
                         {{ Form::label('name',  trans('validation.attributes.backend.access.category.name'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('name', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => 'Root']) }}
+                            {{ Form::text('name', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => 'Root']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -53,7 +53,7 @@
                         {{ Form::label('name_ru', trans('validation.attributes.backend.access.category.name'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div><!-- /.box-body -->
@@ -65,7 +65,7 @@
                         {{ Form::label('name_it', trans('validation.attributes.backend.access.category.name'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('name_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('name_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div><!-- /.box-body -->

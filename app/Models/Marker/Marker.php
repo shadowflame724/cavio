@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Marker extends Model
 {
-    protected $fillable = ['title', 'code', 'collection_id', 'x', 'y'];
+    protected $fillable = ['title', 'title_ru', 'title_it', 'code', 'collection_id', 'x', 'y'];
 
     public function collection()
     {

@@ -46,7 +46,7 @@
                         {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('slug', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '191' ]) }}
+                            {{ Form::text('slug', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '35' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -54,7 +54,7 @@
                         {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
+                            {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -152,7 +152,7 @@
                         {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
+                            {{ Form::text('title_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -196,7 +196,7 @@
                                                 {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
                                                 <div class="col-lg-10">
-                                                    {{ Form::text('blocks['.$i.'][title_ru]', $block->title_ru, ['class' => 'form-control', 'maxlength' => '191' ]) }}
+                                                    {{ Form::text('blocks['.$i.'][title_ru]', $block->title_ru, ['class' => 'form-control', 'maxlength' => '35' ]) }}
                                                 </div><!--col-lg-10-->
                                             </div><!--form control-->
 
@@ -222,7 +222,7 @@
                         {{ Form::label('title_it', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required' ]) }}
+                            {{ Form::text('title_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -264,7 +264,7 @@
                                                 {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
                                                 <div class="col-lg-10">
-                                                    {{ Form::text('blocks['.$i.'][title_it]', $block->title_it, ['class' => 'form-control', 'maxlength' => '191' ]) }}
+                                                    {{ Form::text('blocks['.$i.'][title_it]', $block->title_it, ['class' => 'form-control', 'maxlength' => '35' ]) }}
                                                 </div><!--col-lg-10-->
                                             </div><!--form control-->
 

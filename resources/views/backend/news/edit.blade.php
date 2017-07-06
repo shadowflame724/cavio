@@ -79,7 +79,7 @@
                         {{ Form::label('preview', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('preview', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('preview', null, ['class' => 'form-control redactor', 'minlength' => '3',  'maxlength' => '250', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -90,16 +90,18 @@
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
-                    <div class="form-group">
-                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::hidden('photo', null) }}
-                            <div class="dropzone" id="add_photo"></div>
-                            <div class="photo">
-                                <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                            </div>
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
+                        <div class="dropzone" id="dz_photo"></div>
+                    @if($news->image)
+                        <div class="photo active">
+                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                            <img id="add_photo" src="/upload/images/{{ $news->image  }}" alt="">
+                        </div>
+                    @else
+                        <div class="photo">
+                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                        </div>
+                    @endif
+
                 </div>
             </div>
 
@@ -125,7 +127,7 @@
                         {{ Form::label('preview_ru', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('preview_ru', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('preview_ru', null, ['class' => 'form-control redactor', 'minlength' => '3',  'maxlength' => '250', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -160,7 +162,7 @@
                         {{ Form::label('preview_it', trans('validation.attributes.backend.access.news.preview'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('preview_it', null, ['class' => 'form-control redactor', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('preview_it', null, ['class' => 'form-control redactor', 'minlength' => '3',  'maxlength' => '250', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 

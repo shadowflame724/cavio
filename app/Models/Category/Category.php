@@ -10,6 +10,8 @@ class Category extends Node {
 
     protected $table = 'categories';
 
+    protected $fillable = ['name', 'name_ru', 'name_it'];
+
     // 'parent_id' column name
     protected $parentColumn = 'parent_id';
 

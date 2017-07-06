@@ -15,20 +15,17 @@ class CreateGoodsTable extends Migration
     {
         Schema::create('goods', function (Blueprint $table) {
             $table->increments('id');
-            $table->tinyInteger('category_id');
-            $table->tinyInteger('collection_id');
-            $table->tinyInteger('zone_id');
-            $table->tinyInteger('finish_tissue_id');
+            $table->tinyInteger('category_id')->nullable();
+            $table->tinyInteger('collection_zones_id')->nullable();
             $table->string('code')->nullable();
             $table->string('slug')->nullable();
             $table->string('name')->nullable();
+            $table->float('price')->nullable();
             $table->string('name_ru')->nullable();
             $table->string('name_it')->nullable();
-            $table->string('dimensions');
             $table->text('description')->nullable();
             $table->text('description_ru')->nullable();
             $table->text('description_it')->nullable();
-
 
 //            $table->foreign('category_id')
 //                ->references('id')

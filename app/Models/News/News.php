@@ -23,5 +23,9 @@ class News extends Model
         ];
     }
 
-    protected $fillable = ['title', 'description', 'preview', 'body', 'image'];
+    protected $fillable = ['title', 'title_ru', 'title_it',
+        'description', 'description_ru', 'description_it',
+        'preview', 'preview_ru', 'preview_it',
+        'body', 'body_ru', 'body_it',
+        'image'];
 }
