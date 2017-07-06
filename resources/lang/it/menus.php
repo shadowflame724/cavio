@@ -119,6 +119,10 @@ return [
             ],
         ],
 
+        'menu'    => [
+            'content'   => 'Content',
+            'store'     => 'Store',
+        ],
         'log-viewer' => [
             'main'      => 'Log',
             'dashboard' => 'Dashboard',

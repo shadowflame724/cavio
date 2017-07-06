@@ -118,6 +118,10 @@ return [
                 'management'    => 'Управление объявлением',
             ]
         ],
+        'menu'    => [
+            'content'   => 'Контент',
+            'store'     => 'Магазин',
+        ],
         'log-viewer'    => [
             'dashboard' => 'Обзор',
             'logs'      => 'Все записи',
