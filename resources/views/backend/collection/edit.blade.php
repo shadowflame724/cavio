@@ -67,14 +67,14 @@
                         <div class="col-lg-10">
                             <div class="dropzone" id="dz_photo"></div>
                             @if($collection->image)
-                                {{ Form::hidden('photo', $collection->image) }}
                                 <div class="photo active">
+                                    {{ Form::hidden('photo', $collection->image) }}
                                     <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
                                     <img id="add_photo" src="/upload/images/{{ $collection->image  }}" alt="">
                                 </div>
                             @else
-                                {{ Form::hidden('photo', null) }}
                                 <div class="photo">
+                                    {{ Form::hidden('photo', null) }}
                                     <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
                                 </div>
                             @endif
@@ -133,11 +133,11 @@
         </div><!-- /.box-header -->
 
         <div class="box-body">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-            @foreach($collection->collectionZones as $key => $zone)
-                @php ($i = $key+1)
+                @foreach($collection->collectionZones as $key => $zone)
+                    @php ($i = $key+1)
 
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="heading{{$i}}">
                             <h4 class="panel-title">
@@ -192,8 +192,9 @@
                                             <div class="col-lg-10">
                                                 <div class="dropzone" id="add_photo"></div>
                                                 @if($zone->image)
-                                                    {{ Form::hidden('zones['.$i.'][photo]', $zone->image) }}
                                                     <div class="photo active">
+                                                        {{ Form::hidden('zones['.$i.'][photo]', $zone->image, ['id' => 'zones['.$i.'][photo]']) }}
+
                                                         <div id="dlt_photo{{$i}}"
                                                              class="btn glyphicon glyphicon-remove dlt_photo"></div>
                                                         <img class="add_photo" id="add_photo"
@@ -201,9 +202,9 @@
                                                              alt="">
                                                     </div>
                                                 @else
-                                                    {{ Form::hidden('zones['.$i.'][photo]', null) }}
-
                                                     <div id="photo{{$i}}" class="photo">
+                                                        {{ Form::hidden('zones['.$i.'][photo]', null, ['id' => 'zones['.$i.'][photo]']) }}
+
                                                         <div id="dlt_photo"
                                                              class="btn glyphicon glyphicon-remove dlt_photo"></div>
                                                     </div>
@@ -243,11 +244,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-            @endforeach
-            <a href="{{route('admin.collection.zones.store', $collection)}}"
-               class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
+                @endforeach
+                <a href="{{route('admin.collection.zones.store', $collection)}}"
+                   class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
+            </div>
+
         </div>
 
     </div><!-- /.box-body -->
@@ -292,21 +294,18 @@
             '<input type="text" class="form-control" id="dataHeight" placeholder="height">' +
             '<span class="input-group-addon">px</span>' +
             '</div>' +
-            '<label class="btn btn-primary">'+
-            '<input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.7777777777777777">'+
-            '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Main page banner">'+
-            '16:9</span></label>'+
-
-            '<label class="btn btn-primary">'+
-            '<input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1.3333333333333333">'+
-            '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Main collection photo">'+
-            '3:4</span></label>'+
-
-            '<label class="btn btn-primary">'+
-            '<input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">'+
-            '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Long Col-zone photo">'+
-            '400:91</span></label>'+
-
+            '<label class="btn btn-primary">' +
+            '<input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.7777777777777777">' +
+            '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Main page banner">' +
+            '16:9</span></label>' +
+            '<label class="btn btn-primary">' +
+            '<input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1.3333333333333333">' +
+            '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Main collection photo">' +
+            '3:4</span></label>' +
+            '<label class="btn btn-primary">' +
+            '<input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">' +
+            '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Long Col-zone photo">' +
+            '400:91</span></label>' +
             '</div>' +
             '<div class="modal-body">' +
             '<div class="image-container"></div>' +
@@ -334,7 +333,7 @@
         var inp;
 
         $('.dropzone').each(function (key, el) {
-
+            inp = $('input#zones\\[' + key + '\\]\\[photo\\]');
             myDropzone[key] = new Dropzone($(".dropzone")[key], {
                     autoProcessQueue: false,
                     dictDefaultMessage: "Drop files here",
@@ -358,13 +357,14 @@
 
                         } else {
                             if ($('.photo').eq(key).hasClass('active')) {
-                                $('.photo >img').eq(key).replaceWith('<img id="dz_photo" src="/' + res['success']['path'] + '">');
+                                $('.photo >img').eq(key).replaceWith('<img src="/' + res['success']['path'] + '">');
                             } else {
-                                $('.photo').eq(key).append('<img id="dz_photo" src="/' + res['success']['path'] + '">');
+                                $('.photo').eq(key).append('<img src="/' + res['success']['path'] + '">');
                                 $('.photo').eq(key).addClass('active');
                             }
+                            inp = $('.photo').eq(key).find( ":hidden" );
 
-                            //inp.val(res['success']['imgName']);
+                            inp.val(res['success']['imgName']);
 
                             swal({
                                 title: res['success']['title'],
@@ -445,9 +445,10 @@
                 });
             });
             $('.dlt_photo').each(function (index) {
-                $(this).on("click", function () {
-                    //$(this).parent().parent().remove();
-                   // document.getElementById('images' + index).remove();
+                $(this).on('click', function () {
+                    $(this).parent().children('img').remove();
+                    $(this).parent().removeClass('active');
+                    $(this).parent().find( ":hidden" ).val('');
                 });
             });
         });

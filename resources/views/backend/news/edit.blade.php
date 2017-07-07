@@ -90,17 +90,24 @@
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
-                        <div class="dropzone" id="dz_photo"></div>
-                    @if($news->image)
-                        <div class="photo active">
-                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                            <img id="add_photo" src="/upload/images/{{ $news->image  }}" alt="">
+                    <div class="form-group">
+                        {{ Form::label('photo', trans('validation.attributes.backend.access.news.image'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+
+                            <div class="dropzone" id="dz_photo"></div>
+                            @if($news->image)
+                                <div class="photo active">
+                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                    <img id="add_photo" src="/upload/images/{{ $news->image  }}" alt="">
+                                </div>
+                            @else
+                                <div class="photo">
+                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                </div>
+                            @endif
                         </div>
-                    @else
-                        <div class="photo">
-                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                        </div>
-                    @endif
+                    </div>
+
 
                 </div>
             </div>

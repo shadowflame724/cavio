@@ -84,14 +84,11 @@ class CollectionController extends Controller
      */
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
-        dd($request->all());
         $zones = $request->zones;
 
         foreach ($zones as $key => $newzone) {
             $oldzone = CollectionZone::find($newzone['id']);
-            if (isset($newzone['mainPhoto'] )) {
-                $mainPhoto = $newzone['photo'];
-            }
+
             $oldzone->mainZones()->detach();
             foreach ($newzone['zone_id'] as $mainZone) {
                 $oldzone->mainZones()->attach($mainZone);
@@ -103,12 +100,12 @@ class CollectionController extends Controller
             $oldzone->title_it = $newzone['title_it'];
             $oldzone->image = $newzone['photo'];
             if ($oldzone->save()) {
-                $this->moveImg($newzone['photo']);
+                $this->moveImg($newzone['photo'], $oldImage);
             }
         }
         $oldName = $collection->image;
-        $this->collection->update($collection, $request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo'), $mainPhoto);
-        $this->moveImg($mainPhoto);
+        $this->collection->update($collection, $request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo'));
+        $this->moveImg($request->photo, $oldName);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.updated'));
     }

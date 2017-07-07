@@ -49,7 +49,6 @@ class FinishTissueController extends Controller
     }
 
     /**
-     * @param FinishTissue $finishTissue
      * @param StoreFinishTissueRequest $request
      *
      * @return mixed
@@ -97,7 +96,6 @@ class FinishTissueController extends Controller
      */
     public function update(FinishTissue $finishTissue, UpdateFinishTissueRequest $request)
     {
-        dd($request->all());
         $children = $request['children'];
 
         foreach ($children as $key => $newChild) {

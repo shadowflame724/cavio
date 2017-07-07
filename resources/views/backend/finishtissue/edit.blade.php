@@ -88,64 +88,67 @@
             </div>
 
             <div class="box-body">
+                <div class="row">
 
-                @foreach($finishTissue->children as $key => $child)
-                    @php ($i = $key+1)
+                    <div class="panel-group" id="accordion">
+                        @foreach($finishTissue->children as $key => $child)
+                            @php ($i = $key+1)
+                            <div class="col-lg-4">
 
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="heading{{$i}}">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                       href="#collapse{{$i}}"
-                                       aria-expanded="true" aria-controls="collapse{{$i}}">
-                                        {{$i}}. {{$child->title}}
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
-                                 aria-labelledby="heading{{$i}}">
-                                <div class="panel-body">
-                                    {{ Form::hidden('children['.$i.'][id]', $child->id) }}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapse{{$key}}"
+                                               aria-expanded="true" aria-controls="collapse{{$key}}">
+                                                {{$i}}. {{$child->title}}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse{{$key}}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            {{ Form::hidden('children['.$i.'][id]', $child->id) }}
 
+                                            <div class="form-group">
+                                                {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                                    <div class="form-group">
-                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+                                                <div class="col-lg-10">
+                                                    {{ Form::text('children['.$i.'][title]', $child->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
 
-                                        <div class="col-lg-10">
-                                            {{ Form::text('children['.$i.'][title]', $child->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
-                                        </div><!--col-lg-10-->
-                                    </div><!--form control-->
+                                            <div class="form-group">
+                                                {{ Form::label('children['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                                                <div class="col-lg-10">
+                                                    <div class="dropzone" id="dropzone-{{ $key }}"></div>
+                                                    @if($child->image)
+                                                        <div class="photo active">
+                                                            {{ Form::hidden('children['.$i.'][photo]', $child->image) }}
+                                                            <div id="dlt_photo{{$key}}"
+                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                                            <img class="add_photo" id="add_photo{{$key}}"
+                                                                 src="/upload/images/{{ $child->image }}"
+                                                                 alt="">
+                                                        </div>
+                                                    @else
+                                                        <div class="photo">
+                                                            {{ Form::hidden('children['.$i.'][photo]', null) }}
 
-                                    <div class="form-group">
-                                        {{ Form::label('children['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                                        <div class="col-lg-10">
-                                            {{ Form::hidden('children['.$i.'][photo]', null) }}
-                                            <div class="dropzone" id="add_photo"></div>
-                                            @if($child->image)
-                                                <div class="photo active">
-                                                    <div id="dlt_photo{{$key}}"
-                                                         class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                    <img class="add_photo" id="add_photo{{$key}}"
-                                                         src="/upload/images/{{ $child->image }}"
-                                                         alt="">
-                                                </div>
-                                            @else
-                                                <div class="photo">
-                                                    <div id="dlt_photo{{$key}}"
-                                                         class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                </div>
-                                            @endif
-                                        </div><!--col-lg-10-->
-                                    </div><!--form control-->
-                                    <a href="{{route('admin.finish-tissue.destroy.child', $child->id)}}"
-                                       class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
+                                                            <div id="dlt_photo{{$key}}"
+                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                                        </div>
+                                                    @endif
+                                                </div><!--col-lg-10-->
+                                            </div><!--form control-->
+                                            <a href="{{route('admin.finish-tissue.destroy.child', $child->id)}}"
+                                               class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-
-                @endforeach
+                </div>
 
                 <a href="{{route('admin.finish-tissue.store.child', $finishTissue)}}"
                    class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
@@ -217,14 +220,14 @@
 
         var myDropzone = [];
 
-        $('.panel-group').each(function (key, el) {
+        $('.panel-default').each(function (key, el) {
             var inp = $('input#children\\[' + (key + 1) + '\\]\\[photo\\]');
             if (document.getElementById('add_photo' + key)) {
                 var pathname = document.getElementById('add_photo' + key).getAttribute('src');
                 var leafname = pathname.split('\\').pop().split('/').pop();
                 inp.val(leafname);
             }
-            myDropzone[key] = new Dropzone($(".dropzone")[key], {
+            myDropzone[key] = new Dropzone($("#dropzone-"+key)[0], {
                     autoProcessQueue: false,
                     dictDefaultMessage: "Drop files here",
                     url: "{{route('admin.file.upload.finish-tissue')}}",
@@ -232,6 +235,7 @@
                     headers: {
                         'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
                     },
+                    hIndex: key,
                     success: function (file, res) {
                         this.removeFile(file);
 
@@ -246,11 +250,10 @@
                             });
 
                         } else {
-
                             if ($('.photo').eq(key).hasClass('active')) {
-                                $('.photo >img').replaceWith('<img id="dz_photo" src="/' + res['success']['path'] + '">');
+                                $('.photo').eq(key).children('img').replaceWith('<img src="/' + res['success']['path'] + '">');
                             } else {
-                                $('.photo').eq(key).append('<img id="dz_photo" src="/' + res['success']['path'] + '">');
+                                $('.photo').eq(key).append('<img src="/' + res['success']['path'] + '">');
                                 $('.photo').eq(key).addClass('active');
                             }
 
@@ -284,13 +287,13 @@
             );
 
             myDropzone[key].on('thumbnail', function (file) {
-                var selfAccId = $(this['clickableElements']).closest('.panel-group').index();
+                var selfAccId = $(this['clickableElements']).closest('.col-lg-4').index();
+                console.log('-', this);
                 if (file.cropped) {
                     return;
                 }
                 var cachedFilename = file.name;
                 myDropzone[selfAccId].removeFile(file);
-
 
                 var $cropperModal = $(modalTemplate);
                 var $uploadCrop = $cropperModal.find('.crop-upload');
@@ -316,6 +319,7 @@
                 reader.readAsDataURL(file);
                 $cropperModal.modal('show');
                 $uploadCrop.on('click', function () {
+                    console.log(selfAccId);
                     var blob = cropper.getCroppedCanvas().toDataURL();
                     var newFile = dataURItoBlob(blob);
                     newFile.cropped = true;
@@ -325,11 +329,15 @@
                     $cropperModal.modal('hide');
                 });
             });
-            $('#dlt_photo' + key).on('click', function () {
-                $('#add_photo' + key).remove();
-                $('.photo').eq(key).removeClass('active');
-                inp.val('');
+            $('.dlt_photo').each(function () {
+                $(this).on('click', function () {
+                    $(this).parent().children('img').remove();
+                    $(this).parent().removeClass('active');
+                    $(this).parent().find( ":hidden" ).val('');
+                });
             });
+
         });
         Dropzone.autoDiscover = false;
-    </script>@endsection
+    </script>
+@endsection

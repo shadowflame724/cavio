@@ -101,7 +101,7 @@ class CollectionRepository extends BaseRepository
         $collection->description = $input['description'];
         $collection->description_ru = $input['description_ru'];
         $collection->description_it = $input['description_it'];
-        $collection->photo= $input['photo'];
+        $collection->image = $input['photo'];
 
         if (isset($input['banner'])) {
             $collection->banner = 1;
