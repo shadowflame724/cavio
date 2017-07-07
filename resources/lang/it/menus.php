@@ -118,6 +118,10 @@ return [
                 'management' => 'Gestione ruoli',
             ],
         ],
+        'menu' => [
+            'content' => 'Content',
+            'store' => 'Store',
+        ],
 
         'log-viewer' => [
             'main'      => 'Log',
