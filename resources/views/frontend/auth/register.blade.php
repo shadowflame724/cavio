@@ -1,83 +1,78 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.'.$pageLayout)
+
+@section('bodyClass', 'login')
+
+@section('before_header', '')
 
 @section('content')
-    <div class="row">
-
-        <div class="col-md-8 col-md-offset-2">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('labels.frontend.auth.register_box_title') }}</div>
-
-                <div class="panel-body">
-
-                    {{ Form::open(['route' => 'frontend.auth.register.post', 'class' => 'form-horizontal']) }}
-
-                    <div class="form-group">
-                        {{ Form::label('first_name', trans('validation.attributes.frontend.first_name'),
-                        ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::text('first_name', null,
-                            ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => trans('validation.attributes.frontend.first_name')]) }}
-                        </div><!--col-md-6-->
-                    </div><!--form-group-->
-
-                    <div class="form-group">
-                        {{ Form::label('last_name', trans('validation.attributes.frontend.last_name'),
-                        ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::text('last_name', null,
-                            ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => trans('validation.attributes.frontend.last_name')]) }}
-                        </div><!--col-md-6-->
-                    </div><!--form-group-->
-
-                    <div class="form-group">
-                        {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::email('email', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => trans('validation.attributes.frontend.email')]) }}
-                        </div><!--col-md-6-->
-                    </div><!--form-group-->
-
-                    <div class="form-group">
-                        {{ Form::label('password', trans('validation.attributes.frontend.password'), ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::password('password', ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('validation.attributes.frontend.password')]) }}
-                        </div><!--col-md-6-->
-                    </div><!--form-group-->
-
-                    <div class="form-group">
-                        {{ Form::label('password_confirmation', trans('validation.attributes.frontend.password_confirmation'), ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::password('password_confirmation', ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('validation.attributes.frontend.password_confirmation')]) }}
-                        </div><!--col-md-6-->
-                    </div><!--form-group-->
-
-                    @if (config('access.captcha.registration'))
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! Form::captcha() !!}
-                                {{ Form::hidden('captcha_status', 'true') }}
-                            </div><!--col-md-6-->
-                        </div><!--form-group-->
-                    @endif
-
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            {{ Form::submit(trans('labels.frontend.auth.register_button'), ['class' => 'btn btn-primary']) }}
-                        </div><!--col-md-6-->
-                    </div><!--form-group-->
-
-                    {{ Form::close() }}
-
-                </div><!-- panel body -->
-
-            </div><!-- panel -->
-
-        </div><!-- col-md-8 -->
-
-    </div><!-- row -->
+<section class="zone-col-modal modal-log_reg" style="position:relative;visibility: visible;opacity: 1;">
+    <div class="inner-zone-col-modal" style="padding-top: 200px;">
+        {{ Form::open(['route' => 'frontend.auth.register.post', 'class' => 'login_reg']) }}
+            <div class="wrap-2-input clearfix">
+                <div class="wrap-inp_W_50">
+                    {{ Form::text('first_name', null, [
+                                'class' => 'fullW',
+                                'maxlength' => '191',
+                                'required' => 'required',
+                                'autofocus' => 'autofocus',
+                                'placeholder' => trans('frontend.login_modal.firstName')
+                                ]) }}
+                </div>
+                <div class="wrap-inp_W_50">
+                    {{ Form::text('last_name', null, [
+                                'class' => 'fullW',
+                                'maxlength' => '191',
+                                'required' => 'required',
+                                'placeholder' => trans('frontend.login_modal.lastName')
+                                ]) }}
+                </div>
+            </div>
+            <div class="wrap-2-input clearfix">
+                <div class="wrap-inp_W_50">
+                    {{ Form::tel('phone', null, [
+                                'class' => 'fullW',
+                                'maxlength' => '50',
+                                'required' => 'required',
+                                'placeholder' => trans('frontend.login_modal.phone')
+                                ]) }}
+                </div>
+                <div class="wrap-inp_W_50">
+                    {{ Form::text('region', null, [
+                                'class' => 'fullW',
+                                'maxlength' => '50',
+                                'required' => 'required',
+                                'placeholder' => trans('frontend.login_modal.region')
+                                ]) }}
+                </div>
+            </div>
+            <hr class="login_reg-line">
+            {{ Form::email('email', null, [
+                                'class' => 'fullW',
+                                'maxlength' => '191',
+                                'required' => 'required',
+                                'placeholder' => trans('validation.attributes.frontend.email')
+                                ]) }}
+            {{ Form::password('password', [
+                                'class' => 'fullW',
+                                'required' => 'required',
+                                'placeholder' => trans('validation.attributes.frontend.password')
+                                ]) }}
+            {{ Form::password('password_confirmation', [
+                                'class' => 'fullW',
+                                'required' => 'required',
+                                'placeholder' => trans('validation.attributes.frontend.password_confirmation')
+                                ]) }}
+            <div class="captcha">
+                {!! Form::captcha() !!}
+                {{ Form::hidden('captcha_status', 'true') }}
+            </div>
+            {{ Form::submit(trans('frontend.login_modal.register'), ['class' => 'btn btn-primary']) }}
+        {{ Form::close() }}
+    </div>
+</section>
 @endsection
 
-@section('after-scripts')
+@section('after_scripts')
     @if (config('access.captcha.registration'))
         {!! Captcha::script() !!}
     @endif

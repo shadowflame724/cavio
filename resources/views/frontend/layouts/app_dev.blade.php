@@ -5,16 +5,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-        <title>{{ $page->title }}</title>
+        <title>{{ (isset($page->title))?$page->title:ENV('APP_NAME') }}</title>
         <meta name="msapplication-tap-highlight" content="no">
         <link rel="manifest" href="manifest.json">
         <meta name="mobile-web-app-capable" content="yes">
-        <meta name="application-name" content="{{ $page->title }}">
-        {{ $page->description }}
+        <meta name="application-name" content="{{ (isset($page->title))?$page->title:ENV('APP_NAME') }}">
+        {{ (isset($page->description))?$page->description:ENV('APP_NAME') }}
         <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="{{ $page->title }}">
+        <meta name="apple-mobile-web-app-title" content="{{ (isset($page->title))?$page->title:ENV('APP_NAME') }}">
         <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
         <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
         <meta name="msapplication-TileColor" content="#2F3BA2">
