@@ -56,6 +56,7 @@ class ComposerServiceProvider extends ServiceProvider
             $view
                 ->with([
                     'isAjax' => $isAjax,
+                    'pageLayout' => ($isAjax)?'ajax':'app_dev',
                     'curPath' => $path,
                     'langPaths' => $langPaths,
                     'langSuf' => $langSuf,

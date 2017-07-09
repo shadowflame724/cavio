@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app_dev')
+@extends('frontend.layouts.'.$pageLayout)
 
 @section('bodyClass', 'about')
 
@@ -212,171 +212,171 @@
     </div>
 </section>
 <section id=under-about-mood class=under-mood>
-            <div class="wrap-images-under-mood clearfix">
-                <div class="images-under-mood-left">
-                    <div class="wrap-image-und-mood-l-t p-for-l"><a href="#"
-                                                                    class="wrap-inner-img anim-img-corn-bg">
-                            <div class="img-back dark">
-                                <svg viewBox="0 0 1395.63 1237.68">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="wave.svg#wave"></use>
-                                </svg>
-                            </div>
-                            <div class="corn-img corner-text" before="— Villa Cannes"><img
-                                        src="/upload/images/under-mood-l-t.jpg" alt=""></div>
-                        </a></div>
-                    <div class="wrap-image-und-mood-l-b p-for-l"><a href="#"
-                                                                    class="wrap-inner-img anim-img-corn-bg">
-                            <div class="img-back dark">
-                                <svg viewBox="0 0 1395.63 1237.68">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="wave.svg#wave"></use>
-                                </svg>
-                            </div>
-                            <div class="corn-img corner-text" before="— Villa Cannes"><img
-                                        src="/upload/images/under-mood-l-b.jpg" alt=""></div>
-                        </a></div>
-                </div>
-                <div class="images-under-mood-right">
-                    <div class="wrap-images-und-mood-r-t clearfix">
-                        <div class="wrap-image-und-mood-r-t"><a href="#" class="wrap-inner-img anim-img-corn-bg">
-                                <div class="img-back dark">
-                                    <svg viewBox="0 0 1395.63 1237.68">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                             xlink:href="wave.svg#wave"></use>
-                                    </svg>
-                                </div>
-                                <div class="corn-img corner-text" before="— Manhattan penthouse"><img
-                                            src="/upload/images/under-mood-r-t.jpg" alt=""></div>
-                            </a></div>
-                        <div class="wrap-image-und-mood-m-t"><a href="#" class="wrap-inner-img anim-img-corn-bg">
-                                <div class="img-back dark">
-                                    <svg viewBox="0 0 1395.63 1237.68">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                             xlink:href="wave.svg#wave"></use>
-                                    </svg>
-                                </div>
-                                <div class="corn-img corner-text" before="— Manhattan penthouse"><img
-                                            src="/upload/images/under-mood-m-t.jpg" alt=""></div>
-                            </a></div>
+    <div class="wrap-images-under-mood clearfix">
+        <div class="images-under-mood-left">
+            <div class="wrap-image-und-mood-l-t p-for-l"><a href="#"
+                                                            class="wrap-inner-img anim-img-corn-bg">
+                    <div class="img-back dark">
+                        <svg viewBox="0 0 1395.63 1237.68">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xlink:href="wave.svg#wave"></use>
+                        </svg>
                     </div>
-                    <div class="wrap-image-und-mood-r-b"><a href="#" class="wrap-inner-img anim-img-corn-bg">
-                            <div class="img-back dark">
-                                <svg viewBox="0 0 1395.63 1237.68">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="wave.svg#wave"></use>
-                                </svg>
-                            </div>
-                            <div class="corn-img corner-text" before="— Villa Cannes"><img
-                                        src="/upload/images/under-mood-r-b.jpg" alt=""></div>
-                        </a></div>
-                </div>
-                <div class="mood-big show"><span id="inner-mood-big">mood</span></div>
+                    <div class="corn-img corner-text" before="— Villa Cannes"><img
+                                src="/upload/images/under-mood-l-t.jpg" alt=""></div>
+                </a></div>
+            <div class="wrap-image-und-mood-l-b p-for-l"><a href="#"
+                                                            class="wrap-inner-img anim-img-corn-bg">
+                    <div class="img-back dark">
+                        <svg viewBox="0 0 1395.63 1237.68">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xlink:href="wave.svg#wave"></use>
+                        </svg>
+                    </div>
+                    <div class="corn-img corner-text" before="— Villa Cannes"><img
+                                src="/upload/images/under-mood-l-b.jpg" alt=""></div>
+                </a></div>
+        </div>
+        <div class="images-under-mood-right">
+            <div class="wrap-images-und-mood-r-t clearfix">
+                <div class="wrap-image-und-mood-r-t"><a href="#" class="wrap-inner-img anim-img-corn-bg">
+                        <div class="img-back dark">
+                            <svg viewBox="0 0 1395.63 1237.68">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xlink:href="wave.svg#wave"></use>
+                            </svg>
+                        </div>
+                        <div class="corn-img corner-text" before="— Manhattan penthouse"><img
+                                    src="/upload/images/under-mood-r-t.jpg" alt=""></div>
+                    </a></div>
+                <div class="wrap-image-und-mood-m-t"><a href="#" class="wrap-inner-img anim-img-corn-bg">
+                        <div class="img-back dark">
+                            <svg viewBox="0 0 1395.63 1237.68">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xlink:href="wave.svg#wave"></use>
+                            </svg>
+                        </div>
+                        <div class="corn-img corner-text" before="— Manhattan penthouse"><img
+                                    src="/upload/images/under-mood-m-t.jpg" alt=""></div>
+                    </a></div>
             </div>
-            <div class="wrap-under-mood-text clearfix">
-                <div class=col-under-mood-text>
-                    <div class=title-under-history>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(9)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(9)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(9)->title !!}
-                        @endif
+            <div class="wrap-image-und-mood-r-b"><a href="#" class="wrap-inner-img anim-img-corn-bg">
+                    <div class="img-back dark">
+                        <svg viewBox="0 0 1395.63 1237.68">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xlink:href="wave.svg#wave"></use>
+                        </svg>
                     </div>
-                    <div class=text-upline>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(9)->body_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(9)->body_it !!}
-                        @else
-                            {!! $page->blocks->get(9)->body !!}
-                        @endif
-                    </div>
-                </div>
-                <div class=col-under-mood-text>
-                    <div class=title-under-history>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(10)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(10)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(10)->title !!}
-                        @endif
-                    </div>
-                    <div class=text-upline>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(10)->body_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(10)->body_it !!}
-                        @else
-                            {!! $page->blocks->get(10)->body !!}
-                        @endif
-                    </div>
-                </div>
-                <div class=col-under-mood-text>
-                    <div class=title-under-history>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(11)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(11)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(11)->title !!}
-                        @endif
-                    </div>
-                    <div class=text-upline>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(11)->body_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(11)->body_it !!}
-                        @else
-                            {!! $page->blocks->get(11)->body !!}
-                        @endif
-                    </div>
-                </div>
+                    <div class="corn-img corner-text" before="— Villa Cannes"><img
+                                src="/upload/images/under-mood-r-b.jpg" alt=""></div>
+                </a></div>
+        </div>
+        <div class="mood-big show"><span id="inner-mood-big">mood</span></div>
+    </div>
+    <div class="wrap-under-mood-text clearfix">
+        <div class=col-under-mood-text>
+            <div class=title-under-history>
+                @if (App::getLocale() == 'ru')
+                    {!! $page->blocks->get(9)->title_ru !!}
+                @elseif(App::getLocale() == 'it')
+                    {!! $page->blocks->get(9)->title_it !!}
+                @else
+                    {!! $page->blocks->get(9)->title !!}
+                @endif
             </div>
-        </section>
+            <div class=text-upline>
+                @if (App::getLocale() == 'ru')
+                    {!! $page->blocks->get(9)->body_ru !!}
+                @elseif(App::getLocale() == 'it')
+                    {!! $page->blocks->get(9)->body_it !!}
+                @else
+                    {!! $page->blocks->get(9)->body !!}
+                @endif
+            </div>
+        </div>
+        <div class=col-under-mood-text>
+            <div class=title-under-history>
+                @if (App::getLocale() == 'ru')
+                    {!! $page->blocks->get(10)->title_ru !!}
+                @elseif(App::getLocale() == 'it')
+                    {!! $page->blocks->get(10)->title_it !!}
+                @else
+                    {!! $page->blocks->get(10)->title !!}
+                @endif
+            </div>
+            <div class=text-upline>
+                @if (App::getLocale() == 'ru')
+                    {!! $page->blocks->get(10)->body_ru !!}
+                @elseif(App::getLocale() == 'it')
+                    {!! $page->blocks->get(10)->body_it !!}
+                @else
+                    {!! $page->blocks->get(10)->body !!}
+                @endif
+            </div>
+        </div>
+        <div class=col-under-mood-text>
+            <div class=title-under-history>
+                @if (App::getLocale() == 'ru')
+                    {!! $page->blocks->get(11)->title_ru !!}
+                @elseif(App::getLocale() == 'it')
+                    {!! $page->blocks->get(11)->title_it !!}
+                @else
+                    {!! $page->blocks->get(11)->title !!}
+                @endif
+            </div>
+            <div class=text-upline>
+                @if (App::getLocale() == 'ru')
+                    {!! $page->blocks->get(11)->body_ru !!}
+                @elseif(App::getLocale() == 'it')
+                    {!! $page->blocks->get(11)->body_it !!}
+                @else
+                    {!! $page->blocks->get(11)->body !!}
+                @endif
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
 
 @section('after_footer')
 <div id=wrap-page-indicators class=hide>
-        <div class=wrap-relate-indicators>
-            <div id=indicator-1 class=indicator><a href="#about-history"><span class=ind-numb>01</span> <span
-                            class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
-                    <span
-                            class=ind-name>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(0)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(0)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(0)->title !!}
-                        @endif
-                    </span></a></div>
-            <div id=indicator-2 class=indicator><a href="#about-philosofhy"><span class=ind-numb>02</span> <span
-                            class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
-                    <span
-                            class=ind-name>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(3)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(3)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(3)->title !!}
-                        @endif
-                    </span></a></div>
-            <div id=indicator-3 class=indicator><a href="#about-mood"><span class=ind-numb>03</span> <span
-                            class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
-                    <span
-                            class=ind-name>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(7)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(7)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(7)->title !!}
-                        @endif
-                    </span></a></div>
-        </div>
+    <div class=wrap-relate-indicators>
+        <div id=indicator-1 class=indicator><a href="#about-history"><span class=ind-numb>01</span> <span
+                        class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
+                <span
+                        class=ind-name>
+                    @if (App::getLocale() == 'ru')
+                        {!! $page->blocks->get(0)->title_ru !!}
+                    @elseif(App::getLocale() == 'it')
+                        {!! $page->blocks->get(0)->title_it !!}
+                    @else
+                        {!! $page->blocks->get(0)->title !!}
+                    @endif
+                </span></a></div>
+        <div id=indicator-2 class=indicator><a href="#about-philosofhy"><span class=ind-numb>02</span> <span
+                        class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
+                <span
+                        class=ind-name>
+                    @if (App::getLocale() == 'ru')
+                        {!! $page->blocks->get(3)->title_ru !!}
+                    @elseif(App::getLocale() == 'it')
+                        {!! $page->blocks->get(3)->title_it !!}
+                    @else
+                        {!! $page->blocks->get(3)->title !!}
+                    @endif
+                </span></a></div>
+        <div id=indicator-3 class=indicator><a href="#about-mood"><span class=ind-numb>03</span> <span
+                        class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
+                <span
+                        class=ind-name>
+                    @if (App::getLocale() == 'ru')
+                        {!! $page->blocks->get(7)->title_ru !!}
+                    @elseif(App::getLocale() == 'it')
+                        {!! $page->blocks->get(7)->title_it !!}
+                    @else
+                        {!! $page->blocks->get(7)->title !!}
+                    @endif
+                </span></a></div>
     </div>
+</div>
 @endsection

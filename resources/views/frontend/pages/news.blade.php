@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app_dev')
+@extends('frontend.layouts.'.$pageLayout)
 
 @section('bodyClass', 'news')
 
@@ -17,51 +17,51 @@
     </div>
 </section>
 <section id=news-data>
-        <div class=news-data-wrap>
-            <div id=wrap-news-type class="wrap-news-types-list drop-down"><span class=curr-news-type></span>
-                <ul class=news-types-list>
-                    <li class=active><a href=#>{{ trans('frontend.news.allNews') }}</a>
-                    <li><a href=#>{{ trans('frontend.news.pressa') }}</a>
-                    <li><a href=#>{{ trans('frontend.news.video') }}</a>
-                    <li><a href=#>{{ trans('frontend.news.showrooms') }}</a>
-                </ul>
-            </div>
-            <div class=wrap-news-list>
-                <div id=news-list class=clearfix>
-                    @foreach($news as $item)
-                        <div class="news-item">
-                            @if($item->image)
-                                <a href="{{ route('frontend.news', $item->slug) }}"><img class="news-item-img"
-                                                                  src="upload/images/{{ $item->image }}"></a>
+    <div class=news-data-wrap>
+        <div id=wrap-news-type class="wrap-news-types-list drop-down"><span class=curr-news-type></span>
+            <ul class=news-types-list>
+                <li class=active><a href=#>{{ trans('frontend.news.allNews') }}</a>
+                <li><a href=#>{{ trans('frontend.news.pressa') }}</a>
+                <li><a href=#>{{ trans('frontend.news.video') }}</a>
+                <li><a href=#>{{ trans('frontend.news.showrooms') }}</a>
+            </ul>
+        </div>
+        <div class=wrap-news-list>
+            <div id=news-list class=clearfix>
+                @foreach($news as $item)
+                    <div class="news-item">
+                        @if($item->image)
+                            <a href="{{ route('frontend.news', $item->slug) }}"><img class="news-item-img"
+                                                              src="upload/images/{{ $item->image }}"></a>
+                        @endif
+                        <div class="news-date">{{ $item->created_at->diffForHumans() }}</div>
+                        <a href="{{ route('frontend.news', $item->slug) }}" class="news-title">
+                            @if (App::getLocale() == 'ru')
+                                {!! $item->title_ru !!}
+                            @elseif(App::getLocale() == 'it')
+                                {!! $item->title_it !!}
+                            @else
+                                {!! $item->title !!}
                             @endif
-                            <div class="news-date">{{ $item->created_at->diffForHumans() }}</div>
-                            <a href="{{ route('frontend.news', $item->slug) }}" class="news-title">
+                        </a>
+                        @if($item->preview)
+                            <div class="news-text">
                                 @if (App::getLocale() == 'ru')
-                                    {!! $item->title_ru !!}
+                                    {!! $item->preview_ru !!}
                                 @elseif(App::getLocale() == 'it')
-                                    {!! $item->title_it !!}
+                                    {!! $item->preview_it !!}
                                 @else
-                                    {!! $item->title !!}
+                                    {!! $item->preview !!}
                                 @endif
-                            </a>
-                            @if($item->preview)
-                                <div class="news-text">
-                                    @if (App::getLocale() == 'ru')
-                                        {!! $item->preview_ru !!}
-                                    @elseif(App::getLocale() == 'it')
-                                        {!! $item->preview_it !!}
-                                    @else
-                                        {!! $item->preview !!}
-                                    @endif
-                                    <a
-                                            href="{{  route('frontend.news', $item->slug) }}"
-                                            class="link-arrow">→</a>
-                                </div>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
+                                <a
+                                        href="{{  route('frontend.news', $item->slug) }}"
+                                        class="link-arrow">→</a>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection

@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app_dev')
+@extends('frontend.layouts.'.$pageLayout)
 
 @section('bodyClass', 'main')
 

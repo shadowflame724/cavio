@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app_dev')
+@extends('frontend.layouts.'.$pageLayout)
 
 @section('bodyClass', 'showrooms')
 
@@ -87,61 +87,61 @@
     </div>
 </section>
 <section id="main-showroom">
-        <div class="container">
-            <div class="wrap-freedom-under-phil show_r">
-                <div id="about-romb" class="romb show">
-                    <div class="romb-right"></div>
-                    <div class="romb-middle">
-                        <svg class="wave-romb" viewBox="0 0 1395.63 1237.68">
+    <div class="container">
+        <div class="wrap-freedom-under-phil show_r">
+            <div id="about-romb" class="romb show">
+                <div class="romb-right"></div>
+                <div class="romb-middle">
+                    <svg class="wave-romb" viewBox="0 0 1395.63 1237.68">
+                        <use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href=wave.svg#wave></use>
+                    </svg>
+                </div>
+                <div class="romb-left"></div>
+            </div>
+            <div class="freedom-under-phil-text">
+                @if (App::getLocale() == 'ru')
+                    {!! $page->blocks->get(3)->body_ru !!}
+                @elseif(App::getLocale() == 'it')
+                    {!! $page->blocks->get(3)->body_it !!}
+                @else
+                    {!! $page->blocks->get(3)->body !!}
+                @endif
+            </div>
+        </div>
+        <div id="main-show_r" class="wrap-philosophy a main_show_r clearfix show">
+            <div class="phil-left">
+                <div class="wrap-img-bg philosophy-img">
+                    <div class="img-back wave-dark">
+                        <svg viewBox="0 0 1395.63 1237.68">
                             <use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href=wave.svg#wave></use>
                         </svg>
                     </div>
-                    <div class="romb-left"></div>
+                    <img src="/upload/images/{{ $page->blocks->get(4)->image }}" alt="">
                 </div>
-                <div class="freedom-under-phil-text">
+            </div>
+            <div class="phil-right">
+                <div class="title-main-show_r">
                     @if (App::getLocale() == 'ru')
-                        {!! $page->blocks->get(3)->body_ru !!}
+                        {!! $page->blocks->get(4)->title_ru !!}
                     @elseif(App::getLocale() == 'it')
-                        {!! $page->blocks->get(3)->body_it !!}
+                        {!! $page->blocks->get(4)->title_it !!}
                     @else
-                        {!! $page->blocks->get(3)->body !!}
+                        {!! $page->blocks->get(4)->title !!}
+                    @endif
+                </div>
+                <div class="wrap-main-show_r-contacts">
+                    @if (App::getLocale() == 'ru')
+                        {!! $page->blocks->get(4)->body_ru !!}
+                    @elseif(App::getLocale() == 'it')
+                        {!! $page->blocks->get(4)->body_it !!}
+                    @else
+                        {!! $page->blocks->get(4)->body !!}
                     @endif
                 </div>
             </div>
-            <div id="main-show_r" class="wrap-philosophy a main_show_r clearfix show">
-                <div class="phil-left">
-                    <div class="wrap-img-bg philosophy-img">
-                        <div class="img-back wave-dark">
-                            <svg viewBox="0 0 1395.63 1237.68">
-                                <use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href=wave.svg#wave></use>
-                            </svg>
-                        </div>
-                        <img src="/upload/images/{{ $page->blocks->get(4)->image }}" alt="">
-                    </div>
-                </div>
-                <div class="phil-right">
-                    <div class="title-main-show_r">
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(4)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(4)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(4)->title !!}
-                        @endif
-                    </div>
-                    <div class="wrap-main-show_r-contacts">
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(4)->body_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(4)->body_it !!}
-                        @else
-                            {!! $page->blocks->get(4)->body !!}
-                        @endif
-                    </div>
-                </div>
-            </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection
 
 @section('after_scripts')
