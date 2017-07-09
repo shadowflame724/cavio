@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <title>{{ $page->title }}</title>
+    <title>{{ $page->title }}^^^</title>
     <meta name="msapplication-tap-highlight" content="no">
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
