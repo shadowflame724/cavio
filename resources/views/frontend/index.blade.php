@@ -1,4 +1,4 @@
-<html class=" backgroundblendmode">
+<html lang="{{ app()->getLocale() }}" class=" backgroundblendmode">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,32 +37,16 @@
             <div class="scroller scroller-zc-modal">
                 <div class="scroller-inner">
                     <div class="close-modal"></div>
-                    <div class="wrap-swiper-log_reg inner-zone-col-modal ind_pop relative"><h3
-                                class="section-title modal ind_pop show">
-                            @if (App::getLocale() == 'ru')
-                                {{ $popup->title_ru }}
-                            @elseif(App::getLocale() == 'it')
-                                {{ $popup->title_it }}
-                            @else
-                                {{ $popup->title }}
-                            @endif
-                        </h3>
+                    <div class="wrap-swiper-log_reg inner-zone-col-modal ind_pop relative">
+                        <h3 class="section-title modal ind_pop show">{{ $popup->{'title'.$langSuf} }}</h3>
                         <div class="wrap-content-ind_pop clearfix">
                             <div class="wrap-media-ind_pop"><img src="/upload/images/{{ $popup->image }}" alt=""></div>
-                            <div class="wrap-text-ind_pop">
-                                @if (App::getLocale() == 'ru')
-                                    {!! $popup->body_ru !!}
-                                @elseif(App::getLocale() == 'it')
-                                    {!! $popup->body_it !!}
-                                @else
-                                    {!! $popup->body !!}
-                                @endif
-                            </div>
+                            <div class="wrap-text-ind_pop">{!! $popup->{'body'.$langSuf} !!}</div>
                         </div>
                         <div class="wrap-ind_pop-btn">
-                                <a href="/{{ $popup->link }}">
-                                    <button class="btn small" content="okay">{{ trans('frontend.index.okay') }}</button>
-                                </a>
+                            <a href="/{{ $popup->link }}">
+                                <button class="btn small" content="okay">{{ trans('frontend.index.okay') }}</button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -77,79 +61,34 @@
                 @php($i=0)
                 @foreach($collections as $collection)
                     @if($collection->banner == 1)
-                        @if($i==0)
-                            <div class="banner-top-item">
-                                <img src="/upload/images/{{ $collection->image }}" alt="" class='banner-img'>
-                                @foreach($collection->markers as $marker)
-                                    <a href=# class='banner-circle'
-                                       style="top: {{ $marker->y }}%; left: {{ $marker->x }}%">
-                                        <div class='banner-circle-relay'>
-                                            <svg xmlns=http://www.w3.org/2000/svg
-                                                 xmlns:xlink=http://www.w3.org/1999/xlink
-                                                 version=1.1 viewBox="-1 -1 62 62" preserveAspectRatio=xMidYMid
-                                                 class='svg-banner-circle'>
-                                                <circle class='filled' cx='30' cy='30' r='0'/>
-                                                <path d="" fill=none stroke-dasharray="2px 2.2px" stroke-width='2'/>
-                                                <circle class='stroke' cx='30' cy='30' r='14'/>
-                                            </svg>
-                                        </div>
-                                        <div class="banner-popup">
-                                            <div class="banner-popup-relate">
-                                                <div class="banner-popup-code">{{ $marker->code }}</div>
-                                                <div class="banner-popup-text">
-                                                    @if (App::getLocale() == 'ru')
-                                                        {{ $marker->title_ru }}
-                                                    @elseif(App::getLocale() == 'it')
-                                                        {{ $marker->title_it }}
-                                                    @else
-                                                        {{ $marker->title }}
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                @endforeach
-                                @php($i++)
+                    <div class="banner-top-item @if($i)hide @endif">
+                        <img src="/upload/images/{{ $collection->image }}" alt="" class='banner-img'>
+                        @foreach($collection->markers as $marker)
+                        <a href=# class='banner-circle'
+                           style="top: {{ $marker->y }}%; left: {{ $marker->x }}%">
+                            <div class='banner-circle-relay'>
+                                <svg xmlns=http://www.w3.org/2000/svg
+                                     xmlns:xlink=http://www.w3.org/1999/xlink
+                                     version=1.1 viewBox="-1 -1 62 62" preserveAspectRatio=xMidYMid
+                                     class='svg-banner-circle'>
+                                    <circle class='filled' cx='30' cy='30' r='0'/>
+                                    <path d="" fill=none stroke-dasharray="2px 2.2px" stroke-width='2'/>
+                                    <circle class='stroke' cx='30' cy='30' r='14'/>
+                                </svg>
                             </div>
-                        @else
-                            <div class="banner-top-item hide"><img
-                                        src="/upload/images/{{ $collection->image }}" alt=""
-                                        class="banner-img">
-                                @foreach($collection->markers as $marker)
-                                    <a href=# class="banner-circle"
-                                       style="top: {{ $marker->y }}%; left: {{ $marker->x }}%">
-                                        <div class='banner-circle-relay'>
-                                            <svg xmlns=http://www.w3.org/2000/svg
-                                                 xmlns:xlink=http://www.w3.org/1999/xlink
-                                                 version=1.1 viewBox="-1 -1 62 62" preserveAspectRatio=xMidYMid
-                                                 class='svg-banner-circle'>
-                                                <circle class='filled' cx='30' cy='30' r='0'/>
-                                                <path d="" fill=none stroke-dasharray="2px 2.2px" stroke-width='2'/>
-                                                <circle class='stroke' cx='30' cy='30' r='14'/>
-                                            </svg>
-                                        </div>
-                                        <div class="banner-popup">
-                                            <div class="banner-popup-relate">
-                                                <div class="banner-popup-code">{{ $marker->code }}</div>
-                                                <div class="banner-popup-text">
-                                                    @if (App::getLocale() == 'ru')
-                                                        {{ $marker->title_ru }}
-                                                    @elseif(App::getLocale() == 'it')
-                                                        {{ $marker->title_it }}
-                                                    @else
-                                                        {{ $marker->title }}
-                                                    @endif                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                @endforeach
+                            <div class="banner-popup">
+                                <div class="banner-popup-relate">
+                                    <div class="banner-popup-code">{{ $marker->code }}</div>
+                                    <div class="banner-popup-text">{{ $marker->{'title'.$langSuf} }}</div>
+                                </div>
                             </div>
-                        @endif
+                        </a>
+                        @endforeach
+                    </div>
+                    @php($i++)
                     @endif
-
                 @endforeach
             </div>
-
             <img class="banner-shadow-top" src="/upload/images/banner-shadow-top.png" alt="">
         </section>
         <section id="new-products">
@@ -162,12 +101,8 @@
                                 @php($k=0)
                                 @foreach($collections as $collection)
                                     @if($collection->banner > 0)
-                                        @if($k==0)
-                                            <div class="new-prod-dot active"></div>
-                                            @php($k++)
-                                        @else
-                                            <div class="new-prod-dot"></div>
-                                        @endif
+                                        <div class="new-prod-dot @if(!$k)active @endif"></div>
+                                        @php($k++)
                                     @endif
                                 @endforeach
                             </div>
@@ -176,50 +111,12 @@
                             @php($u=0)
                             @foreach($collections as $collection)
                                 @if($collection->banner == 1)
-                                    @if($u==0)
-                                        <div class="slidebox">
-                                            <div class="title">
-                                                @if (App::getLocale() == 'ru')
-                                                    {!! $collection->title_ru !!}
-                                                @elseif(App::getLocale() == 'it')
-                                                    {!! $collection->title_it !!}
-                                                @else
-                                                    {!! $collection->title !!}
-                                                @endif
-                                            </div>
-                                            <p class="descr">
-                                                @if (App::getLocale() == 'ru')
-                                                    {!! $collection->description_ru !!}
-                                                @elseif(App::getLocale() == 'it')
-                                                    {!! $collection->description_it !!}
-                                                @else
-                                                    {!! $collection->description !!}
-                                                @endif
-                                                <a href=#
-                                                   class="link-arrow">→</a>
-                                        </div>
-                                        @php($u++)
-                                    @else
-                                        <div class="slidebox hide">
-                                            <div class="title">
-                                                @if (App::getLocale() == 'ru')
-                                                    {!! $collection->title_ru !!}
-                                                @elseif(App::getLocale() == 'it')
-                                                    {!! $collection->title_it !!}
-                                                @else
-                                                    {!! $collection->title !!}
-                                                @endif                                            </div>
-                                            <p class="descr">
-                                                @if (App::getLocale() == 'ru')
-                                                    {!! $collection->description_ru !!}
-                                                @elseif(App::getLocale() == 'it')
-                                                    {!! $collection->description_it !!}
-                                                @else
-                                                    {!! $collection->description !!}
-                                                @endif <a href=#
-                                                          class="link-arrow">→</a>
-                                        </div>
-                                    @endif
+                                    <div class="slidebox @if($u)hide @endif">
+                                        <div class="title">{{ $collection->{'title'.$langSuf} }}</div>
+                                        <p class="descr">{!! $collection->{'description'.$langSuf} !!} <a href=#
+                                                      class="link-arrow">→</a>
+                                    </div>
+                                    @php($u++)
                                 @endif
                             @endforeach
                         </div>
@@ -418,15 +315,8 @@
             </div>
         </section>
         <section id="our-philosophy">
-            <div class="container"><h3 class="section-title show">
-                    @if (App::getLocale() == 'ru')
-                        {!! $page->blocks->get(0)->title_ru !!}
-                    @elseif(App::getLocale() == 'it')
-                        {!! $page->blocks->get(0)->title_it !!}
-                    @else
-                        {!! $page->blocks->get(0)->title !!}
-                    @endif
-                </h3>
+            <div class="container">
+                <h3 class="section-title show">{{ $page->blocks->get(0)->{'title'.$langSuf} }}</h3>
                 <div class="wrap-philosophy a clearfix">
                     <svg class="title-wave wave-phil" viewBox="0 0 1395.63 1237.68">
                         <use xlink:href=wave.svg#wave></use>
@@ -442,15 +332,7 @@
                     </div>
                     <div class="phil-right">
                         <div class="phil-text">
-                            <div class="phil-text-nosvg">
-                                @if (App::getLocale() == 'ru')
-                                    {!! $page->blocks->get(0)->body_ru !!}
-                                @elseif(App::getLocale() == 'it')
-                                    {!! $page->blocks->get(0)->body_it !!}
-                                @else
-                                    {!! $page->blocks->get(0)->body !!}
-                                @endif
-                            </div>
+                            <div class="phil-text-nosvg">{!! $page->blocks->get(0)->{'body'.$langSuf} !!}</div>
                         </div>
                     </div>
                 </div>
@@ -462,37 +344,27 @@
                     <div class="swiper-wrapper">
                         @foreach($collections as $collection)
                             @if($collection->banner == 0)
-                                <div class="item-coll swiper-slide">
-                                    <a href=#>
-                                        <div class="wrap-img-bg small">
-                                            <div class="img-back wave-dark">
-                                                <svg viewBox="0 0 1395.63 1237.68">
-                                                    <use xmlns:xlink=http://www.w3.org/1999/xlink
-                                                         xlink:href=wave.svg#wave></use>
-                                                </svg>
-                                            </div>
-                                            <div class="wrap-transf-img"><img
-                                                        src="/upload/images/{{ $collection->image }}" alt="">
-                                            </div>
+                            <div class="item-coll swiper-slide">
+                                <a href=#>
+                                    <div class="wrap-img-bg small">
+                                        <div class="img-back wave-dark">
+                                            <svg viewBox="0 0 1395.63 1237.68"><use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href=wave.svg#wave></use></svg>
                                         </div>
-                                        <div class="wrap-coll-item-footer">
-                                            <div class="wrap-coll-item-data">
-                                                <div class="coll-name">
-                                                    @if (App::getLocale() == 'ru')
-                                                        {{ $collection->title_ru }}
-                                                    @elseif(App::getLocale() == 'it')
-                                                        {{ $collection->title_it }}
-                                                    @else
-                                                        {{ $collection->title }}
-                                                    @endif
-                                                    <span
-                                                            class="wrap-coll-name-arrow"><span
-                                                                class="coll-name-arrow">→</span></span></div>
-                                                <div class="numb-prod">69 {{ trans('frontend.header.products')}}</div>
-                                            </div>
+                                        <div class="wrap-transf-img">
+                                            <img src="/upload/images/{{ $collection->image }}" alt="">
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                    <div class="wrap-coll-item-footer">
+                                        <div class="wrap-coll-item-data">
+                                            <div class="coll-name">
+                                                {{ $collection->{'title'.$langSuf} }}
+                                                <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
+                                            </div>
+                                            <div class="numb-prod">69 {{ trans('frontend.header.products')}}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                             @endif
                         @endforeach
                     </div>
@@ -510,51 +382,37 @@
                     @php($count=0)
                     @foreach($categories as $category)
                         @if($category->parent_id != null AND $count<10)
-                            <div class="cat">
-                                <div class="car-bg"></div>
-                                <a href=#>
-                                    <div class="wrap-cat-svg">
-                                        <div class="inner-svg white">
-                                            <svg>
-                                                <use xmlns:xlink=http://www.w3.org/1999/xlink
-                                                     xlink:href="#{{ $category->id }}"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="inner-svg orange">
-                                            <svg>
-                                                <use xmlns:xlink=http://www.w3.org/1999/xlink
-                                                     xlink:href="#{{ $category->id }}"></use>
-                                            </svg>
-                                        </div>
+                        <div class="cat">
+                            <div class="car-bg"></div>
+                            <a href=#>
+                                <div class="wrap-cat-svg">
+                                    <div class="inner-svg white">
+                                        <svg><use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href="#{{ $category->id }}"></use></svg>
                                     </div>
-                                    <div class="cat-name" content="
-                                    @if (App::getLocale() == 'ru')
-                                    {{ $category->name_ru }}
-                                    @elseif(App::getLocale() == 'it')
-                                    {{ $category->name_it }}
-                                    @else
-                                    {{ $category->name }}
-                                    @endif
-                                            ">
-                                        @if (App::getLocale() == 'ru')
-                                            {{ $category->name_ru }}
-                                        @elseif(App::getLocale() == 'it')
-                                            {{ $category->name_it }}
-                                        @else
-                                            {{ $category->name }}
-                                        @endif
+                                    <div class="inner-svg orange">
+                                        <svg><use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href="#{{ $category->id }}"></use></svg>
                                     </div>
-                                </a></div>
-                            @php($count = $count+1)
+                                </div>
+                                <div class="cat-name" content="{{ $category->{'name'.$langSuf} }}">
+                                    {{ $category->{'name'.$langSuf} }}
+                                </div>
+                            </a>
+                        </div>
+                        @php($count = $count+1)
                         @endif
                     @endforeach
                 </div>
-                <div class=wrap-btn-more><a href="{{ route('frontend.catalogue') }}" class="btn more-10-cat"
-                                            content="10 {{ trans('frontend.index.moreCategories')}}">10 {{ trans('frontend.index.moreCategories')}}</a>
-                    <a href="{{ route('frontend.catalogue') }}" class="btn more-12-cat"
-                       content="12 more categories">12 {{ trans('frontend.index.moreCategories')}}</a> <a
-                            href="{{ route('frontend.catalogue') }}" class="btn more-14-cat"
-                            content="14 more categories">14 {{ trans('frontend.index.moreCategories')}}</a></div>
+                <div class=wrap-btn-more>
+                    <a href="{{ route('frontend.catalogue') }}"
+                       class="btn more-10-cat"
+                       content="10 {{ trans('frontend.index.moreCategories')}}">10 {{ trans('frontend.index.moreCategories')}}</a>
+                    <a href="{{ route('frontend.catalogue') }}"
+                       class="btn more-12-cat"
+                       content="12 more categories">12 {{ trans('frontend.index.moreCategories')}}</a>
+                    <a href="{{ route('frontend.catalogue') }}"
+                       class="btn more-14-cat"
+                       content="14 more categories">14 {{ trans('frontend.index.moreCategories')}}</a>
+                </div>
             </div>
         </section>
         @include('frontend.includes.footer')

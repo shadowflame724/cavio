@@ -26,40 +26,21 @@
                     </ul>
                 </div>
                 <div class="footer-products-wrap">
-
                     @foreach($categories as $category)
                         @if($category->parent_id == null)
-
-                            <div class="footer-products-col"><a class="title" href="#">
-                                @if (App::getLocale() == 'ru')
-                                            {{ $category->name_ru }}
-                                        @elseif(App::getLocale() == 'it')
-                                            {{ $category->name_it }}
-                                        @else
-                                            {{ $category->name }}
-                                        @endif
-                                    </a>
-
-                                <ul class="footer-products-list">
-                                        @foreach($category->children as $child)
-                                            <li>
-                                                <a href="{{ route('frontend.catalogue') }}"
-                                                   class="anim-underline light-underline">
-                                                    @if (App::getLocale() == 'ru')
-                                                        {{ $child->name_ru }}
-                                                    @elseif(App::getLocale() == 'it')
-                                                        {{ $child->name_it }}
-                                                    @else
-                                                        {{ $child->name }}
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                            </div>
+                        <div class="footer-products-col">
+                            <a class="title" href="#">{{ $category->{'name'.$langSuf} }}</a>
+                            <ul class="footer-products-list">
+                                @foreach($category->children as $child)
+                                <li>
+                                    <a href="{{ route('frontend.catalogue') }}"
+                                       class="anim-underline light-underline">{{ $child->{'name'.$langSuf} }}</a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
                         @endif
                     @endforeach
-
                 </div>
             </div>
             <div class="footer-right-side">

@@ -112,3 +112,22 @@ if (! function_exists('homeRoute')) {
         return 'frontend.index';
     }
 }
+
+
+if (! function_exists('get_lang_from_domain_name'))
+{
+    function get_lang_from_domain_name($request)
+    {
+        $url_array = explode('.', parse_url($request->url(), PHP_URL_HOST));
+        $subdomain = $url_array[0];
+
+        $languages = ['it', 'ru'];
+        $curLang = 'en';
+
+        if (in_array($subdomain, $languages)) {
+            $curLang = $subdomain;
+        }
+
+        return $curLang;
+    }
+}
