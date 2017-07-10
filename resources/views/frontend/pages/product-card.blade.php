@@ -104,13 +104,9 @@
                                                     </div>
                                                 </div>
                                                 <div class=card-name><span>
-                                                    @if (App::getLocale() == 'ru')
-                                                            {{ $good->name_ru }}
-                                                        @elseif(App::getLocale() == 'it')
-                                                            {{ $good->name_it }}
-                                                        @else
-                                                            {{ $good->name }}
-                                                        @endif
+
+                                                        {!! $good->{'name'.$langSuf} !!}
+
                                                 </span></div>
                                                 <div class=card-product-code>{{ $good->code }}</div>
                                             </div>
@@ -205,13 +201,9 @@
                                             <div class=block_title-card>description</div>
                                             <ul class=card-otherData>
                                                 <li><p class=prgrph-card-other>
-                                                @if (App::getLocale() == 'ru')
-                                                    {{ $good->description_ru }}
-                                                @elseif(App::getLocale() == 'it')
-                                                    {{ $good->description_it }}
-                                                @else
-                                                    {{ $good->description }}
-                                                @endif
+
+                                                {!! $good->{'description'.$langSuf} !!}
+
                                             </ul>
                                         </div>
                                     </div>

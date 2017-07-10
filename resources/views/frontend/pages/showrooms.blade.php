@@ -99,13 +99,9 @@
                 <div class="romb-left"></div>
             </div>
             <div class="freedom-under-phil-text">
-                @if (App::getLocale() == 'ru')
-                    {!! $page->blocks->get(3)->body_ru !!}
-                @elseif(App::getLocale() == 'it')
-                    {!! $page->blocks->get(3)->body_it !!}
-                @else
-                    {!! $page->blocks->get(3)->body !!}
-                @endif
+
+                    {!! $page->blocks->get(3)->{'body'.$langSuf} !!}
+
             </div>
         </div>
         <div id="main-show_r" class="wrap-philosophy a main_show_r clearfix show">
@@ -121,22 +117,14 @@
             </div>
             <div class="phil-right">
                 <div class="title-main-show_r">
-                    @if (App::getLocale() == 'ru')
-                        {!! $page->blocks->get(4)->title_ru !!}
-                    @elseif(App::getLocale() == 'it')
-                        {!! $page->blocks->get(4)->title_it !!}
-                    @else
-                        {!! $page->blocks->get(4)->title !!}
-                    @endif
+
+                        {!! $page->blocks->get(4)->{'title'.$langSuf} !!}
+
                 </div>
                 <div class="wrap-main-show_r-contacts">
-                    @if (App::getLocale() == 'ru')
-                        {!! $page->blocks->get(4)->body_ru !!}
-                    @elseif(App::getLocale() == 'it')
-                        {!! $page->blocks->get(4)->body_it !!}
-                    @else
-                        {!! $page->blocks->get(4)->body !!}
-                    @endif
+
+                        {!! $page->blocks->get(4)->{'body'.$langSuf} !!}
+
                 </div>
             </div>
         </div>

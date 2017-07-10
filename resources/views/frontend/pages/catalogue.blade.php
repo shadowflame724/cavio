@@ -28,26 +28,18 @@
                                 <div class=catal-list-block>
                                     <div class=catal-list-title>
                                         <a href="{{ route('frontend.catalogue', $category->id) }}">
-                                            @if (App::getLocale() == 'ru')
-                                                {{ $category->name_ru }}
-                                            @elseif(App::getLocale() == 'it')
-                                                {{ $category->name_it }}
-                                            @else
-                                                {{ $category->name }}
-                                            @endif
+
+                                                {{ $category->{'name'.$langSuf} }}
+
                                         </a>
                                     </div>
                                     <ul class="catal-list">
                                         @foreach($category->children as $child)
                                             <li><a href="{{ route('frontend.catalogue', $child->id) }}"
                                                    class=anim-underline>
-                                                    @if (App::getLocale() == 'ru')
-                                                        {{ $child->name_ru }}
-                                                    @elseif(App::getLocale() == 'it')
-                                                        {{ $child->name_it }}
-                                                    @else
-                                                        {{ $child->name }}
-                                                    @endif
+
+                                                        {{ $child->{'name'.$langSuf} }}
+
                                                 </a>
                                         @endforeach
                                     </ul>
@@ -70,13 +62,9 @@
                                 @foreach($zones as $zone)
                                     <li>
                                         <a href=# class="anim-underline">
-                                            @if (App::getLocale() == 'ru')
-                                                {{ $zone->title_ru }}
-                                            @elseif(App::getLocale() == 'it')
-                                                {{ $zone->title_it }}
-                                            @else
-                                                {{ $zone->title }}
-                                            @endif
+
+                                                {{ $zone->{'title'.$langSuf} }}
+
                                         </a>
                                         <div class="disactive-item"></div>
                                 @endforeach
@@ -88,13 +76,9 @@
                                 @foreach($collections as $collection)
                                     <li>
                                         <a href=# class="anim-underline">
-                                            @if (App::getLocale() == 'ru')
-                                                {{ $collection->title_ru }}
-                                            @elseif(App::getLocale() == 'it')
-                                                {{ $collection->title_it }}
-                                            @else
-                                                {{ $collection->title }}
-                                            @endif
+
+                                                {{ $collection->{'title'.$langSuf} }}
+
                                         </a>
                                         <div class="disactive-item"></div>
                                 @endforeach

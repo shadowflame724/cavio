@@ -18,13 +18,9 @@
                                 @foreach($zone->collectionZones as $collectionZones)
                                     <li>
                                         <a href=#>
-                                            @if (App::getLocale() == 'ru')
-                                                {{ $collectionZones->collection->title_ru }}
-                                            @elseif(App::getLocale() == 'it')
-                                                {{ $collectionZones->collection->title_it }}
-                                            @else
-                                                {{ $collectionZones->collection->title }}
-                                            @endif
+
+                                                {{ $collectionZones->collection->{'title'.$langSuf} }}
+
                                         </a>
                                 @endforeach
                             </ul>
@@ -47,13 +43,9 @@
                         <div class="zon-col-upper_list">
                             <div class="wrap-descr_and_title col clearfix">
                                 <div class="descr-zon_col-item-name col">
-                                    @if (App::getLocale() == 'ru')
-                                        {{ $zone->title_ru }}
-                                    @elseif(App::getLocale() == 'it')
-                                        {{ $zone->title_it }}
-                                    @else
-                                        {{ $zone->title }}
-                                    @endif
+
+                                        {{ $zone->{'title'.$langSuf} }}
+
                                 </div>
                             </div>
                             <div class="zc-modal-prod-numb"><span class="prod-numb">345</span> {{ trans('frontend.zones-collections.products') }}</div>
@@ -196,14 +188,10 @@
 <section class="wrap-banner no_space">
     <div class=wrap-banner-cont>
         <h3 class=section-title>
-            @if (App::getLocale() == 'ru')
-                {{ $zone->title_ru }}
-            @elseif(App::getLocale() == 'it')
-                {{ $zone->title_it }}
-            @else
-                {{ $zone->title }}
-            @endif
-            <a href="{{ route('frontend.zones') }}"
+
+                {{ $zone->{'title'.$langSuf} }}
+
+                <a href="{{ route('frontend.zones') }}"
                class="back-zol_col anim-underline">← {{ trans('frontend.zones-collections.backToZones') }}</a>
             <svg class=title-wave viewBox="0 0 1395.63 1237.68">
                 <use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href=wave.svg#wave></use>
@@ -227,18 +215,14 @@
                             </div>
                             <div>
                                 <div class=coll-name>
-                                    @if (App::getLocale() == 'ru')
-                                        {{ $collectionZone->collection->title_ru  }}
-                                    @elseif(App::getLocale() == 'it')
-                                        {{ $collectionZone->collection->title_it  }}
-                                    @else
-                                        {{ $collectionZone->collection->title  }}
-                                    @endif
-                                    <span class=wrap-coll-name-arrow>
+
+                                        {{ $collectionZone->collection->{'title'.$langSuf} }}
+
+                                        <span class=wrap-coll-name-arrow>
                                     <span class=coll-name-arrow>→</span>
                                 </span>
                                 </div>
-                                <div class=numb-prod>{{ $collectionZone->collection->goods->count() }} {{ trans('frontend.zones-collections.products') }}</div>
+                                <div class=numb-prod>00 {{ trans('frontend.zones-collections.products') }}</div>
                             </div>
                         </a>
                     </div>
