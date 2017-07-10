@@ -32,11 +32,8 @@ class StoreShowroomRequest extends Request
             'city' => 'required|max:35',
             'name' => 'max:191',
             'address' => 'max:191',
-            'phone' => 'max:20|numeric',
-            'phone2' => 'max:20|numeric',
-            'fax' => 'max:20|numeric',
+            'phone' => 'numeric',
             'email' => 'max:35|email',
-
         ];
 
     }

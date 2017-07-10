@@ -67,7 +67,7 @@
                                     @endif
                                     <span class=wrap-coll-name-arrow><span
                                                 class=coll-name-arrow>→</span></span></div>
-                                <div class=numb-prod>{{ $zone->goods->count() }} {{ trans('frontend.zones-collections.products') }}</div>
+                                <div class=numb-prod> {{ trans('frontend.zones-collections.products') }}</div>
                             </div>
                         </a></div>
                 @endforeach

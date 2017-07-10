@@ -257,7 +257,7 @@
                                         <span class=coll-name-arrow>→</span>
                                     </span>
                             </div>
-                            <div class=numb-prod>{{ $collectionZone->collection->goods->count() }} {{ trans('frontend.zones-collections.products') }}</div>
+                            <div class=numb-prod> {{ trans('frontend.zones-collections.products') }}</div>
                         </div>
                     </a>
                 </div>
