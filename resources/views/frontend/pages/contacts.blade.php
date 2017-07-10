@@ -24,22 +24,13 @@
             <div class="cont-col right">
                 <div id=cont-text-r-t class="anim-under-history wrap-text-under-history-right">
                     <div class=title-under-history>
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(0)->title_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(0)->title_it !!}
-                        @else
-                            {!! $page->blocks->get(0)->title !!}
-                        @endif
+                            {!! $page->blocks->get(0)->{'title'.$langSuf} !!}
+
                     </div>
                     <div class="text-upline und-history">
-                        @if (App::getLocale() == 'ru')
-                            {!! $page->blocks->get(0)->body_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $page->blocks->get(0)->body_it !!}
-                        @else
-                            {!! $page->blocks->get(0)->body !!}
-                        @endif
+
+                            {!! $page->blocks->get(0)->{'body'.$langSuf} !!}
+
                     </div>
                 </div>
                 <div class=wrap-cont-col-r>

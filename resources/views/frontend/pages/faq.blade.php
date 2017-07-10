@@ -28,35 +28,17 @@
                     <div class="qa-item-wave-bg wave-dark"
                          style="background-position: 50% 19.0997%;"></div>
                     <label for="ac-{{$key}}"
-                           content="@if (App::getLocale() == 'ru')
-                                    {!! $faq->question_ru !!}
-                                    @elseif(App::getLocale() == 'it')
-                                    {!! $faq->question_it !!}
-                                    @else
-                                    {!! $faq->question !!}
-                                    @endif ">
-                        @if (App::getLocale() == 'ru')
-                            {!! $faq->question_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $faq->question_it !!}
-                        @else
-                            {!! $faq->question !!}
-                        @endif
-                        <hr class="und-question-title">
-                    </label>
-                    <article><p class="answer-text">
-                        @if (App::getLocale() == 'ru')
-                            {!! $faq->answer_ru !!}
-                        @elseif(App::getLocale() == 'it')
-                            {!! $faq->answer_it !!}
-                        @else
-                            {!! $faq->answer !!}
-                        @endif
-                    </article>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
+                           content="{!! $faq->{'question'.$langSuf} !!}">
+                        {!! $faq->{'question'.$langSuf} !!}
+<hr class="und-question-title">
+</label>
+<article><p class="answer-text">
+    {!! $faq->{'answer'.$langSuf} !!}
+</article>
+</div>
+</div>
+@endforeach
+</div>
+</div>
 </section>
 @endsection

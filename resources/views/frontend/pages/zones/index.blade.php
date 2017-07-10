@@ -39,16 +39,12 @@
                         <img src="/upload/images/{{ $zone->collectionZones->random()->image }}" alt=""></div>
                     <div>
                         <div class=coll-name>
-                            @if (App::getLocale() == 'ru')
-                                {{ $zone->title_ru }}
-                            @elseif(App::getLocale() == 'it')
-                                {{ $zone->title_it }}
-                            @else
-                                {{ $zone->title }}
-                            @endif
-                            <span class=wrap-coll-name-arrow><span
+
+                                {{ $zone->{'title'.$langSuf} }}
+
+                                <span class=wrap-coll-name-arrow><span
                                         class=coll-name-arrow>→</span></span></div>
-                        <div class=numb-prod>{{ $zone->goods->count() }} {{ trans('frontend.zones-collections.products') }}</div>
+                        <div class=numb-prod>00 {{ trans('frontend.zones-collections.products') }}</div>
                     </div>
                 </a></div>
             @endforeach
