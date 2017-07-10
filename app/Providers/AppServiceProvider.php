@@ -6,6 +6,7 @@ use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\Message\Message;
 use App\Models\Zone\Zone;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
         /*
          * Application locale defaults for various components
@@ -26,25 +27,7 @@ class AppServiceProvider extends ServiceProvider
          * These will be overridden by LocaleMiddleware if the session local is set
          */
 
-        /*
-         * setLocale for php. Enables ->formatLocalized() with localized values for dates
-         */
-        setlocale(LC_TIME, config('app.locale_php'));
-
-        /*
-         * setLocale to use Carbon source locales. Enables diffForHumans() localized
-         */
-        Carbon::setLocale(config('app.locale'));
-
-        /*
-         * Set the session variable for whether or not the app is using RTL support
-         * For use in the blade directive in BladeServiceProvider
-         */
-        if (config('locale.languages')[config('app.locale')][2]) {
-            session(['lang-rtl' => true]);
-        } else {
-            session()->forget('lang-rtl');
-        }
+        $lang = get_lang_from_domain_name($request);
 
         // Force SSL in production
         if ($this->app->environment() == 'production') {

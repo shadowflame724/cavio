@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Composers\GlobalComposer;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 /**
  * Class ComposerServiceProvider.
@@ -17,6 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function boot(Request $request)
     {
         /*
@@ -35,9 +37,8 @@ class ComposerServiceProvider extends ServiceProvider
             $isAjax = true;
         }
         $lang = get_lang_from_domain_name($request);
-        session()->put('locale', $lang);
 
-        View::composer(['frontend.*','errors.*','api.*'], function ($view) use ($request, $isAjax, $lang) {
+        View::composer(['*'], function ($view) use ($request, $isAjax, $lang) {
             // геолокация
             $path = $request->path();
             if ($path == '/') {

@@ -23,7 +23,10 @@ class LocaleMiddleware
         /*
          * Locale is enabled and allowed to be changed
          */
+        $lang = get_lang_from_domain_name($request);
         if (config('locale.status')) {
+//            dd(config('locale.languages'));
+            session()->put('locale', $lang);
             if (session()->has('locale') && in_array(session()->get('locale'), array_keys(config('locale.languages')))) {
 
                 /*

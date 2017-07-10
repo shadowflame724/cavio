@@ -1,7 +1,7 @@
 <ul class="dropdown-menu" role="menu">
-    @foreach (array_keys(config('locale.languages')) as $lang)
+    @foreach ($langPaths as $lang => $link)
         @if ($lang != App::getLocale())
-        <li>{{ link_to('lang/'.$lang, trans('menus.language-picker.langs.'.$lang)) }}</li>
+        <li><a href="{{ $link }}/admin/dashboard">{{ trans('menus.language-picker.langs.'.$lang) }}</a></li>
         @endif
     @endforeach
 </ul>
