@@ -124,7 +124,6 @@ return [
             'content' => 'Content',
             'store' => 'Store',
         ],
-
         'log-viewer' => [
             'main'      => 'Log Viewer',
             'dashboard' => 'Dashboard',

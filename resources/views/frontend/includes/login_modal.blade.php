@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="item-soc_log-text">{{ trans('frontend.login_modal.withFacebook') }}</div>
                                 </a></div>
-                            <form class="login_reg">
+                            <form action="/login" method="post" class="login_reg">
                                 <hr class="login_reg-line">
                                 <input class="fullW" placeholder="{{ trans('frontend.login_modal.email') }}" type="email"> <input class="fullW"
                                                                                                placeholder="{{ trans('frontend.login_modal.password') }}"
@@ -39,7 +39,7 @@
                         </div>
                         <div class="swiper-slide log_reg-item reg swiper-slide-next"
                              style="width: 365px; transform: translate3d(0px, 0px, -138.356px) rotateX(0deg) rotateY(-69.1781deg); z-index: 0; margin-right: 140px;">
-                            <form class="login_reg">
+                            <form action="/registration" method="post" class="login_reg">
                                 <div class="wrap-2-input clearfix">
                                     <div class="wrap-inp_W_50"><input class="fullW" placeholder="{{ trans('frontend.login_modal.firstName') }}"
                                                                       name="first_name"></div>

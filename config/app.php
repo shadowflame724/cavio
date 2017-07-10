@@ -206,6 +206,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -266,7 +267,8 @@ return [
         'Gravatar'    => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Html'        => Collective\Html\HtmlFacade::class,
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
-        'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Purifier'    => Mews\Purifier\Facades\Purifier::class,
+        'Excel'       => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
