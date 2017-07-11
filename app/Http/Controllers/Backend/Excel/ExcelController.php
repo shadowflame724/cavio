@@ -46,7 +46,6 @@ class ExcelController extends Controller
             }
             foreach ($result as $name => $item) {
                 $one = '';
-                $nameArr = explode('_',$name);
                 if(!empty($item)) {
                     $one = $item;
                 } elseif(isset($res[$prev_key])) {
