@@ -29,12 +29,12 @@
                     @foreach($categories as $category)
                         @if($category->parent_id == null)
                         <div class="footer-products-col">
-                            <a class="title" href="#">{{ $category->{'name'.$langSuf} }}</a>
+                            <a class="title" href="#">{!! $category->{'name'.$langSuf} !!}</a>
                             <ul class="footer-products-list">
                                 @foreach($category->children as $child)
                                 <li>
                                     <a href="{{ route('frontend.catalogue') }}"
-                                       class="anim-underline light-underline">{{ $child->{'name'.$langSuf} }}</a>
+                                       class="anim-underline light-underline">{!! $child->{'name'.$langSuf} !!}</a>
                                 </li>
                                 @endforeach
                             </ul>
@@ -47,22 +47,22 @@
                 <div class="social-wrap"><a href="facebook.com" class="social-link">
                         <svg class="svg-social-icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="images/icons/social.svg#fb"></use>
+                                 xlink:href="../../img/frontend/icons/social.svg#fb"></use>
                         </svg>
                     </a><a href="youtube.com" class="social-link">
                         <svg class="svg-social-icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="images/icons/social.svg#youtube"></use>
+                                 xlink:href="../../img/frontend/icons/social.svg#youtube"></use>
                         </svg>
                     </a><a href="instagram.com" class="social-link">
                         <svg class="svg-social-icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="images/icons/social.svg#instagram"></use>
+                                 xlink:href="../../img/frontend/icons/social.svg#instagram"></use>
                         </svg>
                     </a><a href="pinterest.com" class="social-link">
                         <svg class="svg-social-icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="images/icons/social.svg#pinterest"></use>
+                                 xlink:href="../../img/frontend/icons/social.svg#pinterest"></use>
                         </svg>
                     </a></div>
                 <div class="subscribe-wrap">
