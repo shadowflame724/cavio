@@ -10,6 +10,7 @@ use App\Http\Requests\Backend\Page\ManagePageRequest;
 use App\Http\Requests\Backend\Page\UpdatePageRequest;
 use App\Repositories\Backend\Page\PageRepository;
 use EMT\EMTypograph;
+use Validator;
 
 
 /**
@@ -87,24 +88,71 @@ class PageController extends Controller
     public function update(Page $page, UpdatePageRequest $request)
     {
         $blocks = $request['blocks'];
+        $messages = '';
+        $flag = true;
 
         foreach ($blocks as $key => $newblock) {
+            $bodyCleaned = /*EMTypograph::fast_apply(*/
+                clean($newblock['body']);
+            $bodyRuCleaned = /*EMTypograph::fast_apply(*/
+                clean($newblock['body_ru']);
+            $bodyItCleaned = /*EMTypograph::fast_apply(*/
+                clean($newblock['body_it']);
+
             $oldBlock = Block::find($newblock['id']);
+
+            if ($oldBlock->title_limit != null) {
+
+                $validator = Validator::make($newblock, [
+                    'title' => 'required|max:' . $oldBlock->title_limit,
+                    'title_ru' => 'required|max:' . $oldBlock->title_limit,
+                    'title_it' => 'required|max:' . $oldBlock->title_limit,
+                ]);
+
+                foreach ($validator->errors()->messages() as $message) {
+                    foreach ($message as $item) {
+                        $messages .= 'Block ' . $key . ' ' . $item . '<br>';
+                        $flag = false;
+                    }
+                }
+            }
+
+            if ($oldBlock->body_limit != null) {
+
+                $validator = Validator::make($newblock, [
+                    'body' => 'required|max:' . $oldBlock->body_limit,
+                    'body_ru' => 'required|max:' . $oldBlock->body_limit,
+                    'body_it' => 'required|max:' . $oldBlock->body_limit,
+                ]);
+
+                foreach ($validator->errors()->messages() as $message) {
+                    foreach ($message as $item) {
+                        $messages .= 'Block ' . $key . ' ' . $item . '<br>';
+                        $flag = false;
+                    }
+                }
+            }
+
             $oldImage = $oldBlock->image;
             $oldBlock->title = $newblock['title'];
             $oldBlock->title_ru = $newblock['title_ru'];
             $oldBlock->title_it = $newblock['title_it'];
-            $oldBlock->body = /*EMTypograph::fast_apply(*/
-                clean($newblock['body']);
-            $oldBlock->body = /*EMTypograph::fast_apply(*/
-                clean($newblock['body_ru']);
-            $oldBlock->body = /*EMTypograph::fast_apply(*/
-                clean($newblock['body_it']);
+            $oldBlock->body = $bodyCleaned;
+            $oldBlock->body_ru = $bodyRuCleaned;
+            $oldBlock->body_it = $bodyItCleaned;
             $oldBlock->image = $newblock['photo'];
-            if ($oldBlock->save()) {
-                $this->moveImg($newblock['photo'], $oldImage);
+
+            if ($flag == true) {
+                if ($oldBlock->save()) {
+                    $this->moveImg($newblock['photo'], $oldImage);
+                }
             }
         }
+
+        if ($flag == false) {
+            return redirect()->route('admin.page.edit', ['page' => $page])->withErrors($messages);
+        }
+
 
         $this->page->update($page, $request->only('pageKey', 'title', 'title_ru', 'title_it', 'description', 'body', 'body_ru', 'body_it'));
 

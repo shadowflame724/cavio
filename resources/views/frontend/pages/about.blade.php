@@ -191,6 +191,13 @@
 
       <div class="wrap-under-mood-text clearfix">
         <div class="col-under-mood-text">
+          <div class="title-under-history">{!! $page->blocks->get(8)->{'title'.$langSuf} !!}
+          </div>
+          <div class="text-upline">{!! $page->blocks->get(8)->{'body'.$langSuf} !!}
+          </div>
+        </div>
+
+        <div class="col-under-mood-text">
           <div class="title-under-history">{!! $page->blocks->get(9)->{'title'.$langSuf} !!}
           </div>
           <div class="text-upline">{!! $page->blocks->get(9)->{'body'.$langSuf} !!}
@@ -198,15 +205,8 @@
         </div>
 
         <div class="col-under-mood-text">
-          <div class="title-under-history">{!! $page->blocks->get(10)->{'title'.$langSuf} !!}
-          </div>
-          <div class="text-upline">{!! $page->blocks->get(10)->{'body'.$langSuf} !!}
-          </div>
-        </div>
-
-        <div class="col-under-mood-text">
-          <div class="title-under-history">{!! $page->blocks->get(11)->{'title'.$langSuf} !!}</div>
-          <div class="text-upline">{!! $page->blocks->get(11)->{'body'.$langSuf} !!}</div>
+          <div class="title-under-history">{!! $page->blocks->get(10)->{'title'.$langSuf} !!}</div>
+          <div class="text-upline">{!! $page->blocks->get(10)->{'body'.$langSuf} !!}</div>
         </div>
       </div>
     </section>

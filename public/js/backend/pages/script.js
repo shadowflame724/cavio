@@ -17,7 +17,7 @@ associated.change(function() {
 $(function()
 {
     $('.page').redactor({
-        buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule']
+        buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule'],
     });
 });
 $(function()

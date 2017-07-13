@@ -104,7 +104,7 @@
                 </form>
                 <button class="search-loupe">
                   <svg class="">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="images/icons/social.svg#loupe"></use>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/frontend/icons/social.svg#loupe"></use>
                   </svg>
                 </button>
               </div>

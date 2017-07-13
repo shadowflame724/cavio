@@ -1,4 +1,4 @@
-@extends('frontend.layouts.'.$pageLayout)
+@extends('frontend.layouts.app')
 
 @section('bodyClass', 'login')
 

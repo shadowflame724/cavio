@@ -1,5 +1,4 @@
 <header class="scroll">
-    {{ Html::style('css/frontend/swiper.min.css') }}
     <div class="header-bg"></div>
     <div class="top-nav container">
         <div class="short-nav">

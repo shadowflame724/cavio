@@ -119,6 +119,7 @@ return [
         'password' => 'Password',
         'email' => 'E-mail',
         'phone' => 'Phone',
+        'region' => 'Region',
         'city' => 'City',
         'zipCode' => 'ZIP Code',
         'register' => 'Register',
