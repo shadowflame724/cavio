@@ -1,4 +1,5 @@
 <header class="scroll">
+    {{ Html::style('css/frontend/swiper.min.css') }}
     <div class="header-bg"></div>
     <div class="top-nav container">
         <div class="short-nav">
@@ -84,7 +85,7 @@
                             <div class="wrap-login-lang">
                                 <div class="wrap-login-side">
                                     <a href="#">
-                                        <svg class="svg-login"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="images/icons/social.svg#login"></use></svg>
+                                        <svg class="svg-login"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/frontend/icons/social.svg#login"></use></svg>
                                         <span>{{ trans('frontend.header.login') }}</span>
                                     </a>
                                 </div>

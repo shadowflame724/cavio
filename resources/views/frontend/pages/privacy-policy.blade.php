@@ -13,12 +13,9 @@
             <div class="wrap-privacy-policy hide">
                 <div class=title-priv_pol>
                     {!! $page->{'title'.$langSuf} !!}
-
                 </div>
                 <div class=text-priv_pol>
-
                         {!! $page->{'body'.$langSuf} !!}
-
                 </div>
             </div>
         </div>
