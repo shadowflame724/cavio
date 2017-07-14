@@ -41,7 +41,8 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="en">
                     <div class="box-body">
-                        <div class="form-group">
+                        @if($finishTissue->parent_id == null)
+                            <div class="form-group">
                             {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
                             <div class="col-lg-10">
                                 <select name="type" class="form-control">
@@ -59,6 +60,7 @@
                                 </select>
                             </div><!--col-lg-10-->
                         </div><!--form control-->
+                        @endif
 
                         @if($finishTissue->parent_id != null)
                             <div class="form-group">
