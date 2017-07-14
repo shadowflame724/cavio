@@ -16,6 +16,9 @@ class UploadController extends Controller
         $img = new Image($path);
         $imgWidth = $img->getWidth();
         $imgHeight = $img->getHeight();
+        if (!file_exists(public_path('/upload/tmp'))) {
+            mkdir(public_path('/upload/tmp'), 0777,     true);
+        }
         if ($imgWidth < $width || $imgHeight < $height) {
             $json = [
                 'error' => [

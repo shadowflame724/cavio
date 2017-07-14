@@ -63,13 +63,18 @@ class FinishTissueRepository extends BaseRepository
         DB::transaction(function () use ($input) {
             $finishTissue = self::MODEL;
             $finishTissue = new $finishTissue();
-            $finishTissue->type = $input['type'];
             $finishTissue->title = $input['title'];
             $finishTissue->title_ru = $input['title_ru'];
             $finishTissue->title_it = $input['title_it'];
             $finishTissue->comment = $input['comment'];
+            $finishTissue->parent_id = $input['parent'];
             $finishTissue->short = $input['short'];
             $finishTissue->image = $input['photo'];
+            if($input['parent'] != "null"){
+                $finishTissue->type = FinishTissue::find($input['parent'])->type;
+            }else{
+                $finishTissue->type = $input['type'];
+            }
 
             if ($finishTissue->save()) {
                 event(new FinishTissueCreated($finishTissue));
@@ -91,13 +96,18 @@ class FinishTissueRepository extends BaseRepository
      */
     public function update(Model $finishTissue, array $input)
     {
-        $finishTissue->type = $input['type'];
         $finishTissue->title = $input['title'];
         $finishTissue->title_ru = $input['title_ru'];
         $finishTissue->title_it = $input['title_it'];
         $finishTissue->comment = $input['comment'];
         $finishTissue->short = $input['short'];
         $finishTissue->image = $input['photo'];
+        $finishTissue->parent_id = $input['parent'];
+        if($input['parent'] != "null"){
+            $finishTissue->type = FinishTissue::find($input['parent'])->type;
+        }else{
+            $finishTissue->type = $input['type'];
+        }
 
         DB::transaction(function () use ($finishTissue, $input) {
             if ($finishTissue->save()) {
