@@ -53,7 +53,7 @@
                         <div class="form-group">
                             {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
                             <div class="col-lg-10">
-                                <select name="parent" class="form-control">
+                                <select name="parent" class="form-control" id="parentSelector">
                                     <option value="null" selected>Root</option>
                                     @foreach($parents as $parent)
                                         <option value="{{ $parent->id }}">{{ $parent->title }}</option>
@@ -71,14 +71,6 @@
                         </div><!--form control-->
 
                         <div class="form-group">
-                            {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
-
-                            <div class="col-lg-10">
-                                {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
-
-                        <div class="form-group">
                             {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
@@ -86,16 +78,26 @@
                             </div><!--col-lg-10-->
                         </div><!--form control-->
 
-                        <div class="form-group">
-                            {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                            <div class="col-lg-10">
-                                {{ Form::hidden('photo', null) }}
-                                <div class="dropzone" id="add_photo"></div>
-                                <div class="photo">
-                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                </div>
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
+                        <div id="forChild" hidden>
+                            <div class="form-group">
+                                {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                                <div class="col-lg-10">
+                                    {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
+                                </div><!--col-lg-10-->
+                            </div><!--form control-->
+
+                            <div class="form-group">
+                                {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                                <div class="col-lg-10">
+                                    {{ Form::hidden('photo', null, ['id' => 'hiddenPhoto']) }}
+                                    <div class="dropzone" id="add_photo"></div>
+                                    <div class="photo">
+                                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                    </div>
+                                </div><!--col-lg-10-->
+                            </div><!--form control-->
+                        </div>
                     </div><!--form control-->
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="ru">
@@ -144,5 +146,177 @@
 @section('after-scripts')
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
-    @include('backend.includes.dropzone_cropper')
+    <script>
+        var forChild = document.getElementById('forChild');
+        var parentSelector = document.getElementById('parentSelector');
+        var photo;
+        $(parentSelector).on('change', function () {
+            var x = this.value;
+            if (x !== "null"){
+                $(forChild).fadeIn('slow');
+            }else if (x == "null"){
+                $(forChild).fadeOut('slow');
+                photo = document.getElementsByClassName('photo');
+                $(document.getElementById('hiddenPhoto')).val('');
+                $(photo).removeClass('active');
+                $(photo).find('img').remove();
+            }
+        });
+
+        var cropper;
+        var modalTemplate = '' +
+            '<div class="modal fade" tabindex="-1" role="dialog">' +
+            '<div class="modal-dialog" role="document">' +
+            '<div class="modal-content">' +
+            '<div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<h4 class="modal-title">Crop Image</h4>' +
+            '<div class="input-group input-group-sm">' +
+            '<label class="input-group-addon" for="dataWidth">Width</label>' +
+            '<input type="text" class="form-control" id="dataWidth" placeholder="Width">' +
+            '<span class="input-group-addon">px</span>' +
+            '<label class="input-group-addon" for="dataHeight">Height</label>' +
+            '<input type="text" class="form-control" id="dataHeight" placeholder="height">' +
+            '<span class="input-group-addon">px</span>' +
+            '</div>' +
+            '</div>' +
+            '<div class="modal-body">' +
+            '<div class="image-container"></div>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '<button type="button" class="btn btn-primary crop-upload">Upload</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '';
+
+        function dataURItoBlob(dataURI) {
+            var byteString = atob(dataURI.split(',')[1]);
+            var ab = new ArrayBuffer(byteString.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ab], {type: 'image/jpeg'});
+        }
+
+        var myDropzone = [];
+        var inp;
+
+        $('.dropzone').each(function (key, el) {
+            inp = $('input#zones\\[' + key + '\\]\\[photo\\]');
+            myDropzone[key] = new Dropzone($(".dropzone")[key], {
+                    autoProcessQueue: false,
+                    dictDefaultMessage: "Drop files here",
+                    url: "{{route('admin.file.upload.finish-tissue')}}",
+                    maxFiles: 1,
+                    headers: {
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                    },
+                    success: function (file, res) {
+                        this.removeFile(file);
+
+                        if (res['error']) {
+                            swal({
+                                title: res['error']['title'],
+                                text: res['error']['text'],
+                                type: "warning",
+                                confirmButtonColor: "#DD6B55 ",
+                                confirmButtonText: 'Ok',
+                                closeOnConfirm: true
+                            });
+
+                        } else {
+                            if ($('.photo').eq(key).hasClass('active')) {
+                                $('.photo >img').eq(key).replaceWith('<img src="/' + res['success']['path'] + '">');
+                            } else {
+                                $('.photo').eq(key).append('<img src="/' + res['success']['path'] + '">');
+                                $('.photo').eq(key).addClass('active');
+                            }
+                            inp = $('#hiddenPhoto');
+
+                            inp.val(res['success']['imgName']);
+
+                            swal({
+                                title: res['success']['title'],
+                                text: res['success']['text'],
+                                type: "success",
+                                confirmButtonColor: "#DD6B55 ",
+                                confirmButtonText: 'Ок',
+                                closeOnConfirm: true
+                            });
+                        }
+                    },
+                    error: function (file, errorMessage, xhr) {
+                        var self = this,
+                            default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
+                        swal({
+                            title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
+                            text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),
+                            type: "warning",
+                            showCancelButton: false,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: 'ОК',
+                            closeOnConfirm: true
+                        });
+                        self.removeFile(file);
+                    }
+                }
+            );
+
+            myDropzone[key].on('thumbnail', function (file) {
+                var selfAccId = key;
+                if (file.cropped) {
+                    return;
+                }
+                var cachedFilename = file.name;
+                myDropzone[selfAccId].removeFile(file);
+
+
+                var $cropperModal = $(modalTemplate);
+                var $uploadCrop = $cropperModal.find('.crop-upload');
+                var $img = $('<img />');
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    $cropperModal.find('.image-container').html($img);
+                    $img.attr('src', reader.result);
+                    cropper = new Cropper($img[0], {
+                        preview: '.image-preview',
+                        autoCropArea: 1,
+                        aspectRatio: 1,
+                        movable: false,
+                        cropBoxResizable: true,
+                        minContainerHeight: 320,
+                        minContainerWidth: 568,
+                        crop: function (e) {
+                            $('input#dataWidth').val(e.detail.width);
+                            $('input#dataHeight').val(e.detail.height);
+                        }
+                    });
+                };
+
+                reader.readAsDataURL(file);
+                $cropperModal.modal('show');
+                $uploadCrop.on('click', function () {
+                    var blob = cropper.getCroppedCanvas().toDataURL();
+                    var newFile = dataURItoBlob(blob);
+                    newFile.cropped = true;
+                    newFile.name = cachedFilename;
+                    myDropzone[selfAccId].addFile(newFile);
+                    myDropzone[selfAccId].processQueue();
+                    $cropperModal.modal('hide');
+                });
+            });
+            $('.dlt_photo').each(function (index) {
+                $(this).on('click', function () {
+                    $(this).parent().children('img').remove();
+                    $(this).parent().removeClass('active');
+                    $(this).parent().find(":hidden").val('');
+                });
+            });
+        });
+        Dropzone.autoDiscover = false;
+    </script>
 @endsection

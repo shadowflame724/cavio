@@ -59,6 +59,14 @@ class FinishTissueController extends Controller
      */
     public function store(StoreFinishTissueRequest $request)
     {
+        if ($request->parent != "null") {
+
+            $this->validate($request, [
+                'short' => 'required|max:10',
+                'photo' => 'required',
+            ]);
+        }
+
         $this->finishTissue->create($request->all());
 
         $this->moveImg($request->photo);
@@ -91,6 +99,13 @@ class FinishTissueController extends Controller
     public function update(FinishTissue $finishTissue, UpdateFinishTissueRequest $request)
     {
         $oldName = $finishTissue->image;
+        if ($request->parent != "null") {
+
+            $this->validate($request, [
+                'short' => 'required|max:10',
+                'photo' => 'required',
+            ]);
+        }
         $this->finishTissue->update($finishTissue, $request->all());
         $this->moveImg($request->photo, $oldName);
 
@@ -106,7 +121,8 @@ class FinishTissueController extends Controller
     public function destroy(FinishTissue $finishTissue, ManageFinishTissueRequest $request)
     {
         $imgName = $finishTissue->image;
-        if($finishTissue->children()->count() > 0){
+
+        if ($finishTissue->children()->count() > 0) {
             return redirect()->route('admin.finish-tissue.index')->withErrors(trans('exceptions.backend.access.finishtissue.delete_with_child_error'));
         }
         $this->finishTissue->delete($finishTissue);
