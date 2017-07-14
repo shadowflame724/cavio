@@ -74,6 +74,7 @@ return [
             'finishtissue' => [
                 'create_error'      => "C'è stato un problema durante la creazione di questo fazzoletto di carta. Si prega di riprovare più tardi.",
                 'delete_error'      => "C'è stato un problema durante l'eliminazione di questo fazzoletto di carta. Si prega di riprovare più tardi.",
+                'delete_with_child_error' => 'This finish/tissue have children. Please delete them first.',
                 'update_error'      => "C'è stato un problema durante l'aggiornamento di questo fazzoletto di carta. Si prega di riprovare più tardi.",
             ],
             'popup' => [

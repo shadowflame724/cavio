@@ -43,13 +43,22 @@
                         <div class="form-group">
                             {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
                             <div class="col-lg-10">
-                                {{ Form::select('type', [
-                                "finish" =>
-                                trans("validation.attributes.backend.access.finishtissue.type_finish"),
-                                "tissue" =>
-                                trans("validation.attributes.backend.access.finishtissue.type_tissue")
-                                ],
-                                ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                <select name="type" class="form-control">
+                                    <option value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
+                                    <option value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
+                                </select>
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                <select name="parent" class="form-control">
+                                    <option value="null" selected>Root</option>
+                                    @foreach($parents as $parent)
+                                        <option value="{{ $parent->id }}">{{ $parent->title }}</option>
+                                    @endforeach
+                                </select>
                             </div><!--col-lg-10-->
                         </div><!--form control-->
 
@@ -58,6 +67,33 @@
 
                             <div class="col-lg-10">
                                 {{ Form::text('title', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::hidden('photo', null) }}
+                                <div class="dropzone" id="add_photo"></div>
+                                <div class="photo">
+                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                </div>
                             </div><!--col-lg-10-->
                         </div><!--form control-->
                     </div><!--form control-->
@@ -108,4 +144,5 @@
 @section('after-scripts')
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
+    @include('backend.includes.dropzone_cropper')
 @endsection

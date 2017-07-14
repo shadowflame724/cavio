@@ -44,13 +44,36 @@
                         <div class="form-group">
                             {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
                             <div class="col-lg-10">
-                                {{ Form::select('type', [
-                                "finish" =>
-                                trans("validation.attributes.backend.access.finishtissue.type_finish"),
-                                "tissue" =>
-                                trans("validation.attributes.backend.access.finishtissue.type_tissue")
-                                ],
-                                ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                <select name="type" class="form-control">
+                                    @if($finishTissue->type == "finish")
+                                        <option selected
+                                                value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
+                                        <option
+                                                value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
+                                    @else
+                                        <option
+                                                value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
+                                        <option selected
+                                                value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
+                                    @endif
+                                </select>
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                <select class="form-control"
+                                        name="parent">
+                                    @if($finishTissue->parent_id == null)
+                                        <option value="null" selected>Root</option>
+                                    @endif
+                                    @foreach($parents as $parent)
+                                        <option value="{{ $parent->id }}"
+                                                @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}</option>
+                                    @endforeach
+                                </select>
+
                             </div><!--col-lg-10-->
                         </div><!--form control-->
 
@@ -58,8 +81,43 @@
                             {{ Form::label('title', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
-                                {{ Form::text('title', null, [ 'class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                {{ Form::text('title', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+
+                        <div class="form-group">
+                            {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                <div class="dropzone" id="dz_photo"></div>
+                                @if($finishTissue->image)
+                                    <div class="photo active">
+                                        {{ Form::hidden('photo', $finishTissue->image, ['id' => 'photo']) }}
+                                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                        <img id="add_photo" src="/upload/images/{{ $finishTissue->image  }}" alt="">
+                                    </div>
+                                @else
+                                    <div class="photo">
+                                        {{ Form::hidden('photo', null, ['id' => 'photo']) }}
+                                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                    </div>
+                                @endif
+                            </div>
                         </div><!--form control-->
                     </div><!--form control-->
                 </div>
@@ -86,73 +144,6 @@
                     </div><!--form control-->
                 </div>
             </div>
-
-            <div class="box-body">
-                <div class="row">
-
-                    <div class="panel-group" id="accordion">
-                        @foreach($finishTissue->children as $key => $child)
-                            @php ($i = $key+1)
-                            <div class="col-lg-4">
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                               href="#collapse{{$key}}"
-                                               aria-expanded="true" aria-controls="collapse{{$key}}">
-                                                {{$i}}. {{$child->title}}
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse{{$key}}" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            {{ Form::hidden('children['.$i.'][id]', $child->id) }}
-
-                                            <div class="form-group">
-                                                {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
-
-                                                <div class="col-lg-10">
-                                                    {{ Form::text('children['.$i.'][title]', $child->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
-                                                </div><!--col-lg-10-->
-                                            </div><!--form control-->
-
-                                            <div class="form-group">
-                                                {{ Form::label('children['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                                                <div class="col-lg-10">
-                                                    <div class="dropzone" id="dropzone-{{ $key }}"></div>
-                                                    @if($child->image)
-                                                        <div class="photo active">
-                                                            {{ Form::hidden('children['.$i.'][photo]', $child->image) }}
-                                                            <div id="dlt_photo{{$key}}"
-                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                            <img class="add_photo" id="add_photo{{$key}}"
-                                                                 src="/upload/images/{{ $child->image }}"
-                                                                 alt="">
-                                                        </div>
-                                                    @else
-                                                        <div class="photo">
-                                                            {{ Form::hidden('children['.$i.'][photo]', null) }}
-
-                                                            <div id="dlt_photo{{$key}}"
-                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                        </div>
-                                                    @endif
-                                                </div><!--col-lg-10-->
-                                            </div><!--form control-->
-                                            <a href="{{route('admin.finish-tissue.destroy.child', $child->id)}}"
-                                               class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
-                <a href="{{route('admin.finish-tissue.store.child', $finishTissue)}}"
-                   class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
-            </div>
         </div>
     </div>
 
@@ -178,6 +169,8 @@
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
     <script>
+
+
         var cropper;
         var modalTemplate = '' +
             '<div class="modal fade" tabindex="-1" role="dialog">' +
@@ -194,7 +187,6 @@
             '<input type="text" class="form-control" id="dataHeight" placeholder="height">' +
             '<span class="input-group-addon">px</span>' +
             '</div>' +
-
             '</div>' +
             '<div class="modal-body">' +
             '<div class="image-container"></div>' +
@@ -219,15 +211,11 @@
         }
 
         var myDropzone = [];
+        var inp;
 
-        $('.panel-default').each(function (key, el) {
-            var inp = $('input#children\\[' + (key + 1) + '\\]\\[photo\\]');
-            if (document.getElementById('add_photo' + key)) {
-                var pathname = document.getElementById('add_photo' + key).getAttribute('src');
-                var leafname = pathname.split('\\').pop().split('/').pop();
-                inp.val(leafname);
-            }
-            myDropzone[key] = new Dropzone($("#dropzone-"+key)[0], {
+        $('.dropzone').each(function (key, el) {
+            inp = $('input#zones\\[' + key + '\\]\\[photo\\]');
+            myDropzone[key] = new Dropzone($(".dropzone")[key], {
                     autoProcessQueue: false,
                     dictDefaultMessage: "Drop files here",
                     url: "{{route('admin.file.upload.finish-tissue')}}",
@@ -235,7 +223,6 @@
                     headers: {
                         'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
                     },
-                    hIndex: key,
                     success: function (file, res) {
                         this.removeFile(file);
 
@@ -251,11 +238,12 @@
 
                         } else {
                             if ($('.photo').eq(key).hasClass('active')) {
-                                $('.photo').eq(key).children('img').replaceWith('<img src="/' + res['success']['path'] + '">');
+                                $('.photo >img').eq(key).replaceWith('<img src="/' + res['success']['path'] + '">');
                             } else {
                                 $('.photo').eq(key).append('<img src="/' + res['success']['path'] + '">');
                                 $('.photo').eq(key).addClass('active');
                             }
+                            inp = $('.photo').eq(key).find(":hidden");
 
                             inp.val(res['success']['imgName']);
 
@@ -287,13 +275,13 @@
             );
 
             myDropzone[key].on('thumbnail', function (file) {
-                var selfAccId = $(this['clickableElements']).closest('.col-lg-4').index();
-                console.log('-', this);
+                var selfAccId = key;
                 if (file.cropped) {
                     return;
                 }
                 var cachedFilename = file.name;
                 myDropzone[selfAccId].removeFile(file);
+
 
                 var $cropperModal = $(modalTemplate);
                 var $uploadCrop = $cropperModal.find('.crop-upload');
@@ -305,6 +293,7 @@
                     cropper = new Cropper($img[0], {
                         preview: '.image-preview',
                         autoCropArea: 1,
+                        aspectRatio: 1,
                         movable: false,
                         cropBoxResizable: true,
                         minContainerHeight: 320,
@@ -319,7 +308,6 @@
                 reader.readAsDataURL(file);
                 $cropperModal.modal('show');
                 $uploadCrop.on('click', function () {
-                    console.log(selfAccId);
                     var blob = cropper.getCroppedCanvas().toDataURL();
                     var newFile = dataURItoBlob(blob);
                     newFile.cropped = true;
@@ -329,14 +317,13 @@
                     $cropperModal.modal('hide');
                 });
             });
-            $('.dlt_photo').each(function () {
+            $('.dlt_photo').each(function (index) {
                 $(this).on('click', function () {
                     $(this).parent().children('img').remove();
                     $(this).parent().removeClass('active');
-                    $(this).parent().find( ":hidden" ).val('');
+                    $(this).parent().find(":hidden").val('');
                 });
             });
-
         });
         Dropzone.autoDiscover = false;
     </script>

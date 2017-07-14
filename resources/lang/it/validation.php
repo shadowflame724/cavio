@@ -233,10 +233,13 @@ return [
                 ],
                 'finishtissue' => [
                     'title' => 'Titolo*',
-                    'type' => 'Tipo',
                     'type_finish' => 'Fazzoletto di carta',
                     'type_tissue' => 'Tissue',
                     'image' => 'Immagine',
+                    'parent' => 'Parent',
+                    'comment' => 'Comment',
+                    'short' => 'Short name',
+
                 ],
                 'popup' => [
                     'title' => 'Titolo*',

@@ -65,7 +65,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-1.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-1.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data>
                       <div class="product-code">#pr117</div>
@@ -80,7 +80,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-2.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-2.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data>
                       <div class="product-code">#pr117</div>
@@ -93,7 +93,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-3.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data>
                       <div class="product-code">#pr117</div>
@@ -106,7 +106,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-3.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data>
                       <div class="product-code">#pr117</div>
@@ -119,7 +119,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-3.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data>
                       <div class="product-code">#pr117</div>
@@ -132,7 +132,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-3.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data>
                       <div class="product-code">#pr117</div>
@@ -145,7 +145,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-3.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data>
                       <div class="product-code">#pr117</div>
@@ -158,7 +158,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-3.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data">
                       <div class="product-code">#pr117</div>
@@ -171,7 +171,7 @@
                   <a class=new-products-right-inner-item href=#>
                     <div class="product-img-table">
                       <div class="wrap-new-product-img bg-white-marmur"
-                           style="background-image: url(../images/un_banner-1-3.jpg)"></div>
+                           style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
                     </div>
                     <div class=wrap-new-product-data">
                       <div class="product-code">#pr117</div>
@@ -213,7 +213,7 @@
                 <div class="wrap-img-bg small">
                   <div class="img-back wave-dark">
                     <svg width=1395.63 height=1237.68>
-                      <use xlink:href=wave.svg#wave></use>
+                      <use xlink:href="../wave.svg#wave"></use>
                     </svg>
                   </div>
                   <img src=/upload/images/{{ $collectionZone->image }} alt="">

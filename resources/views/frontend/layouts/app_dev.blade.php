@@ -21,6 +21,7 @@
         <meta name="theme-color" content="#2F3BA2">
         {{ Html::style('css/frontend/main.css') }}
         {{ Html::style('css/frontend/smooth-scrollbar.css') }}
+        {{ Html::style('css/frontend/swiper.min.css') }}
         <script async="" src="//www.google-analytics.com/analytics.js"></script>
         {{ Html::script('js/frontend/url.js') }}
         @include('frontend.includes.physics_script')

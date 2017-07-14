@@ -75,6 +75,7 @@ return [
             'finishtissue' => [
                 'create_error' => 'There was a problem creating this tissues. Please try again.',
                 'delete_error' => 'There was a problem deleting this tissues. Please try again.',
+                'delete_with_child_error' => 'This finish/tissue have children. Please delete them first.',
                 'update_error' => 'There was a problem updating this tissues. Please try again.',
             ],
             'popup' => [

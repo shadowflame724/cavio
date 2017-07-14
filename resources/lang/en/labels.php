@@ -166,7 +166,7 @@ return [
                 'table' => [
                     'id' => 'Id',
                     'title' => 'Title',
-                    'type' => 'Type'
+                    'short' => 'Short'
                 ],
             ],
             'popup' => [

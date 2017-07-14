@@ -26,6 +26,8 @@ class CreateBlocksTable extends Migration
             $table->text('body_ru')->nullable();
             $table->text('body_it')->nullable();
             $table->string('image')->nullable();
+            $table->smallInteger('title_limit')->nullable();
+            $table->smallInteger('body_limit')->nullable();
             $table->timestamps();
         });
     }
