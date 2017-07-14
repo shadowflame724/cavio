@@ -60,22 +60,23 @@
                             </div><!--col-lg-10-->
                         </div><!--form control-->
 
-                        <div class="form-group">
-                            {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
-                            <div class="col-lg-10">
-                                <select class="form-control"
-                                        name="parent">
-                                    @if($finishTissue->parent_id == null)
-                                        <option value="null" selected>Root</option>
-                                    @endif
-                                    @foreach($parents as $parent)
-                                        <option value="{{ $parent->id }}"
-                                                @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}</option>
-                                    @endforeach
-                                </select>
-
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
+                        @if($finishTissue->parent_id != null)
+                            <div class="form-group">
+                                {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
+                                <div class="col-lg-10">
+                                    <select class="form-control"
+                                            name="parent">
+                                        @if($finishTissue->parent_id == null)
+                                            <option value="null" selected>Root</option>
+                                        @endif
+                                        @foreach($parents as $parent)
+                                            <option value="{{ $parent->id }}"
+                                                    @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div><!--col-lg-10-->
+                            </div><!--form control-->
+                        @endif
 
                         <div class="form-group">
                             {{ Form::label('title', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
@@ -86,39 +87,41 @@
                         </div><!--form control-->
 
                         <div class="form-group">
-                            {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
-
-                            <div class="col-lg-10">
-                                {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
-
-                        <div class="form-group">
                             {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
                                 {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
+                        @if($finishTissue->parent_id != null)
 
-                        <div class="form-group">
-                            {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                            <div class="col-lg-10">
-                                <div class="dropzone" id="dz_photo"></div>
-                                @if($finishTissue->image)
-                                    <div class="photo active">
-                                        {{ Form::hidden('photo', $finishTissue->image, ['id' => 'photo']) }}
-                                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                        <img id="add_photo" src="/upload/images/{{ $finishTissue->image  }}" alt="">
-                                    </div>
-                                @else
-                                    <div class="photo">
-                                        {{ Form::hidden('photo', null, ['id' => 'photo']) }}
-                                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div><!--form control-->
+                            <div class="form-group">
+                                {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                                <div class="col-lg-10">
+                                    {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                </div><!--col-lg-10-->
+                            </div><!--form control-->
+
+                            <div class="form-group">
+                                {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                                <div class="col-lg-10">
+                                    <div class="dropzone" id="dz_photo"></div>
+                                    @if($finishTissue->image)
+                                        <div class="photo active">
+                                            {{ Form::hidden('photo', $finishTissue->image, ['id' => 'photo']) }}
+                                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                            <img id="add_photo" src="/upload/images/{{ $finishTissue->image  }}" alt="">
+                                        </div>
+                                    @else
+                                        <div class="photo">
+                                            {{ Form::hidden('photo', null, ['id' => 'photo']) }}
+                                            <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div><!--form control-->
+                        @endif
                     </div><!--form control-->
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="ru">
@@ -169,8 +172,6 @@
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
     <script>
-
-
         var cropper;
         var modalTemplate = '' +
             '<div class="modal fade" tabindex="-1" role="dialog">' +

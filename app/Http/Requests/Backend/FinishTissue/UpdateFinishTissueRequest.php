@@ -31,10 +31,6 @@ class UpdateFinishTissueRequest extends Request
             'title_ru' => "required|max:35",
             'title_it' => "required|max:35",
             'comment' => "required|max:200",
-            'short' => "required|max:10",
-            'type' => "required",
-            'parent' => "required",
-            'photo' => "required",
         ];
     }
 }
