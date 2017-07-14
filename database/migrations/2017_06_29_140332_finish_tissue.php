@@ -19,6 +19,8 @@ class FinishTissue extends Migration
             $table->string('title', 35)->nullable();
             $table->string('title_ru', 35)->nullable();
             $table->string('title_it', 35)->nullable();
+            $table->string('short', 10)->nullable();
+            $table->text('comment')->nullable();
 
             $table->string('type', 35)->nullable();
             $table->string('image')->nullable();

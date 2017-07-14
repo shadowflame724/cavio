@@ -23,7 +23,7 @@ class FinishTissueTableSeeder extends Seeder
         $this->disableForeignKeys();
         $this->truncate('finish_tissues');
 
-        $zones = [
+        $finishes = [
             [
                 'title' => 'Tessuti 2014',
                 'type' => 'finish',
@@ -98,18 +98,19 @@ class FinishTissueTableSeeder extends Seeder
             ]
         ];
 
-        DB::table('finish_tissues')->insert($zones);
+        DB::table('finish_tissues')->insert($finishes);
 
         /*
          * Child
          */
 
 
-        for ($i = 1; $i < 10; $i++) {
-            $zones = [
+        for ($i = 1; $i < 7; $i++) {
+            $finishes = [
                 [
                     'parent_id' => $i,
                     'title' => 'TS437A',
+                    'type' => 'finish',
                     'image' => 'fit_tis_1.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
@@ -117,6 +118,8 @@ class FinishTissueTableSeeder extends Seeder
                 [
                     'parent_id' => $i,
                     'title' => 'TS437A',
+                    'type' => 'finish',
+
                     'image' => 'fit_tis_1.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
@@ -124,6 +127,8 @@ class FinishTissueTableSeeder extends Seeder
                 [
                     'parent_id' => $i,
                     'title' => 'TS437A',
+                    'type' => 'finish',
+
                     'image' => 'fit_tis_1.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
@@ -131,6 +136,8 @@ class FinishTissueTableSeeder extends Seeder
                 [
                     'parent_id' => $i,
                     'title' => 'TS437A',
+                    'type' => 'finish',
+
                     'image' => 'fit_tis_1.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
@@ -138,12 +145,14 @@ class FinishTissueTableSeeder extends Seeder
                 [
                     'parent_id' => $i,
                     'title' => 'TS437A',
+                    'type' => 'finish',
+
                     'image' => 'fit_tis_1.jpg',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ]
             ];
-            DB::table('finish_tissues')->insert($zones);
+            DB::table('finish_tissues')->insert($finishes);
         }
 
         $this->enableForeignKeys();

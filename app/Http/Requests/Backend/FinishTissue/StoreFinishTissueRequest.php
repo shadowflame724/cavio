@@ -31,6 +31,11 @@ class StoreFinishTissueRequest extends Request
             'title' => "required|max:35",
             'title_ru' => "required|max:35",
             'title_it' => "required|max:35",
+
+            'comment' => "required|max:200",
+            'short' => "required|max:10",
+            'type' => "required",
+            'photo' => "required",
         ];
 
     }

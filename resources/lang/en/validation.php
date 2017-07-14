@@ -236,9 +236,12 @@ return [
                 ],
                 'finishtissue' => [
                     'title' => 'Title*',
-                    'type' => 'Type',
                     'type_finish' => 'Finish',
                     'type_tissue' => 'Tissue',
+                    'parent' => 'Parent',
+                    'comment' => 'Comment',
+                    'short' => 'Short name',
+
                     'image' => 'Image',
                 ],
                 'popup' => [

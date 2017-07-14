@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FinishTissue extends Model
 {
-    protected $fillable = ['parent_id', 'title', 'title_ru', 'title_it', 'type', 'image'];
+    protected $fillable = ['parent_id', 'title', 'title_ru', 'title_it', 'type', 'image', 'comment', 'short'];
 
     public function parent()
     {

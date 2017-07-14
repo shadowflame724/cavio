@@ -67,6 +67,9 @@ class FinishTissueRepository extends BaseRepository
             $finishTissue->title = $input['title'];
             $finishTissue->title_ru = $input['title_ru'];
             $finishTissue->title_it = $input['title_it'];
+            $finishTissue->comment = $input['comment'];
+            $finishTissue->short = $input['short'];
+            $finishTissue->image = $input['photo'];
 
             if ($finishTissue->save()) {
                 event(new FinishTissueCreated($finishTissue));
@@ -92,7 +95,9 @@ class FinishTissueRepository extends BaseRepository
         $finishTissue->title = $input['title'];
         $finishTissue->title_ru = $input['title_ru'];
         $finishTissue->title_it = $input['title_it'];
-
+        $finishTissue->comment = $input['comment'];
+        $finishTissue->short = $input['short'];
+        $finishTissue->image = $input['photo'];
 
         DB::transaction(function () use ($finishTissue, $input) {
             if ($finishTissue->save()) {
