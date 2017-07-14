@@ -135,7 +135,7 @@ return [
                     'created_at' => 'Created at'
                 ],
             ],
-            'good' => [
+            'product' => [
                 'create' => 'Create Goods',
                 'edit' => 'Edit Goods',
                 'management' => 'Goods Management',

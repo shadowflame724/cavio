@@ -1,33 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Good;
+namespace App\Http\Controllers\Backend\Product;
 
-use App\Http\Requests\Backend\Good\ManageProductRequest;
-use App\Http\Requests\Backend\Good\UpdateGoodRequest;
-use App\Http\Requests\Backend\Good\StoreGoodRequest;
+use App\Http\Requests\Backend\Product\ManageProductRequest;
+use App\Http\Requests\Backend\Product\UpdateProductRequest;
+use App\Http\Requests\Backend\Product\StoreProductRequest;
 use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\CollectionZone\CollectionZone;
 use App\Models\FinishTissue\FinishTissue;
-use App\Models\Good\Good;
+use App\Models\Product\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Zone\Zone;
-use App\Repositories\Backend\Good\GoodRepository;
+use App\Repositories\Backend\Product\ProductRepository;
 
-class GoodController extends Controller
+class ProductController extends Controller
 {
 
     /**
-     * @var GoodRepository
+     * @var ProductRepository
      */
-    protected $good;
+    protected $product;
 
     /**
-     * @param GoodRepository $good
+     * @param ProductRepository $product
      */
-    public function __construct(GoodRepository $good)
+    public function __construct(ProductRepository $product)
     {
-        $this->good = $good;
+        $this->product = $product;
     }
 
     /**
@@ -37,7 +37,7 @@ class GoodController extends Controller
      */
     public function index(ManageProductRequest $request)
     {
-        return view('backend.goods.index');
+        return view('backend.products.index');
     }
 
     /**
@@ -51,7 +51,7 @@ class GoodController extends Controller
         $collectionZones = CollectionZone::pluck('title', 'id');
         $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
-        return view('backend.goods.create', [
+        return view('backend.products.create', [
             'categories' => $categories,
             'collectionZones' => $collectionZones,
             'finishTissues' => $finishTissues,
@@ -59,34 +59,36 @@ class GoodController extends Controller
     }
 
     /**
-     * @param StoreGoodRequest $request
+     * @param StoreProductRequest $request
      *
      * @return mixed
      */
-    public function store(StoreGoodRequest $request)
+    public function store(StoreProductRequest $request)
     {
-        $this->good->create($request->all());
+        $this->product->create($request->all());
         foreach ($request->images as $image) {
             $this->moveImg($image);
         }
 
-        return redirect()->route('admin.good.index')->withFlashSuccess(trans('alerts.backend.goods.created'));
+        return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.products.created'));
     }
 
     /**
-     * @param Good $good
+     * @param Product $product
      * @param ManageProductRequest $request
      *
      * @return mixed
      */
-    public function edit(Good $good, ManageProductRequest $request)
+    public function edit(Product $product, ManageProductRequest $request)
     {
+        $model = $this->product->getOne($product->id, ['childs','photos']);
+//        dd($model);
         $categories = Category::allLeaves()->get()->pluck('name', 'id');
         $collectionZones = CollectionZone::pluck('title', 'id');
         $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
-        return view('backend.goods.edit', [
-            'good' => $good,
+        return view('backend.products.edit', [
+            'product' => $model,
             'categories' => $categories,
             'collectionZones' => $collectionZones,
             'finishTissues' => $finishTissues,
@@ -94,33 +96,33 @@ class GoodController extends Controller
     }
 
     /**
-     * @param Good $good
-     * @param UpdateGoodRequest $request
+     * @param Product $product
+     * @param UpdateProductRequest $request
      *
      * @return mixed
      */
-    public function update(Good $good, UpdateGoodRequest $request)
+    public function update(Product $product, UpdateProductRequest $request)
     {
         dd($request->all());
-        $this->good->update($good, $request->all());
+        $this->product->update($product, $request->all());
 
         foreach ($request->images as $image) {
             $this->moveImg($image);
         }
 
-        return redirect()->route('admin.good.index')->withFlashSuccess(trans('alerts.backend.goods.updated'));
+        return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.products.updated'));
     }
 
     /**
-     * @param Good $good
+     * @param Product $product
      * @param ManageProductRequest $request
      *
      * @return mixed
      */
-    public function destroy(Good $good, ManageProductRequest $request)
+    public function destroy(Product $product, ManageProductRequest $request)
     {
-        $this->good->delete($good);
+        $this->product->delete($product);
 
-        return redirect()->route('admin.good.index')->withFlashSuccess(trans('alerts.backend.goods.deleted'));
+        return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.products.deleted'));
     }
 }

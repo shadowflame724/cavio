@@ -108,7 +108,7 @@ return [
                     'created_at' => 'Дата создания'
                 ],
             ],
-            'good' => [
+            'product' => [
                 'create' => 'Создать товар',
                 'edit' => 'Изменить товар',
                 'management' => 'Товары',

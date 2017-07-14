@@ -89,7 +89,7 @@
                         'admin/collection*',
                         'admin/zone*',
                         'admin/showroom*',
-                        'admin/good*',
+                        'admin/product*',
                     ]), 'menu-open') }}"
                     style="display: none; {{ active_class(Active::checkUriPattern([
                         'admin/category*',
@@ -97,7 +97,7 @@
                         'admin/collection*',
                         'admin/zone*',
                         'admin/showroom*',
-                        'admin/good*',
+                        'admin/product*',
                         ]), 'display: block;') }}">
 
 
@@ -136,10 +136,10 @@
                         </a>
                     </li>
 
-                    <li class="{{ active_class(Active::checkUriPattern('admin/good*')) }}">
-                        <a href="{{ route('admin.good.index') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/product*')) }}">
+                        <a href="{{ route('admin.product.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('labels.backend.access.good.management') }}</span>
+                            <span>{{ trans('labels.backend.access.product.management') }}</span>
                         </a>
                     </li>
                 </ul>

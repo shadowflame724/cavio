@@ -136,7 +136,7 @@ return [
                     'created_at' => 'Creato a'
                 ],
             ],
-            'good' => [
+            'product' => [
                 'create'     => 'Crea merce',
                 'edit'       => 'Modifica merce',
                 'management' => 'Gestione merce',
