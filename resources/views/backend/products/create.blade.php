@@ -5,6 +5,7 @@
     {{ Html::style('css/backend/plugin/cropper/cropper.css') }}
     {{ Html::style('css/backend/plugin/dropzone/dropzone.css') }}
     {{ Html::style('css/backend/plugin/dropzone/basic.css') }}
+    {{ Html::style('css/backend/plugin/select2/select2.min.css') }}
     {{ Html::style('css/backend/redactor/redactor.css') }}
 @endsection
 @section('after-styles')
@@ -77,134 +78,10 @@
             <div class="box-tools pull-right">
                 @include('backend.products.product-header-buttons')
             </div><!--box-tools pull-right-->
-        </div><!-- /.box-header -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab"
-                                                      data-toggle="tab">EN</a>
-            </li>
-            <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
-            <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="en">
-                <div class="box-body">
-                    <div class="form-group">
-                        {{ Form::label('code', trans('validation.attributes.backend.access.product.code'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('code', null, ['class' => 'form-control', 'maxlength' => '100', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('category_id', trans('validation.attributes.backend.access.product.category_id'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('collectionZone_id', trans('validation.attributes.backend.access.product.collection_id'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {!! Form::select('collectionZone_id[]', $collectionZones, null, ['class' => 'form-control', 'multiple' => true]) !!}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('finishTissues', trans('validation.attributes.backend.access.product.tissue'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::select('finishTissues_id[]', $finishTissues, null, ['class' => 'form-control', 'required' => 'required', 'multiple' => true]) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('code', trans('validation.attributes.backend.access.product.code'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('code', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('name', trans('validation.attributes.backend.access.product.name'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('price', trans('validation.attributes.backend.access.product.price'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('price', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description', trans('validation.attributes.backend.access.product.description'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('description', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10" id="photos">
-                            <div class="dropzone" id="add_photo"></div>
-
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                </div>
-
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="ru">
-                <div class="box-body">
-
-                    <div class="form-group">
-                        {{ Form::label('name_ru', trans('validation.attributes.backend.access.product.name'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.product.description'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('description_ru', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade" id="it">
-                <div class="box-body">
-
-                    <div class="form-group">
-                        {{ Form::label('name_it', trans('validation.attributes.backend.access.product.name'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('name_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description_it', trans('validation.attributes.backend.access.product.description'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('description_it', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-                </div>
-            </div>
         </div>
-        <button class="btn btn-default btn-block addPanel" type="button">Add dimensions</button>
-        <div class="panel-group panels" id="accordion" role="tablist" aria-multiselectable="false"></div>
+        <div class="box-body">
+            @include('backend.products._form')
+        </div>
     </div>
 
     <div class="box box-success">
@@ -229,7 +106,76 @@
 @section('after-scripts')
     {{ Html::script('js/backend/redactor/redactor.js') }}
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
+    {{ Html::script('js/backend/plugin/select2/select2.full.min.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var importData = {!!  json_encode($importData) !!};
+        console.info(importData);
+        $(".select2").select2();
+        $(".new-child select.select2,.new-photo select.select2").select2("destroy");
+        $('select.parent_code').on('change', function () {
+          var _th = $(this);
+          var val = _th.val();
+          var childTemp = $('.new-child').html();
+          var photoTemp = $('.new-photo').html();
+          var isImportConfirm = false;
+          var prntItem = importData[val] || false;
+          var replIputs = function ($prnt,data) {
+            $prnt.find('[data-type="replace-input"]').each(function (i, el) {
+              var $inp = $(el);
+              var name = $inp.attr('data-name');
+              var dataVal = (typeof data[name] === 'object')? JSON.stringify(data[name]) : data[name];
+              var inpVal = dataVal || '';
+              $inp.val(inpVal);
+              $inp.trigger('change');
+            });
+          };
+          if(confirm('Сделать импорт из PARENT_CODE: '+val)){
+            isImportConfirm = true;
+            $('.oneChild,.onePhoto').remove();
+          }
+          if(prntItem && isImportConfirm) {
+            var $prntItem = $('[data-type="parent_item"]');
+            $prntItem.find('[data-type="replace-input"]').each(function (i, el) {
+              var $inp = $(el);
+              var name = $inp.attr('data-name');
+              var inpVal = prntItem[name] || '';
+              $inp.val(inpVal);
+            });
+            $.each(prntItem.childs, function (id,child) {
+              var $chOne = $('<div class="oneChild" />').html(childTemp);
+              var onChildId = $chOne.find('.panel-collapse').attr('id') + id;
+              $chOne.find('.panel-collapse').addClass('in').attr('id', onChildId);
+              $chOne.find('[data-toggle="collapse"]').removeClass('collapsed').attr('href', '#' + onChildId);
+              //
+              replIputs($chOne, child);
+              //
+              $('.new-child').after($chOne);
+              console.info('child: ',child);
+              var count_lines = parseInt(child.count_lines);
+              $.each(child['photos'], function (phid,photo) {
+                var $phOne = $('<div class="onePhoto" />').html(photoTemp);
+                var onPhotoId = $phOne.find('.panel-collapse').attr('id') + id + '_' + phid;
+                $phOne.find('.panel-collapse').addClass('in').attr('id', onPhotoId);
+                $phOne.find('[data-toggle="collapse"]').removeClass('collapsed').attr('href', '#' + onPhotoId);
+                //
+                replIputs($phOne, photo);
+                //
+                $('.new-photo').after($phOne);
+//                console.info('photo: ',photo);
+              });
+            });
+            setTimeout(function () {
+                $('.onePhoto .select2').select2();
+            }, 100);
+
+          }
+
+        });
+
+      });
+    </script>
     <script>
         $('.addPanel').click(function () {
             var x = $('.panels .panel').length + 1;
@@ -392,68 +338,66 @@
 
         var count = 0;
 
-        Dropzone.autoDiscover = false;
-        var myDropzone = new Dropzone(".dropzone", {
-                autoProcessQueue: false,
-                url: "{{route('admin.file.upload.finish-tissue')}}",
-                maxFiles: 1,
-                headers: {
-                    'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
-                },
-                success: function (file, res) {
-                    var _ref = file.previewElement, error;
-                    this.removeFile(file);
+        if($('.dropzone').length){
+            Dropzone.autoDiscover = false;
+            var myDropzone = new Dropzone(".dropzone", {
+                    autoProcessQueue: false,
+                    url: "{{route('admin.file.upload.finish-tissue')}}",
+                    maxFiles: 1,
+                    headers: {
+                        'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                    },
+                    success: function (file, res) {
+                        var _ref = file.previewElement, error;
+                        this.removeFile(file);
 
-                    if (res['error']) {
+                        if (res['error']) {
+                            swal({
+                                title: res['error']['title'],
+                                text: res['error']['text'],
+                                type: "warning",
+                                confirmButtonColor: "#DD6B55 ",
+                                confirmButtonText: 'Ok',
+                                closeOnConfirm: true
+                            });
+
+                        } else {
+                            $('#photos').append('<div class="photo">' +
+                                '<div class="btn glyphicon glyphicon-remove dlt_photo">' +
+                                '</div><img id="images" class="dz_photo" src="/' + res['success']['path'] + '"></div>');
+                            $('.photo').addClass('active');
+
+                            $('form').append('<input id="images'+ count +'" name=\"images[]\" value=\"' + res['success']['imgName'] + '\" type=\"hidden\"/>');
+                            count++;
+                            swal({
+                                title: res['success']['title'],
+                                text: res['success']['text'],
+                                type: "success",
+                                confirmButtonColor: "#DD6B55 ",
+                                confirmButtonText: 'Ок',
+                                closeOnConfirm: true
+                            });
+                        }
+                    },
+                    error: function (file, errorMessage, xhr) {
+                        var self = this,
+                            default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
                         swal({
-                            title: res['error']['title'],
-                            text: res['error']['text'],
+                            title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
+                            text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),
                             type: "warning",
-                            confirmButtonColor: "#DD6B55 ",
-                            confirmButtonText: 'Ok',
+                            showCancelButton: false,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: 'ОК',
                             closeOnConfirm: true
                         });
-
-                    } else {
-                        $('#photos').append('<div class="photo">' +
-                            '<div class="btn glyphicon glyphicon-remove dlt_photo">' +
-                            '</div><img id="images" class="dz_photo" src="/' + res['success']['path'] + '"></div>');
-                        $('.photo').addClass('active');
-
-                        $('form').append('<input id="images'+ count +'" name=\"images[]\" value=\"' + res['success']['imgName'] + '\" type=\"hidden\"/>');
-                        count++;
-                        swal({
-                            title: res['success']['title'],
-                            text: res['success']['text'],
-                            type: "success",
-                            confirmButtonColor: "#DD6B55 ",
-                            confirmButtonText: 'Ок',
-                            closeOnConfirm: true
-                        });
+                        self.removeFile(file);
                     }
-                },
-                error: function (file, errorMessage, xhr) {
-                    var self = this,
-                        default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
-                    swal({
-                        title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
-                        text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),
-                        type: "warning",
-                        showCancelButton: false,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: 'ОК',
-                        closeOnConfirm: true
-                    });
-                    self.removeFile(file);
                 }
-            }
-        );
-
-
-
-        myDropzone.on('thumbnail', function (file) {
+            );
+            myDropzone.on('thumbnail', function (file) {
             if (file.cropped) {
-                return;
+              return;
             }
             var cachedFilename = file.name;
             myDropzone.removeFile(file);
@@ -463,45 +407,49 @@
             var $img = $('<img />');
             var reader = new FileReader();
             reader.onloadend = function () {
-                $cropperModal.find('.image-container').html($img);
-                $img.attr('src', reader.result);
-                mimeType = dataURLtoMimeType(reader.result);
-                cropper = new Cropper($img[0], {
-                    preview: '.image-preview',
-                    autoCropArea: 1,
-                    movable: false,
-                    cropBoxResizable: true,
-                    minContainerHeight: 320,
-                    minContainerWidth: 568,
-                    crop: function (e) {
-                        $('input#dataWidth').val(e.detail.width);
-                        $('input#dataHeight').val(e.detail.height);
-                    }
-                });
+              $cropperModal.find('.image-container').html($img);
+              $img.attr('src', reader.result);
+              mimeType = dataURLtoMimeType(reader.result);
+              cropper = new Cropper($img[0], {
+                preview: '.image-preview',
+                autoCropArea: 1,
+                movable: false,
+                cropBoxResizable: true,
+                minContainerHeight: 320,
+                minContainerWidth: 568,
+                crop: function (e) {
+                  $('input#dataWidth').val(e.detail.width);
+                  $('input#dataHeight').val(e.detail.height);
+                }
+              });
             };
 
             reader.readAsDataURL(file);
             $cropperModal.modal('show');
             $uploadCrop.on('click', function () {
-                var blob = cropper.getCroppedCanvas().toDataURL(mimeType);
-                var newFile = dataURItoBlob(blob);
-                newFile.cropped = true;
-                newFile.name = cachedFilename;
-                myDropzone.addFile(newFile);
-                myDropzone.processQueue();
-                $cropperModal.modal('hide');
+              var blob = cropper.getCroppedCanvas().toDataURL(mimeType);
+              var newFile = dataURItoBlob(blob);
+              newFile.cropped = true;
+              newFile.name = cachedFilename;
+              myDropzone.addFile(newFile);
+              myDropzone.processQueue();
+              $cropperModal.modal('hide');
             });
 
             $('.dlt_photo').each(function (index) {
-                $(this).on("click", function () {
-                    console.log(index);
+              $(this).on("click", function () {
+                console.log(index);
 
-                    $(this).parent().remove();
-                    document.getElementById('images' + index).remove();
-                    count--;
-                });
+                $(this).parent().remove();
+                document.getElementById('images' + index).remove();
+                count--;
+              });
             });
-        });
+          });
+        }
+
+
+
 
     </script>
 @endsection

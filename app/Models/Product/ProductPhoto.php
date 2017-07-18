@@ -16,6 +16,7 @@ class ProductPhoto extends Model {
     protected $fillable = [
         'product_id',
         'photos',
+        'prices_data',
         'finish_ids',
         'tissue_ids',
         'collection_ids',
