@@ -17,10 +17,17 @@ class PageUpdated
     public $page;
 
     /**
-     * @param $page
+     * @var
      */
-    public function __construct($page)
+    public $comment;
+
+    /**
+     * @param $page
+     * @param $comment
+     */
+    public function __construct($page, $comment)
     {
         $this->page = $page;
+        $this->comment = $comment;
     }
 }

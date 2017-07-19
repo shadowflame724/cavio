@@ -92,6 +92,14 @@
                     </div><!--form control-->
 
                     <div class="form-group">
+                        {{ Form::label('admin_comment', trans('validation.attributes.backend.admin_comment.comment'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('admin_comment', null, ['class' => 'form-control', 'required' => 'required']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
                         {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
                             {{ Form::hidden('photo', null) }}

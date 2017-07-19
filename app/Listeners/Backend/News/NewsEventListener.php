@@ -19,7 +19,8 @@ class NewsEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->news->id)
-            ->withText('trans("history.backend.news.created") <strong>'.$event->news->title.'</strong>')
+            ->withText('trans("history.backend.news.created") <strong>'.$event->news->title.'</strong>.<br>
+<small>'.$event->comment.'</small>')
             ->withIcon('plus')
             ->withClass('bg-green')
             ->log();
@@ -32,7 +33,8 @@ class NewsEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->news->id)
-            ->withText('trans("history.backend.news.updated") <strong>'.$event->news->title.'</strong>')
+            ->withText('trans("history.backend.news.updated") <strong>'.$event->news->title.'</strong>.<br>
+<small>'.$event->comment.'</small>')
             ->withIcon('save')
             ->withClass('bg-aqua')
             ->log();
