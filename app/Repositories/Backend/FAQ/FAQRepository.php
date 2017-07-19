@@ -70,7 +70,7 @@ class FAQRepository extends BaseRepository
 
 
             if ($faq->save()) {
-                event(new FAQCreated($faq));
+                event(new FAQCreated($faq, $input['admin_comment']));
 
                 return true;
             }
@@ -100,7 +100,7 @@ class FAQRepository extends BaseRepository
         DB::transaction(function () use ($faq, $input) {
             if ($faq->save()) {
 
-                event(new FAQUpdated($faq));
+                event(new FAQUpdated($faq, $input['admin_comment']));
 
                 return true;
             }

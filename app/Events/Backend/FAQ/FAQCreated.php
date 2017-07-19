@@ -17,10 +17,17 @@ class FAQCreated
     public $faq;
 
     /**
-     * @param $faq
+     * @var
      */
-    public function __construct($faq)
+    public $comment;
+
+    /**
+     * @param $faq
+     * @param $comment
+     */
+    public function __construct($faq, $comment)
     {
         $this->faq = $faq;
+        $this->comment = $comment;
     }
 }

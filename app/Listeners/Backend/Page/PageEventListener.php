@@ -19,7 +19,8 @@ class PageEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->page->id)
-            ->withText('trans("history.backend.page.created") <strong>'.$event->page->title.'</strong>')
+            ->withText('trans("history.backend.page.created") <strong>'.$event->page->title.'</strong>.<br>
+<small>'.$event->comment.'</small>')
             ->withIcon('plus')
             ->withClass('bg-green')
             ->log();
@@ -32,7 +33,8 @@ class PageEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->page->id)
-            ->withText('trans("history.backend.page.updated") <strong>'.$event->page->title.'</strong>')
+            ->withText('trans("history.backend.page.updated") <strong>'.$event->page->title.'</strong>.<br>
+<small>'.$event->comment.'</small>')
             ->withIcon('save')
             ->withClass('bg-aqua')
             ->log();

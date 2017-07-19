@@ -78,7 +78,7 @@ class NewsRepository extends BaseRepository
             $news->image = $input['photo'];
 
             if ($news->save()) {
-                event(new NewsCreated($news));
+                event(new NewsCreated($news, $input['admin_comment']));
 
                 return true;
             }
@@ -114,7 +114,7 @@ class NewsRepository extends BaseRepository
 
         DB::transaction(function () use ($news, $input) {
             if ($news->save()) {
-                event(new NewsUpdated($news));
+                event(new NewsUpdated($news, $input['admin_comment']));
 
                 return true;
             }

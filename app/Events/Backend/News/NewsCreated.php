@@ -17,10 +17,17 @@ class NewsCreated
     public $news;
 
     /**
-     * @param $news
+     * @var
      */
-    public function __construct($news)
+    public $comment;
+
+    /**
+     * @param $news
+     * @param $comment
+     */
+    public function __construct($news, $comment)
     {
         $this->news = $news;
+        $this->comment = $comment;
     }
 }

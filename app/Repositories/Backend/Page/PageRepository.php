@@ -80,7 +80,7 @@ class PageRepository extends BaseRepository
 
             if ($page->save()) {
 
-                event(new PageCreated($page));
+                event(new PageCreated($page, $input['admin_comment']));
 
                 return true;
             }
@@ -116,7 +116,7 @@ class PageRepository extends BaseRepository
 
         DB::transaction(function () use ($page, $input) {
             if ($page->save()) {
-                event(new PageUpdated($page));
+                event(new PageUpdated($page, $input['admin_comment']));
 
                 return true;
             }

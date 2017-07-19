@@ -19,7 +19,8 @@ class FAQEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->faq->id)
-            ->withText('trans("history.backend.faq.created") <strong>'.$event->faq->id.'</strong>')
+            ->withText('trans("history.backend.faq.created") <strong>'.$event->faq->id.'</strong>.<br>
+<small>'.$event->comment.'</small>')
             ->withIcon('plus')
             ->withClass('bg-green')
             ->log();
@@ -32,7 +33,8 @@ class FAQEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->faq->id)
-            ->withText('trans("history.backend.faq.updated") <strong>'.$event->faq->id.'</strong>')
+            ->withText('trans("history.backend.faq.updated") <strong>'.$event->faq->id.'</strong>.<br>
+<small>'.$event->comment.'</small>')
             ->withIcon('save')
             ->withClass('bg-aqua')
             ->log();

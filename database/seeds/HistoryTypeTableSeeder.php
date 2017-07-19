@@ -78,6 +78,11 @@ class HistoryTypeTableSeeder extends Seeder
                 'name'       => 'FinishTissue',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+            ],
+            [
+                'name'       => 'Popup',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]
         ];
 
