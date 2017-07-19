@@ -119,6 +119,9 @@ return [
     'attributes' => [
 
         'backend' => [
+            'admin_comment' => [
+                'comment' => 'Administrator comment*'
+            ],
             'access' => [
                 'permissions' => [
                     'associated_roles' => 'Associated Roles',

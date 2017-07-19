@@ -118,6 +118,9 @@ return [
 
         'backend' => [
             'access' => [
+                'admin_comment' => [
+                    'comment' => 'Commento dell\'amministratore*'
+                ],
                 'permissions' => [
                     'associated_roles' => 'Ruoli associati',
                     'dependencies'     => 'Dipendenze',
