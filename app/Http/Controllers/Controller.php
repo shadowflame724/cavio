@@ -15,6 +15,9 @@ class Controller extends BaseController
 
     public function moveImg($newName, $oldName = null)
     {
+        if (!file_exists(public_path('/upload/images'))) {
+            mkdir(public_path('/upload/images'), 0777, true);
+        }
         $tmpFile = public_path('upload/tmp/') . $newName;
         $file = public_path('upload/images/') . $newName;
         if ($newName != $oldName AND $oldName != null AND file_exists('upload/images/' . $oldName)) {

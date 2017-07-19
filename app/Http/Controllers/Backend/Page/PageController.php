@@ -91,19 +91,19 @@ class PageController extends Controller
         $messages = '';
         $flag = true;
 
-        foreach ($blocks as $key => $newblock) {
+        foreach ($blocks as $key => $newBlock) {
             $bodyCleaned = /*EMTypograph::fast_apply(*/
-                clean($newblock['body']);
+                clean($newBlock['body']);
             $bodyRuCleaned = /*EMTypograph::fast_apply(*/
-                clean($newblock['body_ru']);
+                clean($newBlock['body_ru']);
             $bodyItCleaned = /*EMTypograph::fast_apply(*/
-                clean($newblock['body_it']);
+                clean($newBlock['body_it']);
 
-            $oldBlock = Block::find($newblock['id']);
+            $oldBlock = Block::find($newBlock['id']);
 
             if ($oldBlock->title_limit != null) {
 
-                $validator = Validator::make($newblock, [
+                $validator = Validator::make($newBlock, [
                     'title' => 'required|max:' . $oldBlock->title_limit,
                     'title_ru' => 'required|max:' . $oldBlock->title_limit,
                     'title_it' => 'required|max:' . $oldBlock->title_limit,
@@ -119,7 +119,7 @@ class PageController extends Controller
 
             if ($oldBlock->body_limit != null) {
 
-                $validator = Validator::make($newblock, [
+                $validator = Validator::make($newBlock, [
                     'body' => 'required|max:' . $oldBlock->body_limit,
                     'body_ru' => 'required|max:' . $oldBlock->body_limit,
                     'body_it' => 'required|max:' . $oldBlock->body_limit,
@@ -134,23 +134,23 @@ class PageController extends Controller
             }
 
             $oldImage = $oldBlock->image;
-            $oldBlock->title = $newblock['title'];
-            $oldBlock->title_ru = $newblock['title_ru'];
-            $oldBlock->title_it = $newblock['title_it'];
+            $oldBlock->title = $newBlock['title'];
+            $oldBlock->title_ru = $newBlock['title_ru'];
+            $oldBlock->title_it = $newBlock['title_it'];
             $oldBlock->body = $bodyCleaned;
             $oldBlock->body_ru = $bodyRuCleaned;
             $oldBlock->body_it = $bodyItCleaned;
-            $oldBlock->image = $newblock['photo'];
+            $oldBlock->image = $newBlock['photo'];
 
             if ($flag == true) {
                 if ($oldBlock->save()) {
-                    $this->moveImg($newblock['photo'], $oldImage);
-                }
+                    $this->moveImg($newBlock['photo'], $oldImage);
+                   }
             }
         }
 
         if ($flag == false) {
-            return redirect()->route('admin.page.edit', ['page' => $page])->withErrors($messages);
+            return redirect()->route('admin.page.edit', $page)->withErrors($messages);
         }
 
 

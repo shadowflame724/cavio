@@ -46,7 +46,7 @@
                         {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('slug', null, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '35' ]) }}
+                            {{ Form::text('slug', $page->slug, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '35' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -54,7 +54,7 @@
                         {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title', null, ['id' => 'title','class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
+                            {{ Form::text('title', $page->title, ['id' => 'title','class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -62,14 +62,14 @@
                         {{ Form::label('description', trans('validation.attributes.backend.access.page.description'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('description', null, ['id' => 'description', 'class' => 'form-control', 'required' => 'required']) }}
+                            {{ Form::textarea('description', $page->description, ['id' => 'description', 'class' => 'form-control', 'required' => 'required']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
                     <div class="form-group">
                         {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
-                            {{ Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
+                            {{ Form::textarea('body', $page->body, ['id' => 'body', 'class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -152,7 +152,7 @@
                         {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
+                            {{ Form::text('title_ru', $page->title_ru, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -160,7 +160,7 @@
                     <div class="form-group">
                         {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
-                            {{ Form::textarea('body_ru', null, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
+                            {{ Form::textarea('body_ru', $page->body_ru, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -222,14 +222,14 @@
                         {{ Form::label('title_it', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
+                            {{ Form::text('title_it', $page->title_it, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
                     <div class="form-group">
                         {{ Form::label('body_it', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
-                            {{ Form::textarea('body_it', null, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
+                            {{ Form::textarea('body_it', $page->body_it, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
