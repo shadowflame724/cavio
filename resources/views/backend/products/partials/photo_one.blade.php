@@ -189,14 +189,23 @@
             </div>
 
             <hr class="hr" />
+            <button class="btn btn-info btn-xs" data-type="reload-price" type="button">
+                <i class="fa fa-refresh"></i> Reload prices
+            </button>
 
-            <div class="row">
-                @foreach($photo->prices as $price)
+            <div class="row" data-type="prices-row">
+                @forelse($photo->prices as $price)
                     @include('backend.products.partials.price_one',[
                         'photo_id' => $photo->id,
                         'price' => $price
                     ])
-                @endforeach
+                @empty
+                    <div class="new-price hidden">
+                        @include('backend.products.partials.price_one',[
+                            'price' => $price
+                        ])
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>

@@ -173,6 +173,12 @@
           }
 
         });
+        $('body').on('click','[data-type="reload-price"]',function () {
+          var $prnt = $(this).closest('.panel-body');
+          var pricesRow = $prnt.find('[data-type="prices-row"]');
+
+
+        });
 
       });
     </script>

@@ -239,7 +239,7 @@ class ProductController extends Controller
      *
      * @return mixed
      */
-    public function create(Product $product, ProductChild $child, ProductPhoto $photo, ManageProductRequest $request)
+    public function create(Product $product, ProductChild $child, ProductPhoto $photo, ProductPrice $price, ManageProductRequest $request)
     {
 //        $model = $product;
         $categories = Category::allLeaves()->get()->pluck('name', 'id');
@@ -302,6 +302,7 @@ class ProductController extends Controller
             'product' => $product,
             'child' => $child,
             'photo' => $photo,
+            'price' => $price,
             'importData' => $import,
             'parentCodes' => $parentCodes,
             'parentChildCodes' => $parentChildCodes,
