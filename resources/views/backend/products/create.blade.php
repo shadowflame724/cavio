@@ -110,73 +110,145 @@
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
     <script type="text/javascript">
       $(document).ready(function() {
-        var importData = {!!  json_encode($importData) !!};
+        var importData = {!! json_encode($importData) !!};
         console.info(importData);
         $(".select2").select2();
         $(".new-child select.select2,.new-photo select.select2").select2("destroy");
+
+        var replIputs = function ($prnt,data) {
+          $prnt.find('[data-type="replace-input"]').each(function (i, el) {
+            var $inp = $(el);
+            var name = $inp.attr('data-name');
+            var dataVal = (typeof data[name] === 'object')? JSON.stringify(data[name]) : data[name];
+            var inpVal = dataVal || '';
+            $inp.val(inpVal);
+            $inp.trigger('change');
+          });
+        };
+        var childTemp = $('.new-child').html();
+        var photoTemp = $('.new-photo').html();
+        $('.new-child, .new-photo').remove();
+
         $('select.parent_code').on('change', function () {
           var _th = $(this);
           var val = _th.val();
-          var childTemp = $('.new-child').html();
-          var photoTemp = $('.new-photo').html();
           var isImportConfirm = false;
           var prntItem = importData[val] || false;
-          var replIputs = function ($prnt,data) {
-            $prnt.find('[data-type="replace-input"]').each(function (i, el) {
-              var $inp = $(el);
-              var name = $inp.attr('data-name');
-              var dataVal = (typeof data[name] === 'object')? JSON.stringify(data[name]) : data[name];
-              var inpVal = dataVal || '';
-              $inp.val(inpVal);
-              $inp.trigger('change');
-            });
-          };
           if(confirm('Сделать импорт из PARENT_CODE: '+val)){
             isImportConfirm = true;
             $('.oneChild,.onePhoto').remove();
           }
           if(prntItem && isImportConfirm) {
             var $prntItem = $('[data-type="parent_item"]');
-            $prntItem.find('[data-type="replace-input"]').each(function (i, el) {
-              var $inp = $(el);
-              var name = $inp.attr('data-name');
-              var inpVal = prntItem[name] || '';
-              $inp.val(inpVal);
-            });
+            //
+            replIputs($prntItem, prntItem);
+            //
+
             $.each(prntItem.childs, function (id,child) {
-              var $chOne = $('<div class="oneChild" />').html(childTemp);
+              var childKeyTemp = childTemp.replace(/child\[KEY]/g, 'child[' + id + ']');
+              var $chOne = $('<div class="oneChild" />').html(childKeyTemp);
               var onChildId = $chOne.find('.panel-collapse').attr('id') + id;
               $chOne.find('.panel-collapse').addClass('in').attr('id', onChildId);
               $chOne.find('[data-toggle="collapse"]').removeClass('collapsed').attr('href', '#' + onChildId);
               //
               replIputs($chOne, child);
               //
-              $('.new-child').after($chOne);
-              console.info('child: ',child);
-              var count_lines = parseInt(child.count_lines);
+              $('.child-after').after($chOne);
+
+              var phKey = 0;
               $.each(child['photos'], function (phid,photo) {
-                var $phOne = $('<div class="onePhoto" />').html(photoTemp);
+                var photoKeyTemp = photoTemp.replace(/photo\[KEY]/g, 'photo[' + phKey + ']');
+                var $phOne = $('<div class="onePhoto" />').html(photoKeyTemp);
                 var onPhotoId = $phOne.find('.panel-collapse').attr('id') + id + '_' + phid;
                 $phOne.find('.panel-collapse').addClass('in').attr('id', onPhotoId);
                 $phOne.find('[data-toggle="collapse"]').removeClass('collapsed').attr('href', '#' + onPhotoId);
                 //
                 replIputs($phOne, photo);
                 //
-                $('.new-photo').after($phOne);
+
+                $('.photo-after').after($phOne);
+                phKey++;
 //                console.info('photo: ',photo);
               });
             });
             setTimeout(function () {
-                $('.onePhoto .select2').select2();
+                $('.onePhoto .select2').select2({
+                  tags: true
+                });
             }, 100);
 
           }
 
         });
-        $('body').on('click','[data-type="reload-price"]',function () {
+        $('body').on('click', '[data-type="reload-price"]', function () {
           var $prnt = $(this).closest('.panel-body');
           var pricesRow = $prnt.find('[data-type="prices-row"]');
+          var priceTemp = pricesRow.find('.new-price').html();
+          var dataFn = {!! json_encode($finishCodes) !!};
+          var dataTs = {!! json_encode($tissueCodes) !!};
 
+          var prvFn = false,
+            uniqFn = false,
+            prvTs = false,
+            uniqTs = false;
+          $prnt.find('[data-name="finish_ids"]').each(function (i,fn) {
+            var _ids = $(fn).val().splice(',');
+            $.each(_ids, function (i,_id) {
+                var val = dataFn[_id].short || false;
+                if(!prvFn) {
+                  prvFn = val;
+                  uniqFn = true;
+                }
+                if(prvFn !== val){
+                  uniqFn = false;
+                }
+            });
+          });
+          $prnt.find('[data-name="tissue_ids"]').each(function (i,ts) {
+            var _ids = $(ts).val().splice(',');
+            $.each(_ids, function (i,_id) {
+                var val = dataTs[_id].short || false;
+                if(!prvTs) {
+                  prvTs = val;
+                  uniqTs = true;
+                }
+                if(prvTs !== val){
+                  uniqTs = false;
+                }
+            });
+          });
+
+          $prnt.find('.onePrice').remove();
+          var prKey = 0;
+          $('.oneChild').each(function (i, ch) {
+            var $el = $(ch);
+            var code = $el.find('[data-name="code"]').val();
+            var priceKeyTemp = priceTemp.replace(/\[price]\[KEY]/g, '[price][' + prKey + ']');
+            var onePrice = $('<div class="onePrice" />').html(priceKeyTemp);
+            // CHILD_CODE
+            onePrice.find('[data-replace="child_code"]').html(code);
+            // цена
+            var isPrice = false;
+            if(uniqFn && uniqTs){ // если все оббивки и отделки имеют одинаковые типы
+              var dataPrices = JSON.parse($prnt.find('[data-name="prices"]').val());
+              var needPrice = dataPrices[prvTs][prvFn] || false;
+//              console.warn(needPrice,'<<',dataPrices,prvTs,prvFn);
+              if(needPrice) {
+                onePrice.find('[data-replace="def_price"]').val(needPrice);
+                onePrice.find('[data-replace="custom"]').prop('checked', false);
+                onePrice.find('[data-replace="price"]').attr('readonly', 'readonly').val('');
+                isPrice = true;
+              }
+            }
+            if(!isPrice){
+              onePrice.find('[data-replace="def_price"]').attr('readonly', 'readonly').val('');
+              onePrice.find('[data-replace="custom"]').prop('checked', true);
+              onePrice.find('[data-replace="price"]').removeAttr('readonly').val('');
+            }
+
+            pricesRow.append(onePrice);
+            prKey++;
+          });
 
         });
 

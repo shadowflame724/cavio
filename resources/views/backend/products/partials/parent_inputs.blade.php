@@ -31,7 +31,7 @@
                 'data-type' => 'replace-input',
                 'data-name' => 'name'.$lng['s'],
                 'maxlength' => '100',
-                'required' => 'required'
+                //'required' => 'required'
             ]) }}
         </div>
     </div>

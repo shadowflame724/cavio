@@ -25,6 +25,7 @@ $langsSuf = [
     .panel .input-group textarea { resize: none;}
     .panel .form-control.photos { min-height: 46px;}
     .panel .form-control.photos,.panel .form-control.nHeight { height: auto; font-size: 0;}
+    .panel .form-control.nHeight .select2 { font-size: 12px;}
     .panel .form-control.photos .photo-one { width: 0; height: 0; position: relative; padding: 8%; display: inline-block; vertical-align: top;
         margin-right: 20px; font-size: 14px;
         border: 1px solid #ddd; border-radius: 4px;
@@ -45,7 +46,7 @@ $langsSuf = [
             </label>
         </div>
         <div class="pull-right">
-            <button type="button" class="btn btn-xs btn-success"><i class="fa fa-save"></i> Save</button>
+            {{--<button type="button" class="btn btn-xs btn-success"><i class="fa fa-save"></i> Save</button>--}}
             <button type="button"
                     class="btn btn-xs btn-link"
                     data-toggle="collapse"
@@ -63,7 +64,7 @@ $langsSuf = [
                 ])
             </div>
 
-            <hr class="hr" />
+            <hr class="hr child-after" />
 
             @forelse($product->childs as $child)
                 @include('backend.products.partials.child_one',[
@@ -77,7 +78,7 @@ $langsSuf = [
                 </div>
             @endforelse
 
-            <hr class="hr" />
+            <hr class="hr photo-after" />
 
             @forelse($product->photos as $photo)
                 @include('backend.products.partials.photo_one',[
