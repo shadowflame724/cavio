@@ -33,7 +33,8 @@ class UpdatePopupRequest extends Request
             'body' => "required|max:250",
             'body_ru' => "required|max:250",
             'body_it' => "required|max:250",
-            'link' => "max:20"
+            'link' => "max:20",
+            'admin_comment' => "required"
         ];
     }
 }

@@ -33,6 +33,7 @@ class UpdateFAQRequest extends Request
             'answer' => "required|min:3|max:400",
             'answer_ru' => "required|min:3|max:400",
             'answer_it' => "required|min:3|max:400",
+            'admin_comment' => "required"
         ];
     }
 }

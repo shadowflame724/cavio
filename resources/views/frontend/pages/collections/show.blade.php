@@ -221,7 +221,7 @@
                 <div>
                   <div class=coll-name>
 
-                    {{ $collectionZone->mainZones()->first()->{'title'.$langSuf} }}
+                    {{ $collectionZone->mainZone->{'title'.$langSuf} }}
 
                     <span class=wrap-coll-name-arrow>
                                         <span class=coll-name-arrow>→</span>

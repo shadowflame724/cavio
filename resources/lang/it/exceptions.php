@@ -49,6 +49,8 @@ return [
                 'create_error'      => "C'è stato un problema durante la creazione di questo categoria. Si prega di riprovare più tardi.",
                 'delete_error'      => "C'è stato un problema durante l'eliminazione di questo categoria. Si prega di riprovare più tardi.",
                 'update_error'      => "C'è stato un problema durante l'aggiornamento di questo categoria. Si prega di riprovare più tardi.",
+                'delete_with_children' => 'IT-This category have children categories. Please delete them first.',
+                'create_depth' => 'IT-Depth cannot be grater than 1.',
             ],
             'collection' => [
                 'create_error'      => "C'è stato un problema durante la creazione di questo collezione. Si prega di riprovare più tardi.",

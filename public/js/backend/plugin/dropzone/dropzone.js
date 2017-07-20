@@ -122,7 +122,7 @@
             maxFilesize: 256,
             paramName: "file",
             createImageThumbnails: true,
-            maxThumbnailFilesize: 10,
+            maxThumbnailFilesize: 256,
             thumbnailWidth: 120,
             thumbnailHeight: 120,
             filesizeBase: 1000,

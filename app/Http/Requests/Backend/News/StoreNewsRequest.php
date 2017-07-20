@@ -37,7 +37,7 @@ class StoreNewsRequest extends Request
             'body' => "required|min:3",
             'body_ru' => "required|min:3",
             'body_it' => "required|min:3",
-
+            'admin_comment' => "required",
         ];
 
     }

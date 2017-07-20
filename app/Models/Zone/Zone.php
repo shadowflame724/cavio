@@ -28,9 +28,8 @@ class Zone extends Model
         ];
     }
 
-
     public function collectionZones()
     {
-        return $this->belongsToMany(CollectionZone::class);
+        return $this->hasMany(CollectionZone::class);
     }
 }
