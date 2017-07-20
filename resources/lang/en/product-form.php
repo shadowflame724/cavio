@@ -24,6 +24,7 @@ return [
             'title' => 'PARENT item',
             'published' => 'Published?',
             'code' => 'PARENT_CODE',
+            'category_ids' => 'Categories',
             'comment' => 'Comment for edit product',
             'name' => 'Eng name for parent',
             'name_ru' => 'Rus name for parent',

@@ -26,6 +26,7 @@ class ProductController extends Controller
      * @var ProductRepository
      */
     protected $product;
+    protected $langSuf;
 
     /**
      * @param ProductRepository $product
@@ -33,6 +34,9 @@ class ProductController extends Controller
     public function __construct(ProductRepository $product)
     {
         $this->product = $product;
+        $lang = app()->getLocale();
+        $appLangs = config('app.langs');
+        $this->langSuf = $appLangs['suf'];
     }
 
     /**
@@ -242,7 +246,7 @@ class ProductController extends Controller
     public function create(Product $product, ProductChild $child, ProductPhoto $photo, ProductPrice $price, ManageProductRequest $request)
     {
 //        $model = $product;
-        $categories = Category::allLeaves()->get()->pluck('name', 'id');
+        $langSuf = $this->langSuf;
         $collectionZones = CollectionZone::pluck('title', 'id');
         $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
@@ -336,13 +340,25 @@ class ProductController extends Controller
             $zones = [];
 
             foreach ($collection->collectionZones as $zone) {
-                $zones[$zone->id] = $zone->title;
+                $zones[$zone->id] = $zone->{'title'.$langSuf};
             }
             if(!empty($zones)){
                 $collectionCodes[$collection->id] = [
-                    'label' => $collection->title,
+                    'label' => $collection->{'title'.$langSuf},
                     'group' => $zones
                 ];
+            }
+        }
+        $categoryModel = Category::get();
+        $categoryCodes = [];
+        foreach ($categoryModel as $category) {
+            if (empty($category->parent_id)) {
+                $categoryCodes[$category->id] = [
+                    'label' => $category->{'name'.$langSuf},
+                    'group' => []
+                ];
+            } else {
+                $categoryCodes[$category->parent_id]['group'][$category->id] = $category->{'name'.$langSuf};
             }
         }
 
@@ -358,7 +374,7 @@ class ProductController extends Controller
             'childCodes' => $childCodes,
             'finishCodes' => $finishCodes,
             'tissueCodes' => $tissueCodes,
-            'categories' => $categories,
+            'categoryCodes' => $categoryCodes,
             'collectionCodes' => $collectionCodes,
         ]);
     }
