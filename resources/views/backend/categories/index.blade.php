@@ -40,7 +40,6 @@
     </div><!--box box-success-->
 @endsection
 @section('after-scripts')
-    {{ Html::script("https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js") }}
     {{ Html::script("https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js") }}
     <script>
         $(function () {
@@ -57,9 +56,7 @@
                                 "separator_after": false,
                                 "label": '{!!   trans('labels.backend.access.category.create') !!}',
                                 "action": function (obj) {
-                                    data = tree.create_node(data);
-                                    tree.edit(data);
-                                    var id = obj.reference.prevObject.selector.slice(1);
+                                    var id = obj.reference.prevObject[0].id;
                                     window.location = '{{route('admin.category.create')}}' + '/' + id;
                                 }
                             },
@@ -68,8 +65,7 @@
                                 "separator_after": false,
                                 "label": '{!!  trans('labels.backend.access.category.edit') !!}',
                                 "action": function (obj) {
-                                    tree.edit(data);
-                                    var id = obj.reference.prevObject.selector.slice(1);
+                                    var id = obj.reference.prevObject[0].id;
                                     window.location = '{{route('admin.category.edit')}}' + '/' + id;
                                 }
                             },
@@ -78,8 +74,7 @@
                                 "separator_after": false,
                                 "label": '{!!  trans('labels.backend.access.category.delete') !!}',
                                 "action": function (obj) {
-                                    tree.delete_node(data);
-                                    var id = obj.reference.prevObject.selector.slice(1);
+                                    var id = obj.reference.prevObject[0].id;
                                     window.location = '{{route('admin.category.delete')}}' + '/' + id;
                                 }
                             }

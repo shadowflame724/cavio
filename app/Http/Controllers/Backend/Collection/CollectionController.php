@@ -68,11 +68,11 @@ class CollectionController extends Controller
      */
     public function edit(Collection $collection, ManageCollectionRequest $request)
     {
-        $zones = Zone::pluck('title', 'id');
+        $zones = Zone::all();
 
         return view('backend.collection.edit', [
             'collection' => $collection,
-            'zones' => $zones
+            'mainZones' => $zones
         ]);
     }
 
@@ -84,23 +84,30 @@ class CollectionController extends Controller
      */
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
+        //dd($request->all());
         $zones = $request->zones;
 
-        foreach ($zones as $key => $newzone) {
-            $oldzone = CollectionZone::find($newzone['id']);
 
-            $oldzone->mainZones()->detach();
-            foreach ($newzone['zone_id'] as $mainZone) {
-                $oldzone->mainZones()->attach($mainZone);
-            }
-            $oldzone->mainZones();
-            $oldImage = $oldzone->image;
-            $oldzone->title = $newzone['title'];
-            $oldzone->title_ru = $newzone['title_ru'];
-            $oldzone->title_it = $newzone['title_it'];
-            $oldzone->image = $newzone['photo'];
-            if ($oldzone->save()) {
-                $this->moveImg($newzone['photo'], $oldImage);
+        if ($zones != null) {
+            foreach ($zones as $key => $newzone) {
+                //dd(explode(',', $newzone['photo']));
+
+                $oldzone = CollectionZone::find($newzone['id']);
+
+                $oldImage = $oldzone->image;
+                $oldzone->title = $newzone['title'];
+                $oldzone->title_ru = $newzone['title_ru'];
+                $oldzone->title_it = $newzone['title_it'];
+                $oldzone->image = $newzone['photo'];
+                $oldzone->zone_id = $newzone['zone_id'];
+
+                if ($oldzone->save()) {
+                    $imagesArray = explode(',', $newzone['photo']);
+                    
+                    foreach ($imagesArray as $item) {
+                        $this->moveImg(ltrim($item));
+                    }
+                }
             }
         }
         $oldName = $collection->image;

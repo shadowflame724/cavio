@@ -34,9 +34,9 @@ class CollectionZone extends Model
         return $this->belongsTo(Collection::class);
     }
 
-    public function mainZones()
+    public function mainZone()
     {
-        return $this->belongsToMany(Zone::class);
+        return $this->belongsTo(Zone::class);
     }
 
     public function goods()

@@ -41,6 +41,8 @@ class UpdatePageRequest extends Request
             'blocks.*.body' => "max:700",
             'blocks.*.body_ru' => "max:700",
             'blocks.*.body_it' => "max:700",
+            'admin_comment' => "required",
+
         ];
     }
 }

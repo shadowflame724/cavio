@@ -61,23 +61,24 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $catName = $request->name;
-        $catNameRu = $request->name_ru;
-        $catNameIt = $request->name_it;
         $p_id = $request->p_id;
-        $imageName = $request->image;
         if (Category::isValidNestedSet() == true) {
-            $cat = Category::create([
-                'name' => $catName,
-                'name_ru' => $catNameRu,
-                'name_it' => $catNameIt,
-                'image' => $imageName,
-            ]);
+            $cat = new Category;
+            $cat->name = $request->name;
+            $cat->name_ru = $request->name_ru;
+            $cat->name_it = $request->name_it;
+            $cat->image = $request->image;
+
             if ($p_id != null) {
                 $root = Category::find($p_id);
-                $cat->makeChildOf($root);
+                if ($root->getDepth() > 0) {
+                    return redirect()->route('admin.category.index')->withErrors(trans('exceptions.backend.access.category.create_depth'));
+                }
+                $cat->parent_id = $p_id;
             }
-            event(new CategoryCreated($cat));
+            if ($cat->save()) {
+                event(new CategoryCreated($cat));
+            }
             return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.created'));
         }
 
