@@ -24,6 +24,7 @@ return [
             'title' => 'PARENT',
             'published' => 'Published?',
             'code' => 'PARENT_CODE',
+            'slug' => 'Link on site',
             'category_ids' => 'Categories',
             'comment' => 'Comment for edit product',
             'name' => 'Eng name for parent',

@@ -24,6 +24,7 @@ return [
             'title' => 'PARENT',
             'published' => 'Опубликовано?',
             'code' => 'PARENT_CODE',
+            'slug' => 'Ссылка на сайте',
             'category_ids' => 'Категории',
             'comment' => 'Коммент изменения PARENT',
             'name' => 'Англ. имя для PARENT',

@@ -25,38 +25,43 @@
 <div class="col-lg-12">
     <div class="input-group input-group-sm">
         {{ Form::label('category_id', trans('product-form.label.parent.category_ids'), ['class' => 'input-group-addon']) }}
-        @if(isset($parentCodes))
-            <select class="select2" multiple required="required"
-                    id="category_ids" name="category_ids">
-                @foreach($categoryCodes as $prntCat)
-                    <optgroup label="{{ $prntCat['label'] }}">
-                        @foreach($prntCat['group'] as $cid => $catOne)
-                            @php
-                                $isSel = '';
-                                if(isset($product->category_ids)){
-                                    $category_ids = explode(',', $product->category_ids);
-                                    foreach ($category_ids as $id) {
-                                        if($zid == $id) $isSel = 'selected="selected"';
-                                    }
+        <select class="select2" multiple required="required"
+                id="category_ids" name="category_ids[]">
+            @foreach($categoryCodes as $prntCat)
+                <optgroup label="{{ $prntCat['label'] }}">
+                    @foreach($prntCat['group'] as $cid => $catOne)
+                        @php
+                            $isSel = '';
+                            if(isset($product->category_ids)){
+                                $category_ids = explode(',', $product->category_ids);
+                                foreach ($category_ids as $id) {
+                                    if($cid == $id) $isSel = 'selected="selected"';
                                 }
-                            @endphp
-                            <option value="{{ $cid }}" {{ $isSel }}>{{ $catOne }}</option>
-                        @endforeach
-                    </optgroup>
-                @endforeach
-            </select>
-            {{-- Form::select('category_ids', $parentCodes, $product->category_ids, [
-                'class' => 'select2 form-control',
-                'required' => 'required',
-                'autofocus' => 'autofocus'
-            ]) --}}
-        @else
-            {{ Form::text('category_ids', $product->category_ids, [
-                'class' => 'form-control',
-                'readonly' => 'readonly',
-                'maxlength' => '100',
-                'required' => 'required'
-            ]) }}
+                            }
+                        @endphp
+                        <option value="{{ $cid }}" {{ $isSel }}>{{ $catOne }}</option>
+                    @endforeach
+                </optgroup>
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="input-group input-group-sm">
+        {{ Form::label('slug', trans('product-form.label.parent.slug'), ['class' => 'input-group-addon']) }}
+        {{ Form::text('slug', $product->slug, [
+            'class' => 'form-control',
+            'data-type' => 'replace-slug',
+            'data-name' => 'slug',
+            'maxlength' => '100',
+            'required' => 'required'
+        ]) }}
+        @if(empty($product->slug))
+        <span class="input-group-addon" style="min-width: 32px;padding-top: 3px;padding-bottom: 3px;">
+            <button class="btn btn-warning btn-xs" type="button">
+                <i class="fa fa-dot-circle-o"></i> Generate
+            </button>
+        </span>
         @endif
     </div>
 </div>

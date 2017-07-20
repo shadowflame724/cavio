@@ -109,6 +109,7 @@
         $(".select2").select2();
       });
     </script>
+    @include('backend.products.partials._form_scripts')
     <script>
         $('.addPanel').click(function () {
             var x = $('.panels .panel').length + 1;

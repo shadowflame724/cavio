@@ -4,10 +4,10 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <div class="panel-title">{{ trans('product-form.label.photo.title') }}</div>
-        <div class="radio">
-            <label for="photo[{{$phtKey}}][main]">
+        <div class="radio" data-type="photo_radio">
+            <label for="photo[{{$phtKey}}][main][{{$ky}}]">
                 {{ Form::radio('photo['.$phtKey.'][main]', $photo->main, $photo->main, [
-                    'id' => 'photo['.$phtKey.'][main]'
+                    'id' => 'photo['.$phtKey.'][main]['.$ky.']'
                 ]) }}
                 {{ trans('product-form.label.photo.main') }}
             </label>
@@ -85,7 +85,7 @@
                                         required="required"
                                         multiple
                                         id="photo[{{ $phtKey }}][finish_ids]"
-                                        name="photo[{{ $phtKey }}][finish_ids]">
+                                        name="photo[{{ $phtKey }}][finish_ids][]">
                                     @foreach($finishCodes as $key => $one)
                                         @php
                                             $isSel = '';
@@ -120,7 +120,7 @@
                                         required="required"
                                         multiple
                                         id="photo[{{ $phtKey }}][tissue_ids]"
-                                        name="photo[{{ $phtKey }}][tissue_ids]">
+                                        name="photo[{{ $phtKey }}][tissue_ids][]">
                                     @foreach($tissueCodes as $key => $one)
                                     @php
                                     $isSel = '';
@@ -152,7 +152,7 @@
                             @if(isset($collectionCodes))
                                 <select class="select2" multiple required="required"
                                         id="photo[{{ $phtKey }}][collection_ids]"
-                                        name="photo[{{ $phtKey }}][collection_ids]">
+                                        name="photo[{{ $phtKey }}][collection_ids][]">
                                     @foreach($collectionCodes as $colls)
                                         <optgroup label="{{ $colls['label'] }}">
                                         @foreach($colls['group'] as $zid => $zone)

@@ -403,6 +403,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product, ManageProductRequest $request)
     {
+        $langSuf = $this->langSuf;
         $model = $this->product->getOne($product->id, ['childs','photos','photos.prices','photos.prices.child']);
 //        dd($model);
         $parentCodes = [
@@ -463,7 +464,18 @@ class ProductController extends Controller
                 'name' => 'Tissue5'
             ],
         ];
-        $categories = Category::allLeaves()->get()->pluck('name', 'id');
+        $categoryModel = Category::get();
+        $categoryCodes = [];
+        foreach ($categoryModel as $category) {
+            if (empty($category->parent_id)) {
+                $categoryCodes[$category->id] = [
+                    'label' => $category->{'name'.$langSuf},
+                    'group' => []
+                ];
+            } else {
+                $categoryCodes[$category->parent_id]['group'][$category->id] = $category->{'name'.$langSuf};
+            }
+        }
         $collectionZones = CollectionZone::pluck('title', 'id');
         $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
@@ -489,7 +501,7 @@ class ProductController extends Controller
             'finishCodes' => $finishCodes,
             'tissueCodes' => $tissueCodes,
             'collectionCodes' => $collectionCodes,
-            'categories' => $categories,
+            'categoryCodes' => $categoryCodes,
         ]);
     }
 
@@ -501,14 +513,13 @@ class ProductController extends Controller
      */
     public function update(Product $product, UpdateProductRequest $request)
     {
-        dd($request->all());
         $this->product->update($product, $request->all());
 
-        foreach ($request->images as $image) {
-            $this->moveImg($image);
-        }
+//        foreach ($request->images as $image) {
+//            $this->moveImg($image);
+//        }
 
-        return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.products.updated'));
+        return redirect()->route('admin.product.edit', $product->id)->withFlashSuccess(trans('alerts.backend.products.updated'));
     }
 
     /**

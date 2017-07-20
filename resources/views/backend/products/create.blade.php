@@ -180,80 +180,96 @@
           }
 
         });
-        $('body').on('click', '[data-type="reload-price"]', function () {
-          var $prnt = $(this).closest('.panel-body');
-          var pricesRow = $prnt.find('[data-type="prices-row"]');
-          var priceTemp = pricesRow.find('.new-price').html();
-          var dataFn = {!! json_encode($finishCodes) !!};
-          var dataTs = {!! json_encode($tissueCodes) !!};
+        $('body')
+          .on('click', '[data-type="reload-price"]', function () {
+              var $prnt = $(this).closest('.panel-body');
+              var pricesRow = $prnt.find('[data-type="prices-row"]');
+              var priceTemp = pricesRow.find('.new-price').html();
+              var dataFn = {!! json_encode($finishCodes) !!};
+              var dataTs = {!! json_encode($tissueCodes) !!};
 
-          var prvFn = false,
-            uniqFn = false,
-            prvTs = false,
-            uniqTs = false;
-          $prnt.find('[data-name="finish_ids"]').each(function (i,fn) {
-            var _ids = $(fn).val().splice(',');
-            $.each(_ids, function (i,_id) {
-                var val = dataFn[_id].short || false;
-                if(!prvFn) {
-                  prvFn = val;
-                  uniqFn = true;
+              var prvFn = false,
+                uniqFn = false,
+                prvTs = false,
+                uniqTs = false;
+              $prnt.find('[data-name="finish_ids"]').each(function (i,fn) {
+                var _ids = $(fn).val().splice(',');
+                $.each(_ids, function (i,_id) {
+                    var val = dataFn[_id].short || false;
+                    if(!prvFn) {
+                      prvFn = val;
+                      uniqFn = true;
+                    }
+                    if(prvFn !== val){
+                      uniqFn = false;
+                    }
+                });
+              });
+              $prnt.find('[data-name="tissue_ids"]').each(function (i,ts) {
+                var _ids = $(ts).val().splice(',');
+                $.each(_ids, function (i,_id) {
+                    var val = dataTs[_id].short || false;
+                    if(!prvTs) {
+                      prvTs = val;
+                      uniqTs = true;
+                    }
+                    if(prvTs !== val){
+                      uniqTs = false;
+                    }
+                });
+              });
+
+              $prnt.find('.onePrice').remove();
+              var prKey = 0;
+              $('.oneChild').each(function (i, ch) {
+                var $el = $(ch);
+                var code = $el.find('[data-name="code"]').val();
+                var priceKeyTemp = priceTemp.replace(/\[price]\[KEY]/g, '[price][' + prKey + ']');
+                var onePrice = $('<div class="onePrice" />').html(priceKeyTemp);
+                // CHILD_CODE
+                onePrice.find('[data-replace="child_code"]').html(code);
+                onePrice.find('[data-replace="child_code_input"]').val(code);
+                // цена
+                var isPrice = false;
+                if(uniqFn && uniqTs){ // если все оббивки и отделки имеют одинаковые типы
+                  var dataPrices = JSON.parse($prnt.find('[data-name="prices"]').val());
+                  var needPrice = dataPrices[prvTs][prvFn] || false;
+    //              console.warn(needPrice,'<<',dataPrices,prvTs,prvFn);
+                  if(needPrice) {
+                    onePrice.find('[data-replace="def_price"]').val(needPrice);
+                    onePrice.find('[data-replace="custom"]').prop('checked', false);
+                    onePrice.find('[data-replace="price"]').attr('readonly', 'readonly').val(needPrice);
+                    isPrice = true;
+                  }
                 }
-                if(prvFn !== val){
-                  uniqFn = false;
+                if(!isPrice){
+                  onePrice.find('[data-replace="def_price"]').attr('readonly', 'readonly').val('');
+                  onePrice.find('[data-replace="custom"]').prop('checked', true);
+                  onePrice.find('[data-replace="price"]').removeAttr('readonly').val('');
                 }
-            });
+                onePrice.find('[data-replace="discount"]').val(0);
+
+                pricesRow.append(onePrice);
+                prKey++;
+              });
+
           });
-          $prnt.find('[data-name="tissue_ids"]').each(function (i,ts) {
-            var _ids = $(ts).val().splice(',');
-            $.each(_ids, function (i,_id) {
-                var val = dataTs[_id].short || false;
-                if(!prvTs) {
-                  prvTs = val;
-                  uniqTs = true;
-                }
-                if(prvTs !== val){
-                  uniqTs = false;
-                }
-            });
-          });
+        $('body').on('change', '[data-type="custom_price_check"] input[type="checkbox"]', function () {
+          var $prnt = $(this).closest('[data-type="custom_price_check"]');
+          var is_ch = $(this).prop('checked');
 
-          $prnt.find('.onePrice').remove();
-          var prKey = 0;
-          $('.oneChild').each(function (i, ch) {
-            var $el = $(ch);
-            var code = $el.find('[data-name="code"]').val();
-            var priceKeyTemp = priceTemp.replace(/\[price]\[KEY]/g, '[price][' + prKey + ']');
-            var onePrice = $('<div class="onePrice" />').html(priceKeyTemp);
-            // CHILD_CODE
-            onePrice.find('[data-replace="child_code"]').html(code);
-            // цена
-            var isPrice = false;
-            if(uniqFn && uniqTs){ // если все оббивки и отделки имеют одинаковые типы
-              var dataPrices = JSON.parse($prnt.find('[data-name="prices"]').val());
-              var needPrice = dataPrices[prvTs][prvFn] || false;
-//              console.warn(needPrice,'<<',dataPrices,prvTs,prvFn);
-              if(needPrice) {
-                onePrice.find('[data-replace="def_price"]').val(needPrice);
-                onePrice.find('[data-replace="custom"]').prop('checked', false);
-                onePrice.find('[data-replace="price"]').attr('readonly', 'readonly').val('');
-                isPrice = true;
-              }
-            }
-            if(!isPrice){
-              onePrice.find('[data-replace="def_price"]').attr('readonly', 'readonly').val('');
-              onePrice.find('[data-replace="custom"]').prop('checked', true);
-              onePrice.find('[data-replace="price"]').removeAttr('readonly').val('');
-            }
-
-            pricesRow.append(onePrice);
-            prKey++;
-          });
-
+          if (is_ch) {
+            $prnt.prev().find('input').attr('readonly', 'readonly');
+            $prnt.find('input').removeAttr('readonly');
+          } else {
+            $prnt.prev().find('input').removeAttr('readonly');
+            $prnt.find('input').attr('readonly', 'readonly');
+          }
         });
 
       });
     </script>
+    @include('backend.products.partials._form_scripts')
     <script>
         $('.addPanel').click(function () {
             var x = $('.panels .panel').length + 1;

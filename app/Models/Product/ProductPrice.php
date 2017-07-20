@@ -16,7 +16,9 @@ class ProductPrice extends Model {
     protected $fillable = [
         'product_child_id',
         'product_photo_id',
+        'discount',
         'def_price',
+        'cus_price',
         'price',
         'custom',
         'published'

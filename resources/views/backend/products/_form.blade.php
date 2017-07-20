@@ -80,14 +80,16 @@ $langsSuf = [
 
             <hr class="hr photo-after" />
 
-            @forelse($product->photos as $photo)
+            @forelse($product->photos as $ky => $photo)
                 @include('backend.products.partials.photo_one',[
-                    'photo' => $photo
+                    'photo' => $photo,
+                    'ky' => $ky,
                 ])
             @empty
                 <div class="new-photo hidden">
                     @include('backend.products.partials.photo_one',[
-                        'photo' => $photo
+                        'photo' => $photo,
+                        'ky' => 'NEW',
                     ])
                 </div>
             @endforelse
