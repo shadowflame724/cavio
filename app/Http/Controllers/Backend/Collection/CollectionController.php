@@ -55,7 +55,7 @@ class CollectionController extends Controller
     public function store(StoreCollectionRequest $request)
     {
         $this->collection->create($request->all());
-        $this->moveImg($request->photo);
+        $this->moveCollectionImg($request->photo);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.created'));
     }
@@ -84,14 +84,10 @@ class CollectionController extends Controller
      */
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
-        //dd($request->all());
         $zones = $request->zones;
-
 
         if ($zones != null) {
             foreach ($zones as $key => $newzone) {
-                //dd(explode(',', $newzone['photo']));
-
                 $oldzone = CollectionZone::find($newzone['id']);
 
                 $oldImage = $oldzone->image;
@@ -102,17 +98,28 @@ class CollectionController extends Controller
                 $oldzone->zone_id = $newzone['zone_id'];
 
                 if ($oldzone->save()) {
-                    $imagesArray = explode(',', $newzone['photo']);
-                    
-                    foreach ($imagesArray as $item) {
-                        $this->moveImg(ltrim($item));
+                    $newImagesArray = explode(',', $newzone['photo']);
+                    $oldImagesArray = explode(',', $oldImage);
+                    //dd($newImagesArray, $oldImagesArray, strlen($oldImagesArray[0]));
+
+                    foreach (array_diff($newImagesArray, $oldImagesArray) as $image) {
+                        $this->moveImg($image);
                     }
+
+                    if (strlen($oldImagesArray[0]) > 0 ) {
+                        foreach (array_diff($oldImagesArray, $newImagesArray) as $image) {
+                            $this->deleteImg($image);
+                        }
+                    }
+
+                    //dd('check file png');
+
                 }
             }
         }
         $oldName = $collection->image;
         $this->collection->update($collection, $request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo'));
-        $this->moveImg($request->photo, $oldName);
+        $this->moveCollectionImg($request->photo, $oldName);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.updated'));
     }
@@ -127,7 +134,11 @@ class CollectionController extends Controller
     {
         $imgName = $collection->image;
         $this->collection->delete($collection);
-        $this->deleteImg($imgName);
+        if (file_exists('upload/images/collection/original/' . $imgName)) {
+            unlink(public_path('upload/images/collection/original/' . $imgName));
+            unlink(public_path('upload/images/collection/horizontal/' . $imgName));
+            unlink(public_path('upload/images/collection/vertical/' . $imgName));
+        }
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.deleted'));
     }

@@ -57,7 +57,6 @@ class UploadController extends Controller
         $horizontal = new Image($path);
         $vertical = new Image($path);
 
-
         $imgWidth = $img->getWidth();
         $imgHeight = $img->getHeight();
         if (!file_exists(public_path('/upload/tmp/collection/original'))) {
@@ -77,11 +76,11 @@ class UploadController extends Controller
                 ]
             ];
         } else {
-            if($imgWidth > 2000){
+            if ($imgWidth > 2000) {
                 $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/collection/original/' . $imgName));
-            }elseif ($imgHeight > 2000){
+            } elseif ($imgHeight > 2000) {
                 $img->fitToHeight(2000)->saveAs(public_path('/upload/tmp/collection/original/' . $imgName));
-            }else{
+            } else {
                 $img->saveAs(public_path('/upload/tmp/collection/original/' . $imgName));
             }
             $horizontal->thumbnail(1186, 270)->saveAs(public_path('/upload/tmp/collection/horizontal/' . $imgName));
@@ -113,6 +112,25 @@ class UploadController extends Controller
         foreach ($request->file('file') as $item) {
             $json[] = $this->uploadImg($item, 230, 230);
         }
+        return response()->json($json);
+    }
+
+    public function uploadCropped(Request $request)
+    {
+        $path = $request->file('croppedImage')->getRealPath();
+        $img = new Image($path);
+        $oldImg = $request->get('name');
+
+
+        $img->saveAs(public_path($oldImg));
+
+
+        $json = [
+            'success' => [
+                'title' => 'Done',
+                'text' => 'Photo upload',
+            ]
+        ];
         return response()->json($json);
     }
 
