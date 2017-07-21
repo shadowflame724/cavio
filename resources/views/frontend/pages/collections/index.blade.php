@@ -32,7 +32,7 @@
                         <use xlink:href=wave.svg#wave></use>
                       </svg>
                     </div>
-                    <img src="/upload/images/{{ $collection->image }}" alt=""></div>
+                    <img src="/upload/images/collection/vertical/{{ $collection->image }}" alt=""></div>
                   <div>
                     <div class=coll-name>
                       {{ $collection->{'title'.$langSuf} }}
