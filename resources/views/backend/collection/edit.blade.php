@@ -46,15 +46,14 @@
 
         .photo.active {
             visibility: visible;
-            max-width: 650px;
         }
 
         .dlt_photo {
-            position: absolute;
-            top: 0;
+            position: absolute; display: block; top: 0; right: 0;
             color: red;
-            font-size: 25px;
+            font-size: 20px;
         }
+        .photo-one-bl{ position: relative;display: inline-block; vertical-align: top;}
     </style>
 @endsection
 @section('after-styles')
@@ -253,11 +252,13 @@
                                                             {{ Form::hidden('zones['.$i.'][photo]', $zone->image, ['id' => 'zones['.$i.'][photo]']) }}
                                                             @foreach($zone->getImageArray($zone->image) as $key => $image)
                                                                 @if(strlen($image) > 0)
-                                                                    <div id="dlt_photo[{{$i}}][{{$key}}]"
-                                                                         class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                                    <img class="add_photo" id="add_photo"
-                                                                         src="/upload/images/{{ ltrim($image) }}"
-                                                                         alt="" data-content="{{ ltrim($image) }},">
+                                                                    <div class="photo-one-bl">
+                                                                        <div id="dlt_photo[{{$i}}][{{$key}}]"
+                                                                             class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                                                        <img class="add_photo" id="add_photo"
+                                                                             src="/upload/images/{{ ltrim($image) }}"
+                                                                             alt="" data-content="{{ ltrim($image) }},">
+                                                                    </div>
                                                                 @endif
                                                             @endforeach
                                                         </div>
