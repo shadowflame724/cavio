@@ -43,4 +43,9 @@ class CollectionZone extends Model
     {
         return $this->hasMany(Good::class);
     }
+
+    public function getImageArray($image)
+    {
+        return explode(',', $image);
+    }
 }
