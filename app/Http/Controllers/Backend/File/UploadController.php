@@ -48,43 +48,40 @@ class UploadController extends Controller
 
     }
 
-    public function uploadCollection(Request $request)
+    public function uploadThreeSize($request, $type = 'collection')
     {
-
-        $imgName = time() . '.' . $request->file('file')->getClientOriginalExtension();
-        $path = $request->file('file')->getRealPath();
+        $imgName = time() . '.' . $request->getClientOriginalExtension();
+        $path = $request->getRealPath();
         $img = new Image($path);
         $horizontal = new Image($path);
-        $vertical = new Image($path);
+        $thumb = new Image($path);
 
         $imgWidth = $img->getWidth();
         $imgHeight = $img->getHeight();
-        if (!file_exists(public_path('/upload/tmp/collection/original'))) {
-            mkdir(public_path('/upload/tmp/collection/original'), 0777, true);
+        if (!file_exists(public_path('/upload/tmp/' . $type . '/original'))) {
+            mkdir(public_path('/upload/tmp/' . $type . '/original'), 0777, true);
         }
-        if (!file_exists(public_path('/upload/tmp/collection/horizontal'))) {
-            mkdir(public_path('/upload/tmp/collection/horizontal'), 0777, true);
+        if (!file_exists(public_path('/upload/tmp/' . $type . '/horizontal'))) {
+            mkdir(public_path('/upload/tmp/' . $type . '/horizontal'), 0777, true);
         }
-        if (!file_exists(public_path('/upload/tmp/collection/vertical'))) {
-            mkdir(public_path('/upload/tmp/collection/vertical'), 0777, true);
+        if (!file_exists(public_path('/upload/tmp/' . $type . '/thumb'))) {
+            mkdir(public_path('/upload/tmp/' . $type . '/thumb'), 0777, true);
         }
-        if ($imgWidth < 1920 || $imgHeight < 1103) {
+        if ($imgWidth < 2000 || $imgHeight < 1500) {
             $json = [
                 'error' => [
                     'title' => 'Incorrect photo size',
-                    'text' => 'Min size: ' . 1920 . ' × ' . 1103
+                    'text' => 'Min size: ' . 2000 . ' × ' . 1500
                 ]
             ];
         } else {
-            if ($imgWidth > 2000) {
-                $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/collection/original/' . $imgName));
-            } elseif ($imgHeight > 2000) {
-                $img->fitToHeight(2000)->saveAs(public_path('/upload/tmp/collection/original/' . $imgName));
+            $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
+            $horizontal->thumbnail(1600, 360)->saveAs(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
+            if ($type == 'zone') {
+                $thumb->thumbnail(530, 370)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
             } else {
-                $img->saveAs(public_path('/upload/tmp/collection/original/' . $imgName));
+                $thumb->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
             }
-            $horizontal->thumbnail(1186, 270)->saveAs(public_path('/upload/tmp/collection/horizontal/' . $imgName));
-            $vertical->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/collection/vertical/' . $imgName));
 
             $json = [
                 'success' => [
@@ -97,7 +94,7 @@ class UploadController extends Controller
 
         }
 
-        return response()->json($json);
+        return $json;
     }
 
     public function uploadFinishTissue(Request $request)
@@ -110,8 +107,15 @@ class UploadController extends Controller
     public function uploadCollectionZone(Request $request)
     {
         foreach ($request->file('file') as $item) {
-            $json[] = $this->uploadImg($item, 230, 230);
+            $json[] = $this->uploadThreeSize($item, 'zone');
         }
+        return response()->json($json);
+    }
+
+    public function uploadCollection(Request $request)
+    {
+        $json = $this->uploadThreeSize($request->file('file'));
+
         return response()->json($json);
     }
 
@@ -121,9 +125,7 @@ class UploadController extends Controller
         $img = new Image($path);
         $oldImg = $request->get('name');
 
-
         $img->saveAs(public_path($oldImg));
-
 
         $json = [
             'success' => [
