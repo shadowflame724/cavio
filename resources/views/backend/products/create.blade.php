@@ -115,6 +115,16 @@
         $(".select2").select2();
         $(".new-child select.select2,.new-photo select.select2").select2("destroy");
 
+        var replDiment = function ($inp,dimData) {
+          var prnt_el = $inp.closest('.panel-body');
+          var dim_data = prnt_el.find('[data-type="dimensions_data"]');
+          $.each(dimData, function (type,val) {
+            dim_data.find('.clearfix').before('<div class="col-lg-2">' +
+              '<label>'+type+'</label>' +
+              '<input class="form-control" data-dimensions="'+type+'" maxlength="100" type="text" value="'+val+'">' +
+              '</div>');
+          })
+        };
         var replIputs = function ($prnt,data) {
           $prnt.find('[data-type="replace-input"]').each(function (i, el) {
             var $inp = $(el);
@@ -122,6 +132,10 @@
             var dataVal = (typeof data[name] === 'object')? JSON.stringify(data[name]) : data[name];
             var inpVal = dataVal || '';
             $inp.val(inpVal);
+            if(name == 'dimensions'){
+              replDiment($inp, data[name]);
+
+            }
             $inp.trigger('change');
           });
         };

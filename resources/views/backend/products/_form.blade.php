@@ -32,6 +32,10 @@ $langsSuf = [
         background-size: contain; background-repeat: no-repeat; background-position: 50% 50%;
     }
     .panel .dropzone{ min-height: 0;}
+    .panel .well:before,.panel .well:after{ content: ''; clear: both; display: table;}
+    .panel .well label{ font-weight: normal; font-size: 12px;}
+    .panel .well{ padding: 5px 0; border-radius: 0; margin-left: 15px; margin-right: 15px; margin-bottom: 5px;
+        background-color: #f7f7f7; border-color: #d2d6de; box-shadow: none;}
 </style>
 
 <div class="panel panel-success" id="productOne">

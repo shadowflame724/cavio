@@ -19,4 +19,18 @@
     });
     $th.prop('checked', true);
   });
+  $('body').on('keyup', '[data-type="dimensions_data"] input', function () {
+    var $inp = $(this);
+    var $dataWrap = $inp.closest('[data-type="dimensions_data"]');
+    var newVal = {};
+    $dataWrap.find('input').each(function (i,el) {
+        var $el = $(el);
+        var val = $el.val();
+        var type = $el.attr('data-dimensions');
+      newVal[type] = val;
+    });
+
+    var $dimInp = $dataWrap.parent().find('[data-name="dimensions"]').val(JSON.stringify(newVal));
+
+  });
 </script>

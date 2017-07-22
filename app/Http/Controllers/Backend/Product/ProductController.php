@@ -386,11 +386,8 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request->all());
         $this->product->create($request->all());
-        foreach ($request->images as $image) {
-            $this->moveImg($image);
-        }
+
 
         return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.products.created'));
     }

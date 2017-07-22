@@ -63,80 +63,16 @@ class ProductRepository extends BaseRepository
             ]);
     }
 
-
     /**
-     * @param array $input
+     * @param $input array
+     * @param $productId int
+     * @param $isInsert bool
      *
      * @throws GeneralException
      *
-     * @return bool
+     * @return array
      */
-    public function create(array $input)
-    {
-        dd($input);
-        DB::transaction(function () use ($input) {
-            $product = self::MODEL;
-            $product = new $product();
-            $product->save();
-
-            foreach ($input['collectionZone_id'] as $collectionZone) {
-                $product->collectionZone()->attach($collectionZone);
-            }
-
-            foreach ($input['dimensions'] as $dimension) {
-                Dimensions::create([
-                    'product_id' => $product->id,
-                    'length' => $dimension['length'],
-                    'width' => $dimension['width'],
-                    'height' => $dimension['height'],
-                    'mattress' => $dimension['mattress'],
-                    'weight' => $dimension['weight']
-                ]);
-            }
-
-            foreach ($input['finishTissues_id'] as $finishTissue) {
-                $product->finishTissues()->attach($finishTissue);
-            }
-
-            foreach ($input['images'] as $photo) {
-                ProductsPhotos::create([
-                    'product_id' => $product->id,
-                    'image' => $photo,
-                    'type' => 0
-                ]);
-            }
-
-            $product->category_id = $input['category_id'];
-            $product->code = $input['code'];
-            $product->price = $input['price'];
-            $product->name = $input['name'];
-            $product->name_ru = $input['name_ru'];
-            $product->name_it = $input['name_it'];
-            $product->description = $input['description'];
-            $product->description_ru = $input['description_ru'];
-            $product->description_it = $input['description_it'];
-
-            if ($product->save()) {
-                event(new ProductCreated($product));
-
-                return true;
-            }
-
-            $product->delete();
-
-            throw new GeneralException(trans('exceptions.backend.product.create_error'));
-        });
-    }
-
-    /**
-     * @param Model $product
-     * @param  $input
-     *
-     * @throws GeneralException
-     *
-     * @return bool
-     */
-    public function update(Model $product, array $input)
+    public function implodeData($input = [], $productId = null, $isInsert = false)
     {
         $allData = [
             'childs' => [],
@@ -144,22 +80,11 @@ class ProductRepository extends BaseRepository
             'prices' => [],
         ];
 
-        $product->category_ids = implode(',', $input['category_ids']);
-        $product->code = $input['code'];
-        $product->slug = $input['slug'];
-        $product->name = $input['name'];
-        $product->name_ru = $input['name_ru'];
-        $product->name_it = $input['name_it'];
-        $product->prev = $input['prev'];
-        $product->prev_ru = $input['prev_ru'];
-        $product->prev_it = $input['prev_it'];
-        $product->published = isset($input['published']) ? 1 : 0;
-
         $newChildData = [];
         $childCodes = [];
         foreach ($input['child'] as $ch_id => $item) {
             $newChildData[$ch_id] = [
-                'product_id'        => $product->id,
+                'product_id'        => $productId,
                 'code'              => $item['code'],
                 'name'              => $item['name'],
                 'name_ru'           => $item['name_ru'],
@@ -178,10 +103,11 @@ class ProductRepository extends BaseRepository
             0 => 99999999, // 'min'
             1 => -1, // 'max'
         ];
+        dd($input);
         foreach ($input['photo'] as $ph_id => $item) {
             $isMainPhoto = isset($item['main']) ? 1 : 0;
             $newPhotoData[$ph_id] = [
-                'product_id'        => $product->id,
+                'product_id'        => $productId,
                 'photos'            => implode(',', $item['photos']),
                 'prices_data'       => $item['prices_data'],
                 'finish_ids'        => implode(',', $item['finish_ids']),
@@ -237,11 +163,96 @@ class ProductRepository extends BaseRepository
             $mainPrices[1].' €'
         ]);
 
-        $product->main_photo_data = json_encode($mainPhotoData);
-
         $allData['childs'] = $newChildData;
         $allData['photos'] = $newPhotoData;
         $allData['prices'] = $newPriceData;
+        $allData['main_photo_data'] = json_encode($mainPhotoData);
+
+        return $allData;
+    }
+
+    /**
+     * @param array $input
+     *
+     * @throws GeneralException
+     *
+     * @return bool
+     */
+    public function create(array $input)
+    {
+        $allData = $this->implodeData($input, 0, false);
+        dd($allData);
+        DB::transaction(function () use ($input) {
+            $product = self::MODEL;
+            $product = new $product();
+            $product->save();
+
+            foreach ($input['collectionZone_id'] as $collectionZone) {
+                $product->collectionZone()->attach($collectionZone);
+            }
+
+            foreach ($input['dimensions'] as $dimension) {
+                Dimensions::create([
+                    'product_id' => $product->id,
+                    'length' => $dimension['length'],
+                    'width' => $dimension['width'],
+                    'height' => $dimension['height'],
+                    'mattress' => $dimension['mattress'],
+                    'weight' => $dimension['weight']
+                ]);
+            }
+
+            foreach ($input['finishTissues_id'] as $finishTissue) {
+                $product->finishTissues()->attach($finishTissue);
+            }
+
+            foreach ($input['images'] as $photo) {
+                ProductsPhotos::create([
+                    'product_id' => $product->id,
+                    'image' => $photo,
+                    'type' => 0
+                ]);
+            }
+
+            $product->category_id = $input['category_id'];
+            $product->code = $input['code'];
+            $product->price = $input['price'];
+            $product->name = $input['name'];
+            $product->name_ru = $input['name_ru'];
+            $product->name_it = $input['name_it'];
+            $product->description = $input['description'];
+            $product->description_ru = $input['description_ru'];
+            $product->description_it = $input['description_it'];
+
+            if ($product->save()) {
+                event(new ProductCreated($product));
+
+                return true;
+            }
+
+            $product->delete();
+
+            throw new GeneralException(trans('exceptions.backend.product.create_error'));
+        });
+    }
+
+    public function update(Model $product, array $input)
+    {
+        $product->category_ids = implode(',', $input['category_ids']);
+        $product->code = $input['code'];
+        $product->slug = $input['slug'];
+        $product->name = $input['name'];
+        $product->name_ru = $input['name_ru'];
+        $product->name_it = $input['name_it'];
+        $product->prev = $input['prev'];
+        $product->prev_ru = $input['prev_ru'];
+        $product->prev_it = $input['prev_it'];
+        $product->published = isset($input['published']) ? 1 : 0;
+
+        $allData = $this->implodeData($input, $product->id, false);
+
+        $product->main_photo_data = $allData['main_photo_data'];
+
 //        dd($allData);
 //        dd($input);
 
