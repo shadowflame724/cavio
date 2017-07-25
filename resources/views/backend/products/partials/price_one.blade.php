@@ -1,7 +1,11 @@
 @php
     $prcKey = ($price->id) ? $price->id : 'KEY';
+    $isNotActive = false;
+    if($price->id && !($price->published)){
+        $isNotActive = true;
+    }
 @endphp
-<div class="col-lg-3">
+<div class="col-lg-3" style="@if($isNotActive)opacity: 0.5;@endif">
     <div class="panel panel-danger">
         <div class="panel-heading">
             <div class="panel-title">

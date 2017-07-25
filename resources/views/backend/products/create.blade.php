@@ -158,6 +158,7 @@
             replIputs($prntItem, prntItem);
             //
 
+            var phKey = 0;
             $.each(prntItem.childs, function (id,child) {
               var childKeyTemp = childTemp.replace(/child\[KEY]/g, 'child[' + id + ']');
               var $chOne = $('<div class="oneChild" />').html(childKeyTemp);
@@ -167,10 +168,14 @@
               //
               replIputs($chOne, child);
               //
-              $('.child-after').after($chOne);
+              if ($('.oneChild').length) {
+                $('.oneChild:last').after($chOne);
+              } else {
+                $('.child-after').after($chOne);
+              }
 
-              var phKey = 0;
               $.each(child['photos'], function (phid,photo) {
+                phKey++;
                 var photoKeyTemp = photoTemp.replace(/photo\[KEY]/g, 'photo[' + phKey + ']');
                 var $phOne = $('<div class="onePhoto" />').html(photoKeyTemp);
                 var onPhotoId = $phOne.find('.panel-collapse').attr('id') + id + '_' + phid;
@@ -180,8 +185,11 @@
                 replIputs($phOne, photo);
                 //
 
-                $('.photo-after').after($phOne);
-                phKey++;
+                if ($('.onePhoto').length) {
+                  $('.onePhoto:last').after($phOne);
+                } else {
+                  $('.photo-after').after($phOne);
+                }
 //                console.info('photo: ',photo);
               });
             });

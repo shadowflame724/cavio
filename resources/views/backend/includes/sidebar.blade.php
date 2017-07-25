@@ -49,25 +49,25 @@
                         ]), 'display: block;') }}">
                     <li class="{{ active_class(Active::checkUriPattern('admin/page*')) }}">
                         <a href="{{ route('admin.page.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-list-alt"></i>
                             <span>{{ trans('labels.backend.access.page.management') }}</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/popup*')) }}">
                         <a href="{{ route('admin.popup.edit') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-file-o"></i>
                             <span>{{ trans('labels.backend.access.popup.management') }}</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/news*')) }}">
                         <a href="{{ route('admin.news.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-rss"></i>
                             <span>{{ trans('labels.backend.access.news.management') }}</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/faq*')) }}">
                         <a href="{{ route('admin.faq.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-question-circle-o"></i>
                             <span>{{ trans('labels.backend.access.faq.management') }}</span>
                         </a>
                     </li>
@@ -77,7 +77,7 @@
 
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-list"></i>
+                    <i class="fa fa-ship"></i>
                     <span>{{ trans('menus.backend.menu.store') }}</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -103,48 +103,61 @@
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/category*')) }}">
                         <a href="{{ route('admin.category.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-folder-open-o"></i>
                             <span>{{ trans('labels.backend.access.category.management') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/finish-tissue*')) }}">
                         <a href="{{ route('admin.finish-tissue.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-flag-o"></i>
                             <span>{{ trans('labels.backend.access.finishtissue.management') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/collection*')) }}">
                         <a href="{{ route('admin.collection.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-map-o"></i>
                             <span>{{ trans('labels.backend.access.collection.management') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/zone*')) }}">
                         <a href="{{ route('admin.zone.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-map-signs"></i>
                             <span>{{ trans('labels.backend.access.zone.management') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/showroom*')) }}">
                         <a href="{{ route('admin.showroom.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-puzzle-piece"></i>
                             <span>{{ trans('labels.backend.access.showroom.management') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/product*')) }}">
                         <a href="{{ route('admin.product.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-cubes"></i>
                             <span>{{ trans('labels.backend.access.product.management') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/basket*')) }}">
+                        <a href="{{ route('admin.basket.index') }}">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span>{{ trans('labels.backend.basket.management') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/order*')) }}">
+                        <a href="{{ route('admin.order.index') }}">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>{{ trans('labels.backend.order.management') }}</span>
                         </a>
                     </li>
                 </ul>
             </li>
-
 
         </ul>
 
@@ -154,30 +167,44 @@
 
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">
-                    <i class="fa fa-users"></i>
+                    <i class="fa fa-cogs"></i>
                     <span>{{ trans('menus.backend.access.title') }}</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/access/*'), 'menu-open') }}"
-                    style="display: none; {{ active_class(Active::checkUriPattern('admin/access/*'), 'display: block;') }}">
+                <ul class="treeview-menu
+                    {{ active_class(Active::checkUriPattern([
+                        'admin/access*',
+                        'admin/setting*',
+                    ]), 'menu-open') }}"
+                    style="display: none;
+                    {{ active_class(Active::checkUriPattern([
+                        'admin/access*',
+                        'admin/setting*',
+                    ]), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/setting*')) }}">
+                        <a href="{{ route('admin.setting.index') }}">
+                            <i class="fa fa-cog"></i>
+                            <span>{{ trans('labels.backend.settings.management') }}</span>
+                        </a>
+                    </li>
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/access/user*')) }}">
                         <a href="{{ route('admin.access.user.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-address-book-o"></i>
                             <span>{{ trans('labels.backend.access.users.management') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/access/role*')) }}">
                         <a href="{{ route('admin.access.role.index') }}">
-                            <i class="fa fa-circle-o"></i>
+                            <i class="fa fa-key"></i>
                             <span>{{ trans('labels.backend.access.roles.management') }}</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
-            @endauth
 
             <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
                 <a href="#">
@@ -203,5 +230,6 @@
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->
+        @endauth
     </section><!-- /.sidebar -->
 </aside>
