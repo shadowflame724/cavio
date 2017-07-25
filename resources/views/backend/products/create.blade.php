@@ -197,6 +197,7 @@
                 $('.onePhoto .select2').select2({
                   tags: true
                 });
+                $('[data-type="generate_slug"]').trigger('click');
             }, 100);
 
           }

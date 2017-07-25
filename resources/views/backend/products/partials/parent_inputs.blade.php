@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-    <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm" data-type="parent_for_slug">
         {{ Form::label('code', trans('product-form.label.parent.code'), ['class' => 'input-group-addon']) }}
         @if(isset($parentCodes))
             <select class="select2 form-control parent_code" required="required" id="code" name="code">
@@ -16,6 +16,7 @@
             {{ Form::text('code', $product->code, [
                 'class' => 'form-control',
                 'readonly' => 'readonly',
+                'data-type' => 'input-parent-code',
                 'maxlength' => '100',
                 'required' => 'required'
             ]) }}
@@ -56,18 +57,16 @@
             'maxlength' => '100',
             'required' => 'required'
         ]) }}
-        @if(empty($product->slug))
         <span class="input-group-addon" style="min-width: 32px;padding-top: 3px;padding-bottom: 3px;">
-            <button class="btn btn-warning btn-xs" type="button">
+            <button class="btn btn-warning btn-xs" data-type="generate_slug" type="button">
                 <i class="fa fa-dot-circle-o"></i> Generate
             </button>
         </span>
-        @endif
     </div>
 </div>
 @foreach($langsSuf as $lng)
     <div class="col-lg-4">
-        <div class="input-group input-group-sm">
+        <div class="input-group input-group-sm" data-type="input_for_slug">
             {{ Form::label('name'.$lng['s'], trans('product-form.label.parent.name'.$lng['s']), ['class' => 'input-group-addon']) }}
             {{ Form::text('name'.$lng['s'], $product->{'name'.$lng['s']}, [
                 'class' => 'form-control',

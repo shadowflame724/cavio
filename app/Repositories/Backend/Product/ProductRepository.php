@@ -47,6 +47,16 @@ class ProductRepository extends BaseRepository
 
         return $model;
     }
+    public function issetBySlug($slug)
+    {
+        $model = Product::where([
+            'slug' => $slug
+        ])->first();
+        if($model){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * @return mixed
@@ -126,6 +136,7 @@ class ProductRepository extends BaseRepository
             ];
             foreach ($item['price'] as $pr_id => $prOne) {
                 $ch_id = isset($childCodes[$prOne['child_code']]) ? $childCodes[$prOne['child_code']] : '';
+
                 if (!empty($ch_id) && $pr_id !== 'KEY') {
                     $discount = (int)$prOne['discount'];
                     $def_price = (int)$prOne['def_price'];

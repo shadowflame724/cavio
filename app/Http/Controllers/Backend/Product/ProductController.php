@@ -49,6 +49,17 @@ class ProductController extends Controller
         return view('backend.products.index');
     }
 
+
+    public function getBySlug($slug)
+    {
+        $res = $this->product->issetBySlug($slug);
+        if ($res) {
+            $slug .= '-' . random_alphanumeric_key(4);
+            return $this->getBySlug($slug);
+        }
+        return $slug;
+    }
+
     /**
      * @param ManageProductRequest $request
      *
