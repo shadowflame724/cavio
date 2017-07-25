@@ -122,17 +122,31 @@ class UploadController extends Controller
     public function uploadCropped(Request $request)
     {
         $path = $request->file('croppedImage')->getRealPath();
-        $img = new Image($path);
-        $oldImg = $request->get('name');
+        $croppedImg = new Image($path);
+        $oldImg = new Image(public_path($request->get('name')));
+        $oldImgWidth = $oldImg->getWidth();
+        $oldImgHeight = $oldImg->getHeight();
+        $croppedImgWidth = $croppedImg->getWidth();
+        $croppedImgHeight = $croppedImg->getHeight();
 
-        $img->saveAs(public_path($oldImg));
 
-        $json = [
-            'success' => [
-                'title' => 'Done',
-                'text' => 'Photo upload',
-            ]
-        ];
+        if ($croppedImgWidth < $oldImgWidth || $croppedImgHeight < $oldImgHeight) {
+            $json = [
+                'error' => [
+                    'title' => 'Incorrect photo size',
+                    'text' => 'Min size: ' . $croppedImgWidth . ' × ' . $oldImgHeight
+                ]
+            ];
+        } else {
+            $croppedImg->saveAs(public_path($request->get('name')));
+            $json = [
+                'success' => [
+                    'title' => 'Done',
+                    'text' => 'Photo upload'
+                ]
+            ];
+        }
+
         return response()->json($json);
     }
 

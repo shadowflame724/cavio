@@ -15,18 +15,6 @@
         '<input type="text" class="form-control" id="dataHeight" placeholder="height">' +
         '<span class="input-group-addon">px</span>' +
         '</div>' +
-        '<label class="btn btn-primary">' +
-        '<input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.7777777777777777">' +
-        '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Main page banner">' +
-        'Original</span></label>' +
-        '<label class="btn btn-primary">' +
-        '<input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1.3333333333333333">' +
-        '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Main collection photo">' +
-        'Thumb</span></label>' +
-        '<label class="btn btn-primary">' +
-        '<input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">' +
-        '<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Long Col-zone photo">' +
-        'Horizontal</span></label>' +
         '</div>' +
         '<div class="modal-body">' +
         '<div class="image-container"></div>' +
@@ -40,10 +28,26 @@
         '</div>' +
         '';
 
-    console.log($('.carousel'));
     $('.carousel').carousel({
         interval: 200000
     });
+
+    var $sortableList = [];
+
+    function movePhoto() {
+        $('.photo.active:not(:first)').each(function (key, el) {
+            $sortableList[key] = Sortable.create(el, {
+                onEnd: function (/**Event*/evt) {
+                    var colZonHidden = '';
+                    var colZonPhotos = $(el).children().slice(1);
+                    colZonPhotos.each(function () {
+                        colZonHidden += $(this).find('img').data().content;
+                    });
+                    $(el).children()[0].value = colZonHidden;
+                }
+            });
+        });
+    }
     // transform cropper dataURI output to a Blob which Dropzone accepts
     function dataURItoBlob(dataURI) {
         // convert base64 to raw binary data held in a string
@@ -125,8 +129,6 @@
         },
         success: function (file, res) {
             this.removeFile(file);
-            console.log('response', res, 'file', file);
-
             if (res['error']) {
                 swal({
                     title: res['error']['title'],
@@ -139,60 +141,42 @@
 
             } else {
                 if ($('.photo').hasClass('active')) {
-                    $('#original').replaceWith('<img id="original" src="/upload/tmp/collection/original/' + res['success']['imgName'] + '">');
-                    $('#horizontal').replaceWith('<img id="horizontal" src="/upload/tmp/collection/horizontal/' + res['success']['imgName'] + '">');
-                    $('#thumb').replaceWith('<img id="thumb" src="/upload/tmp/collection/thumb/' + res['success']['imgName'] + '">');
+                    $('#original').replaceWith('<img id="original" class="add_photo" src="/upload/tmp/collection/original/' + res['success']['imgName'] + '">');
+                    $('#horizontal').replaceWith('<img id="horizontal" class="add_photo" src="/upload/tmp/collection/horizontal/' + res['success']['imgName'] + '">');
+                    $('#thumb').replaceWith('<img id="thumb" class="add_photo" src="/upload/tmp/collection/thumb/' + res['success']['imgName'] + '">');
                 } else {
-                    $('.photo').append('<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">'+
-                        '<ol class="carousel-indicators">'+
-                        '<li data-target="#carousel-example-generic" data-slide-to="0"'+
-                        'class="active"></li>'+
-                        '<li data-target="#carousel-example-generic" data-slide-to="1"></li>'+
-                        '<li data-target="#carousel-example-generic" data-slide-to="2"></li>'+
-                        '</ol>'+
-
-                        '<div class="carousel-inner" role="listbox">'+
-                        '<div class="item active">'+
-                        '<img id="original"'+
-                        'src="/upload/tmp/collection/original/'+res['success']['imgName']+'"'+
-                        'alt="" data-content="'+res['success']['imgName']+'">'+
-                        '<div class="carousel-caption">'+
-                        'Original'+
+                    $('.photo').append('<div class="photo-one-bl">' +
+                        '<ul class="nav nav-tabs" role="tablist">' +
+                        '<li role="presentation" class="active"><a href="#originalTab" aria-controls="originalTab" role="tab" data-toggle="tab">Original</a></li>' +
+                        '<li role="presentation"><a href="#horizontalTab" aria-controls="horizontalTab" role="tab" data-toggle="tab">Horizontal</a></li>' +
+                        '<li role="presentation"><a href="#thumbTab" aria-controls="thumbTab" role="tab" data-toggle="tab">Thumb</a></li>' +
+                        '</ul>' +
+                        '<div class="tab-content">' +
+                        '<div role="tabpanel" class="tab-pane fade in active" id="originalTab">' +
+                        '<img id="original" class="add_photo" src="/upload/tmp/collection/original/'+res['success']['imgName']+'" alt="" data-content="'+res['success']['imgName']+'">' +
+                        '</div>' +
+                        '<div role="tabpanel" class="tab-pane fade" id="horizontalTab">' +
+                        '<img id="horizontal" class="add_photo" src="/upload/tmp/collection/horizontal/'+res['success']['imgName']+'" alt="" data-content="'+res['success']['imgName']+'">' +
+                        '</div>' +
+                        '<div role="tabpanel" class="tab-pane fade" id="thumbTab">' +
+                        '<img id="thumb" class="add_photo" src="/upload/tmp/collection/thumb/'+res['success']['imgName']+'" alt="" data-content="'+res['success']['imgName']+'">' +
                         '</div>'+
                         '</div>'+
-                        '<div class="item">'+
-                        '<img id="horizontal"'+
-                        'src="/upload/tmp/collection/horizontal/'+res['success']['imgName']+'"'+
-                        'alt="" data-content="'+res['success']['imgName']+'">'+
-                        '<div class="carousel-caption">'+
-                        'Horizontal'+
-                        '</div>'+
-                        '</div>'+
-                        '<div class="item">'+
-                        '<img id="thumb"'+
-                        'src="/upload/tmp/collection/thumb/'+res['success']['imgName']+'"'+
-                        'alt="" data-content="'+res['success']['imgName']+'">'+
-                        '<div class="carousel-caption">'+
-                        'Thumb'+
-                        '</div>'+
-                        '</div>'+
-                        '</div>'+
-                        '<a class="left carousel-control" href="#carousel-example-generic" role="button"'+
-                        'data-slide="prev">'+
-                        '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>'+
-                        '<span class="sr-only">Previous</span>'+
-                        '</a>'+
-                        '<a class="right carousel-control" href="#carousel-example-generic" role="button"'+
-                        'data-slide="next">'+
-                        '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>'+
-                        '<span class="sr-only">Next</span>'+
-                        '</a>'+
+                        '</>'+
+                        '<div class="cropperButtons">'+
+                        '<label class="btn btn-primary">' +
+                        '<input type="radio" class="sr-only" name="collectionHorizontal" value="/upload/tmp/collection/horizontal/'+res['success']['imgName']+'">' +
+                        '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
+                        'Horizontal</span></label>' +
+                        '<label class="btn btn-primary">' +
+                        '<input type="radio" class="sr-only"  name="collectionThumb" value="/upload/tmp/collection/thumb/'+res['success']['imgName']+'">' +
+                        '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
+                        'Thumb</span></label>' +
                         '</div>');
                     $('.photo').addClass('active');
                 }
 
                 $('#collection-hidden').val(res['success']['imgName']);
-                console.log($('#collection-hidden').val());
                 croppPhoto();
 
                 swal({
@@ -206,12 +190,11 @@
             }
         },
         error: function (file, errorMessage, xhr) {
-            console.log(errorMessage, xhr);
             var self = this,
                 default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
             swal({
                 title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
-                text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),
+                text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '' + (xhr ? default_error : errorMessage),
                 type: "warning",
                 showCancelButton: false,
                 confirmButtonColor: "#DD6B55",
@@ -234,7 +217,6 @@
                 },
                 successmultiple: function (file, res) {
                     this.removeFile(file);
-
                     if (res[0]['error']) {
                         swal({
                             title: res['error']['title'],
@@ -246,19 +228,28 @@
                         });
 
                     } else {
-                        console.log(res);
                         var hidden = '';
                         inp = $('.photo').eq(key + 1).find(":hidden");
                         res.forEach(function (item, i, res) {
                             $('.photo').eq(key + 1).append('<div class="photo-one-bl">'+
                             '<div id="dlt_photo" class="btn glyphicon glyphicon-remove dlt_photo"></div>'+
-                           '<img class="add_photo" src="/upload/tmp/zone/original/' + item.success.imgName + '" data-content="' + item.success.imgName + '">'+
+                           '<img class="colZon_photo" src="/upload/tmp/zone/original/' + item.success.imgName + '" data-content="' + item.success.imgName + ',' +'">'+
+                                '<div class="cropperButtons">'+
+                                '<label class="btn btn-primary">' +
+                                '<input type="radio" class="sr-only horizontal" name="zoneHorizontal" value="/upload/tmp/zone/horizontal/'+item.success.imgName+'"">' +
+                                '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
+                                'Horizontal</span></label>' +
+                                '<label class="btn btn-primary">' +
+                                    '<input type="radio" class="sr-only thumb" name="zoneThumb" value="/upload/tmp/zone/thumb/'+item.success.imgName+'">' +
+                                '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
+                                'Thumb</span></label>' +
+                                '</div>'+
                             '</div>');
                             hidden += item.success.imgName + ',';
                         });
                         $('.photo').eq(key + 1).addClass('active');
                         inp.val(inp.val() + hidden);
-                        console.log('inp.val=', inp.val());
+                        console.log(inp.val());
                         swal({
                             title: res[0]['success']['title'],
                             text: res[0]['success']['text'],
@@ -269,14 +260,16 @@
                         });
                         deletePhoto();
                         croppPhoto();
+                        movePhoto();
                     }
                 },
                 error: function (file, errorMessage, xhr) {
+                    console.log(errorMessage);
                     var self = this,
                         default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
                     swal({
                         title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
-                        text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '\n' + (xhr ? default_error : errorMessage),
+                        text: '{{trans('validation.attributes.backend.access.image.error.text')}} ' + '' + (xhr ? default_error : errorMessage),
                         type: "warning",
                         showCancelButton: false,
                         confirmButtonColor: "#DD6B55",
@@ -290,11 +283,33 @@
     });
 
     function croppPhoto() {
-        $('.photo img').each(function () {
-            $(this).on('click', function () {
-                console.log('click', this);
-                var original = $(this);
-                var img = $(this).clone();
+        $('.cropperButtons').each(function (index, el) {
+            $(el).find('input').on('click', function () {
+                var path = $(this).val();
+                var original = $(this).parents('.photo-one-bl').find('img')[0];
+                console.log(original);
+                var width;
+                var height;
+                switch ($(this)[0].name) {
+                    case 'collectionHorizontal':
+                        width = 454.4;
+                        height = 102.5;
+                        break;
+                    case 'collectionThumb':
+                        width = 136.32;
+                        height = 181.88277087;
+                        break;
+                    case 'zoneHorizontal':
+                        width = 454.4;
+                        height = 102.5;
+                        break;
+                    case 'zoneThumb':
+                        width = 150.52;
+                        height = 105.150976909;
+                        break;
+                }
+                var img = $(original).clone();
+                $(this).val(path.replace(/horizontal|thumb/gi, 'original'));
                 var $cropperModal = $(modalTemplate);
                 var $uploadCrop = $cropperModal.find('.crop-upload');
                 $cropperModal.find('.image-container').html(img[0]);
@@ -302,21 +317,15 @@
                     preview: '.image-preview',
                     autoCropArea: 1,
                     movable: false,
-                    cropBoxResizable: true,
+                    cropBoxResizable: false,
+                    zoomOnWheel: false,
+                    viewMode: 3,
                     minContainerHeight: 320,
                     minContainerWidth: 568,
-                    crop: function (e) {
-                        $('input#dataWidth').val(e.detail.width);
-                        $('input#dataHeight').val(e.detail.height);
-                        $('#aspectRatio1').on('click', function () {
-                            cropper.setAspectRatio(1.7777777777777777);
-                        });
-                        $('#aspectRatio2').on('click', function () {
-                            cropper.setAspectRatio(0.75);
-                        });
-                        $('#aspectRatio3').on('click', function () {
-                            cropper.setAspectRatio(4.3956044);
-                        });
+                    ready: function(){
+                        cropper.setCropBoxData({"left":10,"top":10,"width":width,"height":height});
+                    },
+                    crop: function(){
                     }
                 });
 
@@ -329,13 +338,7 @@
                     newFile.name = img.data().content;
                     $cropperModal.modal('hide');
                     formData.append('croppedImage', newFile);
-                    var pathArray = location.href.split( '/' );
-                    var protocol = pathArray[0];
-                    var host = pathArray[2];
-                    var url = protocol + '//' + host;
-                    var src = img[0].src.replace(url,'');
-                    console.log(src);
-                    formData.append('name', src);
+                    formData.append('name', path);
                     $.ajax('{{route('admin.file.upload.cropped')}}', {
                         headers: {
                             'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
@@ -345,13 +348,41 @@
                         processData: false,
                         contentType: false,
                         success: function (res) {
-                            console.log('Upload success', res);
-                            src = original[0].src;
-                            d = new Date();
-                            $(original).attr("src", src + "?" + d.getTime());
+                            if (res['error']) {
+                                swal({
+                                    title: res['error']['title'],
+                                    text: res['error']['text'],
+                                    type: "warning",
+                                    confirmButtonColor: "#DD6B55 ",
+                                    confirmButtonText: 'Ok',
+                                    closeOnConfirm: true
+                                });
+
+                            } else {
+                                swal({
+                                    title: res['success']['title'],
+                                    text: res['success']['text'],
+                                    type: "success",
+                                    confirmButtonColor: "#DD6B55 ",
+                                    confirmButtonText: 'Ок',
+                                    closeOnConfirm: true
+                                });
+                                console.log('Upload success', res);
+                                d = new Date();
+                                $("img[src$='"+path+"']").attr("src", path + "?" + d.getTime());
+                            }
                         },
                         error: function (res) {
                             console.log('Upload error', res);
+                            swal({
+                                title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
+                                text: '{{trans('validation.attributes.backend.access.image.error.text')}} ',
+                                type: "warning",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: 'ОК',
+                                closeOnConfirm: true
+                            });
                         }
                     });
                 });
@@ -373,4 +404,5 @@
 
     deletePhoto();
     croppPhoto();
+    movePhoto();
 </script>
