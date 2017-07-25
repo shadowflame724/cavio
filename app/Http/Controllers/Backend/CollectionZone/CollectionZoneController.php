@@ -20,12 +20,10 @@ class CollectionZoneController extends Controller
             'title' => "Default title",
             'title_ru' => "Default title",
             'title_it' => "Default title",
-
             'collection_id' => $collection->id,
         ]);
 
         return redirect()->route('admin.collection.edit', $collection)->withFlashSuccess(trans('alerts.backend.collection.zones.created'));
-
     }
 
     /**
@@ -36,7 +34,12 @@ class CollectionZoneController extends Controller
     public function destroy(CollectionZone $collectionZones)
     {
         $collection = $collectionZones->collection;
-        $collectionZones->delete();
+        $imageArray = explode(',', $collectionZones->image);
+        if($collectionZones->delete()){
+            foreach ($imageArray as $image){
+                $this->deleteThreeSizeImg($image, 'zone');
+            }
+        }
 
         return redirect()->route('admin.collection.edit', $collection)->withFlashSuccess(trans('alerts.backend.collection.zones.deleted'));
     }
