@@ -22,7 +22,7 @@ class ProductChild extends Model
         'prev',
         'prev_ru',
         'prev_it',
-        'dimention',
+        'dimensions',
         'sort',
         'published'
     ];

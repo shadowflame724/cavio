@@ -210,7 +210,9 @@ return [
                     'code' => 'Codice*',
                 ],
                 'zone' => [
-                    'title' => 'Titolo*',
+                    'title' => 'Titolo[Eng]*',
+                    'title_ru' => 'Titolo[Rus]*',
+                    'title_it' => 'Titolo[Itl]*',
                     'image' => 'Immagine',
                 ],
                 'good' => [

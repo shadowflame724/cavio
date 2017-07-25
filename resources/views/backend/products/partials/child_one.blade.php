@@ -1,0 +1,96 @@
+@php
+    $chldKey = ($child->id) ? $child->id : 'KEY';
+@endphp
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <div class="panel-title">{{ trans('product-form.label.child.title') }}</div>
+        <div class="checkbox">
+            <label for="child[{{ $chldKey }}][published]">
+                {{ Form::checkbox('child['.$chldKey.'][published]', $child->published, $child->published, [
+                    'id' => 'child['.$chldKey.'][published]'
+                ]) }}
+                {{ trans('product-form.label.child.published') }}
+            </label>
+        </div>
+        <div class="pull-right">
+            {{--<button type="button" class="btn btn-xs btn-success"><i class="fa fa-save"></i></button>--}}
+            {{--<button type="button" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>--}}
+            <button type="button"
+                    class="btn btn-xs btn-link {{ ($child->published)?'':'collapsed' }}"
+                    data-toggle="collapse"
+                    data-parent="#productOne"
+                    href="#productChild{{ $child->id }}">
+                <i class="caret"></i>
+            </button>
+        </div>
+    </div>
+    <div class="panel-collapse collapse {{ ($child->published)?'in':'' }}" id="productChild{{ $child->id }}">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="input-group input-group-sm">
+                        {{ Form::label('child['.$chldKey.'][code]', trans('product-form.label.child.code'), ['class' => 'input-group-addon']) }}
+                        {{ Form::text('child['.$chldKey.'][code]', $child->code, [
+                            'class' => 'form-control',
+                            'data-type' => 'replace-input',
+                            'data-name' => 'code',
+                            'maxlength' => '100',
+                            'required' => 'required'
+                        ]) }}
+                    </div>
+                </div>
+                @foreach($langsSuf as $lng)
+                    <div class="col-lg-4">
+                        <div class="input-group input-group-sm">
+                            {{ Form::label('child['.$chldKey.'][name'.$lng['s'].']', trans('product-form.label.child.name'.$lng['s']), ['class' => 'input-group-addon']) }}
+                            {{ Form::text('child['.$chldKey.'][name'.$lng['s'].']', $child->{'name'.$lng['s']}, [
+                                'class' => 'form-control',
+                                'data-type' => 'replace-input',
+                                'data-name' => 'name'.$lng['s'],
+                                'maxlength' => '100',
+                                'required' => 'required'
+                            ]) }}
+                        </div>
+                        <div class="input-group input-group-sm">
+                            {{ Form::label('child['.$chldKey.'][prev'.$lng['s'].']', trans('product-form.label.child.prev'.$lng['s']), ['class' => 'input-group-addon']) }}
+                            {{ Form::textarea('child['.$chldKey.'][prev'.$lng['s'].']', $child->{'name'.$lng['s']}, [
+                                'class' => 'form-control',
+                                'data-type' => 'replace-input',
+                                'data-name' => 'prev'.$lng['s'],
+                                'maxlength' => '100',
+                                'rows' => '3',
+                                //'required' => 'required'
+                            ]) }}
+                        </div>
+                    </div>
+                @endforeach
+                <div class="col-lg-12">
+                    <div class="input-group input-group-sm">
+                        {{ Form::label('child['.$chldKey.'][dimensions]', trans('product-form.label.child.dimensions'), ['class' => 'input-group-addon']) }}
+                        {{ Form::textarea('child['.$chldKey.'][dimensions]', $child->dimensions, [
+                            'class' => 'form-control child-dimensions',
+                            'data-type' => 'replace-input',
+                            'data-name' => 'dimensions',
+                            'maxlength' => '100',
+                            'rows' => '3',
+                            //'required' => 'required'
+                        ]) }}
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="input-group input-group-sm">
+                        <label for="child[{{$chldKey}}][comment]" class="input-group-addon"><b>{{ trans('product-form.label.child.comment') }}</b></label>
+                        {{ Form::textarea('child['.$chldKey.'][comment]', $child->comment, [
+                            'id' => 'child['.$chldKey.'][comment]',
+                            'data-replace' => 'comment',
+                            'class' => 'form-control',
+                            'maxlength' => '100',
+                            'rows' => '3',
+                            //'required' => 'required'
+                        ]) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

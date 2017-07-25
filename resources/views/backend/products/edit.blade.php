@@ -5,6 +5,7 @@
     {{ Html::style('css/backend/plugin/cropper/cropper.css') }}
     {{ Html::style('css/backend/plugin/dropzone/dropzone.css') }}
     {{ Html::style('css/backend/plugin/dropzone/basic.css') }}
+    {{ Html::style('css/backend/plugin/select2/select2.min.css') }}
     {{ Html::style('css/backend/redactor/redactor.css') }}
 @endsection
 @section('after-styles')
@@ -39,22 +40,20 @@
             display: inline-block;
             visibility: hidden;
         }
-
-        .dz-photo {
-            margin: 30px 0 50px;
-        }
-
         .photo.active {
             visibility: visible;
             max-width: 650px;
         }
 
+        .dz-photo {
+            margin: 30px 0 50px;
+        }
+
+
         .dlt_photo {
             position: absolute;
             top: 0;
             right: 0;
-            color: red;
-            font-size: 25px;
         }
     </style>
 
@@ -77,185 +76,9 @@
                 @include('backend.products.product-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
-                <a href="#en" aria-controls="en" role="tab" data-toggle="tab">EN</a>
-            </li>
-            <li role="presentation">
-                <a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a>
-            </li>
-            <li role="presentation">
-                <a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="en">
-                <div class="box-body">
-                    @include('backend.products._form')
-
-                    {{--<div class="form-group">--}}
-                        {{--{{ Form::label('collectionZone_id', trans('validation.attributes.backend.access.product.collection_id'), ['class' => 'col-lg-2 control-label']) }}--}}
-                        {{--<div class="col-lg-10">--}}
-                            {{--<select class="form-control" multiple="multiple"--}}
-                                    {{--name="collectionZone_id[]">--}}
-                                {{--@foreach($collectionZones as $key => $collectionZone)--}}
-                                    {{--<option value="{{$key}}"--}}
-                                            {{--@foreach($product->collectionZone as $c) @if($key == $c->id)selected="selected"@endif @endforeach>{{ $collectionZone }}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</div><!--col-lg-10-->--}}
-                    {{--</div><!--form control-->--}}
-
-                    {{--<div class="form-group">--}}
-                        {{--{{ Form::label('finishTissues', trans('validation.attributes.backend.access.product.tissue'), ['class' => 'col-lg-2 control-label']) }}--}}
-
-                        {{--<div class="col-lg-10">--}}
-                            {{--<select class="form-control" multiple="multiple"--}}
-                                    {{--name="finishTissues_id[]">--}}
-                                {{--@foreach($finishTissues as $key => $finishTissue)--}}
-                                    {{--<option value="{{$key}}"--}}
-                                            {{--@foreach($product->finishTissues as $f) @if($key == $f->id)selected="selected"@endif @endforeach>{{ $finishTissue }}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</div><!--col-lg-10-->--}}
-                    {{--</div><!--form control-->--}}
-
-                    <div class="form-group">
-                        {{ Form::label('code', trans('validation.attributes.backend.access.product.code'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('code', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('name', trans('validation.attributes.backend.access.product.name'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('price', trans('validation.attributes.backend.access.product.price'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('price', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description', trans('validation.attributes.backend.access.product.description'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('description', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-                    <div class="form-group">
-                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            <div class="dropzone" id="dz_photo"></div>
-                        </div>
-                        <div class="col-lg-2">
-                        </div>
-                        <div class="col-lg-10" id="photos">
-                            @if($product->photos)
-                                @foreach($product->photos as $key => $photo)
-                                    <div class="photo active">
-                                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                        <img id="add_photo{{ $key }}" src="/upload/images/{{ $photo->image  }}" alt="">
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="photo">
-                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                </div>
-                            @endif
-                        </div>
-
-                    </div><!--form control-->
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="ru">
-                <div class="box-body">
-
-                    <div class="form-group">
-                        {{ Form::label('name_ru', trans('validation.attributes.backend.access.product.name'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.product.description'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('description_ru', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade" id="it">
-                <div class="box-body">
-
-                    <div class="form-group">
-                        {{ Form::label('name_it', trans('validation.attributes.backend.access.product.name'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('name_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description_it', trans('validation.attributes.backend.access.product.description'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::text('description_it', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-                </div>
-            </div>
+        <div class="box-body">
+            @include('backend.products._form')
         </div>
-        <div class="panel-group panels" id="accordion" role="tablist" aria-multiselectable="false">
-            {{--@foreach($product->dimensions as $key => $dimension)--}}
-                {{--@php($i = $key + 1)--}}
-                {{--<div class="panel panel-primary">--}}
-                    {{--<div class="panel-heading" role="tab"><h4 class="panel-title">--}}
-                            {{--<a data-toggle="collapse" href="#{{ $i }}" aria-expanded="false"--}}
-                               {{--aria-controls="collapseOne">--}}
-                                {{--Dimensions {{ $i }}</a>--}}
-                            {{--<a id="removeSlide{{ $i }}" style="cursor: pointer" class="pull-right" data-toggle="tooltip"--}}
-                               {{--data-placement="top" title="Delete this"><i class="fa fa-lg fa-trash"></i></a></h4>--}}
-                    {{--</div>--}}
-                    {{--<div id="{{ $i }}" class="panel-collapse collapse" role="tabpanel">--}}
-                        {{--<div class="panel-body">--}}
-                            {{--<div class="form-group"><label class="form-label col-md-2" for="length">length</label>--}}
-                                {{--<div class="col-md-10"><input type="text" name="dimensions[{{ $i }}][length]"--}}
-                                                              {{--value="{{ $dimension->length }}" class="form-control">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group"><label class="form-label col-md-2" for="width">width</label>--}}
-                                {{--<div class="col-md-10"><input type="text" name="dimensions[{{ $i }}][width]"--}}
-                                                              {{--value="{{ $dimension->width }}"--}}
-                                                              {{--class="form-control">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group"><label class="form-label col-md-2" for="height">height</label>--}}
-                                {{--<div class="col-md-10"><input type="text" name="dimensions[{{ $i }}][height]"--}}
-                                                              {{--value="{{ $dimension->height }}" class="form-control">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group"><label class="form-label col-md-2" for="mattress">mattress</label>--}}
-                                {{--<div class="col-md-10"><input type="text" name="dimensions[{{ $i }}][mattress]"--}}
-                                                              {{--value="{{ $dimension->mattress }}"--}}
-                                                              {{--class="form-control"></div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group"><label class="form-label col-md-2" for="height">weight</label>--}}
-                                {{--<div class="col-md-10"><input type="text" name="dimensions[{{ $i }}][weight]"--}}
-                                                              {{--value="{{ $dimension->weight }}" class="form-control">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--@endforeach--}}
-        </div>
-        <button class="btn btn-default btn-block addPanel" type="button">Add dimensions</button>
-
     </div>
 
     <div class="box box-success">
@@ -278,8 +101,15 @@
 @section('after-scripts')
     {{ Html::script('js/backend/redactor/redactor.js') }}
     {{--{{ Html::script('js/backend/product/script.js') }}--}}
+    {{ Html::script('js/backend/plugin/select2/select2.full.min.js') }}
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(".select2").select2();
+      });
+    </script>
+    @include('backend.products.partials._form_scripts')
     <script>
         $('.addPanel').click(function () {
             var x = $('.panels .panel').length + 1;

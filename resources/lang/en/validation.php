@@ -213,7 +213,9 @@ return [
                     'code' => 'Code*',
                 ],
                 'zone' => [
-                    'title' => 'Title*',
+                    'title' => 'Title[Eng]*',
+                    'title_ru' => 'Title[Rus]*',
+                    'title_it' => 'Title[Itl]*',
                     'image' => 'Image',
                 ],
                 'good' => [

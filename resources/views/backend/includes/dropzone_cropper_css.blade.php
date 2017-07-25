@@ -35,7 +35,6 @@
 
     .photo.active {
         visibility: visible;
-        max-width: 650px;
     }
 
     .dlt_photo {

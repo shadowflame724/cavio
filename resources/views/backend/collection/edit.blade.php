@@ -6,17 +6,17 @@
     {{ Html::style('css/backend/plugin/dropzone/dropzone.css') }}
     {{ Html::style('css/backend/plugin/dropzone/basic.css') }}
     <style>
-        #original {
-            max-width: 650px;
-        }
+        /*#original {*/
+            /*max-width: 650px;*/
+        /*}*/
 
-        #horizontal {
-            max-width: 650px;
-        }
+        /*#horizontal {*/
+            /*max-width: 650px;*/
+        /*}*/
 
-        #vertical {
-            max-width: 100px;
-        }
+        /*#thumb {*/
+            /*max-width: 100px;*/
+        /*}*/
 
         .sweet-alert {
             z-index: 999;
@@ -46,14 +46,21 @@
 
         .photo.active {
             visibility: visible;
-            max-width: 650px;
         }
 
         .dlt_photo {
             position: absolute;
+            display: block;
             top: 0;
+            right: 0;
             color: red;
-            font-size: 25px;
+            font-size: 20px;
+        }
+
+        .photo-one-bl {
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
         }
     </style>
 @endsection
@@ -118,20 +125,60 @@
                             <div class="dropzone" id="dz_collection"></div>
                             @if($collection->image)
                                 <div class="photo active">
-                                    {{ Form::hidden('photo', $collection->image) }}
-                                    <img id="original"
-                                         src="/upload/images/collection/original/{{ $collection->image  }}"
-                                         alt="" data-content="{{ $collection->image }}">
-                                    <img id="horizontal"
-                                         src="/upload/images/collection/horizontal/{{ $collection->image  }}"
-                                         alt="" data-content="{{ $collection->image }}">
-                                    <img id="vertical"
-                                         src="/upload/images/collection/vertical/{{ $collection->image  }}"
-                                         alt="" data-content="{{ $collection->image }}">
+                                    {{ Form::hidden('photo', $collection->image, ['id' => 'collection-hidden']) }}
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#carousel-example-generic" data-slide-to="0"
+                                                class="active"></li>
+                                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="item active">
+                                                <img id="original"
+                                                     src="/upload/images/collection/original/{{ $collection->image  }}"
+                                                     alt="" data-content="{{ $collection->image }}">
+                                                <div class="carousel-caption">
+                                                    Original
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <img id="horizontal"
+                                                     src="/upload/images/collection/horizontal/{{ $collection->image  }}"
+                                                     alt="" data-content="{{ $collection->image }}">
+                                                <div class="carousel-caption">
+                                                    Horizontal
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <img id="thumb"
+                                                     src="/upload/images/collection/thumb/{{ $collection->image  }}"
+                                                     alt="" data-content="{{ $collection->image }}">
+                                                <div class="carousel-caption">
+                                                    Thumb
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                                           data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                                           data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
                                 </div>
                             @else
                                 <div class="photo">
-                                    {{ Form::hidden('photo', null) }}
+                                    {{ Form::hidden('photo', null, ['id' => 'collection-hidden']) }}
 
                                 </div>
                             @endif
@@ -195,115 +242,117 @@
                 @foreach($collection->collectionZones as $key => $zone)
                     @php ($i = $key+1)
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="heading{{$i}}">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                       href="#collapse{{$i}}"
-                                       aria-expanded="true" aria-controls="collapse{{$i}}">
-                                        {{$i}}. {{$zone->title}}
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
-                                 aria-labelledby="heading{{$i}}">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#en{{$i}}" aria-controls="en"
-                                                                              role="tab"
-                                                                              data-toggle="tab">EN</a>
-                                    </li>
-                                    <li role="presentation"><a href="#ru{{$i}}" aria-controls="ru" role="tab"
-                                                               data-toggle="tab">RU</a></li>
-                                    <li role="presentation"><a href="#it{{$i}}" aria-controls="it" role="tab"
-                                                               data-toggle="tab">IT</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active" id="en{{$i}}">
-                                        <div class="panel-body">
-                                            {{ Form::hidden('zones['.$i.'][id]', $zone->id) }}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading{{$i}}">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapse{{$i}}"
+                                   aria-expanded="true" aria-controls="collapse{{$i}}">
+                                    {{$i}}. {{$zone->title}}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="heading{{$i}}">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#en{{$i}}" aria-controls="en"
+                                                                          role="tab"
+                                                                          data-toggle="tab">EN</a>
+                                </li>
+                                <li role="presentation"><a href="#ru{{$i}}" aria-controls="ru" role="tab"
+                                                           data-toggle="tab">RU</a></li>
+                                <li role="presentation"><a href="#it{{$i}}" aria-controls="it" role="tab"
+                                                           data-toggle="tab">IT</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="en{{$i}}">
+                                    <div class="panel-body">
+                                        {{ Form::hidden('zones['.$i.'][id]', $zone->id) }}
 
-                                            <div class="form-group">
-                                                {{ Form::label('zones['.$i.'][zone_id]', trans('validation.attributes.backend.access.collection.zones.mainZones'), ['class' => 'col-lg-2 control-label']) }}
+                                        <div class="form-group">
+                                            {{ Form::label('zones['.$i.'][zone_id]', trans('validation.attributes.backend.access.collection.zones.mainZones'), ['class' => 'col-lg-2 control-label']) }}
 
-                                                <div class="col-lg-10">
-                                                    <select class="form-control"
-                                                            name="zones[{{ $i }}][zone_id]">
-                                                        @foreach($mainZones as $mainZone)
-                                                            <option value="{{ $mainZone->id }}"
-                                                                    @if($zone->zone_id == $mainZone->id) selected="selected"@endif>{{ $mainZone->title }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div><!--form control-->
+                                            <div class="col-lg-10">
+                                                <select class="form-control"
+                                                        name="zones[{{ $i }}][zone_id]">
+                                                    @foreach($mainZones as $mainZone)
+                                                        <option value="{{ $mainZone->id }}"
+                                                                @if($zone->zone_id == $mainZone->id) selected="selected"@endif>{{ $mainZone->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div><!--form control-->
 
-                                            <div class="form-group">
-                                                {{ Form::label('title', trans('validation.attributes.backend.access.collection.zones.title'), ['class' => 'col-lg-2 control-label']) }}
+                                        <div class="form-group">
+                                            {{ Form::label('title', trans('validation.attributes.backend.access.collection.zones.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                                                <div class="col-lg-10">
-                                                    {{ Form::text('zones['.$i.'][title]', $zone->title, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
-                                                </div><!--col-lg-10-->
-                                            </div><!--form control-->
+                                            <div class="col-lg-10">
+                                                {{ Form::text('zones['.$i.'][title]', $zone->title, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
 
-                                            <div class="form-group">
-                                                {{ Form::label('zones['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                                                <div class="col-lg-10">
-                                                    <div class="dropzone" id="add_photo"></div>
-                                                    @if($zone->image)
-                                                        <div class="photo active">
-                                                            {{ Form::hidden('zones['.$i.'][photo]', $zone->image, ['id' => 'zones['.$i.'][photo]']) }}
-                                                            @foreach($zone->getImageArray($zone->image) as $key => $image)
-                                                                @if(strlen($image) > 0)
+                                        <div class="form-group">
+                                            {{ Form::label('zones['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                                            <div class="col-lg-10">
+                                                <div class="dropzone" id="add_photo"></div>
+                                                @if($zone->image)
+                                                    <div class="photo active">
+                                                        {{ Form::hidden('zones['.$i.'][photo]', $zone->image, ['id' => 'zones['.$i.'][photo]']) }}
+                                                        @foreach($zone->getImageArray($zone->image) as $key => $image)
+                                                            @if(strlen($image) > 0)
+                                                                <div class="photo-one-bl">
                                                                     <div id="dlt_photo[{{$i}}][{{$key}}]"
                                                                          class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                                    <img class="add_photo" id="add_photo"
-                                                                         src="/upload/images/{{ ltrim($image) }}"
+                                                                    <img class="add_photo"
+                                                                         src="/upload/images/zone/original/{{ ltrim($image) }}"
                                                                          alt="" data-content="{{ ltrim($image) }},">
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <div id="photo{{$i}}" class="photo">
-                                                            {{ Form::hidden('zones['.$i.'][photo]', null, ['id' => 'zones['.$i.'][photo]']) }}
-                                                        </div>
-                                                    @endif
-                                                </div><!--col-lg-10-->
-                                            </div><!--form control-->
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @else
+                                                    <div id="photo{{$i}}" class="photo">
+                                                        {{ Form::hidden('zones['.$i.'][photo]', null, ['id' => 'zones['.$i.'][photo]']) }}
+                                                    </div>
+                                                @endif
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
 
-                                            <a href="{{route('admin.collection.zones.destroy', $zone)}}"
-                                               class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
-                                        </div>
+                                        <a href="{{route('admin.collection.zones.destroy', $zone)}}"
+                                           class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
                                     </div>
+                                </div>
 
-                                    <div role="tabpanel" class="tab-pane fade" id="ru{{$i}}">
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                {{ Form::label('title_ru', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+                                <div role="tabpanel" class="tab-pane fade" id="ru{{$i}}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            {{ Form::label('title_ru', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                                                <div class="col-lg-10">
-                                                    {{ Form::text('zones['.$i.'][title_ru]', $zone->title_ru, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
-                                                </div><!--col-lg-10-->
-                                            </div><!--form control-->
+                                            <div class="col-lg-10">
+                                                {{ Form::text('zones['.$i.'][title_ru]', $zone->title_ru, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
 
-                                        </div>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="it{{$i}}">
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                {{ Form::label('title_it', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="it{{$i}}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            {{ Form::label('title_it', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                                                <div class="col-lg-10">
-                                                    {{ Form::text('zones['.$i.'][title_it]', $zone->title_it, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
-                                                </div><!--col-lg-10-->
-                                            </div><!--form control-->
+                                            <div class="col-lg-10">
+                                                {{ Form::text('zones['.$i.'][title_it]', $zone->title_it, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-                        <a href="{{route('admin.collection.zones.store', $collection)}}"
-                           class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
+                    </div>
+                @endforeach
+                <a href="{{route('admin.collection.zones.store', $collection)}}"
+                   class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
             </div>
 
         </div>

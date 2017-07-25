@@ -216,12 +216,15 @@
                       <use xlink:href="../wave.svg#wave"></use>
                     </svg>
                   </div>
-                  <img src=/upload/images/{{ $collectionZone->image }} alt="">
+                  @php
+                    $img = explode(',', $collectionZone->image)[0];
+                  @endphp
+                  <img src=/upload/images/{{ $img }} alt="">
                 </div>
                 <div>
                   <div class=coll-name>
 
-                    {{ $collectionZone->mainZone->{'title'.$langSuf} }}
+{{--                    {{ $collectionZone->mainZone->{'title'.$langSuf} }}--}}
 
                     <span class=wrap-coll-name-arrow>
                                         <span class=coll-name-arrow>→</span>

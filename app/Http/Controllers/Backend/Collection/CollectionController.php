@@ -55,7 +55,7 @@ class CollectionController extends Controller
     public function store(StoreCollectionRequest $request)
     {
         $this->collection->create($request->all());
-        $this->moveCollectionImg($request->photo);
+        $this->moveThreeSizeImg($request->photo);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.created'));
     }
@@ -103,23 +103,20 @@ class CollectionController extends Controller
                     //dd($newImagesArray, $oldImagesArray, strlen($oldImagesArray[0]));
 
                     foreach (array_diff($newImagesArray, $oldImagesArray) as $image) {
-                        $this->moveImg($image);
+                        $this->moveThreeSizeImg($image, null, 'zone');
                     }
 
-                    if (strlen($oldImagesArray[0]) > 0 ) {
+                    if (strlen($oldImagesArray[0]) > 0) {
                         foreach (array_diff($oldImagesArray, $newImagesArray) as $image) {
-                            $this->deleteImg($image);
+                            $this->deleteThreeSizeImg($image, 'zone');
                         }
                     }
-
-                    //dd('check file png');
-
                 }
             }
         }
         $oldName = $collection->image;
         $this->collection->update($collection, $request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo'));
-        $this->moveCollectionImg($request->photo, $oldName);
+        $this->moveThreeSizeImg($request->photo, $oldName);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.updated'));
     }
@@ -134,11 +131,7 @@ class CollectionController extends Controller
     {
         $imgName = $collection->image;
         $this->collection->delete($collection);
-        if (file_exists('upload/images/collection/original/' . $imgName)) {
-            unlink(public_path('upload/images/collection/original/' . $imgName));
-            unlink(public_path('upload/images/collection/horizontal/' . $imgName));
-            unlink(public_path('upload/images/collection/vertical/' . $imgName));
-        }
+        $this->deleteThreeSizeImg($imgName);
 
         return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.deleted'));
     }

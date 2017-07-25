@@ -94,45 +94,25 @@
                     </ul>
                 </li><!-- /.notifications-menu -->
 
-                <li class="dropdown tasks-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
-                        <span class="label label-default">0</span>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li class="header">{{ trans_choice('strings.backend.general.you_have.tasks', 0, ['number' => 0]) }}</li>
-                        <li class="footer">
-                            {{ link_to('#', trans('strings.backend.general.see_all.tasks')) }}
-                        </li>
-                    </ul>
-                </li><!-- /.tasks-menu -->
-
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ access()->user()->picture }}" class="user-image" alt="User Avatar"/>
                         <span class="hidden-xs">{{ access()->user()->full_name }}</span>
                     </a>
 
+{{--                    {{ dd(access()->user()->roles->toArray()) }}--}}
                     <ul class="dropdown-menu">
                         <li class="user-header">
                             <img src="{{ access()->user()->picture }}" class="img-circle" alt="User Avatar"/>
                             <p>
-                                {{-- access()->user()->full_name }} - {{ implode(", ", access()->user()->roles->lists('name')->toArray()) --}}
+                                {{ access()->user()->full_name }} -
+                                @php($r=0)
+                                @foreach(access()->user()->roles as $role)
+                                    @if($r), @endif
+                                    {{ $role->name }}
+                                @endforeach
                                 <small>{{ trans('strings.backend.general.member_since') }} {{ access()->user()->created_at->format("m/d/Y") }}</small>
                             </p>
-                        </li>
-
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                {{ link_to('#', 'Link') }}
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                {{ link_to('#', 'Link') }}
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                {{ link_to('#', 'Link') }}
-                            </div>
                         </li>
 
                         <li class="user-footer">

@@ -36,9 +36,27 @@ class ComposerServiceProvider extends ServiceProvider
         if($request->ajax()){
             $isAjax = true;
         }
-        $lang = get_lang_from_domain_name($request);
 
-        View::composer(['*'], function ($view) use ($request, $isAjax, $lang) {
+        /*
+         * Languages in global config
+         */
+        $lang = get_lang_from_domain_name($request);
+        $domain = ENV('APP_DOMAIN');
+        $appLangs = [
+            'lang' => $lang,
+            'paths' => [
+                'en' => 'http://' . $domain,
+                'it' => 'http://it.' . $domain,
+                'ru' => 'http://ru.' . $domain,
+            ],
+            'suf' => ($lang == 'en') ? '' : '_' . $lang,
+        ];
+        config([
+            'app.langs' => $appLangs
+        ]);
+        // ******
+
+        View::composer(['*'], function ($view) use ($request, $isAjax, $appLangs) {
             // геолокация
             $path = $request->path();
             if ($path == '/') {
@@ -47,20 +65,14 @@ class ComposerServiceProvider extends ServiceProvider
             if (isset($getParams)) {
                 $path .= $getParams['link'];
             }
-            $langPaths = [
-                'en' => 'http://'.ENV('APP_DOMAIN'),
-                'it' => 'http://it.'.ENV('APP_DOMAIN'),
-                'ru' => 'http://ru.'.ENV('APP_DOMAIN'),
-            ];
-            $langSuf = ($lang == 'en')?'':'_'.$lang;
 
             $view
                 ->with([
                     'isAjax' => $isAjax,
                     'pageLayout' => ($isAjax)?'ajax':'app_dev',
                     'curPath' => $path,
-                    'langPaths' => $langPaths,
-                    'langSuf' => $langSuf,
+                    'langPaths' => $appLangs['paths'],
+                    'langSuf' => $appLangs['suf'],
                 ]);
         });
         /*
