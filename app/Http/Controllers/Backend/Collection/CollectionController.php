@@ -118,7 +118,9 @@ class CollectionController extends Controller
         $this->collection->update($collection, $request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo'));
         $this->moveThreeSizeImg($request->photo, $oldName);
 
-        return redirect()->route('admin.collection.index')->withFlashSuccess(trans('alerts.backend.collection.updated'));
+        return redirect()
+            ->route('admin.collection.edit',$collection->id)
+            ->withFlashSuccess(trans('alerts.backend.collection.updated'));
     }
 
     /**

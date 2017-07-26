@@ -10,7 +10,8 @@ $langsSuf = [
     .panel { border-width: 2px;}
     .panel hr{ margin: 10px 0 15px;}
     .panel .select2 ~ .btn, .panel .inpMb ~ .btn { margin-top: 5px; }
-    .panel .select2 { width: 100% !important; height: 32px; }
+    .panel .select2 { width: 100% !important; }
+    .panel .select2:not(.forPopup) { height: 32px; }
     .panel .select2-container--default .select2-selection--single { border-radius: 0; border: 1px solid #ccc;}
     .panel .select2-container .select2-selection--single { height: 32px;}
     .panel .select2-container--default .select2-selection--single .select2-selection__arrow { height: 30px;}
@@ -36,6 +37,33 @@ $langsSuf = [
     .panel .well label{ font-weight: normal; font-size: 12px;}
     .panel .well{ padding: 5px 0; border-radius: 0; margin-left: 15px; margin-right: 15px; margin-bottom: 5px;
         background-color: #f7f7f7; border-color: #d2d6de; box-shadow: none;}
+
+    .select2-container--default.forPopup .select2-selection--multiple .select2-selection__choice{
+        background: #fff; position: relative;
+    }
+    .select2-container--default.forPopup .select2-search--inline .select2-search__field{
+        width: 100px !important; height: 28px !important; padding: 5px;
+        border-radius: 4px; border: 1px solid #d2d6de;
+        font-size: 16px; line-height: 1; color: #2b2b2b;
+    }
+    .select2-container--default.forPopup .select2-selection--multiple {border: none;}
+    .select2-container--default.forPopup .select2-selection--multiple .select2-selection__rendered{ padding: 0;}
+    .select2-container--default.forPopup .select2-selection--multiple .select2-selection__choice__remove{
+        position: absolute; display: block; top: 0; right: 0; margin: 0; text-align: center; z-index: 2;
+        background-color: #dd4b39; border-color: #d73925; color: #fff;
+        font-size: 24px; line-height: 24px; width: 24px; height: 24px; }
+    .pop-sel-img{ position: relative; display: block; width: 256px; height: 256px; z-index: 1;
+        background-size: contain; background-repeat: no-repeat; background-position: 50% 50%;}
+    .pop-img{ width: 0; height: 0; position: relative; padding: 30%; display: inline-block; vertical-align: top;
+        font-size: 12px;
+        border: 1px solid #ddd; border-radius: 4px;
+        background-size: contain; background-repeat: no-repeat; background-position: 50% 50%;}
+    .pop-img:hover{border: 1px solid #aaa;}
+    .pop-img span{ position: absolute; display: block; top: 100%; height: 15px; left: 0; right: 0;
+        text-align: center;}
+    .modal-body .select2{ width: 100% !important; position: relative;}
+    .select2-container.forPopup .select2-results__option{ width: 20%; display: inline-block;
+        padding-bottom: 20px;}
 </style>
 
 <div class="panel panel-success" id="productOne">
@@ -100,4 +128,27 @@ $langsSuf = [
         </div>
     </div>
 
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="photosPopup" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">All photos</h4>
+            </div>
+            <div class="modal-body">
+
+                <select name="selected_photos" multiple id="selected_photos" class="select2"></select>
+                <div class="modal-photos">
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Select photos</button>
+            </div>
+        </div>
+    </div>
 </div>

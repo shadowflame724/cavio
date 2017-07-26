@@ -115,6 +115,7 @@ class ProductRepository extends BaseRepository
         ];
 //        dd($input);
         $keyPrice = 0;
+        $isDiscount = false;
         foreach ($input['photo'] as $ph_id => $item) {
             $isMainPhoto = isset($item['main']) ? 1 : 0;
             $phOnePhotos = isset($item['photos']) ? implode(',', $item['photos']) : '';
@@ -161,6 +162,9 @@ class ProductRepository extends BaseRepository
                     if ($publish) {
                         if($mainPrices[0] > $price) $mainPrices[0] = $price; // min
                         if($mainPrices[1] < $price) $mainPrices[1] = $price; // max
+                        if($discount > 0){
+                            $isDiscount = true;
+                        }
                     }
                     $newPriceData[$keyPrice] = [
                         'product_child_id'  => $ch_id,
@@ -183,6 +187,7 @@ class ProductRepository extends BaseRepository
             }
         }
         $mainPhotoData['prices'] = false;
+        $mainPhotoData['isDiscount'] = $isDiscount;
         if ($mainPrices[0] == 99999999 || $mainPrices[1] == -1) { // нету min или max
             if ($mainPrices[0] == 99999999 && $mainPrices[1] == -1) { // нету min и max
                 $mainPhotoData['prices'] = '';
@@ -295,6 +300,7 @@ class ProductRepository extends BaseRepository
 
         $allData = $this->implodeData($input, $product->id, false);
 
+//        dd($allData);
         $product->main_photo_data = json_encode($allData['main_photo_data']);
         if(!isset($allData['main_photo_data']['photos'])){
             $product->published = 0;
