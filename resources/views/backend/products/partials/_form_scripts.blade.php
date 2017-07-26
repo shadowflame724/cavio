@@ -18,6 +18,7 @@
   )();
 
   $('body')
+
       .on('change', '[data-type="custom_price_check"] input[type="checkbox"]', function () {
         var $prnt = $(this).closest('[data-type="custom_price_check"]');
         var is_ch = $(this).prop('checked');
@@ -105,4 +106,55 @@
 
         }
       });
+
+  function formatState (state) {
+    if (!state.id) { return state.text; }
+    var temp = '<div class="pop-img" ' +
+      'style="background-image: url(/api/product-image/'+state.text+')">' +
+      '<span>'+state.text+'</span></div>';
+
+    var $state = $(temp);
+    return $state;
+  };
+  function formatSelection (state) {
+    if (!state.id) { return state.text; }
+    var temp = '<div class="pop-sel-img" ' +
+      'style="background-image: url(/api/product-image/'+state.text+')">';
+
+    var $state = $(temp);
+    return $state;
+  };
+  $(window).on('load', function () {
+    var $photos = $('#photosPopup');
+
+    $.get('/api/product-image/all').done(function (answ) {
+      var temp = '<div class="">';
+      var data = [];
+      $.each(answ, function (i,link) {
+        var name = link.split('/')[3];
+//        console.warn('>>', i,link,name);
+        var tempOne = '<div class="pop-img" style="background-image: url('+link+')"><span>'+name+'</span></div>';
+        temp += tempOne;
+        data.push({
+          id: name,
+          text: name,
+        });
+      });
+      temp += '</div>';
+
+      $(".select2.selected_photos").select2({
+        data: data,
+        templateResult: formatState,
+        templateSelection: formatSelection,
+        theme: "default forPopup",
+        maximumSelectionLength: 2
+//      templateResult: formatRepo, // omitted for brevity, see the source of this page
+//      templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+//      $(".js-example-templating").select2({
+//        templateResult: formatState
+//      });
+//      $photos.find('.modal-photos').html(temp);
+    });
+  });
 </script>
