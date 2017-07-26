@@ -64,14 +64,21 @@ class ProductRepository extends BaseRepository
 
         return $res;
     }
-    public function getOne($id, $with = null)
+    public function getBySlug($slug, $with = null)
     {
-        $model = $this->query();
+        $model = [];
         if($with){
             $model = $model->with($with);
         }
-        $model = $model->findOrFail($id);
+        $model = Product::where(['slug'=>$slug,'published'=>1])->with('childs','photos','photos.prices')->first();
 
+        $collIds = [];
+        foreach ($model->photos as $photo) {
+            $ids = explode(',',$photo->collection_ids);
+            $collIds = array_merge($ids,$collIds);
+        }
+        dd($model);
+//        dd($model);
         return $model;
     }
 }

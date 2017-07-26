@@ -37,4 +37,13 @@ class ProductController extends Controller
             'page' => $page,
         ]);
     }
+
+    public function one($slug)
+    {
+        $model = $this->product->getBySlug($slug);
+
+        return view('frontend.pages.product-card', [
+            'good' => $model,
+        ]);
+    }
 }
