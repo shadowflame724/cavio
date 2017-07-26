@@ -148,8 +148,12 @@ return [
                 'page' => [
                     'pageKey' => 'Page key',
                     'title' => 'Title*',
-                    'description' => 'Description*',
                     'body' => 'Content*',
+                    'title_ru' => 'Title[RU]*',
+                    'body_ru' => 'Content[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'body_it' => 'Content[IT]*',
+                    'description' => 'Description*',
                 ],
                 'block' => [
                     'title' => 'Title*',
@@ -157,6 +161,10 @@ return [
                     'body' => 'Content*',
                     'image' => 'Image*',
                     'image_select' => 'Select image',
+                    'title_ru' => 'Title[RU]*',
+                    'body_ru' => 'Content[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'body_it' => 'Content[IT]*',
                 ],
                 'image' => [
                     'error' =>[
@@ -203,6 +211,10 @@ return [
                 'collection' => [
                     'title' => 'Title*',
                     'description' => 'Description*',
+                    'title_ru' => 'Title[RU]*',
+                    'description_ru' => 'Description[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'description_it' => 'Description[IT]*',
                     'banner' => 'Banner ?',
                     'image' => 'Image*',
                     'image_select' => 'Select image',

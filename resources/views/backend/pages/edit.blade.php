@@ -78,7 +78,7 @@
                 <div role="tabpanel" class="tab-pane fade" id="ru">
 
                     <div class="form-group">
-                        {{ Form::label('title', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
+                        {{ Form::label('title', trans('validation.attributes.backend.access.page.title_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
                             {{ Form::text('title_ru', $page->title_ru, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
@@ -87,7 +87,7 @@
 
 
                     <div class="form-group">
-                        {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
+                        {{ Form::label('body', trans('validation.attributes.backend.access.page.body_ru'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
                             {{ Form::textarea('body_ru', $page->body_ru, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
                         </div><!--col-lg-10-->
@@ -96,7 +96,7 @@
 
                 <div role="tabpanel" class="tab-pane fade" id="it">
                     <div class="form-group">
-                        {{ Form::label('title_it', trans('validation.attributes.backend.access.page.title'), ['class' => 'col-lg-2 control-label']) }}
+                        {{ Form::label('title_it', trans('validation.attributes.backend.access.page.title_it'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
                             {{ Form::text('title_it', $page->title_it, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
@@ -104,7 +104,7 @@
                     </div><!--form control-->
 
                     <div class="form-group">
-                        {{ Form::label('body_it', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
+                        {{ Form::label('body_it', trans('validation.attributes.backend.access.page.body_it'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
                             {{ Form::textarea('body_it', $page->body_it, ['class' => 'form-control page', 'required' => 'required', 'minlength' => '3' ]) }}
                         </div><!--col-lg-10-->
@@ -158,7 +158,6 @@
                                         </ul>
                                         {{ Form::hidden('blocks['.$i.'][id]', $block->id) }}
                                         <div class="box-body">
-
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane fade in active" id="en{{$i}}">
 
@@ -181,7 +180,7 @@
                                                 <div role="tabpanel" class="tab-pane fade" id="ru{{$i}}">
 
                                                     <div class="form-group">
-                                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+                                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                                                         <div class="col-lg-10">
                                                             {{ Form::text('blocks['.$i.'][title_ru]', $block->title_ru, ['class' => 'form-control', 'maxlength' => '35' ]) }}
@@ -189,7 +188,7 @@
                                                     </div><!--form control-->
 
                                                     <div class="form-group">
-                                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
+                                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body_ru'), ['class' => 'col-lg-2 control-label']) !!}
                                                         <div class="col-lg-10">
                                                             {!! Form::textarea('blocks['.$i.'][body_ru]', $block->body_ru, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
                                                         </div><!--col-lg-10-->
@@ -199,7 +198,7 @@
                                                 <div role="tabpanel" class="tab-pane fade" id="it{{$i}}">
 
                                                     <div class="form-group">
-                                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+                                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title_it'), ['class' => 'col-lg-2 control-label']) }}
 
                                                         <div class="col-lg-10">
                                                             {{ Form::text('blocks['.$i.'][title_it]', $block->title_it, ['class' => 'form-control', 'maxlength' => '35' ]) }}
@@ -207,7 +206,7 @@
                                                     </div><!--form control-->
 
                                                     <div class="form-group">
-                                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
+                                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body_it'), ['class' => 'col-lg-2 control-label']) !!}
                                                         <div class="col-lg-10">
                                                             {!! Form::textarea('blocks['.$i.'][body_it]', $block->body_it, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
                                                         </div><!--col-lg-10-->
@@ -310,6 +309,12 @@
         }
 
         var myDropzone = [];
+        var selfAccId;
+        $('.panel-default').each(function(key, el){
+            $(this).on('show.bs.collapse', function () {
+                selfAccId = key;
+            });
+        });
 
         $('.panel-default').each(function (key, el) {
             var inp = $('input#blocks\\[' + (key + 1) + '\\]\\[photo\\]');
@@ -318,6 +323,7 @@
                 var leafname = pathname.split('\\').pop().split('/').pop();
                 inp.val(leafname);
             }
+
             myDropzone[key] = new Dropzone($(".dropzone")[key], {
                     autoProcessQueue: false,
                     dictDefaultMessage: "Drop files here",
@@ -340,11 +346,11 @@
                             });
 
                         } else {
-                            console.log($('.photo').eq(key)[0]);
                             if ($('.photo').eq(key).hasClass('active')) {
-                                $('.photo >img').replaceWith('<img id="dz_photo" src="/' + res['success']['path'] + '">');
+                                console.log($('.photo >img'));
+                                $('#add_photo'+key).replaceWith('<img class="add_photo" id="#add_photo'+key+'" src="/' + res['success']['path'] + '">');
                             } else {
-                                $('.photo').eq(key).append('<img id="dz_photo" src="/' + res['success']['path'] + '">');
+                                $('.photo').eq(key).append('<img class="add_photo" id="#add_photo'+key+'" src="/' + res['success']['path'] + '">');
                                 $('.photo').eq(key).addClass('active');
                             }
 
@@ -379,14 +385,13 @@
             );
 
             myDropzone[key].on('thumbnail', function (file) {
-                var selfAccId = $(this['clickableElements']).closest('.panel-group').index();
+//                var selfAccId = $(this['clickableElements']).closest('.box-body').index();
+                console.log(selfAccId);
                 if (file.cropped) {
                     return;
                 }
                 var cachedFilename = file.name;
                 myDropzone[selfAccId].removeFile(file);
-
-
                 var $cropperModal = $(modalTemplate);
                 var $uploadCrop = $cropperModal.find('.crop-upload');
                 var $img = $('<img />');
@@ -411,7 +416,6 @@
                 reader.readAsDataURL(file);
                 $cropperModal.modal('show');
                 $uploadCrop.on('click', function () {
-                    console.log('0000000000', $uploadCrop, $cropperModal)
                     var blob = cropper.getCroppedCanvas().toDataURL();
                     var newFile = dataURItoBlob(blob);
                     newFile.cropped = true;
@@ -422,7 +426,8 @@
                 });
             });
             $('#dlt_photo' + key).on('click', function () {
-                $('#add_photo' + key).remove();
+                console.log("remove=", $('#add_photo' + key));
+                $(this).parent().find('img').remove();
                 $('.photo').eq(key).removeClass('active');
                 inp.val('');
             });

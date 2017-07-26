@@ -56,8 +56,6 @@ class UploadController extends Controller
         $horizontal = new Image($path);
         $thumb = new Image($path);
 
-        $imgWidth = $img->getWidth();
-        $imgHeight = $img->getHeight();
         if (!file_exists(public_path('/upload/tmp/' . $type . '/original'))) {
             mkdir(public_path('/upload/tmp/' . $type . '/original'), 0777, true);
         }
@@ -67,32 +65,24 @@ class UploadController extends Controller
         if (!file_exists(public_path('/upload/tmp/' . $type . '/thumb'))) {
             mkdir(public_path('/upload/tmp/' . $type . '/thumb'), 0777, true);
         }
-        if ($imgWidth < 2000 || $imgHeight < 1500) {
-            $json = [
-                'error' => [
-                    'title' => 'Incorrect photo size',
-                    'text' => 'Min size: ' . 2000 . ' × ' . 1500
-                ]
-            ];
+
+        $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
+        $horizontal->thumbnail(1600, 360)->saveAs(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
+        if ($type == 'zone') {
+            $thumb->thumbnail(530, 370)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
         } else {
-            $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
-            $horizontal->thumbnail(1600, 360)->saveAs(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
-            if ($type == 'zone') {
-                $thumb->thumbnail(530, 370)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
-            } else {
-                $thumb->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
-            }
-
-            $json = [
-                'success' => [
-                    'title' => 'Done',
-                    'text' => 'Photo upload',
-                    'imgName' => $imgName,
-                    'path' => $img->getPath()
-                ]
-            ];
-
+            $thumb->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
         }
+
+        $json = [
+            'success' => [
+                'title' => 'Done',
+                'text' => 'Photo upload',
+                'imgName' => $imgName,
+                'path' => $img->getPath()
+            ]
+        ];
+
 
         return $json;
     }
