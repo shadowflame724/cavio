@@ -43,7 +43,7 @@ class ProductController extends Controller
         $model = $this->product->getBySlug($slug);
 
         return view('frontend.pages.product-card', [
-            'good' => $model,
+            'product' => $model,
         ]);
     }
 }
