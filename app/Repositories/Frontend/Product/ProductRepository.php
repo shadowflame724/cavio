@@ -131,11 +131,20 @@ class ProductRepository extends BaseRepository
 
                         $finish_ids = (!empty($photo->finish_ids)) ? explode(',',$photo->finish_ids) : [];
                         $finishModel = FinishTissue::whereIn('id',$finish_ids)->get();
-                        $finish = $finishModel->title;
+                        if(isset($finishModel)){
+                            foreach ($finishModel as $item) {
+                                $finish[] = $item->title;
+                            }
+                        }
+
 
                         $tissue_ids = (!empty($photo->tissue_ids)) ? explode(',',$photo->tissue_ids) : [];
                         $tissueModel = FinishTissue::whereIn('id',$tissue_ids)->get();
-                        $tissue = $tissueModel->title;
+                        if(isset($tissueModel)){
+                            foreach ($tissueModel as $item) {
+                                $tissue[] = $item->title;
+                            }
+                        }
 
                         //prices
                         $prices = [];
