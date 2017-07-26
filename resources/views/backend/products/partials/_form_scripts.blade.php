@@ -148,13 +148,7 @@
         templateSelection: formatSelection,
         theme: "default forPopup",
         maximumSelectionLength: 2
-//      templateResult: formatRepo, // omitted for brevity, see the source of this page
-//      templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
-//      $(".js-example-templating").select2({
-//        templateResult: formatState
-//      });
-//      $photos.find('.modal-photos').html(temp);
     });
   });
 </script>
