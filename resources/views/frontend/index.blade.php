@@ -39,7 +39,7 @@
             @foreach($collections as $collection)
                 @if($collection->banner == 1)
                     <div class="banner-top-item @if($i)hide @endif">
-                        <img src="/upload/images/{{ $collection->image }}" alt="" class='banner-img'>
+                        <img src="/upload/images/collection/original/{{ $collection->image }}" alt="" class='banner-img'>
                         @foreach($collection->markers as $marker)
                             <a href=# class='banner-circle'
                                style="top: {{ $marker->y }}%; left: {{ $marker->x }}%">
@@ -380,7 +380,7 @@
                                             </svg>
                                         </div>
                                         <div class="wrap-transf-img">
-                                            <img src="/upload/images/{{ $collection->image }}" alt="">
+                                            <img src="/upload/images/collection/thumb/{{ $collection->image }}" alt="">
                                         </div>
                                     </div>
                                     <div class="wrap-coll-item-footer">

@@ -233,6 +233,8 @@ return [
 
                 'marker' => [
                     'title' => 'Titolo*',
+                    'title_ru' => 'Titolo[RU]*',
+                    'title_it' => 'Titolo[IT]*',
                     'code' => 'Codice*',
                 ],
 
