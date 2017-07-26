@@ -115,6 +115,16 @@
         $(".select2").select2();
         $(".new-child select.select2,.new-photo select.select2").select2("destroy");
 
+        var replDiment = function ($inp,dimData) {
+          var prnt_el = $inp.closest('.panel-body');
+          var dim_data = prnt_el.find('[data-type="dimensions_data"]');
+          $.each(dimData, function (type,val) {
+            dim_data.find('.clearfix').before('<div class="col-lg-2">' +
+              '<label>'+type+'</label>' +
+              '<input class="form-control" data-dimensions="'+type+'" maxlength="100" type="text" value="'+val+'">' +
+              '</div>');
+          })
+        };
         var replIputs = function ($prnt,data) {
           $prnt.find('[data-type="replace-input"]').each(function (i, el) {
             var $inp = $(el);
@@ -122,6 +132,10 @@
             var dataVal = (typeof data[name] === 'object')? JSON.stringify(data[name]) : data[name];
             var inpVal = dataVal || '';
             $inp.val(inpVal);
+            if(name == 'dimensions'){
+              replDiment($inp, data[name]);
+
+            }
             $inp.trigger('change');
           });
         };
@@ -144,6 +158,7 @@
             replIputs($prntItem, prntItem);
             //
 
+            var phKey = 0;
             $.each(prntItem.childs, function (id,child) {
               var childKeyTemp = childTemp.replace(/child\[KEY]/g, 'child[' + id + ']');
               var $chOne = $('<div class="oneChild" />').html(childKeyTemp);
@@ -153,10 +168,14 @@
               //
               replIputs($chOne, child);
               //
-              $('.child-after').after($chOne);
+              if ($('.oneChild').length) {
+                $('.oneChild:last').after($chOne);
+              } else {
+                $('.child-after').after($chOne);
+              }
 
-              var phKey = 0;
               $.each(child['photos'], function (phid,photo) {
+                phKey++;
                 var photoKeyTemp = photoTemp.replace(/photo\[KEY]/g, 'photo[' + phKey + ']');
                 var $phOne = $('<div class="onePhoto" />').html(photoKeyTemp);
                 var onPhotoId = $phOne.find('.panel-collapse').attr('id') + id + '_' + phid;
@@ -166,8 +185,11 @@
                 replIputs($phOne, photo);
                 //
 
-                $('.photo-after').after($phOne);
-                phKey++;
+                if ($('.onePhoto').length) {
+                  $('.onePhoto:last').after($phOne);
+                } else {
+                  $('.photo-after').after($phOne);
+                }
 //                console.info('photo: ',photo);
               });
             });
@@ -175,6 +197,7 @@
                 $('.onePhoto .select2').select2({
                   tags: true
                 });
+                $('[data-type="generate_slug"]').trigger('click');
             }, 100);
 
           }

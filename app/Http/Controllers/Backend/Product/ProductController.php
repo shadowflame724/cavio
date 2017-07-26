@@ -49,6 +49,17 @@ class ProductController extends Controller
         return view('backend.products.index');
     }
 
+
+    public function getBySlug($slug)
+    {
+        $res = $this->product->issetBySlug($slug);
+        if ($res) {
+            $slug .= '-' . random_alphanumeric_key(4);
+            return $this->getBySlug($slug);
+        }
+        return $slug;
+    }
+
     /**
      * @param ManageProductRequest $request
      *
@@ -386,11 +397,8 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request->all());
         $this->product->create($request->all());
-        foreach ($request->images as $image) {
-            $this->moveImg($image);
-        }
+
 
         return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.products.created'));
     }

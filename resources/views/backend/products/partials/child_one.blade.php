@@ -34,6 +34,7 @@
                             'class' => 'form-control',
                             'data-type' => 'replace-input',
                             'data-name' => 'code',
+                            'readonly' => 'readonly',
                             'maxlength' => '100',
                             'required' => 'required'
                         ]) }}
@@ -64,7 +65,30 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="col-lg-12">
+                <div class="clearfix"></div>
+                <div class="well" data-type="dimensions_data">
+                    @php
+                        $dimensions = json_decode($child->dimensions);
+                    @endphp
+                    @if(is_object($dimensions))
+                    @foreach ($dimensions as $type => $dimension)
+                    <div class="col-lg-2">
+                        {{ Form::label(
+                            'child['.$chldKey.'][dimensions]['.$type.']',
+                            trans('product-form.label.child.dimensions.'.$type)
+                        ) }}
+                        {{ Form::text('child['.$chldKey.'][dimensions]['.$type.']', $dimension, [
+                            'class' => 'form-control',
+                                'data-dimensions' => $type,
+                            'maxlength' => '100',
+                            //'required' => 'required'
+                        ]) }}
+                    </div>
+                    @endforeach
+                    @endif
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-lg-12 hidden">
                     <div class="input-group input-group-sm">
                         {{ Form::label('child['.$chldKey.'][dimensions]', trans('product-form.label.child.dimensions'), ['class' => 'input-group-addon']) }}
                         {{ Form::textarea('child['.$chldKey.'][dimensions]', $child->dimensions, [

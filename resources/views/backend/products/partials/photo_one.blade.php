@@ -194,7 +194,7 @@
                         ]) }}
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12 ">
                     {{ Form::text('photo['.$phtKey.'][prices_data]', $photo->prices_data, [
                         'class' => 'form-control',
                         'readonly' => 'readonly',

@@ -56,8 +56,6 @@ class UploadController extends Controller
         $horizontal = new Image($path);
         $thumb = new Image($path);
 
-        $imgWidth = $img->getWidth();
-        $imgHeight = $img->getHeight();
         if (!file_exists(public_path('/upload/tmp/' . $type . '/original'))) {
             mkdir(public_path('/upload/tmp/' . $type . '/original'), 0777, true);
         }
@@ -67,32 +65,24 @@ class UploadController extends Controller
         if (!file_exists(public_path('/upload/tmp/' . $type . '/thumb'))) {
             mkdir(public_path('/upload/tmp/' . $type . '/thumb'), 0777, true);
         }
-        if ($imgWidth < 2000 || $imgHeight < 1500) {
-            $json = [
-                'error' => [
-                    'title' => 'Incorrect photo size',
-                    'text' => 'Min size: ' . 2000 . ' × ' . 1500
-                ]
-            ];
+
+        $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
+        $horizontal->thumbnail(1600, 360)->saveAs(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
+        if ($type == 'zone') {
+            $thumb->thumbnail(530, 370)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
         } else {
-            $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
-            $horizontal->thumbnail(1600, 360)->saveAs(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
-            if ($type == 'zone') {
-                $thumb->thumbnail(530, 370)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
-            } else {
-                $thumb->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
-            }
-
-            $json = [
-                'success' => [
-                    'title' => 'Done',
-                    'text' => 'Photo upload',
-                    'imgName' => $imgName,
-                    'path' => $img->getPath()
-                ]
-            ];
-
+            $thumb->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
         }
+
+        $json = [
+            'success' => [
+                'title' => 'Done',
+                'text' => 'Photo upload',
+                'imgName' => $imgName,
+                'path' => $img->getPath()
+            ]
+        ];
+
 
         return $json;
     }
@@ -100,6 +90,13 @@ class UploadController extends Controller
     public function uploadFinishTissue(Request $request)
     {
         $json = $this->uploadImg($request->file('file'), 230, 230);
+
+        return response()->json($json);
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $json = $this->uploadImg($request->file('file'), 700, 700);
 
         return response()->json($json);
     }
@@ -122,17 +119,16 @@ class UploadController extends Controller
     public function uploadCropped(Request $request)
     {
         $path = $request->file('croppedImage')->getRealPath();
-        $img = new Image($path);
-        $oldImg = $request->get('name');
-
-        $img->saveAs(public_path($oldImg));
-
+        $croppedImg = new Image($path);
+        $croppedImg->saveAs(public_path($request->get('name')));
         $json = [
             'success' => [
                 'title' => 'Done',
-                'text' => 'Photo upload',
+                'text' => 'Photo upload'
             ]
         ];
+
+
         return response()->json($json);
     }
 

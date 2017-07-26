@@ -20,7 +20,6 @@ class ProductPhoto extends Model {
         'finish_ids',
         'tissue_ids',
         'collection_ids',
-        'zone_ids',
         'main',
         'published',
         'prev',

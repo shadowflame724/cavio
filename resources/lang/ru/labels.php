@@ -15,6 +15,15 @@ return [
     */
 
     'backend' => [
+        'settings' => [
+            'management' => 'Настройки',
+        ],
+        'basket' => [
+            'management' => 'Корзины пользователей',
+        ],
+        'order' => [
+            'management' => 'Заказы',
+        ],
         'access' => [
             'roles' => [
                 'create' => 'Создать новую роль',

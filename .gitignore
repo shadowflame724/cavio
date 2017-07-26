@@ -19,3 +19,4 @@ Todo.rtf
 .vagrant
 /.vagrant
 npm-debug.log
+!/vendor/jbzoo/image/src/Image.php

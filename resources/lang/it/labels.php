@@ -32,6 +32,15 @@ return [
     ],
 
     'backend' => [
+        'settings' => [
+            'management' => 'Settings',
+        ],
+        'basket' => [
+            'management' => 'Users baskets',
+        ],
+        'order' => [
+            'management' => 'Orders',
+        ],
         'access' => [
             'roles' => [
                 'create'     => 'Crea ruolo',

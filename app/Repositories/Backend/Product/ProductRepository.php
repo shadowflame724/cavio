@@ -47,6 +47,16 @@ class ProductRepository extends BaseRepository
 
         return $model;
     }
+    public function issetBySlug($slug)
+    {
+        $model = Product::where([
+            'slug' => $slug
+        ])->first();
+        if($model){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * @return mixed
@@ -63,80 +73,16 @@ class ProductRepository extends BaseRepository
             ]);
     }
 
-
     /**
-     * @param array $input
+     * @param $input array
+     * @param $productId int
+     * @param $isInsert bool
      *
      * @throws GeneralException
      *
-     * @return bool
+     * @return array
      */
-    public function create(array $input)
-    {
-        dd($input);
-        DB::transaction(function () use ($input) {
-            $product = self::MODEL;
-            $product = new $product();
-            $product->save();
-
-            foreach ($input['collectionZone_id'] as $collectionZone) {
-                $product->collectionZone()->attach($collectionZone);
-            }
-
-            foreach ($input['dimensions'] as $dimension) {
-                Dimensions::create([
-                    'product_id' => $product->id,
-                    'length' => $dimension['length'],
-                    'width' => $dimension['width'],
-                    'height' => $dimension['height'],
-                    'mattress' => $dimension['mattress'],
-                    'weight' => $dimension['weight']
-                ]);
-            }
-
-            foreach ($input['finishTissues_id'] as $finishTissue) {
-                $product->finishTissues()->attach($finishTissue);
-            }
-
-            foreach ($input['images'] as $photo) {
-                ProductsPhotos::create([
-                    'product_id' => $product->id,
-                    'image' => $photo,
-                    'type' => 0
-                ]);
-            }
-
-            $product->category_id = $input['category_id'];
-            $product->code = $input['code'];
-            $product->price = $input['price'];
-            $product->name = $input['name'];
-            $product->name_ru = $input['name_ru'];
-            $product->name_it = $input['name_it'];
-            $product->description = $input['description'];
-            $product->description_ru = $input['description_ru'];
-            $product->description_it = $input['description_it'];
-
-            if ($product->save()) {
-                event(new ProductCreated($product));
-
-                return true;
-            }
-
-            $product->delete();
-
-            throw new GeneralException(trans('exceptions.backend.product.create_error'));
-        });
-    }
-
-    /**
-     * @param Model $product
-     * @param  $input
-     *
-     * @throws GeneralException
-     *
-     * @return bool
-     */
-    public function update(Model $product, array $input)
+    public function implodeData($input = [], $productId = null, $isInsert = false)
     {
         $allData = [
             'childs' => [],
@@ -144,22 +90,11 @@ class ProductRepository extends BaseRepository
             'prices' => [],
         ];
 
-        $product->category_ids = implode(',', $input['category_ids']);
-        $product->code = $input['code'];
-        $product->slug = $input['slug'];
-        $product->name = $input['name'];
-        $product->name_ru = $input['name_ru'];
-        $product->name_it = $input['name_it'];
-        $product->prev = $input['prev'];
-        $product->prev_ru = $input['prev_ru'];
-        $product->prev_it = $input['prev_it'];
-        $product->published = isset($input['published']) ? 1 : 0;
-
         $newChildData = [];
         $childCodes = [];
         foreach ($input['child'] as $ch_id => $item) {
             $newChildData[$ch_id] = [
-                'product_id'        => $product->id,
+                'product_id'        => $productId,
                 'code'              => $item['code'],
                 'name'              => $item['name'],
                 'name_ru'           => $item['name_ru'],
@@ -178,15 +113,21 @@ class ProductRepository extends BaseRepository
             0 => 99999999, // 'min'
             1 => -1, // 'max'
         ];
+//        dd($input);
+        $keyPrice = 0;
         foreach ($input['photo'] as $ph_id => $item) {
             $isMainPhoto = isset($item['main']) ? 1 : 0;
+            $phOnePhotos = isset($item['photos']) ? implode(',', $item['photos']) : '';
+            $phOneFinish = isset($item['finish_ids']) ? implode(',', $item['finish_ids']) : '';
+            $phOneTissue = isset($item['tissue_ids']) ? implode(',', $item['tissue_ids']) : '';
+            $phOneCollection = isset($item['collection_ids']) ? implode(',', $item['collection_ids']) : '';
             $newPhotoData[$ph_id] = [
-                'product_id'        => $product->id,
-                'photos'            => implode(',', $item['photos']),
+                'product_id'        => $productId,
+                'photos'            => $phOnePhotos,
                 'prices_data'       => $item['prices_data'],
-                'finish_ids'        => implode(',', $item['finish_ids']),
-                'tissue_ids'        => implode(',', $item['tissue_ids']),
-                'collection_ids'    => implode(',', $item['collection_ids']),
+                'finish_ids'        => $phOneFinish,
+                'tissue_ids'        => $phOneTissue,
+                'collection_ids'    => $phOneCollection,
                 'prev'              => $item['prev'],
                 'prev_ru'           => $item['prev_ru'],
                 'prev_it'           => $item['prev_it'],
@@ -194,8 +135,9 @@ class ProductRepository extends BaseRepository
                 'published'         => isset($item['published']) ? 1 : 0
             ];
             foreach ($item['price'] as $pr_id => $prOne) {
-                $ch_id = isset($childCodes[$prOne['child_code']]) ? $childCodes[$prOne['child_code']] : false;
-                if ($ch_id) {
+                $ch_id = isset($childCodes[$prOne['child_code']]) ? $childCodes[$prOne['child_code']] : '';
+
+                if (!empty($ch_id) && $pr_id !== 'KEY') {
                     $discount = (int)$prOne['discount'];
                     $def_price = (int)$prOne['def_price'];
                     $cus_price = (int)$prOne['cus_price'];
@@ -205,16 +147,22 @@ class ProductRepository extends BaseRepository
                     // если не стоит кастом и не ввели значение def_price
                     // или стоит кастом и не ввели значение price
                     // делаем цену неактивной
-                    if( (!($def_price > 0) && !$custom) || (!($price > 0) && $custom)) {
+                    if ((!($def_price > 0) && !$custom) || (!($cus_price > 0) && $custom)) {
                         $publish = false;
                     } else {
                         $price = ($custom) ? $cus_price : $def_price;
+                    }
+                    // если кто-то у радителей неопубликован - цена недоступна
+                    $publChild = (isset($newChildData[$ch_id]['published']) && $newChildData[$ch_id]['published'] == 1) ? true : false;
+                    $publPhoto = (isset($newPhotoData[$ph_id]['published']) && $newPhotoData[$ph_id]['published'] == 1) ? true : false;
+                    if (!$publChild || !$publPhoto) {
+                        $publish = false;
                     }
                     if ($publish) {
                         if($mainPrices[0] > $price) $mainPrices[0] = $price; // min
                         if($mainPrices[1] < $price) $mainPrices[1] = $price; // max
                     }
-                    $newPriceData[$pr_id] = [
+                    $newPriceData[$keyPrice] = [
                         'product_child_id'  => $ch_id,
                         'product_photo_id'  => $ph_id,
                         'discount'          => $discount,
@@ -224,33 +172,141 @@ class ProductRepository extends BaseRepository
                         'custom'            => $custom,
                         'published'         => $publish
                     ];
+//                    echo 'keyPrice: '.$keyPrice.'<br>';
+                    $keyPrice++;
                 }
+//                echo '_______________<br>';
             }
             if($isMainPhoto){
                 $mainPhoto = isset($item['photos'][0]) ? $item['photos'][0] : '';
                 $mainPhotoData['photos'] = $mainPhoto;
             }
         }
-
-        $mainPhotoData['prices'] = implode(' — ', [
-            $mainPrices[0].' €',
-            $mainPrices[1].' €'
-        ]);
-
-        $product->main_photo_data = json_encode($mainPhotoData);
+        $mainPhotoData['prices'] = false;
+        if ($mainPrices[0] == 99999999 || $mainPrices[1] == -1) { // нету min или max
+            if ($mainPrices[0] == 99999999 && $mainPrices[1] == -1) { // нету min и max
+                $mainPhotoData['prices'] = '';
+            } elseif ($mainPrices[0] == 99999999) { // нету min
+                $mainPhotoData['prices'] = $mainPrices[1].' €';
+            } elseif ($mainPrices[1] == -1) { // нету max
+                $mainPhotoData['prices'] = $mainPrices[0].' €';
+            }
+        } else { // есть и min и max
+            $mainPhotoData['prices'] = implode(' — ', [
+                $mainPrices[0].' €',
+                $mainPrices[1].' €'
+            ]);
+        }
 
         $allData['childs'] = $newChildData;
         $allData['photos'] = $newPhotoData;
         $allData['prices'] = $newPriceData;
+        $allData['main_photo_data'] = $mainPhotoData;
+
+        return $allData;
+    }
+
+    /**
+     * @param array $input
+     *
+     * @throws GeneralException
+     *
+     * @return bool
+     */
+    public function create(array $input)
+    {
+        $product = self::MODEL;
+        $product = new $product();
+        $product->category_ids = implode(',', $input['category_ids']);
+        $product->code = $input['code'];
+        $link = $input['name'];
+        $product->slug = isset($input['slug']) ? $input['slug'] : $link;
+        $product->name = $input['name'];
+        $product->name_ru = $input['name_ru'];
+        $product->name_it = $input['name_it'];
+        $product->title = $input['name'];
+        $product->title_ru = $input['name_ru'];
+        $product->title_it = $input['name_it'];
+        $product->prev = $input['prev'];
+        $product->prev_ru = $input['prev_ru'];
+        $product->prev_it = $input['prev_it'];
+        $product->description = $input['prev'];
+        $product->description_ru = $input['prev_ru'];
+        $product->description_it = $input['prev_it'];
+        $product->published = isset($input['published']) ? 1 : 0;
+        $product->save();
+
+        $allData = $this->implodeData($input, $product->id, false);
+//        dd($allData);
+        DB::transaction(function () use ($product, $allData) {
+            $product->main_photo_data = json_encode($allData['main_photo_data']);
+            if(!isset($allData['main_photo_data']['photos'])){
+                $product->published = 0;
+            }
+            $oldChildIds = [];
+            foreach ($allData['childs'] as $ch_id => $childOne) {
+                $one = $childOne;
+                $child = ProductChild::create($one);
+                $oldChildIds[$ch_id] = $child->id;
+            }
+            // ProductPhotos
+            $oldPhotoIds = [];
+            foreach ($allData['photos'] as $ph_id => $photoOne) {
+                $one = $photoOne;
+                $photo = ProductPhoto::create($one);
+                $oldPhotoIds[$ph_id] = $photo->id;
+            }
+            // ProductPrices
+            foreach ($allData['prices'] as $pr_id => $priceOne) {
+                $chKey = $priceOne['product_child_id'];
+                $phKey = $priceOne['product_photo_id'];
+                $chNewKey = isset($oldChildIds[$chKey]) ? $oldChildIds[$chKey] : false;
+                $phNewKey = isset($oldPhotoIds[$phKey]) ? $oldPhotoIds[$phKey] : false;
+                if($chNewKey && $phNewKey){
+                    $one = $priceOne;
+                    $one["product_child_id"] = $chNewKey;
+                    $one["product_photo_id"] = $phNewKey;
+                    ProductPrice::create($one);
+                }
+            }
+            if ($product->save()) {
+//                event(new ProductUpdated($product));
+
+                return true;
+            }
+
+            $product->delete();
+            return false;
+        });
+    }
+
+    public function update(Model $product, array $input)
+    {
+        $product->category_ids = implode(',', $input['category_ids']);
+        $product->code = $input['code'];
+        $product->slug = $input['slug'];
+        $product->name = $input['name'];
+        $product->name_ru = $input['name_ru'];
+        $product->name_it = $input['name_it'];
+        $product->prev = $input['prev'];
+        $product->prev_ru = $input['prev_ru'];
+        $product->prev_it = $input['prev_it'];
+        $product->published = isset($input['published']) ? 1 : 0;
+
+        $allData = $this->implodeData($input, $product->id, false);
+
+        $product->main_photo_data = json_encode($allData['main_photo_data']);
+        if(!isset($allData['main_photo_data']['photos'])){
+            $product->published = 0;
+        }
+
 //        dd($allData);
 //        dd($input);
-
 
         DB::transaction(function () use ($product, $allData) {
             // ProductChilds
             foreach ($allData['childs'] as $ch_id => $childOne) {
                 $child = ProductChild::find($ch_id);
-//                dd($child);
                 $child->update($childOne);
             }
             // ProductPhotos
@@ -260,8 +316,16 @@ class ProductRepository extends BaseRepository
             }
             // ProductPrices
             foreach ($allData['prices'] as $pr_id => $priceOne) {
-                $price = ProductPrice::find($pr_id);
-                $price->update($priceOne);
+                $chKey = $priceOne['product_child_id'];
+                $phKey = $priceOne['product_photo_id'];
+                $ch_id = isset($allData['childs'][$chKey]) ? $chKey : false;
+                $ph_id = isset($allData['photos'][$phKey]) ? $phKey : false;
+                if($ch_id && $ph_id){
+                    ProductPrice::where([
+                        'product_child_id' => $ch_id,
+                        'product_photo_id' => $ph_id
+                    ])->update($priceOne);
+                }
             }
             if ($product->save()) {
 //                event(new ProductUpdated($product));
