@@ -37,7 +37,24 @@
                 <div class="col-lg-12">
                     <div class="input-group input-group-sm">
                         {{ Form::label('photo['.$phtKey.'][photos]', trans('product-form.label.photo.photos'), ['class' => 'input-group-addon']) }}
-                        <div class="form-control photos" id="photos">
+
+                        <div class="form-control photos">
+                            <select name="photo[{{$phtKey}}][photos][]"
+                                    id="select2_photos_{{$phtKey}}"
+                                    multiple
+                                    class="select2 selected_photos">
+                                @php($phArr = explode(',', $photo->photos))
+                                @if(count($phArr))
+                                    @foreach($phArr as $key => $img)
+                                        @if(!empty($img))
+                                            <option value="{{ $img }}" selected>{{ $img }}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        {{-- <div class="form-control photos" id="photos">
                             @php($phArr = explode(',', $photo->photos))
                             @if(count($phArr))
                                 @foreach($phArr as $key => $img)
@@ -51,13 +68,12 @@
                                     @endif
                                 @endforeach
                             @endif
-                        </div>
-                        <div class="input-group-addon">
-                            <button class="btn btn-primary" type="button">
+                        </div> --}}
+                        {{-- <div class="input-group-addon">
+                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#photosPopup">
                                 <i class="fa fa-image"></i> {{ trans('product-form.label.photo.image') }}
                             </button>
-                            {{--<div class="dropzone" id="dz_photo"></div>--}}
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
                 @foreach($langsSuf as $lng)

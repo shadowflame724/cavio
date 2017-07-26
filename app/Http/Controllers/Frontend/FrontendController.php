@@ -84,6 +84,7 @@ class FrontendController extends Controller
     {
         $page = $this->page('catalogue');
 
+
         return view('frontend.pages.catalogue', [
             'page' => $page,
         ]);
