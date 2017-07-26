@@ -104,6 +104,13 @@ class UploadController extends Controller
         return response()->json($json);
     }
 
+    public function uploadImage(Request $request)
+    {
+        $json = $this->uploadImg($request->file('file'), 700, 700);
+
+        return response()->json($json);
+    }
+
     public function uploadCollectionZone(Request $request)
     {
         foreach ($request->file('file') as $item) {
@@ -123,29 +130,14 @@ class UploadController extends Controller
     {
         $path = $request->file('croppedImage')->getRealPath();
         $croppedImg = new Image($path);
-        $oldImg = new Image(public_path($request->get('name')));
-        $oldImgWidth = $oldImg->getWidth();
-        $oldImgHeight = $oldImg->getHeight();
-        $croppedImgWidth = $croppedImg->getWidth();
-        $croppedImgHeight = $croppedImg->getHeight();
+        $croppedImg->saveAs(public_path($request->get('name')));
+        $json = [
+            'success' => [
+                'title' => 'Done',
+                'text' => 'Photo upload'
+            ]
+        ];
 
-
-        if ($croppedImgWidth < $oldImgWidth || $croppedImgHeight < $oldImgHeight) {
-            $json = [
-                'error' => [
-                    'title' => 'Incorrect photo size',
-                    'text' => 'Min size: ' . $croppedImgWidth . ' × ' . $oldImgHeight
-                ]
-            ];
-        } else {
-            $croppedImg->saveAs(public_path($request->get('name')));
-            $json = [
-                'success' => [
-                    'title' => 'Done',
-                    'text' => 'Photo upload'
-                ]
-            ];
-        }
 
         return response()->json($json);
     }

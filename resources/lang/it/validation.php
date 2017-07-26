@@ -148,6 +148,7 @@ return [
                     'description' => 'Descrizione*',
                     'body' => 'Soddisfare*',
                 ],
+
                 'block' => [
                     'title' => 'Titolo*',
                     'preview' => 'Anteprima*',
@@ -155,6 +156,7 @@ return [
                     'image' => 'Immagine*',
                     'image_select' => 'Selezionare l\'immagine',
                 ],
+
                 'image' => [
                     'error' =>[
                         'dictFileTooBig' => 'Il file è troppo grande',
@@ -178,11 +180,22 @@ return [
                     'description' => 'Descrizione*',
                     'preview' => 'Anteprima*',
                     'body' => 'Soddisfare*',
+                    'title_ru' => 'Titolo[RU]*',
+                    'description_ru' => 'Descrizione[RU]*',
+                    'preview_ru' => 'Anteprima[RU]*',
+                    'body_ru' => 'Soddisfare[RU]*',
+                    'title_it' => 'Titolo[IT]*',
+                    'description_it' => 'Descrizione[IT]*',
+                    'preview_it' => 'Anteprima[IT]*',
+                    'body_it' => 'Soddisfare[IT]*',
                     'image' => 'Immagine',
                     'image_select' => 'Selezionare l\'immagine',
                 ],
+
                 'category' => [
                     'name' => 'Nome*',
+                    'name_ru' => 'Nome[RU]*',
+                    'name_it' => 'Nome[IT]*',
                     'image' => 'Immagine',
                     'image_select' => 'Selezionare l\'immagine',
                 ],
@@ -204,17 +217,24 @@ return [
                 'faq' => [
                     'question' => 'Domanda*',
                     'answer' => 'Risposta*',
+                    'question_ru' => 'Domanda[RU]*',
+                    'answer_ru' => 'Risposta[RU]*',
+                    'question_it' => 'Domanda[IT]*',
+                    'answer_it' => 'Risposta[IT]*',
                 ],
+
                 'marker' => [
                     'title' => 'Titolo*',
                     'code' => 'Codice*',
                 ],
+
                 'zone' => [
                     'title' => 'Titolo[Eng]*',
                     'title_ru' => 'Titolo[Rus]*',
                     'title_it' => 'Titolo[Itl]*',
                     'image' => 'Immagine',
                 ],
+
                 'good' => [
                     'category_id' => 'Categoria*',
                     'collection_id' => 'Collezione*',
@@ -226,6 +246,7 @@ return [
                     'finish' => 'Finish',
                     'description' => 'Descrizione',
                 ],
+
                 'showroom' => [
                     'country' => 'Nazione*',
                     'city' => 'Città*',
@@ -236,20 +257,27 @@ return [
                     'fax' => 'Fax',
                     'email' => 'E-mail'
                 ],
+
                 'finishtissue' => [
                     'title' => 'Titolo*',
+                    'title_ru' => 'Titolo[RU]*',
+                    'title_it' => 'Titolo[IT]*',
                     'type_finish' => 'Fazzoletto di carta',
                     'type_tissue' => 'Tissue',
                     'image' => 'Immagine',
                     'parent' => 'Parent',
                     'comment' => 'Comment',
                     'short' => 'Short name',
-
                 ],
+
                 'popup' => [
                     'title' => 'Titolo*',
+                    'title_ru' => 'Titolo[RU]*',
+                    'title_it' => 'Titolo[IT]*',
                     'show' => 'Mostrare*',
                     'body' => 'Soddisfare*',
+                    'body_ru' => 'Soddisfare[RU]*',
+                    'body_it' => 'Soddisfare[IT]*',
                     'image' => 'Immagine*',
                     'link' => 'Collegamento*'
                 ],

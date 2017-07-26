@@ -290,22 +290,27 @@
                 console.log(original);
                 var width;
                 var height;
+                var asepectRatio;
                 switch ($(this)[0].name) {
                     case 'collectionHorizontal':
-                        width = 454.4;
-                        height = 102.5;
+                        asepectRatio = 4.444444444;
+                        width = 1600;
+                        height = 360;
                         break;
                     case 'collectionThumb':
-                        width = 136.32;
-                        height = 181.88277087;
+                        asepectRatio = 1.432432432;
+                        width = 530;
+                        height = 370;
                         break;
                     case 'zoneHorizontal':
-                        width = 454.4;
-                        height = 102.5;
+                        asepectRatio = 4.444444444;
+                        width = 1600;
+                        height = 360;
                         break;
                     case 'zoneThumb':
-                        width = 150.52;
-                        height = 105.150976909;
+                        asepectRatio = 0.75;
+                        width = 480;
+                        height = 640;
                         break;
                 }
                 var img = $(original).clone();
@@ -316,23 +321,22 @@
                 cropper = new Cropper(img[0], {
                     preview: '.image-preview',
                     autoCropArea: 1,
+                    aspectRatio: asepectRatio,
                     movable: false,
-                    cropBoxResizable: false,
                     zoomOnWheel: false,
                     viewMode: 3,
                     minContainerHeight: 320,
                     minContainerWidth: 568,
-                    ready: function(){
-                        cropper.setCropBoxData({"left":10,"top":10,"width":width,"height":height});
-                    },
-                    crop: function(){
+                    crop: function (e) {
+                        $('input#dataWidth').val(e.detail.width);
+                        $('input#dataHeight').val(e.detail.height);
                     }
                 });
 
                 $cropperModal.modal('show');
                 $uploadCrop.on('click', function () {
                     var formData = new FormData();
-                    var blob = cropper.getCroppedCanvas().toDataURL('image/jpg');
+                    var blob = cropper.getCroppedCanvas({"width": width, "height":height}).toDataURL('image/jpg');
                     var newFile = dataURItoBlob(blob);
                     newFile.cropped = true;
                     newFile.name = img.data().content;
