@@ -37,30 +37,31 @@
                 <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
                 <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
             </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="en">
-                    <div class="box-body">
-                        <div class="form-group">
-                            {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
-                            <div class="col-lg-10">
-                                <select name="type" class="form-control">
-                                    <option value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
-                                    <option value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
-                                </select>
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
 
-                        <div class="form-group">
-                            {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
-                            <div class="col-lg-10">
-                                <select name="parent" class="form-control" id="parentSelector">
-                                    <option value="null" selected>Root</option>
-                                    @foreach($parents as $parent)
-                                        <option value="{{ $parent->id }}">{{ $parent->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
+            <div class="box-body">
+                <div class="form-group">
+                    {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <select name="type" class="form-control">
+                            <option value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
+                            <option value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
+                        </select>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div class="form-group">
+                    {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <select name="parent" class="form-control" id="parentSelector">
+                            <option value="null" selected>Root</option>
+                            @foreach($parents as $parent)
+                                <option value="{{ $parent->id }}">{{ $parent->title }}</option>
+                            @endforeach
+                        </select>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="en">
 
                         <div class="form-group">
                             {{ Form::label('title', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
@@ -69,39 +70,8 @@
                                 {{ Form::text('title', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
-
-                        <div class="form-group">
-                            {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
-
-                            <div class="col-lg-10">
-                                {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
-
-                        <div id="forChild" hidden>
-                            <div class="form-group">
-                                {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
-
-                                <div class="col-lg-10">
-                                    {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
-                                </div><!--col-lg-10-->
-                            </div><!--form control-->
-
-                            <div class="form-group">
-                                {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                                <div class="col-lg-10">
-                                    {{ Form::hidden('photo', null, ['id' => 'hiddenPhoto']) }}
-                                    <div class="dropzone" id="add_photo"></div>
-                                    <div class="photo">
-                                        <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                    </div>
-                                </div><!--col-lg-10-->
-                            </div><!--form control-->
-                        </div>
                     </div><!--form control-->
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="ru">
-                    <div class="box-body">
+                    <div role="tabpanel" class="tab-pane fade" id="ru">
                         <div class="form-group">
                             {{ Form::label('title_ru', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
 
@@ -109,10 +79,8 @@
                                 {{ Form::text('title_ru', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
-                    </div><!--form control-->
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="it">
-                    <div class="box-body">
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="it">
                         <div class="form-group">
                             {{ Form::label('title_it', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
 
@@ -122,6 +90,37 @@
                         </div><!--form control-->
                     </div><!--form control-->
                 </div>
+
+                <div class="form-group">
+                    {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div id="forChild" hidden>
+                    <div class="form-group">
+                        {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10">
+                            {{ Form::hidden('photo', null, ['id' => 'hiddenPhoto']) }}
+                            <div class="dropzone" id="add_photo"></div>
+                            <div class="photo">
+                                <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                            </div>
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+
+
             </div>
         </div><!-- /.box-body -->
     </div><!--box-->
@@ -152,9 +151,9 @@
         var photo;
         $(parentSelector).on('change', function () {
             var x = this.value;
-            if (x !== "null"){
+            if (x !== "null") {
                 $(forChild).fadeIn('slow');
-            }else if (x == "null"){
+            } else if (x == "null") {
                 $(forChild).fadeOut('slow');
                 photo = document.getElementsByClassName('photo');
                 $(document.getElementById('hiddenPhoto')).val('');

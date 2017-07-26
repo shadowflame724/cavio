@@ -148,8 +148,12 @@ return [
                 'page' => [
                     'pageKey' => 'Page key',
                     'title' => 'Title*',
-                    'description' => 'Description*',
                     'body' => 'Content*',
+                    'title_ru' => 'Title[RU]*',
+                    'body_ru' => 'Content[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'body_it' => 'Content[IT]*',
+                    'description' => 'Description*',
                 ],
                 'block' => [
                     'title' => 'Title*',
@@ -157,6 +161,10 @@ return [
                     'body' => 'Content*',
                     'image' => 'Image*',
                     'image_select' => 'Select image',
+                    'title_ru' => 'Title[RU]*',
+                    'body_ru' => 'Content[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'body_it' => 'Content[IT]*',
                 ],
                 'image' => [
                     'error' =>[
@@ -181,11 +189,21 @@ return [
                     'description' => 'Description*',
                     'preview' => 'Preview*',
                     'body' => 'Content*',
+                    'title_ru' => 'Title[RU]*',
+                    'description_ru' => 'Description[RU]*',
+                    'preview_ru' => 'Preview[RU]*',
+                    'body_ru' => 'Content[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'description_it' => 'Description[IT]*',
+                    'preview_it' => 'Preview[IT]*',
+                    'body_it' => 'Content[IT]*',
                     'image' => 'Image',
                     'image_select' => 'Select image',
                 ],
                 'category' => [
                     'name' => 'Name*',
+                    'name_ru' => 'Name[RU]*',
+                    'name_it' => 'Name[IT]*',
                     'image' => 'Image',
                     'image_select' => 'Select image',
                 ],
@@ -193,6 +211,10 @@ return [
                 'collection' => [
                     'title' => 'Title*',
                     'description' => 'Description*',
+                    'title_ru' => 'Title[RU]*',
+                    'description_ru' => 'Description[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'description_it' => 'Description[IT]*',
                     'banner' => 'Banner ?',
                     'image' => 'Image*',
                     'image_select' => 'Select image',
@@ -207,6 +229,10 @@ return [
                 'faq' => [
                     'question' => 'Question*',
                     'answer' => 'Answer*',
+                    'question_ru' => 'Question[RU]*',
+                    'answer_ru' => 'Answer[RU]*',
+                    'question_it' => 'Question[IT]*',
+                    'answer_it' => 'Answer[IT]*',
                 ],
                 'marker' => [
                     'title' => 'Title*',
@@ -241,6 +267,8 @@ return [
                 ],
                 'finishtissue' => [
                     'title' => 'Title*',
+                    'title_ru' => 'Title[RU]*',
+                    'title_it' => 'Title[IT]*',
                     'type' => 'Type',
                     'type_finish' => 'Finish',
                     'type_tissue' => 'Tissue',
@@ -252,8 +280,12 @@ return [
                 ],
                 'popup' => [
                     'title' => 'Title*',
+                    'title_ru' => 'Title[RU]*',
+                    'title_it' => 'Title[IT]*',
                     'show' => 'Show*',
                     'body' => 'Content*',
+                    'body_ru' => 'Content[RU]*',
+                    'body_it' => 'Content[IT]*',
                     'image' => 'Image*',
                     'link' => 'Link*'
                 ],

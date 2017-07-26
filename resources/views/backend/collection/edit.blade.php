@@ -98,21 +98,21 @@
             <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
             <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
         </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="en">
-                <div class="box-body">
-                    <div class="form-group">
-                        {{ Form::label('banner', trans('validation.attributes.backend.access.collection.banner'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            {{ Form::checkbox('banner', null) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
+        <div class="box-body">
+            <div class="form-group">
+                {{ Form::label('banner', trans('validation.attributes.backend.access.collection.banner'), ['class' => 'col-lg-2 control-label']) }}
+                <div class="col-lg-10">
+                    {{ Form::checkbox('banner', null) }}
+                </div><!--col-lg-10-->
+            </div><!--form control-->
 
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="en">
                     <div class="form-group">
                         {{ Form::label('title', trans('validation.attributes.backend.access.collection.title'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('title', null, ['id'=> 'title', 'class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -120,110 +120,103 @@
                         {{ Form::label('description', trans('validation.attributes.backend.access.collection.description'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('description', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('description', null, ['id'=> 'description', 'class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="ru">
                     <div class="form-group">
-                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                        {{ Form::label('title_ru', trans('validation.attributes.backend.access.collection.title_ru'), ['class' => 'col-lg-2 control-label']) }}
+
                         <div class="col-lg-10">
-                            <div class="dropzone" id="dz_collection"></div>
-                            @if($collection->image)
-                                <div class="photo active">
-                                    {{ Form::hidden('photo', $collection->image, ['id' => 'collection-hidden']) }}
-                                    <div class="photo-one-bl">
-                                        <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active"><a href="#originalTab"
-                                                                                      aria-controls="originalTab"
-                                                                                      role="tab" data-toggle="tab">Original</a>
-                                            </li>
-                                            <li role="presentation"><a href="#horizontalTab"
-                                                                       aria-controls="horizontalTab" role="tab"
-                                                                       data-toggle="tab">Horizontal</a></li>
-                                            <li role="presentation"><a href="#thumbTab" aria-controls="thumbTab"
-                                                                       role="tab" data-toggle="tab">Thumb</a></li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane fade in active" id="originalTab">
-                                                <img id="original" class="add_photo"
-                                                     src="/upload/images/collection/original/{{ $collection->image }}"
-                                                     alt="" data-content="{{ $collection->image }}">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="horizontalTab">
-                                                <img id="horizontal" class="add_photo"
-                                                     src="/upload/images/collection/horizontal/{{ $collection->image }}"
-                                                     alt="" data-content="{{ $collection->image }}">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="thumbTab">
-                                                <img id="thumb" class="add_photo"
-                                                     src="/upload/images/collection/thumb/{{ $collection->image }}"
-                                                     alt="" data-content="{{ $collection->image }}">
-                                            </div>
-                                        </div>
-                                        <div class="cropperButtons">
-                                            <label class="btn btn-primary">
-                                                <input type="radio" class="sr-only" name="collectionHorizontal"
-                                                       value="/upload/images/collection/horizontal/{{ $collection->image }}">
-                                                <span class="docs-tooltip" data-toggle="tooltip" title="">
-                        Horizontal</span></label>
-                                            <label class="btn btn-primary">
-                                                <input type="radio" class="sr-only" name="collectionThumb"
-                                                       value="/upload/images/collection/thumb/{{ $collection->image }}">
-                                                <span class="docs-tooltip" data-toggle="tooltip" title="">
-                        Thumb</span></label>
-                                        </div>
+                            {{ Form::text('title_ru', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.collection.description_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('description_ru', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="it">
+                    <div class="form-group">
+                        {{ Form::label('title_it', trans('validation.attributes.backend.access.collection.title_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title_it', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_it', trans('validation.attributes.backend.access.collection.description_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('description_it', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+            </div>
+            <div class="form-group">
+                {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                <div class="col-lg-10">
+                    <div class="dropzone" id="dz_collection"></div>
+                    @if($collection->image)
+                        <div class="photo active">
+                            {{ Form::hidden('photo', $collection->image, ['id' => 'collection-hidden']) }}
+                            <div class="photo-one-bl">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#originalTab"
+                                                                              aria-controls="originalTab"
+                                                                              role="tab" data-toggle="tab">Original</a>
+                                    </li>
+                                    <li role="presentation"><a href="#horizontalTab"
+                                                               aria-controls="horizontalTab" role="tab"
+                                                               data-toggle="tab">Horizontal</a></li>
+                                    <li role="presentation"><a href="#thumbTab" aria-controls="thumbTab"
+                                                               role="tab" data-toggle="tab">Thumb</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="originalTab">
+                                        <img id="original" class="add_photo"
+                                             src="/upload/images/collection/original/{{ $collection->image }}"
+                                             alt="" data-content="{{ $collection->image }}">
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="horizontalTab">
+                                        <img id="horizontal" class="add_photo"
+                                             src="/upload/images/collection/horizontal/{{ $collection->image }}"
+                                             alt="" data-content="{{ $collection->image }}">
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="thumbTab">
+                                        <img id="thumb" class="add_photo"
+                                             src="/upload/images/collection/thumb/{{ $collection->image }}"
+                                             alt="" data-content="{{ $collection->image }}">
                                     </div>
                                 </div>
+                                <div class="cropperButtons">
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" name="collectionHorizontal"
+                                               value="/upload/images/collection/horizontal/{{ $collection->image }}">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="">
+                        Horizontal</span></label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" name="collectionThumb"
+                                               value="/upload/images/collection/thumb/{{ $collection->image }}">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="">
+                        Thumb</span></label>
+                                </div>
+                            </div>
+                        </div>
 
-                            @else
-                                        <div class="photo">
-                                            {{ Form::hidden('photo', null, ['id' => 'collection-hidden']) }}
+                    @else
+                        <div class="photo">
+                            {{ Form::hidden('photo', null, ['id' => 'collection-hidden']) }}
 
-                                        </div>
-                                    @endif
-                                </div><!--col-lg-10-->
-                        </div><!--form control-->
-                    </div>
-                </div>
-
-                <div role="tabpanel" class="tab-pane fade" id="ru">
-                    <div class="box-body">
-                        <div class="form-group">
-                            {{ Form::label('title_ru', trans('validation.attributes.backend.access.collection.title'), ['class' => 'col-lg-2 control-label']) }}
-
-                            <div class="col-lg-10">
-                                {{ Form::text('title_ru', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
-
-                        <div class="form-group">
-                            {{ Form::label('description_ru', trans('validation.attributes.backend.access.collection.description'), ['class' => 'col-lg-2 control-label']) }}
-
-                            <div class="col-lg-10">
-                                {{ Form::text('description_ru', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
-                    </div>
-                </div>
-
-                <div role="tabpanel" class="tab-pane fade" id="it">
-                    <div class="box-body">
-                        <div class="form-group">
-                            {{ Form::label('title_it', trans('validation.attributes.backend.access.collection.title'), ['class' => 'col-lg-2 control-label']) }}
-
-                            <div class="col-lg-10">
-                                {{ Form::text('title_it', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
-
-                        <div class="form-group">
-                            {{ Form::label('description_it', trans('validation.attributes.backend.access.collection.description'), ['class' => 'col-lg-2 control-label']) }}
-
-                            <div class="col-lg-10">
-                                {{ Form::text('description_it', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
-                            </div><!--col-lg-10-->
-                        </div><!--form control-->
-                    </div>
-                </div>
+                        </div>
+                    @endif
+                </div><!--col-lg-10-->
             </div><!--form control-->
 
 
@@ -377,6 +370,7 @@
             </div>
 
         </div><!-- /.box-body -->
+    </div><!-- /.box-body -->
 
         <div class="box box-success">
             <div class="box-body">

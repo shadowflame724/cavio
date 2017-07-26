@@ -48,6 +48,7 @@
             });
         });
     }
+
     // transform cropper dataURI output to a Blob which Dropzone accepts
     function dataURItoBlob(dataURI) {
         // convert base64 to raw binary data held in a string
@@ -153,23 +154,23 @@
                         '</ul>' +
                         '<div class="tab-content">' +
                         '<div role="tabpanel" class="tab-pane fade in active" id="originalTab">' +
-                        '<img id="original" class="add_photo" src="/upload/tmp/collection/original/'+res['success']['imgName']+'" alt="" data-content="'+res['success']['imgName']+'">' +
+                        '<img id="original" class="add_photo" src="/upload/tmp/collection/original/' + res['success']['imgName'] + '" alt="" data-content="' + res['success']['imgName'] + '">' +
                         '</div>' +
                         '<div role="tabpanel" class="tab-pane fade" id="horizontalTab">' +
-                        '<img id="horizontal" class="add_photo" src="/upload/tmp/collection/horizontal/'+res['success']['imgName']+'" alt="" data-content="'+res['success']['imgName']+'">' +
+                        '<img id="horizontal" class="add_photo" src="/upload/tmp/collection/horizontal/' + res['success']['imgName'] + '" alt="" data-content="' + res['success']['imgName'] + '">' +
                         '</div>' +
                         '<div role="tabpanel" class="tab-pane fade" id="thumbTab">' +
-                        '<img id="thumb" class="add_photo" src="/upload/tmp/collection/thumb/'+res['success']['imgName']+'" alt="" data-content="'+res['success']['imgName']+'">' +
-                        '</div>'+
-                        '</div>'+
-                        '</>'+
-                        '<div class="cropperButtons">'+
+                        '<img id="thumb" class="add_photo" src="/upload/tmp/collection/thumb/' + res['success']['imgName'] + '" alt="" data-content="' + res['success']['imgName'] + '">' +
+                        '</div>' +
+                        '</div>' +
+                        '</>' +
+                        '<div class="cropperButtons">' +
                         '<label class="btn btn-primary">' +
-                        '<input type="radio" class="sr-only" name="collectionHorizontal" value="/upload/tmp/collection/horizontal/'+res['success']['imgName']+'">' +
+                        '<input type="radio" class="sr-only" name="collectionHorizontal" value="/upload/tmp/collection/horizontal/' + res['success']['imgName'] + '">' +
                         '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
                         'Horizontal</span></label>' +
                         '<label class="btn btn-primary">' +
-                        '<input type="radio" class="sr-only"  name="collectionThumb" value="/upload/tmp/collection/thumb/'+res['success']['imgName']+'">' +
+                        '<input type="radio" class="sr-only"  name="collectionThumb" value="/upload/tmp/collection/thumb/' + res['success']['imgName'] + '">' +
                         '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
                         'Thumb</span></label>' +
                         '</div>');
@@ -231,25 +232,24 @@
                         var hidden = '';
                         inp = $('.photo').eq(key + 1).find(":hidden");
                         res.forEach(function (item, i, res) {
-                            $('.photo').eq(key + 1).append('<div class="photo-one-bl">'+
-                            '<div id="dlt_photo" class="btn glyphicon glyphicon-remove dlt_photo"></div>'+
-                           '<img class="colZon_photo" src="/upload/tmp/zone/original/' + item.success.imgName + '" data-content="' + item.success.imgName + ',' +'">'+
-                                '<div class="cropperButtons">'+
+                            $('.photo').eq(key + 1).append('<div class="photo-one-bl">' +
+                                '<div id="dlt_photo" class="btn glyphicon glyphicon-remove dlt_photo"></div>' +
+                                '<img class="colZon_photo" src="/upload/tmp/zone/original/' + item.success.imgName + '" data-content="' + item.success.imgName + ',' + '">' +
+                                '<div class="cropperButtons">' +
                                 '<label class="btn btn-primary">' +
-                                '<input type="radio" class="sr-only horizontal" name="zoneHorizontal" value="/upload/tmp/zone/horizontal/'+item.success.imgName+'"">' +
+                                '<input type="radio" class="sr-only horizontal" name="zoneHorizontal" value="/upload/tmp/zone/horizontal/' + item.success.imgName + '"">' +
                                 '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
                                 'Horizontal</span></label>' +
                                 '<label class="btn btn-primary">' +
-                                    '<input type="radio" class="sr-only thumb" name="zoneThumb" value="/upload/tmp/zone/thumb/'+item.success.imgName+'">' +
+                                '<input type="radio" class="sr-only thumb" name="zoneThumb" value="/upload/tmp/zone/thumb/' + item.success.imgName + '">' +
                                 '<span class="docs-tooltip" data-toggle="tooltip" title="">' +
                                 'Thumb</span></label>' +
-                                '</div>'+
-                            '</div>');
+                                '</div>' +
+                                '</div>');
                             hidden += item.success.imgName + ',';
                         });
                         $('.photo').eq(key + 1).addClass('active');
                         inp.val(inp.val() + hidden);
-                        console.log(inp.val());
                         swal({
                             title: res[0]['success']['title'],
                             text: res[0]['success']['text'],
@@ -264,7 +264,6 @@
                     }
                 },
                 error: function (file, errorMessage, xhr) {
-                    console.log(errorMessage);
                     var self = this,
                         default_error = '{{trans('validation.attributes.backend.access.image.error.default_error')}}';
                     swal({
@@ -287,25 +286,29 @@
             $(el).find('input').on('click', function () {
                 var path = $(this).val();
                 var original = $(this).parents('.photo-one-bl').find('img')[0];
-                console.log(original);
                 var width;
                 var height;
+                var asepectRatio;
                 switch ($(this)[0].name) {
                     case 'collectionHorizontal':
-                        width = 454.4;
-                        height = 102.5;
+                        asepectRatio = 4.444444444;
+                        width = 1600;
+                        height = 360;
                         break;
                     case 'collectionThumb':
-                        width = 136.32;
-                        height = 181.88277087;
+                        asepectRatio = 1.432432432;
+                        width = 530;
+                        height = 370;
                         break;
                     case 'zoneHorizontal':
-                        width = 454.4;
-                        height = 102.5;
+                        asepectRatio = 4.444444444;
+                        width = 1600;
+                        height = 360;
                         break;
                     case 'zoneThumb':
-                        width = 150.52;
-                        height = 105.150976909;
+                        asepectRatio = 0.75;
+                        width = 480;
+                        height = 640;
                         break;
                 }
                 var img = $(original).clone();
@@ -316,23 +319,22 @@
                 cropper = new Cropper(img[0], {
                     preview: '.image-preview',
                     autoCropArea: 1,
+                    aspectRatio: asepectRatio,
                     movable: false,
-                    cropBoxResizable: false,
                     zoomOnWheel: false,
                     viewMode: 3,
                     minContainerHeight: 320,
                     minContainerWidth: 568,
-                    ready: function(){
-                        cropper.setCropBoxData({"left":10,"top":10,"width":width,"height":height});
-                    },
-                    crop: function(){
+                    crop: function (e) {
+                        $('input#dataWidth').val(e.detail.width);
+                        $('input#dataHeight').val(e.detail.height);
                     }
                 });
 
                 $cropperModal.modal('show');
                 $uploadCrop.on('click', function () {
                     var formData = new FormData();
-                    var blob = cropper.getCroppedCanvas().toDataURL('image/jpg');
+                    var blob = cropper.getCroppedCanvas({"width": width, "height": height}).toDataURL('image/jpg');
                     var newFile = dataURItoBlob(blob);
                     newFile.cropped = true;
                     newFile.name = img.data().content;
@@ -348,32 +350,20 @@
                         processData: false,
                         contentType: false,
                         success: function (res) {
-                            if (res['error']) {
-                                swal({
-                                    title: res['error']['title'],
-                                    text: res['error']['text'],
-                                    type: "warning",
-                                    confirmButtonColor: "#DD6B55 ",
-                                    confirmButtonText: 'Ok',
-                                    closeOnConfirm: true
-                                });
+                            swal({
+                                title: res['success']['title'],
+                                text: res['success']['text'],
+                                type: "success",
+                                confirmButtonColor: "#DD6B55 ",
+                                confirmButtonText: 'Ок',
+                                closeOnConfirm: true
+                            });
+                            d = new Date();
+                            $("img[src$='" + path + "']").attr("src", path + "?" + d.getTime());
 
-                            } else {
-                                swal({
-                                    title: res['success']['title'],
-                                    text: res['success']['text'],
-                                    type: "success",
-                                    confirmButtonColor: "#DD6B55 ",
-                                    confirmButtonText: 'Ок',
-                                    closeOnConfirm: true
-                                });
-                                console.log('Upload success', res);
-                                d = new Date();
-                                $("img[src$='"+path+"']").attr("src", path + "?" + d.getTime());
-                            }
                         },
                         error: function (res) {
-                            console.log('Upload error', res);
+
                             swal({
                                 title: '{{trans('validation.attributes.backend.access.image.error.title')}}',
                                 text: '{{trans('validation.attributes.backend.access.image.error.text')}} ',
@@ -389,6 +379,7 @@
             })
         });
     }
+
     Dropzone.autoDiscover = false;
 
     function deletePhoto() {
