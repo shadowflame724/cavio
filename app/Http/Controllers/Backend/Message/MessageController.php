@@ -51,9 +51,11 @@ class MessageController extends Controller
     {
         $message->status = 1;
         $message->save();
+        $messages = Message::where('status', 0)->get();
 
         return view('backend.messages.show', [
             'message' => $message,
+            'messages' => $messages,
         ]);
     }
 

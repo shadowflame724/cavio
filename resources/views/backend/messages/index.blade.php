@@ -22,6 +22,7 @@
                     <thead>
                     <tr>
                         <th>{{ trans('labels.backend.access.message.table.name') }}</th>
+                        <th>{{ trans('labels.backend.access.message.table.email') }}</th>
                         <th>{{ trans('labels.backend.access.message.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
@@ -48,6 +49,7 @@
                 },
                 columns: [
                     {data: 'name', name: 'title'},
+                    {data: 'email', name: 'email'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],

@@ -16,6 +16,7 @@ class Good extends Model
 
     protected $fillable = [
         'category_id',
+        'collection_id',
         'code',
         'price',
         'name',
