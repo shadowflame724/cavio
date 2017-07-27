@@ -42,11 +42,9 @@
                       </div>
                       <ul class="catal-list">
                         @foreach($category->children as $child)
-                          <li><a href="{{ route('frontend.catalogue', $child->slug) }}"
-                                 class=anim-underline>
-
+                          <li>
+                            <a href="{{ route('frontend.catalogue.one', $child->slug) }}" class=anim-underline>
                               {{ $child->{'name'.$langSuf} }}
-
                             </a>
                         @endforeach
                       </ul>
@@ -70,12 +68,9 @@
                   <ul class="zon-col-list-catal zones">
                     @foreach($zones as $zone)
                       <li>
-                        <a href=# class="anim-underline">
-
-                          {{ $zone->{'title'.$langSuf} }}
-
-                        </a>
+                        <a href=# class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
                         <div class="disactive-item"></div>
+                      </li>
                     @endforeach
                   </ul>
 
@@ -86,11 +81,10 @@
                     @foreach($collections as $collection)
                       <li>
                         <a href=# class="anim-underline">
-
                           {{ $collection->{'title'.$langSuf} }}
-
                         </a>
                         <div class="disactive-item"></div>
+                      </li>
                     @endforeach
                   </ul>
                 </div>
