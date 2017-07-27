@@ -33,7 +33,7 @@
                   @if($category->parent_id == null)
                     <div class=catal-list-block>
                       <div class=catal-list-title>
-                        <a href="{{ route('frontend.category.show', $category->slug) }}">
+                        <a href="{{ route('frontend.catalogue.one', $category->slug) }}">
 
                           {{ $category->{'name'.$langSuf} }}
                           {{$category->slug}}
