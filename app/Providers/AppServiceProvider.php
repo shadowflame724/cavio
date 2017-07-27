@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
         $collections = Collection::all();
         $categories = Category::all();
         $zones = Zone::all();
-        $messages = Message::all();
+        $messages = Message::where('status', 0)->get();
 
         View::share([
             'collections' => $collections,

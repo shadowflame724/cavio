@@ -160,6 +160,7 @@ return [
 
                 'table' => [
                     'name' => 'Имя',
+                    'email' => 'Email',
                     'new' => 'Новое',
                     'created_at' => 'Отправлено'
                 ]

@@ -30,28 +30,24 @@
                     </li>
                 @endif
 
-                @php($count = 0)
-                @foreach($messages as $message)
-                    @if($message->status == 0)
-                        @php($count++)
-                    @endif
-                @endforeach
+                {{--@php($count = 0)--}}
+                {{--@foreach($messages as $message)--}}
+                        {{--@php($count++)--}}
+                {{--@endforeach--}}
 
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-default">{{ $count }}</span>
+                        <span class="label label-default">{{ $messages->count() }}</span>
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li class="header">{{ trans_choice('strings.backend.general.you_have.messages', $count , ['number' => 2]) }}</li>
+                        <li class="header">{{ trans_choice('strings.backend.general.you_have.messages',  2, ['number' => $messages->count()]) }}</li>
 
-                        @if($count > 0)
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
                                     @foreach($messages as $message)
-                                        @if($message->status == 0)
                                             <li><!-- start message -->
                                                 <a href="{{ route('admin.message.show', $message->id) }}">
                                                     <h4>
@@ -66,11 +62,9 @@
                                                 </a>
                                             </li>
                                             <!-- end message -->
-                                        @endif
                                     @endforeach
                                 </ul>
                             </li>
-                        @endif
 
                         <li class="footer">
                             {{ link_to('admin/messages', trans('strings.backend.general.see_all.messages')) }}

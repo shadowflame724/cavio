@@ -22,7 +22,6 @@ Route::get('finish-tissue', 'FrontendController@finishTissue')->name('finish-tis
 Route::get('catalogue', 'ProductController@index')->name('catalogue');
 Route::get('product/{slug}', 'ProductController@one')->name('goods.show');
 
-
 Route::get('collections', 'CollectionController@index')->name('collections');
 Route::get('collections/{collection}', 'CollectionController@show')->name('collections.show');
 

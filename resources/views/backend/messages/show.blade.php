@@ -26,6 +26,8 @@
             <div class="box-body">
                 <div class="form-group">
                     <h3>{{ trans('labels.backend.access.message.from') }}: {!! $message->name !!}</h3>
+                    <h4>{!! $message->email !!}</h4>
+
 
                     {{ trans('labels.backend.access.message.date') }}: {{ $message->created_at->diffForHumans() }}
 

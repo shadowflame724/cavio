@@ -190,6 +190,7 @@ return [
 
                 'table' => [
                     'name' => 'Name',
+                    'email' => 'Email',
                     'new' => 'New',
                     'created_at' => 'Posted'
                 ]

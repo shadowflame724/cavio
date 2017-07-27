@@ -17,6 +17,7 @@ class CreateGoodsTable extends Migration
             $table->increments('id');
             $table->tinyInteger('category_id')->nullable();
             $table->tinyInteger('collection_zones_id')->nullable();
+            $table->tinyInteger('collection_id')->nullable();
             $table->string('code')->nullable();
             $table->string('slug')->nullable();
             $table->string('name')->nullable();
