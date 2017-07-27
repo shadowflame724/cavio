@@ -3,10 +3,12 @@
 namespace App\Models\Category;
 
 use App\Models\Good\Good;
-use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Baum\Node;
 
-class Category extends Node {
+class Category extends Node
+{
+    use Sluggable;
 
     protected $table = 'categories';
 
@@ -26,6 +28,24 @@ class Category extends Node {
 
     // guard attributes from mass-assignment
     protected $guarded = array('id', 'parent_id', 'lft', 'rgt', 'depth');
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function goods()
     {

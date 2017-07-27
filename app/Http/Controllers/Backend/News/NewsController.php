@@ -8,8 +8,7 @@ use App\Http\Requests\Backend\News\StoreNewsRequest;
 use App\Models\News\News;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\News\NewsRepository;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Storage;
+
 
 
 class NewsController extends Controller

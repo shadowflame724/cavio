@@ -6,6 +6,7 @@ var scrolledBottom = false;
 var beCollScrolled = false;
 
 var scrollbars;
+var topMenuScroll;
 
 var scrollFunc;
 
@@ -21,11 +22,11 @@ $(document).ready(function () {
     }
 
     if ($(document).scrollTop()) $('header:not(.scroll)').addClass('scroll');
-    else                        $('header.scroll').removeClass('scroll');
+    else $('header.scroll').removeClass('scroll');
 
     $(window).on('scroll', function () {
         if ($(document).scrollTop()) $('header:not(.scroll)').addClass('scroll');
-        else                        $('header.scroll').removeClass('scroll');
+        else $('header.scroll').removeClass('scroll');
     });
 });
 
@@ -48,6 +49,16 @@ if (!document.querySelector('body.card')) {
 
     scrollbars = !$('body').hasClass('about');
 
+
+    $(window).on('resize', function () {
+        //RESIZE TOPDROPMENU
+        var thentisDropMenu = $('.top-menu-box.show');
+        var newTopMenuHeight = thisDropMenu.find('.wrap-menus').height() + $('header').height();
+        if (newTopMenuHeight > window.innerHeight) newTopMenuHeight = window.innerHeight;
+        if (thisDropMenu.find('.forTopMenuScroll').length) topMenuScroll.setPosition(0, 0);
+        docum.getElementById('top-menu').style.height = newTopMenuHeight + 'px';
+    });
+
     $(document).ready(function () {
         jQuery.Color.hook("fill stroke");
 
@@ -65,7 +76,7 @@ if (!document.querySelector('body.card')) {
                     else if (!document.querySelector('main.scrolling')) wavesBg_1.play();
                 }
 
-                if (document.querySelector('body.press-design'))  return;
+                if (document.querySelector('body.press-design')) return;
 
                 if (status.offset.y != 0) $('header:not(.scroll)').addClass('scroll');
                 else $('header.scroll').removeClass('scroll');
@@ -99,13 +110,13 @@ if (!document.querySelector('body.card')) {
         showElements();
 
         var timeOTopImg;
-        $('.wrap-menu-zones li a').on('mouseenter', function () {
+        $('.top-menu-box.collection li >a').on('mouseenter', function () {
             var index = $(this).closest('li').index();
 
-            var showedImg = document.querySelector('.wrap-menu-img .wrap-coll-top-menu-img.show');
-            var willShowImg = $('.wrap-menu-img .wrap-coll-top-menu-img').eq(index);
+            var showedImg = document.querySelector('.top-menu-box.collection .wrap-coll-top-menu-img.show');
+            var willShowImg = $(this).next();
 
-            if (willShowImg.hasClass('show'))  return;
+            if (willShowImg.hasClass('show')) return;
 
             var lastSritedImgEl = $('.sprite-wrap-coll-top-menu-img .last');
             var firstSritedImgEl = $('.sprite-wrap-coll-top-menu-img .first');
@@ -118,8 +129,7 @@ if (!document.querySelector('body.card')) {
 
 
             if (firstSritedImgUrl != 'none') {
-                lastSritedImgEl
-                    .css('background-image', firstSritedImgUrl);
+                lastSritedImgEl.css('background-image', firstSritedImgUrl);
             }
 
             firstSritedImgEl
@@ -127,7 +137,7 @@ if (!document.querySelector('body.card')) {
 
 
             setTimeout(function () {
-                wrapSprite.style.transition = 'transform .3s ease, -webkit-transform .3s ease';
+                wrapSprite.style.transition = 'transform .4s ease, -webkit-transform .4s ease';
                 wrapSprite.style.transform = 'translate(0, 50%)';
                 wrapSprite.style['-webkit-transform'] = 'translate(0, 50%)';
             }, 1);
@@ -160,15 +170,21 @@ if (!document.querySelector('body.card')) {
 
         $('.btn-top-menu').on('mouseenter', function () {
 
+            var thisDropMenu = $('#' + this.getAttribute('for'));
+            var newTopMenuHeight = thisDropMenu.find('.wrap-menus').height() + $('header').height();
+            if (newTopMenuHeight > window.innerHeight) newTopMenuHeight = window.innerHeight;
+            if (thisDropMenu.find('.forTopMenuScroll').length) topMenuScroll.setPosition(0, 0);
+
+
             if (!$('header').hasClass('show-top-menu')) {
                 $('header').addClass('show-top-menu');
-                var self = this;
-                $('#' + this.getAttribute('for')).removeClass('show');
-                setTimeout(function () {
-                    $('#' + self.getAttribute('for')).addClass('show');
+
+                thisDropMenu.removeClass('show');
+                setTimeout(function () {thisDropMenu.addClass('show')
                 }, 2);
 
                 $('.btn-top-menu[for=' + this.getAttribute('for') + ']').addClass('active');
+                document.getElementById('top-menu').style.height = newTopMenuHeight + 'px';
                 return;
             }
 
@@ -177,16 +193,27 @@ if (!document.querySelector('body.card')) {
                 $('.top-menu-box.show').removeClass('show');
                 this.classList.add('active');
 
-                $('#' + this.getAttribute('for')).addClass('show');
+                thisDropMenu.addClass('show');
+                document.getElementById('top-menu').style.height = newTopMenuHeight + 'px';
             }
         });
 
-        $('header').on('mouseleave', function (e) {
-            $('header').removeClass('show-top-menu');
-            $('#' + this.getAttribute('for')).removeClass('show');
-            $('.btn-top-menu.active').removeClass('active');
-            $('.top-menu-box.show').removeClass('show');
+
+        $('header').on('mouseleave', function () {
+            hideTopMenu()
         });
+        $('.nav-icon, .svg-main-logo, .lang-panel, .btn-login, .svg-stash').on('mouseenter', function () {
+            hideTopMenu()
+        });
+
+
+        // hideTopMenu
+        var newTopMenuHeight = $('#menu-products .wrap-menus').height() + $('header').height();
+        if (newTopMenuHeight > window.innerHeight) newTopMenuHeight = window.innerHeight;
+        document.querySelector('.forTopMenuScroll').style.height = newTopMenuHeight + 'px';
+        topMenuScroll = Scrollbar.init(document.querySelector('.topMenuScroll'), {alwaysShowTracks: true});
+        $('.forTopMenuScroll').attr('style', '');
+
 
         $('.nav-icon').on('click', function () {
             $(this).toggleClass('open');
@@ -197,13 +224,6 @@ if (!document.querySelector('body.card')) {
                 .toggleClass('show-left-menu');
 
             $(document.body).toggleClass('overfl-h');
-
-            // if($(this).hasClass('open')){
-            //   mainScroll && mainScroll.disable();
-            // }
-            // else {
-            //   mainScroll && mainScroll.enable();
-            // }
         });
 
         $('.drop-item > a').on('click', function (event) {
@@ -312,7 +332,7 @@ if (document.querySelector('body.main')) {
             if (mainScroll) mainScroll.options.speed = 1;
         },
         'mousewheel': function (event) {
-            if (!mainScroll)  return;
+            if (!mainScroll) return;
 
             var currValScrollUndBanner = $(this).find('.new-products-right-item:not(.hide)').offset().left;
 
@@ -349,12 +369,12 @@ if (document.querySelector('body.main')) {
         if (!$(this).hasClass('lang-item')) {
             e.preventDefault();
 
-            if (mainScroll && mainScroll.offset.y == 0)  return;
+            if (mainScroll && mainScroll.offset.y == 0) return;
 
             if (mainScroll) mainScroll.scrollTo(0, 0, mainScroll.offset.y / 4, function () {
                 if (wavesBg_1) wavesBg_1.play();
             });
-            else  $('body').animate({scrollTop: 0}, $('body').scrollTop() / 5);
+            else $('body').animate({scrollTop: 0}, $('body').scrollTop() / 5);
         }
     });
 
@@ -599,7 +619,7 @@ if (document.querySelector('body.main')) {
     });
 
     function animBannerCircle(container) {
-        if (window.innerWidth <= 1024)  return;
+        if (window.innerWidth <= 1024) return;
 
         //  ==== HIDE ===
         $(container).find('.banner-circle').removeClass('showed');
@@ -802,7 +822,7 @@ if (document.querySelector('body.main')) {
     });
 
     $('.new-products-dots .new-prod-dot').on('click', function (event) {
-        if ($(this).hasClass('active'))  return;
+        if ($(this).hasClass('active')) return;
 
         clearInterval(intervalNewProdDot);
 
@@ -1571,7 +1591,7 @@ if (document.querySelector('body.catalogue')) {
     });
 
     $('ul.catal-perc li').on('click', function (e) {
-        if ($(this).hasClass('active'))  return;
+        if ($(this).hasClass('active')) return;
 
         $(this).siblings('.active').removeClass('active');
         this.className += ' active';
@@ -1579,7 +1599,7 @@ if (document.querySelector('body.catalogue')) {
 
     //  Pagination ======
     $('ul.list-pagination li').on('click', function (e) {
-        if ($(this).hasClass('active'))  return;
+        if ($(this).hasClass('active')) return;
 
         $(this).siblings('.active').removeClass('active');
         this.className += ' active';
@@ -1890,7 +1910,7 @@ if (document.querySelector('body.press-design')) {
             });
 
             $(this).removeClass('up').addClass('down');
-        } else  $(this).removeClass('down').addClass('up');
+        } else $(this).removeClass('down').addClass('up');
 
 
         // console.log(neadSort, keySort, prevSortArrow);
@@ -1996,7 +2016,7 @@ if (document.querySelector('body.finish-tissue')) {
         var offsetEl = $(this.getAttribute('href')).offset().top;
 
         if (mainScroll) mainScroll.scrollTo(0, offsetEl - 50 + mainScroll.offset.y, offsetEl / 2);
-        else  $('html, body').animate({scrollTop: offsetEl - 50}, offsetEl / 2);
+        else $('html, body').animate({scrollTop: offsetEl - 50}, offsetEl / 2);
     });
 
 
@@ -2111,7 +2131,7 @@ if (document.querySelector('body.stash')) {
 
 
     $('.calc_it').on('click', function (e) {
-        if ($(this).hasClass('disabled'))  return;
+        if ($(this).hasClass('disabled')) return;
 
         var itemNumbValEl = $(this).siblings(".ord_it-numb-val");
 
@@ -2133,7 +2153,7 @@ if (document.querySelector('body.stash')) {
         var btnMinus = $(this).closest(".ord_it-numb").find('.calc_it.minus');
 
         if (+itemNumbValEl.text() <= 1) btnMinus.addClass('disabled');
-        else                             btnMinus.removeClass("disabled");
+        else btnMinus.removeClass("disabled");
     });
 
 
@@ -2284,7 +2304,7 @@ if (document.querySelector('body.showrooms')) {
             // effect: "coverflow",
             coverflow: {slideShadows: false},
             onInit: function (swiper) {
-                $(carouselShowR).find('.show_r-slide.swiper-slide-active');
+                $(carouselShowR).find('.show_r-slide.swiper-slide-active')
             },
         });
     });
@@ -2673,7 +2693,7 @@ function initShowRMap() {
     for (var posM = 0; markersPos.length > posM; posM++) {
         new google.maps.Marker({
             position: markersPos[posM],
-            icon: '../../img/frontend/marker-s_r.png',
+            icon: '../../img/frontend/marker.png',
             map: map
         });
     }
@@ -2713,13 +2733,13 @@ $('input').on('keyup', function () {
 });
 
 $('input').on('blur', function () {
-    if (!$(this).hasClass('input-error'))  return;
+    if (!$(this).hasClass('input-error')) return;
 
     $('.input-error').removeClass('input-error');
 });
 
 $('ul.wrap-dimensions-values li').on('click', function (e) {
-    if ($(this).hasClass('active'))  return;
+    if ($(this).hasClass('active')) return;
 
     $(this).closest('ul.wrap-dimensions-values').find('li.active').removeClass('active')
     $(this).addClass('active')
@@ -2734,7 +2754,7 @@ $('ul.wrap-dimensions-values li').on('click', function (e) {
 
 
 $('ul.card-varians-list li').on('click', function (e) {
-    if ($(this).hasClass('active'))  return;
+    if ($(this).hasClass('active')) return;
 
     var indexCurr = $('ul.card-varians-list li.active').index();
     var indexNew = $(this).index();
@@ -2759,7 +2779,7 @@ $('ul.card-varians-list li').on('click', function (e) {
 });
 
 $('.toggle-cent_inch .toggle-inner-length').on('click', function (e) {
-    if ($(this).hasClass('active'))  return;
+    if ($(this).hasClass('active')) return;
 
     $(this).siblings('.toggle-inner-length.active').removeClass('active');
     this.className += ' active';
@@ -2843,9 +2863,16 @@ function platformDef() {
     }
 }
 
+function hideTopMenu() {
+    $('header').removeClass('show-top-menu');
+    $('.btn-top-menu.active').removeClass('active');
+    $('.top-menu-box.show').removeClass('show');
+    document.getElementById('top-menu').style.height = 0;
+}
+
 function blendModeDef() {
     /*! modernizr 3.5.0 (Custom Build) | MIT *
-     * https://modernizr.com/download/?-backgroundblendmode-setclasses !*/
+   * https://modernizr.com/download/?-backgroundblendmode-setclasses !*/
     !function (e, n, t) {
         function r(e, n) {
             return typeof e === n
@@ -2853,9 +2880,9 @@ function blendModeDef() {
 
         function o() {
             var e, n, t, o, i, s, a;
-            for (var l in C)if (C.hasOwnProperty(l)) {
-                if (e = [], n = C[l], n.name && (e.push(n.name.toLowerCase()), n.options && n.options.aliases && n.options.aliases.length))for (t = 0; t < n.options.aliases.length; t++)e.push(n.options.aliases[t].toLowerCase());
-                for (o = r(n.fn, "function") ? n.fn() : n.fn, i = 0; i < e.length; i++)s = e[i], a = s.split("."), 1 === a.length ? Modernizr[a[0]] = o : (!Modernizr[a[0]] || Modernizr[a[0]] instanceof Boolean || (Modernizr[a[0]] = new Boolean(Modernizr[a[0]])), Modernizr[a[0]][a[1]] = o), h.push((o ? "" : "no-") + a.join("-"))
+            for (var l in C) if (C.hasOwnProperty(l)) {
+                if (e = [], n = C[l], n.name && (e.push(n.name.toLowerCase()), n.options && n.options.aliases && n.options.aliases.length)) for (t = 0; t < n.options.aliases.length; t++) e.push(n.options.aliases[t].toLowerCase());
+                for (o = r(n.fn, "function") ? n.fn() : n.fn, i = 0; i < e.length; i++) s = e[i], a = s.split("."), 1 === a.length ? Modernizr[a[0]] = o : (!Modernizr[a[0]] || Modernizr[a[0]] instanceof Boolean || (Modernizr[a[0]] = new Boolean(Modernizr[a[0]])), Modernizr[a[0]][a[1]] = o), h.push((o ? "" : "no-") + a.join("-"))
             }
         }
 
@@ -2890,7 +2917,7 @@ function blendModeDef() {
 
         function u(e, n, t) {
             var o;
-            for (var i in e)if (e[i] in n)return t === !1 ? e[i] : (o = n[e[i]], r(o, "function") ? f(o, t || n) : o);
+            for (var i in e) if (e[i] in n) return t === !1 ? e[i] : (o = n[e[i]], r(o, "function") ? f(o, t || n) : o);
             return !1
         }
 
@@ -2920,18 +2947,18 @@ function blendModeDef() {
 
         function m(e, t, r, o) {
             var i, s, a, f, u = "modernizr", d = l("div"), p = c();
-            if (parseInt(r, 10))for (; r--;)a = l("div"), a.id = o ? o[r] : u + (r + 1), d.appendChild(a);
+            if (parseInt(r, 10)) for (; r--;) a = l("div"), a.id = o ? o[r] : u + (r + 1), d.appendChild(a);
             return i = l("style"), i.type = "text/css", i.id = "s" + u, (p.fake ? p : d).appendChild(i), p.appendChild(d), i.styleSheet ? i.styleSheet.cssText = e : i.appendChild(n.createTextNode(e)), d.id = u, p.fake && (p.style.background = "", p.style.overflow = "hidden", f = x.style.overflow, x.style.overflow = "hidden", x.appendChild(p)), s = t(d, e), p.fake ? (p.parentNode.removeChild(p), x.style.overflow = f, x.offsetHeight) : d.parentNode.removeChild(d), !!s
         }
 
         function v(n, r) {
             var o = n.length;
             if ("CSS" in e && "supports" in e.CSS) {
-                for (; o--;)if (e.CSS.supports(d(n[o]), r))return !0;
+                for (; o--;) if (e.CSS.supports(d(n[o]), r)) return !0;
                 return !1
             }
             if ("CSSSupportsRule" in e) {
-                for (var i = []; o--;)i.push("(" + d(n[o]) + ":" + r + ")");
+                for (var i = []; o--;) i.push("(" + d(n[o]) + ":" + r + ")");
                 return i = i.join(" or "), m("@supports (" + i + ") { #modernizr { position: absolute; } }", function (e) {
                     return "absolute" == p(e, null, "position")
                 })
@@ -2946,16 +2973,16 @@ function blendModeDef() {
 
             if (i = r(i, "undefined") ? !1 : i, !r(o, "undefined")) {
                 var u = v(e, o);
-                if (!r(u, "undefined"))return u
+                if (!r(u, "undefined")) return u
             }
-            for (var d, p, c, m, g, y = ["modernizr", "tspan", "samp"]; !N.style && y.length;)d = !0, N.modElem = l(y.shift()), N.style = N.modElem.style;
-            for (c = e.length, p = 0; c > p; p++)if (m = e[p], g = N.style[m], a(m, "-") && (m = s(m)), N.style[m] !== t) {
-                if (i || r(o, "undefined"))return f(), "pfx" == n ? m : !0;
+            for (var d, p, c, m, g, y = ["modernizr", "tspan", "samp"]; !N.style && y.length;) d = !0, N.modElem = l(y.shift()), N.style = N.modElem.style;
+            for (c = e.length, p = 0; c > p; p++) if (m = e[p], g = N.style[m], a(m, "-") && (m = s(m)), N.style[m] !== t) {
+                if (i || r(o, "undefined")) return f(), "pfx" == n ? m : !0;
                 try {
                     N.style[m] = o
                 } catch (h) {
                 }
-                if (N.style[m] != g)return f(), "pfx" == n ? m : !0
+                if (N.style[m] != g) return f(), "pfx" == n ? m : !0
             }
             return f(), !1
         }
@@ -2989,12 +3016,12 @@ function blendModeDef() {
         S._cssomPrefixes = b;
         var E = function (n) {
             var r, o = prefixes.length, i = e.CSSRule;
-            if ("undefined" == typeof i)return t;
-            if (!n)return !1;
-            if (n = n.replace(/^@/, ""), r = n.replace(/-/g, "_").toUpperCase() + "_RULE", r in i)return "@" + n;
+            if ("undefined" == typeof i) return t;
+            if (!n) return !1;
+            if (n = n.replace(/^@/, ""), r = n.replace(/-/g, "_").toUpperCase() + "_RULE", r in i) return "@" + n;
             for (var s = 0; o > s; s++) {
                 var a = prefixes[s], l = a.toUpperCase() + "_" + r;
-                if (l in i)return "@-" + a.toLowerCase() + "-" + n
+                if (l in i) return "@-" + a.toLowerCase() + "-" + n
             }
             return !1
         };
@@ -3013,7 +3040,7 @@ function blendModeDef() {
             return 0 === e.indexOf("@") ? E(e) : (-1 != e.indexOf("-") && (e = s(e)), n ? y(e, n, t) : y(e, "pfx"))
         };
         Modernizr.addTest("backgroundblendmode", k("backgroundBlendMode", "text")), o(), i(h), delete S.addTest, delete S.addAsyncTest;
-        for (var T = 0; T < Modernizr._q.length; T++)Modernizr._q[T]();
+        for (var T = 0; T < Modernizr._q.length; T++) Modernizr._q[T]();
         e.Modernizr = Modernizr
     }(window, document);
 }

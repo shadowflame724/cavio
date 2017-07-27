@@ -100,19 +100,19 @@ class CategoryController extends Controller
 
     /**
      * @param UpdateCategoryRequest $request
-     * @param Category $cat
+     * @param Category $category
      *
      * @return mixed
      */
-    public function update(UpdateCategoryRequest $request, Category $cat)
+    public function update(Category $category, UpdateCategoryRequest $request)
     {
-        $cat->name = $request->name;
-        $cat->name_ru = $request->name_ru;
-        $cat->name_it = $request->name_it;
-        $cat->image = $request->image;
+        $category->name = $request->name;
+        $category->name_ru = $request->name_ru;
+        $category->name_it = $request->name_it;
+        $category->image = $request->image;
 
-        if ($cat->save()) {
-            event(new CategoryUpdated($cat));
+        if ($category->save()) {
+            event(new CategoryUpdated($category));
         }
 
         return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.updated'));

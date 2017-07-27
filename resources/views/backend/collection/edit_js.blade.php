@@ -32,6 +32,7 @@
         interval: 200000
     });
 
+
     var $sortableList = [];
 
     function movePhoto() {
@@ -210,11 +211,24 @@
         inp = $('input#zones\\[' + key + '\\]\\[photo\\]');
         myDropzone[key] = new Dropzone($(".dropzone:not(:first)")[key], {
                 uploadMultiple: true,
+                parallelUploads: 5,
                 dictDefaultMessage: "Drop files here",
                 url: "{{route('admin.file.upload.collection-zone')}}",
-                maxFiles: 20,
+                maxFiles: 30,
                 headers: {
                     'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                },
+                processingmultiple: function () {
+                    swal({
+                        title: 'Uploading...',
+                        text: 'Please wait.',
+                        imageUrl: '/img/backend/ajax-loader.gif',
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        showConfirmButton: false,
+                        allowEscapeKey: false,
+                        allowOutsideClick: false
+                    })
                 },
                 successmultiple: function (file, res) {
                     this.removeFile(file);
@@ -286,6 +300,7 @@
             $(el).find('input').on('click', function () {
                 var path = $(this).val();
                 var original = $(this).parents('.photo-one-bl').find('img')[0];
+                console.log('original', original);
                 var width;
                 var height;
                 var asepectRatio;
@@ -312,7 +327,8 @@
                         break;
                 }
                 var img = $(original).clone();
-                $(this).val(path.replace(/horizontal|thumb/gi, 'original'));
+                console.log('before=', path);
+                var pathOriginal = path.replace(/horizontal|thumb/gi, 'original');
                 var $cropperModal = $(modalTemplate);
                 var $uploadCrop = $cropperModal.find('.crop-upload');
                 $cropperModal.find('.image-container').html(img[0]);
@@ -341,6 +357,7 @@
                     $cropperModal.modal('hide');
                     formData.append('croppedImage', newFile);
                     formData.append('name', path);
+                    console.log(pathOriginal);
                     $.ajax('{{route('admin.file.upload.cropped')}}', {
                         headers: {
                             'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
