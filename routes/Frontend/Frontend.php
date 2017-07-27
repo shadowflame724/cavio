@@ -18,7 +18,7 @@ Route::get('showrooms', 'FrontendController@showrooms')->name('showrooms');
 Route::get('privacy-policy', 'FrontendController@privacyPolicy')->name('privacy-policy');
 Route::get('stash', 'FrontendController@stash')->name('stash');
 Route::get('catalogue', 'FrontendController@catalogue')->name('catalogue');
-Route::get('catalogue/{slug}', 'FrontendController@catalogueShow')->name('catalogue.show');
+Route::get('catalogue/category/{slug}', 'FrontendController@categoryShow')->name('category.show');
 
 Route::get('finish-tissue', 'FrontendController@finishTissue')->name('finish-tissue');
 

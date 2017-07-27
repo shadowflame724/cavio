@@ -6,17 +6,17 @@
     {{ Html::style('css/backend/plugin/dropzone/dropzone.css') }}
     {{ Html::style('css/backend/plugin/dropzone/basic.css') }}
     <style>
-        /*#original {*/
-        /*max-width: 650px;*/
-        /*}*/
-
-        /*#horizontal {*/
-        /*max-width: 650px;*/
-        /*}*/
-
-        /*#thumb {*/
-        /*max-width: 100px;*/
-        /*}*/
+        #spinner{
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            top: 50%;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            background: url(/link/to/your/image);
+            background-size: 100%;
+        }
 
         .sweet-alert {
             z-index: 999;

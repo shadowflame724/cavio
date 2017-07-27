@@ -93,6 +93,22 @@ class FrontendController extends Controller
     /**
      * @return \Illuminate\View\View
      */
+    public function categoryShow($slug)
+    {
+        dd($slug);
+        $page = $this->page('catalogue');
+        $category = Category::where('slug', $slug);
+
+
+        return view('frontend.pages.catalogue', [
+            'page' => $page,
+            'category' => $category
+        ]);
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
     public function faq()
     {
         $faqs = FAQ::all();

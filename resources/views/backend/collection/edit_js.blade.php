@@ -32,6 +32,7 @@
         interval: 200000
     });
 
+
     var $sortableList = [];
 
     function movePhoto() {
@@ -210,11 +211,24 @@
         inp = $('input#zones\\[' + key + '\\]\\[photo\\]');
         myDropzone[key] = new Dropzone($(".dropzone:not(:first)")[key], {
                 uploadMultiple: true,
+                parallelUploads: 5,
                 dictDefaultMessage: "Drop files here",
                 url: "{{route('admin.file.upload.collection-zone')}}",
-                maxFiles: 20,
+                maxFiles: 30,
                 headers: {
                     'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
+                },
+                processingmultiple: function () {
+                    swal({
+                        title: 'Uploading...',
+                        text: 'Please wait.',
+                        imageUrl: '/img/backend/ajax-loader.gif',
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        showConfirmButton: false,
+                        allowEscapeKey: false,
+                        allowOutsideClick: false
+                    })
                 },
                 successmultiple: function (file, res) {
                     this.removeFile(file);
