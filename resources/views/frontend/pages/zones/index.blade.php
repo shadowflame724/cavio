@@ -22,30 +22,28 @@
 
       <div class="container">
         <div class="zon-col-list clearfix">
-
           @foreach($zones as $zone)
-            <div class="item-coll zon-col"><a
-                      href="{{ route('frontend.zones.show', $zone) }}">
+            <div class="item-coll zon-col">
+              <a href="{{ route('frontend.zones.show', $zone) }}">
                 <div class="wrap-img-bg small">
                   <div class="img-back wave-dark">
                     <svg width=1395.63 height=1237.68>
                       <use xlink:href=wave.svg#wave></use>
                     </svg>
                   </div>
-                @php
+                  @php
                     $image = explode(',', $zone->collectionZones()->first()->image)[0];
-                @endphp
-                  <img src="/upload/images/zone/thumb/{{ $image }}" alt=""></div>
+                  @endphp
+                  <img src="/upload/images/zone/thumb/{{ $image }}" alt="">
+                </div>
                 <div>
-                  <div class=coll-name>
-
-                    {{ $zone->{'title'.$langSuf} }}
-
-                    <span class=wrap-coll-name-arrow><span
-                              class=coll-name-arrow>→</span></span></div>
+                  <div class=coll-name>{{ $zone->{'title'.$langSuf} }}
+                    <span class=wrap-coll-name-arrow><span class=coll-name-arrow>→</span></span>
+                  </div>
                   <div class=numb-prod>00 {{ trans('frontend.zones-collections.products') }}</div>
                 </div>
-              </a></div>
+              </a>
+            </div>
           @endforeach
         </div>
       </div>
