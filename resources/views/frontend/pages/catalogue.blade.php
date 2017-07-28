@@ -33,15 +33,16 @@
                   @if($category->parent_id == null)
                     <div class=catal-list-block>
                       <div class=catal-list-title>
-                        <a href="{{ route('frontend.catalogue', $category->id) }}">
+                        <a href="{{ route('frontend.catalogue.one', $category->slug) }}">
 
                           {{ $category->{'name'.$langSuf} }}
+                          {{$category->slug}}
 
                         </a>
                       </div>
                       <ul class="catal-list">
                         @foreach($category->children as $child)
-                          <li><a href="{{ route('frontend.catalogue', $child->id) }}"
+                          <li><a href="{{ route('frontend.catalogue', $child->slug) }}"
                                  class=anim-underline>
 
                               {{ $child->{'name'.$langSuf} }}

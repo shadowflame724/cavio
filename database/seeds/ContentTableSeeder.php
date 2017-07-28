@@ -28,7 +28,6 @@ class ContentTableSeeder extends Seeder
         $this->call(CategoryTableSeeder::class);
         $this->call(ZoneTableSeeder::class);
         $this->call(CollectionZonesTableSeeder::class);
-        $this->call(CollectionZoneZoneTableSeeder::class);
         $this->call(ShowroomTableSeeder::class);
         $this->call(PopupTableSeeder::class);
         $this->call(FinishTissueTableSeeder::class);

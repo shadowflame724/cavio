@@ -77,18 +77,7 @@ class FrontendController extends Controller
         ]);
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function catalogue()
-    {
-        $page = $this->page('catalogue');
 
-
-        return view('frontend.pages.catalogue', [
-            'page' => $page,
-        ]);
-    }
 
     /**
      * @return \Illuminate\View\View

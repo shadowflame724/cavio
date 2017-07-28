@@ -191,6 +191,7 @@ return [
 
                 'table' => [
                     'name' => 'Nome',
+                    'email' => 'Email',
                     'new' => 'Nuovo',
                     'created_at' => 'Postato'
                 ]

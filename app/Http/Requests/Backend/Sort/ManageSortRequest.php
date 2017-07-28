@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Backend\Category;
+namespace App\Http\Requests\Backend\Sort;
 
 use App\Http\Requests\Request;
 
+
 /**
- * Class UpdateCategoryRequest.
+ * Class ManageSortRequest.
  */
-class UpdateCategoryRequest extends Request
+class ManageSortRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +28,7 @@ class UpdateCategoryRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:35',
-            'name_ru' => 'required|min:3|max:35',
-            'name_it' => 'required|min:3|max:35'
+            //
         ];
     }
 }

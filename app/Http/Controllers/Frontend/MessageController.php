@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class MessageController extends Controller
 {
     /**
-     * @param StoreMessageRequest $request
+     * @param Request $request
      *
      * @return mixed
      */

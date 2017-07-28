@@ -22,6 +22,8 @@ class ZonesCollections extends Migration
             $table->string('title_it', 35)->nullable();
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
+            $table->text('products_id')->nullable();
+
             $table->timestamps();
         });
     }

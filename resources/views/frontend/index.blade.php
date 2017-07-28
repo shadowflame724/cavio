@@ -39,7 +39,7 @@
             @foreach($collections as $collection)
                 @if($collection->banner == 1)
                     <div class="banner-top-item @if($i)hide @endif">
-                        <img src="/upload/images/{{ $collection->image }}" alt="" class='banner-img'>
+                        <img src="/upload/images/collection/original/{{ $collection->image }}" alt="" class='banner-img'>
                         @foreach($collection->markers as $marker)
                             <a href=# class='banner-circle'
                                style="top: {{ $marker->y }}%; left: {{ $marker->x }}%">
@@ -92,8 +92,9 @@
                             @if($collection->banner == 1)
                                 <div class="slidebox @if($u)hide @endif">
                                     <div class="title">{{ $collection->{'title'.$langSuf} }}</div>
-                                    <p class="descr">{!! $collection->{'description'.$langSuf} !!} <a href=#
-                                                                                                      class="link-arrow">→</a>
+                                    <p class="descr">{!! $collection->{'description'.$langSuf} !!}
+                                        <a href="/collection/one" class="link-arrow">→</a>
+                                    </p>
                                 </div>
                                 @php($u++)
                             @endif
@@ -108,7 +109,6 @@
                         <a class="new-products-right-inner-item" href="#">
                             <div class="wrap-new-product-img bg-white-marmur"
                                  style="background-image: url(upload/images/un_banner-1-1.jpg)">
-                                <!--<img src="images/un_banner-1-1.jpg" alt="">-->
                             </div>
                             <div class="wrap-new-product-data">
                                 <div class="product-code">#dsf32</div>
@@ -252,10 +252,10 @@
                         <a class="new-products-right-inner-item" href="#">
                             <div class="new-products-more-center">
                                 <div class="new-products-more-widt">
-                        <span class="show-all-prod anim-underline">
-                          Show All
-                          <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
-                        </span>
+                                    <span class="show-all-prod anim-underline">
+                                      Show All
+                                      <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
+                                    </span>
                                     <div class="show-all-prod-numb">
                                         <span>124 products</span>
                                     </div>
@@ -351,7 +351,10 @@
                 </div>
                 <div class="phil-right">
                     <div class="phil-text">
-                        <div class="phil-text-nosvg">{!! $page->blocks->get(0)->{'body'.$langSuf} !!}</div>
+                        <div class="phil-text-nosvg">
+                            {!! $page->blocks->get(0)->{'body'.$langSuf} !!}
+                            <a href="/about" class="link-arrow">→</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -380,7 +383,7 @@
                                             </svg>
                                         </div>
                                         <div class="wrap-transf-img">
-                                            <img src="/upload/images/{{ $collection->image }}" alt="">
+                                            <img src="/upload/images/collection/thumb/{{ $collection->image }}" alt="">
                                         </div>
                                     </div>
                                     <div class="wrap-coll-item-footer">
@@ -419,18 +422,18 @@
                     @if($category->parent_id != null AND $count<10)
                         <div class="cat hide">
                             <div class="car-bg"></div>
-                            <a href="catalogue.html">
+                            <a href="/catalogue">
                                 <div class="wrap-cat-svg">
                                     <div class="inner-svg white">
                                         <svg>
                                             <use xmlns:xlink=http://www.w3.org/1999/xlink
-                                                 xlink:href="#{{ $category->id }}"></use>
+                                                 xlink:href="#cat{{ $category->id }}"></use>
                                         </svg>
                                     </div>
                                     <div class="inner-svg orange">
                                         <svg>
                                             <use xmlns:xlink=http://www.w3.org/1999/xlink
-                                                 xlink:href="#{{ $category->id }}"></use>
+                                                 xlink:href="#cat{{ $category->id }}"></use>
                                         </svg>
                                     </div>
                                 </div>
@@ -466,9 +469,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svgLayout"
          style="display:none">
         @foreach($categories as $category)
-            <symbol id="{{ $category->id }}" viewBox="0 0 200 200">
-                <path fill-rule="evenodd" d="{{ $category->image }}"/>
-            </symbol>
+            <symbol id="cat{{ $category->id }}" viewBox="0 0 200 200">{{ $category->image }}</symbol>
         @endforeach
         <symbol id="stash" viewBox="0 0 49 37">
             <path fill-rule="evenodd"

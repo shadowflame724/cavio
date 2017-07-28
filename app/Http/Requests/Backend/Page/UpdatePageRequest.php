@@ -38,9 +38,9 @@ class UpdatePageRequest extends Request
             'blocks.*.title' => "max:35",
             'blocks.*.title_ru' => "max:35",
             'blocks.*.title_it' => "max:35",
-            'blocks.*.body' => "max:700",
-            'blocks.*.body_ru' => "max:700",
-            'blocks.*.body_it' => "max:700",
+            'blocks.*.body' => "max:800",
+            'blocks.*.body_ru' => "max:800",
+            'blocks.*.body_it' => "max:800",
             'admin_comment' => "required",
 
         ];

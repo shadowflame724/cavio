@@ -53,39 +53,60 @@
                 @foreach($collection->markers as $key => $marker)
                     @php ($i = $key+1)
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapse{{$key}}"
-                                   aria-expanded="true" aria-controls="collapse{{$key}}">
-                                    {{$i}}. {{$marker->title}}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse{{$key}}" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#en{{$key}}" aria-controls="en"
-                                                                              role="tab"
-                                                                              data-toggle="tab">EN</a>
-                                    </li>
-                                    <li role="presentation"><a href="#ru{{$key}}" aria-controls="ru" role="tab"
-                                                               data-toggle="tab">RU</a></li>
-                                    <li role="presentation"><a href="#it{{$key}}" aria-controls="it" role="tab"
-                                                               data-toggle="tab">IT</a></li>
-                                </ul>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse{{$key}}"
+                                       aria-expanded="true" aria-controls="collapse{{$key}}">
+                                        {{$i}}. {{$marker->title}}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{$key}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#en{{$key}}" aria-controls="en"
+                                                                                  role="tab"
+                                                                                  data-toggle="tab">EN</a>
+                                        </li>
+                                        <li role="presentation"><a href="#ru{{$key}}" aria-controls="ru" role="tab"
+                                                                   data-toggle="tab">RU</a></li>
+                                        <li role="presentation"><a href="#it{{$key}}" aria-controls="it" role="tab"
+                                                                   data-toggle="tab">IT</a></li>
+                                    </ul>
+                                    <div class="box-body">
 
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active" id="en{{$key}}">
-                                        <div class="form-group">
-                                            {{ Form::hidden('markers['.$key.'][id]', $marker->id, ['class' => 'form-control', 'id' => 'markers['.$key.'][id]']) }}
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="en{{$key}}">
+                                                <div class="form-group">
+                                                    {{ Form::hidden('markers['.$key.'][id]', $marker->id, ['class' => 'form-control', 'id' => 'markers['.$key.'][id]']) }}
 
-                                            {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
-                                            <div class="col-lg-10">
-                                                {{ Form::text('markers['.$key.'][title]', $marker->title, ['class' => 'form-control', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                            </div><!--col-lg-10-->
-                                        </div><!--form control-->
+                                                    {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
+                                                    <div class="col-lg-10">
+                                                        {{ Form::text('markers['.$key.'][title]', $marker->title, ['class' => 'form-control', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                            </div>
+
+                                            <div role="tabpanel" class="tab-pane fade" id="ru{{$key}}">
+                                                <div class="form-group">
+                                                    {{ Form::label('title', trans('validation.attributes.backend.access.marker.title_ru'), ['class' => 'col-lg-2 control-label']) }}
+                                                    <div class="col-lg-10">
+                                                        {{ Form::text('markers['.$key.'][title_ru]', $marker->title_ru, ['class' => 'form-control', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                            </div>
+
+                                            <div role="tabpanel" class="tab-pane fade" id="it{{$key}}">
+                                                <div class="form-group">
+                                                    {{ Form::label('title', trans('validation.attributes.backend.access.marker.title_it'), ['class' => 'col-lg-2 control-label']) }}
+                                                    <div class="col-lg-10">
+                                                        {{ Form::text('markers['.$key.'][title_it]', $marker->title_it, ['class' => 'form-control', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                            </div>
+                                        </div>
 
                                         <div class="form-group">
                                             {{ Form::label('code', trans('validation.attributes.backend.access.marker.code'), ['class' => 'col-lg-2 control-label']) }}
@@ -98,33 +119,14 @@
 
                                         <a href="{{route('admin.marker.destroy', $marker)}}"
                                            class='btn btn-danger btn-xs'>{{trans('buttons.general.crud.delete')}}</a>
+
+
                                     </div>
-
-
-                                    <div role="tabpanel" class="tab-pane fade" id="ru{{$key}}">
-                                        <div class="form-group">
-                                            {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
-                                            <div class="col-lg-10">
-                                                {{ Form::text('markers['.$key.'][title_ru]', $marker->title_ru, ['class' => 'form-control', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                            </div><!--col-lg-10-->
-                                        </div><!--form control-->
-                                    </div>
-
-                                    <div role="tabpanel" class="tab-pane fade" id="it{{$key}}">
-                                        <div class="form-group">
-                                            {{ Form::label('title', trans('validation.attributes.backend.access.marker.title'), ['class' => 'col-lg-2 control-label']) }}
-                                            <div class="col-lg-10">
-                                                {{ Form::text('markers['.$key.'][title_it]', $marker->title_it, ['class' => 'form-control', 'maxlength' => '30', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                            </div><!--col-lg-10-->
-                                        </div><!--form control-->
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                @endforeach
+                        @endforeach
             </div>
             <a href="{{route('admin.collection.marker.store', $collection)}}"
                class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
@@ -158,7 +160,7 @@
         var markerY;// = $('#markers\\[1\\]\\[y\\]').val();
 
         map.onclick = function (e) {
-            if (!currMarkerId)  return;
+            if (!currMarkerId) return;
             var mapMainH = mapMain.innerHeight();
             var mapMainW = mapMain.innerWidth();
             var x = e.offsetX == undefined ? e.layerX : e.offsetX;

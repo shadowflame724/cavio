@@ -37,6 +37,21 @@ class ProductController extends Controller
             'page' => $page,
         ]);
     }
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function catOne($slug)
+    {
+//        dd($slug);
+        $page = $this->page('catalogue');
+        $category = Category::where('slug', $slug);
+
+
+        return view('frontend.pages.catalogue', [
+            'page' => $page,
+            'category' => $category
+        ]);
+    }
 
     public function one($slug)
     {
