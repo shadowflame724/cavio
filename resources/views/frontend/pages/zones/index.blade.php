@@ -25,7 +25,7 @@
 
           @foreach($zones as $zone)
             <div class="item-coll zon-col"><a
-                      href="{{ route('frontend.zones.show', $zone) }}">
+                      href="{{ route('frontend.zones.show', $zone->slug) }}">
                 <div class="wrap-img-bg small">
                   <div class="img-back wave-dark">
                     <svg width=1395.63 height=1237.68>

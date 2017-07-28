@@ -163,6 +163,14 @@
                             <span>{{ trans('labels.backend.order.management') }}</span>
                         </a>
                     </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/sort*')) }}">
+                        <a href="{{ route('admin.sort.index') }}">
+                            <i class="fa fa-sort"></i>
+                            <span>{{ trans('labels.backend.sort.management') }}</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
 
