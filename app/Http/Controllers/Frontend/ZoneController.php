@@ -20,12 +20,13 @@ class ZoneController extends Controller
     }
 
     /**
-     * @param Zone $zone
      * @return \Illuminate\View\View
      */
-    public function show(Zone $zone)
+    public function show($slug)
     {
         $page = $this->page('zones');
+        $zone = Zone::where('slug', $slug)->first();
+
 
         return view('frontend.pages.zones.show', [
             'page' => $page,

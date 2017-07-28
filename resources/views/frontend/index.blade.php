@@ -469,7 +469,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svgLayout"
          style="display:none">
         @foreach($categories as $category)
-            <symbol id="cat{{ $category->id }}" viewBox="0 0 200 200">{{ $category->image }}</symbol>
+            <symbol id="cat{{ $category->id }}" viewBox="0 0 200 200">{!! $category->image !!}</symbol>
         @endforeach
         <symbol id="stash" viewBox="0 0 49 37">
             <path fill-rule="evenodd"
