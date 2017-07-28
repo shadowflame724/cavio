@@ -167,16 +167,16 @@
                         @endif
                     </span>
                       <span class="size-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.dimensions') }}</div>
-                        @if(isset($product['productChilds']['dimensions']->length))
+                        @if(isset($product['productChilds']['dimensions']->length) && !empty($product['productChilds']['dimensions']->length))
                         L: {{$product['productChilds']['dimensions']->length}},
                         @endif
-                        @if(isset($product['productChilds']['dimensions']->width))
+                        @if(isset($product['productChilds']['dimensions']->width) && !empty($product['productChilds']['dimensions']->width))
                         W: {{$product['productChilds']['dimensions']->width}},
                         @endif
-                        @if(isset($product['productChilds']['dimensions']->height))
+                        @if(isset($product['productChilds']['dimensions']->height) && !empty($product['productChilds']['dimensions']->height))
                         H: {{$product['productChilds']['dimensions']->height}},
                         @endif
-                        @if(isset($product['productChilds']['dimensions']->mattress))
+                        @if(isset($product['productChilds']['dimensions']->mattress) && !empty($product['productChilds']['dimensions']->mattress))
                         Mattress: {{$product['productChilds']['dimensions']->mattress}},
                         @endif
                       </span>

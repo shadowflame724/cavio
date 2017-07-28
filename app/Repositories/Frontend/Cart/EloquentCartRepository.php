@@ -50,11 +50,9 @@ class EloquentCartRepository implements CartContract
         $data['count'] = (int)$data['count'];
 
         if (empty($this->_cart)) {
-            $data['id'] = 1;
             $this->_cart[] = $data;
         } else {
             $end = end($this->_cart);
-            $data['id'] = $end['id'] + 1;
             array_push($this->_cart, $data);
         }
         cart()->update($this->_cart);
