@@ -29,8 +29,7 @@ class UpdateCategoryRequest extends Request
         return [
             'name' => 'required|min:3|max:35',
             'name_ru' => 'required|min:3|max:35',
-            'name_it' => 'required|min:3|max:35',
-            'image' => 'required|min:3'
+            'name_it' => 'required|min:3|max:35'
         ];
     }
 }

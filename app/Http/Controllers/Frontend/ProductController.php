@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\FAQ\FAQ;
 use App\Models\FinishTissue\FinishTissue;
@@ -35,6 +34,27 @@ class ProductController extends Controller
         return view('frontend.pages.catalogue', [
             'model' => $model,
             'page' => $page,
+        ]);
+    }
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function catOne($slug)
+    {
+        $page = $this->page('catalogue');
+        $model = $this->product->catOne($slug);
+
+        return view('frontend.pages.catalogue', [
+            'page' => $page,
+            'model' => $model
+        ]);
+    }
+
+    public function one($slug)
+    {
+        $model = $this->product->getBySlug($slug);
+        return view('frontend.pages.product-card', [
+            'product' => $model,
         ]);
     }
 }

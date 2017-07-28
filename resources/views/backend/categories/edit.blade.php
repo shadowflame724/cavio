@@ -44,7 +44,7 @@
                         {{ Form::label('name_ru', trans('validation.attributes.backend.access.category.name_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -54,7 +54,7 @@
                         {{ Form::label('name_it', trans('validation.attributes.backend.access.category.name_it'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('name_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::text('name_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -62,7 +62,7 @@
                 <div class="form-group">
                     {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
-                        {{Form::textarea('image', null, [ 'class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        {{Form::textarea('image', null, [ 'class' => 'form-control', 'minlength' => '3']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
             </div>

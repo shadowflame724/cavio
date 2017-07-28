@@ -20,23 +20,36 @@
                                     <div class="wrap-card-view clearfix">
 
                                         <div class="relative">
-                                            <div class="wrap-curr-card-view hide">
-                                                <div class="curr-card-view bg-white-marmur discount" style="background-image: url(images/chair_card.jpg)"></div>
+                                            @if(isset($product['prices']) && !empty($product['prices']))
+                                            <?php $i = 1;?>
+                                            @foreach($product['prices'] as $one)
+                                            @if(isset($one['photosArr']['photos'][0]) && !empty($one['photosArr']['photos'][0]))
+                                            <div class="wrap-curr-card-view  @if($i==1) show @else hide @endif">
+                                                <div class="curr-card-view bg-white-marmur discount"
+                                                     style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$one['photosArr']['photos'][0]}})"></div>
                                             </div>
-                                            <div class="wrap-curr-card-view show">
-                                                <div class="curr-card-view bg-white-marmur discount" style="background-image: url(images/chair_card-2.jpg)"></div>
-                                            </div>
-                                            <div class="wrap-curr-card-view hide">
-                                                <div class="curr-card-view bg-white-marmur" style="background-image: url(images/varior-1.jpg)"></div>
-                                            </div>
+                                            <?php $i++;?>
+                                            @endif
+                                            @endforeach
+                                            @endif
                                         </div>
 
                                         <div class="wrap-mini">
                                             <div class="wrap-card-varians-list">
                                                 <ul class="card-varians-list">
-                                                    <li class=""><div class="dot-card_item bg-white-marmur" style="background-image: url(images/chair_card.jpg)"></div></li>
-                                                    <li class="active"><div class="dot-card_item bg-white-marmur" style="background-image: url(images/chair_card-2.jpg)"></div></li>
-                                                    <li class=""><div class="dot-card_item bg-white-marmur" style="background-image: url(images/varior-1.jpg)"></div></li>
+                                                @if(isset($product['photos']) && !empty($product['photos']))
+                                                @php($i=0)
+                                                @foreach($product['photos'] as $photo)
+                                                    @foreach($photo['photos'] as $img)
+                                                    <li @if(!$i) class="active" @endif data-photo="{{$photo['id']}}">
+                                                        <div
+                                                            class="dot-card_item bg-white-marmur"
+                                                            style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{ $img }})"></div>
+                                                    </li>
+                                                    @php($i++)
+                                                    @endforeach
+                                                @endforeach
+                                                @endif
                                                 </ul>
                                             </div>
                                         </div>
@@ -46,38 +59,26 @@
                                         <div class="label-price_buy clearfix">
                                             <div class="wrap-swiper-card_price">
                                                 <div class="swiper-wrapper">
-                                                    <div class="swiper-slide wrap-card-price">
+                                                    @if(isset($product['prices']) && !empty($product['prices']))
+                                                    <?php $i = 1;?>
+                                                    @foreach($product['prices'] as $one)
+                                                    <div data-photo="{{$one['product_photo_id']}}" data-child="{{$one['product_child_id']}}" class="swiper-slide wrap-card-price  @if($i==1) active @endif">
                                                         <div class="t_cell">
                                                             <div class="card-price">
-                                                                <div>3425 €</div>
+                                                                <div>{{$one['price_vat']}} €</div>
                                                                 <div class="wrap-under-card_price small">
-                                                                    <div class="under-card-price line-through">355€</div>
-                                                                    <div class="under-card-price">985€ + 22%VAT</div>
+                                                                    @if($one['discount'] > 0)
+                                                                    <div class="under-card-price line-through">{{$one['price_old']}}€</div>
+                                                                    @endif
+                                                                    <div class="under-card-price">{{$one['price_new']}}€ + 22%VAT</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="swiper-slide wrap-card-price active">
-                                                        <div class="t_cell">
-                                                            <div class="card-price">
-                                                                <div>2245 €</div>
-                                                                <div class="wrap-under-card_price small">
-                                                                    <div class="under-card-price line-through">1 734€</div>
-                                                                    <div class="under-card-price">985€ + 22%VAT</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="swiper-slide wrap-card-price">
-                                                        <div class="t_cell">
-                                                            <div class="card-price">
-                                                                <div>561 €</div>
-                                                                <div class="wrap-under-card_price small">
-                                                                    <div class="under-card-price">185€ + 22%VAT</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
+                                                    <?php $i++;?>
+                                                    @endforeach
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="card-to_stash">
@@ -97,9 +98,14 @@
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <div class="wrap-card-params-right">
                                     <div class="swiper-wrapper overfl-h">
-                                        <div class="swiper-slide bg-white-marmur card_item-params">
+                                        @if(isset($product['prices']) && !empty($product['prices']))
+                                        <?php $i = 1;?>
+                                        @foreach($product['prices'] as $one)
+                                        <div data-photo="{{$one['product_photo_id']}}" data-child="{{$one['product_child_id']}}" class="swiper-slide bg-white-marmur card_item-params">
                                             <div class="wrap-card-header">
                                                 <div class="wrap-card-name">
                                                     <div class="card-zoneCat-list clearfix">
@@ -120,9 +126,9 @@
 
                                                     </div>
                                                     <div class="card-name">
-                                                        <span>Sofa 2 Seats Foldin</span>
+                                                        <span>{{$one['childsArr']['name']}}</span>
                                                     </div>
-                                                    <div class="card-product-code">FR112</div>
+                                                    <div class="card-product-code">{{$one['childsArr']['code']}}</div>
                                                 </div>
                                             </div>
                                             <div class="wrap-relate-card-more-choices">
@@ -132,9 +138,11 @@
                                                         <div class="cell-card-more-choices fin">
                                                             <div class="swiper-wrapper overfl-h">
                                                                 <div class="swiper-slide fin_slide bg-white-marmur">
-                                                                    <div class="nowrap-list-card_pr">Neutri</div>
-                                                                    <div class="nowrap-list-card_pr">Oro</div>
-                                                                    <div class="nowrap-list-card_pr">Viola</div>
+                                                                    @if(isset($one['photosArr']['finish']) && !empty($one['photosArr']['finish']))
+                                                                    @foreach($one['photosArr']['finish'] as $finish)
+                                                                    <div class="nowrap-list-card_pr">{{$finish}}</div>
+                                                                    @endforeach
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -143,7 +151,13 @@
                                                         <div class="block_title-card">Tissue</div>
                                                         <div class="cell-card-more-choices tis">
                                                             <div class="swiper-wrapper overfl-h">
-                                                                <div class="swiper-slide fin_slide bg-white-marmur">TS111, TS333, TS333</div>
+                                                                <div class="swiper-slide fin_slide bg-white-marmur">
+                                                                    @if(isset($one['photosArr']['tissue']) && !empty($one['photosArr']['tissue']))
+                                                                    @foreach($one['photosArr']['tissue'] as $tissue)
+                                                                    {{$tissue}},
+                                                                    @endforeach
+                                                                    @endif
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -157,90 +171,31 @@
                                                 </div>
                                                 <div class="wrap-table-dimensions clearfix">
                                                     <ul class="wrap-dimensions-values clearfix">
-                                                        <li>
+                                                        @if(isset($product['childs']) && !empty($product['childs']))
+                                                        @foreach($product['childs'] as $child)
+                                                        <li data-child="{{$child['id']}}" @if($child['id'] == $one['product_child_id']) class="active" @endif>
                                                             <div class="dimensions-item-numb">1</div>
                                                             <div class="wrap-dim-swiper">
                                                                 <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>294</li>
-                                                                        <li>14/280</li>
-                                                                        <li>13</li>
-                                                                        <li>20x135x34</li>
-                                                                        <li>10 kg</li>
+                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur cent">
+                                                                        <li>{{$child['dimensions']->length}}</li>
+                                                                        <li>{{$child['dimensions']->width}}</li>
+                                                                        <li>{{$child['dimensions']->height}}</li>
+                                                                        <li>{{$child['dimensions']->mattress}}</li>
+                                                                        <li>{{$child['dimensions']->niche}}</li>
                                                                     </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>11111</li>
-                                                                        <li>11/11111</li>
-                                                                        <li>111</li>
-                                                                        <li>11x1x111</li>
-                                                                        <li>11 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="active">
-                                                            <div class="dimensions-item-numb">2</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>394</li>
-                                                                        <li>170/190</li>
-                                                                        <li>13</li>
-                                                                        <li>40x125x11</li>
-                                                                        <li>98 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>2222</li>
-                                                                        <li>22/222</li>
-                                                                        <li>22</li>
-                                                                        <li>22x222x22</li>
-                                                                        <li>22 kg</li>
+                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur inch">
+                                                                        <li>{{$child['dimensions']->length}}</li>
+                                                                        <li>{{$child['dimensions']->width}}</li>
+                                                                        <li>{{$child['dimensions']->height}}</li>
+                                                                        <li>{{$child['dimensions']->mattress}}</li>
+                                                                        <li>{{$child['dimensions']->niche}}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                        <li>
-                                                            <div class="dimensions-item-numb">3</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>294</li>
-                                                                        <li>120/212</li>
-                                                                        <li>43</li>
-                                                                        <li>40x145x11</li>
-                                                                        <li>88 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>33333</li>
-                                                                        <li>333/33</li>
-                                                                        <li>33</li>
-                                                                        <li>333x3x33</li>
-                                                                        <li>33 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="dimensions-item-numb">4</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>194</li>
-                                                                        <li>100/250</li>
-                                                                        <li>93</li>
-                                                                        <li>70x195x14</li>
-                                                                        <li>80 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>4444</li>
-                                                                        <li>44/4444</li>
-                                                                        <li>444</li>
-                                                                        <li>4444x44x4</li>
-                                                                        <li>44 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                        @endforeach
+                                                        @endif
                                                     </ul>
                                                     <ul class="size-name val-rules">
                                                         <li>Length:</li>
@@ -272,369 +227,20 @@
                                             <div class="wrap-card-otherData">
                                                 <div class="block_title-card">description</div>
                                                 <ul class="card-otherData">
-                                                    <li><p class="prgrph-card-other">Golden God 2222 Golden God 222</p></li>
-                                                    <li><p class="prgrph-card-other">Golden God 111 Golden God Golden God Golden God</p></li>
+                                                    @if(isset($product['prev']) && !empty($product['prev']))
+                                                    <li><p class="prgrph-card-other">{{$product['prev']}}</p></li>
+                                                    @endif
+                                                    @if(isset($one['photosArr']['prev']) && !empty($one['photosArr']['prev']))
+                                                    <li><p class="prgrph-card-other">{{$one['photosArr']['prev']}}</p></li>
+                                                    @endif
+                                                    @if(isset($one['childsArr']['prev']) && !empty($one['childsArr']['prev']))
+                                                    <li><p class="prgrph-card-other">{{$one['childsArr']['prev']}}</p></li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="swiper-slide bg-white-marmur card_item-params">
-                                            <div class="wrap-card-header">
-                                                <div class="wrap-card-name">
-                                                    <div class="card-zoneCat-list clearfix">
-
-                                                        <div class="wrap-catal-zon_col">
-                                                            <div class="swiper-wrapper overfl-h">
-                                                                <div class="swiper-slide bg-white-marmur">
-                                                                    <div class="wrap-catal-zones">
-                                                                        <span class="catal-type">living</span>
-                                                                    </div>
-                                                                    <div class="wrap-catal-coll">
-                                                                        <span class="catal-coll">Villa Cannes</span>
-                                                                        <span class="catal-coll">Villa Cannes43</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card-name">
-                                                        <span>Sofa 2 Seats Foldin</span>
-                                                    </div>
-                                                    <div class="card-product-code">FRY21</div>
-                                                </div>
-                                            </div>
-                                            <div class="wrap-relate-card-more-choices">
-                                                <div class="wrap-card-more-choices clearfix">
-                                                    <div class="item-standart-choice">
-                                                        <div class="block_title-card">finish</div>
-                                                        <div class="cell-card-more-choices fin">
-                                                            <div class="swiper-wrapper overfl-h">
-                                                                <div class="swiper-slide fin_slide bg-white-marmur">
-                                                                    <div class="nowrap-list-card_pr">1 Lucido Scuro </div>
-                                                                    <div class="nowrap-list-card_pr">2 Lucido Scuro </div>
-                                                                    <div class="nowrap-list-card_pr">3 Lucido Scuro </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-standart-choice">
-                                                        <div class="block_title-card">Tissue</div>
-                                                        <div class="cell-card-more-choices tis">
-                                                            <div class="swiper-wrapper overfl-h">
-                                                                <div class="swiper-slide fin_slide bg-white-marmur">TS212</div>
-                                                            </div>
-                                                        </div>
-                                                        <!--<div class="cell-card-more-choices">TS445, TS6587</div>-->
-                                                    </div>
-                                                    <a href="finish-tissue.html" class="card-mode-choice hov-colMain_clack">More choices →</a>
-                                                </div>
-                                            </div>
-                                            <div class="wrap-card-dimensions">
-                                                <div class="wrap-card-block-title clearfix">
-                                                    <div class="block_title-card">Dimensions</div>
-                                                    <div class="toggle-cent_inch"><span class="toggle-inner-length hov-colMain_clack active">Centimeters</span> / <span class="toggle-inner-length hov-colMain_clack">inches</span></div>
-                                                </div>
-                                                <div class="wrap-table-dimensions clearfix">
-                                                    <ul class="wrap-dimensions-values clearfix">
-                                                        <li>
-                                                            <div class="dimensions-item-numb">1</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>294</li>
-                                                                        <li>14/280</li>
-                                                                        <li>13</li>
-                                                                        <li>20x135x34</li>
-                                                                        <li>10 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>55555</li>
-                                                                        <li>5555/5555</li>
-                                                                        <li>55</li>
-                                                                        <li>55x555x55</li>
-                                                                        <li>55 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="active">
-                                                            <div class="dimensions-item-numb">2</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>394</li>
-                                                                        <li>170/190</li>
-                                                                        <li>13</li>
-                                                                        <li>40x125x11</li>
-                                                                        <li>98 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>6666</li>
-                                                                        <li>66/66</li>
-                                                                        <li>66</li>
-                                                                        <li>6666x666x6</li>
-                                                                        <li>6 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="dimensions-item-numb">3</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>294</li>
-                                                                        <li>120/212</li>
-                                                                        <li>43</li>
-                                                                        <li>40x145x11</li>
-                                                                        <li>88 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>7777</li>
-                                                                        <li>77/77</li>
-                                                                        <li>777</li>
-                                                                        <li>77x77x7777</li>
-                                                                        <li>7 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="dimensions-item-numb">4</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>194</li>
-                                                                        <li>100/250</li>
-                                                                        <li>93</li>
-                                                                        <li>70x195x14</li>
-                                                                        <li>80 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>8888</li>
-                                                                        <li>88/8</li>
-                                                                        <li>8888</li>
-                                                                        <li>888x88x8</li>
-                                                                        <li>8 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="size-name val-rules">
-                                                        <li>Length:</li>
-                                                        <li>Width:</li>
-                                                        <li>Height:</li>
-                                                        <li>Mattress:</li>
-                                                        <li>Weight:</li>
-                                                    </ul>
-                                                    <div class="wrap-curr_dim_val-swiper">
-                                                        <div class="swiper-wrapper">
-                                                            <ul class="swiper-slide size-name no-desktop curr_dimensions_values bg-white-marmur cent">
-                                                                <li>194</li>
-                                                                <li>100/250</li>
-                                                                <li>93</li>
-                                                                <li>70x195x14</li>
-                                                                <li>80 kg</li>
-                                                            </ul>
-                                                            <ul class="swiper-slide size-name no-desktop curr_dimensions_values bg-white-marmur inch">
-                                                                <li>194</li>
-                                                                <li>100/250</li>
-                                                                <li>93</li>
-                                                                <li>70x195x14</li>
-                                                                <li>80 kg</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="wrap-card-otherData">
-                                                <div class="block_title-card">DESCRIPTION</div>
-                                                <ul class="card-otherData">
-                                                    <li><p class="prgrph-card-other">Golden God</p></li>
-                                                    <li><p class="prgrph-card-other">Golden God</p></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide bg-white-marmur card_item-params">
-                                            <div class="wrap-card-header">
-                                                <div class="wrap-card-name">
-                                                    <div class="card-zoneCat-list clearfix">
-
-                                                        <div class="wrap-catal-zon_col">
-                                                            <div class="swiper-wrapper overfl-h">
-                                                                <div class="swiper-slide bg-white-marmur">
-                                                                    <div class="wrap-catal-zones">
-                                                                        <span class="catal-type">Living</span>
-                                                                        <span class="catal-type">Studio</span>
-                                                                    </div>
-                                                                    <div class="wrap-catal-coll">
-                                                                        <span class="catal-coll">Fiesole</span>
-                                                                        <span class="catal-coll">Como</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card-name">
-                                                        <span>Sofa 2 Seats Foldin</span>
-                                                    </div>
-                                                    <div class="card-product-code">FR432</div>
-                                                </div>
-                                            </div>
-                                            <div class="wrap-relate-card-more-choices">
-                                                <div class="wrap-card-more-choices clearfix">
-                                                    <div class="item-standart-choice">
-                                                        <div class="block_title-card">finish</div>
-                                                        <div class="cell-card-more-choices fin">
-                                                            <div class="swiper-wrapper overfl-h">
-                                                                <div class="swiper-slide fin_slide bg-white-marmur">
-                                                                    <div class="nowrap-list-card_pr">Francesca Collezione</div>
-                                                                    <div class="nowrap-list-card_pr">Marrone</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-standart-choice">
-                                                        <div class="block_title-card">Tissue</div>
-                                                        <div class="cell-card-more-choices tis">
-                                                            <div class="swiper-wrapper overfl-h">
-                                                                <div class="swiper-slide fin_slide bg-white-marmur">TS437A,TS227A</div>
-                                                            </div>
-                                                        </div>
-                                                        <!--<div class="cell-card-more-choices">TS445, TS6587</div>-->
-                                                    </div>
-                                                    <a href="finish-tissue.html" class="card-mode-choice hov-colMain_clack">More choices →</a>
-                                                </div>
-                                            </div>
-                                            <div class="wrap-card-dimensions">
-                                                <div class="wrap-card-block-title clearfix">
-                                                    <div class="block_title-card">Dimensions</div>
-                                                    <div class="toggle-cent_inch"><span class="toggle-inner-length hov-colMain_clack active">Centimeters</span> / <span class="toggle-inner-length hov-colMain_clack">inches</span></div>
-                                                </div>
-                                                <div class="wrap-table-dimensions clearfix">
-                                                    <ul class="wrap-dimensions-values clearfix">
-                                                        <li>
-                                                            <div class="dimensions-item-numb">1</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>294</li>
-                                                                        <li>14/280</li>
-                                                                        <li>13</li>
-                                                                        <li>20x135x34</li>
-                                                                        <li>10 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>121212</li>
-                                                                        <li>12/12</li>
-                                                                        <li>1212</li>
-                                                                        <li>121x12x12</li>
-                                                                        <li>12 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="active">
-                                                            <div class="dimensions-item-numb">2</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>394</li>
-                                                                        <li>170/190</li>
-                                                                        <li>13</li>
-                                                                        <li>40x125x11</li>
-                                                                        <li>98 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>4545</li>
-                                                                        <li>45/455</li>
-                                                                        <li>4545</li>
-                                                                        <li>454x5454x5</li>
-                                                                        <li>45 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="dimensions-item-numb">3</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>294</li>
-                                                                        <li>120/212</li>
-                                                                        <li>43</li>
-                                                                        <li>40x145x11</li>
-                                                                        <li>88 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>89</li>
-                                                                        <li>8989/89</li>
-                                                                        <li>89</li>
-                                                                        <li>98x989x89</li>
-                                                                        <li>98 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="dimensions-item-numb">4</div>
-                                                            <div class="wrap-dim-swiper">
-                                                                <div class="swiper-wrapper">
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>194</li>
-                                                                        <li>100/250</li>
-                                                                        <li>93</li>
-                                                                        <li>70x195x14</li>
-                                                                        <li>80 kg</li>
-                                                                    </ul>
-                                                                    <ul class="swiper-slide dimensions-values-item bg-white-marmur">
-                                                                        <li>38</li>
-                                                                        <li>38/83</li>
-                                                                        <li>38</li>
-                                                                        <li>8383x888x8</li>
-                                                                        <li>88 kg</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="size-name val-rules">
-                                                        <li>Length:</li>
-                                                        <li>Width:</li>
-                                                        <li>Height:</li>
-                                                        <li>Mattress:</li>
-                                                        <li>Weight:</li>
-                                                    </ul>
-                                                    <div class="wrap-curr_dim_val-swiper">
-                                                        <div class="swiper-wrapper">
-                                                            <ul class="swiper-slide size-name no-desktop curr_dimensions_values bg-white-marmur cent">
-                                                                <li>194</li>
-                                                                <li>100/250</li>
-                                                                <li>93</li>
-                                                                <li>70x195x14</li>
-                                                                <li>80 kg</li>
-                                                            </ul>
-                                                            <ul class="swiper-slide size-name no-desktop curr_dimensions_values bg-white-marmur inch">
-                                                                <li>194</li>
-                                                                <li>100/250</li>
-                                                                <li>93</li>
-                                                                <li>70x195x14</li>
-                                                                <li>80 kg</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="wrap-card-otherData">
-                                                <div class="block_title-card">DESCRIPTION</div>
-                                                <ul class="card-otherData">
-                                                    <li><p class="prgrph-card-other">Golden God Golden God Golden God Golden God</p></li>
-                                                    <li><p class="prgrph-card-other">Golden God 232332 32323</p></li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        @endforeach
+                                        @endif
                                     </div>
 
                                     <div class="wrap-share_social">
@@ -668,51 +274,25 @@
 
                             <div class="wrap-bigest-swiper">
                                 <div class="swiper-wrapper overfl-h">
+                                    @if(isset($product['photos']) && !empty($product['photos']))
+                                    @foreach($product['photos'] as $photo)
                                     <div class="swiper-slide outer-slide bg-white-marmur">
                                         <div class="wrap-carousel-card">
                                             <div class="swiper-wrapper">
+                                                @if(!empty($photo['collection']))
+                                                @foreach($photo['collection'] as $img)
+                                                @if(!empty($img))
                                                 <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/card-carous-2.jpg" alt="">
+                                                    <img src="//cvo-dev.spongeservice.com.ua/upload/images/zone/horizontal/{{$img}}" alt="">
                                                 </div>
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/card-carous-2.jpg" alt="">
-                                                </div>
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/card-carous-2.jpg" alt="">
-                                                </div>
+                                                @endif
+                                                @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide outer-slide bg-white-marmur">
-                                        <div class="wrap-carousel-card">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/banner-main-3.jpg" alt="">
-                                                </div>
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/banner-main-3.jpg" alt="">
-                                                </div>
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/banner-main-3.jpg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide outer-slide bg-white-marmur">
-                                        <div class="wrap-carousel-card">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/banner-main-1.jpg" alt="">
-                                                </div>
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/banner-main-1.jpg" alt="">
-                                                </div>
-                                                <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="/upload/images/banner-main-1.jpg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
+                                    @endif
                                 </div>
                             </div>
 

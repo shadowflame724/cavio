@@ -313,6 +313,12 @@ return [
                     'body_it' => 'Content[IT]*',
                     'type' => 'Type*',
                 ],
+                'settings' => [
+                    'soc_links' => 'Links*',
+                    'discount_data' => 'Discount*',
+                    'koef_data' => 'Coefficient(cm/inch)*'
+                ],
+
             ],
         ],
 

@@ -33,20 +33,15 @@
                   @if($category->parent_id == null)
                     <div class=catal-list-block>
                       <div class=catal-list-title>
-                        <a href="{{ route('frontend.category.show', $category->slug) }}">
-
+                        <a href="{{ route('frontend.catalogue.one', $category->slug) }}">
                           {{ $category->{'name'.$langSuf} }}
-                          {{$category->slug}}
-
                         </a>
                       </div>
                       <ul class="catal-list">
                         @foreach($category->children as $child)
-                          <li><a href="{{ route('frontend.catalogue', $child->slug) }}"
-                                 class=anim-underline>
-
+                          <li>
+                            <a href="{{ route('frontend.catalogue.one', $child->slug) }}" class=anim-underline>
                               {{ $child->{'name'.$langSuf} }}
-
                             </a>
                         @endforeach
                       </ul>
@@ -70,12 +65,9 @@
                   <ul class="zon-col-list-catal zones">
                     @foreach($zones as $zone)
                       <li>
-                        <a href=# class="anim-underline">
-
-                          {{ $zone->{'title'.$langSuf} }}
-
-                        </a>
+                        <a href=# class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
                         <div class="disactive-item"></div>
+                      </li>
                     @endforeach
                   </ul>
 
@@ -86,17 +78,17 @@
                     @foreach($collections as $collection)
                       <li>
                         <a href=# class="anim-underline">
-
                           {{ $collection->{'title'.$langSuf} }}
-
                         </a>
                         <div class="disactive-item"></div>
+                      </li>
                     @endforeach
                   </ul>
                 </div>
               </div>
             </div>
           </div>
+          @if(isset($model) && !empty($model))
           <div class="catal-content">
             <div class="catal-content-inner">
               <div class="wrap-catal-filter">
@@ -114,15 +106,13 @@
                 <span class="catal-item-numb"><span class="numb">64</span> products</span>
               </div>
               <div class="wrap-catal-list">
-                @if(isset($model) && !empty($model))
-                @foreach($model as $product)
                 <div class="disp-catal-list clearfix">
+                  @foreach($model as $product)
                   <div class="new-products-right-item grid w33 @if($product['isDiscount']) discount @endif">
                     <a class="new-products-right-inner-item" href="/product/{{$product['slug']}}">
                       <div class="product-img-table">
                         <div class="wrap-new-product-img bg-white-marmur"
-                             @if(!empty($product['photos'])) style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['photos']}})" @endif>
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
+                           @if(!empty($product['photos'])) style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['photos']}})" @endif>
                         </div>
                       </div>
                       <div class="wrap-new-product-data">
@@ -133,119 +123,6 @@
                     </a>
                   </div>
                   @endforeach
-                  @endif
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-2.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">295 €</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-3.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">395 €</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-3.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">695 € — 795 €</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-3.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">695 € — 795 €</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-3.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">695 €</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-3.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">1195 €</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-3.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">695 € — 795 €</div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="new-products-right-item grid w33">
-                    <a class="new-products-right-inner-item" href="#">
-                      <div class="product-img-table">
-                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(../img/frontend/un_banner-1-3.jpg)">
-                          <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                        </div>
-                      </div>
-                      <div class="wrap-new-product-data">
-                        <div class="product-code">#pr117</div>
-                        <div class="product-name">Bench</div>
-                        <div class="product-price">195 €</div>
-                      </div>
-                    </a>
-                  </div>
                 </div>
                 <ul class="list-pagination clearfix">
                   <li class="pag-item active">1</li>
@@ -256,6 +133,7 @@
               </div>
             </div>
           </div>
+          @endif
         </div>
 
       </div>
