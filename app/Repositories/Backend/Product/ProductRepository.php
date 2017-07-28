@@ -7,6 +7,9 @@ use App\Models\Product\Product;
 use App\Models\Product\ProductChild;
 use App\Models\Product\ProductPhoto;
 use App\Models\Product\ProductPrice;
+use App\Models\Category\Category;
+use App\Models\Collection\Collection;
+use App\Models\CollectionZone\CollectionZone;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -211,6 +214,129 @@ class ProductRepository extends BaseRepository
         return $allData;
     }
 
+    public function remFromArr($product_ids = false, $product_id = false)
+    {
+        if(!$product_ids || !$product_id) {
+            return '';
+        }
+        $oneProdIds = explode(',', $product_ids);
+        $arr = [];
+        foreach ($oneProdIds as $oneProdId) {
+            if ((int)$oneProdId !== (int)$product_id && (int)$oneProdId > 0) {
+                $arr[] = (int)$oneProdId;
+            }
+        }
+        return implode(',', $arr);
+    }
+    public function addInArr($product_ids = false, $product_id = false)
+    {
+        if((int)$product_id > 0) {
+            $oneProdIds = explode(',', $product_ids);
+            $notInCat = true;
+            foreach ($oneProdIds as $oneProdId) {
+                if ((int)$oneProdId == (int)$product_id) {
+                    $notInCat = false;
+                }
+            }
+            if ($notInCat) {
+                array_push($oneProdIds, $product_id);
+                $arr = [];
+                foreach ($oneProdIds as $oneProdId) {
+                    if ((int)$oneProdId > 0) {
+                        $arr[] = (int)$oneProdId;
+                    }
+                }
+                return implode(',', $arr);
+            }
+        }
+        return false;
+    }
+
+    public function updateCollectionProducts($oldIds = [], $newIds = [], $product_id = [])
+    {
+        $remArr = array_diff($oldIds, $newIds);
+        $addArr = array_diff($newIds, $oldIds);
+
+        foreach ($remArr as $new_id) {
+            $oneModel = CollectionZone::find($new_id);
+            $oneModel->product_ids = $this->remFromArr($oneModel->product_ids, $product_id);
+            $oneModel->save();
+            $oneModel->collection->product_ids = $this->remFromArr($oneModel->collection->product_ids, $product_id);
+            $oneModel->collection->save();
+        }
+        foreach ($addArr as $new_id) {
+            $oneModel = CollectionZone::find($new_id);
+            $new_product_ids = $this->addInArr($oneModel->product_ids, $product_id);
+            if ($new_product_ids) {
+                $oneModel->product_ids = $new_product_ids;
+                $oneModel->save();
+            }
+            $coll_product_ids = $this->addInArr($oneModel->collection->product_ids, $product_id);
+            if ($coll_product_ids) {
+                $oneModel->collection->product_ids = $coll_product_ids;
+                $oneModel->collection->save();
+            }
+        }
+
+        return true;
+    }
+    public function updateCategoryProducts($oldIds = [], $newIds = [], $product_id = [])
+    {
+        $remArr = array_diff($oldIds, $newIds);
+        $addArr = array_diff($newIds, $oldIds);
+
+        foreach ($remArr as $new_id) {
+            $catModel = Category::find($new_id);
+            $catModel->product_ids = $this->remFromArr($catModel->product_ids, $product_id);
+            $catModel->save();
+        }
+        foreach ($addArr as $new_id) {
+            $catModel = Category::find($new_id);
+            $catProds = explode(',', $catModel->product_ids);
+            $notInCat = true;
+            foreach ($catProds as $catProd) {
+                if ($catProd == $product_id) {
+                    $notInCat = false;
+                }
+            }
+            if ($notInCat) {
+                array_push($catProds, $product_id);
+                $arr = [];
+                foreach ($catProds as $catProd) {
+                    if ((int)$catProd > 0) {
+                        $arr[] = (int)$catProd;
+                    }
+                }
+                $catModel->product_ids = implode(',', $arr);
+                $catModel->save();
+            }
+        }
+
+        return true;
+    }
+    public function removeProductsFromCollection($remIds = [], $product_id = 0)
+    {
+        foreach ($remIds as $new_id) {
+            $oneModel = CollectionZone::find($new_id);
+            $oneModel->product_ids = $this->remFromArr($oneModel->product_ids, $product_id);
+            $oneModel->save();
+            $oneModel->collection->product_ids = $this->remFromArr($oneModel->collection->product_ids, $product_id);
+            $oneModel->collection->save();
+        }
+
+        return true;
+    }
+    public function removeProductsFromCategory($remIds = [], $product_id = 0)
+    {
+        foreach ($remIds as $new_id) {
+            $catModel = Category::find($new_id);
+            $catModel->product_ids = $this->remFromArr($catModel->product_ids, $product_id);
+            $catModel->save();
+        }
+
+        return true;
+    }
+
     /**
      * @param array $input
      *
@@ -243,10 +369,13 @@ class ProductRepository extends BaseRepository
 
         $allData = $this->implodeData($input, $product->id, false);
 //        dd($allData);
-        DB::transaction(function () use ($product, $allData) {
+        DB::transaction(function () use ($product, $allData, $input) {
             $product->main_photo_data = json_encode($allData['main_photo_data']);
             if(!isset($allData['main_photo_data']['photos'])){
                 $product->published = 0;
+            }
+            if($product->published) {
+                $this->updateCategoryProducts([], $input['category_ids'], $product->id);
             }
             $oldChildIds = [];
             foreach ($allData['childs'] as $ch_id => $childOne) {
@@ -260,6 +389,10 @@ class ProductRepository extends BaseRepository
                 $one = $photoOne;
                 $photo = ProductPhoto::create($one);
                 $oldPhotoIds[$ph_id] = $photo->id;
+                if($product->published && $photo->published) {
+                    $collection_ids = explode(',', $photo->collection_ids);
+                    $this->updateCollectionProducts([], $collection_ids, $product->id);
+                }
             }
             // ProductPrices
             foreach ($allData['prices'] as $pr_id => $priceOne) {
@@ -287,6 +420,7 @@ class ProductRepository extends BaseRepository
 
     public function update(Model $product, array $input)
     {
+        $oldCats = explode(',', $product->category_ids);
         $product->category_ids = implode(',', $input['category_ids']);
         $product->code = $input['code'];
         $product->slug = $input['slug'];
@@ -305,6 +439,12 @@ class ProductRepository extends BaseRepository
         if(!isset($allData['main_photo_data']['photos'])){
             $product->published = 0;
         }
+        if($product->published) {
+            $this->updateCategoryProducts($oldCats, $input['category_ids'], $product->id);
+        } else {
+            $this->removeProductsFromCategory($oldCats, $product->id);
+            $this->removeProductsFromCategory($input['category_ids'], $product->id);
+        }
 
 //        dd($allData);
 //        dd($input);
@@ -319,6 +459,13 @@ class ProductRepository extends BaseRepository
             foreach ($allData['photos'] as $ph_id => $photoOne) {
                 $photo = ProductPhoto::find($ph_id);
                 $photo->update($photoOne);
+                if($product->published) {
+                    $collection_ids = explode(',', $photo->collection_ids);
+                    $this->updateCollectionProducts([], $collection_ids, $product->id);
+                } else {
+                    $collection_ids = explode(',', $photo->collection_ids);
+                    $this->removeProductsFromCollection($collection_ids, $product->id);
+                }
             }
             // ProductPrices
             foreach ($allData['prices'] as $pr_id => $priceOne) {
