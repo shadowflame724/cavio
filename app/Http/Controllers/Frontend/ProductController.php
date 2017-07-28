@@ -56,7 +56,6 @@ class ProductController extends Controller
     public function one($slug)
     {
         $model = $this->product->getBySlug($slug);
-        dd($model);
         return view('frontend.pages.product-card', [
             'product' => $model,
         ]);
