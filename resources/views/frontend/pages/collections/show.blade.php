@@ -16,11 +16,9 @@
                 <span class="curr-news-type">All collections</span>
                 <ul class="zc-modal-types clearfix">
                   @foreach($collection->collectionZones as $zone)
-                    <li>
-                      <a href=#>
-                        {{ $zone->{'title'.$langSuf} }}
-
-                      </a>
+                  <li>
+                    <a href=#>{{ $zone->{'title'.$langSuf} }}</a>
+                  </li>
                   @endforeach
                 </ul>
               </div>
