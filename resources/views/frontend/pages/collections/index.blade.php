@@ -21,28 +21,26 @@
     <section class="">
       <div class="container">
         <div class="zon-col-list clearfix">
-
           @foreach($collections as $collection)
-            @if($collection->banner == 0)
-              <div class="item-coll zon-col">
-                <a href="{{ route('frontend.collections.show', $collection->slug) }}">
-                  <div class="wrap-img-bg small">
-                    <div class="img-back wave-dark">
-                      <svg width=1395.63 height=1237.68>
-                        <use xlink:href=wave.svg#wave></use>
-                      </svg>
-                    </div>
-                    <img src="/upload/images/collection/thumb/{{ $collection->image }}" alt=""></div>
-                  <div>
-                    <div class=coll-name>
-                      {{ $collection->{'title'.$langSuf} }}
-                      <span class="wrap-coll-name-arrow"><span
-                                class="coll-name-arrow">→</span></span></div>
-                    <div class="numb-prod">69 {{ trans('frontend.zones-collections.products') }}</div>
-                  </div>
-                </a>
+          {{--@if($collection->banner == 0)--}}
+          <div class="item-coll zon-col">
+            <a href="{{ route('frontend.collections.show', $collection->slug) }}">
+              <div class="wrap-img-bg small">
+                <div class="img-back wave-dark">
+                  <svg width=1395.63 height=1237.68><use xlink:href=wave.svg#wave></use></svg>
+                </div>
+                <img src="/upload/images/collection/thumb/{{ $collection->image }}" alt="">
               </div>
-            @endif
+              <div>
+                <div class=coll-name>
+                  {{ $collection->{'title'.$langSuf} }}
+                  <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
+                </div>
+                <div class="numb-prod">69 {{ trans('frontend.zones-collections.products') }}</div>
+              </div>
+            </a>
+          </div>
+          {{--@endif--}}
           @endforeach
         </div>
       </div>
