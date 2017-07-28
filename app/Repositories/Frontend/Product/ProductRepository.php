@@ -212,9 +212,9 @@ class ProductRepository extends BaseRepository
                                     $nativePrice = $price->price;
                                     $discountPrice = 0;
                                     if($price->discount > 0){
-                                        $nativePrice = $nativePrice*((100-$price->discount)/100);
+                                        $nativePrice = round($nativePrice*((100-$price->discount)/100));
                                     }
-                                    $vatPrice = $nativePrice*1.22;
+                                    $vatPrice = round($nativePrice*1.22);
 
                                     $prices[] = [
                                         'price_old' => $price->price,
