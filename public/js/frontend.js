@@ -1,3 +1,4 @@
+
 var mainScroll;
 
 var inStartFooter = false;
@@ -56,8 +57,8 @@ var basket = (function () {
     }
   }
 
-  function update(id, cnt, size,color) {
-    updateItem(id, cnt, size,color);
+  function update(id, cnt) {
+    saveUpdatedItem(id, cnt);
   }
 
   function findByid(id) {
@@ -90,18 +91,16 @@ var basket = (function () {
    * item - object товара в корзине,
    * callback - ф-ция, срабатывающая после сохранения на сервере
    * **/
-  function saveUpdatedItem(item, callback) {
+  function saveUpdatedItem(id, cnt) {
 
-    $.post(link + '/' + item.id, {'item': item})
+    $.post(link + '/' + id, {'id':id,'count':cnt})
       .done(function (data) {
         console.log(data)
-        item = data.item;
-        cart_html = data.html;
-        callback(true);
+        // item = data.item;
+        // cart_html = data.html;
       })
       .fail(function (data) {
         console.error('Fail update item in basket');
-        callback(false);
       });
   }
 
@@ -186,8 +185,8 @@ var basket = (function () {
     remove: function (id, cnt, size,color, call) {
       removeItem(parseInt(id), parseInt(cnt), size, color, call);
     },
-    update: function (id, cnt, size,color) {
-      update(parseInt(id), parseInt(cnt), size,color);
+    update: function (id, cnt) {
+      update(parseInt(id), parseInt(cnt));
     },
     updateBasketSumm: function () {
       showCostBasket();
@@ -2172,6 +2171,9 @@ if(document.querySelector('body.stash')){
     if($(this).hasClass('disabled'))  return;
 
     var itemNumbValEl = $(this).siblings(".ord_it-numb-val");
+    var price_id = $(this).siblings(".ord_it-numb-val").attr('data-priceid') || false;
+
+
 
     var plusVal = 1;
     itemNumbValEl.removeClass('plus minus');
@@ -2181,8 +2183,14 @@ if(document.querySelector('body.stash')){
     } else{
       setTimeout(function(){   itemNumbValEl.addClass('plus')   },1);
     }
+    var totalCnt = +itemNumbValEl.text()+plusVal;
 
-    itemNumbValEl.text(+itemNumbValEl.text() + plusVal);
+    if(price_id){
+      console.log('basket.update',price_id,totalCnt);
+      basket.update(price_id,totalCnt);
+    }
+
+    itemNumbValEl.text(totalCnt);
 
     var btnMinus = $(this).closest(".ord_it-numb").find('.calc_it.minus');
 
