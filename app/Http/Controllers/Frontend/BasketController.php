@@ -32,10 +32,10 @@ class BasketController extends Controller
         $basketGoods = $this->carts->findAll();
         if(!empty($basketGoods)){
             foreach ($basketGoods as $basketGood){
-                $priceIdsArr[] = $basketGood['price_id'];
+                $basketInfoArr[$basketGood['price_id']] = $basketGood['count'];
             }
-            if(!empty($priceIdsArr)){
-                $products = $this->product->getProductsbyPriceIds($priceIdsArr);
+            if(!empty($basketInfoArr)){
+                $products = $this->product->getProductsbyPriceIds($basketInfoArr);
             }
         }
 
@@ -44,11 +44,12 @@ class BasketController extends Controller
         $summ_default = 0;
         $discount = 0;
         if(!empty($products)){
-            foreach ($products as $product){
+            foreach ($products as $key => $product){
                 $summ_vat = $summ_vat+(int)$product['price_vat'];
                 $summ_default = $summ_default+(int)$product['price_new'];
             }
         }
+
         if($summ_vat >= 5000 && $summ_vat <= 10000){
             $discount = 5;
         }
@@ -112,14 +113,14 @@ class BasketController extends Controller
 
     }
 
-    public function update($id, $count, Request $request)
+    public function update($id, Request $request)
     {
         $response = [];
         try {
             $statusCode = 200;
             $data = [
                 'price_id' => $id,
-                'count' => $count,
+                'count' => $request->input('count'),
             ];
             $item = $this->carts->update($id, $data);
             $response_cart = $this->carts->getResult();

@@ -64,26 +64,18 @@ class EloquentCartRepository implements CartContract
     public function update($id, $data)
     {
         $this->_cart = cart()->get();
-        $item = $this->find($id);
-        $goods_id = $item['goods_id'];
-        $dis=0;
-        $goods = DB::table('goods')
-            ->select(['goods.id', 'goods.price', 'goods.price2 as dis' ,'goods.stock'])
-            ->where('goods.id',$goods_id)
-            ->groupBy('goods.id')
-            ->first();
-        // цена со скидкой (при ее надичии)
-        if($goods->stock){
-            $dis= round( $goods->price * round($goods->dis/100, 3) );
+        if(!empty($this->_cart)){
+            foreach ($this->_cart as $key => $itemCart){
+                if($itemCart['price_id'] == $id){
+                    $item['price_id'] = $id;
+                    $item['count'] = (int)$data['count'];
+                    $this->_cart[$key] = $item;
+
+                    cart()->update($this->_cart);
+                }
+            }
         }
-        $item['price'] = $goods->price - $dis;
-        $item['count'] = (int)$data['count'];
-        $item['size'] = $data['size'];
-        $this->_cart[$id - 1] = $item;
-
-        cart()->update($this->_cart);
-
-        return $item;
+        return false;
     }
 
     public function destroy($id)
