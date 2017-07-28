@@ -157,8 +157,8 @@
                         </a>
                     </li>
 
-                    <li class="{{ active_class(Active::checkUriPattern('admin/order*')) }}">
-                        <a href="{{ route('admin.order.index') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/orders*')) }}">
+                        <a href="{{ route('admin.orders.index') }}">
                             <i class="fa fa-shopping-cart"></i>
                             <span>{{ trans('labels.backend.order.management') }}</span>
                         </a>
