@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\FAQ\FAQ;
 use App\Models\FinishTissue\FinishTissue;
@@ -42,14 +41,12 @@ class ProductController extends Controller
      */
     public function catOne($slug)
     {
-//        dd($slug);
         $page = $this->page('catalogue');
-        $category = Category::where('slug', $slug);
-
+        $model = $this->product->catOne($slug);
 
         return view('frontend.pages.catalogue', [
             'page' => $page,
-            'category' => $category
+            'model' => $model
         ]);
     }
 
