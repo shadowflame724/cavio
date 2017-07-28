@@ -26,6 +26,7 @@
         {{ Html::script('js/frontend/url.js') }}
         @include('frontend.includes.physics_script')
         {{ Html::script('js/frontend/two.js') }}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body class="@yield('bodyClass')" id="@yield('bodyClass')">
         @yield('before_header')
@@ -36,7 +37,6 @@
             @yield('content')
             @include('frontend.includes.footer')
         </main>
-
         @yield('after_footer')
         @include('frontend.includes.svg')
 
@@ -50,7 +50,13 @@
         <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js></script>
         {{ Html::script('js/frontend/main.js') }}
         @yield('after_scripts')
-
+        <script>
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+        </script>
         @include('includes.partials.ga')
     </body>
 </html>

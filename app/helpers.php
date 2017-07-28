@@ -144,3 +144,13 @@ if (! function_exists('random_alphanumeric_key'))
         return $res;
     }
 }
+if ( ! function_exists('cart'))
+{
+    /**
+     * Access (lol) the Access:: facade as a simple function
+     */
+    function cart()
+    {
+        return app('cart');
+    }
+}

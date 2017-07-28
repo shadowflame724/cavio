@@ -207,6 +207,7 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        App\Providers\CartServiceProvider::class,
 
     ],
 

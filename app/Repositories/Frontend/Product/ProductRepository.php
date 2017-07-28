@@ -217,6 +217,7 @@ class ProductRepository extends BaseRepository
                                     $vatPrice = round($nativePrice*1.22);
 
                                     $prices[] = [
+                                        'id' => $price->id,
                                         'price_old' => $price->price,
                                         'price_new' => $nativePrice,
                                         'discount' => $price->discount,
