@@ -64,7 +64,7 @@
                                                     @foreach($product['prices'] as $one)
                                                     <div data-photo="{{$one['product_photo_id']}}" data-child="{{$one['product_child_id']}}" class="swiper-slide wrap-card-price  @if($i==1) active @endif">
                                                         <div class="t_cell">
-                                                            <div class="card-price">
+                                                            <div class="card-price" data-id="{{$one['id']}}">
                                                                 <div>{{$one['price_vat']}} €</div>
                                                                 <div class="wrap-under-card_price small">
                                                                     @if($one['discount'] > 0)
@@ -82,18 +82,20 @@
                                                 </div>
                                             </div>
                                             <div class="card-to_stash">
-                                                <svg id="card-to_stash" class="svg-card-to_stash" viewBox="0 0 110 128" width="110" height="128">
-                                                    <polygon points="71.6,103 14.3,103 0.7,65.3 85.4,65.3 85.4,69.7 7,69.7 17.4,98.6 71.6,98.6  "></polygon>
-                                                    <polygon points="70.2,109.8 66.1,108.1 91.2,48 109.4,48 109.4,52.4 94.1,52.4  "></polygon>
-                                                    <rect x="31.2" y="114.6" width="27.6" height="4.4"></rect>
-                                                    <path d="M66.8,126.9c-5.6,0-10.1-4.5-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1c5.6,0,10.1,4.5,10.1,10.1   C76.9,122.4,72.4,126.9,66.8,126.9z M66.8,111.2c-3.1,0-5.7,2.5-5.7,5.7c0,3.1,2.5,5.7,5.7,5.7c3.1,0,5.7-2.5,5.7-5.7   C72.4,113.7,69.9,111.2,66.8,111.2z"></path>
-                                                    <path d="M23.3,126.9c-5.6,0-10.1-4.5-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1s10.1,4.5,10.1,10.1C33.4,122.4,28.9,126.9,23.3,126.9z    M23.3,111.2c-3.1,0-5.7,2.5-5.7,5.7c0,3.1,2.5,5.7,5.7,5.7s5.7-2.5,5.7-5.7C29,113.7,26.4,111.2,23.3,111.2z"></path>
-                                                    <path class="st0" d="M44,42.8"></path>
-                                                    <g class="stash-arrow">
-                                                        <rect x="45.4" y="1.1" width="4.4" height="45.3"></rect>
-                                                        <polygon points="47.7,49.6 33.6,35.5 36.7,32.3 47.7,43.3 58.5,32.5 61.6,35.6  "></polygon>
-                                                    </g>
-                                                </svg>
+                                                <a href="#" id="add_to_cart">
+                                                    <svg id="card-to_stash" class="svg-card-to_stash" viewBox="0 0 110 128" width="110" height="128">
+                                                        <polygon points="71.6,103 14.3,103 0.7,65.3 85.4,65.3 85.4,69.7 7,69.7 17.4,98.6 71.6,98.6  "></polygon>
+                                                        <polygon points="70.2,109.8 66.1,108.1 91.2,48 109.4,48 109.4,52.4 94.1,52.4  "></polygon>
+                                                        <rect x="31.2" y="114.6" width="27.6" height="4.4"></rect>
+                                                        <path d="M66.8,126.9c-5.6,0-10.1-4.5-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1c5.6,0,10.1,4.5,10.1,10.1   C76.9,122.4,72.4,126.9,66.8,126.9z M66.8,111.2c-3.1,0-5.7,2.5-5.7,5.7c0,3.1,2.5,5.7,5.7,5.7c3.1,0,5.7-2.5,5.7-5.7   C72.4,113.7,69.9,111.2,66.8,111.2z"></path>
+                                                        <path d="M23.3,126.9c-5.6,0-10.1-4.5-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1s10.1,4.5,10.1,10.1C33.4,122.4,28.9,126.9,23.3,126.9z    M23.3,111.2c-3.1,0-5.7,2.5-5.7,5.7c0,3.1,2.5,5.7,5.7,5.7s5.7-2.5,5.7-5.7C29,113.7,26.4,111.2,23.3,111.2z"></path>
+                                                        <path class="st0" d="M44,42.8"></path>
+                                                        <g class="stash-arrow">
+                                                            <rect x="45.4" y="1.1" width="4.4" height="45.3"></rect>
+                                                            <polygon points="47.7,49.6 33.6,35.5 36.7,32.3 47.7,43.3 58.5,32.5 61.6,35.6  "></polygon>
+                                                        </g>
+                                                    </svg>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
