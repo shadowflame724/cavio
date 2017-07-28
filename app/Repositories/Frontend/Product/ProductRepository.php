@@ -79,10 +79,18 @@ class ProductRepository extends BaseRepository
         return $category;
     }
 
-    public function getProductsbyPriceIds($ids)
+    public function getProductsbyPriceIds($basketInfoArr)
     {
         $res = [];
-        $products = ProductPrice::whereIn('id', $ids)->get();
+        $ids = [];
+
+        foreach ($basketInfoArr as $price_id => $count){
+            $ids[] = $price_id;
+        }
+
+        if(!empty($ids)){
+            $products = ProductPrice::whereIn('id', $ids)->get();
+        }
 
         if(!empty($products)){
             foreach ($products as $prod){
@@ -161,12 +169,13 @@ class ProductRepository extends BaseRepository
                 $res[] = [
                     'id' => $prod->id,
                     'price_old' => $prod->price,
+                    'count' => $basketInfoArr[$prod->id],
                     'price_new' => $nativePrice,
                     'price_vat' => $vatPrice,
                     'discount' => $prod->discount,
                     'productChilds' => $productChildsRes,
                     'productPhotos' => $productPhotosArrRes,
-                    'collections' => $collsRes,
+                    'collections' => $collsRes
                 ];
             }
         }

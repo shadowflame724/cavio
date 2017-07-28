@@ -126,7 +126,11 @@
                       <div class="top-center-ord_it-data clearfix">
                         <div class="ord_it-name">{{$product['productChilds']['name']}}</div>
                         <div class="wrap-calc_price">
-                          <div class="ord_it-numb"><span class="calc_it minus disabled"></span><span class="ord_it-numb-val">1</span><span class="calc_it plus"></span></div>
+                          <div class="ord_it-numb">
+                            <span class="calc_it minus disabled"></span>
+                            <span class="ord_it-numb-val" data-priceid="{{$product['id']}}">{{$product['count']}}</span>
+                            <span class="calc_it plus"></span>
+                          </div>
                           <div class="ord_it-price">{{$product['price_vat']}} €</div>
                         </div>
                       </div>
