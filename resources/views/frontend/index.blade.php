@@ -93,7 +93,7 @@
                                 <div class="slidebox @if($u)hide @endif">
                                     <div class="title">{{ $collection->{'title'.$langSuf} }}</div>
                                     <p class="descr">{!! $collection->{'description'.$langSuf} !!}
-                                        <a href="/collection/one" class="link-arrow">→</a>
+                                        <a href="/collections/{{ $collection->slug }}" class="link-arrow">→</a>
                                     </p>
                                 </div>
                                 @php($u++)

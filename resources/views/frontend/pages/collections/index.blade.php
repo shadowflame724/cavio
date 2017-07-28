@@ -23,7 +23,7 @@
         <div class="zon-col-list clearfix">
 
           @foreach($collections as $collection)
-            @if($collection->banner == 0)
+{{--            @if($collection->banner == 0)--}}
               <div class="item-coll zon-col">
                 <a href="{{ route('frontend.collections.show', $collection) }}">
                   <div class="wrap-img-bg small">
@@ -42,7 +42,7 @@
                   </div>
                 </a>
               </div>
-            @endif
+            {{--@endif--}}
           @endforeach
         </div>
       </div>

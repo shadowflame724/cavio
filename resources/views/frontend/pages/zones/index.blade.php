@@ -32,7 +32,10 @@
                       <use xlink:href=wave.svg#wave></use>
                     </svg>
                   </div>
-                  <img src="/upload/images/{{ $zone->collectionZones->random()->image }}" alt=""></div>
+                @php
+                    $image = explode(',', $zone->collectionZones()->first()->image)[0];
+                @endphp
+                  <img src="/upload/images/zone/thumb/{{ $image }}" alt=""></div>
                 <div>
                   <div class=coll-name>
 
