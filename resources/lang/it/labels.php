@@ -183,6 +183,10 @@ return [
                 'edit'       => 'Modifica apparire',
                 'management' => 'Gestione apparire',
             ],
+            'settings' => [
+                'edit'       => 'Modifica impostazioni',
+                'management' => 'Gestione impostazioni',
+            ],
             'message' => [
                 'show' => 'Mostra il messaggio',
                 'management' => 'Tutti i messaggi',

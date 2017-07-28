@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Popup;
+namespace App\Http\Requests\Backend\Settings;
 
 use App\Http\Requests\Request;
 
 /**
- * Class UpdatePopupRequest.
+ * Class UpdateSettingsRequest.
  */
-class UpdatePopupRequest extends Request
+class UpdateSettingsRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +27,9 @@ class UpdatePopupRequest extends Request
     public function rules()
     {
         return [
-            'title' => "required|min:3|max:40",
-            'title_ru' => "required|min:3|max:40",
-            'title_it' => "required|min:3|max:40",
-            'body' => "required|max:250",
-            'body_ru' => "required|max:250",
-            'body_it' => "required|max:250",
-            'link' => "max:20",
-            'admin_comment' => "required"
+            'soc_links' => "required",
+            'discount_data' => "required",
+            'koef_data' => "required",
         ];
     }
 }

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Events\Backend\Popup;
+namespace App\Events\Backend\Settings;
 
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class PopupUpdated.
+ * Class SettingsUpdated.
  */
-class PopupUpdated
+class SettingsUpdated
 {
     use SerializesModels;
 
     /**
      * @var
      */
-    public $popup;
+    public $settings;
 
     /**
      * @var
@@ -22,12 +22,12 @@ class PopupUpdated
     public $comment;
 
     /**
-     * @param $popup
+     * @param $settings
      * @param $comment
      */
-    public function __construct($popup, $comment)
+    public function __construct($settings, $comment)
     {
-        $this->popup = $popup;
+        $this->settings = $settings;
         $this->comment = $comment;
     }
 }

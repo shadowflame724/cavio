@@ -82,6 +82,9 @@ return [
             'popup' => [
                 'update_error' => 'There was a problem updating this popup. Please try again.'
             ],
+            'settings' => [
+                'update_error' => 'There was a problem updating settings. Please try again.',
+            ],
             'templateMessage' => [
                 'create_error' => 'There was a problem creating this template message. Please try again.',
                 'delete_error' => 'There was a problem deleting this template message. Please try again.',

@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Popup;
+namespace App\Http\Controllers\Backend\Settings;
 
-use App\Events\Backend\Popup\PopupUpdated;
+use App\Events\Backend\Settings\SettingsUpdated;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Popup\UpdatePopupRequest;
-use App\Models\Popup\Popup;
-use App\Repositories\Backend\Popup\PopupRepository;
+use App\Http\Requests\Backend\Settings\UpdateSettingsRequest;
+use App\Models\Settings\Settings;
+use App\Repositories\Backend\Settings\SettingsRepository;
 use Illuminate\Http\Request;
 
-class PopupController extends Controller
+class SettingsController extends Controller
 {
     /**
-     * @var PopupRepository
+     * @var SettingsRepository
      */
-    protected $popup;
+    protected $settings;
 
     /**
-     * @param PopupRepository $popup
+     * @param SettingsRepository $settings
      */
-    public function __construct(PopupRepository $popup)
+    public function __construct(SettingsRepository $settings)
     {
-        $this->popup = $popup;
+        $this->settings = $settings;
     }
     
     /**
@@ -30,25 +30,35 @@ class PopupController extends Controller
      */
     public function edit()
     {
-        $popup = Popup::find(1);
+        $settings = Settings::firstOrCreate(['id' => 1], [
+            'soc_links' => '[]',
+            'discount_data' => '[]',
+            'koef_data' => '[]'
+        ]);
 
-        return view('backend.popup.edit', [
-            'popup' => $popup,
+        $socLinksArr = json_decode($settings->soc_links);
+        $discountDataArr = json_decode($settings->discount_data);
+        $koefData = json_decode($settings->koef_data);
+
+        return view('backend.settings.edit', [
+            'settings' => $settings,
+            'koefData' => $koefData,
+            'socLinksArr' => $socLinksArr,
+            'discountDataArr' => $discountDataArr
         ]);
     }
 
     /**
-     * @param UpdatePopupRequest $request
+     * @param UpdateSettingsRequest $request
      *
      * @return mixed
      */
-    public function update(UpdatePopupRequest $request)
+    public function update(UpdateSettingsRequest $request)
     {
-        $popup = Popup::find(1);
-        $oldName = $popup->image;
-        $this->popup->update($popup, $request->all());
-        $this->moveImg($request->photo, $oldName);
+        $settings = Settings::find(1);
 
-        return redirect()->route('admin.popup.edit')->withFlashSuccess(trans('alerts.backend.popup.updated'));
+        $this->settings->update($settings, $request->all());
+
+        return redirect()->route('admin.settings.edit')->withFlashSuccess(trans('alerts.backend.settings.updated'));
     }
 }

@@ -80,6 +80,9 @@ return [
                 'update_error'      => "C'è stato un problema durante l'aggiornamento di questo fazzoletto di carta. Si prega di riprovare più tardi.",
             ],
             'popup' => [
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo impostazioni. Si prega di riprovare più tardi.",
+            ],
+            'settings' => [
                 'update_error'      => "C'è stato un problema durante l'aggiornamento di questo apparire. Si prega di riprovare più tardi.",
             ],
             'templateMessage' => [

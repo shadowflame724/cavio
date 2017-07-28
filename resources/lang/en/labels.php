@@ -182,6 +182,11 @@ return [
                 'edit' => 'Edit popup',
                 'management' => 'Popups Management'
             ],
+            'settings' => [
+                'edit' => 'Edit settings',
+                'management' => 'Settings Management'
+            ],
+
             'message' => [
                 'show' => 'Show Message',
                 'management' => 'All messages',

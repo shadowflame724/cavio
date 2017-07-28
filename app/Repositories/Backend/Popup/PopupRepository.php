@@ -37,11 +37,13 @@ class PopupRepository extends BaseRepository
         $popup->body_it = $input['body_it'];
         $popup->image = $input['photo'];
         $popup->link = $input['link'];
-        if ($input['show']) {
+
+        if (isset($input['show'])) {
             $popup->show = 1;
-        } else {
+        }else{
             $popup->show = 0;
         }
+
 
         DB::transaction(function () use ($popup, $input) {
             if ($popup->save()) {

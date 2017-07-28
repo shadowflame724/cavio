@@ -1,19 +1,19 @@
 <?php
 
 /*
-* Popup Management
+* Settings Management
 */
-Route::group(['namespace' => 'Popup'], function () {
+Route::group(['namespace' => 'Settings'], function () {
 
-    Route::get('popup',
+    Route::get('settings',
         [
-            'as' => 'popup.edit',
-            'uses' => 'PopupController@edit'
+            'as' => 'settings.edit',
+            'uses' => 'SettingsController@edit'
         ]);
 
-    Route::patch('popup/edit',
+    Route::patch('settings/edit',
         [
-            'as' => 'popup.update',
-            'uses' => 'PopupController@update'
+            'as' => 'settings.update',
+            'uses' => 'SettingsController@update'
         ]);
 });

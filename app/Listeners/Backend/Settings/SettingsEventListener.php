@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Listeners\Backend\Popup;
+namespace App\Listeners\Backend\Settings;
 
 /**
- * Class PopupEventListener.
+ * Class SettingsEventListener.
  */
-class PopupEventListener
+class SettingsEventListener
 {
     /**
      * @var string
      */
-    private $history_slug = 'Popup';
+    private $history_slug = 'Settings';
 
     /**
      * @param $event
@@ -18,8 +18,8 @@ class PopupEventListener
     public function onUpdated($event)
     {
         history()->withType($this->history_slug)
-            ->withEntity($event->popup->id)
-            ->withText('trans("history.backend.popup.updated") <strong>'.$event->popup->title.'</strong>.<br>
+            ->withEntity($event->settings->id)
+            ->withText('trans("history.backend.settings.updated").<br>
 <small>'.$event->comment.'</small>')
             ->withIcon('save')
             ->withClass('bg-aqua')
@@ -34,8 +34,8 @@ class PopupEventListener
     public function subscribe($events)
     {
         $events->listen(
-            \App\Events\Backend\Popup\PopupUpdated::class,
-            'App\Listeners\Backend\Popup\PopupEventListener@onUpdated'
+            \App\Events\Backend\Settings\SettingsUpdated::class,
+            'App\Listeners\Backend\Settings\SettingsEventListener@onUpdated'
         );
     }
 }

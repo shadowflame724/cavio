@@ -18,111 +18,119 @@ return [
             'title' => 'Gestione accessi',
 
             'roles' => [
-                'all'        => 'Tutti i ruoli',
-                'create'     => 'Crea ruolo',
-                'edit'       => 'Modifica ruolo',
+                'all' => 'Tutti i ruoli',
+                'create' => 'Crea ruolo',
+                'edit' => 'Modifica ruolo',
                 'management' => 'Gestione ruoli',
-                'main'       => 'Ruoli',
+                'main' => 'Ruoli',
             ],
 
             'users' => [
-                'all'             => 'Tutti gli utenti',
+                'all' => 'Tutti gli utenti',
                 'change-password' => 'Cambia password',
-                'create'          => 'Crea utente',
-                'deactivated'     => 'Utenti disattivati',
-                'deleted'         => 'Utenti eliminati',
-                'edit'            => 'Modifica utente',
-                'main'            => 'Utenti',
-                'view'            => 'View User',
+                'create' => 'Crea utente',
+                'deactivated' => 'Utenti disattivati',
+                'deleted' => 'Utenti eliminati',
+                'edit' => 'Modifica utente',
+                'main' => 'Utenti',
+                'view' => 'View User',
             ],
 
             'page' => [
-                'all'        => 'Tutti i pagina',
-                'create'     => 'Crea pagina',
-                'edit'       => 'Modifica pagina',
+                'all' => 'Tutti i pagina',
+                'create' => 'Crea pagina',
+                'edit' => 'Modifica pagina',
                 'management' => 'Gestione pagina',
-                'main'       => 'Pagine'
+                'main' => 'Pagine'
             ],
             'block' => [
-                'all'        => 'Tutti i bloccare',
-                'create'     => 'Crea bloccare',
-                'edit'       => 'Modifica bloccare',
+                'all' => 'Tutti i bloccare',
+                'create' => 'Crea bloccare',
+                'edit' => 'Modifica bloccare',
                 'management' => 'Gestione bloccare',
-                'main'       => 'Blocchi'
+                'main' => 'Blocchi'
             ],
             'news' => [
-                'all'        => 'Tutti i notizia',
-                'create'     => 'Crea notizia',
-                'edit'       => 'Modifica notizia',
+                'all' => 'Tutti i notizia',
+                'create' => 'Crea notizia',
+                'edit' => 'Modifica notizia',
                 'management' => 'Gestione notizia',
-                'main'       => 'Notizia'
+                'main' => 'Notizia'
             ],
             'category' => [
-                'all'        => 'Tutti i categoria',
-                'create'     => 'Crea categoria',
+                'all' => 'Tutti i categoria',
+                'create' => 'Crea categoria',
                 'create_root' => 'Creare categorie di root',
-                'edit'       => 'Modifica categoria',
+                'edit' => 'Modifica categoria',
                 'management' => 'Gestione categoria',
-           ],
+            ],
             'collection' => [
-                'all'        => 'Tutti i collezione',
-                'create'     => 'Crea collezione',
-                'edit'       => 'Modifica collezione',
+                'all' => 'Tutti i collezione',
+                'create' => 'Crea collezione',
+                'edit' => 'Modifica collezione',
                 'management' => 'Gestione collezione',
-                'main'       => 'Collezioni'
+                'main' => 'Collezioni'
             ],
             'marker' => [
-                'all'        => 'Tutti i marcatore',
-                'create'     => 'Crea marcatore',
-                'edit'       => 'Modifica marcatore',
+                'all' => 'Tutti i marcatore',
+                'create' => 'Crea marcatore',
+                'edit' => 'Modifica marcatore',
                 'management' => 'Gestione marcatore',
-                'main'       => 'Marcatori'
+                'main' => 'Marcatori'
             ],
             'faq' => [
-                'all'        => 'Tutti i FAQ',
-                'create'     => 'Crea FAQ',
-                'edit'       => 'Modifica FAQ',
+                'all' => 'Tutti i FAQ',
+                'create' => 'Crea FAQ',
+                'edit' => 'Modifica FAQ',
                 'management' => 'Gestione FAQ',
-                'main'       => 'FAQ\'s'
+                'main' => 'FAQ\'s'
             ],
             'zone' => [
-                'all'        => 'Tutti i zone',
-                'create'     => 'Crea zone',
-                'edit'       => 'Modifica zone',
+                'all' => 'Tutti i zone',
+                'create' => 'Crea zone',
+                'edit' => 'Modifica zone',
                 'management' => 'Gestione zone',
-                'main'       => 'Zone'
+                'main' => 'Zone'
             ],
             'good' => [
-                'all'        => 'Tutti i ruoli',
-                'create'     => 'Crea ruolo',
-                'edit'       => 'Modifica ruolo',
+                'all' => 'Tutti i ruoli',
+                'create' => 'Crea ruolo',
+                'edit' => 'Modifica ruolo',
                 'management' => 'Gestione ruoli',
-                'main'       => 'Ruoli'
+                'main' => 'Ruoli'
             ],
             'showroom' => [
-                'all'        => 'Tutti i merce',
-                'create'     => 'Crea merce',
-                'edit'       => 'Modifica merce',
+                'all' => 'Tutti i merce',
+                'create' => 'Crea merce',
+                'edit' => 'Modifica merce',
                 'management' => 'Gestione merce',
-                'main'       => 'Merce'
+                'main' => 'Merce'
             ],
             'finishtissue' => [
-                'all'        => 'Tutti i tessuti',
-                'create'     => 'Crea fazzoletto di carta',
-                'edit'       => 'Modifica fazzoletto di carta',
+                'all' => 'Tutti i tessuti',
+                'create' => 'Crea fazzoletto di carta',
+                'edit' => 'Modifica fazzoletto di carta',
                 'management' => 'Gestione fazzoletto di carta',
-                'main'       => 'Tessuti'
+                'main' => 'Tessuti'
             ],
             'popup' => [
-                'edit'       => 'Modifica ruolo',
-                'management' => 'Gestione ruoli',
+                'edit' => 'Modifica apparire',
+                'management' => 'Gestione apparire',
+                'main' => 'Apparire',
+
+            ],
+            'settings' => [
+                'edit' => 'Modifica impostazioni',
+                'management' => 'Gestione impostazioni',
+                'main' => 'Impostazioni',
+
             ],
             'templateMessage' => [
-                'all'        => 'Tutto il template',
-                'create'     => 'Creare un modello',
-                'edit'       => 'Modificare il modello',
+                'all' => 'Tutto il template',
+                'create' => 'Creare un modello',
+                'edit' => 'Modificare il modello',
                 'management' => 'Messaggi di gestione del modello',
-                'main'       => 'Modelli'
+                'main' => 'Modelli'
             ],
         ],
         'menu' => [
@@ -131,15 +139,15 @@ return [
         ],
 
         'log-viewer' => [
-            'main'      => 'Log',
+            'main' => 'Log',
             'dashboard' => 'Dashboard',
-            'logs'      => 'Logs',
+            'logs' => 'Logs',
         ],
 
         'sidebar' => [
             'dashboard' => 'Dashboard',
-            'general'   => 'Generale',
-            'system'    => 'System',
+            'general' => 'Generale',
+            'system' => 'System',
         ],
     ],
 
@@ -152,24 +160,24 @@ return [
          * Be sure to add the new language in alphabetical order.
          */
         'langs' => [
-            'ar'    => 'العربية (Arabic)',
-            'zh'    => '(Chinese Simplified)',
+            'ar' => 'العربية (Arabic)',
+            'zh' => '(Chinese Simplified)',
             'zh-TW' => '(Chinese Traditional)',
-            'da'    => 'Danese (Danish)',
-            'de'    => 'Tedesco (German)',
-            'el'    => '(Greek)',
-            'en'    => 'Inglese (English)',
-            'es'    => 'Spagnol (Spanish)',
-            'fr'    => 'Francese (French)',
-            'id'    => 'Indonesiano (Indonesian)',
-            'it'    => 'Italiano (Italian)',
-            'ja'    => '(Japanese)',
-            'nl'    => 'Olandese (Dutch)',
+            'da' => 'Danese (Danish)',
+            'de' => 'Tedesco (German)',
+            'el' => '(Greek)',
+            'en' => 'Inglese (English)',
+            'es' => 'Spagnol (Spanish)',
+            'fr' => 'Francese (French)',
+            'id' => 'Indonesiano (Indonesian)',
+            'it' => 'Italiano (Italian)',
+            'ja' => '(Japanese)',
+            'nl' => 'Olandese (Dutch)',
             'pt_BR' => 'Portoghese Brasiliano (Brazilian Portuguese)',
-            'ru'    => 'Russo (Russian)',
-            'sv'    => 'Svedese (Swedish)',
-            'th'    => '(Thai)',
-            'tr'    => '(Turkish)',
+            'ru' => 'Russo (Russian)',
+            'sv' => 'Svedese (Swedish)',
+            'th' => '(Thai)',
+            'tr' => '(Turkish)',
         ],
     ],
 ];

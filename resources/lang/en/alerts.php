@@ -82,6 +82,9 @@ return [
             'deleted' => 'The template message was successfully deleted.',
             'updated' => 'The template message was successfully updated.',
         ],
+        'settings' => [
+            'updated' => 'The settings was successfully updated.'
+        ],
 
 
         'users' => [

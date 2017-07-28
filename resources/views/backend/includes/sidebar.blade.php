@@ -182,15 +182,15 @@
                 <ul class="treeview-menu
                     {{ active_class(Active::checkUriPattern([
                         'admin/access*',
-                        'admin/setting*',
+                        'admin/settings*',
                     ]), 'menu-open') }}"
                     style="display: none;
                     {{ active_class(Active::checkUriPattern([
                         'admin/access*',
                         'admin/setting*',
                     ]), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/setting*')) }}">
-                        <a href="{{ route('admin.setting.index') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/settings*')) }}">
+                        <a href="{{ route('admin.settings.edit') }}">
                             <i class="fa fa-cog"></i>
                             <span>{{ trans('labels.backend.settings.management') }}</span>
                         </a>

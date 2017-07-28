@@ -302,6 +302,11 @@ return [
                     'type' => 'Tipo',
 
                 ],
+                'settings' => [
+                    'soc_links' => 'Links*',
+                    'discount_data' => 'Sconto*',
+                    'koef_data' => 'Fattore(cm/inch)*'
+                ],
 
                 'users' => [
                     'active'                  => 'Attivo',

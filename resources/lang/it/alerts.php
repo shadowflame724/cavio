@@ -73,6 +73,9 @@ return [
             'deleted' => 'Messaggio di modello cancellato con successo.',
             'updated' => 'Messaggio di modello aggiornato con successo.',
         ],
+        'settings' => [
+            'updated' => 'Impostazioni aggiornato con successo.',
+        ],
 
         'users' => [
             'confirmation_email'  => "Una nuova e-mail di conferma è stata inviata all'indirizzo registrato.",

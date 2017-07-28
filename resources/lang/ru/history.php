@@ -77,6 +77,9 @@ return [
         'popup' => [
             'updated' => 'обновил объявление'
         ],
+        'settings' => [
+            'updated' => 'обновил найстроки'
+        ],
         'templateMessage' => [
             'created' => 'создал шаблон сообщения',
             'deleted' => 'удалил шаблон сообщения',

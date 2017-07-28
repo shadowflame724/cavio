@@ -77,6 +77,9 @@ return [
         'popup' => [
             'updated' => 'apparire aggiornato',
         ],
+        'settings' => [
+            'updated' => 'impostazioni aggiornato',
+        ],
         'templateMessage' => [
             'created' => 'messaggio di modello creato',
             'deleted' => 'messaggio di modello eliminato',

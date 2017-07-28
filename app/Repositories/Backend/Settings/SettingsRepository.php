@@ -29,19 +29,9 @@ class SettingsRepository extends BaseRepository
      */
     public function update(Model $settings, array $input)
     {
-        $settings->soc_links = $input['title'];
-        $settings->title_ru = $input['title_ru'];
-        $settings->title_it = $input['title_it'];
-        $settings->body = $input['body'];
-        $settings->body_ru = $input['body_ru'];
-        $settings->body_it = $input['body_it'];
-        $settings->image = $input['photo'];
-        $settings->link = $input['link'];
-        if ($input['show']) {
-            $settings->show = 1;
-        } else {
-            $settings->show = 0;
-        }
+        $settings->soc_links = json_encode($input['soc_links']);
+        $settings->discount_data = json_encode($input['discount_data']);
+        $settings->koef_data = json_encode(str_replace(',', '.', preg_replace("/[^0-9,.]/", "",$input['koef_data'])));
 
         DB::transaction(function () use ($settings, $input) {
             if ($settings->save()) {
@@ -51,7 +41,7 @@ class SettingsRepository extends BaseRepository
                 return true;
             }
 
-            throw new GeneralException(trans('exceptions.backend.Settings.update_error'));
+            throw new GeneralException(trans('exceptions.backend.settings.update_error'));
         });
     }
 }
