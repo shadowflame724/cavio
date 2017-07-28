@@ -84,6 +84,8 @@ class CollectionController extends Controller
      */
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
+        //dd($request->all());
+
         $zones = $request->zones;
 
         if ($zones != null) {
@@ -98,7 +100,9 @@ class CollectionController extends Controller
                 $oldzone->zone_id = $newzone['zone_id'];
 
                 if ($oldzone->save()) {
-                    $newImagesArray = explode(',', $newzone['photo']);
+                    $imagesString = rtrim($newzone['photo'],",");
+
+                    $newImagesArray = explode(',', $imagesString);
                     $oldImagesArray = explode(',', $oldImage);
                     //dd($newImagesArray, $oldImagesArray, strlen($oldImagesArray[0]));
 

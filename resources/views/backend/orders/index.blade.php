@@ -1,34 +1,32 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.access.page.management'))
+@section ('title', trans('labels.backend.access.orders.management'))
 
 @section('after-styles')
     {{ Html::style("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css") }}
 @endsection
 
 @section('page-header')
-    <h1>{{ trans('labels.backend.access.page.management') }}</h1>
+    <h1>{{ trans('labels.backend.access.orders.management') }}</h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('labels.backend.access.page.management') }}</h3>
+            <h3 class="box-title">{{ trans('labels.backend.access.orders.management') }}</h3>
 
             <div class="box-tools pull-right">
-                @include('backend.pages.page-header-buttons')
             </div>
         </div><!-- /.box-header -->
 
         <div class="box-body">
             <div class="table-responsive">
-                <table id="pages-table" class="table table-condensed table-hover">
+                <table id="orders-table" class="table table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th>{{ trans('labels.backend.access.page.table.id') }}</th>
-                        <th>{{ trans('labels.backend.access.page.table.pageKey') }}</th>
-                        <th>{{ trans('labels.backend.access.page.table.title') }}</th>
-                        <th>{{ trans('labels.backend.access.page.table.created_at') }}</th>
+                        <th>{{ trans('labels.backend.access.orders.table.id') }}</th>
+                        <th>{{ trans('labels.backend.access.orders.table.type') }}</th>
+                        <th>{{ trans('labels.backend.access.orders.table.title') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
                     </thead>
@@ -45,7 +43,7 @@
             </div><!-- /.box tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-            {!! history()->renderType('Page') !!}
+            {!! history()->renderType('Order') !!}
         </div><!-- /.box-body -->
     </div><!--box box-success-->
 @endsection
@@ -53,22 +51,22 @@
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
 
     <script>
+
         $(function() {
-            $('#pages-table').DataTable({
+            $('#orders-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route("admin.page.get") }}',
+                    url: '{{ route("admin.template-messages.get") }}',
                     type: 'post'
                 },
                 columns: [
                     {data: 'id', name: 'id' },
-                    {data: 'slug', name: 'slug' },
-                    {data: 'title', name: 'title'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'user_id', name: 'user_id'},
+                    {data: 'summ', name: 'summ'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
-                order: [[3, "asc"]],
+                order: [[1, "asc"]],
                 searchDelay: 500
             });
         });

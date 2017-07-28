@@ -55,6 +55,8 @@ class EventServiceProvider extends ServiceProvider
         \App\Listeners\Backend\Showroom\ShowroomEventListener::class,
         \App\Listeners\Backend\FinishTissue\FinishTissueEventListener::class,
         \App\Listeners\Backend\Popup\PopupEventListener::class,
+        \App\Listeners\Backend\TemplateMessage\TemplateMessageEventListener::class,
+        \App\Listeners\Backend\Settings\SettingsEventListener::class,
 
 
     ];

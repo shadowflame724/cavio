@@ -182,6 +182,11 @@ return [
                 'edit' => 'Edit popup',
                 'management' => 'Popups Management'
             ],
+            'settings' => [
+                'edit' => 'Edit settings',
+                'management' => 'Settings Management'
+            ],
+
             'message' => [
                 'show' => 'Show Message',
                 'management' => 'All messages',
@@ -194,6 +199,17 @@ return [
                     'new' => 'New',
                     'created_at' => 'Posted'
                 ]
+            ],
+            'templateMessage' => [
+                'create' => 'Create Template',
+                'edit' => 'Edit Template',
+                'management' => 'Template messages',
+
+                'table' => [
+                    'id' => 'Id',
+                    'type' => 'Type',
+                    'title' => 'Title',
+                ],
             ],
 
 

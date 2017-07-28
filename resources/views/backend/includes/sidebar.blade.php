@@ -40,6 +40,7 @@
                         'admin/popup*',
                         'admin/news*',
                         'admin/faq*',
+                        'admin/template-messages*',
                     ]), 'menu-open') }}"
                     style="display: none; {{ active_class(Active::checkUriPattern([
                         'admin/page*',
@@ -69,6 +70,12 @@
                         <a href="{{ route('admin.faq.index') }}">
                             <i class="fa fa-question-circle-o"></i>
                             <span>{{ trans('labels.backend.access.faq.management') }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/template-messages*')) }}">
+                        <a href="{{ route('admin.template-messages.index') }}">
+                            <i class="fa fa-envelope"></i>
+                            <span>{{ trans('labels.backend.access.templateMessage.management') }}</span>
                         </a>
                     </li>
                 </ul>
@@ -150,12 +157,20 @@
                         </a>
                     </li>
 
-                    <li class="{{ active_class(Active::checkUriPattern('admin/order*')) }}">
-                        <a href="{{ route('admin.order.index') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/orders*')) }}">
+                        <a href="{{ route('admin.orders.index') }}">
                             <i class="fa fa-shopping-cart"></i>
                             <span>{{ trans('labels.backend.order.management') }}</span>
                         </a>
                     </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/sort*')) }}">
+                        <a href="{{ route('admin.sort.index') }}">
+                            <i class="fa fa-sort"></i>
+                            <span>{{ trans('labels.backend.sort.management') }}</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
 
@@ -175,15 +190,15 @@
                 <ul class="treeview-menu
                     {{ active_class(Active::checkUriPattern([
                         'admin/access*',
-                        'admin/setting*',
+                        'admin/settings*',
                     ]), 'menu-open') }}"
                     style="display: none;
                     {{ active_class(Active::checkUriPattern([
                         'admin/access*',
                         'admin/setting*',
                     ]), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/setting*')) }}">
-                        <a href="{{ route('admin.setting.index') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/settings*')) }}">
+                        <a href="{{ route('admin.settings.edit') }}">
                             <i class="fa fa-cog"></i>
                             <span>{{ trans('labels.backend.settings.management') }}</span>
                         </a>

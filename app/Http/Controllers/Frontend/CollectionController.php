@@ -21,11 +21,11 @@ class CollectionController extends Controller
     }
 
     /**
-     * @param Collection $collection
      * @return \Illuminate\View\View
      */
-    public function show(Collection $collection)
+    public function show($slug)
     {
+        $collection = Collection::where('slug', $slug)->first();
         $page = $this->page('collections');
 
         return view('frontend.pages.collections.show', [

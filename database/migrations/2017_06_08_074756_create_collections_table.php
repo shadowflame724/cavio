@@ -24,7 +24,7 @@ class CreateCollectionsTable extends Migration
             $table->text('description_it', 400)->nullable();
             $table->string('image')->nullable();
             $table->integer('banner')->nullable();
-            $table->text('products_id')->nullable();
+            $table->text('product_ids')->nullable();
 
             $table->timestamps();
         });

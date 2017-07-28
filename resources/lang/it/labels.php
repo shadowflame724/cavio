@@ -183,6 +183,10 @@ return [
                 'edit'       => 'Modifica apparire',
                 'management' => 'Gestione apparire',
             ],
+            'settings' => [
+                'edit'       => 'Modifica impostazioni',
+                'management' => 'Gestione impostazioni',
+            ],
             'message' => [
                 'show' => 'Mostra il messaggio',
                 'management' => 'Tutti i messaggi',
@@ -195,6 +199,17 @@ return [
                     'new' => 'Nuovo',
                     'created_at' => 'Postato'
                 ]
+            ],
+            'templateMessage' => [
+                'create'     => 'Crea modello',
+                'edit'       => 'Modifica modello',
+                'management' => 'Messaggio di modello',
+
+                'table' => [
+                    'id' => 'Id',
+                    'type' => 'Tipo',
+                    'title' => 'Titolo',
+                ],
             ],
 
             'users' => [

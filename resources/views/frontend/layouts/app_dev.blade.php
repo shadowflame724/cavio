@@ -10,7 +10,8 @@
         <link rel="manifest" href="manifest.json">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="application-name" content="{{ (isset($page->title))?$page->title:ENV('APP_NAME') }}">
-        {{ (isset($page->description))?$page->description:ENV('APP_NAME') }}
+        <meta name="description" content="{{ (isset($page->description))?$page->description:ENV('APP_NAME') }}">
+
         <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -42,14 +43,8 @@
         @include('frontend.includes.svg')
 
         @yield('before_scripts')
-        <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
-        <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery-color/2.1.2/jquery.color.min.js></script>
-        <script src=https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/7.3.1/smooth-scrollbar.js></script>
-        <script src=https://cdn.jsdelivr.net/jquery.bez/1.0.11/jquery.bez.min.js></script>
-        <script src=https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js></script>
-        <script src=https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js></script>
-        <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js></script>
-        {{ Html::script('js/frontend/main.js') }}
+        {{ Html::script(mix('js/vendor.js')) }}
+        {{ Html::script(mix('js/frontend.js')) }}
         @yield('after_scripts')
         <script>
           $.ajaxSetup({
