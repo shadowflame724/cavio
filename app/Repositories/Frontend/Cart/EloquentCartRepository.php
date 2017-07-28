@@ -79,7 +79,13 @@ class EloquentCartRepository implements CartContract
     public function destroy($id)
     {
         $this->_cart = cart()->get();
-        unset($this->_cart[$id - 1]);
+        if(!empty($this->_cart)){
+            foreach ($this->_cart as $key => $cartItem){
+                if($cartItem['price_id'] == $id){
+                    unset($this->_cart[$key]);
+                }
+            }
+        }
         cart()->update($this->_cart);
     }
 

@@ -131,20 +131,8 @@ var basket = (function () {
    * cnt - количество удаляемого товара,
    * size - размер
    * **/
-  function removeItem(goods_id, cnt, size,color, callback) {
-    var item = _.find(cart, function (o) {
-      return o.goods_id == goods_id && o.size == size && o.color == color
-    });
-    if (_.isUndefined(item)) {
-      console.error(goods_id, cnt, size,color, callback);
-      return false;
-    }
-    if (item.count <= cnt) {
-      removeFromBasket(item, callback);
-    } else {
-      item.count = item.count - cnt;
-      saveUpdatedItem(item, callback);
-    }
+  function removeItem(goods_id) {
+    removeFromBasket(goods_id)
   }
 
   /**
@@ -152,23 +140,22 @@ var basket = (function () {
    * cnt - +/- количество,
    * size - размер
    * **/
-  function removeFromBasket(item, callback) {
+  function removeFromBasket(id) {
     $.ajax({
       type: "DELETE",
-      url: link + '/' + item.id,
-      data: {'item': item}
+      url: link + '/' + id,
     })
       .done(function (data) {
-        cart = _.reject(cart, function (o) {
-          return o.id == item.id;
-        });
+        // cart = _.reject(cart, function (o) {
+        //   return o.id == item.id;
+        // });
         //console.log(data);
-        cart_html = data.html;
-        callback(true);
+        // cart_html = data.html;
+        // callback(true);
       })
       .fail(function (data) {
         console.error('Fail put item to basket');
-        callback(false);
+        // callback(false);
       });
   }
 
@@ -182,8 +169,8 @@ var basket = (function () {
     add: function (id,count) {
       addToBasket(id,count);
     },
-    remove: function (id, cnt, size,color, call) {
-      removeItem(parseInt(id), parseInt(cnt), size, color, call);
+    remove: function (id) {
+      removeItem(parseInt(id));
     },
     update: function (id, cnt) {
       update(parseInt(id), parseInt(cnt));
@@ -2161,6 +2148,9 @@ if(document.querySelector('body.stash')){
 
   $('.kick-ord_it').on('click', function(e){
     var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
+    var priceid = $(this).attr('data-priceid');
+    alert(priceid);
+    basket.remove(priceid);
     itemStash.addClass('remove');
 
     setTimeout(function(e){   itemStash.remove()  }, 600);
@@ -2901,8 +2891,8 @@ function hideTopMenu(){
 }
 
 function blendModeDef() {
-    /*! modernizr 3.5.0 (Custom Build) | MIT *
-     * https://modernizr.com/download/?-backgroundblendmode-setclasses !*/
+  /*! modernizr 3.5.0 (Custom Build) | MIT *
+   * https://modernizr.com/download/?-backgroundblendmode-setclasses !*/
   !function (e, n, t) {
     function r(e, n) {
       return typeof e === n

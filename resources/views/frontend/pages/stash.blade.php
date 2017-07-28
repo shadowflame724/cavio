@@ -122,7 +122,7 @@
                 <div class="wrap-center-order_it-data stash">
                   <div>
                     <div class="wrap-head-ord_it-for_mobile stash">
-                      <div class="kick-ord_it"></div>
+                      <div class="kick-ord_it" data-priceid="{{$product['id']}}"></div>
                       <div class="top-center-ord_it-data clearfix">
                         <div class="ord_it-name">{{$product['productChilds']['name']}}</div>
                         <div class="wrap-calc_price">
