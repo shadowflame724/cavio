@@ -35,7 +35,7 @@ Route::get('macros', 'FrontendController@macros')->name('macros');
 /**
  * Корзина
  */
-Route::get('basket/', 'BasketController@index')->name('basket.index');
+Route::get('basket', 'BasketController@index')->name('basket.index');
 Route::get('basket/show', 'BasketController@show')->name('basket.show');
 Route::put('basket/', 'BasketController@store')->name('basket.store');
 Route::post('basket/{id}', 'BasketController@update')->name('basket.update');

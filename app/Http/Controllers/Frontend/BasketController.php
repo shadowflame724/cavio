@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Frontend\Cart\CartContract;
 use DB;
-
+use App\Repositories\Frontend\Product\ProductRepository;
 /**
  * Class FrontendController
  * @package App\Http\Controllers
@@ -15,9 +15,10 @@ class BasketController extends Controller
 {
     protected $carts;
 
-    public function __construct(CartContract $carts)
+    public function __construct(CartContract $carts,ProductRepository $product)
     {
         $this->carts = $carts;
+        $this->product = $product;
     }
 
     /**
@@ -25,38 +26,45 @@ class BasketController extends Controller
      */
     public function index()
     {
-
-
         // обычный запрос
+        $priceIdsArr = [];
+        $products = [];
         $basketGoods = $this->carts->findAll();
-        $goodsIds = [];
-        $goods = [];
-        $summ = 0;
-        if( !empty($basketGoods)){
-            foreach ($basketGoods as $item) {
-                array_push($goodsIds,$item['goods_id']);
-                $summ = $summ + $item['count']*$item['price'];
+        if(!empty($basketGoods)){
+            foreach ($basketGoods as $basketGood){
+                $priceIdsArr[] = $basketGood['price_id'];
             }
-            $findGoods = DB::table('goods as t')
-                ->select('t.id','t.name','t.slug','t.image','t1.slug as section_slug','t2.slug as category_slug')
-                ->leftJoin('category_sections as t1','t1.id','=','t.section_id')
-                ->leftJoin('categories as t2','t2.id','=','t.category_id')
-                ->whereIn('t.id',$goodsIds)
-                ->get();
-            foreach ($findGoods as $item) {
-                $goods[$item->id]['name'] = $item->name;
-                $goods[$item->id]['slug'] = $item->slug;
-                $goods[$item->id]['image'] = $item->image;
-                $goods[$item->id]['section'] = $item->section_slug;
-                $goods[$item->id]['category'] = $item->category_slug;
+            if(!empty($priceIdsArr)){
+                $products = $this->product->getProductsbyPriceIds($priceIdsArr);
             }
         }
 
+        $summ = [];
+        $summ_vat = 0;
+        $summ_default = 0;
+        $discount = 0;
+        if(!empty($products)){
+            foreach ($products as $product){
+                $summ_vat = $summ_vat+(int)$product['price_vat'];
+                $summ_default = $summ_default+(int)$product['price_new'];
+            }
+        }
+        if($summ_vat >= 5000 && $summ_vat <= 10000){
+            $discount = 5;
+        }
+        if($summ_vat >= 10001 && $summ_vat <= 20000){
+            $discount = 10;
+        }
+        $summ = [
+            'summ_vat' => $summ_vat,
+            'summ_default' => $summ_default,
+            'discount_all' => $discount,
+        ];
 
-        return view('frontend.basket.index', [
+
+        return view('frontend.pages.stash', [
             'summ' => $summ,
-            'basket' => $basketGoods,
-            'goods' => $goods
+            'products' => $products
         ]);
 
     }

@@ -153,7 +153,7 @@
         <div class="wrap-right-top-menu">
             <div class="wrap-login hide"><a href="#" class="btn-login anim-underline">login</a></div>
             <div class="wrap-stash-ico hide">
-                <a href="stash.html">
+                <a href="/basket">
                     <svg class="svg-stash">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stash"></use>
                     </svg>
