@@ -115,8 +115,21 @@ return [
             ],
             'popup' => [
                 'edit'       => 'Edit Popup',
-                'management' => 'GoodPopup Management',
+                'management' => 'Popup Management',
                 'main'       => 'Popup',
+            ],
+            'settings' => [
+                'edit'       => 'Edit Settings',
+                'management' => 'Settings Management',
+                'main'       => 'Settings',
+            ],
+
+            'templateMessage' => [
+                'all'        => 'All Templates',
+                'create'     => 'Create Template',
+                'edit'       => 'Edit Template',
+                'management' => 'Template messages Management',
+                'main'       => 'Templates',
             ],
         ],
 

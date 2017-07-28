@@ -105,6 +105,8 @@ class CollectionRepository extends BaseRepository
 
         if (isset($input['banner'])) {
             $collection->banner = 1;
+        }else{
+            $collection->banner = 0;
         }
 
 

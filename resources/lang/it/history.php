@@ -77,6 +77,14 @@ return [
         'popup' => [
             'updated' => 'apparire aggiornato',
         ],
+        'settings' => [
+            'updated' => 'impostazioni aggiornato',
+        ],
+        'templateMessage' => [
+            'created' => 'messaggio di modello creato',
+            'deleted' => 'messaggio di modello eliminato',
+            'updated' => 'messaggio di modello aggiornato',
+        ],
         'users' => [
             'changed_password' => 'changed password for user',
             'created' => 'created user',

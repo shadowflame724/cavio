@@ -84,6 +84,8 @@ class CollectionController extends Controller
      */
     public function update(Collection $collection, UpdateCollectionRequest $request)
     {
+        //dd($request->all());
+
         $zones = $request->zones;
 
         if ($zones != null) {

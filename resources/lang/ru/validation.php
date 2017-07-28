@@ -254,6 +254,21 @@ return [
                     'image' => 'Изображение*',
                     'link' => 'Ссылка*'
                 ],
+                'settings' => [
+                    'soc_links' => 'Ссылки*',
+                    'discount_data' => 'Скидки*',
+                    'koef_data' => 'Коэффициент(см/дюйм)*'
+                ],
+
+                'templateMessage' => [
+                    'title' => 'Заголовок*',
+                    'body' => 'Контент*',
+                    'title_ru' => 'Заголовок[RU]*',
+                    'body_ru' => 'Контент[RU]*',
+                    'title_it' => 'Заголовок[IT]*',
+                    'body_it' => 'Контент[IT]*',
+                    'type' => 'Тип*'
+                ],
                 'users' => [
                     'active' => 'Активный',
                     'associated_roles' => 'Роли',

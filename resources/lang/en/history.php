@@ -76,6 +76,14 @@ return [
         'popup' => [
             'updated' => 'updated popups',
         ],
+        'templateMessage' => [
+            'created' => 'created template message',
+            'deleted' => 'deleted template message',
+            'updated' => 'updated template message',
+        ],
+        'settings' => [
+            'updated' => 'updated settings',
+        ],
 
         'users' => [
             'changed_password' => 'changed password for user',
