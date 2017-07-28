@@ -37,7 +37,7 @@ class SortController extends Controller
         //dd($collection);
         //$products = $collection->goods()->get();
 
-        return response()->json($collection);
+        return response()->json($collection->product_ids);
     }
 
     /**
@@ -49,7 +49,7 @@ class SortController extends Controller
         //dd($category);
         //$products = $category->goods()->get();
 
-        return response()->json($category);
+        return response()->json($category->product_ids);
     }
 
     /**
@@ -61,7 +61,7 @@ class SortController extends Controller
         //dd($collectionZone);
         //$products = $collectionZone->goods()->get();
 
-        return response()->json($collectionZone);
+        return response()->json($collectionZone->product_ids);
     }
 
 }
