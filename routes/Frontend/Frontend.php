@@ -24,10 +24,10 @@ Route::get('catalogue/{slug}', 'ProductController@catOne')->name('catalogue.one'
 Route::get('product/{slug}', 'ProductController@one')->name('goods.show');
 
 Route::get('collections', 'CollectionController@index')->name('collections');
-Route::get('collections/{collection}', 'CollectionController@show')->name('collections.show');
+Route::get('collection/{slug}', 'CollectionController@show')->name('collections.show');
 
 Route::get('zones', 'ZoneController@index')->name('zones');
-Route::get('zones/{zone}', 'ZoneController@show')->name('zones.show');
+Route::get('zone/{slug}', 'ZoneController@show')->name('zones.show');
 
 Route::get('macros', 'FrontendController@macros')->name('macros');
 
