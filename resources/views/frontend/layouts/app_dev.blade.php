@@ -37,6 +37,7 @@
             @yield('content')
             @include('frontend.includes.footer')
         </main>
+
         @yield('after_footer')
         @include('frontend.includes.svg')
 

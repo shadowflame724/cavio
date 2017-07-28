@@ -107,59 +107,16 @@
         <div class="small-page-title hide"><span class="text-title">{{ trans('frontend.shoppingCart.title') }}</span></div>
         <div class="wrap-catal stash wrap-box-shadow clearfix bg-white-marmur hide">
           <div class="wrap-stash-list">
-            <div class="item-detail-order-data-wrap_anim discount">
+            @if(!empty($products))
+            @foreach($products as $product)
+            <div class="item-detail-order-data-wrap_anim @if($product['discount'] > 0) discount @endif">
               <div class="item-detail-order-data stash">
                 <div class="inner-order-item-img">
                   <div class="for-disp_discount">
-                    <div class="order-item-img bg-white-marmur" style="background-image: url(../../upload/images/order-litem-1.jpg)"></div>
-                  </div>
-                </div>
-                <div class="wrap-center-order_it-data stash">
-                    <div>
-                      <div class="wrap-head-ord_it-for_mobile stash">
-                        <div class="kick-ord_it"></div>
-                        <div class="top-center-ord_it-data clearfix">
-                          <div class="ord_it-name">Sofa 2 Seats Folding</div>
-                          <div class="wrap-calc_price">
-                            <div class="ord_it-numb"><span class="calc_it minus disabled"></span><span class="ord_it-numb-val">1</span><span class="calc_it plus"></span></div>
-                            <div class="ord_it-price">1445 €</div>
-                          </div>
-                        </div>
-                        <div class="mibble-center-ord_it-data order stash">
-                          <span class="ord_it-code">FR2272</span>
-                          <span class="catal-type">dinning</span>
-                          <span class="catal-type">dinning</span>
-                          <span class="catal-type">dinning</span>
-                          <span class="catal-item-numb">Villa Cannes</span>
-                          <span class="catal-item-numb">Villa Cannes</span>
-                          <span class="catal-item-numb">Villa Cannes</span>
-                        </div>
-                      </div>
-                      <div class="bottom-center-ord_it-data clearfix">
-                        <span class="material-ord_it">
-                          <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.finishing') }}</div>
-                          <span class="inner-nowrap">Ebano Lucido Scuro</span>
-                          <span class="inner-nowrap">Ebano Lucido</span>
-                          <span class="inner-nowrap">Ebano Scuro</span>
-                        </span>
-                        <span class="material-ord_it-code">
-                          <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.tissue') }}</div>
-                          <span class="inner-nowrap">TS445</span>
-                          <span class="inner-nowrap">TS111</span>
-                          <span class="inner-nowrap">TS222</span>
-                          <span class="inner-nowrap">TS333</span>
-                        </span>
-                        <span class="size-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.dimensions') }}</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-            <div class="item-detail-order-data-wrap_anim">
-              <div class="item-detail-order-data stash">
-                <div class="inner-order-item-img">
-                  <div class="for-disp_discount">
-                    <div class="order-item-img bg-white-marmur" style="background-image: url(../../upload/images/order-litem-1.jpg)"></div>
+                    @if(isset($product['productPhotos']['photos'][0]))
+                        <div class="order-item-img bg-white-marmur"
+                         style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['productPhotos']['photos'][0]}})"></div>
+                    @endif
                   </div>
                 </div>
                 <div class="wrap-center-order_it-data stash">
@@ -167,60 +124,65 @@
                     <div class="wrap-head-ord_it-for_mobile stash">
                       <div class="kick-ord_it"></div>
                       <div class="top-center-ord_it-data clearfix">
-                        <div class="ord_it-name">Sofa 2 Seats Folding</div>
+                        <div class="ord_it-name">{{$product['productChilds']['name']}}</div>
                         <div class="wrap-calc_price">
                           <div class="ord_it-numb"><span class="calc_it minus disabled"></span><span class="ord_it-numb-val">1</span><span class="calc_it plus"></span></div>
-                          <div class="ord_it-price">1445 €</div>
+                          <div class="ord_it-price">{{$product['price_vat']}} €</div>
                         </div>
                       </div>
                       <div class="mibble-center-ord_it-data order stash">
-                        <span class="ord_it-code">FR2272</span>
-                        <span class="catal-type">dinning</span>
-                        <span class="catal-item-numb">Villa Cannes</span>
+                        <span class="ord_it-code">{{$product['productChilds']['code']}}</span>
+                        @if(!empty($product['collections']['zone']))
+                        @foreach($product['collections']['zone'] as $zone)
+                          <span class="catal-type">{{$zone}}</span>
+                        @endforeach
+                        @endif
+
+                        @if(!empty($product['collections']['collection']))
+                        @foreach($product['collections']['collection'] as $collection)
+                          <span class="catal-item-numb">{{$collection}}</span>
+                        @endforeach
+                        @endif
                       </div>
                     </div>
                     <div class="bottom-center-ord_it-data clearfix">
-                      <span class="material-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.finishing') }}</div>Ebano Lucido Scuro</span>
-                      <span class="material-ord_it-code"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.tissue') }}</div>TS445</span>
-                      <span class="size-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.dimensions') }}</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
+                    <span class="material-ord_it">
+                      <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.finishing') }}</div>
+                      @if(isset($product['productPhotos']['finish']))
+                      @foreach($product['productPhotos']['finish'] as $one)
+                          <span class="inner-nowrap">{{$one}}</span>
+                      @endforeach
+                      @endif
+                    </span>
+                      <span class="material-ord_it-code">
+                      <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.tissue') }}</div>
+                        @if(isset($product['productPhotos']['tissue']))
+                        @foreach($product['productPhotos']['tissue'] as $one)
+                          <span class="inner-nowrap">{{$one}}</span>
+                        @endforeach
+                        @endif
+                    </span>
+                      <span class="size-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.dimensions') }}</div>
+                        @if(isset($product['productChilds']['dimensions']->length))
+                        L: {{$product['productChilds']['dimensions']->length}},
+                        @endif
+                        @if(isset($product['productChilds']['dimensions']->width))
+                        W: {{$product['productChilds']['dimensions']->width}},
+                        @endif
+                        @if(isset($product['productChilds']['dimensions']->height))
+                        H: {{$product['productChilds']['dimensions']->height}},
+                        @endif
+                        @if(isset($product['productChilds']['dimensions']->mattress))
+                        Mattress: {{$product['productChilds']['dimensions']->mattress}},
+                        @endif
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="item-detail-order-data-wrap_anim">
-              <div class="item-detail-order-data stash">
-                <div class="inner-order-item-img">
-                  <div class="for-disp_discount">
-                    <div class="order-item-img bg-white-marmur" style="background-image: url(../../upload/images/order-litem-1.jpg)"></div>
-                  </div>
-                </div>
-                <div class="wrap-center-order_it-data stash">
-                  <div>
-                    <div class="wrap-head-ord_it-for_mobile stash">
-                      <div class="kick-ord_it"></div>
-                      <div class="top-center-ord_it-data clearfix">
-                        <div class="ord_it-name">Sofa 2 Seats Folding</div>
-                        <div class="wrap-calc_price">
-                          <div class="ord_it-numb"><span class="calc_it minus disabled"></span><span class="ord_it-numb-val">1</span><span class="calc_it plus"></span></div>
-                          <div class="ord_it-price">1445 €</div>
-                        </div>
-                      </div>
-                      <div class="mibble-center-ord_it-data order stash">
-                        <span class="ord_it-code">FR2272</span>
-                        <span class="catal-type">dinning</span>
-                        <span class="catal-item-numb">Villa Cannes</span>
-                      </div>
-                    </div>
-                    <div class="bottom-center-ord_it-data clearfix">
-                      <span class="material-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.finishing') }}</div>Ebano Lucido Scuro</span>
-                      <span class="material-ord_it-code"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.tissue') }}</div>TS445</span>
-                      <span class="size-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.dimensions') }}</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @endforeach
+            @endif
 
             <div class="wrap-bot-stash_list clearfix">
               <div class="footnote">
@@ -258,9 +220,23 @@
               <!--</div>-->
               <div class="wrap-total_result-ord_it stast ver_2">
                 <div class="label-total">{{ trans('frontend.shoppingCart.totalToPay') }}:</div>
-                <div class="total_price-ord_it">9 500 €</div>
-                <div class="crossed-price">10 000 €</div>
-                <div class="price-vat">**{{ trans('frontend.shoppingCart.including') }} 22% (220€) {{ trans('frontend.shoppingCart.vat') }}, and Additional discount 5% (500€)</div>
+
+                @if($summ['discount_all'] > 0)
+                @php($summF = $summ['summ_vat']*$summ['discount_all']/100)
+                @php($total = round($summ['summ_vat']-$summF))
+                <div class="total_price-ord_it">{{$total}} €</div>
+                <div class="crossed-price">{{$summ['summ_vat']}} €</div>
+                @else
+                <div class="total_price-ord_it">{{$summ['summ_vat']}} €</div>
+                @endif
+
+                <div class="price-vat">**{{ trans('frontend.shoppingCart.including') }}
+                  22% ({{round($summ['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}
+
+                  @if($summ['discount_all'] > 0)
+                  ,and Additional discount {{$summ['discount_all']}}% ({{round($summF)}}€)
+                  @endif
+                </div>
             </div>
           </div>
             <div class="wrap-stash_order clearfix">

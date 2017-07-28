@@ -54,7 +54,7 @@ class EloquentCartRepository implements CartContract
             $this->_cart[] = $data;
         } else {
             $end = end($this->_cart);
-            $data['id'] = $end['id'] + 1;;
+            $data['id'] = $end['id'] + 1;
             array_push($this->_cart, $data);
         }
         cart()->update($this->_cart);
