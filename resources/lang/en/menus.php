@@ -118,6 +118,13 @@ return [
                 'management' => 'GoodPopup Management',
                 'main'       => 'Popup',
             ],
+            'templateMessage' => [
+                'all'        => 'All Templates',
+                'create'     => 'Create Template',
+                'edit'       => 'Edit Template',
+                'management' => 'Template messages Management',
+                'main'       => 'Templates',
+            ],
         ],
 
         'menu' => [

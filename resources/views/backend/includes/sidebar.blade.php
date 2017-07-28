@@ -40,6 +40,7 @@
                         'admin/popup*',
                         'admin/news*',
                         'admin/faq*',
+                        'admin/template-messages*',
                     ]), 'menu-open') }}"
                     style="display: none; {{ active_class(Active::checkUriPattern([
                         'admin/page*',
@@ -69,6 +70,12 @@
                         <a href="{{ route('admin.faq.index') }}">
                             <i class="fa fa-question-circle-o"></i>
                             <span>{{ trans('labels.backend.access.faq.management') }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/template-messages*')) }}">
+                        <a href="{{ route('admin.template-messages.index') }}">
+                            <i class="fa fa-envelope"></i>
+                            <span>{{ trans('labels.backend.access.templateMessage.management') }}</span>
                         </a>
                     </li>
                 </ul>

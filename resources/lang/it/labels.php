@@ -196,6 +196,17 @@ return [
                     'created_at' => 'Postato'
                 ]
             ],
+            'templateMessage' => [
+                'create'     => 'Crea modello',
+                'edit'       => 'Modifica modello',
+                'management' => 'Messaggio di modello',
+
+                'table' => [
+                    'id' => 'Id',
+                    'type' => 'Tipo',
+                    'title' => 'Titolo',
+                ],
+            ],
 
             'users' => [
                 'active'              => 'Utenti attivi',

@@ -304,6 +304,15 @@ return [
                     'password_confirmation'   => 'Password Confirmation',
                     'send_confirmation_email' => 'Send Confirmation E-mail',
                 ],
+                'templateMessage' => [
+                    'title' => 'Title*',
+                    'body' => 'Content*',
+                    'title_ru' => 'Title[RU]*',
+                    'body_ru' => 'Content[RU]*',
+                    'title_it' => 'Title[IT]*',
+                    'body_it' => 'Content[IT]*',
+                    'type' => 'Type*',
+                ],
             ],
         ],
 

@@ -82,6 +82,11 @@ return [
             'popup' => [
                 'update_error'      => "C'è stato un problema durante l'aggiornamento di questo apparire. Si prega di riprovare più tardi.",
             ],
+            'templateMessage' => [
+                'create_error'      => "C'è stato un problema durante la creazione di questo messaggio di modello. Si prega di riprovare più tardi.",
+                'delete_error'      => "C'è stato un problema durante l'eliminazione di questo messaggio di modello. Si prega di riprovare più tardi.",
+                'update_error'      => "C'è stato un problema durante l'aggiornamento di questo messaggio di modello. Si prega di riprovare più tardi.",
+            ],
             'users' => [
                 'cant_deactivate_self'  => 'Non puoi eseguire questa operazione su te stesso.',
                 'cant_delete_admin'  => 'You can not delete the super administrator.',

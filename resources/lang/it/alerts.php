@@ -68,6 +68,11 @@ return [
             'deleted' => 'Showroom cancellato con successo.',
             'updated' => 'Showroom aggiornato con successo.',
         ],
+        'templateMessage' => [
+            'created' => 'Messaggio di modello creato con successo.',
+            'deleted' => 'Messaggio di modello cancellato con successo.',
+            'updated' => 'Messaggio di modello aggiornato con successo.',
+        ],
 
         'users' => [
             'confirmation_email'  => "Una nuova e-mail di conferma è stata inviata all'indirizzo registrato.",

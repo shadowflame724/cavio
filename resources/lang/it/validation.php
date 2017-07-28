@@ -292,6 +292,17 @@ return [
                     'link' => 'Collegamento*'
                 ],
 
+                'templateMessage' => [
+                    'title' => 'Titolo*',
+                    'body' => 'Soddisfare*',
+                    'title_ru' => 'Titolo[RU]*',
+                    'body_ru' => 'Soddisfare[RU]*',
+                    'title_it' => 'Titolo[IT]*',
+                    'body_it' => 'Soddisfare[IT]*',
+                    'type' => 'Tipo',
+
+                ],
+
                 'users' => [
                     'active'                  => 'Attivo',
                     'associated_roles'        => 'Ruoli associati',

@@ -195,6 +195,17 @@ return [
                     'created_at' => 'Posted'
                 ]
             ],
+            'templateMessage' => [
+                'create' => 'Create Template',
+                'edit' => 'Edit Template',
+                'management' => 'Template messages',
+
+                'table' => [
+                    'id' => 'Id',
+                    'type' => 'Type',
+                    'title' => 'Title',
+                ],
+            ],
 
 
             'users' => [

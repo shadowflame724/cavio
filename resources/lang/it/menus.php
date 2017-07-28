@@ -117,6 +117,13 @@ return [
                 'edit'       => 'Modifica ruolo',
                 'management' => 'Gestione ruoli',
             ],
+            'templateMessage' => [
+                'all'        => 'Tutto il template',
+                'create'     => 'Creare un modello',
+                'edit'       => 'Modificare il modello',
+                'management' => 'Messaggi di gestione del modello',
+                'main'       => 'Modelli'
+            ],
         ],
         'menu' => [
             'content' => 'Content',

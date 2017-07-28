@@ -77,6 +77,11 @@ return [
             'deleted' => 'The dealer was successfully deleted.',
             'updated' => 'The dealer was successfully updated.',
         ],
+        'templateMessage' => [
+            'created' => 'The template message was successfully created.',
+            'deleted' => 'The template message was successfully deleted.',
+            'updated' => 'The template message was successfully updated.',
+        ],
 
 
         'users' => [
