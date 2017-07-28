@@ -24,7 +24,7 @@
           @foreach($collections as $collection)
           {{--@if($collection->banner == 0)--}}
           <div class="item-coll zon-col">
-            <a href="{{ route('frontend.collections.show', $collection) }}">
+            <a href="{{ route('frontend.collections.show', $collection->slug) }}">
               <div class="wrap-img-bg small">
                 <div class="img-back wave-dark">
                   <svg width=1395.63 height=1237.68><use xlink:href=wave.svg#wave></use></svg>
