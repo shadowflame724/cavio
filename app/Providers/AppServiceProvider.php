@@ -6,6 +6,7 @@ use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\Message\Message;
 use App\Models\Zone\Zone;
+use App\Models\Settings\Settings;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
@@ -46,12 +47,23 @@ class AppServiceProvider extends ServiceProvider
 //            $zone->getOneImage();
 //        }
         $messages = Message::where('status', 0)->get();
+        $settings = [];
+        $settingModel = Settings::find(1);
+        if(!empty($settingModel)){
+            $soc = json_decode($settingModel->soc_links, true);
+            $settings['soc_links'] = $soc;
+            $disc = json_decode($settingModel->discount_data, true);
+            $settings['discount_data'] = $disc;
+            $settings['koef_data'] = $settingModel->koef_data;
+            $settings['vat_data'] = $settingModel->vat_data;
+        }
 
         View::share([
             'collections' => $collections,
             'categories' => $categories,
             'zones' => $zones,
-            'messages' => $messages
+            'messages' => $messages,
+            'settings' => $settings
         ]);
 
     }
