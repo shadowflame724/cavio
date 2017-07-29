@@ -42,10 +42,6 @@ class AppServiceProvider extends ServiceProvider
         $collections = Collection::all();
         $categories = Category::all();
         $zones = Zone::with('collectionZones')->get();
-//        $zones = Zone::all();
-//        foreach ($zones as $zone) {
-//            $zone->getOneImage();
-//        }
         $messages = Message::where('status', 0)->get();
         $settings = [];
         $settingModel = Settings::find(1);
@@ -57,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
             $settings['koef_data'] = $settingModel->koef_data;
             $settings['vat_data'] = $settingModel->vat_data;
         }
+        config(['app.settings' => $settings]);
 
         View::share([
             'collections' => $collections,
