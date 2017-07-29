@@ -96,6 +96,9 @@ var basket = (function () {
     $.post(link + '/' + id, {'id':id,'count':cnt})
       .done(function (data) {
         console.log(data)
+
+        $('.total-basket-main').html(data.html);
+
         // item = data.item;
         // cart_html = data.html;
       })
@@ -2161,8 +2164,10 @@ if(document.querySelector('body.stash')){
     if($(this).hasClass('disabled'))  return;
 
     var itemNumbValEl = $(this).siblings(".ord_it-numb-val");
+    var priceOfItem = $(this).parents('.wrap-calc_price').find(".ord_it-price").find('span');
     var price_id = $(this).siblings(".ord_it-numb-val").attr('data-priceid') || false;
-
+    var price = $(this).siblings(".ord_it-numb-val").attr('data-price') || false;
+    var total = 0;
 
 
     var plusVal = 1;
@@ -2180,7 +2185,13 @@ if(document.querySelector('body.stash')){
       basket.update(price_id,totalCnt);
     }
 
+    if(price){
+      total = parseFloat(price)*parseFloat(totalCnt);
+    }
     itemNumbValEl.text(totalCnt);
+    console.log('priceOfItem');
+    console.log(priceOfItem);
+    priceOfItem.text(total);
 
     var btnMinus = $(this).closest(".ord_it-numb").find('.calc_it.minus');
 

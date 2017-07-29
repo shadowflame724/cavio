@@ -70,6 +70,7 @@ class EloquentCartRepository implements CartContract
                     $this->_cart[$key] = $item;
 
                     cart()->update($this->_cart);
+                    return $this->_cart;
                 }
             }
         }
@@ -95,21 +96,6 @@ class EloquentCartRepository implements CartContract
     public function response()
     {
         $this->findAll();
-        $summ=0;
-        $count=0;
-        if (empty($this->_cart))
-            return ['list_id' => [], 'items' => []];
-        foreach ($this->_cart as $item) {
-            $list_id[] = $item['id'];
-            $list_goods_id[] = $item['goods_id'];
-            $items[] = $item;
-            $count=$count+$item['count'];
-            $summ=(int)$summ+($item['count']*$item['price']);
-        }
-        return ['list_id' => $list_id,'list_goods_id' => $list_goods_id, 'items' => $items,'count'=>$count,'summ'=>$summ,'count_text'=>$this->get_rus($count, ['товар','товара','товаров'])];
-    }
-
-    public function getResult(){
         $summ=0;
         $count=0;
         if (empty($this->_cart))
