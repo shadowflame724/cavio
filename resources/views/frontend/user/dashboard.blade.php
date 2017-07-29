@@ -132,9 +132,9 @@
                     <div class="item-log_reg-toggle log swiper-button-disabled">info</div>
                     <div class="item-log_reg-toggle reg">orders</div>
                 </div>
-                <div class="swiper-wrapper wrap-profile-items" style="transform: translate3d(0px, 0px, 0px);">
+                <div class="swiper-wrapper wrap-profile-items">
 
-                    <div class="swiper-slide profile-item log swiper-slide-active" style="width: 1560px; transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg); z-index: 1; margin-right: 240px;">
+                    <div class="swiper-slide profile-item log">
                         {{ Form::model($logged_in_user, [
                             'route' => 'frontend.user.profile.update',
                             'class' => 'user_profile',
@@ -220,7 +220,7 @@
                         {{ Form::close() }}
                     </div>
 
-                    <div class="swiper-slide profile-item log swiper-slide-next" style="width: 1560px; transform: translate3d(0px, 0px, -115.385px) rotateX(0deg) rotateY(-57.6923deg); z-index: 0; margin-right: 240px;">
+                    <div class="swiper-slide profile-item log swiper-slide-next">
                         <div class="wrap-order_list-profile">
                             <div class="head-order_list clearfix">
                                 <div class="td date">Date</div>
