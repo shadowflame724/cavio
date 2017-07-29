@@ -25,9 +25,11 @@ Route::get('product/{slug}', 'ProductController@one')->name('goods.show');
 
 Route::get('collections', 'CollectionController@index')->name('collections');
 Route::get('collections/{slug}', 'CollectionController@show')->name('collections.show');
+Route::get('collections/{collection}/{slug}', 'CollectionController@showPopup')->name('collections.show_popup');
 
 Route::get('zones', 'ZoneController@index')->name('zones');
 Route::get('zones/{slug}', 'ZoneController@show')->name('zones.show');
+Route::get('zones/{zone}/{collection}', 'ZoneController@showPopup')->name('zones.show_popup');
 
 Route::get('macros', 'FrontendController@macros')->name('macros');
 
