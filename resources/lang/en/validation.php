@@ -210,17 +210,32 @@ return [
 
                 'collection' => [
                     'title' => 'Title*',
-                    'description' => 'Description*',
+                    'name' => 'Name*',
+                    'name_ru' => 'Name[RU]*',
+                    'name_it' => 'Name[IT]*',
+                    'prev' => 'Preview*',
+                    'prev_ru' => 'Preview[RU]*',
+                    'prev_it' => 'Preview[IT]*',
+                    'description' => 'SEO*',
                     'title_ru' => 'Title[RU]*',
-                    'description_ru' => 'Description[RU]*',
+                    'description_ru' => 'SEO[RU]*',
                     'title_it' => 'Title[IT]*',
-                    'description_it' => 'Description[IT]*',
+                    'description_it' => 'SEO[IT]*',
                     'banner' => 'Banner ?',
                     'image' => 'Image*',
                     'image_select' => 'Select image',
                     'zones' => [
                         'mainZones' => 'Main Zone',
                         'title' => 'Title',
+                        'title_ru' => 'Title[RU]',
+                        'title_it' => 'Title[IT]',
+                        'name' => 'Name*',
+                        'name_ru' => 'Name[RU]*',
+                        'name_it' => 'Name[IT]*',
+                        'description' => 'SEO*',
+                        'description_ru' => 'SEO[RU]*',
+                        'description_it' => 'SEO[IT]*',
+
                         'management' => 'Collection-zones management',
                         'mainPhoto' => 'Main photo?'
                     ]
@@ -244,6 +259,12 @@ return [
                     'title' => 'Title[Eng]*',
                     'title_ru' => 'Title[Rus]*',
                     'title_it' => 'Title[Itl]*',
+                    'name' => 'Name*',
+                    'name_ru' => 'Name[RU]*',
+                    'name_it' => 'Name[IT]*',
+                    'description' => 'SEO*',
+                    'description_ru' => 'SEO[RU]*',
+                    'description_it' => 'SEO[IT]*',
                     'image' => 'Image',
                 ],
                 'good' => [
