@@ -211,6 +211,31 @@ return [
                     'title' => 'Titolo',
                 ],
             ],
+            'orders' => [
+                'edit' => 'Modifica orders',
+                'management' => 'Orders Gestione',
+                'table' => [
+                    'id' => 'Id',
+                    'status' => 'Status',
+                    'user_id' => 'Client email',
+                    'summ' => 'Summ',
+                    'created_at' => 'Created at'
+                ],
+            ],
+            'baskets' => [
+                'show' => 'Show basket',
+                'management' => 'Baskets Management',
+                'table' => [
+                    'id' => 'Id',
+                    'user_id' => 'Client email',
+                    'summ' => 'Summ',
+                    'created_at' => 'Created at'
+                ],
+            ],
+            'sort' => [
+                'management' => 'Sort products[IT]'
+            ],
+
 
             'users' => [
                 'active'              => 'Utenti attivi',

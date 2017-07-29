@@ -80,6 +80,9 @@ return [
         'settings' => [
             'updated' => 'обновил найстроки'
         ],
+        'orders' => [
+            'updated' => 'обновил статус заказа'
+        ],
         'templateMessage' => [
             'created' => 'создал шаблон сообщения',
             'deleted' => 'удалил шаблон сообщения',

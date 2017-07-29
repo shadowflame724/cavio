@@ -179,6 +179,30 @@ return [
                     'title' => 'Заголовок',
                 ],
             ],
+            'orders' => [
+                'edit' => 'Изменить заказ',
+                'management' => 'Управление заказами',
+                'table' => [
+                    'id' => '№',
+                    'status' => 'Статус',
+                    'user_id' => 'email клиента',
+                    'summ' => 'Сумма',
+                    'created_at' => 'Создан'
+                ],
+            ],
+            'baskets' => [
+                'show' => 'Показать корзину',
+                'management' => 'Корзины',
+                'table' => [
+                    'id' => '№',
+                    'user_id' => 'email клиента',
+                    'summ' => 'Сумма',
+                    'created_at' => 'Создан'
+                ],
+            ],
+            'sort' => [
+                'management' => 'Сортировка продуктов'
+            ],
             'users' => [
                 'active' => 'Активные пользователи',
                 'all_permissions' => 'Полный доступ',

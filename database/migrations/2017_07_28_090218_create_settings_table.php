@@ -18,7 +18,8 @@ class CreateSettingsTable extends Migration
 
             $table->text('soc_links');
             $table->text('discount_data');
-            $table->float('koef_data');
+            $table->text('koef_data');
+            $table->text('vat_data');
 
             $table->timestamps();
         });

@@ -85,6 +85,9 @@ return [
         'settings' => [
             'updated' => 'The settings was successfully updated.'
         ],
+        'orders' => [
+            'updated' => 'The order\'s status was successfully updated.'
+        ],
 
 
         'users' => [

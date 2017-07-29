@@ -106,10 +106,26 @@
                     </div><!--form control-->
 
                     <div class="form-group">
+                        {{ Form::label('name', trans('validation.attributes.backend.access.collection.name'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
                         {{ Form::label('description', trans('validation.attributes.backend.access.collection.description'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('description', null, ['id'=> 'description', 'class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('description', null, ['id'=> 'description', 'class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('prev', trans('validation.attributes.backend.access.collection.prev'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('prev', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -123,10 +139,26 @@
                     </div><!--form control-->
 
                     <div class="form-group">
+                        {{ Form::label('name_ru', trans('validation.attributes.backend.access.collection.name_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
                         {{ Form::label('description_ru', trans('validation.attributes.backend.access.collection.description_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('description_ru', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('description_ru', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('prev_ru', trans('validation.attributes.backend.access.collection.prev_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('prev_ru', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -140,10 +172,25 @@
                     </div><!--form control-->
 
                     <div class="form-group">
+                        {{ Form::label('name_it', trans('validation.attributes.backend.access.collection.name_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('name_it', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
                         {{ Form::label('description_it', trans('validation.attributes.backend.access.collection.description_it'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::text('description_it', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('description_it', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('prev_it', trans('validation.attributes.backend.access.collection.prev_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('prev_it', null, ['class' => 'form-control', 'maxlength' => '400', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -275,6 +322,20 @@
                                                         {{ Form::text('zones['.$i.'][title]', $zone->title, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
                                                     </div><!--col-lg-10-->
                                                 </div><!--form control-->
+                                                <div class="form-group">
+                                                    {{ Form::label('name', trans('validation.attributes.backend.access.collection.zones.name'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                    <div class="col-lg-10">
+                                                        {{ Form::text('zones['.$i.'][name]', $zone->name, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                                <div class="form-group">
+                                                    {{ Form::label('description', trans('validation.attributes.backend.access.collection.zones.description'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                    <div class="col-lg-10">
+                                                        {{ Form::textarea('zones['.$i.'][description]', $zone->description, ['class' => 'form-control', 'required' => 'required', 'minlength' => '3' ]) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="ru{{$i}}">
                                                 <div class="form-group">
@@ -282,6 +343,20 @@
 
                                                     <div class="col-lg-10">
                                                         {{ Form::text('zones['.$i.'][title_ru]', $zone->title_ru, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                                <div class="form-group">
+                                                    {{ Form::label('name_ru', trans('validation.attributes.backend.access.collection.zones.name_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                    <div class="col-lg-10">
+                                                        {{ Form::text('zones['.$i.'][name_ru]', $zone->name_ru, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                                <div class="form-group">
+                                                    {{ Form::label('description_ru', trans('validation.attributes.backend.access.collection.zones.description_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                    <div class="col-lg-10">
+                                                        {{ Form::textarea('zones['.$i.'][description_ru]', $zone->description_ru, ['class' => 'form-control', 'required' => 'required', 'minlength' => '3' ]) }}
                                                     </div><!--col-lg-10-->
                                                 </div><!--form control-->
 
@@ -292,6 +367,20 @@
 
                                                     <div class="col-lg-10">
                                                         {{ Form::text('zones['.$i.'][title_it]', $zone->title_it, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                                <div class="form-group">
+                                                    {{ Form::label('name_it', trans('validation.attributes.backend.access.collection.zones.name_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                    <div class="col-lg-10">
+                                                        {{ Form::text('zones['.$i.'][name_it]', $zone->name_it, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'minlength' => '3' ]) }}
+                                                    </div><!--col-lg-10-->
+                                                </div><!--form control-->
+                                                <div class="form-group">
+                                                    {{ Form::label('description_it', trans('validation.attributes.backend.access.collection.zones.description_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                    <div class="col-lg-10">
+                                                        {{ Form::textarea('zones['.$i.'][description_it]', $zone->description_it, ['class' => 'form-control', 'required' => 'required', 'minlength' => '3' ]) }}
                                                     </div><!--col-lg-10-->
                                                 </div><!--form control-->
                                             </div>

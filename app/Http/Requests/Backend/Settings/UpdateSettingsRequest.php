@@ -30,6 +30,7 @@ class UpdateSettingsRequest extends Request
             'soc_links' => "required",
             'discount_data' => "required",
             'koef_data' => "required",
+            'vat_data' => "required"
         ];
     }
 }

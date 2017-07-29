@@ -30,6 +30,12 @@ class UpdateZoneRequest extends Request
             'title' => "required|min:3|max:35",
             'title_ru' => "required|min:3|max:35",
             'title_it' => "required|min:3|max:35",
+            'name' => "required|min:3|max:35",
+            'name_ru' => "required|min:3|max:35",
+            'name_it' => "required|min:3|max:35",
+            'description' => "required|min:3|max:400",
+            'description_ru' => "required|min:3|max:400",
+            'description_it' => "required|min:3|max:400",
         ];
     }
 }

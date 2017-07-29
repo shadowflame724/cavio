@@ -27,7 +27,8 @@ class UpdateOrderRequest extends Request
     public function rules()
     {
         return [
-            'status' => "required"
+            'status' => "required",
+            'admin_comment' => "required"
         ];
     }
 }
