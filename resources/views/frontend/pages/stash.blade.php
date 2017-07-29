@@ -122,7 +122,7 @@
                 <div class="wrap-center-order_it-data stash">
                   <div>
                     <div class="wrap-head-ord_it-for_mobile stash">
-                      <div class="kick-ord_it"></div>
+                      <div class="kick-ord_it" data-priceid="{{$product['id']}}"></div>
                       <div class="top-center-ord_it-data clearfix">
                         <div class="ord_it-name">{{$product['productChilds']['name']}}</div>
                         <div class="wrap-calc_price">
@@ -167,16 +167,16 @@
                         @endif
                     </span>
                       <span class="size-ord_it"><div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.dimensions') }}</div>
-                        @if(isset($product['productChilds']['dimensions']->length))
+                        @if(isset($product['productChilds']['dimensions']->length) && !empty($product['productChilds']['dimensions']->length))
                         L: {{$product['productChilds']['dimensions']->length}},
                         @endif
-                        @if(isset($product['productChilds']['dimensions']->width))
+                        @if(isset($product['productChilds']['dimensions']->width) && !empty($product['productChilds']['dimensions']->width))
                         W: {{$product['productChilds']['dimensions']->width}},
                         @endif
-                        @if(isset($product['productChilds']['dimensions']->height))
+                        @if(isset($product['productChilds']['dimensions']->height) && !empty($product['productChilds']['dimensions']->height))
                         H: {{$product['productChilds']['dimensions']->height}},
                         @endif
-                        @if(isset($product['productChilds']['dimensions']->mattress))
+                        @if(isset($product['productChilds']['dimensions']->mattress) && !empty($product['productChilds']['dimensions']->mattress))
                         Mattress: {{$product['productChilds']['dimensions']->mattress}},
                         @endif
                       </span>

@@ -168,10 +168,10 @@ class ProductRepository extends BaseRepository
 
                 $res[] = [
                     'id' => $prod->id,
-                    'price_old' => $prod->price,
+                    'price_old' => $prod->price*$basketInfoArr[$prod->id],
                     'count' => $basketInfoArr[$prod->id],
-                    'price_new' => $nativePrice,
-                    'price_vat' => $vatPrice,
+                    'price_new' => $nativePrice*$basketInfoArr[$prod->id],
+                    'price_vat' => $vatPrice*$basketInfoArr[$prod->id],
                     'discount' => $prod->discount,
                     'productChilds' => $productChildsRes,
                     'productPhotos' => $productPhotosArrRes,

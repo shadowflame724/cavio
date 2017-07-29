@@ -50,11 +50,9 @@ class EloquentCartRepository implements CartContract
         $data['count'] = (int)$data['count'];
 
         if (empty($this->_cart)) {
-            $data['id'] = 1;
             $this->_cart[] = $data;
         } else {
             $end = end($this->_cart);
-            $data['id'] = $end['id'] + 1;
             array_push($this->_cart, $data);
         }
         cart()->update($this->_cart);
@@ -81,7 +79,13 @@ class EloquentCartRepository implements CartContract
     public function destroy($id)
     {
         $this->_cart = cart()->get();
-        unset($this->_cart[$id - 1]);
+        if(!empty($this->_cart)){
+            foreach ($this->_cart as $key => $cartItem){
+                if($cartItem['price_id'] == $id){
+                    unset($this->_cart[$key]);
+                }
+            }
+        }
         cart()->update($this->_cart);
     }
 

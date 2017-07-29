@@ -137,8 +137,9 @@ class BasketController extends Controller
     {
         $this->carts->destroy($id);
         $statusCode = 200;
+        $response = [];
         //$response['item'] = $item;
-        $response['html'] = View('frontend.basket.header',$this->carts->getResult())->render();
+//        $response['html'] = View('frontend.basket.header',$this->carts->getResult())->render();
         return response()->json($response, $statusCode);
     }
 
