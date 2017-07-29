@@ -319,6 +319,28 @@ return [
                     'koef_data' => 'Coefficient(inch/cm)*',
                     'vat_data' => 'VAT*'
                 ],
+                'orders' => [
+                    'user_fr_name' => 'Client first name',
+                    'user_ls_name' => 'Client last name',
+                    'user_email' => 'Client Email',
+                    'summ' => 'Summ',
+                    'cnt' => 'Count',
+
+                    'status' => 'Status*',
+                    'status_new' => 'New',
+                    'status_sent' => 'Sent',
+                    'status_delivering' => 'Delivering',
+                    'status_closed' => 'Closed',
+                ],
+                'baskets' => [
+                    'user_fr_name' => 'Client first name',
+                    'user_ls_name' => 'Client last name',
+                    'user_email' => 'Client Email',
+                    'summ' => 'Summ',
+                    'count' => 'Count',
+
+                ],
+
 
             ],
         ],

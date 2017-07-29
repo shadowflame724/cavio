@@ -281,6 +281,26 @@ return [
                     'password_confirmation' => 'Проверка пароля',
                     'send_confirmation_email' => 'Отправить подтверждение на E-mail',
                 ],
+                'orders' => [
+                    'user_fr_name' => 'Имя клиента',
+                    'user_ls_name' => 'Фамилия клиента',
+                    'user_email' => 'email клиента',
+                    'summ' => 'Сумма',
+                    'cnt' => 'Количество',
+
+                    'status' => 'Статус*',
+                    'status_new' => 'Новый',
+                    'status_sent' => 'Отправлен',
+                    'status_delivering' => 'Доставляется',
+                    'status_closed' => 'Закрыт',
+                ],
+                'baskets' => [
+                    'user_fr_name' => 'Имя клиента',
+                    'user_ls_name' => 'Фамилия клиента',
+                    'user_email' => 'email клиента',
+                    'summ' => 'Сумма',
+                    'count' => 'Количество',
+                ],
                 'image' => [
                     'error' =>[
                         'dictFileTooBig' => 'Слишком большой файл',

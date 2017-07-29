@@ -123,6 +123,16 @@ return [
                 'management' => 'Settings Management',
                 'main'       => 'Settings',
             ],
+            'orders' => [
+                'edit'       => 'Edit Orders',
+                'management' => 'Orders Management',
+                'main'       => 'Orders',
+            ],
+            'baskets' => [
+                'show'       => 'Show Basket',
+                'management' => 'Basket Management',
+                'main'       => 'Baskets',
+            ],
 
             'templateMessage' => [
                 'all'        => 'All Templates',

@@ -80,6 +80,9 @@ return [
         'settings' => [
             'updated' => 'impostazioni aggiornato',
         ],
+        'orders' => [
+            'updated' => 'order\'s status aggiornato',
+        ],
         'templateMessage' => [
             'created' => 'messaggio di modello creato',
             'deleted' => 'messaggio di modello eliminato',

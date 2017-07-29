@@ -12,7 +12,9 @@ class Zone extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['title', 'title_ru', 'title_it', 'image'];
+    protected $fillable = ['title', 'title_ru', 'title_it', 'image'
+        , 'name', 'name_ru', 'name_it',
+        'description', 'description_ru', 'description_it'];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -23,7 +25,7 @@ class Zone extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }

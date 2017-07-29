@@ -5,9 +5,9 @@ namespace App\Http\Requests\Backend\Order;
 use App\Http\Requests\Request;
 
 /**
- * Class UpdateOrderRequest.
+ * Class ManageOrderRequest.
  */
-class UpdateOrderRequest extends Request
+class ManageOrderRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,6 @@ class UpdateOrderRequest extends Request
     public function rules()
     {
         return [
-            'status' => "required",
-            'admin_comment' => "required"
         ];
     }
 }

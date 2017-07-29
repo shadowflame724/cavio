@@ -64,7 +64,12 @@ class ZoneRepository extends BaseRepository
             $zone->title = $input['title'];
             $zone->title_ru = $input['title_ru'];
             $zone->title_it = $input['title_it'];
-
+            $zone->name = $input['name'];
+            $zone->name = $input['name_ru'];
+            $zone->name = $input['name_it'];
+            $zone->description = $input['description'];
+            $zone->description = $input['description_ru'];
+            $zone->description = $input['description_it'];
 
             if ($zone->save()) {
 
