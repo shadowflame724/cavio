@@ -32,4 +32,13 @@ class Zone extends Model
     {
         return $this->hasMany(CollectionZone::class);
     }
+
+    public function getOneImage()
+    {
+        $images = $this->collectionZones->first()->image;
+        if(!empty($images)){
+            return explode(',', $images)[0];
+        }
+        return '';
+    }
 }

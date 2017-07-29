@@ -3,17 +3,22 @@
     <div class="top-nav container">
         <div class="short-nav">
             <div class="short-nav-item hide">
-                <a href="/catalogue" for="menu-products" class="btn-top-menu anim-underline">products</a>
+                <a href="{{ route('frontend.catalogue') }}"
+                   for="menu-products"
+                   class="btn-top-menu anim-underline">products</a>
             </div>
             <div class="short-nav-item hide">
-                <a href="/collections" for="menu-collection"
+                <a href="{{ route('frontend.collections') }}"
+                   for="menu-collection"
                    class="btn-top-menu anim-underline">collections</a>
             </div>
         </div>
         <div class="wrap-left-nav">
             <div class="inner-left-nav">
                 <div class="wrap-left-nav-col-side">
-                    <a href="#" class="drop-left-menu-products">products <span class="drop-item-arrow">→</span></a>
+                    <a href="{{ route('frontend.catalogue') }}"
+                       class="drop-left-menu-products"
+                    >products <span class="drop-item-arrow">→</span></a>
                     <div class="left-nav-products">
                         <div class="wrap-menus products clearfix">
                             @foreach($categories as $category)
@@ -21,11 +26,11 @@
                             <div class="top-menu-block">
                                 <div class="innet-top-menu-block">
                                     <a class="top-menu-title"
-                                       href="{{ route('frontend.catalogue', $category->slug) }}">{{ $category->{'name'.$langSuf} }}</a>
+                                       href="{{ route('frontend.catalogue.one', $category->slug) }}">{{ $category->{'name'.$langSuf} }}</a>
                                     <ul class="top-menu-list">
                                         @foreach($category->children as $child)
                                         <li>
-                                            <a href="{{ route('frontend.catalogue', $category->slug) }}">{{ $child->{'name'.$langSuf} }}</a>
+                                            <a href="{{ route('frontend.catalogue.one', $category->slug) }}">{{ $child->{'name'.$langSuf} }}</a>
                                         </li>
                                         @endforeach
                                     </ul>
@@ -93,7 +98,7 @@
 
                             <div class="wrap-login-lang">
                                 <div class="wrap-login-side">
-                                    <a href="/login">
+                                    <a href="{{ route('frontend.auth.login') }}">
                                         <svg class="svg-login">
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                                  xlink:href="../../img/frontend/icons/social.svg#login"></use>
@@ -151,10 +156,10 @@
         </div>
         <div class="wrap-right-top-menu">
             <div class="wrap-login hide">
-                <a href="/login" class="btn-login anim-underline">login</a>
+                <a href="{{ route('frontend.auth.login') }}" class="btn-login anim-underline">login</a>
             </div>
             <div class="wrap-stash-ico hide">
-                <a href="/basket">
+                <a href="{{ route('frontend.basket.index') }}">
                     <svg class="svg-stash">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stash"></use>
                     </svg>
@@ -210,7 +215,7 @@
                                            class="anim-underline light-underline"
                                         >{{ $zone->{'title'.$langSuf} }}</a>
                                         <div class="wrap-coll-top-menu-img"
-                                             style="background-image: url('/upload/images/zone/thumb/{{ $zone->image }}');"></div>
+                                             style="background-image: url('/upload/images/zone/thumb/{{ $zone->getOneImage() }}');"></div>
                                     </li>
                                     @endforeach
                                 </ul>

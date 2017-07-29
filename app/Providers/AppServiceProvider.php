@@ -40,7 +40,11 @@ class AppServiceProvider extends ServiceProvider
 
         $collections = Collection::all();
         $categories = Category::all();
-        $zones = Zone::all();
+        $zones = Zone::with('collectionZones')->get();
+//        $zones = Zone::all();
+//        foreach ($zones as $zone) {
+//            $zone->getOneImage();
+//        }
         $messages = Message::where('status', 0)->get();
 
         View::share([

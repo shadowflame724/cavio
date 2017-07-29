@@ -7,189 +7,73 @@
 @endsection
 
 @section('content')
-    <section id="zones-mobal" class="zone-col-modal">
-        <div class="wrapper-zone-col-modal">
-            <div class="scroller scroller-zc-modal">
-                <div class="scroller-inner">
-                    <div class="close-modal"></div>
-                    <div class="inner-zone-col-modal bg-white-marmur">
-                        <div class="wrap-drop-list-zc">
-                            <div class="title-list-type">{{ trans('frontend.zones-collections.collections') }}</div>
-                            <div id=wrap-news-type class="drop-down show">
-                                <span class="curr-news-type">All collections</span>
-                                <ul class="zc-modal-types clearfix">
-                                    @foreach($collection->collectionZones as $zone)
-                                    <li>
-                                        <a href=#>{{ $zone->{'title'.$langSuf} }}</a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+<section id="zones-mobal" class="zone-col-modal show" style="position:relative;">
+    <div class="wrapper-zone-col-modal">
+        <div class="scroller scroller-zc-modal">
+            <div class="scroller-inner">
+                <div class="close-modal"></div>
+                <div class="inner-zone-col-modal bg-white-marmur">
+                    <div class="wrap-drop-list-zc">
+                        <div class="title-list-type">{{ trans('frontend.zones-collections.collections') }}</div>
+                        <div id=wrap-news-type class="drop-down show">
+                            <span class="curr-news-type">All collections</span>
+                            <ul class="zc-modal-types clearfix">
+                            @foreach($collectionZones as $item)
+                                <li @if($item->slug == $zone->slug)class="active"@endif>
+                                    <a href="{{ route('frontend.collections.show_popup', [$collection->slug, $item->slug]) }}"
+                                    >{{ $item->{'title'.$langSuf} }}</a>
+                                </li>
+                            @endforeach
+                            </ul>
                         </div>
-                        <div class="zc-modal-carousel">
-                            <div class="swiper-wrapper shadow-top-bot">
-                                <div class="swiper-slide zc-modal-slide"
-                                     style="background-image: url('/upload/images/zc-carousel-item1.jpg')"></div>
-                                <div class="swiper-slide zc-modal-slide"
-                                     style="background-image: url('/upload/images/banner-main-1.jpg')"></div>
-                                <div class="swiper-slide zc-modal-slide"
-                                     style="background-image: url('/upload/images/zc-carousel-item2.jpg')"></div>
-                            </div>
-                            <div class="zc-modal-swip-arrow prev"></div>
-                            <div class="zc-modal-swip-arrow next"></div>
-                            <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="zc-modal-carousel">
+                        <div class="swiper-wrapper shadow-top-bot">
+                        @php($zoneImages = explode(',',$zone->image))
+                        @foreach($zoneImages as $image)
+                            @if(!empty($image))
+                            <div class="swiper-slide zc-modal-slide"
+                                 style="background-image: url('/upload/images/zone/original/{{ $image }}')"></div>
+                            @endif
+                        @endforeach
                         </div>
-                        <div class="wrap-zc-modal-product-list">
-                            <div class=zon-col-upper_list>
-                                <div class="wrap-descr_and_title clearfix">
-                                    <div class=wrap-name-and-prod_numb>
-                                        <div class=descr-zon_col-item-name>
-
-                                            {{ $collection->{'title'.$langSuf} }}
-
-                                        </div>
-                                        <div class=zc-modal-prod-numb>
-                                            <span class="prod-numb">345</span>
-                                            {{ trans('frontend.zones-collections.products') }}
-                                        </div>
+                        <div class="zc-modal-swip-arrow prev"></div>
+                        <div class="zc-modal-swip-arrow next"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="wrap-zc-modal-product-list">
+                        <div class=zon-col-upper_list>
+                            <div class="wrap-descr_and_title clearfix">
+                                <div class=wrap-name-and-prod_numb>
+                                    <div class=descr-zon_col-item-name>{{ $collection->{'title'.$langSuf} }}</div>
+                                    @if(count($products))
+                                    <div class=zc-modal-prod-numb>
+                                        <span class="prod-numb">{{ count($products) }}</span>
+                                        {{ trans('frontend.zones-collections.products') }}
                                     </div>
-                                    <div class=descr-zon_col-item>
-
-                                        {{ $collection->{'description'.$langSuf} }}
-
-                                    </div>
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="zc-modal-product-list clearfix">
-
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-1.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data>
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-
-
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-2.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data>
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data>
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data>
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data>
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data>
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data>
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data">
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="new-products-right-item grid">
-                                    <a class=new-products-right-inner-item href=#>
-                                        <div class="product-img-table">
-                                            <div class="wrap-new-product-img bg-white-marmur"
-                                                 style="background-image: url(../../img/frontend/un_banner-1-3.jpg)"></div>
-                                        </div>
-                                        <div class=wrap-new-product-data">
-                                            <div class="product-code">#pr117</div>
-                                            <div class="product-name">Bench</div>
-                                            <div class="product-size">Como</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class=zc-modal-product-show-more>
-                                <button class="btn dark"
-                                        content="{{ trans('frontend.zones-collections.showMore') }}">{{ trans('frontend.zones-collections.showMore') }}</button>
+                                <div class=descr-zon_col-item>{{ $collection->{'description'.$langSuf} }}</div>
                             </div>
                         </div>
+                        @if(count($products))
+                        <div class="zc-modal-product-list clearfix">
+                            @foreach($products as $product)
+                                @include('frontend.includes.prod_item', [
+                                    'product' => $product
+                                ])
+                            @endforeach
+                        </div>
+                        <div class=zc-modal-product-show-more>
+                            <button class="btn dark"
+                                    content="{{ trans('frontend.zones-collections.showMore') }}"
+                            >{{ trans('frontend.zones-collections.showMore') }}</button>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection
