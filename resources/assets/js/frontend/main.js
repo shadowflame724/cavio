@@ -1551,7 +1551,7 @@ if(document.querySelector('body.zone-col')){
   });
 
   $('.item-coll.to_modal a').on('click', function(event){
-    event.preventDefault();
+    // event.preventDefault();
 
     $('#zones-mobal').removeClass('hide').addClass('show');
     $('body').toggleClass('overfl-h');

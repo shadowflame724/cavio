@@ -18,19 +18,19 @@
                         <div class="wrap-menus products clearfix">
                             @foreach($categories as $category)
                             @if($category->parent_id == null)
-                                <div class="top-menu-block">
-                                    <div class="innet-top-menu-block">
-                                        <a class="top-menu-title"
-                                           href="{{ route('frontend.catalogue', $category->slug) }}">{{ $category->{'name'.$langSuf} }}</a>
-                                        <ul class="top-menu-list">
-                                            @foreach($category->children as $child)
-                                                <li>
-                                                    <a href="{{ route('frontend.catalogue', $category->slug) }}">{{ $child->{'name'.$langSuf} }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                            <div class="top-menu-block">
+                                <div class="innet-top-menu-block">
+                                    <a class="top-menu-title"
+                                       href="{{ route('frontend.catalogue', $category->slug) }}">{{ $category->{'name'.$langSuf} }}</a>
+                                    <ul class="top-menu-list">
+                                        @foreach($category->children as $child)
+                                        <li>
+                                            <a href="{{ route('frontend.catalogue', $category->slug) }}">{{ $child->{'name'.$langSuf} }}</a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
+                            </div>
                             @endif
                             @endforeach
                         </div>
@@ -42,35 +42,32 @@
                         <div class="left-nav-inner">
 
                             <ul class="left-nav">
-
                                 <!-- NO DESKTOP -->
                                 <li class="drop-item">
-                                    <a href="#">collections <span class="drop-item-arrow">→</span></a>
-
+                                    <a href="{{ route('frontend.collections') }}">collections <span class="drop-item-arrow">→</span></a>
                                     <ul class="drop-item-menu">
                                         @foreach($collections as $collection)
-                                            <li>
-                                                <a href="#"
-                                                   class="anim-underline">{{ $collection->{'title'.$langSuf} }}</a>
-                                            </li>
+                                        <li>
+                                            <a href="{{ route('frontend.collections.show', $collection->slug) }}"
+                                               class="anim-underline"
+                                            >{{ $collection->{'title'.$langSuf} }}</a>
+                                        </li>
                                         @endforeach
-
                                     </ul>
-
                                 </li>
 
                                 <li class="drop-item">
-                                    <a href="#">zones <span class="drop-item-arrow">→</span></a>
-
+                                    <a href="{{ route('frontend.zones') }}"
+                                    >zones <span class="drop-item-arrow">→</span></a>
                                     <ul class="drop-item-menu">
                                         @foreach($zones as $zone)
-                                            <li>
-                                                <a href="#"
-                                                   class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
-                                            </li>
+                                        <li>
+                                            <a href="{{ route('frontend.zones.show', $zone->slug) }}"
+                                               class="anim-underline"
+                                            >{{ $zone->{'title'.$langSuf} }}</a>
+                                        </li>
                                         @endforeach
                                     </ul>
-
                                 </li>
                                 <!-- END NO DESKTOP -->
 
@@ -96,7 +93,7 @@
 
                             <div class="wrap-login-lang">
                                 <div class="wrap-login-side">
-                                    <a href="#">
+                                    <a href="/login">
                                         <svg class="svg-login">
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                                  xlink:href="../../img/frontend/icons/social.svg#login"></use>
@@ -106,14 +103,15 @@
                                 </div>
                                 <div class="side-lang-panel clearfix">
                                     @foreach($langPaths as $lang => $link)
-                                        <a href="{{ $link }}"
-                                           class="lang-item @if (App::getLocale() == $lang)active @endif">{{ $lang }}</a>
+                                    <a href="{{ $link }}"
+                                       class="lang-item @if (App::getLocale() == $lang)active @endif"
+                                    >{{ $lang }}</a>
                                     @endforeach
                                 </div>
                             </div>
 
                             <div class="wrap-search">
-                                <form action="">
+                                <form action="/search">
                                     <input class="menu-search" type="text" placeholder="SEARCH">
                                     <button class="menu-search-btn"></button>
                                 </form>
@@ -143,15 +141,18 @@
                     </a>
                     <div class="lang-panel hide clearfix">
                         @foreach($langPaths as $lang => $link)
-                            <a href="{{ $link }}"
-                               class="lang-item @if (App::getLocale() == $lang)active @endif">{{ $lang }}</a>
+                        <a href="{{ $link }}"
+                           class="lang-item @if (App::getLocale() == $lang)active @endif"
+                        >{{ $lang }}</a>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
         <div class="wrap-right-top-menu">
-            <div class="wrap-login hide"><a href="#" class="btn-login anim-underline">login</a></div>
+            <div class="wrap-login hide">
+                <a href="/login" class="btn-login anim-underline">login</a>
+            </div>
             <div class="wrap-stash-ico hide">
                 <a href="/basket">
                     <svg class="svg-stash">
@@ -170,43 +171,47 @@
                     <div class="topMenuScroll">
                         <div class="wrap-menus products clearfix">
                             @foreach($categories as $category)
-                                @if($category->parent_id == null)
-                                    <div class="top-menu-block">
-                                        <div class="innet-top-menu-block">
-                                            <a class="top-menu-title"
-                                               href="{{ route('frontend.catalogue', $category->slug) }}">{{ $category->{'name'.$langSuf} }}</a>
-                                            <ul class="top-menu-list">
-                                                @foreach($category->children as $child)
-                                                    <li>
-                                                        <a href="{{ route('frontend.catalogue', $category->slug) }}">{{ $child->{'name'.$langSuf} }}</a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                @endif
+                            @if($category->parent_id == null)
+                            <div class="top-menu-block">
+                                <div class="innet-top-menu-block">
+                                    <a class="top-menu-title"
+                                       href="{{ route('frontend.catalogue.one', $category->slug) }}"
+                                    >{{ $category->{'name'.$langSuf} }}</a>
+                                    <ul class="top-menu-list">
+                                        @foreach($category->children as $child)
+                                        <li>
+                                            <a href="{{ route('frontend.catalogue.one', $child->slug) }}"
+                                            >{{ $child->{'name'.$langSuf} }}</a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            @endif
                             @endforeach
-
                         </div>
                     </div>
                 </div>
             </div>
             <div id="menu-collection" class="top-menu-box clearfix collection">
                 <div class="container">
-
                     <hr class="top-menu-line">
 
                     <div class="wrap-menus clearfix">
                         <div class="wrap-menu-zones">
                             <div class="inner-menu-zones">
-                                <a class="top-menu-title" href="#">zones</a>
+                                <a class="top-menu-title"
+                                   href="{{ route('frontend.zones') }}"
+                                >zones</a>
                                 <ul class="top-menu-list no-mb clearfix">
                                     @foreach($zones as $zone)
-                                        <li>
-                                            <a href="#" class="anim-underline light-underline">{{ $zone->{'title'.$langSuf} }}</a>
-                                            <div class="wrap-coll-top-menu-img"
-                                                 style="background-image: url('../../upload/images/zone/thumb/{{ $zone->image }}');"></div>
-                                        </li>
+                                    <li>
+                                        <a href="{{ route('frontend.zones.show', $zone->slug) }}"
+                                           class="anim-underline light-underline"
+                                        >{{ $zone->{'title'.$langSuf} }}</a>
+                                        <div class="wrap-coll-top-menu-img"
+                                             style="background-image: url('/upload/images/zone/thumb/{{ $zone->image }}');"></div>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -214,13 +219,17 @@
 
                         <div class="wrap-menu-collections">
                             <div class="inner-menu-collections">
-                                <a class="top-menu-title" href="#">collections</a>
+                                <a class="top-menu-title"
+                                   href="{{ route('frontend.collections') }}"
+                                >collections</a>
                                 <ul class="top-menu-list no-mb">
                                     @foreach($collections as $collection)
                                     <li>
-                                        <a href="#" class="anim-underline light-underline">{{ $collection->{'title'.$langSuf} }}</a>
+                                        <a href="{{ route('frontend.collections.show', $collection->slug) }}"
+                                           class="anim-underline light-underline"
+                                        >{{ $collection->{'title'.$langSuf} }}</a>
                                         <div class="wrap-coll-top-menu-img"
-                                             style="background-image: url('../../upload/images/collection/thumb/{{ $collection->image }}');"></div>
+                                             style="background-image: url('/upload/images/collection/thumb/{{ $collection->image }}');"></div>
                                     </li>
                                     @endforeach
                                 </ul>
