@@ -411,7 +411,7 @@ class ProductRepository extends BaseRepository
                 $discount = $data->isDiscount;
             }
             $res[$product->id] = [
-                'discount' => $discount,
+                'isDiscount' => $discount,
                 'image' => $photo,
                 'prices' => $prices,
                 'code' => $product->code,

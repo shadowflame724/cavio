@@ -163,7 +163,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a href="finish-tissue.html" class="card-mode-choice hov-colMain_clack">More choices →</a>
+                                                    <a href="{{ route('frontend.finish-tissue') }}" class="card-mode-choice hov-colMain_clack">More choices →</a>
                                                 </div>
                                             </div>
                                             <div class="wrap-card-dimensions">

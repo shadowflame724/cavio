@@ -1,4 +1,4 @@
-<div class="new-products-right-item grid @if($product['discount'])discount @endif">
+<div class="new-products-right-item grid @if($product['isDiscount'])discount @endif">
     <a class=new-products-right-inner-item href="/product/{{ $product['slug'] }}">
         <div class="product-img-table">
             <div class="wrap-new-product-img bg-white-marmur"
