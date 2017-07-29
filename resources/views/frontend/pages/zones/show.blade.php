@@ -203,7 +203,7 @@
                 @php($item = $collectionZones[0])
                 @php($cnt = (!empty($item->product_ids)) ? count(explode(',', $item->product_ids)) : false)
                 <div class="item-coll zon-col z_c-list to_modal">
-                    <a href="/zones/{{$zone->slug}}/{{$item->slug }}">
+                    <a href="{{ route('frontend.zones.show_popup', [$zone->slug, $item->collection->slug]) }}">
                         <div class="wrap-img-bg small">
                             <div class="img-back wave-dark">
                                 <svg width=1395.63 height=1237.68><use xlink:href="../wave.svg#wave"></use></svg>
