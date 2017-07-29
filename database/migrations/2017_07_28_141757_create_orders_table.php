@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSettingsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->text('soc_links');
-            $table->text('discount_data');
-            $table->text('koef_data');
-            $table->text('vat_data');
+            $table->integer('user_id')->nullable();
+            $table->text('product_data');
+            $table->integer('cnt');
+            $table->float('summ');
+            $table->tinyInteger('status');
 
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('orders');
     }
 }

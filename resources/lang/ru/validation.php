@@ -257,7 +257,8 @@ return [
                 'settings' => [
                     'soc_links' => 'Ссылки*',
                     'discount_data' => 'Скидки*',
-                    'koef_data' => 'Коэффициент(см/дюйм)*'
+                    'koef_data' => 'Коэффициент(дюйм/см)*',
+                    'vat_data' => 'VAT*'
                 ],
 
                 'templateMessage' => [

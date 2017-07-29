@@ -305,7 +305,9 @@ return [
                 'settings' => [
                     'soc_links' => 'Links*',
                     'discount_data' => 'Sconto*',
-                    'koef_data' => 'Fattore(cm/inch)*'
+                    'koef_data' => 'Fattore(inch/cm)*',
+                    'vat_data' => 'VAT*'
+
                 ],
 
                 'users' => [
