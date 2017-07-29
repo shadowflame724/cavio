@@ -97,6 +97,12 @@
                             </ul>
 
                             <div class="wrap-login-lang">
+                                @if(access()->user())
+                                <div class="wrap-login-side">
+                                    <a href="{{ route('frontend.user.dashboard') }}"
+                                    >{{ access()->user()->first_name }}</a>
+                                </div>
+                                @else
                                 <div class="wrap-login-side">
                                     <a href="{{ route('frontend.auth.login') }}">
                                         <svg class="svg-login">
@@ -106,6 +112,7 @@
                                         <span>Login</span>
                                     </a>
                                 </div>
+                                @endif
                                 <div class="side-lang-panel clearfix">
                                     @foreach($langPaths as $lang => $link)
                                     <a href="{{ $link }}"
@@ -155,9 +162,19 @@
             </div>
         </div>
         <div class="wrap-right-top-menu">
+            @if(access()->user())
             <div class="wrap-login hide">
-                <a href="{{ route('frontend.auth.login') }}" class="btn-login anim-underline">login</a>
+                <a href="{{ route('frontend.user.dashboard') }}"
+                   class="btn-login anim-underline"
+                >{{ access()->user()->first_name }}</a>
             </div>
+            @else
+            <div class="wrap-login hide">
+                <a href="{{ route('frontend.auth.login') }}"
+                   class="btn-login open-modal-login anim-underline"
+                >login</a>
+            </div>
+            @endif
             <div class="wrap-stash-ico hide">
                 <a href="{{ route('frontend.basket.index') }}">
                     <svg class="svg-stash">

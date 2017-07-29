@@ -1,139 +1,436 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.'.$pageLayout)
 
 @section('content')
-    <div class="row">
+<section id="top-waves" class="relative">
+    <svg version="1.1" width="640" height="480" class="bg-wave" viewBox="40 0 580 500" style="overflow: hidden;">
+        <defs>
 
-        <div class="col-xs-12">
+        </defs>
+        <g id="two_0" transform="matrix(1 0 0 1 0 0)" opacity="1">
+            <g id="two_1" transform="matrix(1 0 0 1 320 240)" opacity="1">
+                <path transform="matrix(1 0 0 1 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.7" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_15">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('navs.frontend.dashboard') }}</div>
+                </path>
+                <path transform="matrix(0.96 0 0 0.96 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.74" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_16">
 
-                <div class="panel-body">
+                </path>
+                <path transform="matrix(0.92 0 0 0.92 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.7799999999999999" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_17">
 
-                    <div class="row">
+                </path>
+                <path transform="matrix(0.88 0 0 0.88 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.82" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_18">
 
-                        <div class="col-md-4 col-md-push-8">
+                </path>
+                <path transform="matrix(0.84 0 0 0.84 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.86" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_19">
 
-                            <ul class="media-list">
-                                <li class="media">
-                                    <div class="media-left">
-                                        <img class="media-object profile-picture" src="{{ $logged_in_user->picture }}" alt="Profile picture">
-                                    </div><!--media-left-->
+                </path>
+                <path transform="matrix(0.8 0 0 0.8 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.8999999999999999" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_20">
 
-                                    <div class="media-body">
-                                        <h4 class="media-heading">
-                                            {{ $logged_in_user->name }}<br/>
-                                            <small>
-                                                {{ $logged_in_user->email }}<br/>
-                                                Joined {{ $logged_in_user->created_at->format('F jS, Y') }}
-                                            </small>
-                                        </h4>
+                </path>
+                <path transform="matrix(0.76 0 0 0.76 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.94" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_21">
 
-                                        {{ link_to_route('frontend.user.account', trans('navs.frontend.user.account'), [], ['class' => 'btn btn-info btn-xs']) }}
+                </path>
+                <path transform="matrix(0.72 0 0 0.72 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="0.98" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_22">
 
-                                        @permission('view-backend')
-                                            {{ link_to_route('admin.dashboard', trans('navs.frontend.user.administration'), [], ['class' => 'btn btn-danger btn-xs']) }}
-                                        @endauth
-                                    </div><!--media-body-->
-                                </li><!--media-->
-                            </ul><!--media-list-->
+                </path>
+                <path transform="matrix(0.68 0 0 0.68 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.02" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_23">
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Sidebar Item</h4>
-                                </div><!--panel-heading-->
+                </path>
+                <path transform="matrix(0.64 0 0 0.64 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.06" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_24">
 
-                                <div class="panel-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.
-                                </div><!--panel-body-->
-                            </div><!--panel-->
+                </path>
+                <path transform="matrix(0.6 0 0 0.6 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_25">
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Sidebar Item</h4>
-                                </div><!--panel-heading-->
+                </path>
+                <path transform="matrix(0.56 0 0 0.56 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.14" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_26">
 
-                                <div class="panel-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.
-                                </div><!--panel-body-->
-                            </div><!--panel-->
-                        </div><!--col-md-4-->
+                </path>
+                <path transform="matrix(0.52 0 0 0.52 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.18" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_27">
 
-                        <div class="col-md-8 col-md-pull-4">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>Item</h4>
-                                        </div><!--panel-heading-->
+                </path>
+                <path transform="matrix(0.48 0 0 0.48 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.22" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_28">
 
-                                        <div class="panel-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.</p>
-                                        </div><!--panel-body-->
-                                    </div><!--panel-->
-                                </div><!--col-xs-12-->
-                            </div><!--row-->
+                </path>
+                <path transform="matrix(0.44 0 0 0.44 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.26" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_29">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>Item</h4>
-                                        </div><!--panel-heading-->
+                </path>
+                <path transform="matrix(0.4 0 0 0.4 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.2999999999999998" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_30">
 
-                                        <div class="panel-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.</p>
-                                        </div><!--panel-body-->
-                                    </div><!--panel-->
-                                </div><!--col-md-6-->
+                </path>
+                <path transform="matrix(0.36 0 0 0.36 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.3399999999999999" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_31">
 
-                                <div class="col-md-6">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>Item</h4>
-                                        </div><!--panel-heading-->
+                </path>
+                <path transform="matrix(0.32 0 0 0.32 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.38" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_32">
 
-                                        <div class="panel-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.</p>
-                                        </div><!--panel-body-->
-                                    </div><!--panel-->
-                                </div><!--col-md-6-->
+                </path>
+                <path transform="matrix(0.28 0 0 0.28 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.42" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_33">
 
-                                <div class="col-md-6">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>Item</h4>
-                                        </div><!--panel-heading-->
+                </path>
+                <path transform="matrix(0.24 0 0 0.24 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.46" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_34">
 
-                                        <div class="panel-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.</p>
-                                        </div><!--panel-body-->
-                                    </div><!--panel-->
-                                </div><!--col-md-6-->
+                </path>
+                <path transform="matrix(0.2 0 0 0.2 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.5" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_35">
 
-                                <div class="col-md-6">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4>Item</h4>
-                                        </div><!--panel-heading-->
+                </path>
+                <path transform="matrix(0.16 0 0 0.16 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.54" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_36">
 
-                                        <div class="panel-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.</p>
-                                        </div><!--panel-body-->
-                                    </div><!--panel-->
-                                </div><!--col-md-6-->
+                </path>
+                <path transform="matrix(0.12 0 0 0.12 0 0)" d="M 172.923 0 C 168.043 26.073 145.853 46.596 133.932 70.292 C 121.771 94.465 118.545 125.204 100.065 144.969 C 80.259 166.151 50.965 180.287 22.651 186.552 C -6.85 193.081 -41.335 193.986 -68.76 181.303 C -95.769 168.813 -112.465 139.334 -131.002 116.057 C -148.748 93.774 -174.795 72.244 -178.541 44.006 C -182.26 15.966 -155.277 -9.323 -151.621 -37.372 C -147.244 -70.948 -180.374 -114.561 -157.795 -139.794 C -135.143 -165.107 -88.083 -137.33 -54.994 -145.006 C -28.203 -151.221 -5.871 -176.468 21.596 -177.862 C 50.323 -179.32 80.824 -167.723 104.768 -151.784 C 128.876 -135.735 149.541 -111.124 161.302 -84.659 C 172.754 -58.89 178.11 -27.718 172.923 0 Z " fill="none" stroke="rgba(181, 99, 73, 0.3)" stroke-width="1.58" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_37">
 
-                            </div><!--row-->
+                </path>
+            </g>
+            <path transform="matrix(1 0 0 1 172.923 0)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_2">
 
-                        </div><!--col-md-8-->
+            </path>
+            <path transform="matrix(1 0 0 1 133.932 70.293)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_3">
 
-                    </div><!--row-->
+            </path>
+            <path transform="matrix(1 0 0 1 100.065 144.969)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_4">
 
-                </div><!--panel body-->
+            </path>
+            <path transform="matrix(1 0 0 1 22.652 186.553)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_5">
 
-            </div><!-- panel -->
+            </path>
+            <path transform="matrix(1 0 0 1 -68.759 181.304)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_6">
 
-        </div><!-- col-md-10 -->
+            </path>
+            <path transform="matrix(1 0 0 1 -131.002 116.058)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_7">
 
-    </div><!-- row -->
+            </path>
+            <path transform="matrix(1 0 0 1 -178.54 44.006)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_8">
+
+            </path>
+            <path transform="matrix(1 0 0 1 -151.62 -37.371)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_9">
+
+            </path>
+            <path transform="matrix(1 0 0 1 -157.794 -139.793)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_10">
+
+            </path>
+            <path transform="matrix(1 0 0 1 -54.993 -145.006)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_11">
+
+            </path>
+            <path transform="matrix(1 0 0 1 21.596 -177.862)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_12">
+
+            </path>
+            <path transform="matrix(1 0 0 1 104.768 -151.783)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_13">
+
+            </path>
+            <path transform="matrix(1 0 0 1 161.303 -84.658)" d="M 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 C 0 0 0 0 0 0 Z " fill="#fff" stroke="transparent" stroke-width="1" stroke-opacity="1" fill-opacity="1" visibility="visible" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" id="two_14">
+
+            </path>
+        </g>
+    </svg>
+</section>
+
+<section id="catalogue">
+    <div class="container">
+        <div class="small-page-title">
+            <span class="text-title">Profile</span>
+        </div>
+        <div class="wrap-catal profile wrap-box-shadow clearfix bg-white-marmur">
+            <div class="wrap-profile-swiper swiper-container-horizontal">
+                <div class="wrap-log_reg-toggle">
+                    <div class="item-log_reg-toggle log swiper-button-disabled">info</div>
+                    <div class="item-log_reg-toggle reg">orders</div>
+                </div>
+                <div class="swiper-wrapper wrap-profile-items" style="transform: translate3d(0px, 0px, 0px);">
+
+                    <div class="swiper-slide profile-item log swiper-slide-active" style="width: 1560px; transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg); z-index: 1; margin-right: 240px;">
+                        {{ Form::model($logged_in_user, [
+                            'route' => 'frontend.user.profile.update',
+                            'class' => 'user_profile',
+                            'method' => 'PATCH'
+                        ]) }}
+                        <div class="wrap-user_prof-inp">
+                            <div class="row-inp-profile clearfix">
+                                <div class="wrap-inp-profile f-name" data-fieldname="First Name">
+                                {{ Form::text('first_name', null, [
+                                    'required' => 'required',
+                                    'autofocus' => 'autofocus',
+                                    'maxlength' => '191',
+                                    'placeholder' => trans('validation.attributes.frontend.first_name')
+                                ]) }}
+                                </div>
+                                @if ($logged_in_user->canChangeEmail())
+                                <div class="wrap-inp-profile email" data-fieldname="e-mail">
+                                    {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
+                                    {{ Form::email('email', null, [
+                                        'required' => 'required',
+                                        'maxlength' => '191',
+                                        'placeholder' => trans('validation.attributes.frontend.email')
+                                    ]) }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="row-inp-profile clearfix">
+                                <div class="wrap-inp-profile l-name" data-fieldname="Last Name">
+                                    {{ Form::text('last_name', null, [
+                                        'required' => 'required',
+                                        'maxlength' => '191',
+                                        'placeholder' => trans('validation.attributes.frontend.last_name')
+                                    ]) }}
+                                </div>
+                                <div class="wrap-inp-profile pass-old" data-fieldname="{{ trans('validation.attributes.frontend.old_password') }}">
+                                    {{ Form::password('old_password', [
+                                        'required' => 'required',
+                                        'placeholder' => trans('validation.attributes.frontend.old_password')
+                                    ]) }}
+                                </div>
+                            </div>
+                            <div class="row-inp-profile clearfix">
+                                <div class="wrap-inp-profile phone" data-fieldname="{{ trans('validation.attributes.frontend.phone') }}">
+                                    {{ Form::tel('phone', null, [
+                                        'required' => 'required',
+                                        'maxlength' => '191',
+                                        'placeholder' => trans('validation.attributes.frontend.phone')
+                                    ]) }}
+                                </div>
+                                <div class="wrap-inp-profile pass-new" data-fieldname="{{ trans('validation.attributes.frontend.new_password') }}">
+                                    {{ Form::password('password', [
+                                        'required' => 'required',
+                                        'placeholder' => trans('validation.attributes.frontend.new_password')
+                                    ]) }}
+                                </div>
+                            </div>
+                            <div class="row-inp-profile clearfix">
+                                <div class="wrap-inp-profile region" data-fieldname="{{ trans('validation.attributes.frontend.region') }}">
+                                    {{ Form::text('region', null, [
+                                        'required' => 'required',
+                                        'maxlength' => '191',
+                                        'placeholder' => trans('validation.attributes.frontend.region')
+                                    ]) }}
+                                </div>
+                                <div class="wrap-inp-profile pass-conf" data-fieldname="{{ trans('validation.attributes.frontend.new_password_confirmation') }}">
+                                    {{ Form::password('password_confirmation', [
+                                        'required' => 'required',
+                                        'placeholder' => trans('validation.attributes.frontend.new_password_confirmation')
+                                    ]) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wrap-use_prof-btn">
+                            {{ Form::button(trans('labels.general.buttons.update'), [
+                                'type' => 'submit',
+                                'content' => trans('labels.general.buttons.update'),
+                                'class' => 'btn dark-profile',
+                                'id' => 'update-profile'
+                            ]) }}
+                        </div>
+
+                        {{ Form::close() }}
+                    </div>
+
+                    <div class="swiper-slide profile-item log swiper-slide-next" style="width: 1560px; transform: translate3d(0px, 0px, -115.385px) rotateX(0deg) rotateY(-57.6923deg); z-index: 0; margin-right: 240px;">
+                        <div class="wrap-order_list-profile">
+                            <div class="head-order_list clearfix">
+                                <div class="td date">Date</div>
+                                <div class="td order">Order</div>
+                                <div class="td status">Status</div>
+                            </div>
+                            <div class="body-order_list">
+                                <div class="row-order_list close">
+                                    <div class="row-short-data clearfix">
+                                        <div class="td date">
+                                            <span class="label-short_data">date</span>14.02.2017</div>
+                                        <div class="td order">
+                                            <span class="label-short_data">order</span>
+                                            <span class="wrap-for_arrow">#325747</span>
+                                        </div>
+                                        <div class="td status">
+                                            <span class="label-short_data">status</span>Awaiting payment</div>
+                                    </div>
+                                    <div class="detail-order-data clearfix">
+                                        <div class="item-detail-order-data-wrap_anim order profile-item discount">
+                                            <div class="item-detail-order-data stash">
+                                                <div class="inner-order-item-img">
+                                                    <div class="for-disp_discount">
+                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wrap-center-order_it-data stash">
+                                                    <div>
+                                                        <div class="wrap-head-ord_it-for_mobile stash">
+                                                            <div class="top-center-ord_it-data clearfix">
+                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
+                                                                <div class="wrap-calc_price">
+                                                                    <div class="ord_it-numb">
+                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
+                                                                    <div class="ord_it-price">1445 €</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mibble-center-ord_it-data order stash">
+                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="bottom-center-ord_it-data clearfix">
+                                                            <span class="material-ord_it">
+                                                                <div class="label-bot-ord_it-data">finish</div>
+                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> <span class="inner-nowrap">Ebano Lucido</span> <span class="inner-nowrap">Ebano Scuro</span> </span>
+                                                            <span class="material-ord_it-code">
+                                                                <div class="label-bot-ord_it-data">Tissue</div>
+                                                                <span class="inner-nowrap">TS445</span> <span class="inner-nowrap">TS111</span> <span class="inner-nowrap">TS222</span> <span class="inner-nowrap">TS333</span> </span>
+                                                            <span class="size-ord_it">
+                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-detail-order-data-wrap_anim order profile-item">
+                                            <div class="item-detail-order-data stash">
+                                                <div class="inner-order-item-img">
+                                                    <div class="for-disp_discount">
+                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wrap-center-order_it-data stash">
+                                                    <div>
+                                                        <div class="wrap-head-ord_it-for_mobile stash">
+                                                            <div class="top-center-ord_it-data clearfix">
+                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
+                                                                <div class="wrap-calc_price">
+                                                                    <div class="ord_it-numb">
+                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
+                                                                    <div class="ord_it-price">1445 €</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mibble-center-ord_it-data order stash">
+                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="bottom-center-ord_it-data clearfix">
+                                                            <span class="material-ord_it">
+                                                                <div class="label-bot-ord_it-data">finish</div>
+                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> </span>
+                                                            <span class="material-ord_it-code">
+                                                                <div class="label-bot-ord_it-data">Tissue</div>
+                                                                <span class="inner-nowrap">TS445</span> </span>
+                                                            <span class="size-ord_it">
+                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-detail-order-data-wrap_anim order profile-item">
+                                            <div class="item-detail-order-data stash">
+                                                <div class="inner-order-item-img">
+                                                    <div class="for-disp_discount">
+                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wrap-center-order_it-data stash">
+                                                    <div>
+                                                        <div class="wrap-head-ord_it-for_mobile stash">
+                                                            <div class="top-center-ord_it-data clearfix">
+                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
+                                                                <div class="wrap-calc_price">
+                                                                    <div class="ord_it-numb">
+                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
+                                                                    <div class="ord_it-price">1445 €</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mibble-center-ord_it-data order stash">
+                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="bottom-center-ord_it-data clearfix">
+                                                            <span class="material-ord_it">
+                                                                <div class="label-bot-ord_it-data">finish</div>
+                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> </span>
+                                                            <span class="material-ord_it-code">
+                                                                <div class="label-bot-ord_it-data">Tissue</div>
+                                                                <span class="inner-nowrap">TS445</span> </span>
+                                                            <span class="size-ord_it">
+                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-detail-order-data-wrap_anim order total_result clearfix">
+                                            <div class="wrap-total_result-ord_it order">
+                                                <div class="label-total">total:</div>
+                                                <div class="total_price-ord_it">9 500 €</div>
+                                                <div class="crossed-price">10 000 €</div>
+                                                <div class="price-vat">Including 22% (220€) VAT</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-order_list close">
+                                    <div class="row-short-data clearfix">
+                                        <div class="td date">
+                                            <span class="label-short_data">date</span>14.02.2017</div>
+                                        <div class="td order">
+                                            <span class="label-short_data">order</span>
+                                            <span class="wrap-for_arrow">#325747</span>
+                                        </div>
+                                        <div class="td status">
+                                            <span class="label-short_data">status</span>Awaiting payment</div>
+                                    </div>
+                                    <div class="detail-order-data clearfix">
+                                        <div class="item-detail-order-data-wrap_anim order profile-item discount">
+                                            <div class="item-detail-order-data stash">
+                                                <div class="inner-order-item-img">
+                                                    <div class="for-disp_discount">
+                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wrap-center-order_it-data stash">
+                                                    <div>
+                                                        <div class="wrap-head-ord_it-for_mobile stash">
+                                                            <div class="top-center-ord_it-data clearfix">
+                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
+                                                                <div class="wrap-calc_price">
+                                                                    <div class="ord_it-numb">
+                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
+                                                                    <div class="ord_it-price">1445 €</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mibble-center-ord_it-data order stash">
+                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="bottom-center-ord_it-data clearfix">
+                                                            <span class="material-ord_it">
+                                                                <div class="label-bot-ord_it-data">finish</div>
+                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> <span class="inner-nowrap">Ebano Lucido</span> <span class="inner-nowrap">Ebano Scuro</span> </span>
+                                                            <span class="material-ord_it-code">
+                                                                <div class="label-bot-ord_it-data">Tissue</div>
+                                                                <span class="inner-nowrap">TS445</span> <span class="inner-nowrap">TS111</span> <span class="inner-nowrap">TS222</span> <span class="inner-nowrap">TS333</span> </span>
+                                                            <span class="size-ord_it">
+                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-detail-order-data-wrap_anim order total_result clearfix">
+                                            <div class="wrap-total_result-ord_it order">
+                                                <div class="label-total">total:</div>
+                                                <div class="total_price-ord_it">10 235 €</div>
+                                                <div class="crossed-price">10 735 €</div>
+                                                <div class="price-vat">Including 22% (2 364€) VAT</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

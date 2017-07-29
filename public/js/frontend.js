@@ -426,7 +426,7 @@ if (!document.querySelector('body.card')) {
     $('header').on('mouseleave', function () {
       hideTopMenu();
     });
-    $('.nav-icon, .svg-main-logo, .lang-panel, .btn-login, .svg-stash').on('mouseenter', function () {
+    $('.nav-icon, .svg-main-logo, .lang-panel, .open-modal-login, .svg-stash').on('mouseenter', function () {
       hideTopMenu();
     });
 
@@ -506,7 +506,7 @@ if (!document.querySelector('body.card')) {
     $(dispCurrVal).text($(this).text());
   });
 
-  $('.btn-login').on('click', function (event) {
+  $('.open-modal-login').on('click', function (event) {
     event.preventDefault();
 
     $('#modal-log_reg').removeClass('hide').addClass('show');

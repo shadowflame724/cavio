@@ -94,6 +94,8 @@ class UserRepository extends BaseRepository
                 config('access.users_table').'.first_name',
                 config('access.users_table').'.last_name',
                 config('access.users_table').'.email',
+                config('access.users_table').'.phone',
+                config('access.users_table').'.region',
                 config('access.users_table').'.status',
                 config('access.users_table').'.confirmed',
                 config('access.users_table').'.created_at',
@@ -160,6 +162,8 @@ class UserRepository extends BaseRepository
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
         $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->region = $data['region'];
         $user->status = isset($data['status']) ? 1 : 0;
         $user->confirmed = isset($data['confirmed']) ? 1 : 0;
 
