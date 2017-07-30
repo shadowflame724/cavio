@@ -121,17 +121,18 @@
               <div class="wrap-catal-list">
                 <div class="disp-catal-list clearfix">
                   @foreach($model as $product)
-                  <div class="new-products-right-item grid w33 @if($product['isDiscount']) discount @endif">
-                    <a class="new-products-right-inner-item" href="/product/{{$product['slug']}}">
+                  @php($prodData = $product->getMainData())
+                  <div class="new-products-right-item grid w33 @if($prodData['isDiscount']) discount @endif">
+                    <a class="new-products-right-inner-item" href="/product/{{$product->slug}}">
                       <div class="product-img-table">
                         <div class="wrap-new-product-img bg-white-marmur"
-                           @if(!empty($product['photos'])) style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['photos']}})" @endif>
+                           @if(!empty($prodData['photos'])) style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$prodData['photos']}})" @endif>
                         </div>
                       </div>
                       <div class="wrap-new-product-data">
-                        <div class="product-code">#{{$product['code']}}</div>
-                        <div class="product-name">{{$product['name']}}</div>
-                        <div class="product-price">{{$product['prices']}}</div>
+                        <div class="product-code">{{ $prodData['codes'] }}</div>
+                        <div class="product-name">{{ $product->{'name'.$langSuf} }}</div>
+                        <div class="product-price">{{ $prodData['prices'] }}</div>
                       </div>
                     </a>
                   </div>

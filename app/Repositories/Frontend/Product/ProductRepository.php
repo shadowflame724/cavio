@@ -39,32 +39,7 @@ class ProductRepository extends BaseRepository
             ->get();
 
         if(isset($model)) {
-            foreach ($model as $item) {
-                $main_photo_data = (!empty($item->main_photo_data)) ? \GuzzleHttp\json_decode($item->main_photo_data) : [];
-                $photos = (!empty($main_photo_data->photos)) ? $main_photo_data->photos : [];
-                $prices = (!empty($main_photo_data->prices)) ? $main_photo_data->prices : [];
-                $isDiscount = (!empty($main_photo_data->isDiscount)) ? $main_photo_data->isDiscount : false;
-
-                $res[] = [
-                  'code' => $item->code,
-                  'photos' => $photos,
-                  'prices' => $prices,
-                  'isDiscount' => $isDiscount,
-                  'slug' => $item->slug,
-                  'name' => $item->name,
-                  'name_ru' => $item->name_ru,
-                  'name_it' => $item->name_it,
-                  'prev' => $item->prev,
-                  'prev_ru' => $item->prev_ru,
-                  'prev_it' => $item->prev_it,
-                  'title' => $item->title,
-                  'title_ru' => $item->title_ru,
-                  'title_it' => $item->title_it,
-                  'description' => $item->description,
-                  'description_ru' => $item->description_ru,
-                  'description_it' => $item->description_it
-                ];
-            }
+            return $model;
         }
 
         return $res;
@@ -217,32 +192,7 @@ class ProductRepository extends BaseRepository
             $model = Product::whereIn('id',$prodIds)->where('published',1)->get();
 
             if(isset($model)) {
-                foreach ($model as $item) {
-                    $main_photo_data = (!empty($item->main_photo_data)) ? \GuzzleHttp\json_decode($item->main_photo_data) : [];
-                    $photos = (!empty($main_photo_data->photos)) ? $main_photo_data->photos : [];
-                    $prices = (!empty($main_photo_data->prices)) ? $main_photo_data->prices : [];
-                    $isDiscount = (!empty($main_photo_data->isDiscount)) ? $main_photo_data->isDiscount : false;
-
-                    $res[] = [
-                        'code' => $item->code,
-                        'photos' => $photos,
-                        'prices' => $prices,
-                        'isDiscount' => $isDiscount,
-                        'slug' => $item->slug,
-                        'name' => $item->name,
-                        'name_ru' => $item->name_ru,
-                        'name_it' => $item->name_it,
-                        'prev' => $item->prev,
-                        'prev_ru' => $item->prev_ru,
-                        'prev_it' => $item->prev_it,
-                        'title' => $item->title,
-                        'title_ru' => $item->title_ru,
-                        'title_it' => $item->title_it,
-                        'description' => $item->description,
-                        'description_ru' => $item->description_ru,
-                        'description_it' => $item->description_it
-                    ];
-                }
+                return $model;
             }
 
             return $res;
@@ -261,7 +211,12 @@ class ProductRepository extends BaseRepository
         if($with){
             $model = $model->with($with);
         }
-        $model = Product::where(['slug'=>$slug,'published'=>1])->with('childs','photos','photos.prices','photos.prices.child')->first();
+        $model = Product::where([
+            'slug'=>$slug,
+            'published'=>1
+        ])
+            ->with('childs','photos','photos.prices','photos.prices.child')
+            ->first();
 //dd($model);
         if($model){
 

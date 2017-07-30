@@ -95,7 +95,12 @@ class ProductRepository extends BaseRepository
 
         $newChildData = [];
         $childCodes = [];
+        $mainCodes = [];
         foreach ($input['child'] as $ch_id => $item) {
+            $publish = isset($item['published']) ? 1 : 0;
+            if($publish){
+                $mainCodes[] = '#'.$item['code'];
+            }
             $newChildData[$ch_id] = [
                 'product_id'        => $productId,
                 'code'              => $item['code'],
@@ -106,7 +111,7 @@ class ProductRepository extends BaseRepository
                 'prev_ru'           => $item['prev_ru'],
                 'prev_it'           => $item['prev_it'],
                 'dimensions'        => $item['dimensions'],
-                'published'         => isset($item['published']) ? 1 : 0,
+                'published'         => $publish,
             ];
             $childCodes[$item['code']] = $ch_id;
         }
@@ -205,6 +210,7 @@ class ProductRepository extends BaseRepository
                 $mainPrices[1].' €'
             ]);
         }
+        $mainPhotoData['codes'] = implode(',', $mainCodes);
 
         $allData['childs'] = $newChildData;
         $allData['photos'] = $newPhotoData;
