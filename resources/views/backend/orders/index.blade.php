@@ -25,8 +25,10 @@
                     <thead>
                     <tr>
                         <th>{{ trans('labels.backend.access.orders.table.id') }}</th>
-                        <th>{{ trans('labels.backend.access.orders.table.type') }}</th>
-                        <th>{{ trans('labels.backend.access.orders.table.title') }}</th>
+                        <th>{{ trans('labels.backend.access.orders.table.status') }}</th>
+                        <th>{{ trans('labels.backend.access.orders.table.user_id') }}</th>
+                        <th>{{ trans('labels.backend.access.orders.table.summ') }}</th>
+                        <th>{{ trans('labels.backend.access.orders.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
                     </thead>
@@ -57,13 +59,15 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route("admin.template-messages.get") }}',
+                    url: '{{ route("admin.orders.get") }}',
                     type: 'post'
                 },
                 columns: [
                     {data: 'id', name: 'id' },
+                    {data: 'status', name: 'status'},
                     {data: 'user_id', name: 'user_id'},
                     {data: 'summ', name: 'summ'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],

@@ -13,7 +13,9 @@ class CollectionZone extends Model
     use Sluggable;
 
     protected $fillable = ['collection_id', 'zone_id',
-        'title', 'title_ru', 'title_it', 'image'];
+        'title', 'title_ru', 'title_it', 'image',
+        'name', 'name_ru', 'name_it',
+        'description', 'description_ru', 'description_it'];
 
     /**
      * Return the sluggable configuration array for this model.

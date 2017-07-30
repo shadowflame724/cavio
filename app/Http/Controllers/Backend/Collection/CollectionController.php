@@ -96,6 +96,12 @@ class CollectionController extends Controller
                 $oldzone->title = $newzone['title'];
                 $oldzone->title_ru = $newzone['title_ru'];
                 $oldzone->title_it = $newzone['title_it'];
+                $oldzone->name = $newzone['name'];
+                $oldzone->name_ru = $newzone['name_ru'];
+                $oldzone->name_it = $newzone['name_it'];
+                $oldzone->description = $newzone['description'];
+                $oldzone->description_ru = $newzone['description_ru'];
+                $oldzone->description_it = $newzone['description_it'];
                 $oldzone->image = $newzone['photo'];
                 $oldzone->zone_id = $newzone['zone_id'];
 

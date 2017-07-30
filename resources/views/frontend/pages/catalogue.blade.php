@@ -65,7 +65,7 @@
                   <ul class="zon-col-list-catal zones">
                     @foreach($zones as $zone)
                       <li>
-                        <a href=# class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
+                        <a href="#zone={{ $zone->slug }}" class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
                         <div class="disactive-item"></div>
                       </li>
                     @endforeach
@@ -77,7 +77,7 @@
                   <ul class="zon-col-list-catal collections">
                     @foreach($collections as $collection)
                       <li>
-                        <a href=# class="anim-underline">
+                        <a href="#collection={{ $collection->slug }}" class="anim-underline">
                           {{ $collection->{'title'.$langSuf} }}
                         </a>
                         <div class="disactive-item"></div>

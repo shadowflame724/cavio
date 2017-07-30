@@ -76,6 +76,9 @@ return [
         'settings' => [
             'updated' => 'Impostazioni aggiornato con successo.',
         ],
+        'orders' => [
+            'updated' => 'Order\'s status con successo.',
+        ],
 
         'users' => [
             'confirmation_email'  => "Una nuova e-mail di conferma è stata inviata all'indirizzo registrato.",

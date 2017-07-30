@@ -2,6 +2,8 @@
 
 namespace App\Models\Access\User;
 
+use App\Events\Backend\Basket\Basket;
+use App\Models\Order\Order;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Access\User\Traits\UserAccess;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,7 +38,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'status', 'confirmation_code', 'confirmed'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'phone', 'region', 'password', 'status', 'confirmation_code', 'confirmed'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -63,5 +65,15 @@ class User extends Authenticatable
     {
         parent::__construct($attributes);
         $this->table = config('access.users_table');
+    }
+
+    public function basket()
+    {
+        return $this->belongsTo(Basket::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }

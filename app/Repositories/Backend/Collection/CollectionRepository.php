@@ -67,6 +67,12 @@ class CollectionRepository extends BaseRepository
             $collection->title = $input['title'];
             $collection->title_ru = $input['title_ru'];
             $collection->title_it = $input['title_it'];
+            $collection->name = $input['name'];
+            $collection->name_ru = $input['name_ru'];
+            $collection->name_it = $input['name_it'];
+            $collection->prev = $input['prev'];
+            $collection->prev_ru = $input['prev_ru'];
+            $collection->prev_it = $input['prev_it'];
             if (isset($input['banner'])) {
                 $collection->banner = 1;
             }

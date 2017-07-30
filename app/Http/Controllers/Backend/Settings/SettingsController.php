@@ -33,16 +33,19 @@ class SettingsController extends Controller
         $settings = Settings::firstOrCreate(['id' => 1], [
             'soc_links' => '[]',
             'discount_data' => '[]',
-            'koef_data' => '[]'
+            'koef_data' => '[]',
+            'vat_data' => '[]'
         ]);
 
         $socLinksArr = json_decode($settings->soc_links);
         $discountDataArr = json_decode($settings->discount_data);
         $koefData = json_decode($settings->koef_data);
+        $vatData = json_decode($settings->vat_data);
 
         return view('backend.settings.edit', [
             'settings' => $settings,
             'koefData' => $koefData,
+            'vatData' => $vatData,
             'socLinksArr' => $socLinksArr,
             'discountDataArr' => $discountDataArr
         ]);

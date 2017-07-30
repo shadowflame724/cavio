@@ -44,27 +44,18 @@
                 </div>
             </div>
             <div class="footer-right-side">
-                <div class="social-wrap"><a href="facebook.com" class="social-link">
+                <div class="social-wrap">
+                @foreach($settings['soc_links'] as $type => $socLink)
+                    @if(!empty($socLink))
+                    <a href="{{ $socLink }}" target="_blank" class="social-link">
                         <svg class="svg-social-icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="../../img/frontend/icons/social.svg#fb"></use>
+                                 xlink:href="../../img/frontend/icons/social.svg#{{ $type }}"></use>
                         </svg>
-                    </a><a href="youtube.com" class="social-link">
-                        <svg class="svg-social-icon">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="../../img/frontend/icons/social.svg#youtube"></use>
-                        </svg>
-                    </a><a href="instagram.com" class="social-link">
-                        <svg class="svg-social-icon">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="../../img/frontend/icons/social.svg#instagram"></use>
-                        </svg>
-                    </a><a href="pinterest.com" class="social-link">
-                        <svg class="svg-social-icon">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="../../img/frontend/icons/social.svg#pinterest"></use>
-                        </svg>
-                    </a></div>
+                    </a>
+                    @endif
+                @endforeach
+                </div>
                 <div class="subscribe-wrap">
                     <form action=""><input class="email-input" placeholder="{{ trans('frontend.footer.enterYourEmail') }}">
                         <button class="btn subscribe" content="{{ trans('frontend.footer.subscribe') }}">{{ trans('frontend.footer.subscribe') }}</button>

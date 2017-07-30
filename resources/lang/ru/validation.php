@@ -188,15 +188,31 @@ return [
                 ],
                 'collection' => [
                     'title' => 'Заголовок*',
-                    'description' => 'Описание*',
+                    'title_ru' => 'Заголовок[RU]*',
+                    'title_it' => 'Заголовок[IT]*',
                     'banner' => 'Баннер ?',
+                    'name' => 'Название*',
+                    'name_ru' => 'Название[RU]*',
+                    'name_it' => 'Название[IT]*',
+                    'description' => 'SEO*',
+                    'description_ru' => 'SEO[RU]*',
+                    'description_it' => 'SEO[IT]*',
+                    'prev' => 'Описание*',
+                    'prev_ru' => 'Описание[RU]*',
+                    'prev_it' => 'Описание[IT]*',
                     'image' => 'Изображение*',
                     'image_select' => 'Выберите изображение',
                 ],
                 'zone' => [
-                    'title' => 'Заголовок[Eng]*',
-                    'title_ru' => 'Заголовок[Rus]*',
-                    'title_it' => 'Заголовок[Itl]*',
+                    'title' => 'Заголовок*',
+                    'title_ru' => 'Заголовок[RU]*',
+                    'title_it' => 'Заголовок[IT]*',
+                    'name' => 'Название*',
+                    'name_ru' => 'Название[RU]*',
+                    'name_it' => 'Название[IT]*',
+                    'description' => 'SEO*',
+                    'description_ru' => 'SEO[RU]*',
+                    'description_it' => 'SEO[IT]*',
                     'image' => 'Изображение',
                 ],
                 'faq' => [
@@ -257,7 +273,8 @@ return [
                 'settings' => [
                     'soc_links' => 'Ссылки*',
                     'discount_data' => 'Скидки*',
-                    'koef_data' => 'Коэффициент(см/дюйм)*'
+                    'koef_data' => 'Коэффициент(дюйм/см)*',
+                    'vat_data' => 'VAT*'
                 ],
 
                 'templateMessage' => [
@@ -279,6 +296,26 @@ return [
                     'password' => 'Новый пароль',
                     'password_confirmation' => 'Проверка пароля',
                     'send_confirmation_email' => 'Отправить подтверждение на E-mail',
+                ],
+                'orders' => [
+                    'user_fr_name' => 'Имя клиента',
+                    'user_ls_name' => 'Фамилия клиента',
+                    'user_email' => 'email клиента',
+                    'summ' => 'Сумма',
+                    'cnt' => 'Количество',
+
+                    'status' => 'Статус*',
+                    'status_new' => 'Новый',
+                    'status_sent' => 'Отправлен',
+                    'status_delivering' => 'Доставляется',
+                    'status_closed' => 'Закрыт',
+                ],
+                'baskets' => [
+                    'user_fr_name' => 'Имя клиента',
+                    'user_ls_name' => 'Фамилия клиента',
+                    'user_email' => 'email клиента',
+                    'summ' => 'Сумма',
+                    'count' => 'Количество',
                 ],
                 'image' => [
                     'error' =>[

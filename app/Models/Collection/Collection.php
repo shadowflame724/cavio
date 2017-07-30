@@ -16,7 +16,8 @@ class Collection extends Model
 
     protected $fillable = ['title', 'title_ru', 'title_it',
         'description', 'description_ru', 'description_it',
-        'image'];
+        'image', 'name', 'name_ru', 'name_it',
+        'prev', 'prev_ru', 'prev_it', 'sort'];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -27,7 +28,7 @@ class Collection extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }
@@ -37,9 +38,9 @@ class Collection extends Model
         return $this->hasMany(Marker::class);
     }
 
-    public function goods()
+    public function products()
     {
-        return $this->hasMany(Good::class);
+        return $this->hasMany(Product::class);
     }
 
     public function collectionZones()

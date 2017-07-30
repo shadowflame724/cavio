@@ -123,8 +123,18 @@ return [
                 'edit' => 'Modifica impostazioni',
                 'management' => 'Gestione impostazioni',
                 'main' => 'Impostazioni',
-
             ],
+            'orders' => [
+                'edit' => 'Modifica orders',
+                'management' => 'Gestione orders',
+                'main' => 'Orders',
+            ],
+            'baskets' => [
+                'show' => 'Show baskets',
+                'management' => 'Gestione baskets',
+                'main' => 'Baskets',
+            ],
+
             'templateMessage' => [
                 'all' => 'Tutto il template',
                 'create' => 'Creare un modello',

@@ -76,6 +76,9 @@ return [
         'popup' => [
             'updated' => 'updated popups',
         ],
+        'orders' => [
+            'updated' => 'updated order\'s status',
+        ],
         'templateMessage' => [
             'created' => 'created template message',
             'deleted' => 'deleted template message',
