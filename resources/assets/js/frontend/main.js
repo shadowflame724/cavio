@@ -204,6 +204,29 @@ $(document).ready(function(){
 
     basket.add($_price_id,$_count);
   });
+
+  function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  //subscribe
+  $('body').on('submit','#subscribe',function () {
+    var _form = $(this),
+        _action = _form.attr('action'),
+        mail = _form.find('input.email-input').val() || false;
+
+    console.log('_action');
+    console.log(_action);
+    console.log(mail);
+    if(mail && validateEmail(mail)){
+      alert('subscribe success mail');
+      $.get(_action+'?email='+mail, function( data ) {
+        alert( "subscribe success SEND" );
+      });
+    }
+    return false;
+  });
 });
 
 $('.wrap-login-side a').on('click', function(e){
@@ -2739,9 +2762,7 @@ $('form').on('submit', function(e){
   });
 
 
-  document.querySelector('.input-error').focus();
-
-
+  // document.querySelector('.input-error').focus();
   if(isValid){
     if($(this).hasClass('form-submit')){
       $('#modal-thank_you-subs').removeClass('hide').addClass('show');

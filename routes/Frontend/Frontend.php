@@ -33,6 +33,9 @@ Route::get('zones/{zone}/{collection}', 'ZoneController@showPopup')->name('zones
 
 Route::get('macros', 'FrontendController@macros')->name('macros');
 
+Route::get('subscribe', 'MailchimpController@subscribeNews')->name('subscribe');
+Route::get('unsubscribe', 'MailchimpController@unsubscribeNews')->name('unsubscribe');
+
 
 /**
  * Корзина

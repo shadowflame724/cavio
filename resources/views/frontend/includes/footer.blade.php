@@ -19,7 +19,7 @@
                 <div class="footer-nav-menu-wrap">
                     <ul class="footer-nav-menu">
                         <li><a href="{{ route('frontend.catalogue') }}">{{ trans('frontend.header.products') }}</a></li>
-                        <li><a href="{{ route('frontend.zones') }}">{{ trans('frontend.header.zones') }}</a></li>
+                        <li><a href="{{ route('frontend.collections') }}">{{ trans('frontend.header.zones') }}</a></li>
                         <li><a href="{{ route('frontend.about') }}">{{ trans('frontend.header.about') }}</a></li>
                         <li><a href="{{ route('frontend.showrooms') }}">{{ trans('frontend.header.showrooms') }}</a></li>
                         <li><a href="{{ route('frontend.contacts') }}">{{ trans('frontend.header.contact') }}</a></li>
@@ -29,15 +29,12 @@
                     @foreach($categories as $category)
                         @if($category->parent_id == null)
                         <div class="footer-products-col">
-                            <a class="title"
-                               href="{{ route('frontend.catalogue.one', $category->slug) }}"
-                            >{!! $category->{'name'.$langSuf} !!}</a>
+                            <a class="title" href="#">{!! $category->{'name'.$langSuf} !!}</a>
                             <ul class="footer-products-list">
                                 @foreach($category->children as $child)
                                 <li>
-                                    <a href="{{ route('frontend.catalogue.one', $child->slug) }}"
-                                       class="anim-underline light-underline"
-                                    >{!! $child->{'name'.$langSuf} !!}</a>
+                                    <a href="{{ route('frontend.catalogue') }}"
+                                       class="anim-underline light-underline">{!! $child->{'name'.$langSuf} !!}</a>
                                 </li>
                                 @endforeach
                             </ul>
@@ -60,7 +57,8 @@
                 @endforeach
                 </div>
                 <div class="subscribe-wrap">
-                    <form action="/subscribe"><input class="email-input" placeholder="{{ trans('frontend.footer.enterYourEmail') }}">
+                    <form action="{{ route('frontend.subscribe') }}" id="subscribe" method="GET">
+                        <input class="email-input" name="email" placeholder="{{ trans('frontend.footer.enterYourEmail') }}">
                         <button class="btn subscribe" content="{{ trans('frontend.footer.subscribe') }}">{{ trans('frontend.footer.subscribe') }}</button>
                     </form>
                 </div>
