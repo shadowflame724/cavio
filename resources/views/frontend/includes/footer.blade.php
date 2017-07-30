@@ -57,7 +57,8 @@
                 @endforeach
                 </div>
                 <div class="subscribe-wrap">
-                    <form action=""><input class="email-input" placeholder="{{ trans('frontend.footer.enterYourEmail') }}">
+                    <form action="{{ route('frontend.subscribe') }}" id="subscribe" method="GET">
+                        <input class="email-input" name="email" placeholder="{{ trans('frontend.footer.enterYourEmail') }}">
                         <button class="btn subscribe" content="{{ trans('frontend.footer.subscribe') }}">{{ trans('frontend.footer.subscribe') }}</button>
                     </form>
                 </div>
