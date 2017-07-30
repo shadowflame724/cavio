@@ -46,7 +46,7 @@ return [
     'index' => [
         'shopByCollection' => 'Шопинг по коллекциям',
         'shopByCategory' => 'Шопинг по категориям',
-        'moreCategories' => 'больше категорий',
+        'moreCategories' => 'Остальные :count категорий',
         'showAll' => 'показать Все',
         'new' => 'Новинки',
         'okay' => 'окей',

@@ -47,7 +47,7 @@ return [
     'index' => [
         'shopByCollection' => 'Shop by Collection',
         'shopByCategory' => 'Shop by Category',
-        'moreCategories' => 'more categories',
+        'moreCategories' => ':count more categories',
         'showAll' => 'show All',
         'new' => 'new',
         'okay' => 'okay',

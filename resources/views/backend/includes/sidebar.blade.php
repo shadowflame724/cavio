@@ -147,58 +147,49 @@
 
                     <li class="{{ active_class(Active::checkUriPattern(['admin/product*','admin/sort*'])) }} treeview">
                         <a href="#">
-                            <i class="fa fa-cogs"></i>
+                            <i class="fa fa-cubes"></i>
                             <span>{{ trans('labels.backend.access.product.management') }}</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
 
-                        <ul class="treeview-menu
-                            {{ active_class(Active::checkUriPattern([
+                        <ul class="treeview-menu {{ active_class(Active::checkUriPattern([
                                 'admin/product*',
                                 'admin/sort*',
                             ]), 'menu-open') }}"
-                            style="display: none;
-                {{ active_class(Active::checkUriPattern([
-                    'admin/access*',
-                    'admin/setting*',
-                ]), 'display: block;') }}">
+                            style="display: none; {{ active_class(Active::checkUriPattern([
+                                'admin/product*',
+                                'admin/sort*',
+                            ]), 'display: block;') }}">
 
                             <li class="{{ active_class(Active::checkUriPattern('admin/product*')) }}">
                                 <a href="{{ route('admin.product.index') }}">
-                                    <i class="fa fa-cubes"></i>
+                                    <i class="fa fa-cube"></i>
                                     <span>{{ trans('labels.backend.access.product.management') }}</span>
                                 </a>
                             </li>
 
                             <li class="{{ active_class(Active::checkUriPattern('admin/sort/categories*')) }}">
                                 <a href="{{ route('admin.sort.index') }}">
-                                    <i class="fa fa-cubes"></i>
-                                    <span>Сортировка (категории)</span>
+                                    <i class="fa fa-sort-amount-asc"></i>
+                                    <span>Сорт. в категории</span>
                                 </a>
                             </li>
 
                             <li class="{{ active_class(Active::checkUriPattern('admin/sort/collections*')) }}">
                                 <a href="{{ route('admin.sort.index') }}">
-                                    <i class="fa fa-cubes"></i>
-                                    <span>Сортировка (коллекции)</span>
+                                    <i class="fa fa-sort-amount-asc"></i>
+                                    <span>Сорт. в коллекции</span>
                                 </a>
                             </li>
 
                             <li class="{{ active_class(Active::checkUriPattern('admin/sort/zones*')) }}">
                                 <a href="{{ route('admin.sort.index') }}">
-                                    <i class="fa fa-cubes"></i>
-                                    <span>Сортировка (зоны)</span>
+                                    <i class="fa fa-sort-amount-asc"></i>
+                                    <span>Сорт. в зоне</span>
                                 </a>
                             </li>
 
                         </ul>
-                    </li>
-
-                    <li class="{{ active_class(Active::checkUriPattern('admin/product*')) }}">
-                        <a href="{{ route('admin.product.index') }}">
-                            <i class="fa fa-cubes"></i>
-                            <span>{{ trans('labels.backend.access.product.management') }}</span>
-                        </a>
                     </li>
 
                     <li class="{{ active_class(Active::checkUriPattern('admin/baskets*')) }}">

@@ -3431,13 +3431,13 @@ var App = (function () {
     });
   }
 
-  function _editHeadHtml(html, clbk) {
-    $('.header-mob').html(html);
-    clbk();
-  }
-
   function _editAfterFooter(html, clbk) {
     $('#after_footer').html(html);
+    // clbk();
+  }
+
+  function _editHeadHtml(html, clbk) {
+    $('.header-mob').html(html);
     clbk();
   }
 

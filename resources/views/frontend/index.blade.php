@@ -374,7 +374,7 @@
                     @foreach($collections as $collection)
                         @if($collection->banner == 0)
                             <div class="item-coll swiper-slide">
-                                <a href=#>
+                                <a href="{{ route('frontend.collections.show', $collection->slug) }}">
                                     <div class="wrap-img-bg small">
                                         <div class="img-back wave-dark">
                                             <svg viewBox="0 0 1395.63 1237.68">
@@ -418,46 +418,54 @@
 
             <div class="cat-wrapper clearfix hide">
                 @php($count=0)
+                @php($otherCnt=0)
                 @foreach($categories as $category)
-                    @if($category->parent_id != null AND $count<10)
+                    @if($category->to_home != null AND $count<10)
                         <div class="cat hide">
                             <div class="car-bg"></div>
-                            <a href="/catalogue">
+                            <a href="{{ route('frontend.catalogue.one', $category->slug) }}">
                                 <div class="wrap-cat-svg">
                                     <div class="inner-svg white">
-                                        <svg>
-                                            <use xmlns:xlink=http://www.w3.org/1999/xlink
-                                                 xlink:href="#cat{{ $category->id }}"></use>
-                                        </svg>
+                                        <svg><use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href="#cat{{ $category->id }}"></use></svg>
                                     </div>
                                     <div class="inner-svg orange">
-                                        <svg>
-                                            <use xmlns:xlink=http://www.w3.org/1999/xlink
-                                                 xlink:href="#cat{{ $category->id }}"></use>
-                                        </svg>
+                                        <svg><use xmlns:xlink=http://www.w3.org/1999/xlink xlink:href="#cat{{ $category->id }}"></use></svg>
                                     </div>
                                 </div>
                                 <div class="cat-name" content="{{ $category->{'name'.$langSuf} }}">
                                     {{ $category->{'name'.$langSuf} }}
                                 </div>
-                                <!--<div class="cat-name a">Sofas & Arm-chairs</div>-->
                             </a>
                         </div>
                         @php($count = $count+1)
                     @endif
+                    @php
+                    if($category->parent_id != null){
+                        $otherCnt++;
+                    }
+                    @endphp
                 @endforeach
             </div>
 
             <div class="wrap-btn-more hide">
+                @if($otherCnt > 10)
                 <a href="{{ route('frontend.catalogue') }}"
                    class="btn more-10-cat"
-                   content="10 {{ trans('frontend.index.moreCategories')}}">10 {{ trans('frontend.index.moreCategories')}}</a>
+                   content="{{ trans('frontend.index.moreCategories', ['count' => $otherCnt-10])}}"
+                >{{ trans('frontend.index.moreCategories', ['count' => $otherCnt-10])}}</a>
+                @endif
+                @if($otherCnt > 8)
                 <a href="{{ route('frontend.catalogue') }}"
                    class="btn more-12-cat"
-                   content="12 more categories">12 {{ trans('frontend.index.moreCategories')}}</a>
+                   content="{{ trans('frontend.index.moreCategories', ['count' => $otherCnt-8])}}"
+                >{{ trans('frontend.index.moreCategories', ['count' => $otherCnt-8])}}</a>
+                @endif
+                @if($otherCnt > 6)
                 <a href="{{ route('frontend.catalogue') }}"
                    class="btn more-14-cat"
-                   content="14 more categories">14 {{ trans('frontend.index.moreCategories')}}</a>
+                   content="{{ trans('frontend.index.moreCategories', ['count' => $otherCnt-6])}}"
+                >{{ trans('frontend.index.moreCategories', ['count' => $otherCnt-6] )}}</a>
+                @endif
             </div>
         </div>
     </section>
