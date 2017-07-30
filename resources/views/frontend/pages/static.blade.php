@@ -11,8 +11,8 @@
     <section>
         <div class="container cont-priv_pol">
             <div class="wrap-privacy-policy hide">
-                <div class=title-priv_pol>{!! $page->blocks()->first()->{'title'.$langSuf} !!}</div>
-                <div class=text-priv_pol>{!! $page->blocks()->first()->{'body'.$langSuf} !!}</div>
+                <div class=title-priv_pol>{!! $page['name'.$langSuf] !!}</div>
+                <div class=text-priv_pol>{!! $page['body'.$langSuf] !!}</div>
             </div>
         </div>
     </section>
