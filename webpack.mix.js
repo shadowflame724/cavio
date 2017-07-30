@@ -22,10 +22,12 @@ mix
     'resources/assets/js/frontend/vendor/jquery.bez.min.js',
     'resources/assets/js/frontend/vendor/swiper.jquery.min.js',
     'resources/assets/js/frontend/vendor/velocity.min.js',
-    'resources/assets/js/frontend/vendor/jquery.mousewheel.min.js'
+    'resources/assets/js/frontend/vendor/jquery.mousewheel.min.js',
+    'resources/assets/js/frontend/vendor/page.js'
   ], 'public/js/vendor.js')
-  .scripts([
-    'resources/assets/js/frontend/main.js'
+  .js([
+    'resources/assets/js/frontend/main.js',
+    'resources/assets/js/frontend/app.js',
   ], 'public/js/frontend.js')
   .js([
     'resources/assets/js/backend/app.js',

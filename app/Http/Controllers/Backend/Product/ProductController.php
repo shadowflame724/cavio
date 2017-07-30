@@ -259,7 +259,6 @@ class ProductController extends Controller
 //        $model = $product;
         $langSuf = $this->langSuf;
         $collectionZones = CollectionZone::pluck('title', 'id');
-        $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
         Cache::flush();
         $import = Cache::remember('get_data_from_import', 24*60, function() {
@@ -297,54 +296,25 @@ class ProductController extends Controller
         }
 //        dd($parentChildCodes);
 //        dd($parentCodes);
-        $finishCodes = [
-            1 => [
-                'short' => 'f1',
-                'name' => 'Finish1 [f1]'
-            ],
-            2 => [
-                'short' => 'f2',
-                'name' => 'Finish2 [f2]'
-            ],
-            3 => [
-                'short' => 'f3',
-                'name' => 'Finish3 [f3]'
-            ],
-            4 => [
-                'short' => 'f1',
-                'name' => 'Finish4 [f1]'
-            ],
-            5 => [
-                'short' => 'f4',
-                'name' => 'Finish5 [f4]'
-            ],
-        ];
-        $tissueCodes = [
-            1 => [
-                'short' => 't1',
-                'name' => 'Tissue1 [t1]'
-            ],
-            2 => [
-                'short' => 't2',
-                'name' => 'Tissue2 [t2]'
-            ],
-            3 => [
-                'short' => 't3',
-                'name' => 'Tissue3 [t3]'
-            ],
-            4 => [
-                'short' => 't4',
-                'name' => 'Tissue4 [t4]'
-            ],
-            5 => [
-                'short' => 'tp',
-                'name' => 'Tissue5 [tp]'
-            ],
-            6 => [
-                'short' => 'tci',
-                'name' => 'Tissue5 [tci]'
-            ],
-        ];
+        $finishTissues = FinishTissue::where('parent_id', '!=', null)
+            ->where('short', '!=', '')
+            ->get();
+        $finishCodes = [];
+        $tissueCodes = [];
+        foreach ($finishTissues as $item) {
+            if($item->type == 'finish'){
+                $finishCodes[$item->id] = [
+                    'short' => $item->short,
+                    'name' => $item->{'title'.$langSuf}.' ['.$item->short.']'
+                ];
+            }
+            if($item->type == 'tissue'){
+                $tissueCodes[$item->id] = [
+                    'short' => $item->short,
+                    'name' => $item->{'title'.$langSuf}.' ['.$item->short.']'
+                ];
+            }
+        }
         $collections = Collection::with('collectionZones')->get();
         $collectionCodes = [];
         foreach ($collections as $collection) {
@@ -424,54 +394,26 @@ class ProductController extends Controller
             'BN8830' => 'BN8830',
             'BN8831' => 'BN8831'
         ];
-        $finishCodes = [
-            1 => [
-                'short' => 'f1',
-                'name' => 'Finish1 [f1]'
-            ],
-            2 => [
-                'short' => 'f2',
-                'name' => 'Finish2 [f2]'
-            ],
-            3 => [
-                'short' => 'f3',
-                'name' => 'Finish3 [f3]'
-            ],
-            4 => [
-                'short' => 'f1',
-                'name' => 'Finish4 [f1]'
-            ],
-            5 => [
-                'short' => 'f4',
-                'name' => 'Finish5 [f4]'
-            ],
-        ];
-        $tissueCodes = [
-            1 => [
-                'short' => 't1',
-                'name' => 'Tissue1'
-            ],
-            2 => [
-                'short' => 't2',
-                'name' => 'Tissue2'
-            ],
-            3 => [
-                'short' => 't3',
-                'name' => 'Tissue3'
-            ],
-            4 => [
-                'short' => 't4',
-                'name' => 'Tissue4'
-            ],
-            5 => [
-                'short' => 'tp',
-                'name' => 'Tissue5'
-            ],
-            6 => [
-                'short' => 'tci',
-                'name' => 'Tissue5'
-            ],
-        ];
+        $collectionZones = CollectionZone::pluck('title', 'id');
+        $finishTissues = FinishTissue::where('parent_id', '!=', null)
+            ->where('short', '!=', '')
+            ->get();
+        $finishCodes = [];
+        $tissueCodes = [];
+        foreach ($finishTissues as $item) {
+            if($item->type == 'finish'){
+                $finishCodes[$item->id] = [
+                    'short' => $item->short,
+                    'name' => $item->{'title'.$langSuf}.' ['.$item->short.']'
+                ];
+            }
+            if($item->type == 'tissue'){
+                $tissueCodes[$item->id] = [
+                    'short' => $item->short,
+                    'name' => $item->{'title'.$langSuf}.' ['.$item->short.']'
+                ];
+            }
+        }
         $categoryModel = Category::get();
         $categoryCodes = [];
         foreach ($categoryModel as $category) {
@@ -484,8 +426,6 @@ class ProductController extends Controller
                 $categoryCodes[$category->parent_id]['group'][$category->id] = $category->{'name'.$langSuf};
             }
         }
-        $collectionZones = CollectionZone::pluck('title', 'id');
-        $finishTissues = FinishTissue::where('parent_id', '!=', null)->get()->pluck('title', 'id');
 
         $collections = Collection::with('collectionZones')->get();
         $collectionCodes = [];

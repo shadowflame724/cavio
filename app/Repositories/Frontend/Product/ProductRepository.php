@@ -34,7 +34,9 @@ class ProductRepository extends BaseRepository
     public function getAll($order_by = 'sort', $sort = 'asc')
     {
         $res = [];
-        $model = Product::where('published',1)->orderBy($order_by, $sort)->get();
+        $model = Product::where('published',1)
+            ->orderBy($order_by, $sort)
+            ->get();
 
         if(isset($model)) {
             foreach ($model as $item) {
@@ -83,13 +85,15 @@ class ProductRepository extends BaseRepository
     {
         $res = [];
         $ids = [];
+        $products = [];
 
         foreach ($basketInfoArr as $price_id => $count){
             $ids[] = $price_id;
         }
-
         if(!empty($ids)){
-            $products = ProductPrice::whereIn('id', $ids)->get();
+            $products = ProductPrice::whereIn('id', $ids)
+                ->where('published', 1)
+                ->get();
         }
 
         if(!empty($products)){
@@ -383,6 +387,42 @@ class ProductRepository extends BaseRepository
             $res['collection'] = $collsRes;
         }
 //        dd($res);
+        return $res;
+    }
+
+    public function whereInIds($ids = [])
+    {
+        $res = [];
+        $products = Product::whereIn('id', $ids)
+            ->where('published',1)
+            ->get();
+
+        foreach ($products as $product) {
+            $data = json_decode($product->main_photo_data);
+            $photo = '';
+            if(isset($data->prices)) {
+                $photo = explode(',', $data->photos)[0];
+            }
+            $prices = '';
+            if(isset($data->prices)){
+                $prices = $data->prices;
+            }
+            $discount = false;
+            if(isset($data->isDiscount)){
+                $discount = $data->isDiscount;
+            }
+            $res[$product->id] = [
+                'isDiscount' => $discount,
+                'image' => $photo,
+                'prices' => $prices,
+                'code' => $product->code,
+                'slug' => $product->slug,
+                'name' => $product->name,
+                'name_ru' => $product->name_ru,
+                'name_it' => $product->name_it,
+            ];
+        }
+
         return $res;
     }
 }

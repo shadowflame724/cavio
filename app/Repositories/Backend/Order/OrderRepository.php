@@ -47,7 +47,7 @@ class OrderRepository extends BaseRepository
                 config('orders_table') . '.created_at',
             ]);
     }
-    
+
 
     /**
      * @param Model $order
@@ -59,13 +59,12 @@ class OrderRepository extends BaseRepository
      */
     public function update(Model $order, array $input)
     {
-        $order->status = $input['status'];
-
-
         DB::transaction(function () use ($order, $input) {
+            $order->status = $input['status'];
+
             if ($order->save()) {
 
-                event(new OrderUpdated($order));
+                event(new OrderUpdated($order, $input['admin_comment']));
 
                 return true;
             }
@@ -74,24 +73,24 @@ class OrderRepository extends BaseRepository
         });
     }
 
-    /**
-     * @param Model $order
-     *
-     * @throws GeneralException
-     *
-     * @return bool
-     */
-    public function delete(Model $order)
-    {
-        DB::transaction(function () use ($order) {
-
-            if ($order->delete()) {
-                event(new OrderDeleted($order));
-
-                return true;
-            }
-
-            throw new GeneralException(trans('exceptions.backend.order.delete_error'));
-        });
-    }
+//    /**
+//     * @param Model $order
+//     *
+//     * @throws GeneralException
+//     *
+//     * @return bool
+//     */
+//    public function delete(Model $order)
+//    {
+//        DB::transaction(function () use ($order) {
+//
+//            if ($order->delete()) {
+//                event(new OrderDeleted($order));
+//
+//                return true;
+//            }
+//
+//            throw new GeneralException(trans('exceptions.backend.order.delete_error'));
+//        });
+//    }
 }

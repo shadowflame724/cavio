@@ -182,10 +182,36 @@ return [
                 'edit' => 'Edit popup',
                 'management' => 'Popups Management'
             ],
+
             'settings' => [
                 'edit' => 'Edit settings',
                 'management' => 'Settings Management'
             ],
+            'orders' => [
+                'edit' => 'Edit orders',
+                'management' => 'Orders Management',
+                'table' => [
+                    'id' => 'Id',
+                    'status' => 'Status',
+                    'user_id' => 'Client email',
+                    'summ' => 'Summ',
+                    'created_at' => 'Created at'
+                ],
+            ],
+            'baskets' => [
+                'show' => 'Show basket',
+                'management' => 'Baskets Management',
+                'table' => [
+                    'id' => 'Id',
+                    'user_id' => 'Client email',
+                    'summ' => 'Summ',
+                    'created_at' => 'Created at'
+                ],
+            ],
+            'sort' => [
+                'management' => 'Sort products'
+            ],
+
 
             'message' => [
                 'show' => 'Show Message',

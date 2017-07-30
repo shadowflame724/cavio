@@ -30,6 +30,8 @@ class StoreUserRequest extends Request
         return [
             'first_name'     => 'required|max:191',
             'last_name'  => 'required|max:191',
+            'phone'  => 'max:191',
+            'region'  => 'max:191',
             'email'    => ['required', 'email', 'max:191', Rule::unique('users')],
             'password' => 'required|min:6|confirmed',
         ];

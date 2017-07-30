@@ -23,26 +23,36 @@ class SettingsController extends Controller
     {
         $this->settings = $settings;
     }
-    
+
     /**
      *
      * @return mixed
      */
     public function edit()
     {
+        $socLinksArr = [
+            'fb' => 'https://facebook.com',
+            'youtube'=> 'https://youtube.com',
+            'instagram' => 'https://instagram.com',
+            'pinterest' => 'https://pinterest.com'
+        ];
         $settings = Settings::firstOrCreate(['id' => 1], [
-            'soc_links' => '[]',
+            'soc_links' => json_encode($socLinksArr),
             'discount_data' => '[]',
-            'koef_data' => '[]'
+            'koef_data' => '[]',
+            'vat_data' => '[]'
         ]);
 
         $socLinksArr = json_decode($settings->soc_links);
         $discountDataArr = json_decode($settings->discount_data);
         $koefData = json_decode($settings->koef_data);
+        $vatData = json_decode($settings->vat_data);
+        //dd($socLinksArr);
 
         return view('backend.settings.edit', [
             'settings' => $settings,
             'koefData' => $koefData,
+            'vatData' => $vatData,
             'socLinksArr' => $socLinksArr,
             'discountDataArr' => $discountDataArr
         ]);

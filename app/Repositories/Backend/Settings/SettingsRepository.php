@@ -29,9 +29,17 @@ class SettingsRepository extends BaseRepository
      */
     public function update(Model $settings, array $input)
     {
-        $settings->soc_links = json_encode($input['soc_links']);
+        $socLinksArr = [
+            'fb' => $input['soc_links']['fb'],
+            'youtube'=> $input['soc_links']["youtube"],
+            'instagram' => $input['soc_links']["instagram"],
+            'pinterest' => $input['soc_links']["pinterest"]
+        ];
+
+        $settings->soc_links = json_encode($socLinksArr);
+        $settings->vat_data = json_encode($input['vat_data']);
         $settings->discount_data = json_encode($input['discount_data']);
-        $settings->koef_data = json_encode(str_replace(',', '.', preg_replace("/[^0-9,.]/", "",$input['koef_data'])));
+        $settings->koef_data = json_encode(str_replace(',', '.', preg_replace("/[^0-9,.]/", "", $input['koef_data'])));
 
         DB::transaction(function () use ($settings, $input) {
             if ($settings->save()) {

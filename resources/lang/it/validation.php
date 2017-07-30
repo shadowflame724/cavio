@@ -210,13 +210,29 @@ return [
 
                 'collection' => [
                     'title' => 'Titolo*',
-                    'description' => 'Descrizione*',
+                    'prev' => 'Descrizione*',
+                    'prev_ru' => 'Descrizione[RU]*',
+                    'prev_it' => 'Descrizione[IT]*',
                     'banner' => 'Bandiera ?',
+                    'description' => 'SEO*',
+                    'description_ru' => 'SEO[RU]*',
+                    'description_it' => 'SEO[IT]*',
                     'image' => 'Immagine*',
                     'image_select' => '',
+                    'name' => 'Nome[Eng]*',
+                    'name_ru' => 'Nome[Rus]*',
+                    'name_it' => 'Nome[Itl]*',
                     'zones' => [
                         'mainZones' => 'Zona principale',
-                        'title' => 'Titolo',
+                        'title' => 'Titolo*',
+                        'title_ru' => 'Titolo[RU]*',
+                        'title_it' => 'Titolo[IT]*',
+                        'name' => 'Nome[Eng]*',
+                        'name_ru' => 'Nome[Rus]*',
+                        'name_it' => 'Nome[Itl]*',
+                        'description' => 'SEO*',
+                        'description_ru' => 'SEO[RU]*',
+                        'description_it' => 'SEO[IT]*',
                         'management' => 'Collezione-zone gestione',
                         'mainPhoto' => 'Foto principale?'
                     ]
@@ -242,6 +258,12 @@ return [
                     'title' => 'Titolo[Eng]*',
                     'title_ru' => 'Titolo[Rus]*',
                     'title_it' => 'Titolo[Itl]*',
+                    'name' => 'Nome[Eng]*',
+                    'name_ru' => 'Nome[Rus]*',
+                    'name_it' => 'Nome[Itl]*',
+                    'description' => 'SEO*',
+                    'description_ru' => 'SEO[RU]*',
+                    'description_it' => 'SEO[IT]*',
                     'image' => 'Immagine',
                 ],
 
@@ -305,7 +327,29 @@ return [
                 'settings' => [
                     'soc_links' => 'Links*',
                     'discount_data' => 'Sconto*',
-                    'koef_data' => 'Fattore(cm/inch)*'
+                    'koef_data' => 'Fattore(inch/cm)*',
+                    'vat_data' => 'VAT*'
+
+                ],
+                'orders' => [
+                    'user_fr_name' => 'Client first name',
+                    'user_ls_name' => 'Client last name',
+                    'user_email' => 'Client Email',
+                    'summ' => 'Summ',
+                    'cnt' => 'Count',
+
+                    'status' => 'Status*',
+                    'status_new' => 'New',
+                    'status_sent' => 'Sent',
+                    'status_delivering' => 'Delivering',
+                    'status_closed' => 'Closed',
+                ],
+                'baskets' => [
+                    'user_fr_name' => 'Client first name',
+                    'user_ls_name' => 'Client last name',
+                    'user_email' => 'Client Email',
+                    'summ' => 'Summ',
+                    'count' => 'Count',
                 ],
 
                 'users' => [

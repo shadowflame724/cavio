@@ -150,10 +150,10 @@
                         </a>
                     </li>
 
-                    <li class="{{ active_class(Active::checkUriPattern('admin/basket*')) }}">
-                        <a href="{{ route('admin.basket.index') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/baskets*')) }}">
+                        <a href="{{ route('admin.baskets.index') }}">
                             <i class="fa fa-shopping-bag"></i>
-                            <span>{{ trans('labels.backend.basket.management') }}</span>
+                            <span>{{ trans('labels.backend.access.baskets.management') }}</span>
                         </a>
                     </li>
 
@@ -167,7 +167,7 @@
                     <li class="{{ active_class(Active::checkUriPattern('admin/sort*')) }}">
                         <a href="{{ route('admin.sort.index') }}">
                             <i class="fa fa-sort"></i>
-                            <span>{{ trans('labels.backend.sort.management') }}</span>
+                            <span>{{ trans('labels.backend.access.sort.management') }}</span>
                         </a>
                     </li>
 

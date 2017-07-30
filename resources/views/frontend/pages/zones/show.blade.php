@@ -16,11 +16,9 @@
                                 <span class="curr-news-type">{{ trans('frontend.zones-collections.allZones') }}</span>
                                 <ul class="zc-modal-types clearfix">
                                     @foreach($zone->collectionZones->groupBy('collection_id') as $collectionZones)
-
-                                        <li>
-                                            <a href=#>
-                                                {{ $collectionZones[0]->{'title'.$langSuf} }}
-                                            </a>
+                                    <li>
+                                        <a href=#>{{ $collectionZones[0]->{'title'.$langSuf} }}</a>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -189,10 +187,7 @@
 @section('content')
     <section class="wrap-banner no_space">
         <div class=wrap-banner-cont>
-            <h3 class=section-title>
-
-                {{ $zone->{'title'.$langSuf} }}
-
+            <h3 class=section-title>{{ $zone->{'title'.$langSuf} }}
                 <a href="{{ route('frontend.zones') }}"
                    class="back-zol_col anim-underline">← {{ trans('frontend.zones-collections.backToZones') }}</a>
                 <svg class=title-wave viewBox="0 0 1395.63 1237.68">
@@ -205,32 +200,29 @@
         <div class=container>
             <div class="zon-col-list clearfix z_c-list">
                 @foreach($zone->collectionZones->groupBy('collection_id') as $collectionZones)
-                    <div class="item-coll zon-col z_c-list to_modal">
-                        <a href=#>
-                            <div class="wrap-img-bg small">
-                                <div class="img-back wave-dark">
-                                    <svg width=1395.63 height=1237.68>
-                                        <use xlink:href="../wave.svg#wave"></use>
-                                    </svg>
-                                </div>
-                                @php
-                                    $img = explode(',', $collectionZones[0]->collection->image)[0];
-                                @endphp
-                                <img src=/upload/images/collection/horizontal/{{ $img }} alt="">
+                @php($item = $collectionZones[0])
+                @php($cnt = (!empty($item->product_ids)) ? count(explode(',', $item->product_ids)) : false)
+                <div class="item-coll zon-col z_c-list to_modal">
+                    <a href="{{ route('frontend.zones.show_popup', [$zone->slug, $item->collection->slug]) }}">
+                        <div class="wrap-img-bg small">
+                            <div class="img-back wave-dark">
+                                <svg width=1395.63 height=1237.68><use xlink:href="../wave.svg#wave"></use></svg>
                             </div>
-                            <div>
-                                <div class=coll-name>
-
-                                    {{ $collectionZones[0]->collection->{'title'.$langSuf} }}
-
-                                    <span class=wrap-coll-name-arrow>
-                                    <span class=coll-name-arrow>→</span>
-                                </span>
-                                </div>
-                                <div class=numb-prod>00 {{ trans('frontend.zones-collections.products') }}</div>
+                            @php
+                                $img = explode(',', $item->collection->image)[0];
+                            @endphp
+                            <img src=/upload/images/collection/horizontal/{{ $img }} alt="">
+                        </div>
+                        <div>
+                            <div class=coll-name>{{ $item->collection->{'title'.$langSuf} }}
+                                <span class=wrap-coll-name-arrow><span class=coll-name-arrow>→</span></span>
                             </div>
-                        </a>
-                    </div>
+                            @if($cnt)
+                            <div class=numb-prod>{{ $cnt }} {{ trans('frontend.zones-collections.products') }}</div>
+                            @endif
+                        </div>
+                    </a>
+                </div>
                 @endforeach
             </div>
         </div>
