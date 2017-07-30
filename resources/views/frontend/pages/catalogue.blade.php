@@ -24,29 +24,30 @@
               <div class="wrap-percents">
                 <ul class="catal-perc clearfix">
                   <li class="active">{{ trans('frontend.catalogue.all') }}</li>
+                    <?php
+                    // TODO: Сделать фильтр по скидкам (?sale=true)
+                    ?>
                   <li>{{ trans('frontend.catalogue.sale') }} %</li>
                 </ul>
 
               </div>
               <div class="inner-catal-side-items">
-                @foreach($categories as $category)
-                  @if($category->parent_id == null)
-                    <div class=catal-list-block>
-                      <div class=catal-list-title>
-                        <a href="{{ route('frontend.catalogue.one', $category->slug) }}">
-                          {{ $category->{'name'.$langSuf} }}
+                @foreach($cats as $category)
+                <div class=catal-list-block>
+                  <div class=catal-list-title>
+                    <a href="{{ route('frontend.catalogue.one', $category['parent']['slug']) }}"
+                      @if($category['parent']['active']) class="active"@endif
+                    >{{ $category['parent']['name'.$langSuf] }}</a>
+                  </div>
+                  <ul class="catal-list">
+                    @foreach($category['childs'] as $child)
+                      <li @if($child['active']) class="active"@endif>
+                        <a href="{{ route('frontend.catalogue.one', $child['slug']) }}" class=anim-underline>
+                          {{ $child['name'.$langSuf] }}
                         </a>
-                      </div>
-                      <ul class="catal-list">
-                        @foreach($category->children as $child)
-                          <li>
-                            <a href="{{ route('frontend.catalogue.one', $child->slug) }}" class=anim-underline>
-                              {{ $child->{'name'.$langSuf} }}
-                            </a>
-                        @endforeach
-                      </ul>
-                    </div>
-                  @endif
+                    @endforeach
+                  </ul>
+                </div>
                 @endforeach
 
                 <div class="wrap-zon-col-side">
@@ -63,6 +64,9 @@
                   </div>
 
                   <ul class="zon-col-list-catal zones">
+                    <?php
+                      // TODO: Сделать фильтр по зонам (?zone=slug)
+                    ?>
                     @foreach($zones as $zone)
                       <li>
                         <a href="#zone={{ $zone->slug }}" class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
@@ -75,6 +79,9 @@
                     <div class="zon-col-side-toggle">{{ trans('frontend.catalogue.collections') }}</div>
                   </div>
                   <ul class="zon-col-list-catal collections">
+                    <?php
+                    // TODO: Сделать фильтр по колекциям (?collection=slug)
+                    ?>
                     @foreach($collections as $collection)
                       <li>
                         <a href="#collection={{ $collection->slug }}" class="anim-underline">
@@ -88,12 +95,14 @@
               </div>
             </div>
           </div>
-          @if(isset($model) && !empty($model))
           <div class="catal-content">
             <div class="catal-content-inner">
               <div class="wrap-catal-filter">
-                <form action="">
-                  <input class="catal-filter" type="text" placeholder="{{ trans('frontend.catalogue.search') }}">
+                <?php
+                // TODO: Сделать фильтр по поиску (?search=g)
+                ?>
+                <form action="/search">
+                  <input class="catal-filter" type="text" name="g" placeholder="{{ trans('frontend.catalogue.search') }}">
                 </form>
                 <button class="search-loupe">
                   <svg class="">
@@ -102,28 +111,36 @@
                 </button>
               </div>
               <div class="catal-list-info">
+                <?php
+                // TODO: Вывести выбраные фильтры
+                ?>
                 <span class="catal-type">dinning</span>
-                <span class="catal-item-numb"><span class="numb">64</span> products</span>
+                <span class="catal-item-numb"><span class="numb">{{ count($model) }}</span> products</span>
               </div>
+              @if(isset($model) && !empty($model))
               <div class="wrap-catal-list">
                 <div class="disp-catal-list clearfix">
                   @foreach($model as $product)
-                  <div class="new-products-right-item grid w33 @if($product['isDiscount']) discount @endif">
-                    <a class="new-products-right-inner-item" href="/product/{{$product['slug']}}">
+                  @php($prodData = $product->getMainData())
+                  <div class="new-products-right-item grid w33 @if($prodData['isDiscount']) discount @endif">
+                    <a class="new-products-right-inner-item" href="/product/{{$product->slug}}">
                       <div class="product-img-table">
                         <div class="wrap-new-product-img bg-white-marmur"
-                           @if(!empty($product['photos'])) style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['photos']}})" @endif>
+                           @if(!empty($prodData['photos'])) style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$prodData['photos']}})" @endif>
                         </div>
                       </div>
                       <div class="wrap-new-product-data">
-                        <div class="product-code">#{{$product['code']}}</div>
-                        <div class="product-name">{{$product['name']}}</div>
-                        <div class="product-price">{{$product['prices']}}</div>
+                        <div class="product-code">{{ $prodData['codes'] }}</div>
+                        <div class="product-name">{{ $product->{'name'.$langSuf} }}</div>
+                        <div class="product-price">{{ $prodData['prices'] }}</div>
                       </div>
                     </a>
                   </div>
                   @endforeach
                 </div>
+                <?php
+                // TODO: Вывести пагинацию
+                ?>
                 <ul class="list-pagination clearfix">
                   <li class="pag-item active">1</li>
                   <li class="pag-item">2</li>
@@ -131,9 +148,11 @@
                   <li class="pag-item">4</li>
                 </ul>
               </div>
+              @else
+                <h2 class="no-products">{{ trans('frontend.catalogue.no_products') }}</h2>
+              @endif
             </div>
           </div>
-          @endif
         </div>
 
       </div>

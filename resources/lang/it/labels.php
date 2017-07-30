@@ -233,7 +233,8 @@ return [
                 ],
             ],
             'sort' => [
-                'management' => 'Sort products[IT]'
+                'management' => 'Sort products[IT]',
+
             ],
 
 

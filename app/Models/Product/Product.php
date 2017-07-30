@@ -52,4 +52,20 @@ class Product extends Model {
         return $this->hasMany(Block::class);
     }
 
+    public function getMainData()
+    {
+        $main_photo_data = (!empty($this->main_photo_data)) ? \GuzzleHttp\json_decode($this->main_photo_data) : [];
+        $codes = (!empty($main_photo_data->codes)) ? $main_photo_data->codes : '#';
+        $photos = (!empty($main_photo_data->photos)) ? $main_photo_data->photos : [];
+        $prices = (!empty($main_photo_data->prices)) ? $main_photo_data->prices : [];
+        $isDiscount = (!empty($main_photo_data->isDiscount)) ? $main_photo_data->isDiscount : false;
+        $data = [
+            'codes' => $codes,
+            'photos' => $photos,
+            'prices' => $prices,
+            'isDiscount' => $isDiscount,
+        ];
+        return $data;
+    }
+
 }

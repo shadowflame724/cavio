@@ -88,6 +88,9 @@ return [
         'orders' => [
             'updated' => 'The order\'s status was successfully updated.'
         ],
+        'sort' => [
+            'updated' => 'The product\'s sorting was successfully updated.'
+        ],
 
 
         'users' => [

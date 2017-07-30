@@ -47,7 +47,7 @@ return [
     'index' => [
         'shopByCollection' => 'Shop by Collection',
         'shopByCategory' => 'Shop by Category',
-        'moreCategories' => 'more categories',
+        'moreCategories' => ':count more categories',
         'showAll' => 'show All',
         'new' => 'new',
         'okay' => 'okay',
@@ -151,6 +151,7 @@ return [
         'products' => 'Products',
         'zones' => 'Zones',
         'collections' => 'Collections',
+        'no_products' => 'No products to show',
 
 
     ]

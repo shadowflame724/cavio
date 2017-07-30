@@ -46,7 +46,7 @@ return [
     'index' => [
         'shopByCollection' => 'Acquista per collezione',
         'shopByCategory' => 'Acquista per categoria',
-        'moreCategories' => 'Più categorie',
+        'moreCategories' => 'Più :count categorie',
         'showAll' => 'mostra tutto',
         'new' => 'nuovo',
         'okay' => 'va bene',
@@ -149,6 +149,7 @@ return [
         'products' => 'Prodotti',
         'zones' => 'Zone',
         'collections' => 'Collezioni',
+        'no_products' => 'Nessun prodotto da mostrare',
     ]
 
 
