@@ -17,7 +17,7 @@
         <div id="before_header">@yield('before_header')</div>
         <div id="header">@include('frontend.includes.header')</div>
         <div id="content" data-page="/{{$path}}">@yield('content')</div>
-        <div id="footer">@include('frontend.includes.footer')</div>
+        {{--<div id="footer">@include('frontend.includes.footer')</div>--}}
         <div id="after_footer">@yield('after_footer')</div>
     </body>
 </html>

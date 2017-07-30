@@ -373,7 +373,9 @@ if(!document.querySelector('body.card')) {
 
 
     $('header').on('mouseleave', function(){  hideTopMenu()  });
-    $('.nav-icon, .svg-main-logo, .lang-panel, .open-modal-login, .svg-stash').on('mouseenter', function(){   hideTopMenu()  });
+    $('.nav-icon, .svg-main-logo, .lang-panel, .open-modal-login, .svg-stash').on('mouseenter', function(){
+      hideTopMenu()
+    });
 
 
     // hideTopMenu
@@ -2901,6 +2903,13 @@ function hideTopMenu(){
   document.getElementById('top-menu').style.height = 0;
 }
 
+function hideLeftMenu(){
+  $('.nav-icon').removeClass('open');
+  $('.wrap-left-nav').removeClass('show');
+  $('header').removeClass('show-left-menu');
+  $(document.body).toggleClass('overfl-h');
+}
+
 function blendModeDef() {
   /*! modernizr 3.5.0 (Custom Build) | MIT *
    * https://modernizr.com/download/?-backgroundblendmode-setclasses !*/
@@ -3269,7 +3278,8 @@ var App = (function () {
   }
 
   function _hidePopup() {
-    console.log('_hidePopup');
+    hideTopMenu();
+    hideLeftMenu();
   }
 
   function _routes() {
@@ -3300,6 +3310,7 @@ var App = (function () {
           prevPage = ctx.pathname;
           _editHeadHtml(obj.headHtml, function () {
             _editHeadSEO(obj.head);
+            _editAfterFooter(obj.afterFooterHtml);
             _editContentHtml(obj.contentHtml, obj.dataPage, function () {
               setTimeout(function() {
                 _reInit(function() {
@@ -3341,15 +3352,17 @@ var App = (function () {
               {'name': 'title', 'value': $html.find('title:first').text(), 'attr': false},
               {'name': 'title', 'value': $html.find('meta[name="description"]').attr('content'), 'attr': 'content'},
             ],
-            headHtml = $html.find('.header-mob').html(),
-            dataPage = $html.find('main').attr('data-page'),
-            contentHtml = $html.find('#content').html();
+            headHtml = $html.find('#header').html(),
+            dataPage = $html.find('#content').attr('data-page'),
+            contentHtml = $html.find('#content').html(),
+            afterFooterHtml = $html.find('#after_footer').html();
 
           needPageData = {
             'head': head,
             'headHtml': headHtml,
             'dataPage': dataPage,
-            'contentHtml': contentHtml
+            'contentHtml': contentHtml,
+            'afterFooterHtml': afterFooterHtml
           };
           _loadedPages[ctx.canonicalPath] = needPageData;
           insertInHtml(needPageData);
@@ -3392,6 +3405,21 @@ var App = (function () {
 
   }
 
+  function _reInit(clbk) {
+    // window.reinit();
+    clbk();
+  }
+
+  function _home(ctx, clbk) {
+
+    clbk();
+  }
+
+  function _error404(ctx, clbk) {
+
+    clbk();
+  }
+
   function _editHeadSEO(html) {
     console.info(html);
     _.forEach(html, function (e) {
@@ -3408,24 +3436,14 @@ var App = (function () {
     clbk();
   }
 
-  function _reInit(clbk) {
-    // window.reinit();
-    clbk();
-  }
-
-  function _home(ctx, clbk) {
-
-    clbk();
-  }
-
-  function _error404(ctx, clbk) {
-
+  function _editAfterFooter(html, clbk) {
+    $('#after_footer').html(html);
     clbk();
   }
 
   function _editContentHtml(html, pageName, clbk) {
     $('main .scroll-content').html(html);
-    console.info('>>> ',pageName)
+    mainScroll.scrollTo(0, 0, 500);
     $('main').attr('data-page', pageName);
     clbk();
   }

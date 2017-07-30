@@ -45,7 +45,9 @@
             @include('frontend.includes.footer')
         </main>
 
-        @yield('after_footer')
+        <div id="after_footer">
+            @yield('after_footer')
+        </div>
         @include('frontend.includes.svg')
 
         @yield('before_scripts')
