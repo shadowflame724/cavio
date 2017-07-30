@@ -97,6 +97,7 @@
                         'admin/zone*',
                         'admin/showroom*',
                         'admin/product*',
+                        'admin/sort*',
                     ]), 'menu-open') }}"
                     style="display: none; {{ active_class(Active::checkUriPattern([
                         'admin/category*',
@@ -105,6 +106,7 @@
                         'admin/zone*',
                         'admin/showroom*',
                         'admin/product*',
+                        'admin/sort*',
                         ]), 'display: block;') }}">
 
 
@@ -143,6 +145,55 @@
                         </a>
                     </li>
 
+                    <li class="{{ active_class(Active::checkUriPattern(['admin/product*','admin/sort*'])) }} treeview">
+                        <a href="#">
+                            <i class="fa fa-cogs"></i>
+                            <span>{{ trans('labels.backend.access.product.management') }}</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+
+                        <ul class="treeview-menu
+                            {{ active_class(Active::checkUriPattern([
+                                'admin/product*',
+                                'admin/sort*',
+                            ]), 'menu-open') }}"
+                            style="display: none;
+                {{ active_class(Active::checkUriPattern([
+                    'admin/access*',
+                    'admin/setting*',
+                ]), 'display: block;') }}">
+
+                            <li class="{{ active_class(Active::checkUriPattern('admin/product*')) }}">
+                                <a href="{{ route('admin.product.index') }}">
+                                    <i class="fa fa-cubes"></i>
+                                    <span>{{ trans('labels.backend.access.product.management') }}</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ active_class(Active::checkUriPattern('admin/sort/categories*')) }}">
+                                <a href="{{ route('admin.sort.index') }}">
+                                    <i class="fa fa-cubes"></i>
+                                    <span>Сортировка (категории)</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ active_class(Active::checkUriPattern('admin/sort/collections*')) }}">
+                                <a href="{{ route('admin.sort.index') }}">
+                                    <i class="fa fa-cubes"></i>
+                                    <span>Сортировка (коллекции)</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ active_class(Active::checkUriPattern('admin/sort/zones*')) }}">
+                                <a href="{{ route('admin.sort.index') }}">
+                                    <i class="fa fa-cubes"></i>
+                                    <span>Сортировка (зоны)</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/product*')) }}">
                         <a href="{{ route('admin.product.index') }}">
                             <i class="fa fa-cubes"></i>
@@ -161,13 +212,6 @@
                         <a href="{{ route('admin.orders.index') }}">
                             <i class="fa fa-shopping-cart"></i>
                             <span>{{ trans('labels.backend.order.management') }}</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ active_class(Active::checkUriPattern('admin/sort*')) }}">
-                        <a href="{{ route('admin.sort.index') }}">
-                            <i class="fa fa-sort"></i>
-                            <span>{{ trans('labels.backend.access.sort.management') }}</span>
                         </a>
                     </li>
 
