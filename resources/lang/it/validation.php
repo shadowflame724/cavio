@@ -351,6 +351,11 @@ return [
                     'summ' => 'Summ',
                     'count' => 'Count',
                 ],
+                'sort' => [
+                    'type_collection' => 'Sort by collection',
+                    'type_category' => 'Sort by category',
+                    'type_collectionZone' => 'Sort by zones',
+                ],
 
                 'users' => [
                     'active'                  => 'Attivo',

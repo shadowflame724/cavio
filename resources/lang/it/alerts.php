@@ -79,6 +79,9 @@ return [
         'orders' => [
             'updated' => 'Order\'s status con successo.',
         ],
+        'sort' => [
+            'updated' => 'The product\'s sorting was successfully updated.'
+        ],
 
         'users' => [
             'confirmation_email'  => "Una nuova e-mail di conferma è stata inviata all'indirizzo registrato.",

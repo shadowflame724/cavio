@@ -3,6 +3,11 @@
 @section ('title', trans('labels.backend.access.sort.management'))
 
 @section('after-styles')
+    <style>
+        .product-photo {
+            width: 100px;
+        }
+    </style>
 @endsection
 
 @section('page-header')
@@ -17,11 +22,10 @@
             <div class="box-tools pull-right">
             </div>
         </div><!-- /.box-header -->
-        {!! Form::open(['route' => 'admin.sort.collection.update', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'enctype' => "multipart/form-data", 'id'=> 'sort-form']) !!}
 
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
+                {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_collection'), ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
                     <select name="collection" class="form-control" id="collectionSelect">
                         @foreach($collections as $key => $collection)
@@ -32,7 +36,7 @@
                     </select>
                 </div><!--col-lg-10-->
 
-                {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
+                {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_category'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
                     <select name="category" class="form-control" id="categorySelect">
@@ -43,7 +47,7 @@
                         @endforeach
                     </select>
                 </div><!--col-lg-10-->
-                {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
+                {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_collectionZone'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
                     <select name="collectionZone" class="form-control" id="collectionZoneSelect">
@@ -64,58 +68,94 @@
     <div class="box box-success">
         <div class="box-body">
             <div class="pull-right">
-                {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+                {{ Form::submit(trans('buttons.general.crud.create'), ['id' => 'submit-all', 'class' => 'btn btn-success btn-xs']) }}
             </div><!--pull-right-->
 
             <div class="clearfix"></div>
         </div><!-- /.box-body -->
     </div><!--box-->
-    {!! Form::close() !!}
 
 @endsection
 @section('after-scripts')
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
+    {{ Html::script('//cdnjs.cloudflare.com/ajax/libs/Sortable/1.6.0/Sortable.min.js') }}
+
     <script>
+
         $('#collectionSelect').on('change', function (e) {
             var url = '{{ route("admin.sort.collection.show", '')}}' + '/' + e.target.value;
+            $('#products-box').children().remove();
             getProducts(url);
         });
         $('#categorySelect').on('change', function (e) {
             var url = '{{ route("admin.sort.category.show", '')}}' + '/' + e.target.value;
+            $('#products-box').children().remove();
             getProducts(url);
         });
         $('#collectionZoneSelect').on('change', function (e) {
             var url = '{{ route("admin.sort.collection-zone.show", '')}}' + '/' + e.target.value;
+            $('#products-box').children().remove();
             getProducts(url);
         });
-        var template = '<div class="content" id="products-box">' +
-            '<div class="col-lg-3">' +
-            '</div>' +
-            '</div>';
 
         function getProducts(url) {
             $.ajax({
                 headers: {
                     'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
                 },
-                type: "GET",
+                type: "POST",
                 url: url,
                 success: function (data) {
-                    console.log('success', data);
-                    $('#products-box').replaceWith(template);
-                },
-                error: function (res) {
-                    console.log('error', res);
-                    data.forEach(function (item, i) {
-                        $('#products-box').append('<div class="content" id="products-box">' +
-                            '<div class="col-lg-3">' +
-                            i + '.<img src="' + item.image + '">' +
-                            'Product:' + item.name +
-                            '</div>' +
+                    data.products.forEach(function (item, i) {
+
+                        $('#products-box').append('<div class="product-box col-lg-2" data-id="' + item.id + '">' +
+                            '<b>' + item.code + '</b><br>' +
+                            '<b>' + item.name + '</b><br>' +
+                            '<img class="product-photo" src="/upload/products/' + JSON.parse(item.main_photo_data).photos + '">' +
                             '</div>');
                     });
+                    $('#products-box').append(
+                        '<div class="pull-right">' +
+                        '<form action="{{ route('admin.sort.update') }}" method="post" id="sort-form">' +
+                        '<input type="text" name="type" hidden value ="' + data.type + '">' +
+                        '<input type="text" name="id" hidden value ="' + data.id + '">' +
+                        '<input type="hidden" name="_token" value="' + document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value + '">' +
+                        '<input type="text" id="product_ids" name="product_ids" hidden value ="' + data.product_ids + '">' +
+                        '</form>'
+                    );
+                    moveProduct();
+                    update();
+
+                },
+                error: function (res) {
+                    swal({
+                        title: "No products",
+                        text: "For this item",
+                        type: "warning",
+                        confirmButtonColor: "#DD6B55"
+                    })
                 }
             });
         }
+
+
+        function moveProduct() {
+            var sortableList = new Sortable(document.getElementById('products-box'), {
+                onEnd: function (/**Event*/evt) {
+                    var index = sortableList.toArray().indexOf('2fj');
+                    clean = sortableList.toArray().splice(0, index);
+                    var json = JSON.stringify(clean);
+                    $('#product_ids').val(json.replace(/[\[\]"]+/g, ''));
+                }
+            });
+
+        }
+
+        function update() {
+            $('#submit-all').on('click', function () {
+                $('#sort-form').submit();
+            })
+        }
+
     </script>
 @endsection
