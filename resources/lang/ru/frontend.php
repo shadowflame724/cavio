@@ -149,6 +149,7 @@ return [
         'products' => 'Продуктов',
         'zones' => 'Зоны',
         'collections' => 'Коллекции',
+        'no_products' => 'Нет товаров для показа',
 
     ]
 

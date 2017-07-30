@@ -192,9 +192,28 @@ class ProductRepository extends BaseRepository
     {
         $categoryModel = $this->getCatBySlug($slug);
 
-        if(!empty($categoryModel->product_ids)){
+        $product_ids = '';
+        if($categoryModel->parent_id == null){
+            $ids = [];
+            foreach($categoryModel->children as $child){
+                if(!empty($child->product_ids)){
+                    $prIds = explode(',',$child->product_ids);
+                    foreach ($prIds as $prId) {
+                        $id = (int)$prId;
+                        if($id > 0){
+                            $ids[$id] = $id;
+                        }
+                    }
+                }
+            }
+            $product_ids = implode(',', $ids);
+        } elseif(!empty($categoryModel->product_ids)) {
+            $product_ids = $categoryModel->product_ids;
+        }
+
+        if(!empty($product_ids)){
             $res = [];
-            $prodIds = explode(',',$categoryModel->product_ids);
+            $prodIds = explode(',',$product_ids);
             $model = Product::whereIn('id',$prodIds)->where('published',1)->get();
 
             if(isset($model)) {

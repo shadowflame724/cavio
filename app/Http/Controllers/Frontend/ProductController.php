@@ -11,6 +11,7 @@ use App\Models\Page\Page;
 use App\Models\Popup\Popup;
 use App\Models\Showroom\Showroom;
 use App\Models\Zone\Zone;
+use App\Models\Category\Category;
 use App\Repositories\Frontend\Product\ProductRepository;
 
 /**
@@ -27,6 +28,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+        return $this->showOneCategView();
+
         $page = $this->page('catalogue');
         $model = $this->product->getAll();
 //        dd($model);
@@ -41,12 +44,69 @@ class ProductController extends Controller
      */
     public function catOne($slug)
     {
+        return $this->showOneCategView($slug);
+    }
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function showOneCategView($slug = '', $data = [])
+    {
+        $catsMenu = [];
+        $categories = Category::all();
+        $productCatsIds = [];
+        foreach ($categories as $category) {
+            if($category->parent_id == null){
+                $isPrntActive = false;
+                if($category->slug === $slug){
+                    $isPrntActive = true;
+                }
+                $catsMenu[$category->id] = [
+                    'parent' => [
+                        'slug' => $category->slug,
+                        'name' => $category->name,
+                        'name_ru' => $category->name_ru,
+                        'name_it' => $category->name_it,
+                        'active' => false,
+                    ],
+                    'childs' => [],
+                ];
+                foreach ($category->children as $child) {
+                    if($category->slug === $slug){ // накапливаем продукты из дочерних категорий если находимся в родительской
+                        $productCatsIds[] = $child->id;
+                    }
+                    $isChldActive = false;
+                    if($child->slug === $slug){
+                        $isPrntActive = true;
+                        $isChldActive = true;
+                        $productCatsIds[] = $child->id;
+                    }
+                    $catsMenu[$category->id]['childs'][$child->id] = [
+                        'slug' => $child->slug,
+                        'name' => $child->name,
+                        'name_ru' => $child->name_ru,
+                        'name_it' => $child->name_it,
+                        'active' => $isChldActive,
+                    ];
+                }
+                $catsMenu[$category->id]['parent']['active'] = $isPrntActive;
+            }
+        }
+//        echo'<pre>';
+//        print_r($catsMenu);
+//        echo'</pre>';
+//        dd($productCatsIds);
+
         $page = $this->page('catalogue');
-        $model = $this->product->catOne($slug);
+        if (!empty($slug)) {
+            $products = $this->product->catOne($slug);
+        } else {
+            $products = $this->product->getAll();
+        }
 
         return view('frontend.pages.catalogue', [
             'page' => $page,
-            'model' => $model
+            'cats' => $catsMenu,
+            'model' => $products
         ]);
     }
 

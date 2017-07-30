@@ -215,7 +215,12 @@ var App = (function () {
   }
 
   function _editContentHtml(html, pageName, clbk) {
-    $('main .scroll-content').html(html);
+    $('main .scroll-content > *').each(function (i,_el) {
+      if(!$(_el).is('footer')){
+        $(_el).remove();
+      }
+    });
+    $('main .scroll-content footer').before(html);
     mainScroll.scrollTo(0, 0, 500);
     $('main').attr('data-page', pageName);
     clbk();

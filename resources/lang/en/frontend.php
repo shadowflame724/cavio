@@ -151,6 +151,7 @@ return [
         'products' => 'Products',
         'zones' => 'Zones',
         'collections' => 'Collections',
+        'no_products' => 'No products to show',
 
 
     ]

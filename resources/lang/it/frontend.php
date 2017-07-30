@@ -149,6 +149,7 @@ return [
         'products' => 'Prodotti',
         'zones' => 'Zone',
         'collections' => 'Collezioni',
+        'no_products' => 'Nessun prodotto da mostrare',
     ]
 
 
