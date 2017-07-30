@@ -21,26 +21,25 @@
 
             <div class="form-group">
                 {{ Form::label('soc_links', trans('validation.attributes.backend.access.settings.soc_links'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="btn btn-box-tool" id="add_soc_links"><i class="fa fa-plus"></i></div>
 
                 <div class="col-lg-9" id="soc_links">
-                    @php($keySoc=0)
-                        @if($socLinksArr == null)
-                            <div class="input-group">
-                                <span class="input-group-addon">www.</span>
-                                {{ Form::text('soc_links['.$keySoc.']', null, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
-                                <span class="input-group-addon remove-soc"><i class="fa fa-times"></i></span>
-                            </div>
-                        @else
-                            @foreach($socLinksArr as $socLink)
-                                <div class="input-group">
-                                    <span class="input-group-addon">www.</span>
-                                    {{ Form::text('soc_links['.$keySoc.']', $socLink, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
-                                    <span class="input-group-addon remove-soc"><i class="fa fa-times"></i></span>
-                                </div>
-                                @php($keySoc++)
-                                    @endforeach
-                                    @endif
+
+                    <div class="input-group">
+                        <span class="input-group-addon">Facebook</span>
+                        {{ Form::text('soc_links[fb]', $socLinksArr->fb, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Youtube</span>
+                        {{ Form::text('soc_links[youtube]', $socLinksArr->youtube, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Instagram</span>
+                        {{ Form::text('soc_links[instagram]', $socLinksArr->instagram, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Pinterest</span>
+                        {{ Form::text('soc_links[pinterest]', $socLinksArr->pinterest, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                    </div>
 
                 </div><!--col-lg-10-->
             </div><!--form control-->
@@ -146,13 +145,6 @@
 
 @section('after-scripts')
     <script>
-        function removeSoc() {
-            $('.remove-soc:not(:first)').each(function () {
-                $(this).on('click', function () {
-                    $(this).parent().remove();
-                })
-            })
-        }
 
         function removeDiscount() {
             $('.remove-discount:not(:first)').each(function () {
@@ -162,16 +154,6 @@
             })
         }
 
-        var countSocLinks = {{$keySoc}};
-        $('#add_soc_links').on('click', function () {
-            countSocLinks++;
-            $('#soc_links').append('<div class="input-group">' +
-                '<span class="input-group-addon">www.</span>' +
-                '<input name="soc_links[' + countSocLinks + ']" type="text" class="form-control"/>' +
-                '<span class="input-group-addon remove-soc"><i class="fa fa-times"></i></span>' +
-                '</div>');
-            removeSoc();
-        });
         var countDiscount = {{$key}};
         $('#add_discount_data').on('click', function () {
             countDiscount++;
@@ -188,7 +170,6 @@
             removeDiscount();
         });
 
-        removeSoc();
         removeDiscount();
 
     </script>

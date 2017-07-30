@@ -21,9 +21,6 @@ class SortController extends Controller
      */
     public function index(ManageSortRequest $request)
     {
-        $collection = Collection::find(1);
-        $products = Product::whereIn('id', $collection->product_ids)->all();
-        dd($products);
         $collectionZones = CollectionZone::all();
 
         return view('backend.sort.index',
@@ -38,10 +35,19 @@ class SortController extends Controller
     public function collectionShow($id)
     {
         $collection = Collection::find($id);
-        $products = Product::whereIn('id', $collection->product_ids)->all();
-        dd($products);
+        $product_ids = $collection->product_ids;
 
-        return response()->json($products);
+        $ids = explode(',', $product_ids);
+
+        $json = [
+            'type' => 'collection',
+            'id' => 10,
+            'products' => Product::whereIn('id', $ids)->orderByRaw(\DB::raw("FIELD(id, $product_ids)"))->get(),
+            'product_ids' => $product_ids
+        ];
+
+
+        return response()->json($json);
     }
 
     /**
@@ -50,10 +56,16 @@ class SortController extends Controller
     public function categoryShow($id)
     {
         $category = Category::find($id);
-        //dd($category);
-        //$products = $category->goods()->get();
+        $product_ids = $category->product_ids;
+        $ids = explode(',', $product_ids);
+        $json = [
+            'type' => 'category',
+            'id' => $id,
+            'products' => Product::whereIn('id', $ids)->orderByRaw(\DB::raw("FIELD(id, $product_ids)"))->get(),
+            'product_ids' => $product_ids
+        ];
 
-        return response()->json($category->product_ids);
+        return response()->json($json);
     }
 
     /**
@@ -62,10 +74,45 @@ class SortController extends Controller
     public function collectionZoneShow($id)
     {
         $collectionZone = CollectionZone::find($id);
-        //dd($collectionZone);
-        //$products = $collectionZone->goods()->get();
+        $product_ids = $collectionZone->product_ids;
+        $ids = explode(',', $product_ids);
+        $json = [
+            'type' => 'collectionZone',
+            'id' => $id,
+            'products' => Product::whereIn('id', $ids)->orderByRaw(\DB::raw("FIELD(id, $product_ids)"))->get(),
+            'product_ids' => $product_ids
+        ];
 
-        return response()->json($collectionZone->product_ids);
+        return response()->json($json);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function update(\Illuminate\Http\Request $request)
+    {
+        switch ($request->type) {
+            case 'collection':
+                $collection = Collection::find($request->id);
+                $collection->product_ids = $request->product_ids;
+                $collection->save();
+
+                break;
+            case 'category':
+                $category = Category::find($request->id);
+                $category->product_ids = $request->product_ids;
+                $category->save();
+
+                break;
+            case 'collectionZone':
+                $collectionZone = CollectionZone::find($request->id);
+                $collectionZone->product_ids = $request->product_ids;
+                $collectionZone->save();
+
+                break;
+        }
+
+        return redirect(route('admin.sort.index'))->withFlashSuccess(trans('alerts.backend.sort.updated'));;
     }
 
 }

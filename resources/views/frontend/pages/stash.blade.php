@@ -190,18 +190,21 @@
 
             <div class="wrap-bot-stash_list clearfix">
               <div class="footnote">
+                @if(!empty($config) && isset($config['discount_data']))
                 <div class="item-footnote">* {{ trans('frontend.shoppingCart.fullCostMessage') }}.</div>
                 <div class="item-footnote">
                   ** {{ trans('frontend.shoppingCart.additionalDiscountsMessage') }}:
                   <div class="marg-t clearfix">
                     <div class="descr-disc-label">{{ trans('frontend.shoppingCart.from') }}</div>
                     <div class="descr-disc">
-                      5000 {{ trans('frontend.shoppingCart.to') }} 10000 – 5%<br>
-                      10001 to 20000  - 10%<br>
-                      >20000  - {{ trans('frontend.shoppingCart.customDiscount') }}
+                      @foreach($config['discount_data'] as $discount_data)
+                      {{$discount_data['from']}} {{ trans('frontend.shoppingCart.to') }} {{$discount_data['to']}} - {{$discount_data['equal']}}%<br>
+                      @endforeach
+                      {{-->20000  - {{ trans('frontend.shoppingCart.customDiscount') }}--}}
                     </div>
                   </div>
                 </div>
+                @endif
               </div>
 
               <!--<div class="wrap-total_result-ord_it stast">-->

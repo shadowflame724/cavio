@@ -317,6 +317,11 @@ return [
                     'summ' => 'Сумма',
                     'count' => 'Количество',
                 ],
+                'sort' => [
+                    'type_collection' => 'Сортировка по коллекциям',
+                    'type_category' => 'Сортировка по категориям',
+                    'type_collectionZone' => 'Сортировка по зонам',
+                ],
                 'image' => [
                     'error' =>[
                         'dictFileTooBig' => 'Слишком большой файл',
