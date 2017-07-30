@@ -149,12 +149,7 @@ var basket = (function () {
       url: link + '/' + id,
     })
       .done(function (data) {
-        // cart = _.reject(cart, function (o) {
-        //   return o.id == item.id;
-        // });
-        //console.log(data);
-        // cart_html = data.html;
-        // callback(true);
+        $('.total-basket-main').html(data.html);
       })
       .fail(function (data) {
         console.error('Fail put item to basket');
@@ -2152,7 +2147,6 @@ if(document.querySelector('body.stash')){
   $('.kick-ord_it').on('click', function(e){
     var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
     var priceid = $(this).attr('data-priceid');
-    alert(priceid);
     basket.remove(priceid);
     itemStash.addClass('remove');
 

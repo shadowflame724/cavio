@@ -88,6 +88,7 @@ class EloquentCartRepository implements CartContract
             }
         }
         cart()->update($this->_cart);
+        return $this->_cart;
     }
 
     /**

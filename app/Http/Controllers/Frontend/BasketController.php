@@ -26,8 +26,7 @@ class BasketController extends Controller
      */
     public function index()
     {
-        dd(config('app.settings'));
-        // обычный запрос
+        $config = config('app.settings');
         $priceIdsArr = [];
         $products = [];
         $basketGoods = $this->carts->findAll();
@@ -50,13 +49,21 @@ class BasketController extends Controller
                 $summ_default = $summ_default+(int)$product['price_new'];
             }
         }
+        if(isset($config['discount_data']) && !empty($config['discount_data'])){
+            foreach ($config['discount_data'] as $discount_data) {
+                if($summ_vat >= $discount_data['from'] && $summ_vat <= $discount_data['to']){
+                    $discount = $discount_data['equal'];
+                }
+            }
+        }
 
-        if($summ_vat >= 5000 && $summ_vat <= 10000){
-            $discount = 5;
-        }
-        if($summ_vat >= 10001 && $summ_vat <= 20000){
-            $discount = 10;
-        }
+//        if($summ_vat >= 5000 && $summ_vat <= 10000){
+//            $discount = 5;
+//        }
+//        if($summ_vat >= 10001 && $summ_vat <= 20000){
+//            $discount = 10;
+//        }
+
         $summ = [
             'summ_vat' => $summ_vat,
             'summ_default' => $summ_default,
@@ -66,6 +73,7 @@ class BasketController extends Controller
 
         return view('frontend.pages.stash', [
             'summ' => $summ,
+            'config' => $config,
             'products' => $products
         ]);
 
@@ -136,17 +144,17 @@ class BasketController extends Controller
 
     public function destroy($id)
     {
-        $this->carts->destroy($id);
+        $cart = $this->carts->destroy($id);
         $statusCode = 200;
         $response = [];
-        //$response['item'] = $item;
-//        $response['html'] = View('frontend.basket.header',$this->carts->getResult())->render();
+        $summ = $this->getCartTotal($cart);
+        $response['html'] = View('frontend.includes.total_basket', ['summ'=>$summ])->render();
         return response()->json($response, $statusCode);
     }
 
     public function getCartTotal($cart)
     {
-        // обычный запрос
+        $config = config('app.settings');
         $priceIdsArr = [];
         $products = [];
         $basketGoods = $cart;
@@ -171,12 +179,14 @@ class BasketController extends Controller
             }
         }
 
-        if($summ_vat >= 5000 && $summ_vat <= 10000){
-            $discount = 5;
+        if(isset($config['discount_data']) && !empty($config['discount_data'])){
+            foreach ($config['discount_data'] as $discount_data) {
+                if($summ_vat >= $discount_data['from'] && $summ_vat <= $discount_data['to']){
+                    $discount = $discount_data['equal'];
+                }
+            }
         }
-        if($summ_vat >= 10001 && $summ_vat <= 20000){
-            $discount = 10;
-        }
+
         $summ = [
             'summ_vat' => $summ_vat,
             'summ_default' => $summ_default,
