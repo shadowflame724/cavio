@@ -155,9 +155,7 @@
                                                             <div class="swiper-wrapper overfl-h">
                                                                 <div class="swiper-slide fin_slide bg-white-marmur">
                                                                     @if(isset($one['photosArr']['tissue']) && !empty($one['photosArr']['tissue']))
-                                                                    @foreach($one['photosArr']['tissue'] as $tissue)
-                                                                    {{$tissue}},
-                                                                    @endforeach
+                                                                    {{implode(',',$one['photosArr']['tissue'])}}
                                                                     @endif
                                                                 </div>
                                                             </div>

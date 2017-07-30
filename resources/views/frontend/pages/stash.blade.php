@@ -127,11 +127,11 @@
                         <div class="ord_it-name">{{$product['productChilds']['name']}}</div>
                         <div class="wrap-calc_price">
                           <div class="ord_it-numb">
-                            <span class="calc_it minus disabled"></span>
-                            <span class="ord_it-numb-val" data-priceid="{{$product['id']}}">{{$product['count']}}</span>
+                            <span class="calc_it minus @if($product['count'] == 1) disabled @endif"></span>
+                            <span class="ord_it-numb-val" data-price="{{$product['price_vat_def']}}" data-priceid="{{$product['id']}}">{{$product['count']}}</span>
                             <span class="calc_it plus"></span>
                           </div>
-                          <div class="ord_it-price">{{$product['price_vat']}} €</div>
+                          <div class="ord_it-price"><span>{{$product['price_vat']}}</span> €</div>
                         </div>
                       </div>
                       <div class="mibble-center-ord_it-data order stash">
@@ -222,26 +222,9 @@
                   <!--<div class="right-val">(2 364Eur)</div>-->
                 <!--</div>-->
               <!--</div>-->
-              <div class="wrap-total_result-ord_it stast ver_2">
-                <div class="label-total">{{ trans('frontend.shoppingCart.totalToPay') }}:</div>
-
-                @if($summ['discount_all'] > 0)
-                @php($summF = $summ['summ_vat']*$summ['discount_all']/100)
-                @php($total = round($summ['summ_vat']-$summF))
-                <div class="total_price-ord_it">{{$total}} €</div>
-                <div class="crossed-price">{{$summ['summ_vat']}} €</div>
-                @else
-                <div class="total_price-ord_it">{{$summ['summ_vat']}} €</div>
-                @endif
-
-                <div class="price-vat">**{{ trans('frontend.shoppingCart.including') }}
-                  22% ({{round($summ['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}
-
-                  @if($summ['discount_all'] > 0)
-                  ,and Additional discount {{$summ['discount_all']}}% ({{round($summF)}}€)
-                  @endif
-                </div>
-            </div>
+              <div class="total-basket-main">
+                @include('frontend.includes.total_basket',['summ' => $summ])
+              </div>
           </div>
             <div class="wrap-stash_order clearfix">
               <button id="order-now" class="btn dark-profile" content="{{ trans('frontend.shoppingCart.orderNow') }}">{{ trans('frontend.shoppingCart.orderNow') }}</button>

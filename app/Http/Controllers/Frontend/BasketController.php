@@ -26,6 +26,7 @@ class BasketController extends Controller
      */
     public function index()
     {
+        dd(config('app.settings'));
         // обычный запрос
         $priceIdsArr = [];
         $products = [];
@@ -122,10 +123,10 @@ class BasketController extends Controller
                 'price_id' => $id,
                 'count' => $request->input('count'),
             ];
-            $item = $this->carts->update($id, $data);
-            $response_cart = $this->carts->getResult();
-//            $response['item'] = $item;
-//            $response['html'] = View('frontend.basket.header',$response_cart)->render();
+            $cart = $this->carts->update($id, $data);
+            $summ = $this->getCartTotal($cart);
+            $response['html'] = View('frontend.includes.total_basket', ['summ'=>$summ])->render();
+
         } catch (CException $e) {
             $statusCode = 500;
         } finally {
@@ -141,6 +142,47 @@ class BasketController extends Controller
         //$response['item'] = $item;
 //        $response['html'] = View('frontend.basket.header',$this->carts->getResult())->render();
         return response()->json($response, $statusCode);
+    }
+
+    public function getCartTotal($cart)
+    {
+        // обычный запрос
+        $priceIdsArr = [];
+        $products = [];
+        $basketGoods = $cart;
+
+        if(!empty($basketGoods)){
+            foreach ($basketGoods as $basketGood){
+                $basketInfoArr[$basketGood['price_id']] = $basketGood['count'];
+            }
+            if(!empty($basketInfoArr)){
+                $products = $this->product->getProductsbyPriceIds($basketInfoArr);
+            }
+        }
+
+        $summ = [];
+        $summ_vat = 0;
+        $summ_default = 0;
+        $discount = 0;
+        if(!empty($products)){
+            foreach ($products as $key => $product){
+                $summ_vat = $summ_vat+(int)$product['price_vat'];
+                $summ_default = $summ_default+(int)$product['price_new'];
+            }
+        }
+
+        if($summ_vat >= 5000 && $summ_vat <= 10000){
+            $discount = 5;
+        }
+        if($summ_vat >= 10001 && $summ_vat <= 20000){
+            $discount = 10;
+        }
+        $summ = [
+            'summ_vat' => $summ_vat,
+            'summ_default' => $summ_default,
+            'discount_all' => $discount,
+        ];
+        return $summ;
     }
 
 }

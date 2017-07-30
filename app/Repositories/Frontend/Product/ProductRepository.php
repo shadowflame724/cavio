@@ -176,6 +176,7 @@ class ProductRepository extends BaseRepository
                     'count' => $basketInfoArr[$prod->id],
                     'price_new' => $nativePrice*$basketInfoArr[$prod->id],
                     'price_vat' => $vatPrice*$basketInfoArr[$prod->id],
+                    'price_vat_def' => $vatPrice,
                     'discount' => $prod->discount,
                     'productChilds' => $productChildsRes,
                     'productPhotos' => $productPhotosArrRes,
