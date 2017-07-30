@@ -216,30 +216,36 @@
 @section('after_footer')
   <div id=wrap-page-indicators class=hide>
     <div class=wrap-relate-indicators>
-      <div id=indicator-1 class=indicator><a href="#about-history"><span class=ind-numb>01</span> <span
-                  class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
-          <span
-                  class=ind-name>
-
-                        {!! $page->blocks->get(0)->{'title'.$langSuf} !!}
-
-                </span></a></div>
-      <div id=indicator-2 class=indicator><a href="#about-philosofhy"><span class=ind-numb>02</span> <span
-                  class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
-          <span
-                  class=ind-name>
-
-                        {!! $page->blocks->get(3)->{'title'.$langSuf} !!}
-
-                </span></a></div>
-      <div id=indicator-3 class=indicator><a href="#about-mood"><span class=ind-numb>03</span> <span
-                  class=wrap-ind-romb><div class=indicator-arrow></div><span class=ind-romb></span></span>
-          <span
-                  class=ind-name>
-
-                        {!! $page->blocks->get(7)->{'title'.$langSuf} !!}
-
-                </span></a></div>
+      <div id=indicator-1 class=indicator>
+        <a href="#about-history">
+          <span class=ind-numb>01</span>
+          <span class=wrap-ind-romb>
+            <div class=indicator-arrow></div>
+            <span class=ind-romb></span>
+          </span>
+          <span class=ind-name>{!! $page->blocks->get(0)->{'title'.$langSuf} !!}</span>
+        </a>
+      </div>
+      <div id=indicator-2 class=indicator>
+        <a href="#about-philosofhy">
+          <span class=ind-numb>02</span>
+          <span class=wrap-ind-romb>
+            <div class=indicator-arrow></div>
+            <span class=ind-romb></span>
+          </span>
+          <span class=ind-name>{!! $page->blocks->get(3)->{'title'.$langSuf} !!}</span>
+        </a>
+      </div>
+      <div id=indicator-3 class=indicator>
+        <a href="#about-mood">
+          <span class=ind-numb>03</span>
+          <span class=wrap-ind-romb>
+            <div class=indicator-arrow></div>
+            <span class=ind-romb></span>
+          </span>
+          <span class=ind-name>{!! $page->blocks->get(7)->{'title'.$langSuf} !!}</span>
+        </a>
+      </div>
     </div>
   </div>
 @endsection

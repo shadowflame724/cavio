@@ -8,10 +8,16 @@
         {{ (isset($page->description))?$page->description:ENV('APP_NAME') }}
     </head>
     <body data-class="@yield('bodyClass')">
+    @php
+        $path = Request::path();
+        if($path == '/'){
+            $path = '';
+        }
+    @endphp
         <div id="before_header">@yield('before_header')</div>
         <div id="header">@include('frontend.includes.header')</div>
-        <div id="content">@yield('content')</div>
-        <div id="footer">@include('frontend.includes.footer')</div>
+        <div id="content" data-page="/{{$path}}">@yield('content')</div>
+        {{--<div id="footer">@include('frontend.includes.footer')</div>--}}
         <div id="after_footer">@yield('after_footer')</div>
     </body>
 </html>

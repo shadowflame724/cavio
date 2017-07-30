@@ -83,7 +83,7 @@
                                                 @foreach($finishTissue->children as $child)
                                                     <div class="item-fin_tis">
                                                         <div class="item-fin_tis-texture"
-                                                             style="background-image: url(../../upload/images/fit_tis_1.jpg)"></div>
+                                                             style="background-image: url(/upload/images/{{$child->image}})"></div>
                                                         <div class="item-fin_tis-code">{{ $child->title }}</div>
                                                     </div>
                                                 @endforeach
@@ -103,7 +103,7 @@
                                                 @foreach($finishTissue->children as $child)
                                                     <div class=item-fin_tis>
                                                         <div class="item-fin_tis-texture"
-                                                             style="background-image: url(../../upload/images/fit_tis_1.jpg)"></div>
+                                                             style="background-image: url(/upload/images/{{$child->image}})"></div>
                                                         <div class="item-fin_tis-code">{{ $child->title }}</div>
                                                     </div>
                                                 @endforeach
