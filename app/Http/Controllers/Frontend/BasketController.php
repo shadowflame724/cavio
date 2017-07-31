@@ -195,4 +195,31 @@ class BasketController extends Controller
         return $summ;
     }
 
+    public function orderSend(Request $request)
+    {
+        dd($request->input());
+        $data = [
+            'price_id' => $request->input('price_id'),
+            'count' => $request->input('count'),
+        ];
+        $item = $this->carts->create($data);
+
+        try {
+            $response = [];
+            $statusCode = 200;
+            $data = [
+                'price_id' => $request->input('price_id'),
+                'count' => $request->input('count'),
+            ];
+            $item = $this->carts->create($data);
+            $response['item'] = $item;
+//            $response['html'] = View('frontend.basket.header',$this->carts->getResult())->render();
+        } catch (CException $e) {
+            $statusCode = 500;
+        } finally {
+            return response()->json($response, $statusCode);
+        }
+
+    }
+
 }

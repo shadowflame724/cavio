@@ -50,6 +50,8 @@ Route::put('basket/', 'BasketController@store')->name('basket.store');
 Route::post('basket/{id}', 'BasketController@update')->name('basket.update');
 Route::delete('basket/{id}', 'BasketController@destroy')->name('basket.destroy');
 
+Route::put('order', 'BasketController@orderSend')->name('order.send');
+
 
 
 /*

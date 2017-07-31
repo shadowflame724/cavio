@@ -10,41 +10,75 @@
 
                     <div class="swiper-wrapper wrap-log_reg-items">
                         <div class="swiper-slide log_reg-item reg">
-
-                            <form class="login_reg">
-
-                                <div class="wrap-2-input clearfix">
-                                    <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="{{ trans('frontend.modalOrder.firstName') }}" name="first_name">
-                                    </div>
-                                    <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="{{ trans('frontend.modalOrder.lastName') }}" name="last_name">
-                                    </div>
+                        {{ Form::open(['route' => 'frontend.order.send', 'class' => 'login_reg']) }}
+                            <div class="wrap-2-input clearfix">
+                                <div class="wrap-inp_W_50">
+                                    {{ Form::text('first_name', null, [
+                                        'class' => 'fullW',
+                                        'maxlength' => '191',
+                                        'required' => 'required',
+                                        'placeholder' => trans('frontend.modalOrder.firstName')
+                                    ]) }}
                                 </div>
-
-                                <div class="wrap-2-input clearfix">
-                                    <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="{{ trans('frontend.modalOrder.phone') }}" name="phone">
-                                    </div>
-                                    <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="{{ trans('frontend.modalOrder.region') }}" name="region">
-                                    </div>
+                                <div class="wrap-inp_W_50">
+                                    {{ Form::text('last_name', null, [
+                                        'class' => 'fullW',
+                                        'maxlength' => '191',
+                                        'required' => 'required',
+                                        'placeholder' => trans('frontend.modalOrder.lastName')
+                                    ]) }}
                                 </div>
-
-                                <div class="wrap-2-input clearfix">
-                                    <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="{{ trans('frontend.modalOrder.city') }}" name="city">
-                                    </div>
-                                    <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="{{ trans('frontend.modalOrder.zipCode') }}" name="zip_code">
-                                    </div>
+                            </div>
+                            <div class="wrap-2-input clearfix">
+                                <div class="wrap-inp_W_50">
+                                    {{ Form::text('phone', null, [
+                                        'class' => 'fullW',
+                                        'maxlength' => '191',
+                                        'required' => 'required',
+                                        'placeholder' => trans('frontend.modalOrder.phone')
+                                    ]) }}
                                 </div>
-
-                                <hr class="login_reg-line">
-
-                                <input class="fullW" placeholder="{{ trans('frontend.modalOrder.email') }}" type="email">
-                                <button id="order-in_stash" class="btn small login_reg-submit" content="{{ trans('frontend.modalOrder.title') }}">{{ trans('frontend.modalOrder.title') }}</button>
-                            </form>
+                                <div class="wrap-inp_W_50">
+                                    {{ Form::text('region', null, [
+                                        'class' => 'fullW',
+                                        'maxlength' => '191',
+                                        'required' => 'required',
+                                        'placeholder' => trans('frontend.modalOrder.region')
+                                    ]) }}
+                                </div>
+                            </div>
+                            <div class="wrap-2-input clearfix">
+                                <div class="wrap-inp_W_50">
+                                    {{ Form::text('city', null, [
+                                        'class' => 'fullW',
+                                        'maxlength' => '191',
+                                        'required' => 'required',
+                                        'placeholder' => trans('frontend.modalOrder.city')
+                                    ]) }}
+                                </div>
+                                <div class="wrap-inp_W_50">
+                                    {{ Form::text('zip_code', null, [
+                                        'class' => 'fullW',
+                                        'maxlength' => '191',
+                                        'required' => 'required',
+                                        'placeholder' => trans('frontend.modalOrder.zipCode')
+                                    ]) }}
+                                </div>
+                            </div>
+                            <hr class="login_reg-line">
+                            {{ Form::email('last_name', null, [
+                                'class' => 'fullW',
+                                'maxlength' => '191',
+                                'required' => 'required',
+                                'placeholder' => trans('frontend.modalOrder.email')
+                            ]) }}
+                            {{ Form::button(trans('frontend.modalOrder.title'), [
+                                'type' => 'submit',
+                                'id' => 'order-in_stash',
+                                'class' => 'btn small login_reg-submit',
+                                'content' => trans('frontend.modalOrder.title')
+                            ]) }}
+                        {{ Form::close() }}
                         </div>
                     </div>
                 </div>

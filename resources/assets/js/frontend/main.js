@@ -2240,11 +2240,11 @@ if(document.querySelector('body.stash')){
 
 
   $('#order-in_stash').on('click', function(e){
-    e.preventDefault();
+    // e.preventDefault();
 
-    $('#modal-order').toggleClass('hide show');
-    $('#modal-thank_you').removeClass('hide').addClass('show');
-    $('body').addClass('overfl-h');
+    // $('#modal-order').toggleClass('hide show');
+    // $('#modal-thank_you').removeClass('hide').addClass('show');
+    // $('body').addClass('overfl-h');
   });
 
   $('#ty-ok').on('click', function(e){
@@ -2757,6 +2757,7 @@ function initShowRMap(){
 
 $('form').on('submit', function(e){
   e.preventDefault();
+  alert('!!')
 
   var isValid = true;
 
