@@ -79,12 +79,12 @@
     </section>
     <section id="under-about-philosofhy" class="under-philosofhy">
       <div class="wrap-under-philosofhy">
-        <div id="wrap-2-col-under-phil" class="wrap-2-col-under-phil">
+        <div id="wrap-2-col-under-phil" class="wrap-2-col-under-phil" data-anim="false">
           <div class="clearfix">
-            <div class="column-under-phil">
+            <div class="column-under-phil" data-anim="false">
               {!! $page->blocks->get(4)->{'body'.$langSuf} !!}
             </div>
-            <div class="column-under-phil">
+            <div class="column-under-phil" data-anim="false">
               <br class="noDesktop">
               {!! $page->blocks->get(5)->{'body'.$langSuf} !!}
             </div>
@@ -92,7 +92,7 @@
         </div>
 
         <div class="wrap-freedom-under-phil">
-          <div id="about-romb" class="romb">
+          <div id="about-romb" class="romb" data-anim="false">
             <div class="romb-right"></div>
             <div class="romb-middle">
               <svg class="wave-romb" viewBox="0 0 1395.63 1237.68">
@@ -112,7 +112,7 @@
 
     <section id="about-mood" class="wrap-banner">
       <div class="banner-center">
-        <div class="wrap-banner-cont">
+        <div class="wrap-banner-cont" data-anim="false">
           <h3 class="section-title">
             {!! $page->blocks->get(7)->{'title'.$langSuf} !!}
 
@@ -184,27 +184,27 @@
             </a>
           </div>
         </div>
-        <div class="mood-big">
+        <div class="mood-big" data-anim="false">
           <span id="inner-mood-big">mood</span>
         </div>
       </div>
 
       <div class="wrap-under-mood-text clearfix">
-        <div class="col-under-mood-text">
+        <div class="col-under-mood-text" data-anim="false">
           <div class="title-under-history">{!! $page->blocks->get(8)->{'title'.$langSuf} !!}
           </div>
           <div class="text-upline">{!! $page->blocks->get(8)->{'body'.$langSuf} !!}
           </div>
         </div>
 
-        <div class="col-under-mood-text">
+        <div class="col-under-mood-text" data-anim="false">
           <div class="title-under-history">{!! $page->blocks->get(9)->{'title'.$langSuf} !!}
           </div>
           <div class="text-upline">{!! $page->blocks->get(9)->{'body'.$langSuf} !!}
           </div>
         </div>
 
-        <div class="col-under-mood-text">
+        <div class="col-under-mood-text" data-anim="false">
           <div class="title-under-history">{!! $page->blocks->get(10)->{'title'.$langSuf} !!}</div>
           <div class="text-upline">{!! $page->blocks->get(10)->{'body'.$langSuf} !!}</div>
         </div>
@@ -214,7 +214,7 @@
 @endsection
 
 @section('after_footer')
-  <div id=wrap-page-indicators class=hide>
+  <div id=wrap-page-indicators data-anim="false">
     <div class=wrap-relate-indicators>
       <div id=indicator-1 class=indicator>
         <a href="#about-history">
