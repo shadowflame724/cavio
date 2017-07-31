@@ -19,7 +19,19 @@ class MailchimpController extends Controller
     public function unsubscribeNews(Request $request, Newsletter $newsletter)
     {
         $mail = $request->input('email');
-        dd($mail.' - unsubscribe already');
+
+        $page = [
+            'name' => 'Unsubscribe',
+            'name-ru' => 'Unsubscribe',
+            'name-it' => 'Unsubscribe',
+            'body' => 'You are unsubscribe alrady!',
+            'body-ru' => 'You are unsubscribe alrady!',
+            'body-it' => 'You are unsubscribe alrady!',
+        ];
+
+        return view('frontend.pages.static',[
+            'page' => $page
+        ]);
 
 //        $newsletter->unsubscribe($mail);
     }
