@@ -227,6 +227,38 @@ $(document).ready(function(){
     }
     return false;
   });
+
+  //login
+  $('body').on('submit','#login',function () {
+    var _form = $(this),
+        _action = _form.attr('action'),
+        mail = _form.find('input[name="email"]').val() || false,
+        pass = _form.find('input[name="password"]').val() || false;
+
+    console.log('_action');
+    console.log(_action);
+    console.log(mail);
+    if(mail && validateEmail(mail)){
+      var data = {'email':mail,'password':pass};
+
+      $.ajax({
+        url:_action,
+        type:"POST",
+        data:data,
+        dataType:"json",
+        success: function(data) {
+          console.log('after login data');
+          if(data.name != ''){
+            var link = '<a href="'+data.link+'" class="btn-login anim-underline">'+data.name+'</a>';
+            $('.wrap-login').html(link);
+            $('.close-modal').trigger('click');
+          }
+        }
+      });
+    }
+
+    return false;
+  });
 });
 
 $('.wrap-login-side a').on('click', function(e){
