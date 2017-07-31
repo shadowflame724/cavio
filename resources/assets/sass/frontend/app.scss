@@ -1,24 +1,75 @@
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Oranienbaum';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oranienbaum'), local('Oranienbaum-Regular'), url(https://fonts.gstatic.com/s/oranienbaum/v5/WyaFSM_en0pjtlmUWwS7GTTOQ_MqJVwkKsUn0wKzc2I.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Oranienbaum';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oranienbaum'), local('Oranienbaum-Regular'), url(https://fonts.gstatic.com/s/oranienbaum/v5/WyaFSM_en0pjtlmUWwS7GTUj_cnvWIuuBMVgbX098Mw.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Oranienbaum';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oranienbaum'), local('Oranienbaum-Regular'), url(https://fonts.gstatic.com/s/oranienbaum/v5/WyaFSM_en0pjtlmUWwS7GSYE0-AqJ3nfInTTiDXDjU4.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Oranienbaum';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oranienbaum'), local('Oranienbaum-Regular'), url(https://fonts.gstatic.com/s/oranienbaum/v5/WyaFSM_en0pjtlmUWwS7GY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
 
-// Variables
-@import "variables";
+@font-face {
+  font-family: "ProbaPro Lt";
+  font-style: normal;
+  src: url("/fonts/proba_pro_light.woff") format("woff");
+}
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@font-face {
+  font-family: "ProbaPro";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/proba_pro_medium.woff") format("woff");;
+}
 
-// Font Awesome
-@import "~font-awesome/scss/font-awesome";
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  &::selection{ background: rgba(181, 99, 73, 0.99); }
+}
+html {
+  -ms-touch-action: none;
+}
 
-// Helpers
-@import "../helpers";
+@import "scss/variables";
+@import "scss/header";
+@import "scss/footer";
 
-// Global
-@import "global";
+@import "scss/home";
+@import "scss/about";
+@import "scss/faq";
+@import "scss/contacts";
+@import "scss/news";
+@import "scss/zones-collections";
+@import "scss/catalogue";
+@import "scss/press-design";
+@import "scss/finish-tissue";
+@import "scss/privacy-policy";
+@import "scss/profile";
+@import "scss/stash";
+@import "scss/showrooms";
 
-// Page
-@import "pages/dashboard";
-
-// Plugins
-@import "../plugin/toastr/toastr.scss";
-@import "../plugin/sweetalert/sweetalert.scss";
+@import "scss/media";

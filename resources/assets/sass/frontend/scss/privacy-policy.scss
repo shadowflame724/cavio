@@ -1,0 +1,131 @@
+.cont-priv_pol{ padding-top: 160px; }
+
+.wrap-privacy-policy{
+  background: $colorMarnur;
+  padding: 45px 100px 125px;
+  margin-bottom: 90px;
+  transition: opacity 1s, transform 1s;
+
+  &.news{
+    padding-bottom: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &[data-anim='false']{ opacity: 0; transform: translateY(80px); }
+  &[data-anim='true'] { opacity: 1; transform: translateY(0); }
+}
+
+.title-priv_pol{
+  position: relative;
+  font-size: 60px;
+
+  &:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100px;
+    margin: auto;
+    height: 1px;
+    width: 80px;
+    background: $mainActiveColor;
+  }
+}
+
+.text-priv_pol{
+  font-family: ProbaPro Lt, sans-serif;
+  font-size: 20px;
+  margin-top: 35px;
+  max-width: 1100px;
+}
+
+
+@media screen and (max-width: $breakPointTablet){
+  .cont-priv_pol{ padding-top: 120px; }
+
+  .wrap-privacy-policy{
+    background: $colorMarnur;
+    padding: 40px 40px 65px;
+    margin-bottom: 60px;
+
+    &.news{ padding-top: 22px; }
+  }
+
+  .title-priv_pol{
+    position: relative;
+    font-size: 40px;
+
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -40px;
+      margin: auto;
+      height: 1px;
+      width: 20px;
+      background: $mainActiveColor;
+    }
+  }
+
+  .text-priv_pol{ font-size: 16px; }
+}
+
+
+@media screen and (max-width: $breakPointMobile){
+  .wrap-privacy-policy{
+    background: $colorMarnur;
+    padding: 30px 30px 35px;
+    margin: 0 (-$containerMarginMobile);
+
+    &.news{
+      padding-top: 20px;
+      .title-priv_pol:before{
+        left: -15px;
+        width: 10px;
+      }
+    }
+  }
+
+  .cont-priv_pol{ padding-top: 100px; }
+
+  .wrap-share_social.news{
+    display: block;
+
+    .label-share{
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .wrap-share-soc_icons{
+      display: block;
+    }
+
+    .share-social-link{
+      display: block;
+      width: 25%;
+      margin: 0;
+      text-align: center;
+    }
+  }
+
+  .title-priv_pol{
+    position: relative;
+    font-size: 27px;
+
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -30px;
+      margin: auto;
+      height: 1px;
+      width: 15px;
+      background: $mainActiveColor;
+    }
+  }
+
+  .text-priv_pol{ font-size: 14px; }
+}

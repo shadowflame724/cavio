@@ -21,7 +21,7 @@ mix
     'resources/assets/js/frontend/vendor/smooth-scrollbar.js',
     'resources/assets/js/frontend/vendor/jquery.bez.min.js',
     'resources/assets/js/frontend/vendor/swiper.jquery.min.js',
-    'resources/assets/js/frontend/vendor/velocity.min.js',
+    // 'resources/assets/js/frontend/vendor/velocity.min.js',
     'resources/assets/js/frontend/vendor/jquery.mousewheel.min.js',
     'resources/assets/js/frontend/vendor/page.js',
   ], 'public/js/vendor.js')

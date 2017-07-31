@@ -1,0 +1,221 @@
+.pres-des-conteiner{ padding-top: 85px; padding-bottom: 180px; }
+
+.wrap-title-pres_des{
+  color: white;
+  font-size: 36px;
+  text-align: center;
+}
+
+
+.head-pres_des{ position: relative; }
+
+
+.wrap-for_arrow{
+  &.up:after{
+    opacity: 1;
+  }
+
+  &.down:after{
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+}
+
+.title-pres_des{ transition: 1.3s }
+
+.under_title-pres_des{
+  font-family: ProbaPro Lt, sans-serif;
+  font-size: 18px;
+  opacity: 0.8;
+  margin-top: 8px;
+  transition: 1.3s .3s;
+}
+
+.tabel-field-name{ display: none; }
+
+.wrap-press-design{
+  background: $colorMarnur;
+  padding: 45px 100px 100px;
+  margin-top: 55px;
+  transition: .9s .6s;
+}
+
+.pres-des-conteiner.hide{
+  .title-pres_des{       opacity: 0; transform: translateY(20px); }
+  .under_title-pres_des{ opacity: 0; transform: translateY(35px); }
+  .link-back-press_des { opacity: 0; transform: translateX(30px); }
+  .wrap-press-design{    opacity: 0; transform: translateY(70px); }
+}
+
+.wrap-swiper-press_design{
+  width: 100%;
+  max-width: 1110px;
+  margin: auto;
+  overflow: hidden;
+}
+
+
+.link-back-press_des{
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 36px;
+  text-transform: uppercase;
+  color: $mainActiveColor;
+  transition: 1s .5s;
+  &:after{ bottom: 4px; }
+}
+
+.table-press-design{
+  display: table;
+  width: 100%;
+  border-spacing: 0;
+
+  .tr{ display: table-row; }
+
+  .td{
+    padding-left: 10px;
+    padding-right: 10px;
+    display: table-cell;
+    vertical-align: top;
+
+    &:first-child{ padding-left: 0; }
+    &:last-child{ padding-right: 0; }
+
+    &.numb{ min-width: 40px; }
+    &.file_name{ width: 50%; }
+    &.download_link{ width: 28%; }
+    &.date{ width: 20%; }
+  }
+
+  .thead-press-design{
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-bottom: 25px;
+    letter-spacing: 3.2px;
+
+    .td{
+      padding-bottom: 25px;
+
+      >span{
+        cursor: pointer;
+        position: relative;
+        transition: .4s;
+
+        &:hover{ color: $mainActiveColor; }
+      }
+    }
+  }
+
+
+  .tr:not(.thead-press-design){
+    font-family: ProbaPro Lt, sans-serif;
+    font-size: 18px;
+    color: black;
+
+    .td{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0,0,0, 0.1);
+
+      a{
+        color: $mainActiveColor;
+
+        &:hover{ color: black; }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 1400px){
+  .link-back-press_des{ font-size: 30px; }
+  .wrap-title-pres_des{ font-size: 30px; }
+  .under_title-pres_des{ margin-top: 5px; }
+  .wrap-press-design{ margin-top: 40px; }
+}
+
+
+@media screen and (max-width: $breakPointTablet){
+  .link-back-press_des{ position: static; }
+  .wrap-press-design{ padding: 20px $containerMargin1024 75px; margin: 35px (-$containerMargin1024) 30px; }
+  .wrap-title-pres_des{ margin-top: 30px; }
+  .pres-des-conteiner{ margin-top: 30px; padding-top: 5px; padding-bottom: 0; }
+  .wrap-log_reg-toggle.pres_des-toggle{
+    margin-bottom: 40px;
+
+    .item-log_reg-toggle{
+      font-size: 18px;
+      padding: 17px 22px 14px 24px;
+    }
+  }
+
+  .table-press-design{
+    .td{
+      &.file_name{ width: 45%; }
+      &.download_link{ width: 32%; }
+      &.source_file{ width: 23%; }
+    }
+
+    .thead-press-design{
+      font-size: 13px;
+      td{ padding-bottom: 18px; }
+    }
+
+    .tbody-press-design{
+      font-size: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: $breakPointMobile){
+  .link-back-press_des{ font-size: 25px; }
+  .wrap-title-pres_des{ font-size: 26px; text-align: left; }
+  .under_title-pres_des{ font-size: 13px; margin-top: 15px; }
+  .wrap-log_reg-toggle.pres_des-toggle{
+    font-size: 0;
+    padding-right: $containerMarginMobile;
+    margin-bottom: 20px;
+
+    .item-log_reg-toggle {
+      font-size: 14px;
+      padding: 12px 0 10px;
+      width: 50%;
+    }
+  }
+  .wrap-press-design{ padding: 20px 0 50px $containerMarginMobile; margin: 25px (-$containerMarginMobile) 0; }
+
+  .table-press-design{
+    display: block;
+    .thead-press-design{ display: none !important; }
+
+    .tr{
+      display: block;
+      width: 100%;
+      border-bottom: 1px solid rgba(0,0,0, 0.1);
+
+      &:not(.thead-press-design){
+        font-size: 15px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+    }
+    .td {
+      width: 100% !important;
+      border: none !important;
+      display: block;
+      padding-left: 0;
+      padding-right: 0;
+
+      &.numb{ display: none; }
+    }
+  }
+
+  .tabel-field-name{
+    display: block;
+    font-family: Oranienbaum, serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+}
