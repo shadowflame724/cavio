@@ -98,6 +98,7 @@
                     });
                 },
                 fileUploadError: function (json) {
+                    console.log(json);
                     swal({
                         title: 'Ooops...',
                         text: json.message.file[0],

@@ -63,7 +63,7 @@ class DocumentRepository extends BaseRepository
             $document = new $document();
             $document->type = $input['type'];
             $document->name = $input['name'];
-            $document->link = $input['link'];
+            $document->link = str_replace(['<p>', '</p>'], '', $input['link']);
 
             if ($document->save()) {
                 event(new DocumentCreated($document, $input['admin_comment']));
@@ -88,7 +88,7 @@ class DocumentRepository extends BaseRepository
     {
         DB::transaction(function () use ($document, $input) {
             $document->name = $input['name'];
-            $document->link = $input['link'];
+            $document->link = str_replace(['<p>', '</p>'], '', $input['link']);
             $document->type = $input['type'];
 
             if ($document->save()) {

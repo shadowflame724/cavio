@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category\Category;
 use App\Models\Collection\Collection;
+use App\Models\Document\Document;
 use App\Models\FAQ\FAQ;
 use App\Models\FinishTissue\FinishTissue;
 use App\Models\News\News;
@@ -110,20 +111,6 @@ class FrontendController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function news()
-    {
-        $news = News::all();
-        $page = $this->page('news');
-
-        return view('frontend.pages.news', [
-            'news' => $news,
-            'page' => $page
-        ]);
-    }
-
-    /**
-     * @return \Illuminate\View\View
-     */
     public function showrooms()
     {
         $showrooms = Showroom::all();
@@ -169,6 +156,22 @@ class FrontendController extends Controller
         return view('frontend.pages.finish-tissue', [
             'page' => $page,
             'finishTissues' => $finishTissues
+        ]);
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function pressDesign()
+    {
+
+        $page = $this->page('press-design');
+        $documents = Document::all();
+
+
+        return view('frontend.pages.press-design', [
+            'page' => $page,
+            'documents' => $documents
         ]);
     }
 
