@@ -332,6 +332,7 @@ return [
                     'type' => 'Тип*',
                     'type_design' => 'DESIGN KIT',
                     'type_press' => 'PRESS KIT',
+                    'type_flash' => 'FLASH INFO',
                 ],
                 'image' => [
                     'error' =>[

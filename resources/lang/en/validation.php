@@ -327,6 +327,7 @@ return [
                     'type' => 'Type*',
                     'type_design' => 'DESIGN KIT',
                     'type_press' => 'PRESS KIT',
+                    'type_flash' => 'FLASH INFO',
                 ],
                 'users' => [
                     'active' => 'Active',

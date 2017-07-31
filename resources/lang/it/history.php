@@ -69,7 +69,7 @@ return [
             'deleted' => 'showroom eliminato',
             'updated' => 'showroom aggiornato',
         ],
-        'finishtissue' => [
+        'finishTissue' => [
             'created' => 'fazzoletto di carta creato',
             'deleted' => 'fazzoletto di carta eliminato',
             'updated' => 'fazzoletto di carta aggiornato',
@@ -88,7 +88,7 @@ return [
             'deleted' => 'messaggio di modello eliminato',
             'updated' => 'messaggio di modello aggiornato',
         ],
-        'documents' => [
+        'document' => [
             'created' => 'document creato',
             'deleted' => 'document eliminato',
             'updated' => 'document aggiornato',

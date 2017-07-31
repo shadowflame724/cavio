@@ -45,7 +45,7 @@
         <div class="box-body">
             <div class="form-group">
                 <div class="col-lg-12">
-                    <div id="map" width="100%"><img src="/upload/images/{{$collection->image}}" alt=""></div>
+                    <div id="map" width="100%"><img src="/upload/images/collection/original/{{$collection->image}}" alt=""></div>
                 </div>
             </div><!--form control-->
 
@@ -159,19 +159,20 @@
         var markerX;// = $('#markers\\[1\\]\\[x\\]').val();
         var markerY;// = $('#markers\\[1\\]\\[y\\]').val();
 
-        map.onclick = function (e) {
-            if (!currMarkerId) return;
+        $(map).on('click', function (e) {
+
             var mapMainH = mapMain.innerHeight();
             var mapMainW = mapMain.innerWidth();
             var x = e.offsetX == undefined ? e.layerX : e.offsetX;
             var y = e.offsetY == undefined ? e.layerY : e.offsetY;
             markerX = x / mapMainW * 100;
             markerY = y / mapMainH * 100;
+            console.log('aaaa');
 
             $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val(markerX);
             $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val(markerY);
             $('#marker-' + currMarkerId).css({top: y + 'px', left: x + 'px'});
-        };
+        });
 
         $('.panel').on('shown.bs.collapse', function () {
             currMarkerId = $(this).index();

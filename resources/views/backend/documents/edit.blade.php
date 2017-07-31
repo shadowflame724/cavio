@@ -31,6 +31,7 @@
                     <select name="type" class="form-control">
                         <option @if($document->type == 0) selected @endif value="0">{{ trans('validation.attributes.backend.access.documents.type_design') }}</option>
                         <option @if($document->type == 1) selected @endif value="1">{{ trans('validation.attributes.backend.access.documents.type_press') }}</option>
+                        <option @if($document->type == 2) selected @endif value="2">{{ trans('validation.attributes.backend.access.documents.type_flash') }}</option>
                     </select>
                 </div><!--col-lg-10-->
             </div><!--form control-->

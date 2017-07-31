@@ -41,19 +41,11 @@
                 {{ Form::label('type', trans('validation.attributes.backend.access.news.type'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
-                    {{ Form::select('type', [
-                     "news" =>
-                    trans("validation.attributes.backend.access.news.type_news"),
-                    "press" =>
-                    trans("validation.attributes.backend.access.news.type_press"),
-                    "presentation" =>
-                    trans("validation.attributes.backend.access.news.type_presentation"),
-                    "video" =>
-                    trans("validation.attributes.backend.access.news.type_video"),
-                    "showroom" =>
-                    trans("validation.attributes.backend.access.news.type_showroom")
-                    ],
-                    ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    <select class="form-control">
+                        @foreach($newsTypes as $key => $type)
+                            <option value="{{ $type->name }}">{!! $type->{'name'.$langSuf} !!}</option>
+                        @endforeach
+                    </select>
                 </div><!--col-lg-10-->
             </div><!--form control-->
             <div class="tab-content">
