@@ -99,14 +99,15 @@
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
-                <div id="forChild" hidden>
-                    <div class="form-group">
-                        {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+                <div class="form-group">
+                    {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
 
-                        <div class="col-lg-10">
-                            {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
+                    <div class="col-lg-10">
+                        {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div id="forChild" hidden>
+
 
                     <div class="form-group">
                         {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
