@@ -34,6 +34,7 @@
                     <select name="type" class="form-control">
                         <option value="0">{{ trans('validation.attributes.backend.access.documents.type_design') }}</option>
                         <option value="1">{{ trans('validation.attributes.backend.access.documents.type_press') }}</option>
+                        <option value="2">{{ trans('validation.attributes.backend.access.documents.type_flash') }}</option>
                     </select>
                 </div><!--col-lg-10-->
             </div><!--form control-->

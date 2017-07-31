@@ -31,14 +31,15 @@
 
     var $sortablePhoto = [];
 
-    var sortableZone = new Sortable(document.getElementById('accordion'), {
-        onEnd: function (/**Event*/evt) {
-            var hidden = $(evt.item).find('input.sort');
-            var index = evt.newIndex;
-            hidden.val(index);
-        }
-    });
-
+    if(document.getElementById('accordion')) {
+        var sortableZone = new Sortable(document.getElementById('accordion'), {
+            onEnd: function (/**Event*/evt) {
+                var hidden = $(evt.item).find('input.sort');
+                var index = evt.newIndex;
+                hidden.val(index);
+            }
+        });
+    }
     function movePhoto() {
         $('.photo.active:not(:first)').each(function (key, el) {
             $sortablePhoto[key] = Sortable.create(el, {

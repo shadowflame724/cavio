@@ -62,7 +62,6 @@ class CollectionRepository extends BaseRepository
     public function create(array $input)
     {
         DB::transaction(function () use ($input) {
-            dd($input);
             $collection = self::MODEL;
             $collection = new $collection();
             $collection->title = $input['title'];

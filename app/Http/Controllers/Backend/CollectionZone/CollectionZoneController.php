@@ -20,6 +20,13 @@ class CollectionZoneController extends Controller
             'title' => "Default title",
             'title_ru' => "Default title",
             'title_it' => "Default title",
+            'name' => "Default name",
+            'name_ru' => "Default name",
+            'name_it' => "Default name",
+            'description' => "Default description",
+            'description_ru' => "Default description",
+            'description_it' => "Default description",
+
             'collection_id' => $collection->id,
         ]);
 

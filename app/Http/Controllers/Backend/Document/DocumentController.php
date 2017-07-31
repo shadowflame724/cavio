@@ -50,8 +50,10 @@ class DocumentController extends Controller
             ->editColumn('type', '
             @if($type == 0)
             DESIGN KIT
-            @else
+            @elseif($type == 1)
             PRESS KIT
+            @else
+            FLASH INFO
             @endif
             ')
             ->addColumn('actions', function ($document) {
