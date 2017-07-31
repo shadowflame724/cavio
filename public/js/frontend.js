@@ -1106,233 +1106,238 @@ if(document.querySelector('body.main')){
 
 //ABOUT
 if(document.querySelector('body.about')){
-  console.log('About page');
+    console.log('About page');
 
-  var indicArrow = document.getElementById('indicator-arrow');
-  var aboutPageLen = $('#about-mood').offset().top;
+    var indicArrow = document.getElementById('indicator-arrow');
+    var aboutPageLen = $('#about-mood').offset().top;
 
-  $('.indicator a').on('click', function(event){
-    event.preventDefault();
+    $('.indicator a').on('click', function(event){
+        event.preventDefault();
 
-    var durationScroll = Math.abs($(this.getAttribute('href')).offset().top) * 0.3;
-    if(mainScroll) {
-      mainScroll.scrollTo(0, mainScroll.offset.y + $(this.getAttribute('href')).offset().top, durationScroll/2, function () {
-        if (wavesBg_1) wavesBg_1.play();
-      });
-    }
-    else{
-      $('body').animate({ scrollTop: $(this.getAttribute('href')).offset().top }, durationScroll);
-    }
+        var durationScroll = Math.abs($(this.getAttribute('href')).offset().top) * 0.3;
+        if(mainScroll) {
+            mainScroll.scrollTo(0, mainScroll.offset.y + $(this.getAttribute('href')).offset().top, durationScroll/2, function () {
+                if (wavesBg_1) wavesBg_1.play();
+            });
+        }
+        else{
+            $('body').animate({ scrollTop: $(this.getAttribute('href')).offset().top }, durationScroll);
+        }
 
-  });
-
-
-  $('.banner-cont-read a').on('click', function(event){
-    event.preventDefault();
-    var durationScroll = Math.abs($(this.getAttribute('href')).eq(0).offset().top) * 0.3;
-
-    if(mainScroll) {
-      mainScroll.scrollTo(0, mainScroll.offset.y + $(this.getAttribute('href')).offset().top - 100, durationScroll, function(){
-        if (wavesBg_1) wavesBg_1.play();
-      });
-    }
-    else{
-      $('body').animate({ scrollTop: $(this.getAttribute('href')).offset().top - 100 }, durationScroll / 3);
-    }
-  });
-
-  $(document).ready(function () {
-    if(window.innerWidth > 1024){
-      checkIndicators();
-
-        setTimeout(function(){  $('#about-history .wrap-banner-cont').attr('data-anim', 'true');  },500);
-        setTimeout(function(){  $('#wrap-page-indicators').attr('data-anim', 'true');  },700);
-    }
-
-    if(mainScroll)  scrollFunc();
-  });
-
-  var footerBeVis = false;
-
-  function scrollFunc() {
-    mainScroll.addListener(function(){
-
-      var wrapImgUnderHistoryLeft = $('.wrap-img-under-history-left').offset().top - (window.innerHeight*0.77);
-      var wrapTextUnderHistoryRight = $('.wrap-text-under-history-right').offset().top - (window.innerHeight*0.77);
-      var wrapImgUnderHistoryRight = $('.wrap-img-under-history-right').offset().top - (window.innerHeight*0.77);
-      var wrapTextUnderHistoryLeft = $('.wrap-text-under-history-left').offset().top - (window.innerHeight*0.8);
-
-
-      var aboutPhilCont = $('#about-philosofhy .banner-center').offset().top - (window.innerHeight*0.55);
-      var aboutMoodCont = $('#about-mood .banner-center').offset().top - (window.innerHeight*0.55);
-
-
-      var itemOffsetAboutPhil = $('#about-philosofhy').offset().top - (window.innerHeight*0.1);
-      var itemOffsetAboutMood = $('#about-mood').offset().top - (window.innerHeight*0.1);
-
-
-      var wrap2ColUnderPhil = $('#wrap-2-col-under-phil').offset().top - (window.innerHeight*0.7);
-      var itemOffsetAboutRomb = $('#about-romb').offset().top - (window.innerHeight*0.7);
-      var itemOffsetMoodBig = $('#inner-mood-big').offset().top - (window.innerHeight*0.7);
-
-      var colUnderMoodText = $('.col-under-mood-text').offset().top - (window.innerHeight*0.7);
-
-
-      if(0 < itemOffsetAboutPhil){
-        document.getElementById('wrapper-bg-philosofhy').style.opacity = (1200 - itemOffsetAboutPhil) / 730;  }
-      else {
-        document.getElementById('wrapper-bg-mood').style.opacity = (1200 - itemOffsetAboutMood) / 730;        }
-
-
-      if(0 > wrapImgUnderHistoryLeft) $('.wrap-img-under-history-left:eq(0)').addClass('show');
-      if(0 > wrapTextUnderHistoryRight) $('.wrap-text-under-history-right:eq(0)').addClass('show');
-
-      if(0 > aboutPhilCont) $('#about-philosofhy .wrap-banner-cont:eq(0)').attr('data-anim', 'true');
-      if(0 > aboutMoodCont) $('#about-mood .wrap-banner-cont:eq(0)').attr('data-anim', 'true');
-
-      if(0 > wrapImgUnderHistoryRight) $('.wrap-img-under-history-right:eq(0)').addClass('show');
-      if(0 > wrapTextUnderHistoryLeft) $('.wrap-text-under-history-left:eq(0)').addClass('show');
-      if(0 > wrap2ColUnderPhil)    $('#wrap-2-col-under-phil').addClass('show');
-      if(0 > itemOffsetAboutRomb)  $('#about-romb').addClass('show');
-      if(0 > itemOffsetMoodBig)    $('.mood-big').addClass('show');
-      if(0 > colUnderMoodText)     $('.col-under-mood-text').addClass('show');
-
-
-
-      var notWaveToTop = false;
-      if($('#about-history').offset().top - (window.innerHeight) > 0){
-        wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[0]);
-        notWaveToTop = true;
-      }
-      if($('#about-philosofhy').offset().top - (window.innerHeight) < 0){
-        wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[1]);
-        notWaveToTop = true;
-      }
-      if($('#about-mood').offset().top - (window.innerHeight) < 0){
-        notWaveToTop = true;
-        wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[2]);
-      }
-      if(!notWaveToTop){
-        wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[0]);
-      }
-
-      if(mainScroll.isVisible(document.querySelector('footer')) && !footerBeVis){
-        $('#wrap-page-indicators').addClass('hide');;
-        footerBeVis = true;
-      }
-      if(!mainScroll.isVisible(document.querySelector('footer')) && footerBeVis){
-        $('#wrap-page-indicators.hide').removeClass('hide');
-        footerBeVis = false;
-      }
-
-      checkIndicators();
     });
-  }
-
-  $(window).on('scroll', function(event){
-    if(!mainScroll){
-      var currScrolled = $(document).scrollTop();
-
-      var heightVisHist = $('#about-history').offset().top + $('#about-history').height() - currScrolled;
-      var heightVisPhil = $('#about-philosofhy').offset().top + $('#about-philosofhy').height() - currScrolled;
-      var heightVisMood = $('#about-mood').offset().top + $('#about-mood').height() - currScrolled;
 
 
+    $('.banner-cont-read a').on('click', function(event){
+        event.preventDefault();
+        var durationScroll = Math.abs($(this.getAttribute('href')).eq(0).offset().top) * 0.3;
 
-      var wrapImgUnderHistoryLeft = $('.wrap-img-under-history-left').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var wrapTextUnderHistoryRight = $('.wrap-text-under-history-right').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var wrapImgUnderHistoryRight = $('.wrap-img-under-history-right').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var wrapTextUnderHistoryLeft = $('.wrap-text-under-history-left').offset().top - (window.innerHeight*0.9) - currScrolled;
+        if(mainScroll) {
+            mainScroll.scrollTo(0, mainScroll.offset.y + $(this.getAttribute('href')).offset().top - 100, durationScroll, function(){
+                if (wavesBg_1) wavesBg_1.play();
+            });
+        }
+        else{
+            $('body').animate({ scrollTop: $(this.getAttribute('href')).offset().top - 100 }, durationScroll / 3);
+        }
+    });
 
-      var aboutPhilCont = $('#about-philosofhy .banner-center').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var aboutMoodCont = $('#about-mood .banner-center').offset().top - (window.innerHeight*0.7) - currScrolled;
+    $(document).ready(function () {
+        if(window.innerWidth > 1024){
+            checkIndicators();
 
-      var itemOffsetAboutPhil = $('#about-philosofhy').offset().top - (window.innerHeight*0.1) - currScrolled;
-      var itemOffsetAboutMood = $('#about-mood').offset().top - (window.innerHeight*0.1) - currScrolled;
+            setTimeout(function(){  $('#about-history .wrap-banner-cont').attr('data-anim', 'true');  },500);
+            setTimeout(function(){  $('#wrap-page-indicators').attr('data-anim', 'true');  },700);
+        }
 
-      var wrap2ColUnderPhil = $('#wrap-2-col-under-phil').offset().top - (window.innerHeight*0.6) - currScrolled;
-      var itemOffsetAboutRomb = $('#about-romb').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var itemOffsetMoodBig = $('#inner-mood-big').offset().top - (window.innerHeight*0.7) - currScrolled;
+        if(mainScroll)  scrollFunc();
+    });
 
+    var footerBeVis = false;
 
-      // ==== PHIL ====
-      var moodItem0 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(0)').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var moodItem1 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(1)').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var moodItem2 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(2)').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var moodItem3 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(3)').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var moodItem4 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(4)').offset().top - (window.innerHeight*0.7) - currScrolled;
-      // ==============
+    function scrollFunc() {
+        mainScroll.addListener(function(){
 
-
-      var colUnderMoodText = $('.col-under-mood-text:eq(0)').offset().top - (window.innerHeight*0.7) - currScrolled;
-
-      if(0 < itemOffsetAboutPhil){
-        document.getElementById('wrapper-bg-philosofhy').style.opacity = (1200 - itemOffsetAboutPhil) / 730; }
-      else{
-        document.getElementById('wrapper-bg-mood').style.opacity = (1200 - itemOffsetAboutMood) / 730;  }
-
-      if(0 > wrapImgUnderHistoryLeft) $('.wrap-img-under-history-left').addClass('show');
-      if(0 > wrapTextUnderHistoryRight) $('.wrap-text-under-history-right').addClass('show');
-
-      if(0 > aboutPhilCont) $('#about-philosofhy .wrap-banner-cont').attr('data-anim', 'true');
-      if(0 > aboutMoodCont) $('#about-mood .wrap-banner-cont').attr('data-anim', 'true');
-
-      if(0 > wrapImgUnderHistoryRight) $('.wrap-img-under-history-right').addClass('show');
-      if(0 > wrapTextUnderHistoryLeft) $('.wrap-text-under-history-left').addClass('show');
-      if(0 > wrap2ColUnderPhil)    $('#wrap-2-col-under-phil').addClass('show');
-      if(0 > itemOffsetAboutRomb)  $('#about-romb').addClass('show');
-      if(0 > itemOffsetMoodBig)    $('.mood-big').addClass('show');
-
-      // ==== MOOD ====
-      if(0 > moodItem0)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(0)').addClass('show');
-      if(0 > moodItem1)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(1)').addClass('show');
-      if(0 > moodItem2)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(2)').addClass('show');
-      if(0 > moodItem3)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(3)').addClass('show');
-      if(0 > moodItem4)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(4)').addClass('show');
-      // ==============
-
-      if(0 > colUnderMoodText)     $('.col-under-mood-text').addClass('show');
+            var wrapImgUnderHistoryLeft = $('.wrap-img-under-history-left').offset().top - (window.innerHeight*0.77);
+            var wrapTextUnderHistoryRight = $('.wrap-text-under-history-right').offset().top - (window.innerHeight*0.77);
+            var wrapImgUnderHistoryRight = $('.wrap-img-under-history-right').offset().top - (window.innerHeight*0.77);
+            var wrapTextUnderHistoryLeft = $('.wrap-text-under-history-left').offset().top - (window.innerHeight*0.8);
 
 
-      // ===
-      if(heightVisHist > 0){
-        wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[0]);
-      }
-      if(heightVisHist < 0 && heightVisPhil > 0){
-        wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[1]);
-      }
-      if(heightVisPhil < 0 && heightVisMood > 0){
-        wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[2]);
-      }
+            var aboutPhilCont = $('#about-philosofhy .banner-center').offset().top - (window.innerHeight*0.55);
+            var aboutMoodCont = $('#about-mood .banner-center').offset().top - (window.innerHeight*0.55);
 
 
-      if(window.innerWidth > 1024)  checkIndicators();
+            var itemOffsetAboutPhil = $('#about-philosofhy').offset().top - (window.innerHeight*0.1);
+            var itemOffsetAboutMood = $('#about-mood').offset().top - (window.innerHeight*0.1);
+
+
+            var wrap2ColUnderPhil = $('#wrap-2-col-under-phil').offset().top - (window.innerHeight*0.7);
+            var itemOffsetAboutRomb = $('#about-romb').offset().top - (window.innerHeight*0.7);
+            var itemOffsetMoodBig = $('#inner-mood-big').offset().top - (window.innerHeight*0.7);
+
+            var colUnderMoodText = $('.col-under-mood-text').offset().top - (window.innerHeight*0.7);
+
+
+            if(0 < itemOffsetAboutPhil){
+                document.getElementById('wrapper-bg-philosofhy').style.opacity = (1200 - itemOffsetAboutPhil) / 730;  }
+            else {
+                document.getElementById('wrapper-bg-mood').style.opacity = (1200 - itemOffsetAboutMood) / 730;        }
+
+
+            if(0 > wrapImgUnderHistoryLeft) $('.wrap-img-under-history-left:eq(0)').attr('data-anim', 'true');
+            if(0 > wrapTextUnderHistoryRight) $('.wrap-text-under-history-right:eq(0)').attr('data-anim', 'true');
+
+            if(0 > aboutPhilCont) $('#about-philosofhy .wrap-banner-cont:eq(0)').attr('data-anim', 'true');
+            if(0 > aboutMoodCont) $('#about-mood .wrap-banner-cont:eq(0)').attr('data-anim', 'true');
+
+            if(0 > wrapImgUnderHistoryRight) $('.wrap-img-under-history-right:eq(0)').attr('data-anim', 'true');
+            if(0 > wrapTextUnderHistoryLeft) $('.wrap-text-under-history-left:eq(0)').attr('data-anim', 'true');
+            if(0 > wrap2ColUnderPhil)    $('#wrap-2-col-under-phil').attr('data-anim', 'true');
+            if(0 > itemOffsetAboutRomb)  $('#about-romb').attr('data-anim', 'true');
+            if(0 > itemOffsetMoodBig)    $('.mood-big').attr('data-anim', 'true');
+            if(0 > colUnderMoodText)     $('.col-under-mood-text').attr('data-anim', 'true');
+
+
+
+            var notWaveToTop = false;
+            if($('#about-history').offset().top - (window.innerHeight) > 0){
+                wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[0]);
+                notWaveToTop = true;
+            }
+            if($('#about-philosofhy').offset().top - (window.innerHeight) < 0){
+                wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[1]);
+                notWaveToTop = true;
+            }
+            if($('#about-mood').offset().top - (window.innerHeight) < 0){
+                notWaveToTop = true;
+                wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[2]);
+            }
+            if(!notWaveToTop){
+                wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[0]);
+            }
+
+            if(mainScroll.isVisible(document.querySelector('footer')) && !footerBeVis){
+                $('#wrap-page-indicators').addClass('hide');
+                footerBeVis = true;
+            }
+            if(!mainScroll.isVisible(document.querySelector('footer')) && footerBeVis){
+                $("#wrap-page-indicators[data-anim='false']").attr('data-anim', 'true');
+                footerBeVis = false;
+            }
+
+            checkIndicators();
+        });
     }
-  });
 
-  function checkIndicators(){
-    if($('#about-philosofhy').offset().top - (window.innerHeight * 0.55) > 0) {
-      if(!$('#indicator-1').hasClass('active')){
-        $('.indicator.active').removeClass('active');
-        $('#indicator-1').addClass('active');
-      }
+    $(window).on('scroll', function(event){
+        if(!mainScroll){
+            var currScrolled = $(document).scrollTop();
+
+            var heightVisHist = $('#about-history').offset().top + $('#about-history').height() - currScrolled;
+            var heightVisPhil = $('#about-philosofhy').offset().top + $('#about-philosofhy').height() - currScrolled;
+            var heightVisMood = $('#about-mood').offset().top + $('#about-mood').height() - currScrolled;
+
+
+
+            var wrapImgUnderHistoryLeft = $('.wrap-img-under-history-left').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var wrapTextUnderHistoryRight = $('.wrap-text-under-history-right').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var wrapImgUnderHistoryRight = $('.wrap-img-under-history-right').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var wrapTextUnderHistoryLeft = $('.wrap-text-under-history-left').offset().top - (window.innerHeight*0.9) - currScrolled;
+
+            var aboutPhilCont = $('#about-philosofhy .banner-center').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var aboutMoodCont = $('#about-mood .banner-center').offset().top - (window.innerHeight*0.7) - currScrolled;
+
+            var itemOffsetAboutPhil = $('#about-philosofhy').offset().top - (window.innerHeight*0.1) - currScrolled;
+            var itemOffsetAboutMood = $('#about-mood').offset().top - (window.innerHeight*0.1) - currScrolled;
+
+            var wrap2ColUnderPhil = $('#wrap-2-col-under-phil').offset().top - (window.innerHeight*0.6) - currScrolled;
+            var itemOffsetAboutRomb = $('#about-romb').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var itemOffsetMoodBig = $('#inner-mood-big').offset().top - (window.innerHeight*0.7) - currScrolled;
+
+
+            // ==== PHIL ====
+            var moodItem0 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(0)').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var moodItem1 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(1)').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var moodItem2 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(2)').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var moodItem3 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(3)').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var moodItem4 = $('.wrap-images-under-mood .anim-img-corn-bg:eq(4)').offset().top - (window.innerHeight*0.7) - currScrolled;
+            // ==============
+
+
+            var colUnderMoodText = $('.col-under-mood-text:eq(0)').offset().top - (window.innerHeight*0.7) - currScrolled;
+
+            if(0 < itemOffsetAboutPhil){
+                document.getElementById('wrapper-bg-philosofhy').style.opacity = (1200 - itemOffsetAboutPhil) / 730; }
+            else{
+                document.getElementById('wrapper-bg-mood').style.opacity = (1200 - itemOffsetAboutMood) / 730;  }
+
+            if(0 > wrapImgUnderHistoryLeft) $('.wrap-img-under-history-left').addClass('show');
+            if(0 > wrapTextUnderHistoryRight) $('.wrap-text-under-history-right').addClass('show');
+
+            if(0 > aboutPhilCont) $('#about-philosofhy .wrap-banner-cont').attr('data-anim', 'true');
+            if(0 > aboutMoodCont) $('#about-mood .wrap-banner-cont').attr('data-anim', 'true');
+
+            if(0 > wrapImgUnderHistoryRight) $('.wrap-img-under-history-right').attr('data-anim', 'true');
+            if(0 > wrapTextUnderHistoryLeft) $('.wrap-text-under-history-left').attr('data-anim', 'true');
+            if(0 > wrap2ColUnderPhil)    $('#wrap-2-col-under-phil').attr('data-anim', 'true');
+            if(0 > itemOffsetAboutRomb)  $('#about-romb').attr('data-anim', 'true');
+            if(0 > itemOffsetMoodBig)    $('.mood-big').attr('data-anim', 'true');
+
+            // ==== MOOD ====
+            if(0 > moodItem0)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(0)').attr('data-anim', 'true');
+            if(0 > moodItem1)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(1)').attr('data-anim', 'true');
+            if(0 > moodItem2)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(2)').attr('data-anim', 'true');
+            if(0 > moodItem3)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(3)').attr('data-anim', 'true');
+            if(0 > moodItem4)   $('.wrap-images-under-mood .anim-img-corn-bg:eq(4)').attr('data-anim', 'true');
+            // ==============
+
+            if(0 > colUnderMoodText)     $('.col-under-mood-text').attr('data-anim', 'true');
+
+
+            // ===
+            if(heightVisHist > 0){
+                wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[0]);
+            }
+            if(heightVisHist < 0 && heightVisPhil > 0){
+                wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[1]);
+            }
+            if(heightVisPhil < 0 && heightVisMood > 0){
+                wavesBg_1.appendTo(document.querySelectorAll('h3.section-title')[2]);
+            }
+
+
+            if(window.innerWidth > 1024)  checkIndicators();
+        }
+    });
+
+    function checkIndicators(){
+        if($('#about-philosofhy').offset().top - (window.innerHeight * 0.55) > 0) {
+            if(!$('#indicator-1').hasClass('active')){
+                $('.indicator.active').removeClass('active');
+                $('#indicator-1').addClass('active');
+            }
+        }
+
+        else if($('#about-mood').offset().top - (window.innerHeight * 0.55) > 0) {
+            if(!$('#indicator-2').hasClass('active')){
+                $('.indicator.active').removeClass('active');
+                $('#indicator-2').addClass('active');
+            }
+        }
+
+        else if(!$('#indicator-3').hasClass('active')){
+            $('.indicator.active').removeClass('active');
+            $('#indicator-3').addClass('active');
+        }
+
+
+
+        if(mainScroll.getSize().content.height-$('footer').height() < mainScroll.offset.y+window.innerHeight) inStartFooter = true;
+        else inStartFooter = false;
+
+        if(inStartFooter)  $('#wrap-page-indicators').attr('data-anim', 'false');
+        if(!inStartFooter && !scrolledBottom && mainScroll && mainScroll.directionY==-1) $('#wrap-page-indicators').attr('data-anim', 'true');
     }
-
-    else if($('#about-mood').offset().top - (window.innerHeight * 0.55) > 0) {
-      if(!$('#indicator-2').hasClass('active')){
-        $('.indicator.active').removeClass('active');
-        $('#indicator-2').addClass('active');
-      }
-    }
-
-    else if(!$('#indicator-3').hasClass('active')){
-      $('.indicator.active').removeClass('active');
-      $('#indicator-3').addClass('active');
-    }
-
-    if(inStartFooter)  $('#wrap-page-indicators').addClass('hide');
-    if(!inStartFooter && !scrolledBottom && mainScroll && mainScroll.directionY==-1) $('#wrap-page-indicators').removeClass('hide');
-  }
 }
 
 //faq

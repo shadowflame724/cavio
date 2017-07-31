@@ -39,6 +39,7 @@
         @yield('before_header')
         @include('frontend.includes.header')
         @include('frontend.includes.login_modal')
+        @include('frontend.includes.popups')
 
         <main id="main-scrollbar" data-page="/{{$path}}">
             @yield('content')
