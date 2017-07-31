@@ -12,12 +12,20 @@ use App\Models\Page\Page;
 use App\Models\Popup\Popup;
 use App\Models\Showroom\Showroom;
 use App\Models\Zone\Zone;
+use App\Repositories\Frontend\Product\ProductRepository;
+
 
 /**
  * Class FrontendController.
  */
 class FrontendController extends Controller
 {
+
+    public function __construct(ProductRepository $product)
+    {
+        $this->product = $product;
+    }
+
     /**
      * @return \Illuminate\View\View
      */
@@ -25,9 +33,15 @@ class FrontendController extends Controller
     {
         $page = $this->page('index');
         $popup = Popup::find(1);
+        $collectionsArr = Collection::all();
+
+        foreach ($collectionsArr as $key => $collection){
+            $collectionsArr[$key]['products'] = $this->product->whereInIds($collection->getProductsByIds());
+        }
 
         return view('frontend.index', [
             'page' => $page,
+            'collectionsArr' => $collectionsArr,
             'popup' => $popup
         ]);
     }
