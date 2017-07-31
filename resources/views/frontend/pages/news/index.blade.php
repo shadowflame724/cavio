@@ -8,7 +8,7 @@
 
 @section('content')
     <section class="wrap-banner">
-      <div class="wrap-banner-cont">
+      <div class="wrap-banner-cont" data-anim="false">
         <h3 class="section-title">
           News
         </h3>
@@ -17,7 +17,7 @@
 
     <section id="news-data">
       <div class="news-data-wrap">
-        <div id="wrap-news-type" class="wrap-news-types-list drop-down">
+        <div id="wrap-news-type" class="wrap-news-types-list drop-down" data-anim="false">
           <span class="curr-news-type"></span>
           <ul class="news-types-list">
             <li class="active"><a href=#>{{ trans('frontend.news.allNews') }}</a>
@@ -27,7 +27,7 @@
           </ul>
         </div>
 
-        <div class="wrap-news-list">
+        <div class="wrap-news-list" data-anim="false">
           <div id="news-list" class="clearfix">
             @foreach($news as $item)
 

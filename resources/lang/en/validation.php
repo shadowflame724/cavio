@@ -316,6 +316,17 @@ return [
                     'type_collection' => 'Sort by collection',
                     'type_category' => 'Sort by category',
                     'type_collectionZone' => 'Sort by zones',
+                    'swal' => [
+                        'title' => 'No products',
+                        'text' => 'for this item'
+                    ]
+                ],
+                'documents' => [
+                    'name' => 'Name*',
+                    'link' => 'Links*',
+                    'type' => 'Type*',
+                    'type_design' => 'DESIGN KIT',
+                    'type_press' => 'PRESS KIT',
                 ],
                 'users' => [
                     'active' => 'Active',

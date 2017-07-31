@@ -94,6 +94,11 @@ return [
                 'delete_error' => 'There was a problem deleting this template message. Please try again.',
                 'update_error' => 'There was a problem updating this template message. Please try again.',
             ],
+            'documents' => [
+                'create_error' => 'There was a problem creating this document. Please try again.',
+                'delete_error' => 'There was a problem deleting this document. Please try again.',
+                'update_error' => 'There was a problem updating this document. Please try again.',
+            ],
             'users' => [
                 'cant_deactivate_self' => 'You can not do that to yourself.',
                 'cant_delete_admin' => 'You can not delete the super administrator.',

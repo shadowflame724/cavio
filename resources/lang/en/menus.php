@@ -133,6 +133,13 @@ return [
                 'management' => 'Basket Management',
                 'main'       => 'Baskets',
             ],
+            'documents' => [
+                'all'        => 'All Documents',
+                'create'     => 'Create Document',
+                'edit'       => 'Edit Document',
+                'management' => 'Documents Management',
+                'main'       => 'Documents',
+            ],
 
             'templateMessage' => [
                 'all'        => 'All Templates',

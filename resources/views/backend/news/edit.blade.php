@@ -173,12 +173,17 @@
 
                     <div class="dropzone" id="dz_photo"></div>
                     @if($news->image)
+
                         <div class="photo active">
+                            {{ Form::hidden('photo', $news->image) }}
+
                             <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
                             <img id="add_photo" src="/upload/images/{{ $news->image  }}" alt="">
                         </div>
                     @else
                         <div class="photo">
+                            {{ Form::hidden('photo', null) }}
+
                             <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
                         </div>
                     @endif

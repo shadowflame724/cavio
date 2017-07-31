@@ -78,6 +78,12 @@
                             <span>{{ trans('labels.backend.access.templateMessage.management') }}</span>
                         </a>
                     </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/documents*')) }}">
+                        <a href="{{ route('admin.documents.index') }}">
+                            <i class="fa fa-file"></i>
+                            <span>{{ trans('labels.backend.access.documents.management') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

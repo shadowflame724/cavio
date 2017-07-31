@@ -10,8 +10,8 @@
 
     <section id="catalogue" class="">
       <div class="container">
-        <div class="small-page-title hide"><span class="text-title">{{ trans('frontend.catalogue.title') }}</span></div>
-        <div class="wrap-catal wrap-box-shadow clearfix bg-white-marmur hide">
+        <div class="small-page-title" data-anim="false"><span class="text-title">{{ trans('frontend.catalogue.title') }}</span></div>
+        <div class="wrap-catal wrap-box-shadow clearfix bg-white-marmur" data-anim="false">
           <div class="catal-side relative">
             <div class="catal-filter-head">
               <!--<svg class="title-wave" viewBox="0 0 1395.63 1237.68">-->

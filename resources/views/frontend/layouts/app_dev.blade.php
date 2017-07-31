@@ -20,7 +20,7 @@
         <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
         <meta name="msapplication-TileColor" content="#2F3BA2">
         <meta name="theme-color" content="#2F3BA2">
-        {{ Html::style('css/frontend/main.css') }}
+        {{ Html::style(mix('css/frontend.css')) }}
         {{ Html::style('css/frontend/smooth-scrollbar.css') }}
         {{ Html::style('css/frontend/swiper.min.css') }}
         <script async="" src="//www.google-analytics.com/analytics.js"></script>
@@ -39,6 +39,7 @@
         @yield('before_header')
         @include('frontend.includes.header')
         @include('frontend.includes.login_modal')
+        @include('frontend.includes.popups')
 
         <main id="main-scrollbar" data-page="/{{$path}}">
             @yield('content')

@@ -237,6 +237,19 @@ return [
                     'title' => 'Title',
                 ],
             ],
+            'documents' => [
+                'create' => 'Create Document',
+                'edit' => 'Edit Document',
+                'management' => 'Documents',
+
+                'table' => [
+                    'id' => 'Id',
+                    'type' => 'Type',
+                    'name' => 'Name',
+                    'link' => 'Links',
+                    'created_at' => 'Posted'
+                ],
+            ],
 
 
             'users' => [
