@@ -12,7 +12,7 @@
     <section id="about-history" class="wrap-banner">
       <div class="banner-center">
         <div class="wrap-banner-cont">
-          <h3 class="section-title">
+          <h3 class="section-title" data-anim="false">
             {!! $page->blocks->get(0)->{'title'.$langSuf} !!}
           </h3>
           <div class="wrap-banner-about-descr">
