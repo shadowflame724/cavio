@@ -149,7 +149,12 @@ var basket = (function () {
       url: link + '/' + id,
     })
       .done(function (data) {
-        $('.total-basket-main').html(data.html);
+        // cart = _.reject(cart, function (o) {
+        //   return o.id == item.id;
+        // });
+        //console.log(data);
+        // cart_html = data.html;
+        // callback(true);
       })
       .fail(function (data) {
         console.error('Fail put item to basket');
@@ -198,29 +203,6 @@ $(document).ready(function(){
     var $_count = 1;
 
     basket.add($_price_id,$_count);
-  });
-
-  function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
-
-  //subscribe
-  $('body').on('submit','#subscribe',function () {
-    var _form = $(this),
-        _action = _form.attr('action'),
-        mail = _form.find('input.email-input').val() || false;
-
-    console.log('_action');
-    console.log(_action);
-    console.log(mail);
-    if(mail && validateEmail(mail)){
-      alert('subscribe success mail');
-      $.get(_action+'?email='+mail, function( data ) {
-        alert( "subscribe success SEND" );
-      });
-    }
-    return false;
   });
 });
 
@@ -2172,6 +2154,7 @@ if(document.querySelector('body.stash')){
   $('.kick-ord_it').on('click', function(e){
     var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
     var priceid = $(this).attr('data-priceid');
+    alert(priceid);
     basket.remove(priceid);
     itemStash.addClass('remove');
 
@@ -2756,7 +2739,9 @@ $('form').on('submit', function(e){
   });
 
 
-  // document.querySelector('.input-error').focus();
+  document.querySelector('.input-error').focus();
+
+
   if(isValid){
     if($(this).hasClass('form-submit')){
       $('#modal-thank_you-subs').removeClass('hide').addClass('show');
@@ -3446,18 +3431,23 @@ var App = (function () {
     });
   }
 
+  function _editAfterFooter(html, clbk) {
+    $('#after_footer').html(html);
+    // clbk();
+  }
+
   function _editHeadHtml(html, clbk) {
     $('.header-mob').html(html);
     clbk();
   }
 
-  function _editAfterFooter(html, clbk) {
-    $('#after_footer').html(html);
-    clbk();
-  }
-
   function _editContentHtml(html, pageName, clbk) {
-    $('main .scroll-content').html(html);
+    $('main .scroll-content > *').each(function (i,_el) {
+      if(!$(_el).is('footer')){
+        $(_el).remove();
+      }
+    });
+    $('main .scroll-content footer').before(html);
     mainScroll.scrollTo(0, 0, 500);
     $('main').attr('data-page', pageName);
     clbk();
