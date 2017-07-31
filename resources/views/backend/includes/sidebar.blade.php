@@ -169,21 +169,21 @@
                             </li>
 
                             <li class="{{ active_class(Active::checkUriPattern('admin/sort/categories*')) }}">
-                                <a href="{{ route('admin.sort.index') }}">
+                                <a href="{{ route('admin.sort.index', 'categories') }}">
                                     <i class="fa fa-sort-amount-asc"></i>
                                     <span>Сорт. в категории</span>
                                 </a>
                             </li>
 
                             <li class="{{ active_class(Active::checkUriPattern('admin/sort/collections*')) }}">
-                                <a href="{{ route('admin.sort.index') }}">
+                                <a href="{{ route('admin.sort.index', 'collections') }}">
                                     <i class="fa fa-sort-amount-asc"></i>
                                     <span>Сорт. в коллекции</span>
                                 </a>
                             </li>
 
                             <li class="{{ active_class(Active::checkUriPattern('admin/sort/zones*')) }}">
-                                <a href="{{ route('admin.sort.index') }}">
+                                <a href="{{ route('admin.sort.index', 'zones') }}">
                                     <i class="fa fa-sort-amount-asc"></i>
                                     <span>Сорт. в зоне</span>
                                 </a>

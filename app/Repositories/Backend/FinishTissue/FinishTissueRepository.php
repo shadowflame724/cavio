@@ -73,6 +73,7 @@ class FinishTissueRepository extends BaseRepository
             if($input['parent'] != "null"){
                 $finishTissue->type = FinishTissue::find($input['parent'])->type;
             }else{
+                $finishTissue->parent_id = null;
                 $finishTissue->type = $input['type'];
             }
 

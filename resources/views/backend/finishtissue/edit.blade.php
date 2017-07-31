@@ -78,36 +78,36 @@
                     </div><!--form control-->
                 @endif
 
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="en">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="en">
 
-                            <div class="form-group">
-                                {{ Form::label('title', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="form-group">
+                            {{ Form::label('title', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                                <div class="col-lg-10">
-                                    {{ Form::text('title', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                </div><!--col-lg-10-->
-                            </div><!--form control-->
+                            <div class="col-lg-10">
+                                {{ Form::text('title', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
                         </div><!--form control-->
-                        <div role="tabpanel" class="tab-pane fade" id="ru">
-                            <div class="form-group">
-                                {{ Form::label('title_ru', trans('validation.attributes.backend.access.finishtissue.title_ru'), ['class' => 'col-lg-2 control-label']) }}
+                    </div><!--form control-->
+                    <div role="tabpanel" class="tab-pane fade" id="ru">
+                        <div class="form-group">
+                            {{ Form::label('title_ru', trans('validation.attributes.backend.access.finishtissue.title_ru'), ['class' => 'col-lg-2 control-label']) }}
 
-                                <div class="col-lg-10">
-                                    {{ Form::text('title_ru', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                </div><!--col-lg-10-->
-                            </div><!--form control-->
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="it">
-                            <div class="form-group">
-                                {{ Form::label('title_it', trans('validation.attributes.backend.access.finishtissue.title_it'), ['class' => 'col-lg-2 control-label']) }}
-
-                                <div class="col-lg-10">
-                                    {{ Form::text('title_it', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                                </div><!--col-lg-10-->
-                            </div><!--form control-->
+                            <div class="col-lg-10">
+                                {{ Form::text('title_ru', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
                         </div><!--form control-->
                     </div>
+                    <div role="tabpanel" class="tab-pane fade" id="it">
+                        <div class="form-group">
+                            {{ Form::label('title_it', trans('validation.attributes.backend.access.finishtissue.title_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                            <div class="col-lg-10">
+                                {{ Form::text('title_it', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+                    </div><!--form control-->
+                </div>
 
                 <div class="form-group">
                     {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
@@ -116,15 +116,17 @@
                         {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
+
+                <div class="form-group">
+                    {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
                 @if($finishTissue->parent_id != null)
 
-                    <div class="form-group">
-                        {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
 
                     <div class="form-group">
                         {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}

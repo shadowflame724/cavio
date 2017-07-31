@@ -39,7 +39,7 @@
             </ul>
 
             <div class="box-body">
-                <div class="form-group">
+                <div class="form-group" id="typeSelector">
                     {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
                         <select name="type" class="form-control">
@@ -99,14 +99,15 @@
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
-                <div id="forChild" hidden>
-                    <div class="form-group">
-                        {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+                <div class="form-group">
+                    {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
 
-                        <div class="col-lg-10">
-                            {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
+                    <div class="col-lg-10">
+                        {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div id="forChild" hidden>
+
 
                     <div class="form-group">
                         {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
@@ -148,13 +149,16 @@
     <script>
         var forChild = document.getElementById('forChild');
         var parentSelector = document.getElementById('parentSelector');
+        var typeSelector = document.getElementById('typeSelector');
         var photo;
         $(parentSelector).on('change', function () {
             var x = this.value;
             if (x !== "null") {
                 $(forChild).fadeIn('slow');
+                $(typeSelector).fadeOut('slow');
             } else if (x == "null") {
                 $(forChild).fadeOut('slow');
+                $(typeSelector).fadeIn('slow');
                 photo = document.getElementsByClassName('photo');
                 $(document.getElementById('hiddenPhoto')).val('');
                 $(photo).removeClass('active');

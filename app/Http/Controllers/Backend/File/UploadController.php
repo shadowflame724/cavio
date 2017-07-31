@@ -128,7 +128,6 @@ class UploadController extends Controller
             ]
         ];
 
-
         return response()->json($json);
     }
 

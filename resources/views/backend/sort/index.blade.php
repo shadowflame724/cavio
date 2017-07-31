@@ -1,6 +1,6 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.access.sort.management'))
+@section ('name', trans('labels.backend.access.sort.management'))
 
 @section('after-styles')
     <style>
@@ -17,7 +17,7 @@
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('labels.backend.access.sort.management') }}</h3>
+            <h3 class="box-name">{{ trans('labels.backend.access.sort.management') }}</h3>
 
             <div class="box-tools pull-right">
             </div>
@@ -25,39 +25,45 @@
 
         <div class="box-body">
             <div class="form-group">
-                {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_collection'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    <select name="collection" class="form-control" id="collectionSelect">
+                @if($type == 'collections')
+                    {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_collection'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <select name="collection" class="form-control" id="collectionSelect">
+                            <option selected disabled value="">Choice collection</option>
                         @foreach($collections as $key => $collection)
-                            <option selected
-                                    value="{{ $collection->id }}"
-                            >{{ $collection->title }}</option>
-                        @endforeach
-                    </select>
-                </div><!--col-lg-10-->
+                                <option value="{{ $collection->id }}">{{ $collection->title }}</option>
+                            @endforeach
+                        </select>
+                    </div><!--col-lg-10-->
+                @elseif($type == 'categories')
 
-                {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_category'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_category'), ['class' => 'col-lg-2 control-label']) }}
 
-                <div class="col-lg-10">
-                    <select name="category" class="form-control" id="categorySelect">
+                    <div class="col-lg-10">
+                        <select name="category" class="form-control" id="categorySelect">
+                            <option selected disabled value="">Choice category</option>
                         @foreach($categories as $key => $category)
-                            <option selected
-                                    value="{{ $category->id }}"
-                            >{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                </div><!--col-lg-10-->
-                {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_collectionZone'), ['class' => 'col-lg-2 control-label']) }}
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div><!--col-lg-10-->
+                @elseif($type == 'zones')
 
-                <div class="col-lg-10">
-                    <select name="collectionZone" class="form-control" id="collectionZoneSelect">
-                        @foreach($collectionZones as $key => $collectionZone)
-                            <option selected
-                                    value="{{ $collectionZone->id }}"
-                            >{{ $collectionZone->title }}</option>
-                        @endforeach
-                    </select>
-                </div><!--col-lg-10-->
+                    {{ Form::label('type', trans('validation.attributes.backend.access.sort.type_collectionZone'), ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        <select name="collectionZone" class="form-control" id="collectionZoneSelect">
+                            <option selected disabled value="">Choice zone</option>
+                        @foreach($collections as $key => $collection)
+                                <optgroup label="{{ $collection->title }}">
+                                    @foreach($collection->collectionZones as $key => $zone)
+                                        <option value="{{ $zone->id }}">{{ $zone->title }}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </select>
+                    </div><!--col-lg-10-->
+                @endif
             </div><!--form control-->
 
             <div class="box-body" id="products-box">
@@ -129,7 +135,7 @@
                 },
                 error: function (res) {
                     swal({
-                        title: "No products",
+                        name: "No products",
                         text: "For this item",
                         type: "warning",
                         confirmButtonColor: "#DD6B55"

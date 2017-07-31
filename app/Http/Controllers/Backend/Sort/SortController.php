@@ -19,15 +19,15 @@ class SortController extends Controller
      *
      * @return mixed
      */
-    public function index(ManageSortRequest $request)
+    public function index(ManageSortRequest $request, $type)
     {
-        $collectionZones = CollectionZone::all();
-
         return view('backend.sort.index',
-            ['collectionZones' => $collectionZones]
+            [
+                'type' => $type
+            ]
         );
-
     }
+
 
     /**
      * @return mixed
@@ -96,23 +96,25 @@ class SortController extends Controller
                 $collection = Collection::find($request->id);
                 $collection->product_ids = $request->product_ids;
                 $collection->save();
-
+                $type = 'collections';
                 break;
             case 'category':
                 $category = Category::find($request->id);
                 $category->product_ids = $request->product_ids;
                 $category->save();
+                $type = 'categories';
 
                 break;
             case 'collectionZone':
                 $collectionZone = CollectionZone::find($request->id);
                 $collectionZone->product_ids = $request->product_ids;
                 $collectionZone->save();
+                $type = 'zones';
 
                 break;
         }
 
-        return redirect(route('admin.sort.index'))->withFlashSuccess(trans('alerts.backend.sort.updated'));;
+        return redirect(route('admin.sort.index', ['type' => $type]))->withFlashSuccess(trans('alerts.backend.sort.updated'));;
     }
 
 }
