@@ -62,7 +62,6 @@ class FinishTissueController extends Controller
         if ($request->parent != "null") {
 
             $this->validate($request, [
-                'short' => 'required|max:10',
                 'photo' => 'required',
             ]);
         }

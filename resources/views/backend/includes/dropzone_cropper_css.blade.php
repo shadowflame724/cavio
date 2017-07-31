@@ -40,6 +40,7 @@
     .dlt_photo {
         position: absolute;
         top: 0;
+        right: 0;
         color: red;
         font-size: 25px;
     }
