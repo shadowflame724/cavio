@@ -236,6 +236,19 @@ return [
                 'management' => 'Sort products[IT]',
 
             ],
+            'documents' => [
+                'create'     => 'Crea document',
+                'edit'       => 'Modifica document',
+                'management' => 'Messaggio di document',
+
+                'table' => [
+                    'id' => 'Id',
+                    'type' => 'Tipo',
+                    'name' => 'Nome',
+                    'link' => 'Links',
+                    'created_at' => 'Created at'
+                ],
+            ],
 
 
             'users' => [

@@ -104,6 +104,7 @@ class CollectionController extends Controller
                 $oldzone->description_it = $newzone['description_it'];
                 $oldzone->image = $newzone['photo'];
                 $oldzone->zone_id = $newzone['zone_id'];
+                $oldzone->sort = $newzone['sort'];
 
                 if ($oldzone->save()) {
                     $imagesString = rtrim($newzone['photo'],",");
@@ -125,7 +126,7 @@ class CollectionController extends Controller
             }
         }
         $oldName = $collection->image;
-        $this->collection->update($collection, $request->only('banner', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it', 'photo'));
+        $this->collection->update($collection, $request->all());
         $this->moveThreeSizeImg($request->photo, $oldName);
 
         return redirect()

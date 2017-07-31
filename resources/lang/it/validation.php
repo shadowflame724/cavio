@@ -355,6 +355,17 @@ return [
                     'type_collection' => 'Sort by collection',
                     'type_category' => 'Sort by category',
                     'type_collectionZone' => 'Sort by zones',
+                    'swal' => [
+                        'title' => 'No product[IT]',
+                        'text' => 'for this item'
+                    ]
+                ],
+                'documents' => [
+                    'name' => 'Nome*',
+                    'link' => 'Links*',
+                    'type' => 'Tipo*',
+                    'type_design' => 'DESIGN KIT',
+                    'type_press' => 'PRESS KIT',
                 ],
 
                 'users' => [

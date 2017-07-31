@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\File;
 use JBZoo\Image\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 
 
 class UploadController extends Controller
@@ -127,6 +128,36 @@ class UploadController extends Controller
                 'text' => 'Photo upload'
             ]
         ];
+
+        return response()->json($json);
+    }
+
+    public function uploadDocument(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'mimes:doc,pdf,docx,zip',
+        ]);
+        if (!file_exists(public_path('upload/documents'))) {
+            mkdir(public_path('upload/documents'), 0777, true);
+        }
+
+        if ($validator->fails()) {
+            $json = [
+                'error' => true,
+                'message' => $validator->errors()
+            ];
+        } else {
+            $fileName = time() . '.' . $request->file('file')->getClientOriginalExtension();
+            $originalFileName = $request->file('file')->getClientOriginalName();
+
+            $request->file('file')->move(public_path('upload/documents/'), $fileName);
+
+            $json = [
+                'url' => str_replace('/admin/file', '', $request->getUri())
+                    . '/' . $fileName,
+                'name' => $originalFileName
+            ];
+        }
 
         return response()->json($json);
     }

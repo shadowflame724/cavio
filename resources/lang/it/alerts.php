@@ -82,6 +82,11 @@ return [
         'sort' => [
             'updated' => 'The product\'s sorting was successfully updated.'
         ],
+        'documents' => [
+            'created' => 'Document creato con successo.',
+            'deleted' => 'Document cancellato con successo.',
+            'updated' => 'Document aggiornato con successo.',
+        ],
 
         'users' => [
             'confirmation_email'  => "Una nuova e-mail di conferma è stata inviata all'indirizzo registrato.",
