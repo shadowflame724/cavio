@@ -57,6 +57,7 @@ class EventServiceProvider extends ServiceProvider
         \App\Listeners\Backend\Popup\PopupEventListener::class,
         \App\Listeners\Backend\TemplateMessage\TemplateMessageEventListener::class,
         \App\Listeners\Backend\Settings\SettingsEventListener::class,
+        \App\Listeners\Backend\Document\DocumentEventListener::class,
 
 
     ];

@@ -73,6 +73,11 @@ return [
             'deleted' => 'deleted tissues',
             'updated' => 'updated tissues',
         ],
+        'documents' => [
+            'created' => 'created document',
+            'deleted' => 'deleted document',
+            'updated' => 'updated document',
+        ],
         'popup' => [
             'updated' => 'updated popups',
         ],

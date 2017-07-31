@@ -135,8 +135,8 @@
                 },
                 error: function (res) {
                     swal({
-                        name: "No products",
-                        text: "For this item",
+                        title: "{{trans('validation.attributes.backend.access.sort.swal.title')}}",
+                        text: "{{trans('validation.attributes.backend.access.sort.swal.text')}}",
                         type: "warning",
                         confirmButtonColor: "#DD6B55"
                     })

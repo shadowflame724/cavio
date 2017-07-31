@@ -28,16 +28,20 @@
         '</div>' +
         '';
 
-    $('.carousel').carousel({
-        interval: 200000
+
+    var $sortablePhoto = [];
+
+    var sortableZone = new Sortable(document.getElementById('accordion'), {
+        onEnd: function (/**Event*/evt) {
+            var hidden = $(evt.item).find('input.sort');
+            var index = evt.newIndex;
+            hidden.val(index);
+        }
     });
-
-
-    var $sortableList = [];
 
     function movePhoto() {
         $('.photo.active:not(:first)').each(function (key, el) {
-            $sortableList[key] = Sortable.create(el, {
+            $sortablePhoto[key] = Sortable.create(el, {
                 onEnd: function (/**Event*/evt) {
                     var colZonHidden = '';
                     var colZonPhotos = $(el).children().slice(1);

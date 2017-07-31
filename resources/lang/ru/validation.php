@@ -321,6 +321,17 @@ return [
                     'type_collection' => 'Сортировка по коллекциям',
                     'type_category' => 'Сортировка по категориям',
                     'type_collectionZone' => 'Сортировка по зонам',
+                    'swal' => [
+                        'title' => 'Нет товаров',
+                        'text' => 'Для выбранного элемента'
+                    ]
+                ],
+                'documents' => [
+                    'name' => 'Имя*',
+                    'link' => 'Ссылки*',
+                    'type' => 'Тип*',
+                    'type_design' => 'DESIGN KIT',
+                    'type_press' => 'PRESS KIT',
                 ],
                 'image' => [
                     'error' =>[

@@ -88,6 +88,11 @@ return [
             'deleted' => 'messaggio di modello eliminato',
             'updated' => 'messaggio di modello aggiornato',
         ],
+        'documents' => [
+            'created' => 'document creato',
+            'deleted' => 'document eliminato',
+            'updated' => 'document aggiornato',
+        ],
         'users' => [
             'changed_password' => 'changed password for user',
             'created' => 'created user',

@@ -134,6 +134,13 @@ return [
                 'management' => 'Gestione baskets',
                 'main' => 'Baskets',
             ],
+            'documents' => [
+                'all' => 'Tutto i documents',
+                'create' => 'Creare document',
+                'edit'       => 'Modifica Document',
+                'management' => 'Documents Gestione',
+                'main'       => 'Documents',
+            ],
 
             'templateMessage' => [
                 'all' => 'Tutto il template',

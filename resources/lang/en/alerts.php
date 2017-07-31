@@ -91,6 +91,11 @@ return [
         'sort' => [
             'updated' => 'The product\'s sorting was successfully updated.'
         ],
+        'documents' => [
+            'created' => 'The document was successfully created.',
+            'deleted' => 'The document was successfully deleted.',
+            'updated' => 'The document was successfully updated.',
+        ],
 
 
         'users' => [

@@ -8,7 +8,9 @@ Route::get('/', 'FrontendController@index')->name('index');
 
 Route::get('about', 'FrontendController@about')->name('about');
 Route::get('faq', 'FrontendController@faq')->name('faq');
-Route::get('news', 'FrontendController@news')->name('news');
+Route::get('news', 'NewsController@index')->name('news');
+Route::get('news/{news}', 'NewsController@show')->name('news.show');
+
 
 Route::get('contacts', 'FrontendController@contacts')->name('contacts');
 Route::post('message', 'MessageController@store')->name('message.store');
@@ -35,6 +37,8 @@ Route::get('macros', 'FrontendController@macros')->name('macros');
 
 Route::get('subscribe', 'MailchimpController@subscribeNews')->name('subscribe');
 Route::get('unsubscribe', 'MailchimpController@unsubscribeNews')->name('unsubscribe');
+
+Route::get('press-design', 'FrontendController@pressDesign')->name('press-design');
 
 
 /**

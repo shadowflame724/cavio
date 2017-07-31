@@ -249,7 +249,6 @@
                     @else
                         <div class="photo">
                             {{ Form::hidden('photo', null, ['id' => 'collection-hidden']) }}
-
                         </div>
                     @endif
                 </div><!--col-lg-10-->
@@ -265,7 +264,7 @@
 
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                @foreach($collection->collectionZones as $key => $zone)
+                @foreach($collection->collectionZones->sortBy('sort') as $key => $zone)
                     @php ($i = $key+1)
 
                         <div class="panel panel-default">
@@ -298,6 +297,7 @@
 
 
                                         {{ Form::hidden('zones['.$i.'][id]', $zone->id) }}
+                                        {{ Form::hidden('zones['.$i.'][sort]', $zone->sort, ['class' => 'sort']) }}
 
                                         <div class="form-group">
                                             {{ Form::label('zones['.$i.'][zone_id]', trans('validation.attributes.backend.access.collection.zones.mainZones'), ['class' => 'col-lg-2 control-label']) }}
@@ -445,9 +445,10 @@
 
                         </div>
                         @endforeach
-                        <a href="{{route('admin.collection.zones.store', $collection)}}"
-                           class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
             </div>
+
+            <a href="{{route('admin.collection.zones.store', $collection)}}"
+               class='btn btn-success btn-xs'>{{trans('buttons.general.crud.create_new')}}</a>
 
         </div>
 
