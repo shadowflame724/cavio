@@ -9,7 +9,7 @@
 @section('content')
     <section id="" class="wrap-banner">
       <div class="banner-center v-centering">
-        <div class="wrap-banner-cont">
+        <div class="wrap-banner-cont" data-anim="false">
           <h3 class="section-title">
             {{ trans('frontend.faq.title') }}
           </h3>
@@ -22,7 +22,7 @@
       <div class="container">
         <div class="ac-container">
           @foreach($faqs as $key => $faq)
-          <div class="ac-item hide">
+          <div class="ac-item" data-anim="false">
             <input id="ac-{{ $key }}" name="accordion-{{ $key }}" type="checkbox" />
             <div class="ac-item-text-wrap">
               <div class="qa-item-wave-bg wave-dark"></div>

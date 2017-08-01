@@ -33,13 +33,27 @@
                                 </a>
                             </div>
 
-                            <form class="login_reg">
-                                <hr class="login_reg-line">
+                            {{ Form::open(['route' => 'frontend.auth.login.post', 'class' => 'login_reg', 'id' => 'login']) }}
 
-                                <input class="fullW" placeholder="E-mail" type="email">
-                                <input class="fullW" placeholder="Password" type="password">
-                                <button class="btn small login_reg-submit" content="login">login</button>
-                            </form>
+                                <hr class="login_reg-line">
+                                {{ Form::email('email', null, [
+                                    'class' => 'fullW',
+                                    'maxlength' => '191',
+                                    'required' => 'required',
+                                    'placeholder' => trans('validation.attributes.frontend.email')
+                                ]) }}
+                                {{ Form::password('password', [
+                                    'class' => 'fullW',
+                                    'required' => 'required',
+                                    'placeholder' => trans('validation.attributes.frontend.password')
+                                ]) }}
+                                <label>
+                                    {{ Form::checkbox('remember') }} {{ trans('labels.frontend.auth.remember_me') }}
+                                </label>
+                                {{ Form::submit(trans('frontend.header.login'), ['class' => 'btn small login_reg-submit']) }}
+                                {{ link_to_route('frontend.auth.password.reset', trans('labels.frontend.passwords.forgot_password')) }}
+
+                            {{ Form::close() }}
                         </div>
 
                         <div class="swiper-slide log_reg-item reg">
