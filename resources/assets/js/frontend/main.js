@@ -1084,7 +1084,6 @@ if(document.querySelector('body.main')){
         setTimeout(function(){  initWaves()  }, 500);
       }
 
-
       if(mainScroll.isVisible( ourPhilosophyTitle )) $('#our-philosophy h3.section-title').attr('data-anim', 'true');
 
 
