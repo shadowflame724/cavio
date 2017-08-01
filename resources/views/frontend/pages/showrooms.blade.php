@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <div id="main-show_r" class="wrap-philosophy a main_show_r clearfix">
+            <div id="main-show_r" class="wrap-philosophy a main_show_r clearfix" data-anim="false">
                 <div class="phil-left">
                     <div class="wrap-img-bg philosophy-img">
                         <div class="img-back wave-dark">

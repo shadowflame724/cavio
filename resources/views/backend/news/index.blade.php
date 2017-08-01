@@ -26,7 +26,7 @@
                     <thead>
                     <tr>
                         <th>{{ trans('labels.backend.access.news.table.id') }}</th>
-                        <th>{{ trans('labels.backend.access.news.table.title') }}</th>
+                        <th>{{ trans('labels.backend.access.news.table.name') }}</th>
                         <th>{{ trans('labels.backend.access.news.table.image') }}</th>
                         <th>{{ trans('labels.backend.access.news.table.type') }}</th>
                         <th>{{ trans('labels.backend.access.news.table.created_at') }}</th>
@@ -66,13 +66,13 @@
                 },
                 columns: [
                     {data: 'id', name: 'id' },
-                    {data: 'title', name: 'title'},
+                    {data: 'name', name: 'name'},
                     {data: 'image', name: 'image'},
                     {data: 'type', name: 'type'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
-                order: [[3, "asc"]],
+                order: [[4, "desc"]],
                 searchDelay: 500
             });
         });

@@ -30,7 +30,7 @@
                     <div class="col-lg-10">
                         <select name="collection" class="form-control" id="collectionSelect">
                             <option selected disabled value="">Choice collection</option>
-                        @foreach($collections as $key => $collection)
+                            @foreach($collections as $key => $collection)
                                 <option value="{{ $collection->id }}">{{ $collection->title }}</option>
                             @endforeach
                         </select>
@@ -42,8 +42,12 @@
                     <div class="col-lg-10">
                         <select name="category" class="form-control" id="categorySelect">
                             <option selected disabled value="">Choice category</option>
-                        @foreach($categories as $key => $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @foreach($parentCat as $category)
+                                <optgroup label="{{ $category->name }}">
+                                    @foreach($category->children as $child)
+                                        <option value="{{ $child->id }}">{{ $child->name }}</option>
+                                    @endforeach
+                                </optgroup>
                             @endforeach
                         </select>
                     </div><!--col-lg-10-->
@@ -54,7 +58,7 @@
                     <div class="col-lg-10">
                         <select name="collectionZone" class="form-control" id="collectionZoneSelect">
                             <option selected disabled value="">Choice zone</option>
-                        @foreach($collections as $key => $collection)
+                            @foreach($collections as $key => $collection)
                                 <optgroup label="{{ $collection->title }}">
                                     @foreach($collection->collectionZones as $key => $zone)
                                         <option value="{{ $zone->id }}">{{ $zone->title }}</option>

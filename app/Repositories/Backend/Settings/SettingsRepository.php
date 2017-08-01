@@ -35,8 +35,8 @@ class SettingsRepository extends BaseRepository
             'instagram' => $input['soc_links']["instagram"],
             'pinterest' => $input['soc_links']["pinterest"]
         ];
-
         $settings->soc_links = json_encode($socLinksArr);
+        $settings->news_types_data = json_encode($input['news_types']);
         $settings->vat_data = json_encode($input['vat_data']);
         $settings->discount_data = json_encode($input['discount_data']);
         $settings->koef_data = json_encode(str_replace(',', '.', preg_replace("/[^0-9,.]/", "", $input['koef_data'])));

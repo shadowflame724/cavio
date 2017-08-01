@@ -18,45 +18,61 @@
         </div><!-- /.box-header -->
 
         <div class="box-body">
-            <div class="form-group col-lg-12">
-                {{ Form::label('user_first_name', trans('validation.attributes.backend.access.orders.user_fr_name'), ['class' => 'col-lg-2 control-label']) }}
-
-                <div class="col-lg-10">
+            <div class="well col-lg-12" id="user-info">
+                <div class="form-group">
+                    <b>{{  trans('validation.attributes.backend.access.baskets.updated_at'), ['class' => 'control-label'] }}
+                        :</b>
+                    {{ $order->updated_at->diffForHumans() }}
+                </div><!--form control-->
+                <div class="form-group">
+                    <b>{{  trans('validation.attributes.backend.access.baskets.user_fr_name'), ['class' => 'control-label'] }}
+                        :</b>
                     {{ $order->user->first_name }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                </div><!--form control-->
 
-            <div class="form-group col-lg-12">
-                {{ Form::label('user_last_name', trans('validation.attributes.backend.access.orders.user_ls_name'), ['class' => 'col-lg-2 control-label']) }}
-
-                <div class="col-lg-10">
+                <div class="form-group">
+                    <b>{{  trans('validation.attributes.backend.access.baskets.user_ls_name'), ['class' => 'control-label'] }}
+                        :</b>
                     {{ $order->user->last_name }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                </div><!--form control-->
 
-            <div class="form-group col-lg-12">
-                {{ Form::label('user_email', trans('validation.attributes.backend.access.orders.user_email'), ['class' => 'col-lg-2 control-label']) }}
-
-                <div class="col-lg-10">
+                <div class="form-group">
+                    <b>{{  trans('validation.attributes.backend.access.baskets.user_email'), ['class' => 'control-label'] }}
+                        :</b>
                     {{ $order->user->email }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                </div><!--form control-->
+            </div>
+            <div class="well col-lg-12" id="products-info">
+                <div class="form-group">
+                    <div class="row">
+                        @foreach($products as $product)
+                            <div class="col-lg-3">
+                                <div class="thumbnail">
+                                    @php($imageArr = explode(',', $product->photos))
+                                        <img class="product_photo" src="/upload/products/{{ $imageArr[0] }}" alt="">
+                                        <div class="caption">
+                                            <h3>{{ $product->name }}</h3>
+                                            <small>{{ $product->code }}</small>
+                                            <p>{{ $product->price }}</p>
+                                        </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div><!--form control-->
 
-            <div class="form-group col-lg-12">
-                {{ Form::label('summ', trans('validation.attributes.backend.access.orders.summ'), ['class' => 'col-lg-2 control-label']) }}
-
-                <div class="col-lg-10">
-                    {{ $order->summ }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
-
-            <div class="form-group col-lg-12">
-                {{ Form::label('cnt', trans('validation.attributes.backend.access.orders.cnt'), ['class' => 'col-lg-2 control-label']) }}
-
-                <div class="col-lg-10">
+                <div class="form-group">
+                    <b>{{  trans('validation.attributes.backend.access.baskets.count'), ['class' => 'control-label'] }}
+                        :</b>
                     {{ $order->cnt }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                </div><!--form control-->
+
+                <div class="form-group">
+                    <b>{{  trans('validation.attributes.backend.access.baskets.summ'), ['class' => 'control-label'] }}
+                        :</b>
+                    {{ $order->summ }}
+                </div><!--form control-->
+            </div>
 
 
 
@@ -69,13 +85,21 @@
                     <select class="form-control"
                             name="status">
                         <option value="0"
-                                @if($order->status = 0) selected="selected"@endif>{{ trans('validation.attributes.backend.access.orders.status_new') }}</option>
+                                @if($order->status == 0) selected="selected"@endif
+                                @if($order->status > 0) disabled="disabled"@endif
+                        >{{ trans('validation.attributes.backend.access.orders.status_new') }}</option>
                         <option value="1"
-                                @if($order->status = 1) selected="selected"@endif>{{ trans('validation.attributes.backend.access.orders.status_sent') }}</option>
+                                @if($order->status == 1) selected="selected"@endif
+                                @if($order->status > 1) disabled="disabled"@endif
+                        >{{ trans('validation.attributes.backend.access.orders.status_sent') }}</option>
                         <option value="2"
-                                @if($order->status = 2) selected="selected"@endif>{{ trans('validation.attributes.backend.access.orders.status_delivering') }}</option>
+                                @if($order->status == 2) selected="selected"@endif
+                                @if($order->status > 2) disabled="disabled"@endif
+                        >{{ trans('validation.attributes.backend.access.orders.status_delivering') }}</option>
                         <option value="3"
-                                @if($order->status = 3) selected="selected"@endif>{{ trans('validation.attributes.backend.access.orders.status_closed') }}</option>
+                                @if($order->status == 3) selected="selected"@endif
+                                @if($order->status > 3) disabled="disabled"@endif
+                        >{{ trans('validation.attributes.backend.access.orders.status_closed') }}</option>
                     </select>
                 </div><!--col-lg-10-->
             </div><!--form control-->

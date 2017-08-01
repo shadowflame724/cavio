@@ -11,7 +11,7 @@
 @section('content')
     <section id="about-history" class="wrap-banner">
       <div class="banner-center">
-        <div class="wrap-banner-cont">
+        <div class="wrap-banner-cont" data-anim="false">
           <h3 class="section-title" data-anim="false">
             {!! $page->blocks->get(0)->{'title'.$langSuf} !!}
           </h3>
@@ -27,7 +27,7 @@
     <section id="under-about-history" class="under-history pull-on-banner">
       <div class="wrap-under-history clearfix">
         <div class="under-history-right">
-          <div class="wrap-text-under-history-right anim-under-history">
+          <div class="wrap-text-under-history-right anim-under-history" data-anim="false">
             <div class="title-under-history">{!! $page->blocks->get(1)->{'title'.$langSuf} !!}
             </div>
             <div class="text-upline und-history">
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="wrap-image-und-history-r">
-            <div class="corner-text wrap-img-under-history anim-img-corn-bg wrap-img-under-history-right">
+            <div class="corner-text wrap-img-under-history anim-img-corn-bg wrap-img-under-history-right" data-anim="false">
               <div class="img-back dark">
                 <svg viewBox="0 0 1395.63 1237.68">
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="wave.svg#wave"></use>
@@ -47,7 +47,7 @@
         </div>
         <div class="under-history-left">
           <div class="wrap-image-und-history-l">
-            <div class="corner-text wrap-img-under-history anim-img-corn-bg wrap-img-under-history-left">
+            <div class="corner-text wrap-img-under-history anim-img-corn-bg wrap-img-under-history-left" data-anim="false">
               <div class="img-back dark">
                 <svg viewBox="0 0 1395.63 1237.68">
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="wave.svg#wave"></use>
@@ -56,7 +56,7 @@
               <div class="corn-img corner-text" before="— Villa Cannes"><img src="/upload/images/{!! $page->blocks->get(2)->image !!}" alt=""></div>
             </div>
           </div>
-          <div class="text-upline und-history anim-under-history wrap-text-under-history-left">
+          <div class="text-upline und-history anim-under-history wrap-text-under-history-left" data-anim="false">
             {!! $page->blocks->get(2)->{'body'.$langSuf} !!}
           </div>
         </div>
@@ -64,7 +64,7 @@
 
     <section id="about-philosofhy" class="wrap-banner">
       <div class="banner-center">
-        <div class="wrap-banner-cont">
+        <div class="wrap-banner-cont" data-anim="false">
           <h3 class="section-title">
             {!! $page->blocks->get(3)->{'title'.$langSuf} !!}
           </h3>

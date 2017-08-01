@@ -179,11 +179,9 @@ return [
 
                 'news' => [
                     'type' => 'Tipo',
-                    'type_news' => 'Notizia',
-                    'type_press' => 'Presss',
-                    'type_presentation' => 'Presentazione',
-                    'type_video' => 'Video',
-                    'type_showroom' => 'Showroom',
+                    'name' => 'Nome*',
+                    'name_ru' => 'Nome[RU]*',
+                    'name_it' => 'Nome[IT]*',
                     'title' => 'Titolo*',
                     'description' => 'Descrizione*',
                     'preview' => 'Anteprima*',
@@ -328,8 +326,10 @@ return [
                     'soc_links' => 'Links*',
                     'discount_data' => 'Sconto*',
                     'koef_data' => 'Fattore(inch/cm)*',
-                    'vat_data' => 'VAT*'
-
+                    'vat_data' => 'VAT*',
+                    'news_types' => 'News types*',
+                    'news_types_ru' => 'News types[RU]*',
+                    'news_types_it' => 'News types[IT]*'
                 ],
                 'orders' => [
                     'user_fr_name' => 'Client first name',
@@ -350,6 +350,7 @@ return [
                     'user_email' => 'Client Email',
                     'summ' => 'Summ',
                     'count' => 'Count',
+                    'updated_at' => 'Last updated'
                 ],
                 'sort' => [
                     'type_collection' => 'Sort by collection',
@@ -366,6 +367,7 @@ return [
                     'type' => 'Tipo*',
                     'type_design' => 'DESIGN KIT',
                     'type_press' => 'PRESS KIT',
+                    'type_flash' => 'FLASH INFO',
                 ],
 
                 'users' => [

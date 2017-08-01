@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Access\User\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Facades\Datatables;
 
 class BasketController extends Controller
@@ -34,7 +35,7 @@ class BasketController extends Controller
             })
             ->rawColumns(['actions'])
             ->make(true);
-        
+
     }
 
     /**
@@ -44,8 +45,20 @@ class BasketController extends Controller
      */
     public function show(Basket $basket)
     {
+        $productData = json_decode($basket->data);
+
+        $products = DB::table('product_prices')
+            ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
+            ->join('product_childs', 'product_prices.product_child_id', '=', 'product_childs.id')
+            //->join('products', 'product_childs.product_id', '=', 'products.id')
+            ->whereIn('product_prices.id', $productData->product_price_ids)
+            ->get();
+
+        //dd($products);
+
         return view('backend.baskets.show', [
-            'basket' => $basket
+            'basket' => $basket,
+            'products' => $products
         ]);
     }
 }

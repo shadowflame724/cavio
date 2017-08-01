@@ -196,7 +196,7 @@ section#dealers{
   pointer-events: none;
 }
 
-section#dealers.hide{
+section#dealers[data-anim='false']{
   .wrap-news-types-list{ opacity: 0; }
 }
 
@@ -238,10 +238,7 @@ section#dealers.hide{
   padding-right: 15px;
   //transition: .4s;
 
-  &.hide{
-    opacity: 0;
-    transform: translateY(50px);
-  }
+  &[data-anim='false']{ opacity: 0; transform: translateY(50px); }
 }
 
 .deal-title{

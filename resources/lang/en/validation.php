@@ -180,11 +180,9 @@ return [
 
                 'news' => [
                     'type' => 'Type',
-                    'type_news' => 'News',
-                    'type_press' => 'Press',
-                    'type_presentation' => 'Presentation',
-                    'type_video' => 'Video',
-                    'type_showroom' => 'Showroom',
+                    'name' => 'Name*',
+                    'name_ru' => 'Name[RU]*',
+                    'name_it' => 'Name[IT]*',
                     'title' => 'Title*',
                     'description' => 'Description*',
                     'preview' => 'Preview*',
@@ -327,6 +325,7 @@ return [
                     'type' => 'Type*',
                     'type_design' => 'DESIGN KIT',
                     'type_press' => 'PRESS KIT',
+                    'type_flash' => 'FLASH INFO',
                 ],
                 'users' => [
                     'active' => 'Active',
@@ -354,7 +353,10 @@ return [
                     'soc_links' => 'Links*',
                     'discount_data' => 'Discount*',
                     'koef_data' => 'Coefficient(inch/cm)*',
-                    'vat_data' => 'VAT*'
+                    'vat_data' => 'VAT*',
+                    'news_types' => 'News types*',
+                    'news_types_ru' => 'News types[RU]*',
+                    'news_types_it' => 'News types[IT]*'
                 ],
                 'orders' => [
                     'user_fr_name' => 'Client first name',
@@ -375,7 +377,7 @@ return [
                     'user_email' => 'Client Email',
                     'summ' => 'Summ',
                     'count' => 'Count',
-
+                    'updated_at' => 'Last updated'
                 ],
 
 

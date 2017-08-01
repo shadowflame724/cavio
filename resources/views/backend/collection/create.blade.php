@@ -176,6 +176,8 @@
     {{ Html::script('js/backend/redactor/redactor.js') }}
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
+    {{ Html::script('//cdnjs.cloudflare.com/ajax/libs/Sortable/1.6.0/Sortable.min.js') }}
+
     @include('backend.collection.edit_js');
 @endsection
 
