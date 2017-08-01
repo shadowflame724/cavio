@@ -1196,6 +1196,8 @@ if(document.querySelector('body.about')){
             if(0 > itemOffsetAboutRomb)  $('#about-romb').attr('data-anim', 'true');
             if(0 > itemOffsetMoodBig)    $('.mood-big').attr('data-anim', 'true');
             if(0 > colUnderMoodText)     $('.col-under-mood-text').attr('data-anim', 'true');
+            // change
+
 
 
 
