@@ -2361,6 +2361,11 @@ function initZenCollPage() {
  */
 
 
+$(document).on('click', '#order-now', function (e) {
+  $('#modal-order').attr('data-anim', 'true');
+  $(document.body).addClass('overfl-h');
+});
+
 //BASKET
 function initBasketPage() {
   console.log('basket page');
@@ -2375,11 +2380,6 @@ function initBasketPage() {
     $('.wrap-catal').attr('data-anim', 'true')
   }, 500);
 
-
-  $(document).on('click', '#order-now', function (e) {
-    $('#modal-order').attr('data-anim', 'true');
-    $(document.body).addClass('overfl-h');
-  });
 
 
   $('.kick-ord_it').on('click', function (e) {
