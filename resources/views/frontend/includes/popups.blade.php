@@ -1,4 +1,4 @@
-<section id="modal-order" class="zone-col-modal modal-log_reg order">
+<section id="modal-order" data-anim="false" class="zone-col-modal modal-log_reg order">
     <div class="wrapper-zone-col-modal">
         <div class="scroller scroller-zc-modal">
             <div class="scroller-inner">
@@ -86,7 +86,7 @@
         </div>
     </div>
 </section>
-<section id="modal-thank_you-subs" class="zone-col-modal modal-log_reg ty">
+<section id="modal-thank_you-subs" data-anim="false" class="zone-col-modal modal-log_reg ty">
     <div class="wrapper-zone-col-modal">
         <div class="scroller scroller-zc-modal">
             <div class="scroller-inner">
@@ -106,7 +106,7 @@
         </div>
     </div>
 </section>
-<section id="modal-thank_you" class="zone-col-modal modal-log_reg ty">
+<section id="modal-thank_you" data-anim="false" class="zone-col-modal modal-log_reg ty">
     <div class="wrapper-zone-col-modal">
         <div class="scroller scroller-zc-modal">
             <div class="scroller-inner">

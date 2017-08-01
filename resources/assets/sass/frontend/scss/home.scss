@@ -235,8 +235,8 @@ html:not(.mobile-platform) .btn:hover{
 html:not(.mobile-platform) .title-wave{ display: none; }
 
 
-.wrap-banner-cont.show .title-wave{ opacity: 0.6; }
-.wrap-philosophy.show .wave-phil{ opacity: 0.7; }
+.wrap-banner-cont[data-anim='true'] .title-wave{ opacity: 0.6; }
+.wrap-philosophy[data-anim='true'] .wave-phil{ opacity: 0.7; }
 .wave-phil{
   transform: translate(7%,-8%);
   transition: opacity 2s .5s;
@@ -514,7 +514,7 @@ svg.svg-banner-circle{
   float: left;
   transition: all 1.2s ease;
 
-  &.hide{ opacity: 0; transform: translate(0, 150px); transition: none; }
+  &[data-anim='false']{ opacity: 0; transform: translate(0, 150px); transition: none; }
   .head{ position: relative; }
 
   .new-label{
@@ -604,14 +604,14 @@ svg.svg-banner-circle{
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
 
-  &.hide{ opacity: 0; transform: translate(0, 150px); transition: none; }
+  &[data-anim='false']{ opacity: 0; transform: translate(0, 150px); transition: none; }
 
   &::-webkit-scrollbar { width: 0 !important }
 }
 
 .wrap-new-products-gradiet{
   transition: transform 1.2s ease, opacity 1.2s ease;
-  &.hide{ opacity: 0; transform: translate(0, 150px); transition: none; }
+  &[data-anim='false']{ opacity: 0; transform: translate(0, 150px); transition: none; }
 }
 
 .new-products-right-item{
@@ -961,7 +961,7 @@ h3.section-title{
   .zc-modal-swip-arrow{ bottom: 0; }
 }
 
-.item-coll:hover, .wrap-philosophy.show{
+.item-coll:hover, .wrap-philosophy[data-anim='true']{
   .wrap-img-bg .img-back{ background: $mainActiveColor !important; }
 }
 
@@ -1141,11 +1141,10 @@ html:not(.mobile-platform) .item-coll.coll-swiper-arr{
   vertical-align: middle;
   width: 45%;
   padding: 0 20px;
-  opacity: 0;
-  transform: translateY(40px);
   transition: transform 1.3s .2s, opacity 1.3s .2s;
 
-  &.show{ opacity: 1; transform: translateY(0); }
+  &[data-anim='false']{ opacity: 0; transform: translateY(40px); }
+  &[data-anim='true']{ opacity: 1; transform: translateY(0); }
 }
 
 
@@ -1161,7 +1160,7 @@ html:not(.mobile-platform) .item-coll.coll-swiper-arr{
 .wrap-philosophy{
   .wrap-img-bg .img-back{ transition: transform 1s; }
 
-  &.show{
+  &[data-anim='true']{
     .phil-left{ opacity: 1; }
     .wrap-img-bg .img-back{ transform: translate(-40px, -30px); }
     .philosophy-img{ transform: scale(1); }
@@ -1232,7 +1231,7 @@ section#shop-by-collection{
     &.swiper-slide-next + .item-coll + .item-coll  a{ transition: .8s .8s; }
   }
 
-  &.hide{
+  &[data-anim='false']{
     .item-coll a{ opacity: 0; transform: translateY(50px); }
   }
 }
@@ -1329,11 +1328,8 @@ section#shop-by-collection{
     transition: 1s;
   }
 
-  &.hide{
-    a{
-      transform: scale(0.6);
-      opacity: 0;
-    }
+  &[data-anim='false']{
+    a{ transform: scale(0.6); opacity: 0; }
   }
 }
 html:not(.mobile-platform) .cat:hover{
@@ -1511,7 +1507,7 @@ section#shop-by-cat{ margin-bottom: 130px; }
   border-left: 1px solid $lineWhite;
   transition: border 2s;
 
-  &.hide{
+  &[data-anim='false']{
     &, .cat{ border-color: transparent; }
   }
 }
@@ -1524,7 +1520,7 @@ section#shop-by-cat{ margin-bottom: 130px; }
   .more-12-cat{ display: none;         }
   .more-14-cat{ display: none;         }
 
-  &.hide{ opacity: 0; transform: translateY(50px); }
+  &[data-anim='false']{ opacity: 0; transform: translateY(50px); }
 }
 
 // END ==================== CATEGORY ====================

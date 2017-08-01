@@ -11,13 +11,6 @@
     <!-- Meta -->
     <meta name="description" content="@yield('meta_description', 'Laravel 5 Boilerplate')">
     <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
-    <script>function copySocIcons() {
-            document.getElementById('wrap-svg_icons').appendChild(document.getElementById('obj-soc_icons').contentDocument.getElementById("social-icons"));
-        }
-    </script>
-    <div id="wrap-svg_icons" style="display: none;"></div>
-    <object id="obj-soc_icons" type="image/svg+xml" data="images/icons/social.svg" onload=copySocIcons()></object>
-
 @yield('meta')
 
 <!-- Styles -->

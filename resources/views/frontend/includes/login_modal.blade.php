@@ -1,4 +1,4 @@
-<section id="modal-log_reg" class="zone-col-modal modal-log_reg">
+<section id="modal-log_reg" class="zone-col-modal modal-log_reg" data-anim="false">
     <div class="wrapper-zone-col-modal">
         <div class="scroller scroller-zc-modal">
             <div class="scroller-inner">

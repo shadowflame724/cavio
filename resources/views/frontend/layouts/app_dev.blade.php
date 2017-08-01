@@ -28,6 +28,7 @@
         @include('frontend.includes.physics_script')
         {{ Html::script('js/frontend/two.js') }}
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
     <body class="@yield('bodyClass')" id="@yield('bodyClass')">
     @php

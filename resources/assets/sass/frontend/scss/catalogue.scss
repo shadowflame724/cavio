@@ -49,7 +49,7 @@ ul.catal-perc{
   transition: all 1s ease;
 }
 
-.small-page-title.hide{
+.small-page-title[data-anim='false']{
   &:before{
     opacity: 0;
     transform: translate(-100px, 0);
@@ -69,7 +69,8 @@ ul.catal-perc{
   overflow: hidden;
   transition: all 1s ease;
 
-  &.hide{ transform: translate(0, 100px); opacity: 0; }
+  &[data-anim='false']{ transform: translate(0, 100px); opacity: 0; }
+  &[data-anim='true'] { transform: translate(0, 0);     opacity: 1; }
 }
 
 .catal-side{

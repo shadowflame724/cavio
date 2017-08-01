@@ -18,7 +18,8 @@ section#qa{ margin-bottom: 190px; }
   will-change: opacity, transform;
   transition: opacity .6s cubic-bezier(0,.39,0,1.12), transform .6s cubic-bezier(0,.39,0,1.12);
 
-  &.hide{ opacity: 0; transform: translate(0, 400px); }
+  &[data-anim='false']{ opacity: 0; transform: translate(0, 400px); }
+  &[data-anim='true']{  opacity: 1; transform: translate(0, 0); }
 }
 
 .ac-container label{
