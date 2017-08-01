@@ -585,7 +585,7 @@ if(document.querySelector('body.main')){
   $(window).on({
     'resize': function(){
       initCollectionCarousel();
-      itemOffsetCollection = $($('#shop-by-collection')[0]).offset().top - (window.innerHeight*0.1);
+      itemOffsetCollection = $('#shop-by-collection').offset().top - (window.innerHeight*0.1);
     },
     'scroll': function(event){
       if(!mainScroll){
@@ -608,29 +608,29 @@ if(document.querySelector('body.main')){
 
 
 
-        if(percVisOurPhil > 0.2) $('#our-philosophy h3.section-title').addClass('show');
-        if(percVisOurPhil > 0.4) $('.wrap-philosophy.a').addClass('show');
-        if(percVisOurPhil > 0.6) $('.phil-right').addClass('show')
+        if(percVisOurPhil > 0.2) $('#our-philosophy h3.section-title').attr('data-anim', 'true');
+        if(percVisOurPhil > 0.4) $('.wrap-philosophy.a').attr('data-anim', 'true');
+        if(percVisOurPhil > 0.6) $('.phil-right').attr('data-anim', 'true');
 
 
         if(percVisShopByColl > 0.4) {
-          $('#shop-by-collection h3.section-title').addClass('show');
-          if(percVisShopByColl > 0.55)  $('#shop-by-collection').removeClass('hide');
+          $('#shop-by-collection h3.section-title').attr('data-anim', 'true');
+          if(percVisShopByColl > 0.55)  $('#shop-by-collection').attr('data-anim', 'true');
         }
 
 
         if(percVisShopByCat > 0.25){
-          $('#shop-by-cat h3.section-title').addClass('show');
+          $('#shop-by-cat h3.section-title').attr('data-anim', 'true');
 
 
-          $('.cat.hide').each(function(key){
+          $(".cat[data-anim='false']").each(function(key){
             var thisVis = -($(this).offset().top - currScrolled-window.innerHeight)/window.innerHeight;
 
-            if(thisVis > 0.2) $(this).removeClass('hide');
+            if(thisVis > 0.2) $(this).attr('data-anim', 'true');
           });
         }
 
-        if(percVisShopByCatBtn > 0.1)  $('#shop-by-cat .wrap-btn-more').removeClass('hide');
+        if(percVisShopByCatBtn > 0.1)  $('#shop-by-cat .wrap-btn-more').attr('data-anim', 'true');
       }
     }
   });
@@ -1077,24 +1077,24 @@ if(document.querySelector('body.main')){
       if (itemOffsetOurPhil < 0 && itemOffsetOurPhil !== true) {
         itemOffsetOurPhil = true;
 
-        $('.wrap-philosophy.a').addClass('show');
-        setTimeout(function(){  $('.phil-right').addClass('show')  }, 170);
+        $('.wrap-philosophy.a').attr('data-anim', 'true');
+        setTimeout(function(){  $('.phil-right').attr('data-anim', 'true')  }, 170);
 
 
         setTimeout(function(){  initWaves()  }, 500);
       }
 
 
-      if(mainScroll.isVisible( ourPhilosophyTitle )) $('#our-philosophy h3.section-title').addClass('show');
+      if(mainScroll.isVisible( ourPhilosophyTitle )) $('#our-philosophy h3.section-title').attr('data-anim', 'true');
 
 
       if(mainScroll.isVisible( collCarous )){
-        $('#shop-by-collection h3.section-title').addClass('show');
+        $('#shop-by-collection h3.section-title').attr('data-anim', 'true');
 
         var pxVisibledSwiper = -($(collCarous).offset().top - window.innerHeight);
         var dispUpperSwiper = (pxVisibledSwiper > $(collCarous).height()*40/100);
 
-        if(dispUpperSwiper)  $(shopByCollection).removeClass('hide');
+        if(dispUpperSwiper)  $(shopByCollection).attr('data-anim', 'true');
       }
 
 
@@ -1104,12 +1104,12 @@ if(document.querySelector('body.main')){
         var percViewCatButtn = (-($('#shop-by-cat .wrap-btn-more').offset().top-window.innerHeight))/window.innerHeight;
 
 
-        if(percViewCatTitle > 0.2)   $('#shop-by-cat h3.section-title').addClass('show');
+        if(percViewCatTitle > 0.2)   $('#shop-by-cat h3.section-title').attr('data-anim', 'true');
         if(percViewCatTable > 0.25){
-          $('#shop-by-cat .cat.hide').removeClass('hide');
-          $('#shop-by-cat .cat-wrapper').removeClass('hide');
+          $("#shop-by-cat .cat[data-anim='false']").attr('data-anim', 'true');
+          $("#shop-by-cat .cat-wrapper").attr('data-anim', 'true');
         }
-        if(percViewCatButtn > 0.08)  $('#shop-by-cat .wrap-btn-more').removeClass('hide');
+        if(percViewCatButtn > 0.08)  $('#shop-by-cat .wrap-btn-more').attr('data-anim', 'true');
       }
     });
   }
@@ -1125,8 +1125,8 @@ if(document.querySelector('body.main')){
 
     animBannerCircle(document.querySelector('.banner-top-item'));
 
-    setTimeout(function(){   $('.new-products-left-side').removeClass('hide')   },1);
-    setTimeout(function(){   $('.new-products-right-side, .wrap-new-products-gradiet').removeClass('hide')    },300);
+    setTimeout(function(){   $('.new-products-left-side').attr('data-anim', 'true');   },1);
+    setTimeout(function(){   $('.new-products-right-side, .wrap-new-products-gradiet').attr('data-anim', 'true');    },300);
 
     // AUTO CLICK NewProdDot =========
     autoChangeActiveNewProdDot();
@@ -1733,244 +1733,244 @@ if(document.querySelector('body.catalogue')){
 
 //contacts
 if(document.querySelector('body.contacts')){
-  console.log('Contacts page');
+    console.log('Contacts page');
 
-  $(document).ready(function () {
-    setTimeout(function(){   $('#cont-text-r-t').addClass('show');   }, 1000);
-    setTimeout(function(){   $('#wrap-cont-map').addClass('show');   }, 1600);
-    setTimeout(function(){ initMap() }, 1200);
+    $(document).ready(function () {
+        setTimeout(function(){   $('#cont-text-r-t').attr('data-anim', 'true');   }, 1000);
+        setTimeout(function(){   $('#wrap-cont-map').attr('data-anim', 'true');   }, 1600);
+        setTimeout(function(){ initMap() }, 1200);
 
-    if(mainScroll)  scrollFunc();
-  });
-
-
-  $(window).on('scroll', function(){
-    if(!mainScroll){
-      var currScrolled = $(document).scrollTop();
-      var mainOffset = $('main').offset().top - currScrolled;
-      var lenFooterPath = $('footer').offset().top - (window.innerHeight);
-
-      var wrapFormMail= $('#form-mail').offset().top - (window.innerHeight*0.7) - currScrolled;
-      var itemAnimContBot= $('.cont-bot .anim-img-corn-bg').offset().top - (window.innerHeight*0.7) - currScrolled;
+        if(mainScroll)  scrollFunc();
+    });
 
 
-      if(0 > wrapFormMail)    $('#form-mail').addClass('show');
-      if(0 > itemAnimContBot) $('.cont-bot .anim-img-corn-bg').addClass('show');
+    $(window).on('scroll', function(){
+        if(!mainScroll){
+            var currScrolled = $(document).scrollTop();
+            var mainOffset = $('main').offset().top - currScrolled;
+            var lenFooterPath = $('footer').offset().top - (window.innerHeight);
 
-      document.getElementById('wrapper-bg-contacts').style.opacity = (0.55 - (1 / (lenFooterPath / -mainOffset))) / 0.55; // 0.55 only for contacts bg
-    }
-  });
-
-
-  function scrollFunc() {
-    mainScroll.addListener(function(){
-
-      var wrapContMap= $('#wrap-cont-map').offset().top - (window.innerHeight*0.7);
-      var wrapImgContRightBot= $('.wrap-img-cont-r-b').offset().top - (window.innerHeight*0.7);
-      var wrapImgContBot= $('.wrap-cont-b').offset().top - (window.innerHeight*0.7);
-      // var wrapContTextRightTop= $('#cont-text-r-t').offset().top - (window.innerHeight*0.7);
-      var wrapFormMail= $('#form-mail').offset().top - (window.innerHeight*0.7);
+            var wrapFormMail= $('#form-mail').offset().top - (window.innerHeight*0.7) - currScrolled;
+            var itemAnimContBot= $('.cont-bot .anim-img-corn-bg').offset().top - (window.innerHeight*0.7) - currScrolled;
 
 
+            if(0 > wrapFormMail)    $('#form-mail').attr('data-anim', 'true');
+            if(0 > itemAnimContBot) $('.cont-bot .anim-img-corn-bg').attr('data-anim', 'true');
 
-      if(0 > wrapContMap) $('.wrap-cont-map').addClass('show');
-      if(0 > wrapImgContRightBot) $('.wrap-img-cont-r-b').addClass('show');
-      if(0 > wrapImgContBot) $('.wrap-cont-b').addClass('show');
-      // if(0 > wrapContTextRightTop) $('#cont-text-r-t').addClass('show');
-      if(0 > wrapFormMail) $('#form-mail').addClass('show');
-
-
-
-      var lenFooterPath = $('footer').offset().top - (window.innerHeight*0.1);
-
-      document.getElementById('wrapper-bg-contacts').style.opacity = -(1700 - lenFooterPath) / 100 / 6;
-    })
-  }
-
-
-  function initMap() {
-    var maxZoom = 5;
-    var centerMap = {lat: -25.363, lng: 131.044};
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      minZoom: 2,
-      center: centerMap,
-      disableDefaultUI: true,
-      styles: [
-        {
-          "featureType": "all",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "saturation": 36
-            },
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 40
-            }
-          ]
-        },
-        {
-          "featureType": "all",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-            {
-              "visibility": "on"
-            },
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 16
-            }
-          ]
-        },
-        {
-          "featureType": "all",
-          "elementType": "labels.icon",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative",
-          "elementType": "geometry.fill",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 20
-            }
-          ]
-        },
-        {
-          "featureType": "administrative",
-          "elementType": "geometry.stroke",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 17
-            },
-            {
-              "weight": 1.2
-            }
-          ]
-        },
-        {
-          "featureType": "landscape",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 20
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 21
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry.fill",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 17
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry.stroke",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 29
-            },
-            {
-              "weight": 0.2
-            }
-          ]
-        },
-        {
-          "featureType": "road.arterial",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 18
-            }
-          ]
-        },
-        {
-          "featureType": "road.local",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 16
-            }
-          ]
-        },
-        {
-          "featureType": "transit",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 19
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#000000"
-            },
-            {
-              "lightness": 17
-            }
-          ]
+            document.getElementById('wrapper-bg-contacts').style.opacity = (0.55 - (1 / (lenFooterPath / -mainOffset))) / 0.55; // 0.55 only for contacts bg
         }
-      ],
     });
 
-    var marker = new google.maps.Marker({
-      position: centerMap,
-      icon: '../images/marker.png',
-      map: map
-    });
-  }
+
+    function scrollFunc() {
+        mainScroll.addListener(function(){
+
+            var wrapContMap= $('#wrap-cont-map').offset().top - (window.innerHeight*0.7);
+            var wrapImgContRightBot= $('.wrap-img-cont-r-b').offset().top - (window.innerHeight*0.7);
+            var wrapImgContBot= $('.wrap-cont-b').offset().top - (window.innerHeight*0.7);
+            // var wrapContTextRightTop= $('#cont-text-r-t').offset().top - (window.innerHeight*0.7);
+            var wrapFormMail= $('#form-mail').offset().top - (window.innerHeight*0.7);
+
+
+
+            if(0 > wrapContMap) $('.wrap-cont-map').attr('data-anim', 'true');
+            if(0 > wrapImgContRightBot) $('.wrap-img-cont-r-b').attr('data-anim', 'true');
+            if(0 > wrapImgContBot) $('.wrap-cont-b').attr('data-anim', 'true');
+            // if(0 > wrapContTextRightTop) $('#cont-text-r-t').addClass('show');
+            if(0 > wrapFormMail) $('#form-mail').attr('data-anim', 'true');
+
+
+
+            var lenFooterPath = $('footer').offset().top - (window.innerHeight*0.1);
+
+            document.getElementById('wrapper-bg-contacts').style.opacity = -(1700 - lenFooterPath) / 100 / 6;
+        })
+    }
+
+
+    function initMap() {
+        var maxZoom = 5;
+        var centerMap = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            minZoom: 2,
+            center: centerMap,
+            disableDefaultUI: true,
+            styles: [
+                {
+                    "featureType": "all",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "saturation": 36
+                        },
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 40
+                        }
+                    ]
+                },
+                {
+                    "featureType": "all",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        },
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 16
+                        }
+                    ]
+                },
+                {
+                    "featureType": "all",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 20
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 17
+                        },
+                        {
+                            "weight": 1.2
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 20
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 21
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 17
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 29
+                        },
+                        {
+                            "weight": 0.2
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 18
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 16
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 19
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        },
+                        {
+                            "lightness": 17
+                        }
+                    ]
+                }
+            ],
+        });
+
+        var marker = new google.maps.Marker({
+            position: centerMap,
+            icon: '../images/marker.png',
+            map: map
+        });
+    }
 }
 
 //pres-design

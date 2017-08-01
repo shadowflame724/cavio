@@ -29,15 +29,13 @@
         {{ Html::script('js/frontend/two.js') }}
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <script>function copySocIcons() {
-            document.getElementById('wrap-svg_icons').appendChild(document.getElementById('obj-soc_icons').contentDocument.getElementById("social-icons"));
-          }
-        </script>
-        <object id="obj-soc_icons" type="image/svg+xml" data="images/icons/social.svg" onload=copySocIcons()></object>
-
     </head>
     <body class="@yield('bodyClass')" id="@yield('bodyClass')">
         <div id="wrap-svg_icons" style="display: none;"></div>
+        <object id="obj-soc_icons" type="image/svg+xml" data="images/icons/social.svg" onload=copySocIcons()></object>
+        <script>function copySocIcons() {
+          document.getElementById('wrap-svg_icons').appendChild(document.getElementById('obj-soc_icons').content);
+        }</script>
     @php
         $path = Request::path();
         if($path == '/'){
