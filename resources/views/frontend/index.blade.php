@@ -7,7 +7,7 @@
 
 @section('head')
     @if($popup->show == 1)
-        <section id="index-popup" class="zone-col-modal modal-log_reg show">
+        <section id="index-popup" class="zone-col-modal modal-log_reg" data-anim="false">
             <div class="wrapper-zone-col-modal">
                 <div class="scroller scroller-zc-modal">
                     <div class="scroller-inner">
@@ -71,7 +71,7 @@
 
     <section id="new-products">
         <div class="wrap-new-products clearfix">
-            <div class="new-products-left-side hide">
+            <div class="new-products-left-side" data-anim="false">
                 <div class="new-products-left-item">
                     <div class="head clearfix">
                         <div class="new-label">{{ trans('frontend.index.new')}}</div>
@@ -103,7 +103,7 @@
 
                 </div>
             </div>
-            <div class="new-products-right-side bg-white-marmur hide">
+            <div class="new-products-right-side bg-white-marmur" data-anim="false">
                 <div class="wrap-right-slidebox bg-white-marmur">
                     <div class="new-products-right-item nowrp-item">
                         <a class="new-products-right-inner-item" href="#">
@@ -326,14 +326,14 @@
                     </div>
                 </div>
             </div>
-            <div class="wrap-new-products-gradiet hide"></div>
+            <div class="wrap-new-products-gradiet" data-anim="false"></div>
         </div>
     </section>
 
     <!-- ============================= Our Philosophy ============================= -->
     <section id="our-philosophy">
         <div class="container">
-            <h3 class="section-title">{{ $page->blocks->get(0)->{'title'.$langSuf} }}</h3>
+            <h3 class="section-title" data-anim="false">{{ $page->blocks->get(0)->{'title'.$langSuf} }}</h3>
 
             <div class="wrap-philosophy a clearfix">
                 <svg class="title-wave wave-phil" viewBox="0 0 1395.63 1237.68">
@@ -349,7 +349,7 @@
                         <img src="/upload/images/{!! $page->blocks->get(0)->image !!}" alt="">
                     </div>
                 </div>
-                <div class="phil-right">
+                <div class="phil-right" data-anim="false">
                     <div class="phil-text">
                         <div class="phil-text-nosvg">
                             {!! $page->blocks->get(0)->{'body'.$langSuf} !!}
@@ -364,10 +364,10 @@
 
 
     <!-- ============================= SHOP By Collection ============================= -->
-    <section id="shop-by-collection" class="hide">
+    <section id="shop-by-collection" data-anim="false">
 
         <div class="cont-coll">
-            <h3 class="section-title small">Shop by Collection</h3>
+            <h3 class="section-title small" data-anim="false">Shop by Collection</h3>
 
             <div class="collection-carousel">
                 <div class="swiper-wrapper">
@@ -414,14 +414,14 @@
     <!-- ============================= SHOP By CATEGORY ============================= -->
     <section id="shop-by-cat">
         <div class="container">
-            <h3 class="section-title small">Shop by Category</h3>
+            <h3 class="section-title small" data-anim="false">Shop by Category</h3>
 
-            <div class="cat-wrapper clearfix hide">
+            <div class="cat-wrapper clearfix" data-anim="false">
                 @php($count=0)
                 @php($otherCnt=0)
                 @foreach($categories as $category)
                     @if($category->to_home != null AND $count<10)
-                        <div class="cat hide">
+                        <div class="cat" data-anim="false">
                             <div class="car-bg"></div>
                             <a href="{{ route('frontend.catalogue.one', $category->slug) }}">
                                 <div class="wrap-cat-svg">
@@ -447,7 +447,7 @@
                 @endforeach
             </div>
 
-            <div class="wrap-btn-more hide">
+            <div class="wrap-btn-more" data-anim="false">
                 @if($otherCnt > 10)
                 <a href="{{ route('frontend.catalogue') }}"
                    class="btn more-10-cat"

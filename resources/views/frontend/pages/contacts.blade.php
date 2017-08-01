@@ -9,7 +9,7 @@
 @section('content')
     <section id="" class="wrap-banner">
         <div class="banner-center v-centering">
-            <div class="wrap-banner-cont">
+            <div class="wrap-banner-cont" data-anim="false">
                 <h3 class="section-title">
                     {{ trans('frontend.contacts.title') }}
                 </h3>
@@ -43,7 +43,7 @@
                 <div class="cont-col">
                     <div class="wrap-map-tablet">
                         <div id="wrap-cont-map"
-                             class="transl_15 anim-img-corn-bg wrap-img-under-history-right anim-under-history m-r-30 wrap-cont-map">
+                             class="transl_15 anim-img-corn-bg wrap-img-under-history-right anim-under-history m-r-30 wrap-cont-map" data-anim="false">
                             <div class="img-back dark">
                                 <svg viewBox="0 0 1395.63 1237.68">
                                     <use xlink:href="wave.svg#wave"></use>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-                    <div id="form-mail" class="form-mail anim-under-history">
+                    <div id="form-mail" class="form-mail anim-under-history" data-anim="false">
                         <div class="form-mail-title">
                             {{ trans('frontend.contacts.sayHello') }}!
                         </div>

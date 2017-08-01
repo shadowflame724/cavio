@@ -73,11 +73,12 @@ body#zone-col{
 }
 
 .zon-col-list{
-  opacity: 0;
   margin: 0 -25px 50px;
-  transform: translate(0, 150px);
   transition: all 0.8s ease;
-  &.show{ opacity: 1; transform: translate(0, 0px); }
+
+  &[data-anim='false']{ opacity: 0; transform: translate(0, 150px); }
+  &[data-anim='true'] { opacity: 1; transform: translate(0, 0px); }
+
 
   &.z_c-list{
     margin-left: 15px;
@@ -149,10 +150,7 @@ body#zone-col{
 }
 
 
-.scroller-inner{
-  transform: translate(0, -100px);
-  transition: all .8s ease;
-}
+.scroller-inner{ transition: .8s; }
 
 section.zone-col-modal{
   position: fixed;
@@ -160,9 +158,9 @@ section.zone-col-modal{
   width: 100%;
   height: 100%;
   background: $mainBGColor;
-  visibility: hidden;
   overflow: auto;
-  opacity: 0;
+  transition: .5s;
+
   &:before{
     content: '';
     position: absolute;
@@ -175,16 +173,18 @@ section.zone-col-modal{
     background-size: cover;
   }
 
-  &.show{
-    animation: showZoneColModal 1s ease forwards;
+  &[data-anim='true']{
+    opacity: 1;
+    pointer-events: all;
 
     .scroller-inner{ transform: translate(0, 0); }
   }
 
-  &.hide{
-    animation: hideZoneColModal .4s ease forwards;
+  &[data-anim='false']{
+    opacity: 0;
+    pointer-events: none;
 
-    .scroller-inner{ transform: translate(0, -100px); transition: all .5s ease; }
+    .scroller-inner{ transform: translate(0, -100px); }
   }
 
 
@@ -223,18 +223,6 @@ section.zone-col-modal{
   // END LOG REG MODAL ============
 }
 
-
-@keyframes showZoneColModal {
-     0% { visibility: hidden;  opacity: 0; }
-   0.1% { visibility: visible; opacity: 0; }
-   100% { visibility: visible; opacity: 1; }
-}
-
-@keyframes hideZoneColModal {
-      0% { visibility: visible; opacity: 1; }
-  99.99% { visibility: visible; opacity: 0; }
-    100% { visibility: hidden;  opacity: 0; }
-}
 
 
 .wrap-zone-col-modal{
