@@ -3186,7 +3186,7 @@ $('header').on('mouseleave', function () {
   hideTopMenu()
 });
 
-$('.nav-icon, .svg-main-logo, .lang-panel, .btn-login, .svg-stash').on('mouseenter', function () {
+$('.nav-icon, .svg-main-logo, .lang-panel, .open-modal-login, .svg-stash').on('mouseenter', function () {
   hideTopMenu()
 });
 
@@ -3214,7 +3214,7 @@ $(document).on('click', '.zone-col-modal, .close-modal', function (event) {
   }
 });
 
-$(document).on('click', '.btn-login', function (e) {
+$(document).on('click', '.open-modal-login', function (e) {
   e.preventDefault();
 
   $('#modal-log_reg').attr('data-anim', 'true');
