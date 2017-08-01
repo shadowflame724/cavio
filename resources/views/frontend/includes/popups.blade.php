@@ -11,7 +11,7 @@
                     <div class="swiper-wrapper wrap-log_reg-items">
                         <div class="swiper-slide log_reg-item reg">
 
-                            <form class="login_reg">
+                            <form class="login_reg" id="order_form">
 
                                 <div class="wrap-2-input clearfix">
                                     <div class="wrap-inp_W_50">

@@ -259,6 +259,7 @@ $(document).ready(function(){
 
     return false;
   });
+
 });
 
 $('.wrap-login-side a').on('click', function(e){
