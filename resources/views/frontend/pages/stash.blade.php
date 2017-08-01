@@ -112,25 +112,6 @@
                 </div>
                 @endif
               </div>
-
-              <!--<div class="wrap-total_result-ord_it stast">-->
-                <!--<div class="stash-total_amount clearfix">-->
-                  <!--<div class="left-label">Total amount</div>-->
-                  <!--<div class="right-val">10 000 Eur</div>-->
-                <!--</div>-->
-                <!--<div class="stash-addit_discount clearfix">-->
-                  <!--<div class="left-label">**Additional discount 5%</div>-->
-                  <!--<div class="right-val">500 Eur</div>-->
-                <!--</div>-->
-                <!--<div class="stash-total_play clearfix">-->
-                  <!--<div class="left-label">Total to pay</div>-->
-                  <!--<div class="right-val">9 500 Eur</div>-->
-                <!--</div>-->
-                <!--<div class="stash-incl clearfix">-->
-                  <!--<div class="left-label">Including 22% VAT</div>-->
-                  <!--<div class="right-val">(2 364Eur)</div>-->
-                <!--</div>-->
-              <!--</div>-->
               <div class="total-basket-main">
                 @include('frontend.includes.total_basket',['summ' => $summ])
               </div>
