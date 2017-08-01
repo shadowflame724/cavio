@@ -150,7 +150,7 @@ body#zone-col{
 }
 
 
-.scroller-inner{ transition: .8s; }
+.scroller-inner{ position: relative; transition: .8s; }
 
 section.zone-col-modal{
   position: fixed;

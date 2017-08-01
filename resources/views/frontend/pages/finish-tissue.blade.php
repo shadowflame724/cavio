@@ -12,7 +12,7 @@
 
     <section id="catalogue" class="finish-tissue">
         <div class="container">
-            <div class="wrap-catal clearfix bg-white-marmur fin_tis hide">
+            <div class="wrap-catal clearfix bg-white-marmur fin_tis" data-anim="false">
                 <div class="catal-side relative">
                     <div class="catal-filter-head">
                         <!--<svg class="title-wave" viewBox="0 0 1395.63 1237.68">-->
