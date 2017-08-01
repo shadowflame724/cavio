@@ -227,6 +227,7 @@ $(document).ready(function(){
     }
     return false;
   });
+  console.log('order submit')
   // order
   $('body').on('submit','#submitOrder',function () {
     var _form = $(this),
@@ -265,7 +266,11 @@ $(document).ready(function(){
         url: _action,
         data: _data
       }).done(function( data ) {
-        alert( "form order SEND success" );
+        // alert( "form order SEND success" );
+
+        $('#modal-order').attr('data-anim','false');
+        $('#modal-thank_you').attr('data-anim','true');
+        $('body').addClass('overfl-h');
       }).error(function() {
         alert( "form order SEND error" );
       }).always(function() {
@@ -2287,14 +2292,6 @@ if(document.querySelector('body.stash')){
     }
   });
 
-
-  $(document).on('click', '#order-in_stash', function(e){
-    e.preventDefault();
-
-    $('#modal-order').toggleClass('hide show');
-    $('#modal-thank_you').removeClass('hide').addClass('show');
-    $('body').addClass('overfl-h');
-  });
 
   $(document).on('click', '#ty-ok', function(e){
     e.preventDefault();
