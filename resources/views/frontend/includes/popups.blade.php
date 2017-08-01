@@ -10,7 +10,11 @@
 
                     <div class="swiper-wrapper wrap-log_reg-items">
                         <div class="swiper-slide log_reg-item reg">
-                        {{ Form::open(['route' => 'frontend.order.send', 'class' => 'login_reg']) }}
+                        {{ Form::open([
+                            'route' => 'frontend.order.send',
+                            'class' => 'login_reg',
+                            'id' => 'submitOrder'
+                            ]) }}
                             <div class="wrap-2-input clearfix">
                                 <div class="wrap-inp_W_50">
                                     {{ Form::text('first_name', null, [
@@ -66,7 +70,7 @@
                                 </div>
                             </div>
                             <hr class="login_reg-line">
-                            {{ Form::email('last_name', null, [
+                            {{ Form::email('email', null, [
                                 'class' => 'fullW',
                                 'maxlength' => '191',
                                 'required' => 'required',
