@@ -10,7 +10,7 @@
     <section id="top-waves" class=relative></section>
     <section>
         <div class="container cont-priv_pol">
-            <div class="wrap-privacy-policy hide">
+            <div class="wrap-privacy-policy" data-anim='false'>
                 <div class=title-priv_pol>{!! $page['name'.$langSuf] !!}</div>
                 <div class=text-priv_pol>{!! $page['body'.$langSuf] !!}</div>
             </div>
