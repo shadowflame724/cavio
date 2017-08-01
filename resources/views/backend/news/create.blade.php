@@ -42,7 +42,7 @@
                 {{ Form::label('type', trans('validation.attributes.backend.access.news.type'), ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">
-                    <select class="form-control">
+                    <select name="type" class="form-control">
                         @foreach($newsTypes as $key => $type)
                             <option value="{{ $type->name }}">{!! $type->{'name'.$langSuf} !!}</option>
                         @endforeach
@@ -56,6 +56,14 @@
 
                         <div class="col-lg-10">
                             {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('name', trans('validation.attributes.backend.access.news.name'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -93,6 +101,14 @@
                     </div><!--form control-->
 
                     <div class="form-group">
+                        {{ Form::label('name_ru', trans('validation.attributes.backend.access.news.name_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('name_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
                         {{ Form::label('description_ru', trans('validation.attributes.backend.access.news.description_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
@@ -124,6 +140,15 @@
                             {{ Form::text('title_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('name_it', trans('validation.attributes.backend.access.news.name_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('name_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
 
                     <div class="form-group">
                         {{ Form::label('description_it', trans('validation.attributes.backend.access.news.description_it'), ['class' => 'col-lg-2 control-label']) }}

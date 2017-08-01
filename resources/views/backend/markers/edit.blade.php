@@ -167,16 +167,13 @@
             var y = e.offsetY == undefined ? e.layerY : e.offsetY;
             markerX = x / mapMainW * 100;
             markerY = y / mapMainH * 100;
-            console.log('aaaa');
-
             $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val(markerX);
             $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val(markerY);
-            $('#marker-' + currMarkerId).css({top: y + 'px', left: x + 'px'});
+            $('#marker-' + currMarkerId).css({top: markerY+ '%', left: markerX + '%'});
         });
 
         $('.panel').on('shown.bs.collapse', function () {
             currMarkerId = $(this).index();
-            console.log(currMarkerId);
             var x = $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val();
             var y = $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val();
             mapMain.append('<div id=' + "marker-" + currMarkerId + ' class="marker" style="position: absolute; top: ' + (y) + '%; left: ' + (x) + '%"></div>');
