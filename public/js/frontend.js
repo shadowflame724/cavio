@@ -235,12 +235,13 @@ $(document).ready(function () {
     }
     return false;
   });
-  console.log('order submit')
+
   // order
-  $('body').on('submit', '#submitOrder', function () {
+  $('body').on('submit', '#submitOrder', function (e) {
+    e.preventDefault();
     var _form = $(this),
       _action = _form.attr('action'),
-      _method = _form.attr('method'),
+      // _method = _form.attr('method'),
       _data = {
         email: (_form.find('input[name="email"]').val() || false),
         first_name: (_form.find('input[name="first_name"]').val() || false),
@@ -268,21 +269,34 @@ $(document).ready(function () {
     });
 
     if (!errForm) {
-      alert('form order submit');
+      _form.find('[type="submit"]').attr('disabled','disabled');
       $.ajax({
-        method: _method,
+        method: 'PUT',
         url: _action,
         data: _data
       }).done(function (data) {
-        // alert( "form order SEND success" );
+        $.each(data, function (key,val) {
+          if (key === 'user') {
+            $('.open-modal-login').replaceWith('<a href="/dashboard" class="btn-login anim-underline">' + val + '</a>');
+          }
+        });
 
         $('#modal-order').attr('data-anim', 'false');
         $('#modal-thank_you').attr('data-anim', 'true');
         $('body').addClass('overfl-h');
-      }).error(function () {
-        alert("form order SEND error");
+      }).fail(function (err) {
+        console.log(err);
+        $.each(err.responseJSON, function (name,data) {
+          _form
+            .find('input[name="' + name + '"]')
+            .addClass('input-error')
+            .focus();
+          $.each(data, function (i,text) {
+            console.warn(text);
+          });
+        });
       }).always(function () {
-        alert("form order SEND always");
+        _form.find('[type="submit"]').removeAttr('disabled');
       });
     }
     return false;
