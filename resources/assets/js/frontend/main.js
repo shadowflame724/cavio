@@ -293,7 +293,6 @@ $(document).ready(function () {
 function initPageAfterLoading() {
   view_HeaderFooter = !(document.getElementById('zones-mobal') || document.getElementById('product-card') || document.getElementById('news-item'));
 
-
   if (view_HeaderFooter) {
     var timeOTopImg;
     showHeader();
