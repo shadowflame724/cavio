@@ -2,13 +2,15 @@
 
 namespace App\Repositories\Backend\Order;
 
+use App\Mail\OrderDelivered;
 use App\Models\Order\Order;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
-use App\Events\Backend\Order\OrderDeleted;
+//use App\Events\Backend\Order\OrderDeleted;
 use App\Events\Backend\Order\OrderUpdated;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class OrderRepository.
@@ -50,24 +52,30 @@ class OrderRepository extends BaseRepository
 
 
     /**
-     * @param Model $order
+     * @param Order $order
      * @param  $input
      *
      * @throws GeneralException
      *
      * @return bool
      */
-    public function update(Model $order, array $input)
+    public function update(Order $order, array $input)
     {
         DB::transaction(function () use ($order, $input) {
             $order->status = $input['status'];
 
             if ($order->save()) {
 
+                if ($input['status'] == 3) {
+
+                    Mail::to($order->user->email)->send(new OrderDelivered($order));
+                }
+
                 event(new OrderUpdated($order, $input['admin_comment']));
 
                 return true;
             }
+
 
             throw new GeneralException(trans('exceptions.backend.order.update_error'));
         });
