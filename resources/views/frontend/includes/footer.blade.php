@@ -12,7 +12,7 @@
                         {{ trans('frontend.footer.privacyPolicy') }}
                     </a></div>
                 <div class="footer-address">Viale Europa, 6/a, 37050<br>San Pietro di Morubio (VR) Italia</div>
-                <div class="developer-by">{{ trans('frontend.footer.developedBy') }} <a href="#" class="colored anim-underline">Sponge D&amp;D</a>.
+                <div class="developer-by">{{ trans('frontend.footer.developedBy') }} <a href="//sponge.com.ua/" target="_blank" class="colored anim-underline">Sponge D&amp;D</a>.
                 </div>
             </div>
             <div class="footer-middle-side">

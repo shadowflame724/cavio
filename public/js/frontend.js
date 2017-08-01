@@ -347,12 +347,13 @@ function initPageAfterLoading() {
     }, 1500);
   }
 
-  if (!document.querySelector('html.mobile-platform')) {
-    mainScroll.addListener(function (status) {
-      if (wavesBg_1) {
-        if (wavesBg_1.playing) wavesBg_1.pause();
-        else if (!document.querySelector("main[data-page='/']")) wavesBg_1.play();
-      }
+
+  // if (!document.querySelector('html.mobile-platform')) {
+  //   mainScroll.addListener(function (status) {
+  //     if (wavesBg_1) {
+  //       if (wavesBg_1.playing) wavesBg_1.pause();
+  //       else if (!document.querySelector("main[data-page='/']")) wavesBg_1.play();
+  //     }
 
       // if(document.querySelector('body.press-design'))  return;
       //
@@ -364,8 +365,8 @@ function initPageAfterLoading() {
       //   $('.btn-top-menu.active').removeClass('active');
       //   $('.top-menu-box.show').removeClass('show');
       // }
-    });
-  }
+  //   });
+  // }
 
 
   // MAIN ========
@@ -494,23 +495,25 @@ if (!document.querySelector('body[data-page="/"]')) {
 
 if (!document.querySelector('html.mobile-platform')) {
 
-  mainScroll.addListener(function (status) {
-    if (wavesBg_1) {
-      if (wavesBg_1.playing) wavesBg_1.pause();
-      else if (!document.querySelector('main[data-page="/"]')) wavesBg_1.play();
-    }
+  if(mainScroll) {
+    mainScroll.addListener(function (status) {
+      if (wavesBg_1) {
+        if (wavesBg_1.playing) wavesBg_1.pause();
+        else if (!document.querySelector('main[data-page="/"]')) wavesBg_1.play();
+      }
 
-    // if (document.querySelector('body.press-design'))  return;
-    //
-    // if (status.offset.y != 0) $('header:not(.scroll)').addClass('scroll');
-    // else $('header.scroll').removeClass('scroll');
-    //
-    // if ($('header').hasClass('show-top-menu')) {
-    //   $('header').removeClass('show-top-menu');
-    //   $('.btn-top-menu.active').removeClass('active');
-    //   $('.top-menu-box.show').removeClass('show');
-    // }
-  });
+      // if (document.querySelector('body.press-design'))  return;
+      //
+      // if (status.offset.y != 0) $('header:not(.scroll)').addClass('scroll');
+      // else $('header.scroll').removeClass('scroll');
+      //
+      // if ($('header').hasClass('show-top-menu')) {
+      //   $('header').removeClass('show-top-menu');
+      //   $('.btn-top-menu.active').removeClass('active');
+      //   $('.top-menu-box.show').removeClass('show');
+      // }
+    });
+  }
 }
 
 
@@ -531,7 +534,7 @@ if (!document.querySelector('html.mobile-platform')) {
 // });
 
 
-showElements();
+// showElements();
 
 var timeOTopImg;
 $('.top-menu-box.collection li >a').on('mouseenter', function () {
@@ -3664,8 +3667,8 @@ var App = (function () {
   }
 
   function _hidePopup() {
-    hideTopMenu();
-    hideLeftMenu();
+    // hideTopMenu();
+    // hideLeftMenu();
   }
 
   function _routes() {
