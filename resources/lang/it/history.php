@@ -69,7 +69,7 @@ return [
             'deleted' => 'showroom eliminato',
             'updated' => 'showroom aggiornato',
         ],
-        'finishtissue' => [
+        'finishTissue' => [
             'created' => 'fazzoletto di carta creato',
             'deleted' => 'fazzoletto di carta eliminato',
             'updated' => 'fazzoletto di carta aggiornato',
@@ -87,6 +87,11 @@ return [
             'created' => 'messaggio di modello creato',
             'deleted' => 'messaggio di modello eliminato',
             'updated' => 'messaggio di modello aggiornato',
+        ],
+        'document' => [
+            'created' => 'document creato',
+            'deleted' => 'document eliminato',
+            'updated' => 'document aggiornato',
         ],
         'users' => [
             'changed_password' => 'changed password for user',

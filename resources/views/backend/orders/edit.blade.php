@@ -14,7 +14,7 @@
 
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('labels.backend.access.orders.create') }}</h3>
+            <h3 class="box-title">{{ trans('labels.backend.access.orders.edit') }}</h3>
         </div><!-- /.box-header -->
 
         <div class="box-body">

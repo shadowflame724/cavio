@@ -16,8 +16,97 @@
             <h3 class="box-title">{{ trans('labels.backend.access.settings.edit') }}</h3>
         </div><!-- /.box-header -->
 
-
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab"
+                                                      data-toggle="tab">EN</a>
+            </li>
+            <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
+            <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+        </ul>
         <div class="box-body">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="en">
+                    <div class="form-group">
+                        {{ Form::label('news_types', trans('validation.attributes.backend.access.settings.news_types'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10" id="soc_links">
+                            <div class="input-group">
+                                <span class="input-group-addon">1</span>
+                                {{ Form::text('news_types[0][name]', $newsTypesArr[0]->name, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">2</span>
+                                {{ Form::text('news_types[1][name]', $newsTypesArr[1]->name, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">3</span>
+                                {{ Form::text('news_types[2][name]', $newsTypesArr[2]->name, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">4</span>
+                                {{ Form::text('news_types[3][name]', $newsTypesArr[3]->name, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">5</span>
+                                {{ Form::text('news_types[4][name]', $newsTypesArr[4]->name, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="ru">
+                    <div class="form-group">
+                        {{ Form::label('news_types', trans('validation.attributes.backend.access.settings.news_types_ru'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10" id="soc_links">
+                            <div class="input-group">
+                                <span class="input-group-addon">1</span>
+                                {{ Form::text('news_types[0][name_ru]', $newsTypesArr[0]->name_ru, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">2</span>
+                                {{ Form::text('news_types[1][name_ru]', $newsTypesArr[1]->name_ru, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">3</span>
+                                {{ Form::text('news_types[2][name_ru]', $newsTypesArr[2]->name_ru, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">4</span>
+                                {{ Form::text('news_types[3][name_ru]', $newsTypesArr[3]->name_ru, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">5</span>
+                                {{ Form::text('news_types[4][name_ru]', $newsTypesArr[4]->name_ru, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="it">
+                    <div class="form-group">
+                        {{ Form::label('news_types', trans('validation.attributes.backend.access.settings.news_types_it'), ['class' => 'col-lg-2 control-label']) }}
+                        <div class="col-lg-10" id="soc_links">
+                            <div class="input-group">
+                                <span class="input-group-addon">1</span>
+                                {{ Form::text('news_types[0][name_it]', $newsTypesArr[0]->name_it, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">2</span>
+                                {{ Form::text('news_types[1][name_it]', $newsTypesArr[1]->name_it, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">3</span>
+                                {{ Form::text('news_types[2][name_it]', $newsTypesArr[2]->name_it, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">4</span>
+                                {{ Form::text('news_types[3][name_it]', $newsTypesArr[3]->name_it, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">5</span>
+                                {{ Form::text('news_types[4][name_it]', $newsTypesArr[4]->name_it, ['class' => 'form-control',  'autofocus' => 'autofocus']) }}
+                            </div>
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
+            </div>
 
             <div class="form-group">
                 {{ Form::label('soc_links', trans('validation.attributes.backend.access.settings.soc_links'), ['class' => 'col-lg-2 control-label']) }}

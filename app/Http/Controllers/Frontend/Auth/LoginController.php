@@ -61,7 +61,16 @@ class LoginController extends Controller
         }
 
         event(new UserLoggedIn($user));
-
+        if($request->ajax()){
+            $statusCode = 200;
+            $user = access()->user();
+            $link = ($user->allow('view-backend')) ? '/admin' : '';
+            $response = [
+                'name' => $user->first_name,
+                'link' => $link . '/dashboard',
+            ];
+            return json_encode($response);
+        }
         return redirect()->intended($this->redirectPath());
     }
 

@@ -68,10 +68,15 @@ return [
             'deleted' => 'deleted showrooms',
             'updated' => 'updated showrooms',
         ],
-        'finishtissue' => [
+        'finishTissue' => [
             'created' => 'created tissues',
             'deleted' => 'deleted tissues',
             'updated' => 'updated tissues',
+        ],
+        'document' => [
+            'created' => 'created document',
+            'deleted' => 'deleted document',
+            'updated' => 'updated document',
         ],
         'popup' => [
             'updated' => 'updated popups',

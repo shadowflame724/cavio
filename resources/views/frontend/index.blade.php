@@ -36,7 +36,7 @@
     <section id="banner" class="wrap-banner-main">
         <div id="wrap-banner-img-box">
             @php($i=0)
-            @foreach($collections as $collection)
+            @foreach($collectionsArr as $collection)
                 @if($collection->banner == 1)
                     <div class="banner-top-item @if($i)hide @endif">
                         <img src="/upload/images/collection/original/{{ $collection->image }}" alt="" class='banner-img'>
@@ -77,7 +77,7 @@
                         <div class="new-label">{{ trans('frontend.index.new')}}</div>
                         <div class="new-products-dots">
                             @php($k=0)
-                            @foreach($collections as $collection)
+                            @foreach($collectionsArr as $collection)
                                 @if($collection->banner > 0)
                                     <div class="new-prod-dot @if(!$k)active @endif"></div>
                                     @php($k++)
@@ -88,7 +88,7 @@
 
                     <div id="wrap-left-slidexbox">
                         @php($u=0)
-                        @foreach($collections as $collection)
+                        @foreach($collectionsArr as $collection)
                             @if($collection->banner == 1)
                                 <div class="slidebox @if($u)hide @endif">
                                     <div class="title">{{ $collection->{'title'.$langSuf} }}</div>
@@ -104,227 +104,51 @@
                 </div>
             </div>
             <div class="new-products-right-side bg-white-marmur" data-anim="false">
-                <div class="wrap-right-slidebox bg-white-marmur">
+                @php($pi=0)
+                @foreach($collectionsArr as $collection)
+                @if($collection->banner > 0)
+                <div class="wrap-right-slidebox bg-white-marmur @if($u) hide disp-none @endif">
+                    @if(!empty($collection->products))
+                    @php($p_count = count($collection->products))
+                    @foreach($collection->products as $product)
                     <div class="new-products-right-item nowrp-item">
-                        <a class="new-products-right-inner-item" href="#">
+                        <a class="new-products-right-inner-item" href="/product/{{$product['slug']}}">
                             <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-1.jpg)">
+                                 style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['image']}})">
                             </div>
                             <div class="wrap-new-product-data">
-                                <div class="product-code">#dsf32</div>
-                                <div class="product-name">Tavolino caffé 1 cas.</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
+                                <div class="product-code">{{$product['code']}}</div>
+                                <div class="product-name">{{$product['name'.$langSuf]}}</div>
+                                <div class="product-size">{{$product['size']}}</div>
                             </div>
                         </a>
                     </div>
-                    <div class="new-products-right-item nowrp-item">
-                        <a class="new-products-right-inner-item" href="#">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-2.jpg)">
-                                <!--<img src="images/un_banner-1-2.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#dsf32</div>
-                                <div class="product-name">Tavolino caffé 1 cas.</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item">
-                        <a class="new-products-right-inner-item" href="#">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-3.jpg)">
-                                <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#pr117</div>
-                                <div class="product-name">Bench</div>
-                                <div class="product-size">105 x 45 x 80 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item">
-                        <a class="new-products-right-inner-item" href="#">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-2.jpg)">
-                                <!--<img src="images/un_banner-1-2.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#dsf32</div>
-                                <div class="product-name">Tavolino caffé 1 cas.</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item">
-                        <a class="new-products-right-inner-item" href="#">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-3.jpg)">
-                                <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#pr117</div>
-                                <div class="product-name">Bench</div>
-                                <div class="product-size">105 x 45 x 80 cm</div>
-                            </div>
-                        </a>
-                    </div>
+                    @endforeach
+                    @endif
                     <div class="new-products-right-item more">
                         <div class="bg-new-pright-item-more">
                             <svg viewBox="0 0 1395.63 1237.68">
                                 <use xlink:href="wave.svg#wave"></use>
                             </svg>
                         </div>
-                        <a class="new-products-right-inner-item" href="#">
+                        <a class="new-products-right-inner-item" href="/collections/{{ $collection->slug }}">
                             <div class="new-products-more-center">
                                 <div class="new-products-more-widt">
-                        <span class="show-all-prod anim-underline">
-                          Show All
-                          <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
-                        </span>
+                    <span class="show-all-prod anim-underline">
+                      Show All
+                      <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
+                    </span>
                                     <div class="show-all-prod-numb">
-                                        <span>124 products</span>
+                                        <span>{{$p_count}} products</span>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="wrap-right-slidebox bg-white-marmur hide disp-none">
-                    <div class="new-products-right-item nowrp-item hide">
-                        <a href="#" class="new-products-right-inner-item">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-2.jpg)">
-                                <!--<img src="images/un_banner-1-2.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#dsf32</div>
-                                <div class="product-name">Tavolino caffé 1 cas.</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item hide">
-                        <a href="#" class="new-products-right-inner-item">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-3.jpg)">
-                                <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#pr117</div>
-                                <div class="product-name">Bench</div>
-                                <div class="product-size">105 x 45 x 80 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item hide">
-                        <a class="new-products-right-inner-item" href="#">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-2.jpg)">
-                                <!--<img src="images/un_banner-1-2.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#dsf32</div>
-                                <div class="product-name">Tavolino caffé 1 cas.</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item hide">
-                        <a href="#" class="new-products-right-inner-item">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-4.jpg)">
-                                <!--<img src="images/un_banner-1-4.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#pbb081</div>
-                                <div class="product-name">Green Butterfly</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item more hide">
-                        <div class="bg-new-pright-item-more">
-                            <svg viewBox="0 0 1395.63 1237.68">
-                                <use xlink:href="wave.svg#wave"></use>
-                            </svg>
-                        </div>
-                        <a class="new-products-right-inner-item" href="#">
-                            <div class="new-products-more-center">
-                                <div class="new-products-more-widt">
-                                    <span class="show-all-prod anim-underline">
-                                      Show All
-                                      <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
-                                    </span>
-                                    <div class="show-all-prod-numb">
-                                        <span>124 products</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="wrap-right-slidebox bg-white-marmur hide disp-none">
-                    <div class="new-products-right-item nowrp-item hide">
-                        <a href="#" class="new-products-right-inner-item">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-2.jpg)">
-                                <!--<img src="images/un_banner-1-2.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#dsf32</div>
-                                <div class="product-name">Tavolino caffé 1 cas.</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item hide">
-                        <a href="#" class="new-products-right-inner-item">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-3.jpg)">
-                                <!--<img src="images/un_banner-1-3.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#pr117</div>
-                                <div class="product-name">Bench</div>
-                                <div class="product-size">105 x 45 x 80 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item nowrp-item hide">
-                        <a href="#" class="new-products-right-inner-item">
-                            <div class="wrap-new-product-img bg-white-marmur"
-                                 style="background-image: url(upload/images/un_banner-1-4.jpg)">
-                                <!--<img src="images/un_banner-1-4.jpg" alt="">-->
-                            </div>
-                            <div class="wrap-new-product-data">
-                                <div class="product-code">#pbb081</div>
-                                <div class="product-name">Green Butterfly</div>
-                                <div class="product-size">108 x 4 x 89 cm</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="new-products-right-item more hide">
-                        <div class="bg-new-pright-item-more">
-                            <svg viewBox="0 0 1395.63 1237.68">
-                                <use xlink:href="wave.svg#wave"></use>
-                            </svg>
-                        </div>
-                        <a class="new-products-right-inner-item" href="#">
-                            <div class="new-products-more-center">
-                                <div class="new-products-more-widt">
-                        <span class="show-all-prod anim-underline">
-                          Show All
-                          <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
-                        </span>
-                                    <div class="show-all-prod-numb">
-                                        <span>124 products</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                @php($pi++)
+                @endif
+                @endforeach
             </div>
             <div class="wrap-new-products-gradiet" data-anim="false"></div>
         </div>

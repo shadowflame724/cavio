@@ -69,10 +69,15 @@ return [
             'deleted' => 'удалил посредника',
             'updated' => 'обновил посредника',
         ],
-        'finishtissue' => [
+        'finishTissue' => [
             'created' => 'создал ткань',
             'deleted' => 'удалил ткань',
             'updated' => 'обновил ткань',
+        ],
+        'document' => [
+            'created' => 'создал документ',
+            'deleted' => 'удалил документ',
+            'updated' => 'обновил документ',
         ],
         'popup' => [
             'updated' => 'обновил объявление'

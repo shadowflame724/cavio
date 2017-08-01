@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\News\UpdateNewsRequest;
 use App\Http\Requests\Backend\News\StoreNewsRequest;
 use App\Models\News\News;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Settings;
 use App\Repositories\Backend\News\NewsRepository;
 
 
@@ -44,7 +45,11 @@ class NewsController extends Controller
      */
     public function create(ManageNewsRequest $request)
     {
-        return view('backend.news.create');
+        $newsTypes = Settings::find(1)->getAttributeValue('news_types_data');
+
+        return view('backend.news.create',[
+            'newsTypes' => json_decode($newsTypes)
+        ]);
     }
 
     /**
@@ -55,8 +60,7 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
-        $this->news->create($request->only('type', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it',
-            'preview', 'preview_ru', 'preview_it', 'body', 'body_ru', 'body_it', 'type', 'photo', 'admin_comment'));
+        $this->news->create($request->all());
 
         $this->moveImg($request->photo);
 
@@ -71,8 +75,11 @@ class NewsController extends Controller
      */
     public function edit(News $news, ManageNewsRequest $request)
     {
+        $newsTypes = Settings::find(1)->getAttributeValue('news_types_data');
+
         return view('backend.news.edit', [
             'news' => $news,
+            'newsTypes' => json_decode($newsTypes)
         ]);
     }
 
@@ -85,8 +92,8 @@ class NewsController extends Controller
     public function update(News $news, UpdateNewsRequest $request)
     {
         $oldName = $news->image;
-        $this->news->update($news, $request->only('type', 'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it',
-            'preview', 'preview_ru', 'preview_it', 'body', 'body_ru', 'body_it', 'type', 'photo', 'admin_comment'));
+
+        $this->news->update($news, $request->all());
         $this->moveImg($request->photo, $oldName);
 
         return redirect()->route('admin.news.index')->withFlashSuccess(trans('alerts.backend.news.updated'));

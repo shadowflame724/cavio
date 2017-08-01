@@ -48,4 +48,19 @@ class Collection extends Model
         return $this->hasMany(CollectionZone::class);
     }
 
+    public function getProductsByIds()
+    {
+        if(empty($this->product_ids)) return [];
+        $ids = [];
+        $expArr = explode(',',$this->product_ids);
+        foreach ($expArr as $one) {
+            $id = (int)$one;
+            if($id > 0){
+                $ids[$id] = $id;
+            }
+        }
+
+        return $ids;
+    }
+
 }

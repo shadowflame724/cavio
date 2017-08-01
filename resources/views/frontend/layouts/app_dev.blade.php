@@ -28,6 +28,7 @@
         @include('frontend.includes.physics_script')
         {{ Html::script('js/frontend/two.js') }}
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
     <body class="@yield('bodyClass')" id="@yield('bodyClass')">
     @php
@@ -39,6 +40,7 @@
         @yield('before_header')
         @include('frontend.includes.header')
         @include('frontend.includes.login_modal')
+        @include('frontend.includes.popups')
 
         <main id="main-scrollbar" data-page="/{{$path}}">
             @yield('content')

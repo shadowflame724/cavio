@@ -30,7 +30,6 @@ class CollectionController extends Controller
     {
         $collection = Collection::where('slug', $slug)->first();
         $page = $this->page('collections');
-
         return view('frontend.pages.collections.show', [
             'page' => $page,
             'collection' => $collection,
