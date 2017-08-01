@@ -167,7 +167,6 @@
             var y = e.offsetY == undefined ? e.layerY : e.offsetY;
             markerX = x / mapMainW * 100;
             markerY = y / mapMainH * 100;
-
             $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val(markerX);
             $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val(markerY);
             $('#marker-' + currMarkerId).css({top: markerY+ '%', left: markerX + '%'});

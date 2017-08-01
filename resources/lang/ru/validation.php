@@ -159,11 +159,9 @@ return [
                 ],
                 'news' => [
                     'type' => 'Тип',
-                    'type_news' => 'Новость',
-                    'type_press' => 'Пресса',
-                    'type_presentation' => 'Презентация',
-                    'type_video' => 'Видео',
-                    'type_showroom' => 'Шоурум',
+                    'name' => 'Название*',
+                    'name_ru' => 'Название[RU]*',
+                    'name_it' => 'Название[IT]*',
                     'title' => 'Заголовок*',
                     'description' => 'Описание*',
                     'preview' => 'Предварительный просмотр*',
@@ -274,7 +272,11 @@ return [
                     'soc_links' => 'Ссылки*',
                     'discount_data' => 'Скидки*',
                     'koef_data' => 'Коэффициент(дюйм/см)*',
-                    'vat_data' => 'VAT*'
+                    'vat_data' => 'VAT*',
+                    'news_types' => "Типы новостей",
+                    'news_types_ru' => 'Типы новостей[RU]*',
+                    'news_types_it' => 'Типы новостей[IT]*'
+
                 ],
 
                 'templateMessage' => [

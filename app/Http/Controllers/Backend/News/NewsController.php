@@ -75,8 +75,11 @@ class NewsController extends Controller
      */
     public function edit(News $news, ManageNewsRequest $request)
     {
+        $newsTypes = Settings::find(1)->getAttributeValue('news_types_data');
+
         return view('backend.news.edit', [
             'news' => $news,
+            'newsTypes' => json_decode($newsTypes)
         ]);
     }
 

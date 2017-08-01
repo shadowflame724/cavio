@@ -18,12 +18,13 @@ class News extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }
 
     protected $fillable = ['title', 'title_ru', 'title_it',
+        'name', 'name_ru', 'name_it',
         'description', 'description_ru', 'description_it',
         'preview', 'preview_ru', 'preview_it',
         'body', 'body_ru', 'body_it',

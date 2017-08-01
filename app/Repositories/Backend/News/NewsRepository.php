@@ -42,7 +42,7 @@ class NewsRepository extends BaseRepository
         return $this->query()
             ->select([
                 config('news_table') . '.id',
-                config('news_table') . '.title',
+                config('news_table') . '.name',
                 config('news_table') . '.type',
                 config('news_table') . '.image',
                 config('news_table') . '.created_at',
@@ -66,6 +66,9 @@ class NewsRepository extends BaseRepository
             $news->title = $input['title'];
             $news->title_ru = $input['title_ru'];
             $news->title_it = $input['title_it'];
+            $news->name = $input['name'];
+            $news->name_ru = $input['name_ru'];
+            $news->name_it = $input['name_it'];
             $news->description = $input['description'];
             $news->description_ru = $input['description_ru'];
             $news->description_it = $input['description_it'];
@@ -101,6 +104,9 @@ class NewsRepository extends BaseRepository
         $news->title = $input['title'];
         $news->title_ru = $input['title_ru'];
         $news->title_it = $input['title_it'];
+        $news->name = $input['name'];
+        $news->name_ru = $input['name_ru'];
+        $news->name_it = $input['name_it'];
         $news->description = $input['description'];
         $news->description_ru = $input['description_ru'];
         $news->description_it = $input['description_it'];
