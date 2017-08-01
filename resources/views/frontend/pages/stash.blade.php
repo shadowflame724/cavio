@@ -104,8 +104,8 @@
 
     <section id="catalogue" class="">
       <div class="container">
-        <div class="small-page-title hide"><span class="text-title">{{ trans('frontend.shoppingCart.title') }}</span></div>
-        <div class="wrap-catal stash wrap-box-shadow clearfix bg-white-marmur hide">
+        <div class="small-page-title" data-anim="false"><span class="text-title">{{ trans('frontend.shoppingCart.title') }}</span></div>
+        <div class="wrap-catal stash wrap-box-shadow clearfix bg-white-marmur" data-anim="false">
           <div class="wrap-stash-list">
             @if(!empty($products))
             @foreach($products as $product)
