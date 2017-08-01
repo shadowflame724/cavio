@@ -19,8 +19,6 @@ platformDef();
 blendModeDef();
 
 
-function hideTopMenu(){};
-function hideLeftMenu(){};
 
 /**
  * Basket
@@ -466,7 +464,7 @@ $('.wrap-login-side a').on('click', function (e) {
 
 $(window).on('resize', function () {
     //RESIZE TOPDROPMENU
-    var thentisDropMenu = $('.top-menu-box.show');
+    var thisDropMenu = $('.top-menu-box.show');
     var newTopMenuHeight = thisDropMenu.find('.wrap-menus').height() + $('header').height();
     if (newTopMenuHeight > window.innerHeight) newTopMenuHeight = window.innerHeight;
     if (thisDropMenu.find('.forTopMenuScroll').length) topMenuScroll.setPosition(0, 0);
@@ -3178,8 +3176,6 @@ $('#ty-ok').on('click', function (e) {
 
 // CLOSE MODALS
 $(document).on('click', '.zone-col-modal, .close-modal', function (event) {
-
-    console.log(234234)
     var isModalSider = !$(event.target).closest('.inner-zone-col-modal').length;
 
     if (isModalSider || $(event.target).hasClass('btn-close-modal')) {
@@ -3262,6 +3258,15 @@ function hideTopMenu() {
     $('.btn-top-menu.active').removeClass('active');
     $('.top-menu-box.show').removeClass('show');
     document.getElementById('top-menu').style.height = 0;
+}
+
+function hideLeftMenu(){
+    $('.nav-icon').removeClass('open');
+    $('.wrap-left-nav').removeClass('show');
+    $('.btn-top-menu.active').removeClass('active');
+    $('.top-menu-box.show').removeClass('show');
+    $('header').removeClass('show-left-menu');
+    $(document.body).toggleClass('overfl-h');
 }
 
 function blendModeDef() {
