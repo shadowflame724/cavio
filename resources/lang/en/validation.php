@@ -377,7 +377,7 @@ return [
                     'user_email' => 'Client Email',
                     'summ' => 'Summ',
                     'count' => 'Count',
-
+                    'updated_at' => 'Last updated'
                 ],
 
 

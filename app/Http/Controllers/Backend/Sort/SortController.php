@@ -21,8 +21,11 @@ class SortController extends Controller
      */
     public function index(ManageSortRequest $request, $type)
     {
+        $parentCat = Category::where('parent_id', '=', null)->get();
+
         return view('backend.sort.index',
             [
+                'parentCat' => $parentCat,
                 'type' => $type
             ]
         );

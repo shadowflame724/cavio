@@ -10,6 +10,7 @@ use App\Models\Order\Order;
 use App\Repositories\Backend\Order\OrderRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Facades\Datatables;
 
 class OrderController extends Controller
@@ -80,8 +81,18 @@ class OrderController extends Controller
      */
     public function edit(Order $order, ManageOrderRequest $request)
     {
+        $productData = json_decode($order->product_data);
+
+        $products = DB::table('product_prices')
+            ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
+            ->join('product_childs', 'product_prices.product_child_id', '=', 'product_childs.id')
+            //->join('products', 'product_childs.product_id', '=', 'products.id')
+            ->whereIn('product_prices.id', $productData->product_price_ids)
+            ->get();
+
         return view('backend.orders.edit', [
-            'order' => $order
+            'order' => $order,
+            'products' => $products
         ]);
     }
 

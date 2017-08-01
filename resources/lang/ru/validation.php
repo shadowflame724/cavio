@@ -318,6 +318,7 @@ return [
                     'user_email' => 'email клиента',
                     'summ' => 'Сумма',
                     'count' => 'Количество',
+                    'updated_at' => 'Последнее изменение'
                 ],
                 'sort' => [
                     'type_collection' => 'Сортировка по коллекциям',
