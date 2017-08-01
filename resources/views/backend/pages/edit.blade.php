@@ -39,13 +39,6 @@
             <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
         </ul>
         <div class="box-body">
-            <div class="form-group">
-                {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
-
-                <div class="col-lg-10">
-                    {{ Form::text('slug', $page->slug, ['id' => 'pageKey', 'class' => 'form-control', 'maxlength' => '35' ]) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="en">
@@ -65,13 +58,6 @@
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
-                    <div class="form-group">
-                        {{ Form::label('description', trans('validation.attributes.backend.access.page.description'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::textarea('description', $page->description, ['id' => 'description', 'class' => 'form-control', 'required' => 'required']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
                 </div>
 
 
@@ -112,6 +98,13 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                {{ Form::label('description', trans('validation.attributes.backend.access.page.description'), ['class' => 'col-lg-2 control-label']) }}
+
+                <div class="col-lg-10">
+                    {{ Form::textarea('description', $page->description, ['id' => 'description', 'class' => 'form-control', 'required' => 'required']) }}
+                </div><!--col-lg-10-->
+            </div><!--form control-->
 
             <div class="form-group">
                 {{ Form::label('admin_comment', trans('validation.attributes.backend.admin_comment.comment'), ['class' => 'col-lg-2 control-label']) }}
@@ -120,129 +113,133 @@
                     {{ Form::textarea('admin_comment', null, ['class' => 'form-control', 'required' => 'required']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
+            @if(!emptyArray($page->blocks))
 
-            <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('labels.backend.access.block.management') }}</h3>
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ trans('labels.backend.access.block.management') }}</h3>
 
-                <div class="box-tools pull-right">
-                </div><!--box-tools pull-right-->
-            </div><!-- /.box-header -->
+                    <div class="box-tools pull-right">
+                    </div><!--box-tools pull-right-->
+                </div><!-- /.box-header -->
 
-            <div class="box-body">
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    @foreach($page->blocks as $key => $block)
-                        @php ($i = $key+1)
+                <div class="box-body">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        @foreach($page->blocks as $key => $block)
+                            @php ($i = $key+1)
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="heading{{$i}}">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                           href="#collapse{{$i}}"
-                                           aria-expanded="true" aria-controls="collapse{{$i}}">
-                                            {{$i}}. {{$block->title}}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
-                                     aria-labelledby="heading{{$i}}">
-                                    <div class="panel-body">
-                                        <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active"><a href="#en{{$i}}"
-                                                                                      aria-controls="en" role="tab"
-                                                                                      data-toggle="tab">EN</a>
-                                            </li>
-                                            <li role="presentation"><a href="#ru{{$i}}" aria-controls="ru" role="tab"
-                                                                       data-toggle="tab">RU</a></li>
-                                            <li role="presentation"><a href="#it{{$i}}" aria-controls="it" role="tab"
-                                                                       data-toggle="tab">IT</a></li>
-                                        </ul>
-                                        {{ Form::hidden('blocks['.$i.'][id]', $block->id) }}
-                                        <div class="box-body">
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane fade in active" id="en{{$i}}">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="heading{{$i}}">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapse{{$i}}"
+                                               aria-expanded="true" aria-controls="collapse{{$i}}">
+                                                {{$i}}. {{$block->title}}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse{{$i}}" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="heading{{$i}}">
+                                        <div class="panel-body">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="active"><a href="#en{{$i}}"
+                                                                                          aria-controls="en" role="tab"
+                                                                                          data-toggle="tab">EN</a>
+                                                </li>
+                                                <li role="presentation"><a href="#ru{{$i}}" aria-controls="ru"
+                                                                           role="tab"
+                                                                           data-toggle="tab">RU</a></li>
+                                                <li role="presentation"><a href="#it{{$i}}" aria-controls="it"
+                                                                           role="tab"
+                                                                           data-toggle="tab">IT</a></li>
+                                            </ul>
+                                            {{ Form::hidden('blocks['.$i.'][id]', $block->id) }}
+                                            <div class="box-body">
+                                                <div class="tab-content">
+                                                    <div role="tabpanel" class="tab-pane fade in active" id="en{{$i}}">
 
-                                                    <div class="form-group">
-                                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
+                                                        <div class="form-group">
+                                                            {{ Form::label('title', trans('validation.attributes.backend.access.block.title'), ['class' => 'col-lg-2 control-label']) }}
 
-                                                        <div class="col-lg-10">
-                                                            {{ Form::text('blocks['.$i.'][title]', $block->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
-                                                        </div><!--col-lg-10-->
-                                                    </div><!--form control-->
+                                                            <div class="col-lg-10">
+                                                                {{ Form::text('blocks['.$i.'][title]', $block->title, ['class' => 'form-control', 'maxlength' => '191' ]) }}
+                                                            </div><!--col-lg-10-->
+                                                        </div><!--form control-->
 
-                                                    <div class="form-group">
-                                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
-                                                        <div class="col-lg-10">
-                                                            {!! Form::textarea('blocks['.$i.'][body]', $block->body, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
-                                                        </div><!--col-lg-10-->
-                                                    </div><!--form control-->
+                                                        <div class="form-group">
+                                                            {!! Form::label('body', trans('validation.attributes.backend.access.block.body'), ['class' => 'col-lg-2 control-label']) !!}
+                                                            <div class="col-lg-10">
+                                                                {!! Form::textarea('blocks['.$i.'][body]', $block->body, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
+                                                            </div><!--col-lg-10-->
+                                                        </div><!--form control-->
+                                                    </div>
+
+                                                    <div role="tabpanel" class="tab-pane fade" id="ru{{$i}}">
+
+                                                        <div class="form-group">
+                                                            {{ Form::label('title', trans('validation.attributes.backend.access.block.title_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                            <div class="col-lg-10">
+                                                                {{ Form::text('blocks['.$i.'][title_ru]', $block->title_ru, ['class' => 'form-control', 'maxlength' => '35' ]) }}
+                                                            </div><!--col-lg-10-->
+                                                        </div><!--form control-->
+
+                                                        <div class="form-group">
+                                                            {!! Form::label('body', trans('validation.attributes.backend.access.block.body_ru'), ['class' => 'col-lg-2 control-label']) !!}
+                                                            <div class="col-lg-10">
+                                                                {!! Form::textarea('blocks['.$i.'][body_ru]', $block->body_ru, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
+                                                            </div><!--col-lg-10-->
+                                                        </div><!--form control-->
+                                                    </div>
+
+                                                    <div role="tabpanel" class="tab-pane fade" id="it{{$i}}">
+
+                                                        <div class="form-group">
+                                                            {{ Form::label('title', trans('validation.attributes.backend.access.block.title_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                                                            <div class="col-lg-10">
+                                                                {{ Form::text('blocks['.$i.'][title_it]', $block->title_it, ['class' => 'form-control', 'maxlength' => '35' ]) }}
+                                                            </div><!--col-lg-10-->
+                                                        </div><!--form control-->
+
+                                                        <div class="form-group">
+                                                            {!! Form::label('body', trans('validation.attributes.backend.access.block.body_it'), ['class' => 'col-lg-2 control-label']) !!}
+                                                            <div class="col-lg-10">
+                                                                {!! Form::textarea('blocks['.$i.'][body_it]', $block->body_it, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
+                                                            </div><!--col-lg-10-->
+                                                        </div><!--form control-->
+                                                    </div>
                                                 </div>
 
-                                                <div role="tabpanel" class="tab-pane fade" id="ru{{$i}}">
-
-                                                    <div class="form-group">
-                                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title_ru'), ['class' => 'col-lg-2 control-label']) }}
-
-                                                        <div class="col-lg-10">
-                                                            {{ Form::text('blocks['.$i.'][title_ru]', $block->title_ru, ['class' => 'form-control', 'maxlength' => '35' ]) }}
-                                                        </div><!--col-lg-10-->
-                                                    </div><!--form control-->
-
-                                                    <div class="form-group">
-                                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body_ru'), ['class' => 'col-lg-2 control-label']) !!}
-                                                        <div class="col-lg-10">
-                                                            {!! Form::textarea('blocks['.$i.'][body_ru]', $block->body_ru, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
-                                                        </div><!--col-lg-10-->
-                                                    </div><!--form control-->
+                                                <div class="form-group">
+                                                    {{ Form::label('blocks['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                                                    <div class="col-lg-10">
+                                                        {{ Form::hidden('blocks['.$i.'][photo]', null) }}
+                                                        <div class="dropzone" id="add_photo"></div>
+                                                        @if($block->image)
+                                                            <div class="photo active">
+                                                                <div id="dlt_photo{{$key}}"
+                                                                     class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                                                <img class="add_photo" id="add_photo{{$key}}"
+                                                                     src="/upload/images/{{ $block->image }}"
+                                                                     alt="">
+                                                            </div>
+                                                        @else
+                                                            <div class="photo">
+                                                                <div id="dlt_photo{{$key}}"
+                                                                     class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                                            </div>
+                                                        @endif
+                                                    </div><!--col-lg-10-->
                                                 </div>
 
-                                                <div role="tabpanel" class="tab-pane fade" id="it{{$i}}">
-
-                                                    <div class="form-group">
-                                                        {{ Form::label('title', trans('validation.attributes.backend.access.block.title_it'), ['class' => 'col-lg-2 control-label']) }}
-
-                                                        <div class="col-lg-10">
-                                                            {{ Form::text('blocks['.$i.'][title_it]', $block->title_it, ['class' => 'form-control', 'maxlength' => '35' ]) }}
-                                                        </div><!--col-lg-10-->
-                                                    </div><!--form control-->
-
-                                                    <div class="form-group">
-                                                        {!! Form::label('body', trans('validation.attributes.backend.access.block.body_it'), ['class' => 'col-lg-2 control-label']) !!}
-                                                        <div class="col-lg-10">
-                                                            {!! Form::textarea('blocks['.$i.'][body_it]', $block->body_it, ['class' => 'form-control block', 'maxlength' => '500' ]) !!}
-                                                        </div><!--col-lg-10-->
-                                                    </div><!--form control-->
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                {{ Form::label('blocks['.$i.'][photo]', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                                                <div class="col-lg-10">
-                                                    {{ Form::hidden('blocks['.$i.'][photo]', null) }}
-                                                    <div class="dropzone" id="add_photo"></div>
-                                                    @if($block->image)
-                                                        <div class="photo active">
-                                                            <div id="dlt_photo{{$key}}"
-                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                            <img class="add_photo" id="add_photo{{$key}}"
-                                                                 src="/upload/images/{{ $block->image }}"
-                                                                 alt="">
-                                                        </div>
-                                                    @else
-                                                        <div class="photo">
-                                                            <div id="dlt_photo{{$key}}"
-                                                                 class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                                        </div>
-                                                    @endif
-                                                </div><!--col-lg-10-->
-                                            </div>
-
-                                        </div><!--form control-->
+                                            </div><!--form control-->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endforeach
+                                @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 
@@ -310,7 +307,7 @@
 
         var myDropzone = [];
         var selfAccId;
-        $('.panel-default').each(function(key, el){
+        $('.panel-default').each(function (key, el) {
             $(this).on('show.bs.collapse', function () {
                 selfAccId = key;
             });
@@ -348,9 +345,9 @@
                         } else {
                             if ($('.photo').eq(key).hasClass('active')) {
                                 console.log($('.photo >img'));
-                                $('#add_photo'+key).replaceWith('<img class="add_photo" id="#add_photo'+key+'" src="/' + res['success']['path'] + '">');
+                                $('#add_photo' + key).replaceWith('<img class="add_photo" id="#add_photo' + key + '" src="/' + res['success']['path'] + '">');
                             } else {
-                                $('.photo').eq(key).append('<img class="add_photo" id="#add_photo'+key+'" src="/' + res['success']['path'] + '">');
+                                $('.photo').eq(key).append('<img class="add_photo" id="#add_photo' + key + '" src="/' + res['success']['path'] + '">');
                                 $('.photo').eq(key).addClass('active');
                             }
 

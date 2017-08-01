@@ -31,7 +31,6 @@ class StorePageRequest extends Request
             'title' => "required|min:3|max:35",
             'title_ru' => "required|min:3|max:35",
             'title_it' => "required|min:3|max:35",
-            'pageKey' => "max:40",
             'description' => "required|min:3",
             'body' => "required|min:3",
             'body_ru' => "required|min:3",

@@ -15,6 +15,7 @@ class UploadController extends Controller
         $imgName = time() . '.' . $file->getClientOriginalExtension();
         $path = $file->getRealPath();
         $img = new Image($path);
+        $img->setQuality(100);
         $imgWidth = $img->getWidth();
         $imgHeight = $img->getHeight();
         if (!file_exists(public_path('/upload/tmp'))) {
@@ -54,8 +55,12 @@ class UploadController extends Controller
         $imgName = time() . '.' . $request->getClientOriginalExtension();
         $path = $request->getRealPath();
         $img = new Image($path);
+        $img->setQuality(100);
         $horizontal = new Image($path);
+        $horizontal->setQuality(100);
         $thumb = new Image($path);
+        $thumb->setQuality(100);
+
 
         if (!file_exists(public_path('/upload/tmp/' . $type . '/original'))) {
             mkdir(public_path('/upload/tmp/' . $type . '/original'), 0777, true);
@@ -121,6 +126,7 @@ class UploadController extends Controller
     {
         $path = $request->file('croppedImage')->getRealPath();
         $croppedImg = new Image($path);
+        $croppedImg->setQuality(100);
         $croppedImg->saveAs(public_path($request->get('name')));
         $json = [
             'success' => [

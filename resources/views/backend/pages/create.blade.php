@@ -32,13 +32,6 @@
             <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
         </ul>
         <div class="box-body">
-            <div class="form-group">
-                {{ Form::label('pageKey', trans('validation.attributes.backend.access.page.pageKey'), ['class' => 'col-lg-2 control-label']) }}
-
-                <div class="col-lg-10">
-                    {{ Form::text('pageKey', null, ['id' => 'pageKey', 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="en">
