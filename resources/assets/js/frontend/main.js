@@ -1057,7 +1057,7 @@ if(document.querySelector('body.main')){
 
 
       if(mainScroll.isVisible( collCarous )){
-        $('#shop-by-collection h3.section-title')).attr('data-anim', 'true');
+        $('#shop-by-collection h3.section-title').attr('data-anim', 'true');
 
         var pxVisibledSwiper = -($(collCarous).offset().top - window.innerHeight);
         var dispUpperSwiper = (pxVisibledSwiper > $(collCarous).height()*40/100);
