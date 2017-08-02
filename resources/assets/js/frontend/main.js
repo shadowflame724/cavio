@@ -247,16 +247,17 @@ $(document).ready(function () {
       first_name:name,
       last_name:lastname,
       phone:phone,
-      region:region
+      region:region,
+      _method:'PATCH'
     };
 
     $.ajax({
       url : _action,
-      data : JSON.stringify(data),
-      type : 'PATCH',
-      contentType : 'application/json',
-      processData: false,
-      dataType: 'json',
+      data : data,
+      type : 'POST',
+      // contentType : 'application/json',
+      // processData: false,
+      // dataType: 'json',
       done: function() {
         alert("user_profile success SEND");
       }
