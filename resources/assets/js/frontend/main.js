@@ -258,9 +258,10 @@ $(document).ready(function () {
       // contentType : 'application/json',
       // processData: false,
       // dataType: 'json',
-      done: function() {
-        alert("user_profile success SEND");
-      }
+    })
+    .done(function() {
+      console.log('user_profile success SEND');
+      $('#modal-thank_you_profile').attr('data-anim', 'true');
     });
     return false;
   });
@@ -3221,6 +3222,15 @@ $('#ty-ok').on('click', function (e) {
 
   // $('#modal-order').attr('data-anim', 'false');
   $('#modal-thank_you').attr('data-anim', 'false');
+  $('body').toggleClass('overfl-h');
+});
+
+
+$('#ty-ok-p').on('click', function (e) {
+  e.preventDefault();
+
+  // $('#modal-order').attr('data-anim', 'false');
+  $('#modal-thank_you_profile').attr('data-anim', 'false');
   $('body').toggleClass('overfl-h');
 });
 

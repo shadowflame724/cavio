@@ -130,3 +130,23 @@
         </div>
     </div>
 </section>
+<section id="modal-thank_you_profile" data-anim="false" class="zone-col-modal modal-log_reg ty">
+    <div class="wrapper-zone-col-modal">
+        <div class="scroller scroller-zc-modal">
+            <div class="scroller-inner">
+                <div class="close-modal"></div>
+
+                <div class="wrap-swiper-log_reg inner-zone-col-modal ty relative">
+
+                    <h3 class="section-title modal show">{{ trans('frontend.thankForUpdateProfile.title') }}.</h3>
+
+                    <div class="ty-text">{{ trans('frontend.thankForUpdateProfile.body') }}.</div>
+
+                    <div class="wrap-stash_order">
+                        <button id="ty-ok-p" class="btn dark-profile" content="ok">ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
