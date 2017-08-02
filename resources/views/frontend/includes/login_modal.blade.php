@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="item-soc_log-text">with Google</div>
                                 </a>
-                                <a href="#" class="btn wrap-item-soc_log fb" content="with facebook">
+                                <a href="/login/facebook" class="btn wrap-item-soc_log fb" content="with facebook">
                                     <div class="item-soc_log-logo">
                                         <svg class="login-soc_icon">
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#login_fb"></use>

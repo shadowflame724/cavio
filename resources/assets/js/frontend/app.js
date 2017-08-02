@@ -51,8 +51,8 @@ var App = (function () {
   }
 
   function _hidePopup() {
-    hideTopMenu();
-    hideLeftMenu();
+    // hideTopMenu();
+    // hideLeftMenu();
   }
 
   function _routes() {
