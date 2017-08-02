@@ -7,33 +7,16 @@ var App = (function () {
     $('body')
 
       .on('click', '[data-filter-name]', function (e) {
-        alert('data-filter-name');
+
         var $el = $(this),
-          isLang = ($el.closest('.lang-panel').length) ? true : false,
-          isSocial = ($el.closest('.wrap-login-social').length) ? true : false,
-          link = $el.attr('href'),
+          type = $el.attr('data-filter-name'),
+          val = $el.attr('data-filter-val'),
           notInApp = ['http://', 'https://', '#', 'tel:', 'mailto:'],
           isRoute = true;
-        // for (var i = 0, l = notInApp.length; i < l; i++) {
-        //   if (link.indexOf(notInApp[i]) > -1) {
-        //     isRoute = false;
-        //   }
-        // }
-        // if($el.attr('target') === '_blank'){
-        //   isRoute = false;
-        // }
-        // if($el.attr('data-type') === 'notApp'){
-        //   window.location.href = link;
-        //   isRoute = false;
-        // }
-        // if (isRoute && !isLang && !isSocial) {
+
+        alert(type+'='+val);
         //   console.warn('внутренний переход на',link);
         //   page(link);
-        //
-        //   e.preventDefault();
-        // } else if (isLang || isSocial) {
-        //   window.location.href = link;
-        // }
         return false;
       })
 
