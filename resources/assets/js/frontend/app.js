@@ -255,6 +255,9 @@ var App = (function () {
     },
     goToPage: function (link) {
       _goPage(link);
+    },
+    goBack: function () {
+      history.go(-1);
     }
   }
 }());
