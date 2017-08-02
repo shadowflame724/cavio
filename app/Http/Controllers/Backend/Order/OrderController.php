@@ -90,8 +90,14 @@ class OrderController extends Controller
         foreach ($productData->product_price_ids as $productPrice) {
             $iDs[] = $productPrice->price_id;
         }
+        $langSuf = '';
+        if (\Lang::getLocale() == 'ru') {
+            $langSuf = '_ru';
+        } elseif (\Lang::getLocale() == 'it') {
+            $langSuf = '_it';
+        }
 
-        $products = ProductRepository::getProdsDataByPriceIds($iDs);
+        $products = ProductRepository::getProdsDataByPriceIds($iDs, $langSuf);
         //dd($products);
 
         return view('backend.orders.edit', [
