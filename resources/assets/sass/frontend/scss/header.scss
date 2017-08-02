@@ -36,10 +36,10 @@ header{ pointer-events: none; }
   width: 40px;
   height: 30px;
   position: relative;
-  transition: .5s;
   cursor: pointer;
+  transition: .5s;
 
-  &.hide{ opacity: 0; animation: none; }
+  &.hide{ opacity: 0; animation: none; pointer-events: none; }
 
   span {
     display: block;
@@ -144,7 +144,7 @@ html:not(.mobile-platform) a:hover svg.svg-main-logo{ fill: $mainActiveColor; }
   padding-right: 50px;
   opacity: 0;
 
-  &.hide{ opacity: 0; animation: none; }
+  &.hide{ opacity: 0; animation: none; pointer-events: none; }
 }
 
 .anim-underline{
@@ -231,7 +231,7 @@ html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
   transition: .4s;
 
   &.dark{ fill: #22201b; }
-  &.hide{ opacity: 0; animation: none; }
+  &.hide{ opacity: 0; animation: none; pointer-events: none; }
 }
 
 .wrap-stash-ico{
