@@ -16,7 +16,11 @@ header{ pointer-events: none; }
 }
 
 // MENU BURGER =======
-.nav-icon, .short-nav-item, .wrap-stash-ico, .svg-main-logo, .wrap-login { animation: showHeadEl 0.9s forwards; }
+.nav-icon, .short-nav-item, .wrap-stash-ico, .svg-main-logo, .wrap-login{
+  transition: .4s, opacity .9s, transform .9s;
+
+  &.hide{ opacity: 0; pointer-events: none; transform: translate(0, -30px); }
+}
 
 
 .header-bg{
@@ -39,8 +43,6 @@ header{ pointer-events: none; }
   cursor: pointer;
   transition: .5s;
 
-  &.hide{ opacity: 0; animation: none; pointer-events: none; }
-
   span {
     display: block;
     position: absolute;
@@ -48,7 +50,6 @@ header{ pointer-events: none; }
     width: 100%;
     background: white;
     border-radius: 9px;
-    opacity: 1;
     left: 0;
     transform: rotate(0deg);
     transition: .25s;
@@ -142,11 +143,8 @@ html:not(.mobile-platform) a:hover svg.svg-main-logo{ fill: $mainActiveColor; }
   display: table-cell;
   vertical-align: middle;
   padding-right: 50px;
-  opacity: 0;
 
   &.hide{
-    opacity: 0; animation: none;
-
     .btn-top-menu{ pointer-events: none; }
   }
 }
@@ -231,21 +229,17 @@ html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
 .svg-main-logo{
   height: 40px;
   width: 247px;
-  opacity: 0;
-  transition: .4s;
 
   &.dark{ fill: #22201b; }
-  &.hide{ opacity: 0; animation: none; pointer-events: none; }
 }
 
 .wrap-stash-ico{
   position: relative;
   z-index: 1;
   height: 100%;
-  opacity: 0;
   display: table-cell;
 
-  &.hide{ opacity: 0; animation: none; a{ pointer-events: none; }}
+  &.hide{ a{ pointer-events: none; }}
 }
 
 .wrap-login{
@@ -254,10 +248,8 @@ html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
   display: table-cell;
   vertical-align: middle;
   padding-right: 130px;
-  opacity: 0;
 
   &.hide{
-    opacity: 0; animation: none;
     .btn-login{ pointer-events: none; }
   }
 }
@@ -281,7 +273,7 @@ html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
   &.active{ background: $mainActiveColor; color: white; }
 }
 html:not(.mobile-platform) header{
-                  .lang-item:not(.active):hover{ border-color: $mainActiveColor; color: white; }
+  .lang-item:not(.active):hover{ border-color: $mainActiveColor; color: white; }
   &.show-top-menu .lang-item:not(.active):hover{ border-color: $mainActiveColor; color: black; }
 }
 
@@ -669,8 +661,8 @@ header.scroll{
 }
 
 @keyframes hideTopMenuBox {
-    0% { visibility: visible; opacity: 1; }
-   99% { visibility: visible; opacity: 0; }
+  0% { visibility: visible; opacity: 1; }
+  99% { visibility: visible; opacity: 0; }
   100% { visibility: hidden;  opacity: 0; }
 }
 
@@ -1030,7 +1022,7 @@ html:not(.mobile-platform) .top-menu-title:hover{ color: $mainActiveColor; }
 
 
 @keyframes showLeftNavCol1Tablet{
-    0% { left: 0; width:  0%; }
+  0% { left: 0; width:  0%; }
   100% { left: 0; width: 50%; }
 }
 
@@ -1220,51 +1212,45 @@ html:not(.mobile-platform) .top-menu-title:hover{ color: $mainActiveColor; }
 }
 
 
-@keyframes showHeadEl {
-    0% { opacity: 0; transform: translate(0, -30px); }
-  100% { opacity: 1; transform: translate(0,   0px); }
-}
-
-
 @keyframes showTopMenuHR{
-    0% { width:   0%; }
-   30% { width:   0%; }
+  0% { width:   0%; }
+  30% { width:   0%; }
   100% { width: 100%; }
 }
 
 @keyframes showTopMenuBlock1{
-    0% { opacity:  0; transform: translate(0, -50px); }
-    5% { opacity:  0; transform: translate(0, -50px); }
+  0% { opacity:  0; transform: translate(0, -50px); }
+  5% { opacity:  0; transform: translate(0, -50px); }
   100% { opacity:  1; transform: translate(0,   0px); }
 }
 
 @keyframes showTopMenuBlock2{
-    0% { opacity:  0; transform: translate(0, -50px); }
-   10% { opacity:  0; transform: translate(0, -50px); }
+  0% { opacity:  0; transform: translate(0, -50px); }
+  10% { opacity:  0; transform: translate(0, -50px); }
   100% { opacity:  1; transform: translate(0,   0px); }
 }
 
 @keyframes showTopMenuBlock3{
-    0% { opacity:  0; transform: translate(0, -50px); }
-   15% { opacity:  0; transform: translate(0, -50px); }
+  0% { opacity:  0; transform: translate(0, -50px); }
+  15% { opacity:  0; transform: translate(0, -50px); }
   100% { opacity:  1; transform: translate(0,   0px); }
 }
 
 @keyframes showTopMenuBlock4{
-    0% { opacity:  0; transform: translate(0, -50px); }
-   20% { opacity:  0; transform: translate(0, -50px); }
+  0% { opacity:  0; transform: translate(0, -50px); }
+  20% { opacity:  0; transform: translate(0, -50px); }
   100% { opacity:  1; transform: translate(0,   0px); }
 }
 
 
 
 @keyframes showLeftNavCol2{
-    0% { width:  0%; }
-   50% { width:  0%; }
+  0% { width:  0%; }
+  50% { width:  0%; }
   100% { width: 50%; }
 }
 
 @keyframes hideLeftNavCol2{
-    0% { width: 50%; }
+  0% { width: 50%; }
   100% { width:  0%; }
 }

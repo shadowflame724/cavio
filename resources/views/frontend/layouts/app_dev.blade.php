@@ -20,9 +20,9 @@
         <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
         <meta name="msapplication-TileColor" content="#2F3BA2">
         <meta name="theme-color" content="#2F3BA2">
-        {{ Html::style(mix('css/frontend.css')) }}
         {{ Html::style('css/frontend/smooth-scrollbar.css') }}
         {{ Html::style('css/frontend/swiper.min.css') }}
+        {{ Html::style(mix('css/frontend.css')) }}
         <script async="" src="//www.google-analytics.com/analytics.js"></script>
         {{ Html::script('js/frontend/url.js') }}
         @include('frontend.includes.physics_script')

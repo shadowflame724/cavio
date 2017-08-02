@@ -194,7 +194,7 @@ $(document).ready(function () {
 
   initLogRegSwiper();
 
-  view_HeaderFooter = !(document.getElementById('zones-mobal') || document.getElementById('product-card') || document.getElementById('news-item'));
+  view_HeaderFooter = !(document.getElementById('zones-modal') || document.getElementById('product-card') || document.getElementById('news-item'));
   allow_CustomScroll = !document.querySelector('html.mobile-platform');
 
 
@@ -344,14 +344,10 @@ $(document).ready(function () {
 
 function initPageAfterLoading() {
 
-  if($('main [data-page-type="popup"]').length){
-    hideHeader();  hideFooter();
-  }
-  else{ showHeader(); showFooter(); }
-
-  view_HeaderFooter = !(document.getElementById('zones-modal') || document.getElementById('collections-modal') || document.getElementById('product-card') || document.getElementById('news-item'));
+  var view_HeaderFooter = !document.querySelector('section[data-page-type="popup"]');
 
   if (view_HeaderFooter) {
+    console.log('HIDE')
     var timeOTopImg;
     showHeader();
     showFooter();
@@ -547,9 +543,9 @@ if (!document.querySelector('body[data-page="/"]')) {
 // });
 //
 // // CLOSE MODAL
-// $(document).on('click', '#zones-mobal', function(event){
+// $(document).on('click', '#zones-modal', function(event){
 //   if (!$(event.target).closest('.inner-zone-col-modal').length) {
-//     $('#zones-mobal').toggleClass('hide show');
+//     $('#zones-modal').toggleClass('hide show');
 //     $('body').toggleClass('overfl-h');
 //   }
 // });
@@ -652,20 +648,6 @@ $('.wrap-search input').on('focus blur', function () {
 
 $('.drop-down').on('click', function () {
   $(this).toggleClass('open');
-});
-
-
-$('.drop-down li a').on('click', function (e) {
-  e.preventDefault();
-
-  $('#modal-log_reg').attr('hide').addClass('show');
-  $('.wrap-left-nav').removeClass('show');
-  $('.nav-icon').removeClass('open');
-  $(document.body).addClass('overfl-h');
-  $('.btn-top-menu.active').removeClass('active');
-  $('.top-menu-box.show').removeClass('show');
-  $('header').removeClass('show-top-menu')
-    .removeClass('show-left-menu');
 });
 
 
@@ -1313,20 +1295,17 @@ function initMainPage() {
 
 //ZON COL MODAL PAGE
 function initZonColModalPage() {
-  var zcModalSwip;
-  zcScroll = Scrollbar.init(document.getElementById('zones-mobal'), {damping: 0.2});
-  zcModalSwip && zcModalSwip.destroy();
-  zcModalSwip = new Swiper('.zc-modal-carousel', {
-    slidesPerView: 1,
-    speed: 1000,
-    autoplay: 4000,
-    loop: true,
-    effect: 'fade', //"coverflow"
-    prevButton: '.zc-modal-swip-arrow.prev',
-    nextButton: '.zc-modal-swip-arrow.next',
-    pagination: '.swiper-pagination',
-    paginationType: 'progress'
-  });
+  var zcModalSwip = new Swiper('.zc-modal-carousel', {
+      slidesPerView: 1,
+      speed: 1000,
+      autoplay: 4000,
+      loop: true,
+      effect: 'fade', //"coverflow"
+      prevButton: '.zc-modal-swip-arrow.prev',
+      nextButton: '.zc-modal-swip-arrow.next',
+      pagination: '.swiper-pagination',
+      paginationType: 'progress'
+    });
 }
 /*
  //ABOUT
@@ -1724,10 +1703,10 @@ function initZonColModalPage() {
  e.preventDefault();
 
 
- zcScroll = Scrollbar.init(document.getElementById('zones-mobal'),{  damping: 0.2  });
+ zcScroll = Scrollbar.init(document.getElementById('zones-modal'),{  damping: 0.2  });
  zcScroll.setPosition(0,0);
 
- $('#zones-mobal').removeClass('hide').addClass('show');
+ $('#zones-modal').removeClass('hide').addClass('show');
  $('body').toggleClass('overfl-h');
  });
  }
@@ -2689,7 +2668,7 @@ function initProductCardPage() {
     });
   });
 
-  $('#zones-mobal').removeClass('hide').addClass('show');
+  $('#zones-modal').removeClass('hide').addClass('show');
   $('body').toggleClass('overfl-h');
 
 
@@ -3192,6 +3171,9 @@ $(document).on('click', '.zone-col-modal, .close-modal', function (event) {
   if (isModalSider || $(event.target).hasClass('btn-close-modal')) {
     $(this).attr('data-anim', 'false');
     $('body').removeClass('overfl-h');
+
+    var pathToBack = location.pathname.substr(0, location.pathname.lastIndexOf('/'));
+    App.goToPage(pathToBack);
 
 
     // RESET AND CLEAR FORM DATA =========
@@ -3914,7 +3896,7 @@ var App = (function () {
       }
     });
     $('main .scroll-content footer').before(html);
-    mainScroll.scrollTo(0, 0, 500);
+    mainScroll.scrollTo(0, 0, 1300);
     $('main').attr('data-page', pageName);
     clbk();
   }

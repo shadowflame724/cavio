@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <section id="product-card" class="zone-col-modal item_cart" data-anim="false">
+    <section id="product-card" class="zone-col-modal item_cart" data-anim="false" data-page-type="popup">
         <div class="wrapper-zone-col-modal">
             <div class="scroller scroller-zc-modal">
                 <div class="scroller-inner">

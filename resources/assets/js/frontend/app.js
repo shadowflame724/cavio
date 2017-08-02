@@ -239,7 +239,7 @@ var App = (function () {
       }
     });
     $('main .scroll-content footer').before(html);
-    mainScroll.scrollTo(0, 0, 500);
+    mainScroll.scrollTo(0, 0, 1300);
     $('main').attr('data-page', pageName);
     clbk();
   }
