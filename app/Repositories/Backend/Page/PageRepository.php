@@ -67,9 +67,6 @@ class PageRepository extends BaseRepository
             $page->title_ru = $input['title_ru'];
             $page->title_it = $input['title_it'];
 
-            if ($input['pageKey']) {
-                $page->slug = $input['pageKey'];
-            }
             $page->description = $input['description'];
             $page->body = /*EMTypograph::fast_apply(*/
                 clean($input['body']);
@@ -103,9 +100,6 @@ class PageRepository extends BaseRepository
         $page->title_ru = $input['title_ru'];
         $page->title_it = $input['title_it'];
 
-        if ($input['pageKey']) {
-            $page->slug = $input['pageKey'];
-        }
         $page->description = $input['description'];
         $page->body = /*EMTypograph::fast_apply(*/
             clean($input['body']);

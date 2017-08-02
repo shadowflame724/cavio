@@ -49,6 +49,16 @@ class ProductController extends Controller
         return view('backend.products.index');
     }
 
+    /**
+     * @param ManageProductRequest $request
+     *
+     * @return mixed
+     */
+    public function indexFull(ManageProductRequest $request)
+    {
+        return view('backend.products.full_data');
+    }
+
 
     public function getBySlug($slug)
     {

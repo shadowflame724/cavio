@@ -40,22 +40,24 @@ class ProductRepository extends BaseRepository
             ->orderBy($order_by, $sort)
             ->get();
     }
+
     public function getOne($id, $with = null)
     {
         $model = $this->query();
-        if($with){
+        if ($with) {
             $model = $model->with($with);
         }
         $model = $model->findOrFail($id);
 
         return $model;
     }
+
     public function issetBySlug($slug)
     {
         $model = Product::where([
             'slug' => $slug
         ])->first();
-        if($model){
+        if ($model) {
             return true;
         }
         return false;
@@ -74,6 +76,72 @@ class ProductRepository extends BaseRepository
                 config('product_table') . '.name',
                 config('product_table') . '.created_at',
             ]);
+    }
+
+    /**
+     * @return Collection
+     */
+    public static function getProdsDataByPriceIds($iDs, $langSuf)
+    {
+        return DB::table('product_prices')
+            ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
+            ->join('product_childs', 'product_prices.product_child_id', '=', 'product_childs.id')
+            ->join('products', 'product_childs.product_id', '=', 'products.id')
+            ->join('collection_zones', 'product_photos.collection_ids', '=', 'collection_zones.id')
+            ->join('collections', 'collection_zones.collection_id', '=', 'collections.id')
+            ->join('zones', 'collection_zones.zone_id', '=', 'zones.id')
+            ->join('categories', 'products.category_ids', '=', 'categories.id')
+            ->join('finish_tissues as finish', 'product_photos.finish_ids', '=', 'finish.id')
+            ->join('finish_tissues as tissue', 'product_photos.tissue_ids', '=', 'tissue.id')
+            ->whereIn('product_prices.id', $iDs)
+            ->select(
+                'product_prices.price',
+                'product_prices.discount',
+                'product_childs.code as child_product_code',
+                'product_childs.name' . $langSuf . ' as child_product_name',
+                'product_photos.photos',
+                'collections.name' . $langSuf . ' as collection_name',
+                'collection_zones.name' . $langSuf . ' as collection_zones_name',
+                'zones.name' . $langSuf . ' as zones_name',
+                'finish.title' . $langSuf . ' as finish_title',
+                'tissue.title' . $langSuf . ' as tissue_title',
+                'categories.name' . $langSuf . ' as categories_name'
+                )
+            ->get();
+    }
+
+    /**
+     * @return Collection
+     */
+    public static function getForPricesDataTable($langSuf)
+    {
+        return DB::table('product_prices')
+            ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
+            ->join('product_childs', 'product_prices.product_child_id', '=', 'product_childs.id')
+            ->join('products', 'product_childs.product_id', '=', 'products.id')
+            ->join('collection_zones', 'product_photos.collection_ids', '=', 'collection_zones.id')
+            ->join('collections', 'collection_zones.collection_id', '=', 'collections.id')
+            ->join('zones', 'collection_zones.zone_id', '=', 'zones.id')
+            ->join('categories', 'products.category_ids', '=', 'categories.id')
+            ->join('finish_tissues as finish', 'product_photos.finish_ids', '=', 'finish.id')
+            ->join('finish_tissues as tissue', 'product_photos.tissue_ids', '=', 'tissue.id')
+            ->select(
+                'product_prices.price',
+                'product_childs.code as child_product_code',
+                'product_childs.name' . $langSuf . ' as child_product_name',
+                'product_photos.photos',
+                'products.id as parent_id',
+                'products.code as parent_code',
+                'products.name' . $langSuf . ' as parent_name',
+                'products.created_at as parent_created_at',
+                'products.updated_at as parent_updated_at',
+                'collections.name' . $langSuf . ' as collection_name',
+                'collection_zones.name' . $langSuf . ' as collection_zones_name',
+                'zones.name' . $langSuf . ' as zones_name',
+                'finish.title' . $langSuf . ' as finish_title',
+                'tissue.title' . $langSuf . ' as tissue_title',
+                'categories.name' . $langSuf . ' as categories_name')
+            ->get();
     }
 
     /**
@@ -98,20 +166,20 @@ class ProductRepository extends BaseRepository
         $mainCodes = [];
         foreach ($input['child'] as $ch_id => $item) {
             $publish = isset($item['published']) ? 1 : 0;
-            if($publish){
-                $mainCodes[] = '#'.$item['code'];
+            if ($publish) {
+                $mainCodes[] = '#' . $item['code'];
             }
             $newChildData[$ch_id] = [
-                'product_id'        => $productId,
-                'code'              => $item['code'],
-                'name'              => $item['name'],
-                'name_ru'           => $item['name_ru'],
-                'name_it'           => $item['name_it'],
-                'prev'              => $item['prev'],
-                'prev_ru'           => $item['prev_ru'],
-                'prev_it'           => $item['prev_it'],
-                'dimensions'        => $item['dimensions'],
-                'published'         => $publish,
+                'product_id' => $productId,
+                'code' => $item['code'],
+                'name' => $item['name'],
+                'name_ru' => $item['name_ru'],
+                'name_it' => $item['name_it'],
+                'prev' => $item['prev'],
+                'prev_ru' => $item['prev_ru'],
+                'prev_it' => $item['prev_it'],
+                'dimensions' => $item['dimensions'],
+                'published' => $publish,
             ];
             $childCodes[$item['code']] = $ch_id;
         }
@@ -131,17 +199,17 @@ class ProductRepository extends BaseRepository
             $phOneTissue = isset($item['tissue_ids']) ? implode(',', $item['tissue_ids']) : '';
             $phOneCollection = isset($item['collection_ids']) ? implode(',', $item['collection_ids']) : '';
             $newPhotoData[$ph_id] = [
-                'product_id'        => $productId,
-                'photos'            => $phOnePhotos,
-                'prices_data'       => $item['prices_data'],
-                'finish_ids'        => $phOneFinish,
-                'tissue_ids'        => $phOneTissue,
-                'collection_ids'    => $phOneCollection,
-                'prev'              => $item['prev'],
-                'prev_ru'           => $item['prev_ru'],
-                'prev_it'           => $item['prev_it'],
-                'main'              => $isMainPhoto,
-                'published'         => isset($item['published']) ? 1 : 0
+                'product_id' => $productId,
+                'photos' => $phOnePhotos,
+                'prices_data' => $item['prices_data'],
+                'finish_ids' => $phOneFinish,
+                'tissue_ids' => $phOneTissue,
+                'collection_ids' => $phOneCollection,
+                'prev' => $item['prev'],
+                'prev_ru' => $item['prev_ru'],
+                'prev_it' => $item['prev_it'],
+                'main' => $isMainPhoto,
+                'published' => isset($item['published']) ? 1 : 0
             ];
             foreach ($item['price'] as $pr_id => $prOne) {
                 $ch_id = isset($childCodes[$prOne['child_code']]) ? $childCodes[$prOne['child_code']] : '';
@@ -168,28 +236,28 @@ class ProductRepository extends BaseRepository
                         $publish = false;
                     }
                     if ($publish) {
-                        if($mainPrices[0] > $price) $mainPrices[0] = $price; // min
-                        if($mainPrices[1] < $price) $mainPrices[1] = $price; // max
-                        if($discount > 0){
+                        if ($mainPrices[0] > $price) $mainPrices[0] = $price; // min
+                        if ($mainPrices[1] < $price) $mainPrices[1] = $price; // max
+                        if ($discount > 0) {
                             $isDiscount = true;
                         }
                     }
                     $newPriceData[$keyPrice] = [
-                        'product_child_id'  => $ch_id,
-                        'product_photo_id'  => $ph_id,
-                        'discount'          => $discount,
-                        'def_price'         => $def_price,
-                        'cus_price'         => $cus_price,
-                        'price'             => $price,
-                        'custom'            => $custom,
-                        'published'         => $publish
+                        'product_child_id' => $ch_id,
+                        'product_photo_id' => $ph_id,
+                        'discount' => $discount,
+                        'def_price' => $def_price,
+                        'cus_price' => $cus_price,
+                        'price' => $price,
+                        'custom' => $custom,
+                        'published' => $publish
                     ];
 //                    echo 'keyPrice: '.$keyPrice.'<br>';
                     $keyPrice++;
                 }
 //                echo '_______________<br>';
             }
-            if($isMainPhoto){
+            if ($isMainPhoto) {
                 $mainPhoto = isset($item['photos'][0]) ? $item['photos'][0] : '';
                 $mainPhotoData['photos'] = $mainPhoto;
             }
@@ -200,14 +268,14 @@ class ProductRepository extends BaseRepository
             if ($mainPrices[0] == 99999999 && $mainPrices[1] == -1) { // нету min и max
                 $mainPhotoData['prices'] = '';
             } elseif ($mainPrices[0] == 99999999) { // нету min
-                $mainPhotoData['prices'] = $mainPrices[1].' €';
+                $mainPhotoData['prices'] = $mainPrices[1] . ' €';
             } elseif ($mainPrices[1] == -1) { // нету max
-                $mainPhotoData['prices'] = $mainPrices[0].' €';
+                $mainPhotoData['prices'] = $mainPrices[0] . ' €';
             }
         } else { // есть и min и max
             $mainPhotoData['prices'] = implode(' — ', [
-                $mainPrices[0].' €',
-                $mainPrices[1].' €'
+                $mainPrices[0] . ' €',
+                $mainPrices[1] . ' €'
             ]);
         }
         $mainPhotoData['codes'] = implode(',', $mainCodes);
@@ -222,7 +290,7 @@ class ProductRepository extends BaseRepository
 
     public function remFromArr($product_ids = false, $product_id = false)
     {
-        if(!$product_ids || !$product_id) {
+        if (!$product_ids || !$product_id) {
             return '';
         }
         $oneProdIds = explode(',', $product_ids);
@@ -234,9 +302,10 @@ class ProductRepository extends BaseRepository
         }
         return implode(',', $arr);
     }
+
     public function addInArr($product_ids = false, $product_id = false)
     {
-        if((int)$product_id > 0) {
+        if ((int)$product_id > 0) {
             $oneProdIds = explode(',', $product_ids);
             $notInCat = true;
             foreach ($oneProdIds as $oneProdId) {
@@ -286,6 +355,7 @@ class ProductRepository extends BaseRepository
 
         return true;
     }
+
     public function updateCategoryProducts($oldIds = [], $newIds = [], $product_id = [])
     {
         $remArr = array_diff($oldIds, $newIds);
@@ -320,6 +390,7 @@ class ProductRepository extends BaseRepository
 
         return true;
     }
+
     public function removeProductsFromCollection($remIds = [], $product_id = 0)
     {
         foreach ($remIds as $new_id) {
@@ -332,6 +403,7 @@ class ProductRepository extends BaseRepository
 
         return true;
     }
+
     public function removeProductsFromCategory($remIds = [], $product_id = 0)
     {
         foreach ($remIds as $new_id) {
@@ -377,10 +449,10 @@ class ProductRepository extends BaseRepository
 //        dd($allData);
         DB::transaction(function () use ($product, $allData, $input) {
             $product->main_photo_data = json_encode($allData['main_photo_data']);
-            if(!isset($allData['main_photo_data']['photos'])){
+            if (!isset($allData['main_photo_data']['photos'])) {
                 $product->published = 0;
             }
-            if($product->published) {
+            if ($product->published) {
                 $this->updateCategoryProducts([], $input['category_ids'], $product->id);
             }
             $oldChildIds = [];
@@ -395,7 +467,7 @@ class ProductRepository extends BaseRepository
                 $one = $photoOne;
                 $photo = ProductPhoto::create($one);
                 $oldPhotoIds[$ph_id] = $photo->id;
-                if($product->published && $photo->published) {
+                if ($product->published && $photo->published) {
                     $collection_ids = explode(',', $photo->collection_ids);
                     $this->updateCollectionProducts([], $collection_ids, $product->id);
                 }
@@ -406,7 +478,7 @@ class ProductRepository extends BaseRepository
                 $phKey = $priceOne['product_photo_id'];
                 $chNewKey = isset($oldChildIds[$chKey]) ? $oldChildIds[$chKey] : false;
                 $phNewKey = isset($oldPhotoIds[$phKey]) ? $oldPhotoIds[$phKey] : false;
-                if($chNewKey && $phNewKey){
+                if ($chNewKey && $phNewKey) {
                     $one = $priceOne;
                     $one["product_child_id"] = $chNewKey;
                     $one["product_photo_id"] = $phNewKey;
@@ -442,10 +514,10 @@ class ProductRepository extends BaseRepository
 
 //        dd($allData);
         $product->main_photo_data = json_encode($allData['main_photo_data']);
-        if(!isset($allData['main_photo_data']['photos'])){
+        if (!isset($allData['main_photo_data']['photos'])) {
             $product->published = 0;
         }
-        if($product->published) {
+        if ($product->published) {
             $this->updateCategoryProducts($oldCats, $input['category_ids'], $product->id);
         } else {
             $this->removeProductsFromCategory($oldCats, $product->id);
@@ -465,7 +537,7 @@ class ProductRepository extends BaseRepository
             foreach ($allData['photos'] as $ph_id => $photoOne) {
                 $photo = ProductPhoto::find($ph_id);
                 $photo->update($photoOne);
-                if($product->published) {
+                if ($product->published) {
                     $collection_ids = explode(',', $photo->collection_ids);
                     $this->updateCollectionProducts([], $collection_ids, $product->id);
                 } else {
@@ -479,7 +551,7 @@ class ProductRepository extends BaseRepository
                 $phKey = $priceOne['product_photo_id'];
                 $ch_id = isset($allData['childs'][$chKey]) ? $chKey : false;
                 $ph_id = isset($allData['photos'][$phKey]) ? $phKey : false;
-                if($ch_id && $ph_id){
+                if ($ch_id && $ph_id) {
                     ProductPrice::where([
                         'product_child_id' => $ch_id,
                         'product_photo_id' => $ph_id

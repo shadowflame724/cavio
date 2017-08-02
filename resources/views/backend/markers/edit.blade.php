@@ -45,7 +45,8 @@
         <div class="box-body">
             <div class="form-group">
                 <div class="col-lg-12">
-                    <div id="map" width="100%"><img src="/upload/images/collection/original/{{$collection->image}}" alt=""></div>
+                    <div id="map" width="100%"><img src="/upload/images/collection/original/{{$collection->image}}"
+                                                    alt=""></div>
                 </div>
             </div><!--form control-->
 
@@ -167,9 +168,10 @@
             var y = e.offsetY == undefined ? e.layerY : e.offsetY;
             markerX = x / mapMainW * 100;
             markerY = y / mapMainH * 100;
+
             $('#markers\\[' + currMarkerId + '\\]\\[x\\]').val(markerX);
             $('#markers\\[' + currMarkerId + '\\]\\[y\\]').val(markerY);
-            $('#marker-' + currMarkerId).css({top: markerY+ '%', left: markerX + '%'});
+            $('#marker-' + currMarkerId).css({top: markerY + '%', left: markerX + '%'});
         });
 
         $('.panel').on('shown.bs.collapse', function () {

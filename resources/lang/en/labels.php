@@ -152,7 +152,20 @@ return [
                 'table' => [
                     'id' => 'Id',
                     'name' => 'Name',
-                    'created_at' => 'Created at'
+                    'price' => 'Price',
+                    'child_code' => 'Child code',
+                    'child_name' => 'Child name',
+                    'parent_name' => 'Parent name',
+                    'photo' => 'Photo',
+                    'collection_name' => 'Collection',
+                    'collection_zone_name' => 'Col-zon',
+                    'zone_name' => 'Zone',
+                    'finish' => 'Finishes',
+                    'tissue' => 'Tissue',
+                    'category' => 'Categories',
+
+                    'created_at' => 'Created at',
+                    'updated_at' => 'Updated at'
                 ],
             ],
             'showroom' => [

@@ -362,8 +362,27 @@ return [
                     'user_fr_name' => 'Client first name',
                     'user_ls_name' => 'Client last name',
                     'user_email' => 'Client Email',
-                    'summ' => 'Summ',
-                    'cnt' => 'Count',
+                    'user_phone' => 'Client Phone number',
+                    'user_zip_code' => 'Zip code',
+                    'user_region' => 'Region',
+                    'user_city' => 'City',
+                    'updated_at' => 'Last updated',
+
+                    'product' => [
+                        'code' => 'Code',
+                        'price' => 'Price',
+                        'vat' => 'VAT',
+                        'discount' => 'Discount',
+                        'final_price' => 'Final price',
+                        'finish_name' => 'Finish name',
+                        'tissue_name' => 'Tissue name',
+                        'categories_name' => 'Categories names'
+                    ],
+                    'allPrices' => 'Summ of all prices',
+                    'allVats' => 'Summ of all vats',
+                    'allDiscounts' => 'Summ of all discount',
+                    'allFinalPrices' => 'Summ of all final prices',
+
 
                     'status' => 'Status*',
                     'status_new' => 'New',
