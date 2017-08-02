@@ -208,7 +208,6 @@ $(document).ready(function () {
     mainScroll = Scrollbar.init(document.getElementById('main-scrollbar'));
   }
 
-
   //Add to cart
   $('body').on('click', '#add_to_cart', function () {
     var $_price_id = $('.swiper-slide.wrap-card-price.active').find('.card-price').attr('data-id') || false;
