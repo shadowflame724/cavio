@@ -223,34 +223,34 @@ $(document).ready(function () {
       _action = _form.attr('action'),
       mail = _form.find('input.email-input').val() || false;
 
-        console.log('_action');
-        console.log(_action);
-        console.log(mail);
-        if (mail && validateEmail(mail)) {
-            alert('subscribe success mail');
-            $.get(_action + '?email=' + mail, function (data) {
-                alert("subscribe success SEND");
-            });
-        }
-        return false;
-    });
+    console.log('_action');
+    console.log(_action);
+    console.log(mail);
+    if (mail && validateEmail(mail)) {
+      alert('subscribe success mail');
+      $.get(_action + '?email=' + mail, function (data) {
+        alert("subscribe success SEND");
+      });
+    }
+    return false;
+  });
 
-    // order
-    $('body').on('submit', '#submitOrder', function (e) {
-    e.preventDefault() ;
-        var _form = $(this),
-            _action = _form.attr('action'),
-            //_method = _form.attr('method'),
-            _data = {
-                email: (_form.find('input[name="email"]').val() || false),
-                first_name: (_form.find('input[name="first_name"]').val() || false),
-                last_name: (_form.find('input[name="last_name"]').val() || false),
-                phone: (_form.find('input[name="phone"]').val() || false),
-                region: (_form.find('input[name="region"]').val() || false),
-                city: (_form.find('input[name="city"]').val() || false),
-                zip_code: (_form.find('input[name="zip_code"]').val() || false)
-            },
-            errForm = false;
+  // order
+  $('body').on('submit', '#submitOrder', function (e) {
+    e.preventDefault();
+    var _form = $(this),
+      _action = _form.attr('action'),
+      //_method = _form.attr('method'),
+      _data = {
+        email: (_form.find('input[name="email"]').val() || false),
+        first_name: (_form.find('input[name="first_name"]').val() || false),
+        last_name: (_form.find('input[name="last_name"]').val() || false),
+        phone: (_form.find('input[name="phone"]').val() || false),
+        region: (_form.find('input[name="region"]').val() || false),
+        city: (_form.find('input[name="city"]').val() || false),
+        zip_code: (_form.find('input[name="zip_code"]').val() || false)
+      },
+      errForm = false;
 
     $.each(_data, function (key, val) {
       var err = false;
@@ -267,45 +267,53 @@ $(document).ready(function () {
       }
     });
 
-        if (!errForm) {
-            _form.find('[type=" submit"]').attr('disabled', 'disabled');
-            $.ajax({
-                method: 'PUT',
-                url: _action,
-                data: _data
-            }).done(function (data) {
-                $.each(data, function (key, val) {
+    if (!errForm) {
+      _form.find('[type=" submit"]').attr('disabled', 'disabled');
+      $.ajax({
+        method: 'PUT',
+        url: _action,
+        data: _data
+      }).done(function (data) {
+        var suc = false;
+        $.each(data, function (key, val) {
           if (key === 'user') {
             $('.open-modal-login').replaceWith('<a href="/dashboard" class="btn-login anim-underline">' + val + '</a>');
           }
-        } );
+          if (key === 'order' && val === 'success') {
+            suc = true;
+          }
+        });
+        if(suc){
+          App.goToPage('/dashboard');
+        }
 
-                $('#modal-order').attr('data-anim', 'false');
-                $('#modal-thank_you').attr('data-anim', 'true');
-                $('body').addClass('overfl-h');
-            }).fail(function (err) {
-                console.log(err);
+        $('#modal-order').attr('data-anim', 'false');
+        $('#modal-thank_you').attr('data-anim', 'true');
+        $('body').addClass('overfl-h');
+      }).fail(function (err) {
+        console.log(err);
         $.each(err.responseJSON, function (name, data) {
           _form
             .find('input[name="' + name + '"]')
             .addClass('input- error')
             .focus();
-          $.each(data,function (i, text) {
-                console.warn(text);
+          $.each(data, function (i, text) {
+            console.warn(text);
           });
         });
-      }). always(function () {
+      }).always(function () {
         _form.find('[type="submit"]').removeAttr('disabled');
-            });
-        }
-        return false;
+      });
+    }
+    return false;
 
-});
-    initPageAfterLoading();
+  });
+  initPageAfterLoading();
 });
 
 function initPageAfterLoading() {
-    if (scrollFunc) scrollbar.removeListener(scrollFunc);view_HeaderFooter = !(document.getElementById('zones-mobal') || document.getElementById('product-card') || document.getElementById('news-item'));
+  if (scrollFunc) scrollbar.removeListener(scrollFunc);
+  view_HeaderFooter = !(document.getElementById('zones-mobal') || document.getElementById('product-card') || document.getElementById('news-item'));
 
 
   if (view_HeaderFooter) {
@@ -319,11 +327,11 @@ function initPageAfterLoading() {
   }
 
 
-    mainScroll.addListener(function () {
+  mainScroll.addListener(function () {
 
-        if (view_HeaderFooter) {
-            if (mainScroll.offset.y > 0) $('header:not(.scroll)').addClass('scroll');
-            else                         $('header.scroll').removeClass('scroll');
+    if (view_HeaderFooter) {
+      if (mainScroll.offset.y > 0) $('header:not(.scroll)').addClass('scroll');
+      else                         $('header.scroll').removeClass('scroll');
 
       $(window).on('scroll', function () {
         if ($(document).scrollTop()) $('header:not(.scroll)').addClass('scroll');
@@ -475,12 +483,12 @@ $('.wrap-login-side a').on('click', function (e) {
 
 
 $(window).on('resize', function () {
-    //RESIZE TOPDROPMENU
-    var thisDropMenu = $('.top-menu-box.show');
-    var newTopMenuHeight = thisDropMenu.find('.wrap-menus').height() + $('header').height();
-    if (newTopMenuHeight > window.innerHeight) newTopMenuHeight = window.innerHeight;
-    if (thisDropMenu.find('.forTopMenuScroll').length) topMenuScroll.setPosition(0, 0);
-    document.getElementById('top-menu').style.height = newTopMenuHeight + 'px';
+  //RESIZE TOPDROPMENU
+  var thisDropMenu = $('.top-menu-box.show');
+  var newTopMenuHeight = thisDropMenu.find('.wrap-menus').height() + $('header').height();
+  if (newTopMenuHeight > window.innerHeight) newTopMenuHeight = window.innerHeight;
+  if (thisDropMenu.find('.forTopMenuScroll').length) topMenuScroll.setPosition(0, 0);
+  document.getElementById('top-menu').style.height = newTopMenuHeight + 'px';
 });
 
 
@@ -648,18 +656,18 @@ function initMainPage() {
 
   $('.new-products-right-side').on({
     'mousemove': function () {
-        if (mainScroll) mainScroll.options.speed = 0;
-        var currValScrollUndBanner = $(this).find('.new-products-right-item:not(.hide)').offset().left;
+      if (mainScroll) mainScroll.options.speed = 0;
+      var currValScrollUndBanner = $(this).find('.new-products-right-item:not(.hide)').offset().left;
     },
     'mouseenter': function () {
-        if (mainScroll) mainScroll.options.speed = 0;
-        clearInterval(intervalNewProdDot);
+      if (mainScroll) mainScroll.options.speed = 0;
+      clearInterval(intervalNewProdDot);
     },
     'mouseleave': function () {
-        if (mainScroll) mainScroll.options.speed = 1;
+      if (mainScroll) mainScroll.options.speed = 1;
     },
     'mousewheel': function (event) {
-        if (!mainScroll)  return;
+      if (!mainScroll)  return;
 
       var currValScrollUndBanner = $(this).find('.new-products-right-item:not(.hide)').offset().left;
 
@@ -784,18 +792,18 @@ function initMainPage() {
     if (windWidth <= 640) slidesPerView = 1.5;
 
 
-        if (slidesPerViewPrev != slidesPerView) {
-            $('.collection-carousel .item-coll.coll-swiper-arr').removeClass('coll-swiper-arr left right');
-            if (!slidesPerViewPrev) slidesPerViewPrev = slidesPerView;
-            collectionCarousel && collectionCarousel.destroy();
-            collectionCarousel = new Swiper('.collection-carousel', {
-                slidesPerView: slidesPerView,
-                centeredSlides: true,
-                paginationClickable: true,
-                spaceBetween: 20,
-                loop: true,
-            });
-        }
+    if (slidesPerViewPrev != slidesPerView) {
+      $('.collection-carousel .item-coll.coll-swiper-arr').removeClass('coll-swiper-arr left right');
+      if (!slidesPerViewPrev) slidesPerViewPrev = slidesPerView;
+      collectionCarousel && collectionCarousel.destroy();
+      collectionCarousel = new Swiper('.collection-carousel', {
+        slidesPerView: slidesPerView,
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 20,
+        loop: true,
+      });
+    }
 
 
     if (window.innerWidth > 1024) {
@@ -3735,6 +3743,10 @@ var App = (function () {
     // hideLeftMenu();
   }
 
+  function _goPage(link) {
+    page(link);
+  }
+
   function _routes() {
     var prevPage = '/';
 
@@ -3920,6 +3932,9 @@ var App = (function () {
     },
     getPages: function () {
       return _loadedPages;
+    },
+    goToPage: function (link) {
+      _goPage(link);
     }
   }
 }());

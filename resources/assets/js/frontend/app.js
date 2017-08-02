@@ -55,6 +55,10 @@ var App = (function () {
     // hideLeftMenu();
   }
 
+  function _goPage(link) {
+    page(link);
+  }
+
   function _routes() {
     var prevPage = '/';
 
@@ -240,6 +244,9 @@ var App = (function () {
     },
     getPages: function () {
       return _loadedPages;
+    },
+    goToPage: function (link) {
+      _goPage(link);
     }
   }
 }());

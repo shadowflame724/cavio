@@ -274,11 +274,18 @@ $(document).ready(function () {
         url: _action,
         data: _data
       }).done(function (data) {
+        var suc = false;
         $.each(data, function (key, val) {
           if (key === 'user') {
             $('.open-modal-login').replaceWith('<a href="/dashboard" class="btn-login anim-underline">' + val + '</a>');
           }
+          if (key === 'order' && val === 'success') {
+            suc = true;
+          }
         });
+        if(suc){
+          App.goToPage('/dashboard');
+        }
 
         $('#modal-order').attr('data-anim', 'false');
         $('#modal-thank_you').attr('data-anim', 'true');
