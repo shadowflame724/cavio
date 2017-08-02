@@ -4,9 +4,9 @@
 
 @section('content')
     <section id="top-waves" class="relative"></section>
-    <div class="container pres-des-conteiner hide">
+    <div class="container pres-des-conteiner">
         <div class="head-pres_des">
-            <a href="/" class="link-back-press_des anim-underline">← cavio</a>
+            <a href="/" data-type="notApp" class="link-back-press_des anim-underline">← cavio</a>
             <div class="wrap-title-pres_des">
                 <div class="title-pres_des">Thank you for visiting us at Salone del Mobile 2017</div>
                 <div class="under_title-pres_des">For any questions please write us an e-mail to <a

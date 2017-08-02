@@ -165,9 +165,11 @@ class FrontendController extends Controller
     public function pressDesign()
     {
 
+        if(! access()->user() || ! access()->user()->hasRole(4)) {
+            return redirect('/');
+        }
         $page = $this->page('press-design');
         $documents = Document::all();
-
 
         return view('frontend.pages.press-design', [
             'page' => $page,

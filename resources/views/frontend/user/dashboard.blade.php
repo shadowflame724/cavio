@@ -126,6 +126,9 @@
         <div class="small-page-title">
             <span class="text-title">Profile</span>
         </div>
+        <div class="links-title" style="float:right;">
+            <a href="{{ route('frontend.press-design') }}">press-design</a>
+        </div>
         <div class="wrap-catal profile wrap-box-shadow clearfix bg-white-marmur">
             <div class="wrap-profile-swiper swiper-container-horizontal">
                 <div class="wrap-log_reg-toggle">

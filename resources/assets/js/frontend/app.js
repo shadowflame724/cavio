@@ -20,6 +20,10 @@ var App = (function () {
         if($el.attr('target') === '_blank'){
           isRoute = false;
         }
+        if($el.attr('data-type') === 'notApp'){
+          window.location.href = link;
+          isRoute = false;
+        }
         if (isRoute && !isLang) {
           console.warn('внутренний переход на',link);
           page(link);
