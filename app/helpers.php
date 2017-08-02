@@ -134,8 +134,27 @@ if (! function_exists('get_lang_from_domain_name'))
 
 if (! function_exists('random_alphanumeric_key'))
 {
-    function random_alphanumeric_key($length = 5, $pool = 'ab0cd1ef2gh3ij4kl5mn6op7qr8st9uvwxyz')
+    function random_alphanumeric_key($length = 5, $pool = 'ab0cd1ef2gh3ij4kl5mn6op7qr8st9uvwxyz', $extended = false)
     {
+        if($extended){
+            $pool = '!"№;%:?*()_+=-~/\<>,.[]{}1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        }
+        $pool_count = strlen($pool) - 1;
+        $res = '';
+        for($i = 0; $i < $length; $i++) {
+            $res .= $pool[mt_rand(0, $pool_count)];
+        }
+        return $res;
+    }
+}
+if (! function_exists('get_random_pass'))
+{
+    function get_random_pass($length = 6, $extended = false)
+    {
+        $pool = 'ab0cd1ef2gh3ij4kl5mn6op7qr8st9uvwxyz';
+        if($extended){
+            $pool = '!№;%:?*()_+=-~/\<>,.[]{}1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        }
         $pool_count = strlen($pool) - 1;
         $res = '';
         for($i = 0; $i < $length; $i++) {

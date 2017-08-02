@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 use App\Repositories\Frontend\Cart\CartContract;
 use DB;
 use App\Repositories\Frontend\Product\ProductRepository;
+use App\Http\Requests\Frontend\Basket\StoreOrderRequest;
+use App\Models\Order\Order;
+use App\Models\Order\OrderProduct;
+
+use App\Events\Frontend\Auth\UserRegistered;
+use App\Repositories\Frontend\Access\User\UserRepository;
+use App\Http\Requests\Frontend\Auth\RegisterRequest;
+//use App\Mail\OrderRegister;
+use App\Notifications\Frontend\Order\OrderRegister;
+use App\Notifications\Frontend\Order\NewOrder;
+
 /**
  * Class FrontendController
  * @package App\Http\Controllers
@@ -15,10 +26,11 @@ class BasketController extends Controller
 {
     protected $carts;
 
-    public function __construct(CartContract $carts,ProductRepository $product)
+    public function __construct(CartContract $carts, ProductRepository $product, UserRepository $user)
     {
         $this->carts = $carts;
         $this->product = $product;
+        $this->user = $user;
     }
 
     /**
@@ -96,6 +108,7 @@ class BasketController extends Controller
 
         }
     }
+
     public function store(Request $request)
     {
         $data = [
@@ -195,30 +208,81 @@ class BasketController extends Controller
         return $summ;
     }
 
-    public function orderSend(Request $request)
-    {
-        dd($request->input());
-        $data = [
-            'price_id' => $request->input('price_id'),
-            'count' => $request->input('count'),
-        ];
-        $item = $this->carts->create($data);
 
-        try {
-            $response = [];
-            $statusCode = 200;
-            $data = [
-                'price_id' => $request->input('price_id'),
-                'count' => $request->input('count'),
-            ];
-            $item = $this->carts->create($data);
-            $response['item'] = $item;
-//            $response['html'] = View('frontend.basket.header',$this->carts->getResult())->render();
-        } catch (CException $e) {
-            $statusCode = 500;
-        } finally {
-            return response()->json($response, $statusCode);
+    public function orderSend(StoreOrderRequest $request, UserRepository $user)
+    {
+        $response = [];
+        $statusCode = 500;
+        $cart = $this->carts->findAll();
+        $summ = $this->getCartTotal($cart)['summ_vat'];
+        if(empty($cart)){
+            return response()->json(['basket' => 'Basket empty'], 500);
         }
+        $user_data = [
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'region' => $request->input('region'),
+            'city' => $request->input('city'),
+            'zip_code' => $request->input('zip_code'),
+        ];
+        $product_data = [
+            'ip' => $request->ip(),
+            'order_data' => $user_data,
+            'product_price_ids' => $cart,
+        ];
+        if (!access()->user()) {
+            $usr = [];
+            foreach ($user_data as $key => $value) {
+                if( $key == 'first_name' ||
+                    $key == 'last_name' ||
+                    $key == 'email' ||
+                    $key == 'phone' ||
+                    $key == 'region'){
+                    $usr[$key] = $value;
+                }
+            }
+            $usr['password'] = get_random_pass(10, true);
+
+            $user = $this->user->create($usr);
+            access()->login($user);
+            event(new UserRegistered(access()->user()));
+            $user->notify(new OrderRegister([
+                'email' => $usr['email'],
+                'password' => $usr['password']
+            ]));
+            $response['user'] = $usr['first_name'];
+        }
+        $user_id = access()->user()->id;
+        $cnt = 0;
+        foreach ($cart as $item) {
+            $cnt += (int)$item['count'];
+        }
+
+        $response['order'] = 'fail';
+        $order = new Order;
+        $order->user_id = $user_id;
+        $order->product_data = json_encode($product_data);
+        $order->cnt = $cnt;
+        $order->summ = $summ;
+        $order->status = 0;
+        if($order->save()) {
+            $statusCode = 200;
+            $response['order'] = 'success';
+            foreach ($cart as $item) {
+                $orderOne = new OrderProduct;
+                $orderOne->order_id = $order->id;
+                $orderOne->product_price_id = $item['price_id'];
+                $orderOne->cnt = (int)$item['count'];
+                $orderOne->data = '[]';
+                $orderOne->save();
+                $this->carts->destroy($item['price_id']);
+            }
+            $user->notify(new NewOrder($order));
+        }
+
+        return response()->json($response, $statusCode);
 
     }
 

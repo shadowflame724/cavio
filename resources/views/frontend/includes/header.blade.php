@@ -164,8 +164,8 @@
         <div class="wrap-right-top-menu">
             @if(access()->user())
             <div class="wrap-login hide">
-                <a href="{{ route('frontend.user.dashboard') }}"
-                   class="btn-login anim-underline"
+                <a href="{{ (access()->user()->hasRoles([1,2])) ? route('admin.dashboard') : route('frontend.user.dashboard') }}"
+                   class="btn-login anim-underline" @if(access()->user()->hasRoles([1,2])) target="_blank"@endif
                 >{{ access()->user()->first_name }}</a>
             </div>
             @else
