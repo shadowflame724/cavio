@@ -145,7 +145,7 @@
                         ]) }}
                         <div class="wrap-user_prof-inp">
                             <div class="row-inp-profile clearfix">
-                                <div class="wrap-inp-profile f-name" data-fieldname="First Name">
+                                <div class="wrap-inp-profile f-name" data-fieldname="{{ trans('validation.attributes.frontend.first_name') }}">
                                 {{ Form::text('first_name', null, [
                                     'required' => 'required',
                                     'autofocus' => 'autofocus',
@@ -153,9 +153,9 @@
                                     'placeholder' => trans('validation.attributes.frontend.first_name')
                                 ]) }}
                                 </div>
-{{--                                {{ is_null($logged_in_user->password) }}--}}
+                                {{--{{ is_null($logged_in_user->password) }}--}}
                                 @if ($logged_in_user->canChangeEmail())
-                                <div class="wrap-inp-profile email" data-fieldname="e-mail">
+                                <div class="wrap-inp-profile email" data-fieldname="{{ trans('validation.attributes.frontend.email') }}">
                                     {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
                                     {{ Form::email('email', null, [
                                         'required' => 'required',
@@ -166,7 +166,7 @@
                                 @endif
                             </div>
                             <div class="row-inp-profile clearfix">
-                                <div class="wrap-inp-profile l-name" data-fieldname="Last Name">
+                                <div class="wrap-inp-profile l-name" data-fieldname="{{ trans('validation.attributes.frontend.last_name') }}">
                                     {{ Form::text('last_name', null, [
                                         'required' => 'required',
                                         'maxlength' => '191',
