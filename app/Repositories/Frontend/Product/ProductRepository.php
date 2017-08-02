@@ -31,12 +31,18 @@ class ProductRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = false)
+    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = 0)
     {
         $res = [];
-        $model = Product::where('published',1)
-            ->orderBy($order_by, $sort)
-            ->get();
+        if($paginCnt > 0) {
+            $model = Product::where('published', 1)
+                ->orderBy($order_by, $sort)
+                ->paginate($paginCnt);
+        } else {
+            $model = Product::where('published', 1)
+                ->orderBy($order_by, $sort)
+                ->get();
+        }
 
         if(isset($model)) {
             return $model;
@@ -163,7 +169,7 @@ class ProductRepository extends BaseRepository
         return $res;
     }
 
-    public function catOne($slug, $paginCnt = false)
+    public function catOne($slug, $paginCnt = 0)
     {
         $categoryModel = $this->getCatBySlug($slug);
 

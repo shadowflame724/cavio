@@ -145,6 +145,7 @@
                 <?php
                 // TODO: Вывести пагинацию
                 ?>
+                {{ $model->links() }}
                 <ul class="list-pagination clearfix">
                   <li class="pag-item active">1</li>
                   <li class="pag-item">2</li>
