@@ -134,14 +134,15 @@ class ProductRepository extends BaseRepository
                 'products.id as parent_id',
                 'products.code as parent_code',
                 'products.name' . $langSuf . ' as parent_name',
-                'products.created_at as parent_created_at',
-                'products.updated_at as parent_updated_at',
                 'collections.name' . $langSuf . ' as collection_name',
-                'collection_zones.name' . $langSuf . ' as collection_zones_name',
                 'zones.name' . $langSuf . ' as zones_name',
                 'product_photos.finish_ids as finish_ids',
-                'tissue.title' . $langSuf . ' as tissue_title',
-                'categories.name' . $langSuf . ' as categories_name')
+                'product_photos.tissue_ids as tissue_ids',
+                'product_photos.tissue_ids as collection_zone_ids',
+                'products.category_ids as categories_ids',
+                'products.created_at as parent_created_at',
+                'products.updated_at as parent_updated_at'
+            )
             ->get();
     }
 

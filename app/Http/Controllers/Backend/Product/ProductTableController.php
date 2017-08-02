@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Backend\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\CollectionZone\CollectionZone;
 use App\Models\FinishTissue\FinishTissue;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\Backend\Product\ProductRepository;
 use App\Http\Requests\Backend\Product\ManageProductRequest;
@@ -100,15 +102,46 @@ class ProductTableController extends Controller
                 return rtrim($string, ', ');
             })
             ->editColumn('tissue_name', function ($product) {
-                $finishes = FinishTissue::where('parent_id', '!=', null)
-                    ->where('type', '=', 'finish')
-                    ->select('id', 'title')->get();
-                $finishArr = explode(',', $product->finish_ids);
+                $langSuf = $this->getLangSuf();
+                $tissues = FinishTissue::where('parent_id', '!=', null)
+                    ->where('type', '=', 'tissue')
+                    ->select('id', 'title' . $langSuf)->get();
+                $tissueArr = explode(',', $product->tissue_ids);
                 $string = '';
-                foreach ($finishes as $finishDB) {
-                    foreach ($finishArr as $finish) {
-                        if ($finishDB->id == $finish) {
-                            $string .= $finishDB->title . ', ';
+                foreach ($tissues as $tissueDB) {
+                    foreach ($tissueArr as $tissue) {
+                        if ($tissueDB->id == $tissue) {
+                            $string .= $tissueDB['title' . $langSuf] . ', ';
+                        }
+                    }
+                }
+
+                return rtrim($string, ', ');
+            })
+            ->editColumn('collection_zones_name', function ($product) {
+                $langSuf = $this->getLangSuf();
+                $colZones = CollectionZone::all('id', 'name' . $langSuf);
+                $colZonesArr = explode(',', $product->collection_zone_ids);
+                $string = '';
+                foreach ($colZones as $colZone) {
+                    foreach ($colZonesArr as $zone) {
+                        if ($colZone->id == $zone) {
+                            $string .= $colZone['name' . $langSuf] . ', ';
+                        }
+                    }
+                }
+
+                return rtrim($string, ', ');
+            })
+            ->editColumn('categories_name', function ($product) {
+                $langSuf = $this->getLangSuf();
+                $categories = Category::all('id', 'name' . $langSuf);
+                $catArr = explode(',', $product->categories_ids);
+                $string = '';
+                foreach ($categories as $category) {
+                    foreach ($catArr as $cat) {
+                        if ($category->id == $cat) {
+                            $string .= $category['name' . $langSuf] . ', ';
                         }
                     }
                 }
@@ -133,6 +166,7 @@ class ProductTableController extends Controller
         } elseif (\Lang::getLocale() == 'it') {
             $langSuf = '_it';
         }
+
         return $langSuf;
     }
 }
