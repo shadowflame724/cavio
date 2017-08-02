@@ -153,6 +153,7 @@
                                     'placeholder' => trans('validation.attributes.frontend.first_name')
                                 ]) }}
                                 </div>
+{{--                                {{ is_null($logged_in_user->password) }}--}}
                                 @if ($logged_in_user->canChangeEmail())
                                 <div class="wrap-inp-profile email" data-fieldname="e-mail">
                                     {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
