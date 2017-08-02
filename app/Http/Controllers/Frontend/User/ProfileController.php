@@ -45,7 +45,7 @@ class ProfileController extends Controller
         }
 
         return redirect()
-            ->route('frontend.user.account')
+            ->route('frontend.user.dashboard')
             ->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
     }
 }
