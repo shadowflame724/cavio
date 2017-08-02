@@ -8,7 +8,7 @@
 
 @section('content')
     <section id="" class="wrap-banner">
-      <div class="wrap-banner-cont double">
+      <div class="wrap-banner-cont double" data-anim="false">
         <h3 class="section-title">
           <div class="inner_wrap-double_title clearfix">
             <div class="wrap-title-item"><a href="{{ route('frontend.zones') }}" class="inner-title-item">{{ trans('frontend.zones-collections.zones') }}</a></div>
@@ -20,7 +20,7 @@
 
     <section class="">
       <div class="container">
-        <div class="zon-col-list clearfix">
+        <div class="zon-col-list clearfix" data-anim="false">
           @foreach($collections as $collection)
           {{--@if($collection->banner == 0)--}}
           <div class="item-coll zon-col">

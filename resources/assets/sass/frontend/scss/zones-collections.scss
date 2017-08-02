@@ -4,7 +4,7 @@
   opacity: 1;
 }
 
-main[data-page='/collections'], main[data-page='/zones']{
+main[data-page^='/collections'], main[data-page^='/zones']{
   section.wrap-banner{
     height:auto;
     min-height: 520px;
@@ -552,7 +552,7 @@ ul.zc-modal-types{
   section.zone-col-modal.modal-log_reg .inner-zone-col-modal.ty{ padding: 130px 110px 60px; }
 
 
-  main[data-page='/collections'], main[data-page='/zones']{
+  main[data-page^='/collections'], main[data-page^='/zones']{
     section.wrap-banner{
       height:auto;
       min-height: 100vh;

@@ -144,7 +144,11 @@ html:not(.mobile-platform) a:hover svg.svg-main-logo{ fill: $mainActiveColor; }
   padding-right: 50px;
   opacity: 0;
 
-  &.hide{ opacity: 0; animation: none; pointer-events: none; }
+  &.hide{
+    opacity: 0; animation: none;
+
+    .btn-top-menu{ pointer-events: none; }
+  }
 }
 
 .anim-underline{
@@ -241,7 +245,7 @@ html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
   opacity: 0;
   display: table-cell;
 
-  &.hide{ opacity: 0; animation: none; }
+  &.hide{ opacity: 0; animation: none; a{ pointer-events: none; }}
 }
 
 .wrap-login{
@@ -252,7 +256,10 @@ html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
   padding-right: 130px;
   opacity: 0;
 
-  &.hide{ opacity: 0; animation: none; }
+  &.hide{
+    opacity: 0; animation: none;
+    .btn-login{ pointer-events: none; }
+  }
 }
 
 .lang-item{
