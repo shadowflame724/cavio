@@ -234,6 +234,8 @@ class UserRepository extends BaseRepository
         $user = $this->find($id);
         $user->first_name = $input['first_name'];
         $user->last_name = $input['last_name'];
+        $user->phone = $input['phone'];
+        $user->region = $input['region'];
 
         if ($user->canChangeEmail()) {
             //Address is not current address
