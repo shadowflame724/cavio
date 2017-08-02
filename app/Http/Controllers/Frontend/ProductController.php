@@ -100,7 +100,7 @@ class ProductController extends Controller
         if (!empty($slug)) {
             $products = $this->product->catOne($slug, 1);
         } else {
-            $products = $this->product->getAll(1);
+            $products = $this->product->getAll('id','desc',1);
         }
         return view('frontend.pages.catalogue', [
             'page' => $page,
