@@ -4,7 +4,13 @@
         @if ($paginator->onFirstPage())
             <li class="pag-item pag-prev disabled"><span>&laquo;</span></li>
         @else
-            <li class="pag-item pag-prev"><a href="{{ $paginator->previousPageUrl() }}" rel="prev">&laquo;</a></li>
+            @php
+            $pg = explode('page=', $paginator->previousPageUrl())[1];
+            @endphp
+            <li class="pag-item pag-prev"><a href="{{ $paginator->previousPageUrl() }}"
+                                             data-filter-name="page"
+                                             data-filter-val="{{ $pg }}"
+                                             rel="prev">&laquo;</a></li>
         @endif
 
         <!-- Pagination Elements -->
@@ -20,7 +26,9 @@
                     @if ($page == $paginator->currentPage())
                         <li class="pag-item active"><span>{{ $page }}</span></li>
                     @else
-                        <li class="pag-item"><a href="{{ $url }}">{{ $page }}</a></li>
+                        <li class="pag-item"><a href="{{ $url }}"
+                                                data-filter-name="page"
+                                                data-filter-val="{{ $page }}">{{ $page }}</a></li>
                     @endif
                 @endforeach
             @endif
@@ -28,7 +36,13 @@
 
         <!-- Next Page Link -->
         @if ($paginator->hasMorePages())
-            <li class="pag-item pag-next"><a href="{{ $paginator->nextPageUrl() }}" rel="next">&raquo;</a></li>
+            @php
+                $pg = explode('page=', $paginator->nextPageUrl())[1];
+            @endphp
+            <li class="pag-item pag-next"><a href="{{ $paginator->nextPageUrl() }}"
+                                             data-filter-name="page"
+                                             data-filter-val="{{ $pg }}"
+                                             rel="next">&raquo;</a></li>
         @else
             <li class="pag-item pag-next disabled"><span>&raquo;</span></li>
         @endif
