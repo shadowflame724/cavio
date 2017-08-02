@@ -8,7 +8,7 @@
 
 @section('content')
     <section class="wrap-banner no_space">
-        <div class=wrap-banner-cont>
+        <div class=wrap-banner-cont data-anim="false">
             <h3 class=section-title>{{ $zone->{'title'.$langSuf} }}
                 <a href="{{ route('frontend.zones') }}"
                    class="back-zol_col anim-underline">← {{ trans('frontend.zones-collections.backToZones') }}</a>
@@ -20,7 +20,7 @@
     </section>
     <section>
         <div class=container>
-            <div class="zon-col-list clearfix z_c-list">
+            <div class="zon-col-list clearfix z_c-list" data-anim="false">
                 @foreach($zone->collectionZones->groupBy('collection_id') as $collectionZones)
                 @php($item = $collectionZones[0])
                 @php($cnt = (!empty($item->product_ids)) ? count(explode(',', $item->product_ids)) : false)

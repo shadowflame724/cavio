@@ -5,6 +5,8 @@ var scrolledBottom = false;
 
 var beCollScrolled = false;
 
+var intervalNewProdDot;
+
 var topMenuScroll;
 
 var scrollFunc;
@@ -234,13 +236,12 @@ $(document).ready(function () {
     }
     return false;
   });
-
+  console.log('order submit')
   // order
-  $('body').on('submit', '#submitOrder', function (e) {
-    e.preventDefault();
+  $('body').on('submit', '#submitOrder', function () {
     var _form = $(this),
       _action = _form.attr('action'),
-      //_method = _form.attr('method'),
+      _method = _form.attr('method'),
       _data = {
         email: (_form.find('input[name="email"]').val() || false),
         first_name: (_form.find('input[name="first_name"]').val() || false),
@@ -268,45 +269,37 @@ $(document).ready(function () {
     });
 
     if (!errForm) {
-      _form.find('[type=" submit"]').attr('disabled', 'disabled');
+      alert('form order submit');
       $.ajax({
-        method: 'PUT',
+        method: _method,
         url: _action,
         data: _data
       }).done(function (data) {
-        $.each(data, function (key, val) {
-          if (key === 'user') {
-            $('.open-modal-login').replaceWith('<a href="/dashboard" class="btn-login anim-underline">' + val + '</a>');
-          }
-        });
+        // alert( "form order SEND success" );
 
         $('#modal-order').attr('data-anim', 'false');
         $('#modal-thank_you').attr('data-anim', 'true');
         $('body').addClass('overfl-h');
-      }).fail(function (err) {
-        console.log(err);
-        $.each(err.responseJSON, function (name, data) {
-          _form
-            .find('input[name="' + name + '"]')
-            .addClass('input- error')
-            .focus();
-          $.each(data, function (i, text) {
-            console.warn(text);
-          });
-        });
+      }).error(function () {
+        alert("form order SEND error");
       }).always(function () {
-        _form.find('[type="submit"]').removeAttr('disabled');
+        alert("form order SEND always");
       });
     }
     return false;
-
   });
+
   initPageAfterLoading();
 });
 
 function initPageAfterLoading() {
-  if (scrollFunc) scrollbar.removeListener(scrollFunc);
-  view_HeaderFooter = !(document.getElementById('zones-mobal') || document.getElementById('product-card') || document.getElementById('news-item'));
+
+  if($('main [data-page-type="popup"]').length){
+    hideHeader();  hideFooter();
+  }
+  else{ showHeader(); showFooter(); }
+
+  view_HeaderFooter = !(document.getElementById('zones-modal') || document.getElementById('collections-modal') || document.getElementById('product-card') || document.getElementById('news-item'));
 
 
   if (view_HeaderFooter) {
@@ -321,7 +314,6 @@ function initPageAfterLoading() {
 
 
   mainScroll.addListener(function () {
-
     if (view_HeaderFooter) {
       if (mainScroll.offset.y > 0) $('header:not(.scroll)').addClass('scroll');
       else                         $('header.scroll').removeClass('scroll');
@@ -334,12 +326,12 @@ function initPageAfterLoading() {
   });
 
 
-  // zon_col_list-zon--modal ============
-  if (document.getElementById('zones-mobal')) {
+  // POPUP ZONES OR POPUP COLLECTIONS ============
+  if (document.getElementById('zones-modal') || document.getElementById('collections-modal')) {
     initZonColModalPage();
-    $('#zones-mobal').attr('data-anim', 'true');
+    $('#zones-modal, #collections-modal').attr('data-anim', 'true');
   }
-  // END zon_col_list-zon--modal ===============
+  // END POPUP ZONES OR POPUP COLLECTIONS ===============
 
 
   // product-card =============================
@@ -393,8 +385,13 @@ function initPageAfterLoading() {
 
 
   // ZONES / COLLECTIONS ========
-  if (document.querySelector("main[data-page$='/zones']") || document.querySelector("main[data-page$='/collections']"))
+  if(document.querySelector("main[data-page='/zones']")       ||
+    document.querySelector("main[data-page='/collections']") ||
+    document.querySelector("main[data-page^='/zones/']")     ||
+    document.querySelector("main[data-page^='/collections/']")
+  ) {
     initZenCollPage();
+  }
 
 
   mainScroll.update();
@@ -629,7 +626,6 @@ var scrollBarListener;
 function initMainPage() {
   console.log('Main page');
 
-  var intervalNewProdDot;
   var timeChangeAutoNewProdDot = 7000;
 
   var bannerCircleDelayStart = 100;
@@ -646,6 +642,8 @@ function initMainPage() {
   var ourPhilosophyTitle;
   var shopByCollection;
   var collCarous;
+
+  setTimeout(function(){  initWaves()   }, 1500);
 
   $('.new-products-right-side').on({
     'mousemove': function () {
@@ -713,7 +711,7 @@ function initMainPage() {
       itemOffsetCollection = $('#shop-by-collection').offset().top - (window.innerHeight * 0.1);
     },
     'scroll': function (event) {
-      if (!mainScroll) {
+      if (!mainScroll && document.querySelector("main[data-page='/']")) {
         var currScrolled = $(document).scrollTop();
         var percVisOurPhil = -($('#our-philosophy').offset().top - currScrolled - window.innerHeight) / window.innerHeight;
         var percVisShopByColl = -($('#shop-by-collection').offset().top - currScrolled - window.innerHeight) / window.innerHeight;
@@ -797,7 +795,6 @@ function initMainPage() {
         loop: true,
       });
     }
-
 
     if (window.innerWidth > 1024) {
       collectionCarousel && collectionCarousel.destroy();
@@ -1108,47 +1105,6 @@ function initMainPage() {
     }, timeChangeAutoNewProdDot);
   }
 
-  $('.new-products-right-inner-item').on('click', function (event) {
-    event.preventDefault();
-
-    // zcScroll = Scrollbar.init(document.getElementById('zones-mobal'), {damping: 0.2});
-    // zcScroll.setPosition(0, 0);
-
-    var slidesPerView = 1.1;
-    var spaceBetween = 120;
-    if (window.innerWidth <= 1400) {
-      spaceBetween = 70;
-    }
-    if (window.innerWidth <= 1024) {
-      spaceBetween = 0;
-      slidesPerView = 1.2;
-    }
-
-
-    cardModalSwip && cardModalSwip.destroy();
-    cardModalSwip = new Swiper('.wrap-carousel-card', {
-      slidesPerView: slidesPerView,
-      loopAdditionalSlides: 3,
-      centeredSlides: true,
-      speed: 700,
-      // autoHeight: true,
-      // autoplay: 4000,
-      spaceBetween: spaceBetween,
-      loop: true,
-      effect: "coverflow",
-      coverflow: {slideShadows: false},
-    });
-
-    $(document).on('click', '.card-modal-slide', function (event) {
-      if ($(event.target).closest('.card-modal-slide').hasClass('swiper-slide-prev')) cardModalSwip.slidePrev();
-      if ($(event.target).closest('.card-modal-slide').hasClass('swiper-slide-next')) cardModalSwip.slideNext();
-    });
-
-    $('#zones-mobal').removeClass('hide').addClass('show');
-    $('body').toggleClass('overfl-h');
-    // wavesBg_1.appendTo(document.querySelector('#zones-mobal .inner-zone-col-modal'));
-  });
-
   $('.new-products-dots .new-prod-dot').on('click', function (event) {
     if ($(this).hasClass('active'))  return;
 
@@ -1223,7 +1179,9 @@ function initMainPage() {
   });
 
   function scrollFunc() {
-    mainScroll.addListener(function (status) {
+    mainScroll.addListener(function(status){
+      if(!document.querySelector("main[data-page='/']"))  return;
+
       if (itemOffsetOurPhil !== true) itemOffsetOurPhil = $('.wrap-philosophy.a').offset().top - (window.innerHeight * 0.7);
       itemOffsetCollection = $('#shop-by-collection').offset().top - (window.innerHeight * 0.1);
 
@@ -1278,32 +1236,30 @@ function initMainPage() {
     });
   }
 
-  $(document).ready(function () {
-    ourPhilosophyTitle = document.querySelector('#our-philosophy .wrap-philosophy');
-    shopByCollection = document.getElementById('shop-by-collection');
-    collCarous = document.querySelector('.collection-carousel');
+  ourPhilosophyTitle = document.querySelector('#our-philosophy .wrap-philosophy');
+  shopByCollection = document.getElementById('shop-by-collection');
+  collCarous = document.querySelector('.collection-carousel');
 
-    initCollectionCarousel();
+  initCollectionCarousel();
 
-    if (mainScroll) scrollFunc();
+  if (mainScroll) scrollFunc();
 
-    animBannerCircle(document.querySelector('.banner-top-item'));
+  animBannerCircle(document.querySelector('.banner-top-item'));
 
-    setTimeout(function () {
-      $('.new-products-left-side').attr('data-anim', 'true');
-    }, 1);
-    setTimeout(function () {
-      $('.new-products-right-side, .wrap-new-products-gradiet').attr('data-anim', 'true');
-    }, 300);
+  setTimeout(function () {
+    $('.new-products-left-side').attr('data-anim', 'true');
+  }, 1);
+  setTimeout(function () {
+    $('.new-products-right-side, .wrap-new-products-gradiet').attr('data-anim', 'true');
+  }, 300);
 
-    // AUTO CLICK NewProdDot =========
-    autoChangeActiveNewProdDot();
-    // ===============================
+  // AUTO CLICK NewProdDot =========
+  autoChangeActiveNewProdDot();
+  // ===============================
 
-    setTimeout(function () {
+  setTimeout(function () {
       if ($('body').hasClass('poppup')) showMainPopup()
     }, 2000);
-  });
 }
 
 //ZON COL MODAL PAGE
@@ -1787,13 +1743,6 @@ function initZenCollPage() {
 
       document.getElementById('wrapper-bg-zone-col').style.opacity = 1 - (1 / (lenFooterPath / -mainOffset));
     }
-  });
-
-  $('.item-coll.to_modal a').on('click', function (event) {
-    event.preventDefault();
-
-    //FOR INIT ZONE or COLLECTION modal window
-    initZonColModal();
   });
 }
 
@@ -3240,10 +3189,6 @@ $(window).on('resize', function () {
 
 // SCROLL LISTENESR =========
 function scrollFuncMain() {
-  var ourPhilosophyTitle = document.querySelector('#our-philosophy .wrap-philosophy');
-  var shopByCollection = document.getElementById('shop-by-collection');
-  var collCarous = document.querySelector('.collection-carousel');
-
   if (itemOffsetOurPhil !== true) itemOffsetOurPhil = $('.wrap-philosophy.a').offset().top - (window.innerHeight * 0.7);
   itemOffsetCollection = $('#shop-by-collection').offset().top - (window.innerHeight * 0.1);
 

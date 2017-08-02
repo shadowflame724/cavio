@@ -194,7 +194,7 @@
 
 @section('content')
     <section id="" class="wrap-banner no_space">
-        <div class="wrap-banner-cont">
+        <div class="wrap-banner-cont" data-anim="false">
             <h3 class="section-title">{{ $collection->{'title'.$langSuf} }}
                 <a href="{{ route('frontend.collections') }}" class="back-zol_col anim-underline">← {{ trans('frontend.zones-collections.backToCollections') }}</a>
             </h3>
@@ -203,7 +203,7 @@
 
     <section class="">
         <div class="container">
-            <div class="zon-col-list clearfix z_c-list">
+            <div class="zon-col-list clearfix z_c-list" data-anim="false">
                 @foreach($collection->collectionZones as $zone)
                     {{--{{ dd($zone) }}--}}
                     @php($item = $zone)
