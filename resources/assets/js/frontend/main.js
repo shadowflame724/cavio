@@ -252,9 +252,11 @@ $(document).ready(function () {
 
     $.ajax({
       url : _action,
-      data : data,
+      data : JSON.stringify(data),
       type : 'PATCH',
       contentType : 'application/json',
+      processData: false,
+      dataType: 'json',
       done: function() {
         alert("user_profile success SEND");
       }
