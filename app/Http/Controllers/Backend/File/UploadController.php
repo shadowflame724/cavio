@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\File;
 
+use Eventviva\ImageResize;
 use JBZoo\Image\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -54,31 +55,32 @@ class UploadController extends Controller
     {
         $imgName = time() . '.' . $request->getClientOriginalExtension();
         $path = $request->getRealPath();
-        $img = new Image($path);
-        $img->setQuality(100);
-        $horizontal = new Image($path);
-        $horizontal->setQuality(100);
-        $thumb = new Image($path);
-        $thumb->setQuality(100);
+        $img = new ImageResize($path);
+        $horizontal = new ImageResize($path);
+        $thumb = new ImageResize($path);
 
 
-        if (!file_exists(public_path('/upload/tmp/' . $type . '/original'))) {
-            mkdir(public_path('/upload/tmp/' . $type . '/original'), 0777, true);
-        }
-        if (!file_exists(public_path('/upload/tmp/' . $type . '/horizontal'))) {
-            mkdir(public_path('/upload/tmp/' . $type . '/horizontal'), 0777, true);
-        }
-        if (!file_exists(public_path('/upload/tmp/' . $type . '/thumb'))) {
-            mkdir(public_path('/upload/tmp/' . $type . '/thumb'), 0777, true);
-        }
+//        if (!file_exists(public_path('/upload/tmp/' . $type . '/original'))) {
+//            mkdir(public_path('/upload/tmp/' . $type . '/original'), 0777, true);
+//        }
+//        if (!file_exists(public_path('/upload/tmp/' . $type . '/horizontal'))) {
+//            mkdir(public_path('/upload/tmp/' . $type . '/horizontal'), 0777, true);
+//        }
+//        if (!file_exists(public_path('/upload/tmp/' . $type . '/thumb'))) {
+//            mkdir(public_path('/upload/tmp/' . $type . '/thumb'), 0777, true);
+//        }
+//
+//        //$img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
+//        $horizontal->thumbnail(1600, 360)->saveAs(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
+//        if ($type == 'zone') {
+//            $thumb->thumbnail(530, 370)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
+//        } else {
+//            $thumb->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
+//        }
+        $img->save(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
+        $horizontal->save(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
+        $thumb->save(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
 
-        $img->fitToWidth(2000)->saveAs(public_path('/upload/tmp/' . $type . '/original/' . $imgName));
-        $horizontal->thumbnail(1600, 360)->saveAs(public_path('/upload/tmp/' . $type . '/horizontal/' . $imgName));
-        if ($type == 'zone') {
-            $thumb->thumbnail(530, 370)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
-        } else {
-            $thumb->thumbnail(480, 640)->saveAs(public_path('/upload/tmp/' . $type . '/thumb/' . $imgName));
-        }
 
         $json = [
             'success' => [

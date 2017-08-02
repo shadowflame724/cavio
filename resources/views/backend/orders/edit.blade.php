@@ -85,7 +85,7 @@
                                                         <img class="product_photo"
                                                              src="/upload/products/{{ $imageArr[0] }}" alt="">
                                                         <div class="caption">
-                                                            <h3>{{ $product->child_product_name }}</h3>
+                                                            <h3>{{ $product->parent_product_name }}</h3>
                                                             <small>
                                                                 <b>{{  trans('validation.attributes.backend.access.orders.product.code') }}
                                                                     : </b>{{ $product->child_product_code }}</small>

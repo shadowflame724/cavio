@@ -81,7 +81,7 @@ class ProductRepository extends BaseRepository
     /**
      * @return Collection
      */
-    public static function getProdsDataByPriceIds($iDs, $langSuf)
+    public static function getProdsDataByPriceIds($iDs, $langSuf= '')
     {
         return DB::table('product_prices')
             ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
@@ -99,6 +99,7 @@ class ProductRepository extends BaseRepository
                 'product_prices.discount',
                 'product_childs.code as child_product_code',
                 'product_childs.name' . $langSuf . ' as child_product_name',
+                'products.name' . $langSuf . ' as parent_product_name',
                 'product_photos.photos',
                 'collections.name' . $langSuf . ' as collection_name',
                 'collection_zones.name' . $langSuf . ' as collection_zones_name',
@@ -113,7 +114,7 @@ class ProductRepository extends BaseRepository
     /**
      * @return Collection
      */
-    public static function getForPricesDataTable($langSuf)
+    public static function getForPricesDataTable($langSuf= '')
     {
         return DB::table('product_prices')
             ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
@@ -138,7 +139,7 @@ class ProductRepository extends BaseRepository
                 'collections.name' . $langSuf . ' as collection_name',
                 'collection_zones.name' . $langSuf . ' as collection_zones_name',
                 'zones.name' . $langSuf . ' as zones_name',
-                'finish.title' . $langSuf . ' as finish_title',
+                'product_photos.finish_ids as finish_ids',
                 'tissue.title' . $langSuf . ' as tissue_title',
                 'categories.name' . $langSuf . ' as categories_name')
             ->get();

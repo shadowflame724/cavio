@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Collection\Collection;
 use App\Models\CollectionZone\CollectionZone;
+use App\Models\FinishTissue\FinishTissue;
 use Carbon\Carbon;
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\Backend\Product\ProductRepository;
@@ -63,14 +64,8 @@ class ProductTableController extends Controller
      */
     public function fullDataTable(ManageProductRequest $request)
     {
-        $langSuf = '';
-        if (\Lang::getLocale() == 'ru') {
-            $langSuf = '_ru';
-        } elseif (\Lang::getLocale() == 'it') {
-            $langSuf = '_it';
-        }
 
-        $products = Datatables::of($this->product->getForPricesDataTable($langSuf))
+        $products = Datatables::of($this->product->getForPricesDataTable($this->getLangSuf()))
             ->editColumn('parent_created_at', function ($product) {
                 return $product->parent_created_at ? with(new Carbon($product->parent_created_at))->format('m/d/Y') : '';
             })
@@ -87,13 +82,57 @@ class ProductTableController extends Controller
                 $photoArr = explode(',', $product->photos);
                 return '<img class="table_photo" src="/upload/products/' . $photoArr[0] . '" alt="">';
             })
+            ->editColumn('finish_name', function ($product) {
+                $langSuf = $this->getLangSuf();
+                $finishes = FinishTissue::where('parent_id', '!=', null)
+                    ->where('type', '=', 'finish')
+                    ->select('id', 'title' . $langSuf)->get();
+                $finishArr = explode(',', $product->finish_ids);
+                $string = '';
+                foreach ($finishes as $finishDB) {
+                    foreach ($finishArr as $finish) {
+                        if ($finishDB->id == $finish) {
+                            $string .= $finishDB['title' . $langSuf] . ', ';
+                        }
+                    }
+                }
+
+                return rtrim($string, ', ');
+            })
+            ->editColumn('tissue_name', function ($product) {
+                $finishes = FinishTissue::where('parent_id', '!=', null)
+                    ->where('type', '=', 'finish')
+                    ->select('id', 'title')->get();
+                $finishArr = explode(',', $product->finish_ids);
+                $string = '';
+                foreach ($finishes as $finishDB) {
+                    foreach ($finishArr as $finish) {
+                        if ($finishDB->id == $finish) {
+                            $string .= $finishDB->title . ', ';
+                        }
+                    }
+                }
+
+                return rtrim($string, ', ');
+            })
             ->editColumn('child_product_code', function ($product) {
-                return '<a href="' . route('admin.product.edit', array('product' => $product->parent_id)) . '">'.$product->child_product_code.'</a>
+                return '<a href="' . route('admin.product.edit', array('product' => $product->parent_id)) . '">' . $product->child_product_code . '</a>
             ';
             })
             ->rawColumns(['child_product_code', 'photos'])
             ->make(true);
 
         return $products;
+    }
+
+    public function getLangSuf()
+    {
+        $langSuf = '';
+        if (\Lang::getLocale() == 'ru') {
+            $langSuf = '_ru';
+        } elseif (\Lang::getLocale() == 'it') {
+            $langSuf = '_it';
+        }
+        return $langSuf;
     }
 }

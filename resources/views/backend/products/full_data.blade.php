@@ -113,12 +113,12 @@
                         name: 'collection_zones_name'
                     },
                     {
-                        data: 'finish_title',
-                        name: 'finish_title'
+                        data: 'finish_name',
+                        name: 'finish_name'
                     },
                     {
-                        data: 'tissue_title',
-                        name: 'tissue_title'
+                        data: 'tissue_name',
+                        name: 'tissue_name'
                     },
                     {
                         data: 'categories_name',

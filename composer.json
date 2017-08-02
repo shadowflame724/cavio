@@ -16,6 +16,7 @@
         "creativeorange/gravatar": "~1.0",
         "cviebrock/eloquent-sluggable": "^4.2",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "eventviva/php-image-resize": "^1.6",
         "gazsp/baum": "~1.1",
         "guzzlehttp/guzzle": "^6.2",
         "hieu-le/active": "~3.0",
