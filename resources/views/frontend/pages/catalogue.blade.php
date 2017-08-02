@@ -70,7 +70,7 @@
                     @foreach($zones as $zone)
                       <li>
                         <a href="#zone={{ $zone->slug }}"
-                           data-filter-name="zone" data-filter-val="{{ $zone->slug }}"
+                           data-filter-name="zones" data-filter-val="{{ $zone->slug }}"
                            class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
                         <div class="disactive-item"></div>
                       </li>
@@ -87,7 +87,7 @@
                     @foreach($collections as $collection)
                       <li>
                         <a href="#collection={{ $collection->slug }}"
-                           data-filter-name="collection" data-filter-val="{{ $collection->slug }}"
+                           data-filter-name="collections" data-filter-val="{{ $collection->slug }}"
                            class="anim-underline">
                           {{ $collection->{'title'.$langSuf} }}
                         </a>

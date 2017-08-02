@@ -3672,6 +3672,12 @@ jQuery.fn.sortDomElements = (function () {
 var App = (function () {
   var thatClass = this,
       _showed = false,
+      _catalogParams = {
+        'sale': false,
+        'zones': [],
+        'collections': [],
+        'page': 1,
+      },
       _loadedPages = {};
 
   function _start() {
@@ -3680,12 +3686,41 @@ var App = (function () {
       .on('click', '[data-filter-name]', function (e) {
 
         var $el = $(this),
+          $prnt = $el.parent(),
           type = $el.attr('data-filter-name'),
-          val = $el.attr('data-filter-val'),
-          notInApp = ['http://', 'https://', '#', 'tel:', 'mailto:'],
-          isRoute = true;
+          val = $el.attr('data-filter-val');
 
-        alert(type+'='+val);
+        if(_catalogParams[type]) {
+          if(type === 'sale') {
+            _catalogParams.sale = (val === 'true') ? true : false;
+          }
+          if(type === 'zones' || type === 'collections') {
+            var rem = $prnt.hasClass('active') ? false : true;
+            if(rem){
+              var index = _catalogParams[type].indexOf(val);
+              if (index > -1) {
+                _catalogParams[type].splice(index, 1);
+              }
+            }else{
+              _catalogParams[type].push(val);
+            }
+          }
+          if(type === 'page') {
+            _catalogParams.page = parseInt(val);
+          }
+
+          var link = '';
+          $.each(_catalogParams, function (tp, vl) {
+            link += (link === '') ? '?' : '';
+            link += (link === '?') ? '' : '&';
+            link += tp + '=' + vl;
+          });
+
+          console.log('::', link, JSON.stringify(_catalogParams));
+
+          // alert(type + '=' + val);
+          page('/catalogue'+link);
+        }
         //   console.warn('внутренний переход на',link);
         //   page(link);
         return false;

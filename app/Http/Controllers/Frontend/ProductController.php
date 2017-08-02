@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Collection\Collection;
 use App\Models\FAQ\FAQ;
 use App\Models\FinishTissue\FinishTissue;
@@ -26,9 +27,9 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->showOneCategView();
+        return $this->showOneCategView('', [], $request);
 
         $page = $this->page('catalogue');
         $model = $this->product->getAll();
@@ -42,15 +43,19 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function catOne($slug)
+    public function catOne($slug, Request $request)
     {
-        return $this->showOneCategView($slug);
+        return $this->showOneCategView($slug, $request);
     }
     /**
      * @return \Illuminate\View\View
      */
-    public function showOneCategView($slug = '', $data = [])
+    public function showOneCategView($slug = '', $data = [], $request)
     {
+        $colls = (!empty($request->input('collections'))) ? explode(',', $request->input('collections')) : null;
+        $zones = (!empty($request->input('zones'))) ? explode(',', $request->input('zones')) : null;
+        $sale = ($request->input('sale') == 'true') ? true : false;
+//        dd($sale);
         $catsMenu = [];
         $categories = Category::all();
         $productCatsIds = [];
