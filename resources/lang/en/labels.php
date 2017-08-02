@@ -148,6 +148,7 @@ return [
                 'create' => 'Create Goods',
                 'edit' => 'Edit Goods',
                 'management' => 'Goods Management',
+                'management_full' => 'Full data Management',
 
                 'table' => [
                     'id' => 'Id',

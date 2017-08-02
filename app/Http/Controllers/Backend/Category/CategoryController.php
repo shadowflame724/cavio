@@ -61,11 +61,6 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $imgName = time() . '.' . $request->file('file')->getClientOriginalExtension();
-        $path = $request->file('file')->getRealPath();
-
-        copy($path, public_path('/upload/tmp/collection/original/'.$imgName));
-
         $p_id = $request->p_id;
         if (Category::isValidNestedSet() == true) {
             $cat = new Category;
