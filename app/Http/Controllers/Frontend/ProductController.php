@@ -45,7 +45,7 @@ class ProductController extends Controller
      */
     public function catOne($slug, Request $request)
     {
-        return $this->showOneCategView($slug, $request);
+        return $this->showOneCategView($slug, [], $request);
     }
     /**
      * @return \Illuminate\View\View
