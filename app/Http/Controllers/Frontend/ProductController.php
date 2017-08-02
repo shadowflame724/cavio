@@ -98,11 +98,10 @@ class ProductController extends Controller
 
         $page = $this->page('catalogue');
         if (!empty($slug)) {
-            $products = $this->product->catOne($slug);
+            $products = $this->product->catOne($slug, 1);
         } else {
-            $products = $this->product->getAll();
+            $products = $this->product->getAll(1);
         }
-
         return view('frontend.pages.catalogue', [
             'page' => $page,
             'cats' => $catsMenu,

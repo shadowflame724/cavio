@@ -31,7 +31,7 @@ class ProductRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getAll($order_by = 'sort', $sort = 'asc')
+    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = false)
     {
         $res = [];
         $model = Product::where('published',1)
@@ -163,7 +163,7 @@ class ProductRepository extends BaseRepository
         return $res;
     }
 
-    public function catOne($slug)
+    public function catOne($slug, $paginCnt = false)
     {
         $categoryModel = $this->getCatBySlug($slug);
 
@@ -189,7 +189,13 @@ class ProductRepository extends BaseRepository
         if(!empty($product_ids)){
             $res = [];
             $prodIds = explode(',',$product_ids);
-            $model = Product::whereIn('id',$prodIds)->where('published',1)->get();
+            if($paginCnt > 0) {
+                $model = Product::whereIn('id', $prodIds)
+                    ->where('published', 1)
+                    ->paginate($paginCnt);
+            } else {
+                $model = Product::whereIn('id', $prodIds)->where('published', 1)->get();
+            }
 
             if(isset($model)) {
                 return $model;

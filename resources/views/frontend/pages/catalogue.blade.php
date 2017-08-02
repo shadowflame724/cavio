@@ -23,11 +23,11 @@
             <div class="wrap-catal-side-items">
               <div class="wrap-percents">
                 <ul class="catal-perc clearfix">
-                  <li class="active">{{ trans('frontend.catalogue.all') }}</li>
+                  <li data-filter-name="sale" data-filter-val="false" class="active">{{ trans('frontend.catalogue.all') }}</li>
                     <?php
                     // TODO: Сделать фильтр по скидкам (?sale=true)
                     ?>
-                  <li>{{ trans('frontend.catalogue.sale') }} %</li>
+                  <li data-filter-name="sale" data-filter-val="true">{{ trans('frontend.catalogue.sale') }} %</li>
                 </ul>
 
               </div>
@@ -69,7 +69,9 @@
                     ?>
                     @foreach($zones as $zone)
                       <li>
-                        <a href="#zone={{ $zone->slug }}" class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
+                        <a href="#zone={{ $zone->slug }}"
+                           data-filter-name="zone" data-filter-val="{{ $zone->slug }}"
+                           class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
                         <div class="disactive-item"></div>
                       </li>
                     @endforeach
@@ -84,7 +86,9 @@
                     ?>
                     @foreach($collections as $collection)
                       <li>
-                        <a href="#collection={{ $collection->slug }}" class="anim-underline">
+                        <a href="#collection={{ $collection->slug }}"
+                           data-filter-name="collection" data-filter-val="{{ $collection->slug }}"
+                           class="anim-underline">
                           {{ $collection->{'title'.$langSuf} }}
                         </a>
                         <div class="disactive-item"></div>
