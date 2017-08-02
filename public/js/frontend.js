@@ -250,8 +250,15 @@ $(document).ready(function () {
       phone:phone,
       region:region
     };
-    $.post(_action, data, function (data) {
-      alert("user_profile success SEND");
+
+    $.ajax({
+      url : _action,
+      data : data,
+      type : 'PATCH',
+      contentType : 'application/json',
+      done: function() {
+        alert("user_profile success SEND");
+      }
     });
     return false;
   });
