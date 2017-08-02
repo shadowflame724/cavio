@@ -235,6 +235,27 @@ $(document).ready(function () {
     return false;
   });
 
+  //user_profile update
+  $('body').on('submit', '.user_profile', function () {
+    var _form = $(this),
+      _action = _form.attr('action'),
+      name = _form.find('input[name="first_name"]').val(),
+      lastname = _form.find('input[name="last_name"]').val(),
+      phone = _form.find('input[name="phone"]').val(),
+      region = _form.find('input[name="region"]').val();
+
+    var data = {
+      first_name:name,
+      last_name:lastname,
+      phone:phone,
+      region:region
+    };
+    $.post(_action, data, function (data) {
+      alert("user_profile success SEND");
+    });
+    return false;
+  });
+
   // order
   $('body').on('submit', '#submitOrder', function (e) {
     e.preventDefault();
