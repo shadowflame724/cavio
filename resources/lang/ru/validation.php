@@ -352,7 +352,10 @@ return [
         ],
         'frontend' => [
             'email' => 'E-mail',
-            'name' => 'Логин',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'phone' => 'Телефон',
+            'region' => 'Регион',
             'new_password' => 'Новый пароль',
             'new_password_confirmation' => 'Подтверждение нового пароля',
             'old_password' => 'Старый пароль',

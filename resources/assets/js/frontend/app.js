@@ -9,6 +9,7 @@ var App = (function () {
         // alert('click a');
         var $el = $(this),
             isLang = ($el.closest('.lang-panel').length) ? true : false,
+            isSocial = ($el.closest('.wrap-login-social').length) ? true : false,
             link = $el.attr('href'),
             notInApp = ['http://', 'https://', '#', 'tel:', 'mailto:'],
             isRoute = true;
@@ -20,12 +21,16 @@ var App = (function () {
         if($el.attr('target') === '_blank'){
           isRoute = false;
         }
-        if (isRoute && !isLang) {
+        if($el.attr('data-type') === 'notApp'){
+          window.location.href = link;
+          isRoute = false;
+        }
+        if (isRoute && !isLang && !isSocial) {
           console.warn('внутренний переход на',link);
           page(link);
 
           e.preventDefault();
-        } else if (isLang) {
+        } else if (isLang || isSocial) {
           window.location.href = link;
         }
         // return false;
@@ -53,6 +58,10 @@ var App = (function () {
   function _hidePopup() {
     // hideTopMenu();
     // hideLeftMenu();
+  }
+
+  function _goPage(link) {
+    page(link);
   }
 
   function _routes() {
@@ -240,6 +249,9 @@ var App = (function () {
     },
     getPages: function () {
       return _loadedPages;
+    },
+    goToPage: function (link) {
+      _goPage(link);
     }
   }
 }());

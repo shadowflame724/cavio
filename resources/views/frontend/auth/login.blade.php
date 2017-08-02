@@ -21,10 +21,12 @@
                 'required' => 'required',
                 'placeholder' => trans('validation.attributes.frontend.password')
             ]) }}
-            <label>
-                {{ Form::checkbox('remember') }} {{ trans('labels.frontend.auth.remember_me') }}
-            </label>
-            {{ link_to_route('frontend.auth.password.reset', trans('labels.frontend.passwords.forgot_password')) }}
+            <div class="reset_remember">
+                <label>
+                    {{ Form::checkbox('remember') }} {{ trans('labels.frontend.auth.remember_me') }}
+                </label>
+                {{ link_to_route('frontend.auth.password.reset', trans('labels.frontend.passwords.forgot_password')) }}
+            </div>
             {{ Form::button(trans('frontend.header.login'), [
                 'type' => 'submit',
                 'content' => trans('frontend.header.login'),

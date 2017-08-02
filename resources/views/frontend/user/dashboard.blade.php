@@ -126,6 +126,9 @@
         <div class="small-page-title">
             <span class="text-title">Profile</span>
         </div>
+        <div class="links-title" style="float:right;">
+            <a href="{{ route('frontend.press-design') }}">press-design</a>
+        </div>
         <div class="wrap-catal profile wrap-box-shadow clearfix bg-white-marmur">
             <div class="wrap-profile-swiper swiper-container-horizontal">
                 <div class="wrap-log_reg-toggle">
@@ -150,6 +153,7 @@
                                     'placeholder' => trans('validation.attributes.frontend.first_name')
                                 ]) }}
                                 </div>
+{{--                                {{ is_null($logged_in_user->password) }}--}}
                                 @if ($logged_in_user->canChangeEmail())
                                 <div class="wrap-inp-profile email" data-fieldname="e-mail">
                                     {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
