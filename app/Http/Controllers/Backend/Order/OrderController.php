@@ -7,7 +7,9 @@ use App\Http\Requests\Backend\Order\ManageOrderRequest;
 use App\Http\Requests\Backend\Order\UpdateOrderRequest;
 use App\Models\Access\User\User;
 use App\Models\Order\Order;
+use App\Models\Settings\Settings;
 use App\Repositories\Backend\Order\OrderRepository;
+use App\Repositories\Backend\Product\ProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -82,17 +84,21 @@ class OrderController extends Controller
     public function edit(Order $order, ManageOrderRequest $request)
     {
         $productData = json_decode($order->product_data);
+        $iDs = [];
+        $settings = Settings::find(1)->first();
 
-        $products = DB::table('product_prices')
-            ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
-            ->join('product_childs', 'product_prices.product_child_id', '=', 'product_childs.id')
-            //->join('products', 'product_childs.product_id', '=', 'products.id')
-            ->whereIn('product_prices.id', $productData->product_price_ids)
-            ->get();
+        foreach ($productData->product_price_ids as $productPrice) {
+            $iDs[] = $productPrice->price_id;
+        }
+
+        $products = ProductRepository::getProdsDataByPriceIds($iDs);
+        //dd($products);
 
         return view('backend.orders.edit', [
             'order' => $order,
-            'products' => $products
+            'orderData' => $productData->order_data,
+            'products' => $products,
+            'vat' => str_replace('"', '', $settings->vat_data)
         ]);
     }
 

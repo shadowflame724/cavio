@@ -174,6 +174,13 @@
                                 </a>
                             </li>
 
+                            <li class="{{ active_class(Active::checkUriPattern('admin/product/full-data*')) }}">
+                                <a href="{{ route('admin.product.fullDataIndex') }}">
+                                    <i class="fa fa-cube"></i>
+                                    <span>{{ trans('labels.backend.access.product.management_full') }}</span>
+                                </a>
+                            </li>
+
                             <li class="{{ active_class(Active::checkUriPattern('admin/sort/categories*')) }}">
                                 <a href="{{ route('admin.sort.index', 'categories') }}">
                                     <i class="fa fa-sort-amount-asc"></i>
