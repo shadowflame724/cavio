@@ -349,7 +349,6 @@ function initPageAfterLoading() {
 
   view_HeaderFooter = !(document.getElementById('zones-modal') || document.getElementById('collections-modal') || document.getElementById('product-card') || document.getElementById('news-item'));
 
-
   if (view_HeaderFooter) {
     var timeOTopImg;
     showHeader();
