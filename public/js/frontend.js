@@ -3697,6 +3697,7 @@ var App = (function () {
         // alert('click a');
         var $el = $(this),
             isLang = ($el.closest('.lang-panel').length) ? true : false,
+            isSocial = ($el.closest('.wrap-login-social').length) ? true : false,
             link = $el.attr('href'),
             notInApp = ['http://', 'https://', '#', 'tel:', 'mailto:'],
             isRoute = true;
@@ -3712,12 +3713,12 @@ var App = (function () {
           window.location.href = link;
           isRoute = false;
         }
-        if (isRoute && !isLang) {
+        if (isRoute && !isLang && !isSocial) {
           console.warn('внутренний переход на',link);
           page(link);
 
           e.preventDefault();
-        } else if (isLang) {
+        } else if (isLang || isSocial) {
           window.location.href = link;
         }
         // return false;
