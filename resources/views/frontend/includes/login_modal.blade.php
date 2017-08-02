@@ -15,7 +15,7 @@
                         <div class="swiper-slide log_reg-item log">
 
                             <div class="wrap-login-social clearfix">
-                                <a href="#" class="btn wrap-item-soc_log google" content="with Google">
+                                <a href="/login/google" class="btn wrap-item-soc_log google" content="with Google">
                                     <div class="item-soc_log-logo">
                                         <svg class="login-soc_icon">
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#login_google_plus"></use>
