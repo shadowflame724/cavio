@@ -386,7 +386,10 @@ return [
 
         'frontend' => [
             'email'                     => 'Indirizzo e-mail',
-            'name'                      => 'Nome',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'phone' => 'Phone',
+            'region' => 'Region',
             'password'                  => 'Password',
             'password_confirmation'     => 'Conferma password',
             'old_password'              => 'Vecchia password',

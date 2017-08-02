@@ -147,7 +147,7 @@
             <div class="inner-logo">
                 <div class="relative">
                     <a href="/">
-                        <svg class="svg-main-logo">
+                        <svg class="svg-main-logo hide">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#main-logo"></use>
                         </svg>
                     </a>

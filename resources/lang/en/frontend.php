@@ -131,6 +131,11 @@ return [
                                 costs'
     ],
 
+    'thankForUpdateProfile' => [
+        'title' => 'Thank you',
+        'body' => 'Your profile has been successfully updated'
+    ],
+
     'zones-collections' => [
         'zones' => 'Zones',
         'allZones' => 'All zones',

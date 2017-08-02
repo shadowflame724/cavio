@@ -106,8 +106,8 @@ class UserRepository extends BaseRepository
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
         $user->email = $data['email'];
-        $user->phone = $data['phone'];
-        $user->region = $data['region'];
+        $user->phone = isset($data['phone'])?$data['phone']:null;
+        $user->region = isset($data['region'])?$data['phone']:null;
         $user->confirmation_code = md5(uniqid(mt_rand(), true));
         $user->status = 1;
         $user->password = $provider ? null : bcrypt($data['password']);
@@ -234,6 +234,8 @@ class UserRepository extends BaseRepository
         $user = $this->find($id);
         $user->first_name = $input['first_name'];
         $user->last_name = $input['last_name'];
+        $user->phone = $input['phone'];
+        $user->region = $input['region'];
 
         if ($user->canChangeEmail()) {
             //Address is not current address

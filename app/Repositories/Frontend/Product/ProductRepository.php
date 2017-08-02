@@ -31,12 +31,18 @@ class ProductRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getAll($order_by = 'sort', $sort = 'asc')
+    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = 0)
     {
         $res = [];
-        $model = Product::where('published',1)
-            ->orderBy($order_by, $sort)
-            ->get();
+        if($paginCnt > 0) {
+            $model = Product::where('published', 1)
+                ->orderBy($order_by, $sort)
+                ->paginate($paginCnt);
+        } else {
+            $model = Product::where('published', 1)
+                ->orderBy($order_by, $sort)
+                ->get();
+        }
 
         if(isset($model)) {
             return $model;
@@ -163,7 +169,7 @@ class ProductRepository extends BaseRepository
         return $res;
     }
 
-    public function catOne($slug)
+    public function catOne($slug, $paginCnt = 0)
     {
         $categoryModel = $this->getCatBySlug($slug);
 
@@ -189,7 +195,13 @@ class ProductRepository extends BaseRepository
         if(!empty($product_ids)){
             $res = [];
             $prodIds = explode(',',$product_ids);
-            $model = Product::whereIn('id',$prodIds)->where('published',1)->get();
+            if($paginCnt > 0) {
+                $model = Product::whereIn('id', $prodIds)
+                    ->where('published', 1)
+                    ->paginate($paginCnt);
+            } else {
+                $model = Product::whereIn('id', $prodIds)->where('published', 1)->get();
+            }
 
             if(isset($model)) {
                 return $model;
@@ -314,6 +326,21 @@ class ProductRepository extends BaseRepository
                             }
                         }
 
+                        //CollectionZone
+                        $ids = explode(',',$photo->collection_ids);
+                        $colsArrModel = CollectionZone::whereIn('id',$ids)->with('collection')->get();
+                        $collsNameRes = [];
+
+                        if(!empty($colsArrModel)){
+                            foreach ($colsArrModel as $colsArr){
+                                $collsNameRes['zone'][] = $colsArr->title;
+
+                                if(isset($colsArr->collection)){
+                                    $collsNameRes['collection'][] = $colsArr->collection->title;
+                                }
+                            }
+                        }
+
                         $photosArr[$photo->id] = [
                             'id' => $photo->id,
                             'product_id' => $photo->product_id,
@@ -326,6 +353,7 @@ class ProductRepository extends BaseRepository
                             'prev_ru' => $photo->prev_ru,
                             'prev_it' => $photo->prev_it,
                             'main' => $photo->main,
+                            'colls_name' => $collsNameRes,
                             'prices' => $prices
                         ];
 

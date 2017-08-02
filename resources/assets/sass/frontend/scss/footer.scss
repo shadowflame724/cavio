@@ -7,8 +7,20 @@ footer{
   font-family: "ProbaPro Lt", sans-serif;
   letter-spacing: 0.5px;
   overflow: hidden;
+  max-height: 500px;
+  transition: .5s;
 
   .container{ position: relative; }
+
+  &.hide{
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes animFooter{
+
 }
 
 .svg-footer-logo{

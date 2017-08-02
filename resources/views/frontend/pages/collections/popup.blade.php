@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<section id="zones-mobal" class="zone-col-modal show" style="position:relative;">
+<section id="collections-modal" class="zone-col-modal" data-page-type="popup" data-anim="false">
     <div class="wrapper-zone-col-modal">
         <div class="scroller scroller-zc-modal">
             <div class="scroller-inner">

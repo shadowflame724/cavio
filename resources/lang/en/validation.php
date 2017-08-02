@@ -407,6 +407,8 @@ return [
             'email' => 'E-mail Address',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
+            'phone' => 'Phone',
+            'region' => 'Region',
             'password' => 'Password',
             'password_confirmation' => 'Password Confirmation',
             'old_password' => 'Old Password',
