@@ -116,11 +116,18 @@
                                                             <div class="swiper-wrapper overfl-h">
                                                                 <div class="swiper-slide bg-white-marmur">
                                                                     <div class="wrap-catal-zones">
-                                                                        <span class="catal-type">dinning</span>
+                                                                        @if(!empty($one['photosArr']['colls_name']['zone']))
+                                                                        @foreach($one['photosArr']['colls_name']['zone'] as $zone)
+                                                                        <span class="catal-type">{{$zone}}</span>
+                                                                        @endforeach
+                                                                        @endif
                                                                     </div>
                                                                     <div class="wrap-catal-coll">
-                                                                        <span class="catal-coll">Villa Cannes</span>
-                                                                        <span class="catal-coll">23Villa Cannes</span>
+                                                                        @if(!empty($one['photosArr']['colls_name']['collection']))
+                                                                        @foreach($one['photosArr']['colls_name']['collection'] as $collection)
+                                                                        <span class="catal-coll">{{$collection}}</span>
+                                                                        @endforeach
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>

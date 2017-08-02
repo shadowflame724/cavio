@@ -314,6 +314,21 @@ class ProductRepository extends BaseRepository
                             }
                         }
 
+                        //CollectionZone
+                        $ids = explode(',',$photo->collection_ids);
+                        $colsArrModel = CollectionZone::whereIn('id',$ids)->with('collection')->get();
+                        $collsNameRes = [];
+
+                        if(!empty($colsArrModel)){
+                            foreach ($colsArrModel as $colsArr){
+                                $collsNameRes['zone'][] = $colsArr->title;
+
+                                if(isset($colsArr->collection)){
+                                    $collsNameRes['collection'][] = $colsArr->collection->title;
+                                }
+                            }
+                        }
+
                         $photosArr[$photo->id] = [
                             'id' => $photo->id,
                             'product_id' => $photo->product_id,
@@ -326,6 +341,7 @@ class ProductRepository extends BaseRepository
                             'prev_ru' => $photo->prev_ru,
                             'prev_it' => $photo->prev_it,
                             'main' => $photo->main,
+                            'colls_name' => $collsNameRes,
                             'prices' => $prices
                         ];
 
