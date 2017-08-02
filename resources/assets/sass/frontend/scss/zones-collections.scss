@@ -153,13 +153,9 @@ main[data-page^='/collections'], main[data-page^='/zones']{
 .scroller-inner{ position: relative; transition: .8s; }
 
 section.zone-col-modal{
-  //position: fixed;
   z-index: 1000;
-  //width: 100%;
-  //height: 100%;
   background: $mainBGColor;
-  //overflow: auto;
-  transition: .5s;
+  transition: .9s;
 
   &.modal-log_reg{
     position: fixed;
@@ -190,8 +186,9 @@ section.zone-col-modal{
   &[data-anim='false']{
     opacity: 0;
     pointer-events: none;
+    transform: translateY(-60px);
 
-    .scroller-inner{ transform: translate(0, -100px); }
+    .scroller-inner{ transform: translate(0, -60px); }
   }
 
 
@@ -229,7 +226,6 @@ section.zone-col-modal{
   }
   // END LOG REG MODAL ============
 }
-
 
 
 .wrap-zone-col-modal{

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-  <section id="top-waves" class=relative></section>
+  <section id="top-waves" class="relative" data-page-type="popup"></section>
   <section>
     <div class="container cont-priv_pol">
       <div class="wrap-privacy-policy hide">
