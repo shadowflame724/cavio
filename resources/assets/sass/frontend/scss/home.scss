@@ -39,6 +39,14 @@ body{
 }
 
 
+#before_header{
+  transition: opacity 1s;
+
+  &[data-anim='false']{ opacity: 0; }
+  &[data-anim='true']{ opacity: 1; }
+}
+
+
 //SWIPER WILL CHANGE HEIGHT ===================
 .wrap-swiper-log_reg, .wrap-profile-swiper{
   will-change: height;

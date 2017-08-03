@@ -87,23 +87,10 @@ var App = (function () {
       var prevPath = $('main').attr('data-page'),
       toggleHidenClass = function (isAdd) {
         if(isAdd) {
-          // $('main')
-          //   .find('.small-page-title,.wrap-catal')
-          //   .addClass('hide');
-          // $('main .show')
-          //   .removeClass('show');
-
-
-          // $('main [data-anim]').attr('data-anim', 'false');
+          console.log('intervalNewProdDot', intervalNewProdDot)
+          clearInterval(intervalNewProdDot);
+          hideElemsBeforeBack();
         } else {
-          // $('main')
-          //   .find('.zon-col-list,.wrap-banner-cont')
-          //   .addClass('show');
-          // $('main .hide')
-          //   .removeClass('hide');
-
-
-            // $('main [data-anim]').attr('data-anim', 'true');
         }
       },
       insertInHtml = function (obj) {

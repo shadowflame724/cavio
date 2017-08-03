@@ -4,7 +4,7 @@
 
 @section('content')
     <section id="top-waves" class="relative"></section>
-    <div class="container pres-des-conteiner">
+    <section class="container pres-des-conteiner" data-page-type="popup">
         <div class="head-pres_des">
             <a href="/" data-type="notApp" class="link-back-press_des anim-underline">← cavio</a>
             <div class="wrap-title-pres_des">
@@ -91,5 +91,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
