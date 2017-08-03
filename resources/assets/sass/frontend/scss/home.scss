@@ -845,6 +845,9 @@ html.mobile-platform .new-products-right-inner-item{
     height: 100%;
     padding-left: 70px;
     padding-right: 90px;
+    transition: .5s;
+
+    &.hide{ opacity: 0; pointer-events: none; }
 
     .new-products-right-item{
       transform: translate(0);
