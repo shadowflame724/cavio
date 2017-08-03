@@ -162,6 +162,7 @@ var basket = (function () {
         //console.log(data);
         // cart_html = data.html;
         // callback(true);
+        $('.total-basket-main').html(data.html);
       })
       .fail(function (data) {
         console.error('Fail put item to basket');
@@ -2356,42 +2357,90 @@ function initBasketPage() {
   }, 500);
 
 
-  $('.kick-ord_it').on('click', function (e) {
+  // $('.kick-ord_it').on('click', function (e) {
+  //   var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
+  //   itemStash.addClass('remove');
+  //
+  //   setTimeout(function (e) {
+  //     console.log('itemStash.remove start');
+  //     itemStash.remove();
+  //   }, 600);
+  // });
+
+  $('.kick-ord_it').on('click', function(e){
     var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
+    var priceid = $(this).attr('data-priceid');
+    basket.remove(priceid);
     itemStash.addClass('remove');
 
-    setTimeout(function (e) {
-      console.log('itemStash.remove start');
-      itemStash.remove();
-    }, 600);
+    setTimeout(function(e){   itemStash.remove()  }, 600);
   });
 
+  // $('.calc_it').on('click', function (e) {
+  //   if ($(this).hasClass('disabled'))  return;
+  //
+  //   var itemNumbValEl = $(this).siblings(".ord_it-numb-val");
+  //
+  //   var plusVal = 1;
+  //   itemNumbValEl.removeClass('plus minus');
+  //   if ($(this).hasClass('minus')) {
+  //     plusVal = -1;
+  //     setTimeout(function () {
+  //       itemNumbValEl.addClass('minus')
+  //     }, 1);
+  //   } else {
+  //     setTimeout(function () {
+  //       itemNumbValEl.addClass('plus')
+  //     }, 1);
+  //   }
+  //
+  //   itemNumbValEl.text(+itemNumbValEl.text() + plusVal);
+  //
+  //   var btnMinus = $(this).closest(".ord_it-numb").find('.calc_it.minus');
+  //
+  //   if (+itemNumbValEl.text() <= 1) btnMinus.addClass('disabled');
+  //   else                             btnMinus.removeClass("disabled");
+  // });
 
-  $('.calc_it').on('click', function (e) {
-    if ($(this).hasClass('disabled'))  return;
+  $('.calc_it').on('click', function(e){
+    if($(this).hasClass('disabled'))  return;
 
     var itemNumbValEl = $(this).siblings(".ord_it-numb-val");
+    var priceOfItem = $(this).parents('.wrap-calc_price').find(".ord_it-price").find('span');
+    var price_id = $(this).siblings(".ord_it-numb-val").attr('data-priceid') || false;
+    var price = $(this).siblings(".ord_it-numb-val").attr('data-price') || false;
+    var total = 0;
+
 
     var plusVal = 1;
     itemNumbValEl.removeClass('plus minus');
-    if ($(this).hasClass('minus')) {
+    if($(this).hasClass('minus')) {
       plusVal = -1;
-      setTimeout(function () {
-        itemNumbValEl.addClass('minus')
-      }, 1);
-    } else {
-      setTimeout(function () {
-        itemNumbValEl.addClass('plus')
-      }, 1);
+      setTimeout(function(){   itemNumbValEl.addClass('minus')   },1);
+    } else{
+      setTimeout(function(){   itemNumbValEl.addClass('plus')   },1);
+    }
+    var totalCnt = +itemNumbValEl.text()+plusVal;
+
+    if(price_id){
+      console.log('basket.update',price_id,totalCnt);
+      basket.update(price_id,totalCnt);
     }
 
-    itemNumbValEl.text(+itemNumbValEl.text() + plusVal);
+    if(price){
+      total = parseFloat(price)*parseFloat(totalCnt);
+    }
+    itemNumbValEl.text(totalCnt);
+    console.log('priceOfItem');
+    console.log(priceOfItem);
+    priceOfItem.text(total);
 
     var btnMinus = $(this).closest(".ord_it-numb").find('.calc_it.minus');
 
-    if (+itemNumbValEl.text() <= 1) btnMinus.addClass('disabled');
+    if(+itemNumbValEl.text() <= 1)   btnMinus.addClass('disabled');
     else                             btnMinus.removeClass("disabled");
   });
+
 }
 
 /*

@@ -42,6 +42,11 @@ class BasketController extends Controller
         $priceIdsArr = [];
         $products = [];
         $basketGoods = $this->carts->findAll();
+
+        if(empty($basketGoods)){
+            return redirect()->to('/');
+        }
+
         if(!empty($basketGoods)){
             foreach ($basketGoods as $basketGood){
                 $basketInfoArr[$basketGood['price_id']] = $basketGood['count'];

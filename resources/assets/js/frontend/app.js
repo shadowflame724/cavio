@@ -181,7 +181,7 @@ var App = (function () {
       // var needPageData = _loadedPages[ctx.pathname];
       var needPageData = _loadedPages[ctx.canonicalPath];
 
-      if (!_.isEmpty(needPageData)) { // если есть в сохраненных достаем из массива
+      if (!_.isEmpty(needPageData) && ctx.canonicalPath !== '/basket') { // если есть в сохраненных достаем из массива и это не страница корзины
         // console.info('this page is loaded in _loadedPages');
         toggleHidenClass(true);
         setTimeout(function () {
