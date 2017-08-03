@@ -98,9 +98,9 @@
 
                 <div class="wrap-swiper-log_reg inner-zone-col-modal ty relative">
 
-                    <h3 class="section-title modal show">Thank You For Subscribing!</h3>
+                    <h3 class="section-title modal show">{{ trans('frontend.thankForSubscribe.title') }}</h3>
 
-                    <div class="ty-text">Thank You For Subscribing!222</div>
+                    <div class="ty-text">{{ trans('frontend.thankForSubscribe.body') }}</div>
 
                     <div class="wrap-stash_order">
                         <button class="btn dark-profile btn-close-modal" content="ok">ok</button>

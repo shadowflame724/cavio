@@ -240,17 +240,6 @@ $(document).ready(function () {
     return false;
   });
 
-
-  //subscribe
-  $('body').on('click', '[data-filter-name="sale"]', function () {
-    var flag = $(this).attr('data-filter-val');
-
-    $.get(_action + '?email=' + mail, function (data) {
-      alert("subscribe success SEND");
-    });
-    return false;
-  });
-
   //user_profile update
   $('body').on('submit', '.user_profile', function () {
     var _form = $(this),
@@ -2398,13 +2387,16 @@ function initBasketPage() {
   }, 500);
 
 
-  $('.kick-ord_it').on('click', function(e){
+  $('.kick-ord_it').on('click', function (e) {
     var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
     var priceid = $(this).attr('data-priceid');
     basket.remove(priceid);
     itemStash.addClass('remove');
 
-    setTimeout(function(e){   itemStash.remove()  }, 600);
+    setTimeout(function (e) {
+      console.log('itemStash.remove start');
+      itemStash.remove();
+    }, 600);
   });
 
   $('.calc_it').on('click', function(e){
@@ -2419,11 +2411,15 @@ function initBasketPage() {
 
     var plusVal = 1;
     itemNumbValEl.removeClass('plus minus');
-    if($(this).hasClass('minus')) {
+    if ($(this).hasClass('minus')) {
       plusVal = -1;
-      setTimeout(function(){   itemNumbValEl.addClass('minus')   },1);
-    } else{
-      setTimeout(function(){   itemNumbValEl.addClass('plus')   },1);
+      setTimeout(function () {
+        itemNumbValEl.addClass('minus')
+      }, 1);
+    } else {
+      setTimeout(function () {
+        itemNumbValEl.addClass('plus')
+      }, 1);
     }
     var totalCnt = +itemNumbValEl.text()+plusVal;
 
@@ -2445,7 +2441,6 @@ function initBasketPage() {
     if(+itemNumbValEl.text() <= 1)   btnMinus.addClass('disabled');
     else                             btnMinus.removeClass("disabled");
   });
-
 }
 
 /*

@@ -92,6 +92,10 @@ return [
                 'management' => 'Zone\'s Management',
                 'main'       => 'Zones',
             ],
+            'product' => [
+                'all'        => 'All Products',
+                'create'     => 'Create Product'
+            ],
             'good' => [
                 'all'        => 'All Goods',
                 'create'     => 'Create Goods',

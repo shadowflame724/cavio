@@ -3,6 +3,7 @@
 namespace App\Repositories\Backend\Product;
 
 use App\Models\Dimensions\Dimensions;
+use App\Models\FinishTissue\FinishTissue;
 use App\Models\Product\Product;
 use App\Models\Product\ProductChild;
 use App\Models\Product\ProductPhoto;
@@ -10,6 +11,7 @@ use App\Models\Product\ProductPrice;
 use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\CollectionZone\CollectionZone;
+use Faker\Provider\DateTime;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -81,7 +83,7 @@ class ProductRepository extends BaseRepository
     /**
      * @return Collection
      */
-    public static function getProdsDataByPriceIds($iDs, $langSuf= '')
+    public static function getProdsDataByPriceIds($iDs, $langSuf = '')
     {
         return DB::table('product_prices')
             ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
@@ -107,35 +109,99 @@ class ProductRepository extends BaseRepository
                 'finish.title' . $langSuf . ' as finish_title',
                 'tissue.title' . $langSuf . ' as tissue_title',
                 'categories.name' . $langSuf . ' as categories_name'
-                )
+            )
             ->get();
+    }
+
+    public function duplicate(Model $product)
+    {
+        $productArr = $product->toArray();
+        $duplicate = new Product($productArr);
+        unset($duplicate->id);
+        unset($duplicate->created_at);
+        unset($duplicate->updated_at);
+        $duplicate->code .= '(copy)';
+        $duplicate->published = 0;
+        $childIdsArr = [];
+        $photosIdsArr = [];
+
+        if ($duplicate->save()) {
+            $childs = ProductChild::where('product_id', $product->id)->get()->toArray();
+            foreach ($childs as $child) {
+                $childDuplicate = new ProductChild($child);
+                unset($childDuplicate->id);
+                unset($childDuplicate->created_at);
+                unset($childDuplicate->updated_at);
+                $childDuplicate->code .= '(copy)';
+                $childDuplicate->published = 0;
+
+                $duplicate->childs()->save($childDuplicate);
+                $childIdsArr[$child['id']] = $childDuplicate->id;
+            }
+
+            $photos = ProductPhoto::where('product_id', $product->id)->get()->toArray();
+            foreach ($photos as $photo) {
+                $photoDuplicate = new ProductPhoto($photo);
+                unset($photoDuplicate->id);
+                unset($photoDuplicate->created_at);
+                unset($photoDuplicate->updated_at);
+                $photoDuplicate->published = 0;
+
+                $duplicate->photos()->save($photoDuplicate);
+                $photosIdsArr[$photo['id']] = $photoDuplicate->id;
+            }
+
+            $child_ids = implode(',', (array_column($childs, 'id')));
+            $prices = ProductPrice::whereIn('product_child_id', [$child_ids])->get()->toArray();
+
+            foreach ($prices as $price) {
+                $priceDuplicate = new ProductPrice($price);
+                unset($priceDuplicate->id);
+                //unset($priceDuplicate->product_photo_id);
+                //unset($priceDuplicate->product_child_id);
+                unset($priceDuplicate->created_at);
+                unset($priceDuplicate->updated_at);
+                $priceDuplicate->published = 0;
+                //dd($priceDuplicate);
+
+                foreach ($childIdsArr as $key => $item){
+                    if($key == $priceDuplicate->product_child_id){
+                        $priceDuplicate->product_child_id = $item;
+                    }
+                }
+                foreach ($photosIdsArr as $key => $item){
+                    if($key == $priceDuplicate->product_photo_id){
+                        $priceDuplicate->product_photo_id = $item;
+                    }
+                }
+                $priceDuplicate->save();
+            }
+
+        }
+
+        return true;
     }
 
     /**
      * @return Collection
      */
-    public static function getForPricesDataTable($langSuf= '')
+    public static function getForPricesDataTable($langSuf = '')
     {
         return DB::table('product_prices')
             ->join('product_photos', 'product_prices.product_photo_id', '=', 'product_photos.id')
             ->join('product_childs', 'product_prices.product_child_id', '=', 'product_childs.id')
             ->join('products', 'product_childs.product_id', '=', 'products.id')
-            ->join('collection_zones', 'product_photos.collection_ids', '=', 'collection_zones.id')
-            ->join('collections', 'collection_zones.collection_id', '=', 'collections.id')
-            ->join('zones', 'collection_zones.zone_id', '=', 'zones.id')
-            ->join('categories', 'products.category_ids', '=', 'categories.id')
-            ->join('finish_tissues as finish', 'product_photos.finish_ids', '=', 'finish.id')
-            ->join('finish_tissues as tissue', 'product_photos.tissue_ids', '=', 'tissue.id')
             ->select(
                 'product_prices.price',
                 'product_childs.code as child_product_code',
                 'product_childs.name' . $langSuf . ' as child_product_name',
+                'product_childs.prev' . $langSuf . ' as child_product_prev',
+                'product_photos.prev' . $langSuf . ' as photos_prev',
+                'products.prev' . $langSuf . ' as parent_prev',
                 'product_photos.photos',
                 'products.id as parent_id',
                 'products.code as parent_code',
                 'products.name' . $langSuf . ' as parent_name',
-                'collections.name' . $langSuf . ' as collection_name',
-                'zones.name' . $langSuf . ' as zones_name',
                 'product_photos.finish_ids as finish_ids',
                 'product_photos.tissue_ids as tissue_ids',
                 'product_photos.tissue_ids as collection_zone_ids',

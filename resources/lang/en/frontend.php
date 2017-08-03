@@ -48,6 +48,7 @@ return [
         'shopByCollection' => 'Shop by Collection',
         'shopByCategory' => 'Shop by Category',
         'moreCategories' => ':count more categories',
+        'products' => 'Products',
         'showAll' => 'show All',
         'new' => 'new',
         'okay' => 'okay',
@@ -127,6 +128,18 @@ return [
         'city' => 'City',
         'zipCode' => 'ZIP Code',
         'register' => 'Register',
+    ],
+
+    'thankForSubscribe' => [
+        'title' => 'Thank You For Subscribing!',
+        'body' => 'Thank You For Subscribing!222'
+    ],
+    'press-design' => [
+        'press_kit' => 'Press kit',
+        'design_kit' => 'Design kit',
+        'links' => 'Download links',
+        'file_name' => 'File name',
+        'date' => 'Date'
     ],
 
     'thankForOrderModal' => [

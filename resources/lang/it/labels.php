@@ -146,14 +146,31 @@ return [
                 ],
             ],
             'product' => [
-                'create'     => 'Crea merce',
-                'edit'       => 'Modifica merce',
-                'management' => 'Gestione merce',
+                'create' => 'Create Goods[IT]',
+                'edit' => 'Edit Goods[IT]',
+                'management' => 'Goods Management[IT]',
+                'management_full' => 'Full data Management[IT]',
 
                 'table' => [
                     'id' => 'Id',
-                    'name' => 'Nome',
-                    'created_at' => 'Creato a'
+                    'name' => 'Name[IT]',
+                    'price' => 'Price[IT]',
+                    'slug' => 'Slug[IT]',
+                    'parent_code' => 'Parent code[IT]',
+                    'child_code' => 'Child code[IT]',
+                    'child_name' => 'Child name[IT]',
+                    'parent_name' => 'Parent name[IT]',
+                    'photo' => 'Photo[IT]',
+                    'collection_name' => 'Collection[IT]',
+                    'collection_zone_name' => 'Col-zon[IT]',
+                    'zone_name' => 'Zone[IT]',
+                    'finish' => 'Finishes[IT]',
+                    'tissue' => 'Tissue[IT]',
+                    'category' => 'Categories[IT]',
+                    'comments' => 'Comments[IT]',
+
+                    'created_at' => 'Created at[IT]',
+                    'updated_at' => 'Updated at[IT]'
                 ],
             ],
             'showroom' => [

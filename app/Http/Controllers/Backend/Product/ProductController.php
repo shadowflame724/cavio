@@ -71,6 +71,17 @@ class ProductController extends Controller
     }
 
     /**
+     * @param Product $product
+     * @return mixed
+     */
+    public function duplicateProduct(Product $product)
+    {
+        $this->product->duplicate($product);
+
+        return redirect(route('admin.product.index'))->withFlashSuccess(trans('alerts.backend.products.duplicate_created'));
+    }
+
+    /**
      * @param ManageProductRequest $request
      *
      * @return mixed
