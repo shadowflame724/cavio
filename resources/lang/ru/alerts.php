@@ -60,8 +60,9 @@ return [
             'deleted'   => 'Зона удалена.',
             'updated'   => 'Зона обновлена.',
         ],
-        'good' => [
+        'products' => [
             'created'   => 'Товар создан.',
+            'duplicate_created'   => 'Копия товара создана.',
             'deleted'   => 'Товар удален.',
             'updated'   => 'Товар обновлен.',
         ],

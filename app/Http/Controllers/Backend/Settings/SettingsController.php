@@ -57,14 +57,14 @@ class SettingsController extends Controller
             'soc_links' => json_encode($socLinksArr),
             'news_types_data' => json_encode($newsTypesArr),
             'discount_data' => '[]',
-            'koef_data' => '[]',
-            'vat_data' => '[]'
+            'koef_data' => '',
+            'vat_data' => ''
         ]);
 
         $socLinksArr = json_decode($settings->soc_links);
         $discountDataArr = json_decode($settings->discount_data);
-        $koefData = json_decode($settings->koef_data);
-        $vatData = json_decode($settings->vat_data);
+        $koefData = $settings->koef_data;
+        $vatData = $settings->vat_data;
         $newsTypesArr = json_decode($settings->news_types_data);
 
         return view('backend.settings.edit', [
