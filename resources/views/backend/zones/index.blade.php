@@ -27,6 +27,7 @@
                     <tr>
                         <th>{{ trans('labels.backend.access.zone.table.id') }}</th>
                         <th>{{ trans('labels.backend.access.zone.table.title') }}</th>
+                        <th>{{ trans('labels.backend.access.roles.table.sort') }}</th>
                         <th>{{ trans('labels.backend.access.zone.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
@@ -64,10 +65,11 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
+                    {data: 'sort', name: 'sort'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
-                order: [[3, "asc"]],
+                order: [[2, "asc"]],
                 searchDelay: 500
             });
         });

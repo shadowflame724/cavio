@@ -148,11 +148,14 @@ return [
                 'create' => 'Create Goods',
                 'edit' => 'Edit Goods',
                 'management' => 'Goods Management',
+                'management_full' => 'Full data Management',
 
                 'table' => [
                     'id' => 'Id',
                     'name' => 'Name',
                     'price' => 'Price',
+                    'slug' => 'Slug',
+                    'parent_code' => 'Parent code',
                     'child_code' => 'Child code',
                     'child_name' => 'Child name',
                     'parent_name' => 'Parent name',
@@ -163,6 +166,7 @@ return [
                     'finish' => 'Finishes',
                     'tissue' => 'Tissue',
                     'category' => 'Categories',
+                    'comments' => 'Comments',
 
                     'created_at' => 'Created at',
                     'updated_at' => 'Updated at'

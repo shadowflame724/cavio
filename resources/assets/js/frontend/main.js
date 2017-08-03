@@ -162,6 +162,7 @@ var basket = (function () {
         //console.log(data);
         // cart_html = data.html;
         // callback(true);
+        $('.total-basket-main').html(data.html);
       })
       .fail(function (data) {
         console.error('Fail put item to basket');
@@ -441,7 +442,7 @@ function initPageAfterLoading() {
   if(document.querySelector("main[data-page='/news']"))  initNewsPage();
 
   // CATALOGUE ========
-  if(document.querySelector("main[data-page='/catalogue']"))  initCataloguePage();
+  if(document.querySelector("main[data-page^='/catalogue']"))  initCataloguePage();
 
   // DASHBOARD
   if(document.querySelector("main[data-page='/dashboard']"))  initDashboardPage();
@@ -1870,12 +1871,6 @@ function initCataloguePage() {
     }
   });
 
-  $('ul.catal-perc li').on('click', function (e) {
-    if ($(this).hasClass('active'))  return;
-
-    $(this).siblings('.active').removeClass('active');
-    this.className += ' active';
-  });
 }
 
 //contacts
@@ -2380,18 +2375,25 @@ function initBasketPage() {
 
   $('.kick-ord_it').on('click', function (e) {
     var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
+    var priceid = $(this).attr('data-priceid');
+    basket.remove(priceid);
     itemStash.addClass('remove');
 
     setTimeout(function (e) {
-      itemStash.remove()
+      console.log('itemStash.remove start');
+      itemStash.remove();
     }, 600);
   });
 
-
-  $('.calc_it').on('click', function (e) {
-    if ($(this).hasClass('disabled'))  return;
+  $('.calc_it').on('click', function(e){
+    if($(this).hasClass('disabled'))  return;
 
     var itemNumbValEl = $(this).siblings(".ord_it-numb-val");
+    var priceOfItem = $(this).parents('.wrap-calc_price').find(".ord_it-price").find('span');
+    var price_id = $(this).siblings(".ord_it-numb-val").attr('data-priceid') || false;
+    var price = $(this).siblings(".ord_it-numb-val").attr('data-price') || false;
+    var total = 0;
+
 
     var plusVal = 1;
     itemNumbValEl.removeClass('plus minus');
@@ -2405,12 +2407,24 @@ function initBasketPage() {
         itemNumbValEl.addClass('plus')
       }, 1);
     }
+    var totalCnt = +itemNumbValEl.text()+plusVal;
 
-    itemNumbValEl.text(+itemNumbValEl.text() + plusVal);
+    if(price_id){
+      console.log('basket.update',price_id,totalCnt);
+      basket.update(price_id,totalCnt);
+    }
+
+    if(price){
+      total = parseFloat(price)*parseFloat(totalCnt);
+    }
+    itemNumbValEl.text(totalCnt);
+    console.log('priceOfItem');
+    console.log(priceOfItem);
+    priceOfItem.text(total);
 
     var btnMinus = $(this).closest(".ord_it-numb").find('.calc_it.minus');
 
-    if (+itemNumbValEl.text() <= 1) btnMinus.addClass('disabled');
+    if(+itemNumbValEl.text() <= 1)   btnMinus.addClass('disabled');
     else                             btnMinus.removeClass("disabled");
   });
 }
@@ -3544,7 +3558,7 @@ function initWaves() {
     svgWaveWrap = document.querySelector('#dealers');
   }
   if (document.querySelector("main[data-page='/showrooms']")) svgWaveWrap = document.querySelector('#waves-content');
-  if (document.querySelector("main[data-page='/catalogue']") ||
+  if (document.querySelector("main[data-page^='/catalogue']") ||
     document.querySelector("main[data-page='/press-design']") ||
     document.querySelector("main[data-page='/finish-tissue']") ||
     document.querySelector("main[data-page='/privacy-policy']") ||

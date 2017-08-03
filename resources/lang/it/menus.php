@@ -35,6 +35,10 @@ return [
                 'main' => 'Utenti',
                 'view' => 'View User',
             ],
+            'product' => [
+                'all'        => 'All Products[IT]',
+                'create'     => 'Create Product[IT]'
+            ],
 
             'page' => [
                 'all' => 'Tutti i pagina',

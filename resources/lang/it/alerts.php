@@ -50,8 +50,9 @@ return [
             'updated' => 'Domanda was successfully updated.',
         ],
 
-        'goods' => [
+        'products' => [
             'created' => 'Merce creato con successo.',
+            'duplicate_created' => 'Merce copy creato con successo.',
             'deleted' => 'Merce cancellato con successo.',
             'updated' => 'Merce aggiornato con successo.',
         ],

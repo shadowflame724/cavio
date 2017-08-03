@@ -102,6 +102,10 @@ return [
         'from' => 'A partire dal',
         'customDiscount' => 'Sconto personalizzato',
         'totalAmount' => 'Importo totale',
+        'amount' => 'Quantità',
+        'date' => 'Data',
+        'order' => 'Ordine',
+        'status' => 'Stato',
         'additionalDiscounts' => 'Sconti aggiuntivi',
         'totalToPay' => 'Totale da pagare',
         'including' => 'Compreso',
@@ -155,7 +159,13 @@ return [
         'zones' => 'Zone',
         'collections' => 'Collezioni',
         'no_products' => 'Nessun prodotto da mostrare',
-    ]
+    ],
 
+    'orders' => [
+        'new' => 'Nuovo',
+        'sent' => 'Inviato',
+        'delivered' => 'Consegnato',
+        'done' => 'Fatto'
+    ]
 
 ];

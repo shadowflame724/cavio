@@ -209,6 +209,7 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\CartServiceProvider::class,
+        App\Providers\OrderServiceProvider::class,
 
     ],
 

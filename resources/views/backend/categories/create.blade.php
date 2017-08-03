@@ -69,13 +69,6 @@
                         {{Form::textarea('image', null, [ 'class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
-
-                <div class="form-group">
-                    {{ Form::label('file', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-10">
-                        {{Form::file('file', null, [ 'class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
             </div>
         </div>
     </div><!--box-->

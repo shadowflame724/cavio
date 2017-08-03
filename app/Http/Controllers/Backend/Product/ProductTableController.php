@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Backend\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category\Category;
 use App\Models\Collection\Collection;
 use App\Models\CollectionZone\CollectionZone;
 use App\Models\FinishTissue\FinishTissue;
+use App\Models\Zone\Zone;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\Backend\Product\ProductRepository;
 use App\Http\Requests\Backend\Product\ManageProductRequest;
@@ -20,6 +23,42 @@ class ProductTableController extends Controller
      * @var ProductRepository
      */
     protected $product;
+
+    /**
+     * @return mixed
+     */
+    public function getCollections()
+    {
+        return $this->collections;
+    }
+
+    /**
+     * @param mixed $collections
+     */
+    public function setCollections($collections)
+    {
+        $this->collections = $collections;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZones()
+    {
+        return $this->zones;
+    }
+
+    /**
+     * @param mixed $zones
+     */
+    public function setZones($zones)
+    {
+        $this->zones = $zones;
+    }
+
+    protected $collections;
+
+    protected $zones;
 
     /**
      * @param ProductRepository $product
@@ -45,13 +84,15 @@ class ProductTableController extends Controller
             })
             ->addColumn('actions', function ($product) {
                 return '<a href="' . route('admin.product.edit', array('product' => $product->id)) . '" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i></a>
+<a href="' . route('admin.product.duplicate', array('product' => $product->id)) . '" class="btn btn-xs btn-primary"><i class="fa fa-clone" data-toggle="tooltip" data-placement="top" title="" data-original-title="Duplicate"></i></a>
 
                 <a data-method="delete" data-trans-button-cancel="Cancel" data-trans-button-confirm="Delete" data-trans-title="Are you sure you want to do this?" class="btn btn-xs btn-danger" style="cursor:pointer;" onclick="$(this).find("form").submit();"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
 <form action="' . route('admin.product.destroy', array('product' => $product->id)) . '"  method="POST" name="delete_item" style="display:none">
    <input type="hidden" name="_method" value="delete">
    <input type="hidden" name="_token" value="' . csrf_token() . '">
 </form>
-</a>';
+</a>
+';
             })
             ->rawColumns(['actions'])
             ->make(true);
@@ -100,26 +141,89 @@ class ProductTableController extends Controller
                 return rtrim($string, ', ');
             })
             ->editColumn('tissue_name', function ($product) {
-                $finishes = FinishTissue::where('parent_id', '!=', null)
-                    ->where('type', '=', 'finish')
-                    ->select('id', 'title')->get();
-                $finishArr = explode(',', $product->finish_ids);
+                $langSuf = $this->getLangSuf();
+                $tissues = FinishTissue::where('parent_id', '!=', null)
+                    ->where('type', '=', 'tissue')
+                    ->select('id', 'title' . $langSuf)->get();
+                $tissueArr = explode(',', $product->tissue_ids);
                 $string = '';
-                foreach ($finishes as $finishDB) {
-                    foreach ($finishArr as $finish) {
-                        if ($finishDB->id == $finish) {
-                            $string .= $finishDB->title . ', ';
+                foreach ($tissues as $tissueDB) {
+                    foreach ($tissueArr as $tissue) {
+                        if ($tissueDB->id == $tissue) {
+                            $string .= $tissueDB['title' . $langSuf] . ', ';
                         }
                     }
                 }
 
                 return rtrim($string, ', ');
             })
-            ->editColumn('child_product_code', function ($product) {
-                return '<a href="' . route('admin.product.edit', array('product' => $product->parent_id)) . '">' . $product->child_product_code . '</a>
+            ->addColumn('collection_zones_name', function ($product) {
+                $langSuf = $this->getLangSuf();
+                $colZones = CollectionZone::all('id', 'collection_id', 'zone_id', 'name' . $langSuf);
+                $colZonesArr = explode(',', $product->collection_zone_ids);
+                $string = '';
+                $collection_ids = '';
+                $zonesName = '';
+                $collectionNames = '';
+                foreach ($colZones as $colZone) {
+                    foreach ($colZonesArr as $zone) {
+                        if ($colZone->id == $zone) {
+                            $string .= $colZone['name' . $langSuf] . ', ';
+                            $collection_ids = $colZone->collection_id . ',';
+                            $zone_id = $colZone->zone_id;
+                            $zone = Zone::where('id', $zone_id)->select('name' . $langSuf)->first();
+                            $zonesName .= $zone['name' . $langSuf] . ', ';
+                        }
+                    }
+                }
+                $collections = Collection::whereIn('id', [$collection_ids])->select('name' . $langSuf)->get()->pluck('name' . $langSuf);
+                foreach ($collections as $collection) {
+                    $collectionNames .= $collection . ', ';
+                }
+
+                $this->setCollections($collectionNames);
+                $this->setZones($zonesName);
+
+                return rtrim($string, ', ');
+            })
+            ->editColumn('categories_name', function ($product) {
+                $langSuf = $this->getLangSuf();
+                $categories = Category::all('id', 'name' . $langSuf);
+                $catArr = explode(',', $product->categories_ids);
+                $string = '';
+                foreach ($categories as $category) {
+                    foreach ($catArr as $cat) {
+                        if ($category->id == $cat) {
+                            $string .= $category['name' . $langSuf] . ', ';
+                        }
+                    }
+                }
+
+                return rtrim($string, ', ');
+            })
+            ->addColumn('collection_name', function ($product) {
+                $string = $this->getCollections();
+
+                return rtrim($string, ', ');
+            })
+            ->addColumn('comments', function ($product) {
+                $string =
+                    '<b>Child: </b>' . $product->child_product_prev . ' <br> ' .
+                    '<b>Photo: </b>' . $product->photos_prev . ' <br> ' .
+                    '<b>Parent: </b>' . $product->parent_prev;
+
+                return $string;
+            })
+            ->addColumn('zones_name', function ($product) {
+                $string = $this->getZones();
+
+                return rtrim($string, ', ');
+            })
+            ->editColumn('parent_code', function ($product) {
+                return '<a href="' . route('admin.product.edit', array('product' => $product->parent_id)) . '">' . $product->parent_code . '</a>
             ';
             })
-            ->rawColumns(['child_product_code', 'photos'])
+            ->rawColumns(['parent_code', 'photos', 'comments'])
             ->make(true);
 
         return $products;
@@ -133,6 +237,7 @@ class ProductTableController extends Controller
         } elseif (\Lang::getLocale() == 'it') {
             $langSuf = '_it';
         }
+
         return $langSuf;
     }
 }

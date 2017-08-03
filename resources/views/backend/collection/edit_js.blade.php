@@ -134,6 +134,18 @@
         headers: {
             'x-csrf-token': document.querySelectorAll('meta[name=csrf-token]')[0].getAttributeNode('content').value
         },
+        processing: function () {
+            swal({
+                title: 'Uploading...',
+                text: 'Please wait.',
+                imageUrl: '/img/backend/ajax-loader.gif',
+                imageWidth: 400,
+                imageHeight: 200,
+                showConfirmButton: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false
+            })
+        },
         success: function (file, res) {
             this.removeFile(file);
             if (res['error']) {

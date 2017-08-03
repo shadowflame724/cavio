@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Collection\Collection;
 use App\Models\FAQ\FAQ;
 use App\Models\FinishTissue\FinishTissue;
@@ -23,12 +24,13 @@ class ProductController extends Controller
     {
         $this->product = $product;
     }
+
     /**
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->showOneCategView();
+        return $this->showOneCategView('', $request);
 
         $page = $this->page('catalogue');
         $model = $this->product->getAll();
@@ -39,25 +41,57 @@ class ProductController extends Controller
             'page' => $page,
         ]);
     }
+
     /**
      * @return \Illuminate\View\View
      */
-    public function catOne($slug)
+    public function catOne($slug, Request $request)
     {
-        return $this->showOneCategView($slug);
+        return $this->showOneCategView($slug, $request);
     }
+
     /**
      * @return \Illuminate\View\View
      */
-    public function showOneCategView($slug = '', $data = [])
+    public function showOneCategView($slug = '', $request)
     {
+        $data = [
+            'sale' => false,
+            'zones' => null,
+            'colls' => null,
+            'page' => null,
+            'getParams' => '',
+        ];
+        $notEmptyGet = false;
+        if ($request->input('sale') == 'true') {
+            $data['sale'] = true;
+            $notEmptyGet = true;
+        }
+        if (!empty($request->input('zones'))) {
+            $data['zones'] = explode(',', $request->input('zones'));
+            $notEmptyGet = true;
+        }
+        if (!empty($request->input('collections'))) {
+            $data['colls'] = explode(',', $request->input('collections'));
+            $notEmptyGet = true;
+        }
+        if ((int)$request->input('page') > 0) {
+            $data['page'] = (int)$request->input('page');
+            $notEmptyGet = true;
+        }
+        if ($notEmptyGet) {
+            $data['getParams'] = '?sale=' . $request->input('sale') .
+                '&zones=' . $request->input('zones') .
+                '&colls=' . $request->input('collections') .
+                '&page=' . $request->input('page');
+        }
         $catsMenu = [];
         $categories = Category::all();
         $productCatsIds = [];
         foreach ($categories as $category) {
-            if($category->parent_id == null){
+            if ($category->parent_id == null) {
                 $isPrntActive = false;
-                if($category->slug === $slug){
+                if ($category->slug === $slug) {
                     $isPrntActive = true;
                 }
                 $catsMenu[$category->id] = [
@@ -71,11 +105,11 @@ class ProductController extends Controller
                     'childs' => [],
                 ];
                 foreach ($category->children as $child) {
-                    if($category->slug === $slug){ // накапливаем продукты из дочерних категорий если находимся в родительской
+                    if ($category->slug === $slug) { // накапливаем продукты из дочерних категорий если находимся в родительской
                         $productCatsIds[] = $child->id;
                     }
                     $isChldActive = false;
-                    if($child->slug === $slug){
+                    if ($child->slug === $slug) {
                         $isPrntActive = true;
                         $isChldActive = true;
                         $productCatsIds[] = $child->id;
@@ -96,16 +130,19 @@ class ProductController extends Controller
 //        echo'</pre>';
 //        dd($productCatsIds);
 
+//        dd($data);
         $page = $this->page('catalogue');
         if (!empty($slug)) {
-            $products = $this->product->catOne($slug, 1);
+            $products = $this->product->catOne($slug, 'id', 'desc', 1, $data);
         } else {
-            $products = $this->product->getAll('id','desc',1);
+            $products = $this->product->getAll('id', 'desc', 1, $data);
         }
         return view('frontend.pages.catalogue', [
             'page' => $page,
             'cats' => $catsMenu,
-            'model' => $products
+            'model' => $products,
+            'getData' => $data,
+            'getParams' => $data['getParams']
         ]);
     }
 

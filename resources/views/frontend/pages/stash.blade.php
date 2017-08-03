@@ -113,7 +113,10 @@
                 @endif
               </div>
               <div class="total-basket-main">
-                @include('frontend.includes.total_basket',['summ' => $summ])
+                @include('frontend.includes.total_basket',[
+                'summ' => $summ,
+                'config' => $config
+                ])
               </div>
           </div>
             <div class="wrap-stash_order clearfix">
@@ -126,9 +129,9 @@
                 <div class="marg-t clearfix">
                   <div class="descr-disc-label">{{ trans('frontend.shoppingCart.from') }}</div>
                   <div class="descr-disc">
-                    5000 {{ trans('frontend.shoppingCart.to') }} 10000 – 5%<br>
-                    10001 {{ trans('frontend.shoppingCart.to') }} 20000  - 10%<br>
-                    >20000  - {{ trans('frontend.shoppingCart.customDiscount') }}
+                    @foreach($config['discount_data'] as $discount_data)
+                      {{$discount_data['from']}} {{ trans('frontend.shoppingCart.to') }} {{$discount_data['to']}} - {{$discount_data['equal']}}%<br>
+                    @endforeach
                   </div>
                 </div>
               </div>

@@ -5,9 +5,9 @@
                 <div class=close-modal></div>
                 <div class="inner-zone-col-modal bg-white-marmur">
                     <div class=wrap-drop-list-zc>
-                        <div class=title-list-type>Collections</div>
+                        <div class=title-list-type>{{ trans('frontend.header.collections') }}</div>
                         <div id=wrap-news-type class="drop-down show">
-                            <span class=curr-news-type>All collections</span>
+                            <span class=curr-news-type>{{ trans('frontend.zones-collections.allCollections') }}</span>
                             <ul class="zc-modal-types clearfix">
                                 @foreach($collection->collectionZones as $zone)
                                     <li>
@@ -33,7 +33,7 @@
                                     <div class=descr-zon_col-item-name>{{ $collection->title }}</div>
                                     <div class=zc-modal-prod-numb>
                                         <span class=prod-numb>345</span>
-                                        products
+                                        {{ trans('frontend.header.products') }}
                                     </div>
                                 </div>
                                 <div class=descr-zon_col-item>{{ $collection->description }}</div>
@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         <div class=zc-modal-product-show-more>
-                            <button class="btn dark" content="show more">show more</button>
+                            <button class="btn dark" content="show more">{{ trans('frontend.zones-collections.showMore') }}</button>
                         </div>
                     </div>
                 </div>

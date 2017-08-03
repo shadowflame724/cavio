@@ -48,6 +48,7 @@ return [
         'shopByCollection' => 'Shop by Collection',
         'shopByCategory' => 'Shop by Category',
         'moreCategories' => ':count more categories',
+        'products' => 'Products',
         'showAll' => 'show All',
         'new' => 'new',
         'okay' => 'okay',
@@ -103,6 +104,10 @@ return [
         'from' => 'From',
         'customDiscount' => 'custom discount',
         'totalAmount' => 'Total amount',
+        'amount' => 'Amount',
+        'date' => 'Date',
+        'order' => 'Order',
+        'status' => 'Status',
         'additionalDiscounts' => 'Additional discounts',
         'totalToPay' => 'Total to pay',
         'including' => 'Including',
@@ -123,6 +128,18 @@ return [
         'city' => 'City',
         'zipCode' => 'ZIP Code',
         'register' => 'Register',
+    ],
+
+    'thankForSubscribe' => [
+        'title' => 'Thank You For Subscribing!',
+        'body' => 'Thank You For Subscribing!222'
+    ],
+    'press-design' => [
+        'press_kit' => 'Press kit',
+        'design_kit' => 'Design kit',
+        'links' => 'Download links',
+        'file_name' => 'File name',
+        'date' => 'Date'
     ],
 
     'thankForOrderModal' => [
@@ -159,6 +176,13 @@ return [
         'no_products' => 'No products to show',
 
 
+    ],
+
+    'orders' => [
+        'new' => 'New',
+        'sent' => 'Sent',
+        'delivered' => 'Delivered',
+        'done' => 'Completed'
     ]
 
 

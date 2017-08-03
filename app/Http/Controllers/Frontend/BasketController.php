@@ -42,6 +42,11 @@ class BasketController extends Controller
         $priceIdsArr = [];
         $products = [];
         $basketGoods = $this->carts->findAll();
+
+        if(empty($basketGoods)){
+            return redirect()->to('/');
+        }
+
         if(!empty($basketGoods)){
             foreach ($basketGoods as $basketGood){
                 $basketInfoArr[$basketGood['price_id']] = $basketGood['count'];
@@ -69,12 +74,6 @@ class BasketController extends Controller
             }
         }
 
-//        if($summ_vat >= 5000 && $summ_vat <= 10000){
-//            $discount = 5;
-//        }
-//        if($summ_vat >= 10001 && $summ_vat <= 20000){
-//            $discount = 10;
-//        }
 
         $summ = [
             'summ_vat' => $summ_vat,
@@ -214,7 +213,8 @@ class BasketController extends Controller
         $response = [];
         $statusCode = 500;
         $cart = $this->carts->findAll();
-        $summ = $this->getCartTotal($cart)['summ_vat'];
+        $cartTotal = $this->getCartTotal($cart);
+        $summ = $cartTotal['summ_vat'];
         if(empty($cart)){
             return response()->json(['basket' => 'Basket empty'], 500);
         }
@@ -230,6 +230,7 @@ class BasketController extends Controller
         $product_data = [
             'ip' => $request->ip(),
             'order_data' => $user_data,
+            'cart_summ_data' => $cartTotal,
             'product_price_ids' => $cart,
         ];
         if (!access()->user()) {
@@ -263,6 +264,7 @@ class BasketController extends Controller
         $response['order'] = 'fail';
         $order = new Order;
         $order->user_id = $user_id;
+        $order->uid = '325746';
         $order->product_data = json_encode($product_data);
         $order->cnt = $cnt;
         $order->summ = $summ;
@@ -279,7 +281,7 @@ class BasketController extends Controller
                 $orderOne->save();
                 $this->carts->destroy($item['price_id']);
             }
-            $user->notify(new NewOrder($order));
+            access()->user()->notify(new NewOrder($order));
         }
 
         return response()->json($response, $statusCode);

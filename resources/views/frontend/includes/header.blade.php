@@ -5,12 +5,12 @@
             <div class="short-nav-item hide">
                 <a href="{{ route('frontend.catalogue') }}"
                    for="menu-products"
-                   class="btn-top-menu anim-underline">products</a>
+                   class="btn-top-menu anim-underline">{{ trans('frontend.header.products') }}</a>
             </div>
             <div class="short-nav-item hide">
                 <a href="{{ route('frontend.collections') }}"
                    for="menu-collection"
-                   class="btn-top-menu anim-underline">collections</a>
+                   class="btn-top-menu anim-underline">{{ trans('frontend.header.collections') }}</a>
             </div>
         </div>
         <div class="wrap-left-nav">
@@ -18,7 +18,7 @@
                 <div class="wrap-left-nav-col-side">
                     <a href="{{ route('frontend.catalogue') }}"
                        class="drop-left-menu-products"
-                    >products <span class="drop-item-arrow">→</span></a>
+                    >{{ trans('frontend.header.products') }} <span class="drop-item-arrow">→</span></a>
                     <div class="left-nav-products">
                         <div class="wrap-menus products clearfix">
                             @foreach($categories as $category)
@@ -49,7 +49,7 @@
                             <ul class="left-nav">
                                 <!-- NO DESKTOP -->
                                 <li class="drop-item">
-                                    <a href="{{ route('frontend.collections') }}">collections <span class="drop-item-arrow">→</span></a>
+                                    <a href="{{ route('frontend.collections') }}">{{ trans('frontend.header.collections') }} <span class="drop-item-arrow">→</span></a>
                                     <ul class="drop-item-menu">
                                         @foreach($collections as $collection)
                                         <li>
@@ -63,7 +63,7 @@
 
                                 <li class="drop-item">
                                     <a href="{{ route('frontend.zones') }}"
-                                    >zones <span class="drop-item-arrow">→</span></a>
+                                    >{{ trans('frontend.header.zones') }} <span class="drop-item-arrow">→</span></a>
                                     <ul class="drop-item-menu">
                                         @foreach($zones as $zone)
                                         <li>
@@ -109,7 +109,7 @@
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                                  xlink:href="../../img/frontend/icons/social.svg#login"></use>
                                         </svg>
-                                        <span>Login</span>
+                                        <span>{{ trans('frontend.header.login') }}</span>
                                     </a>
                                 </div>
                                 @endif
@@ -124,7 +124,7 @@
 
                             <div class="wrap-search">
                                 <form action="/search">
-                                    <input class="menu-search" type="text" placeholder="SEARCH">
+                                    <input class="menu-search" type="text" placeholder="{{ trans('frontend.header.search') }}">
                                     <button class="menu-search-btn"></button>
                                 </form>
                             </div>
@@ -172,7 +172,7 @@
             <div class="wrap-login hide">
                 <a href="{{ route('frontend.auth.login') }}"
                    class="btn-login open-modal-login anim-underline"
-                >login</a>
+                >{{ trans('frontend.header.login') }}</a>
             </div>
             @endif
             <div class="wrap-stash-ico hide">

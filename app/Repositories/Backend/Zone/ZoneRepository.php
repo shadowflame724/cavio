@@ -44,6 +44,7 @@ class ZoneRepository extends BaseRepository
             ->select([
                 config('zones_table') . '.id',
                 config('zones_table') . '.title',
+                config('zones_table') . '.sort',
                 config('zones_table') . '.created_at',
             ]);
     }
@@ -70,6 +71,7 @@ class ZoneRepository extends BaseRepository
             $zone->description = $input['description'];
             $zone->description_ru = $input['description_ru'];
             $zone->description_it = $input['description_it'];
+            $zone->sort = $input['sort'];
 
             if ($zone->save()) {
 
@@ -101,6 +103,7 @@ class ZoneRepository extends BaseRepository
         $zone->description = $input['description'];
         $zone->description_ru = $input['description_ru'];
         $zone->description_it = $input['description_it'];
+        $zone->sort = $input['sort'];
 
         DB::transaction(function () use ($zone, $input) {
             if ($zone->save()) {

@@ -11,7 +11,7 @@
     @endif
 
     <div class="price-vat">**{{ trans('frontend.shoppingCart.including') }}
-        22% ({{round($summ['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}
+        {{$config['vat_data']}}% ({{round($summ['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}
 
         @if($summ['discount_all'] > 0)
             ,and Additional discount {{$summ['discount_all']}}% ({{round($summF)}}€)

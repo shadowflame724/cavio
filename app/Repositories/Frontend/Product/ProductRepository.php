@@ -4,6 +4,9 @@ namespace App\Repositories\Frontend\Product;
 
 use App\Models\Dimensions\Dimensions;
 use App\Models\Category\Category;
+use App\Models\Collection\Collection;
+use App\Models\Zone\Zone;
+use App\Models\CollectionZone\CollectionZone;
 use App\Models\Product\Product;
 use App\Models\Product\ProductChild;
 use App\Models\Product\ProductPhoto;
@@ -12,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CollectionZone\CollectionZone;
 use App\Models\FinishTissue\FinishTissue;
 
 /**
@@ -25,23 +27,86 @@ class ProductRepository extends BaseRepository
      */
     const MODEL = Product::class;
 
+    public function getCollZones($colls = null, $zones = null)
+    {
+        $res = [];
+        $cIds = [];
+        $zIds = [];
+        if(!empty($colls)){
+            $modelColls = Collection::select('id','slug')
+                ->whereIn('slug', $colls)
+                ->orderBy('sort', 'desc')
+                ->get();
+            foreach ($modelColls as $coll){
+                $cIds[$coll->id] = $coll->id;
+            }
+        }
+        if(!empty($zones)){
+            $modelZones = Zone::select('id','slug')
+                ->whereIn('slug', $zones)
+                ->orderBy('sort', 'desc')
+                ->get();
+            foreach ($modelZones as $zone){
+                $zIds[$zone->id] = $zone->id;
+            }
+        }
+        if(!empty($cIds) || !empty($zIds)){
+            $modelOne = CollectionZone::select('id','product_ids')
+                ->where(function ($query) use ($cIds,$zIds){
+                    if(count($cIds) > 0 && count($zIds) > 0){
+                        $query
+                            ->whereIn('collection_id', $cIds)
+                            ->whereIn('zone_id', $zIds);
+                    }elseif(count($cIds) > 0){
+                        $query
+                            ->whereIn('collection_id', $cIds);
+                    }elseif(count($zIds) > 0){
+                        $query
+                            ->whereIn('zone_id', $zIds);
+                    }
+                })
+                ->orderBy('sort', 'desc')
+                ->get();
+            foreach ($modelOne as $item) {
+                $product_ids = explode(',', $item->product_ids);
+                foreach ($product_ids as $product_id) {
+                    $pr_id = (int)$product_id;
+                    if ($pr_id > 0) {
+                        $res[$pr_id] = $pr_id;
+                    }
+                }
+            }
+        }
+
+        return $res;
+    }
+
     /**
      * @param string $order_by
      * @param string $sort
      *
      * @return mixed
      */
-    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = 0)
+    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = 0, $data = [])
     {
         $res = [];
-        if($paginCnt > 0) {
-            $model = Product::where('published', 1)
-                ->orderBy($order_by, $sort)
-                ->paginate($paginCnt);
+        $col_zon_prods = [];
+        if(isset($data['colls']) || isset($data['zones'])){
+            $col_zon_prods = $this->getCollZones($data['colls'], $data['zones']);
+        }
+        $model = Product::query()->where('published', 1);
+        if(count($col_zon_prods) > 0){
+            $model = $model->whereIn('id', $col_zon_prods);
+        }
+        if(isset($data['sale']) && $data['sale']){
+            $model = $model->where('main_photo_data', 'like', '%"isDiscount":true%');
+        }
+        $model = $model->orderBy($order_by, $sort);
+
+        if ($paginCnt > 0) {
+            $model = $model->paginate($paginCnt);
         } else {
-            $model = Product::where('published', 1)
-                ->orderBy($order_by, $sort)
-                ->get();
+            $model = $model->get();
         }
 
         if(isset($model)) {
@@ -169,48 +234,173 @@ class ProductRepository extends BaseRepository
         return $res;
     }
 
-    public function catOne($slug, $paginCnt = 0)
+    public function getProductsbyPriceId($price_id)
     {
+        $res = [];
+        $products = [];
+
+        if(!empty($ids)){
+            $prod = ProductPrice::where('id', $price_id)
+                ->where('published', 1)
+                ->first();
+        }
+
+        if(!empty($product)){
+            $nativePrice = $prod->price;
+            $discountPrice = 0;
+            if($prod->discount > 0){
+                $nativePrice = round($nativePrice*((100-$prod->discount)/100));
+            }
+            $vatPrice = round($nativePrice*1.22);
+
+            //Photo
+            $productPhoto = ProductPhoto::where('id',$prod->product_photo_id)->first();
+            if($productPhoto->published){
+                $productPhotos = (!empty($productPhoto->photos)) ? explode(',',$productPhoto->photos) : [];
+
+                $finish = [];
+                $finish_ids = (!empty($productPhoto->finish_ids)) ? explode(',',$productPhoto->finish_ids) : [];
+                $finishModel = FinishTissue::whereIn('id',$finish_ids)->get();
+                foreach ($finishModel as $item) {
+                    $finish[] = $item->title;
+                }
+
+                $tissue = [];
+                $tissue_ids = (!empty($productPhoto->tissue_ids)) ? explode(',',$productPhoto->tissue_ids) : [];
+                $tissueModel = FinishTissue::whereIn('id',$tissue_ids)->get();
+                foreach ($tissueModel as $item) {
+                    $tissue[] = $item->title;
+                }
+
+                $productPhotosArrRes = [
+                    'id' => $productPhoto->id,
+                    'product_id' => $productPhoto->product_id,
+                    'photos' => $productPhotos,
+                    'finish' => $finish,
+                    'tissue' => $tissue,
+                    'prev' => $productPhoto->prev,
+                    'prev_ru' => $productPhoto->prev_ru,
+                    'prev_it' => $productPhoto->prev_it,
+                    'main' => $productPhoto->main,
+                ];
+                $ids = explode(',',$productPhoto->collection_ids);
+                $colsArrModel = CollectionZone::whereIn('id',$ids)->with('collection')->get();
+                $collsRes = [];
+
+                if(!empty($colsArrModel)){
+                    foreach ($colsArrModel as $colsArr){
+                        $collsRes['zone'][] = $colsArr->title;
+
+                        if(isset($colsArr->collection)){
+                            $collsRes['collection'][] = $colsArr->collection->title;
+                        }
+                    }
+                }
+
+            }
+
+            //Childs
+            $productChildsRes = [];
+            $productChild = ProductChild::where('id',$prod->product_child_id)->first();
+            if($productChild->published){
+                $dimensions = (!empty($productChild->dimensions)) ? \GuzzleHttp\json_decode($productChild->dimensions) : [];
+                $productChildsRes = [
+                    'id' => $productChild->id,
+                    'product_id' => $productChild->product_id,
+                    'code' => $productChild->code,
+                    'name' => $productChild->name,
+                    'name_ru' => $productChild->name_ru,
+                    'name_it' => $productChild->name_it,
+                    'prev' => $productChild->prev,
+                    'prev_ru' => $productChild->prev_ru,
+                    'prev_it' => $productChild->prev_it,
+                    'dimensions' => $dimensions
+                ];
+            }
+
+            $res[] = [
+                'id' => $prod->id,
+                'price_old' => $prod->price,
+                'price_new' => $nativePrice,
+                'price_vat' => $vatPrice,
+                'price_vat_def' => $vatPrice,
+                'discount' => $prod->discount,
+                'productChilds' => $productChildsRes,
+                'productPhotos' => $productPhotosArrRes,
+                'collections' => $collsRes
+            ];
+        }
+
+        return $res;
+    }
+
+
+    public function catOne($slug, $order_by = 'sort', $sort = 'asc', $paginCnt = 0, $data = [])
+    {
+        $res = [];
         $categoryModel = $this->getCatBySlug($slug);
 
         $product_ids = '';
-        if($categoryModel->parent_id == null){
+        if ($categoryModel->parent_id == null) {
             $ids = [];
-            foreach($categoryModel->children as $child){
-                if(!empty($child->product_ids)){
-                    $prIds = explode(',',$child->product_ids);
+            foreach ($categoryModel->children as $child) {
+                if (!empty($child->product_ids)) {
+                    $prIds = explode(',', $child->product_ids);
                     foreach ($prIds as $prId) {
                         $id = (int)$prId;
-                        if($id > 0){
+                        if ($id > 0) {
                             $ids[$id] = $id;
                         }
                     }
                 }
             }
             $product_ids = implode(',', $ids);
-        } elseif(!empty($categoryModel->product_ids)) {
+        } elseif (!empty($categoryModel->product_ids)) {
             $product_ids = $categoryModel->product_ids;
         }
 
-        if(!empty($product_ids)){
-            $res = [];
-            $prodIds = explode(',',$product_ids);
-            if($paginCnt > 0) {
-                $model = Product::whereIn('id', $prodIds)
-                    ->where('published', 1)
-                    ->paginate($paginCnt);
+        if (!empty($product_ids)) {
+            $prodIds = [];
+            $product_ids = explode(',', $product_ids);
+            $col_zon_prods = [];
+            if(isset($data['colls']) || isset($data['zones'])){
+                $col_zon_prods = $this->getCollZones($data['colls'], $data['zones']);
+            }
+            foreach ($product_ids as $product_id) {
+                $is = false;
+                $id = (int)$product_id;
+                if (count($col_zon_prods) > 0) {
+                    foreach ($col_zon_prods as $zid) {
+                        if ($id === (int)$zid) $is = true;
+                    }
+                } else {
+                    $is = true;
+                }
+                if ($is) {
+                    $prodIds[$id] = $id;
+                }
+            }
+
+            $model = Product::query()
+                ->where('published', 1)
+                ->whereIn('id', $prodIds);
+            if(isset($data['sale']) && $data['sale']){
+                $model = $model->where('main_photo_data', 'like', '%"isDiscount":true%');
+            }
+            $model = $model->orderBy($order_by, $sort);
+
+            if ($paginCnt > 0) {
+                $model = $model->paginate($paginCnt);
             } else {
-                $model = Product::whereIn('id', $prodIds)->where('published', 1)->get();
+                $model = $model->get();
             }
 
-            if(isset($model)) {
-                return $model;
+            if (isset($model)) {
+                $res = $model;
             }
-
-            return $res;
         }
 
-        return [];
+        return $res;
     }
 
     public function getBySlug($slug, $with = null)
