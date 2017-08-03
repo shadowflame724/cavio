@@ -77,7 +77,7 @@ class ProductController extends Controller
      */
     public function getDataFromImport()
     {
-        $results = Excel::load('public/excel/import.xlsx', function($reader) {
+        $results = Excel::load('public/excel/import.csv', function($reader) {
 //            $reader->dd();
 //            $reader->each(function($sheet) {
 //                // Loop through all rows
@@ -93,7 +93,6 @@ class ProductController extends Controller
 
         });
 
-        dd($results);
         $resDatas = $results->skipRows(3)->get();
         $resTitles = $results->skipRows(1)->takeRows(1)->get();
         $res = [];
@@ -169,12 +168,12 @@ class ProductController extends Controller
                             'prev_it' => '',
                             'photos' => [],
                             'dimensions' => [
-                                'length' => $onePhoto['length_cm'],
-                                'diametr' => $onePhoto['diametr_cm'],
-                                'width' => $onePhoto['width_cm'],
-                                'height' => $onePhoto['height_cm'],
-                                'mattress' => $onePhoto['mattress_cm'],
-                                'niche' => $onePhoto['niche_cm'],
+                                'length' => $onePhoto['length'],
+                                'diametr' => $onePhoto['diametr'],
+                                'width' => $onePhoto['width'],
+                                'height' => $onePhoto['height'],
+                                'mattress' => $onePhoto['mattress'],
+                                'niche' => $onePhoto['niche'],
                             ],
                         ];
                     } else {
@@ -204,11 +203,13 @@ class ProductController extends Controller
                     if(!empty($onePhoto['child_descr_it'])){
                         $resGroupData[$prntCode]['childs'][$chldCode]['prev_it'] = $onePhoto['child_descr_it'];
                     } //unset($onePhoto['child_descr_it']);
-
-                    $arrPhotos = explode(',', trim($onePhoto['photo']));
+                    $onePht = 'asd.jpg';
+//                    $arrPhotos = explode(',', trim($onePhoto['photo']));
+                    $arrPhotos = explode(',', trim($onePht));
                     $keyPhotos = implode('__', $arrPhotos);
-                    $resGroupData[$prntCode]['childs'][$chldCode]['photos'][$keyPhotos] = [
-                        'photos' => $arrPhotos,
+//                    $resGroupData[$prntCode]['childs'][$chldCode]['photos'][$keyPhotos] = [
+                    $resGroupData[$prntCode]['childs'][$chldCode]['photos'][] = [
+                        'photos' => '',
                         'child_code' => $chldCode,
                         'prices' => [
                             't1' => [
@@ -242,10 +243,10 @@ class ProductController extends Controller
                                 'f4' => $onePhoto['tp_f4'],
                             ],
                             'tci' => [
-                                'f1' => $onePhoto['tci_f1'],
-                                'f2' => $onePhoto['tci_f2'],
-                                'f3' => $onePhoto['tci_f3'],
-                                'f4' => $onePhoto['tci_f4'],
+                                'f1' => $onePhoto['tcl_f1'],
+                                'f2' => $onePhoto['tcl_f2'],
+                                'f3' => $onePhoto['tcl_f3'],
+                                'f4' => $onePhoto['tcl_f4'],
                             ],
                         ]
                     ];
