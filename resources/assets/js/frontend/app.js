@@ -146,14 +146,7 @@ var App = (function () {
         if(isAdd) {
           $('main [data-anim]').attr('data-anim', 'false');
         } else {
-          // $('main')
-          //   .find('.zon-col-list,.wrap-banner-cont')
-          //   .addClass('show');
-          // $('main .hide')
-          //   .removeClass('hide');
-
-
-            // $('main [data-anim]').attr('data-anim', 'true');
+          //
         }
       },
       insertInHtml = function (obj) {
