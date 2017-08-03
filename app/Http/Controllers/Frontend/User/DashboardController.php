@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $user_id = access()->user()->id;
         $config = config('app.settings');
 
-        $orders = $this->orders->getByUserId(23);
+        $orders = $this->orders->getByUserId($user_id);//23
 
 
         if(!empty($orders)){
