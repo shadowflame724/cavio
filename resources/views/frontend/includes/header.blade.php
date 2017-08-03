@@ -3,12 +3,12 @@
     <div class="top-nav container">
         <div class="short-nav">
             <div class="short-nav-item hide">
-                <a href="{{ route('frontend.header.catalogue') }}"
+                <a href="{{ route('frontend.catalogue') }}"
                    for="menu-products"
                    class="btn-top-menu anim-underline">{{ trans('frontend.header.products') }}</a>
             </div>
             <div class="short-nav-item hide">
-                <a href="{{ route('frontend.header.collections') }}"
+                <a href="{{ route('frontend.collections') }}"
                    for="menu-collection"
                    class="btn-top-menu anim-underline">{{ trans('frontend.header.collections') }}</a>
             </div>
@@ -224,7 +224,7 @@
                             <div class="inner-menu-zones">
                                 <a class="top-menu-title"
                                    href="{{ route('frontend.zones') }}"
-                                >{{ trans('frontend.header.zones') }}</a>
+                                >zones</a>
                                 <ul class="top-menu-list no-mb clearfix">
                                     @foreach($zones as $zone)
                                     <li>
@@ -243,7 +243,7 @@
                             <div class="inner-menu-collections">
                                 <a class="top-menu-title"
                                    href="{{ route('frontend.collections') }}"
-                                >{{ trans('frontend.header.collections') }}</a>
+                                >collections</a>
                                 <ul class="top-menu-list no-mb">
                                     @foreach($collections as $collection)
                                     <li>

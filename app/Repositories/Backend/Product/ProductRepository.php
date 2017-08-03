@@ -122,6 +122,8 @@ class ProductRepository extends BaseRepository
         unset($duplicate->updated_at);
         $duplicate->code .= '(copy)';
         $duplicate->published = 0;
+        $childIdsArr = [];
+        $photosIdsArr = [];
 
         if ($duplicate->save()) {
             $childs = ProductChild::where('product_id', $product->id)->get()->toArray();
@@ -134,6 +136,7 @@ class ProductRepository extends BaseRepository
                 $childDuplicate->published = 0;
 
                 $duplicate->childs()->save($childDuplicate);
+                $childIdsArr[$child['id']] = $childDuplicate->id;
             }
 
             $photos = ProductPhoto::where('product_id', $product->id)->get()->toArray();
@@ -143,7 +146,9 @@ class ProductRepository extends BaseRepository
                 unset($photoDuplicate->created_at);
                 unset($photoDuplicate->updated_at);
                 $photoDuplicate->published = 0;
+
                 $duplicate->photos()->save($photoDuplicate);
+                $photosIdsArr[$photo['id']] = $photoDuplicate->id;
             }
 
             $child_ids = implode(',', (array_column($childs, 'id')));
@@ -152,20 +157,28 @@ class ProductRepository extends BaseRepository
             foreach ($prices as $price) {
                 $priceDuplicate = new ProductPrice($price);
                 unset($priceDuplicate->id);
+                //unset($priceDuplicate->product_photo_id);
+                //unset($priceDuplicate->product_child_id);
                 unset($priceDuplicate->created_at);
                 unset($priceDuplicate->updated_at);
                 $priceDuplicate->published = 0;
+                //dd($priceDuplicate);
 
-                foreach ($duplicate->childs as $child){
-                    $child->prices()->save($priceDuplicate);
+                foreach ($childIdsArr as $key => $item){
+                    if($key == $priceDuplicate->product_child_id){
+                        $priceDuplicate->product_child_id = $item;
+                    }
                 }
-                foreach ($duplicate->photos as $photo){
-                    $photo->prices()->save($priceDuplicate);
+                foreach ($photosIdsArr as $key => $item){
+                    if($key == $priceDuplicate->product_photo_id){
+                        $priceDuplicate->product_photo_id = $item;
+                    }
                 }
-
+                $priceDuplicate->save();
             }
 
         }
+
         return true;
     }
 
