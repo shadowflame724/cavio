@@ -118,13 +118,31 @@ return [
                 ],
             ],
             'product' => [
-                'create' => 'Создать товар',
-                'edit' => 'Изменить товар',
-                'management' => 'Товары',
+                'create' => 'Добавить продукт',
+                'edit' => 'Редактировать продукт',
+                'management' => 'Управление продуктами',
+                'management_full' => 'Полная инфо',
+
                 'table' => [
                     'id' => '№',
-                    'name' => 'Название',
-                    'created_at' => 'Дата создания'
+                    'name' => 'Имя',
+                    'price' => 'Цена',
+                    'slug' => 'Ссылка',
+                    'parent_code' => 'Родительский код',
+                    'child_code' => 'Дочерний код',
+                    'child_name' => 'Дочернее имя',
+                    'parent_name' => 'Родительской имя',
+                    'photo' => 'Фото',
+                    'collection_name' => 'Коллекция',
+                    'collection_zone_name' => 'Колл-зона',
+                    'zone_name' => 'Зона',
+                    'finish' => 'Отделка(Ф)',
+                    'tissue' => 'Отделка(Т)',
+                    'category' => 'Категории',
+                    'comments' => 'Коментарии',
+
+                    'created_at' => 'Создан',
+                    'updated_at' => 'Обновлен'
                 ],
             ],
             'showroom' => [

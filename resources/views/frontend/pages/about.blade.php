@@ -20,7 +20,7 @@
               {!! $page->blocks->get(0)->{'body'.$langSuf} !!}
             </div>
           </div>
-          <div class="banner-cont-read"><a href="#under-about-history" class="anim-underline">continue reading →</a></div>
+          <div class="banner-cont-read"><a href="#under-about-history" class="anim-underline">{{ trans('frontend.about.continueReading') }} →</a></div>
         </div>
       </div>
     </section>

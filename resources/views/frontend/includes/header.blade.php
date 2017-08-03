@@ -3,12 +3,12 @@
     <div class="top-nav container">
         <div class="short-nav">
             <div class="short-nav-item hide">
-                <a href="{{ route('frontend.catalogue') }}"
+                <a href="{{ route('frontend.header.catalogue') }}"
                    for="menu-products"
                    class="btn-top-menu anim-underline">{{ trans('frontend.header.products') }}</a>
             </div>
             <div class="short-nav-item hide">
-                <a href="{{ route('frontend.collections') }}"
+                <a href="{{ route('frontend.header.collections') }}"
                    for="menu-collection"
                    class="btn-top-menu anim-underline">{{ trans('frontend.header.collections') }}</a>
             </div>
@@ -172,7 +172,7 @@
             <div class="wrap-login hide">
                 <a href="{{ route('frontend.auth.login') }}"
                    class="btn-login open-modal-login anim-underline"
-                >login</a>
+                >{{ trans('frontend.header.login') }}</a>
             </div>
             @endif
             <div class="wrap-stash-ico hide">
@@ -224,7 +224,7 @@
                             <div class="inner-menu-zones">
                                 <a class="top-menu-title"
                                    href="{{ route('frontend.zones') }}"
-                                >zones</a>
+                                >{{ trans('frontend.header.zones') }}</a>
                                 <ul class="top-menu-list no-mb clearfix">
                                     @foreach($zones as $zone)
                                     <li>
@@ -243,7 +243,7 @@
                             <div class="inner-menu-collections">
                                 <a class="top-menu-title"
                                    href="{{ route('frontend.collections') }}"
-                                >collections</a>
+                                >{{ trans('frontend.header.collections') }}</a>
                                 <ul class="top-menu-list no-mb">
                                     @foreach($collections as $collection)
                                     <li>

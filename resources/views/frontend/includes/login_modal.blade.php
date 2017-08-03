@@ -7,8 +7,8 @@
                 <div class="wrap-swiper-log_reg inner-zone-col-modal relative">
 
                     <div class="wrap-log_reg-toggle">
-                        <div class="item-log_reg-toggle log">login</div>
-                        <div class="item-log_reg-toggle reg">register</div>
+                        <div class="item-log_reg-toggle log">{{ trans('frontend.login_modal.login') }}</div>
+                        <div class="item-log_reg-toggle reg">{{ trans('frontend.login_modal.register') }}</div>
                     </div>
 
                     <div class="swiper-wrapper wrap-log_reg-items">
@@ -21,15 +21,15 @@
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#login_google_plus"></use>
                                         </svg>
                                     </div>
-                                    <div class="item-soc_log-text">with Google</div>
+                                    <div class="item-soc_log-text">{{ trans('frontend.login_modal.withGoogle') }}</div>
                                 </a>
-                                <a href="/login/facebook" class="btn wrap-item-soc_log fb" content="with facebook">
+                                <a href="/login/facebook" class="btn wrap-item-soc_log fb" content="{{ trans('frontend.login_modal.withGoogle') }}">
                                     <div class="item-soc_log-logo">
                                         <svg class="login-soc_icon">
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#login_fb"></use>
                                         </svg>
                                     </div>
-                                    <div class="btn item-soc_log-text">with facebook</div>
+                                    <div class="btn item-soc_log-text">{{ trans('frontend.login_modal.withFacebook') }}</div>
                                 </a>
                             </div>
 
@@ -62,27 +62,27 @@
 
                                 <div class="wrap-2-input clearfix">
                                     <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="First name" name="first_name">
+                                        <input class="fullW" placeholder="{{ trans('frontend.login_modal.firstName') }}" name="{{ trans('frontend.login_modal.firstName') }}">
                                     </div>
                                     <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="Last name" name="last_name">
+                                        <input class="fullW" placeholder="{{ trans('frontend.login_modal.lastName') }}" name="{{ trans('frontend.login_modal.lastName') }}">
                                     </div>
                                 </div>
 
                                 <div class="wrap-2-input clearfix">
                                     <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="Phone" name="phone">
+                                        <input class="fullW" placeholder="{{ trans('frontend.login_modal.phone') }}" name="{{ trans('frontend.login_modal.phone') }}">
                                     </div>
                                     <div class="wrap-inp_W_50">
-                                        <input class="fullW" placeholder="Region" name="region">
+                                        <input class="fullW" placeholder="{{ trans('frontend.login_modal.region') }}" name="{{ trans('frontend.login_modal.region') }}">
                                     </div>
                                 </div>
 
                                 <hr class="login_reg-line">
 
-                                <input class="fullW" placeholder="E-mail" type="email">
-                                <input class="fullW" placeholder="Password" type="password">
-                                <button class="btn small login_reg-submit" content="register">register</button>
+                                <input class="fullW" placeholder="{{ trans('frontend.login_modal.email') }}" type="{{ trans('frontend.login_modal.email') }}">
+                                <input class="fullW" placeholder="{{ trans('frontend.login_modal.password') }}" type="{{ trans('frontend.login_modal.password') }}">
+                                <button class="btn small login_reg-submit" content="{{ trans('frontend.login_modal.register') }}">{{ trans('frontend.login_modal.register') }}</button>
                             </form>
                         </div>
                     </div>

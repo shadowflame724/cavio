@@ -264,10 +264,10 @@ $(document).ready(function () {
       // processData: false,
       // dataType: 'json',
     })
-    .done(function() {
-      console.log('user_profile success SEND');
-      $('#modal-thank_you_profile').attr('data-anim', 'true');
-    });
+      .done(function() {
+        console.log('user_profile success SEND');
+        $('#modal-thank_you_profile').attr('data-anim', 'true');
+      });
     return false;
   });
 
@@ -443,8 +443,16 @@ function initPageAfterLoading() {
   }
 
 
+  // NEWS ========
+  if(document.querySelector("main[data-page='/news']"))  initNewsPage();
+
+
   // CATALOGUE ========
   if(document.querySelector("main[data-page='/catalogue']"))  initCataloguePage();
+
+
+  // DASHBOARD
+  if(document.querySelector("main[data-page='/dashboard']"))  initDashboardPage();
 
   mainScroll.update();
 }
@@ -1285,7 +1293,11 @@ function initMainPage() {
 
   setTimeout(function () {
     $('.new-products-left-side').attr('data-anim', 'true');
+    $('#banner').attr('data-anim', 'true');
   }, 1);
+  // setTimeout(function () {
+  //   $('#banner').attr('data-anim', 'true');
+  // }, 1);
   setTimeout(function () {
     $('.new-products-right-side, .wrap-new-products-gradiet').attr('data-anim', 'true');
   }, 300);
@@ -1295,23 +1307,23 @@ function initMainPage() {
   // ===============================
 
   setTimeout(function () {
-      if ($('body').hasClass('poppup')) showMainPopup()
-    }, 2000);
+    if ($('body').hasClass('poppup')) showMainPopup()
+  }, 2000);
 }
 
 //ZON COL MODAL PAGE
 function initZonColModalPage() {
   var zcModalSwip = new Swiper('.zc-modal-carousel', {
-      slidesPerView: 1,
-      speed: 1000,
-      autoplay: 4000,
-      loop: true,
-      effect: 'fade', //"coverflow"
-      prevButton: '.zc-modal-swip-arrow.prev',
-      nextButton: '.zc-modal-swip-arrow.next',
-      pagination: '.swiper-pagination',
-      paginationType: 'progress'
-    });
+    slidesPerView: 1,
+    speed: 1000,
+    autoplay: 4000,
+    loop: true,
+    effect: 'fade', //"coverflow"
+    prevButton: '.zc-modal-swip-arrow.prev',
+    nextButton: '.zc-modal-swip-arrow.next',
+    pagination: '.swiper-pagination',
+    paginationType: 'progress'
+  });
 }
 /*
  //ABOUT
@@ -1549,7 +1561,9 @@ function initZonColModalPage() {
  if(!inStartFooter && !scrolledBottom && mainScroll && mainScroll.directionY==-1) $('#wrap-page-indicators').attr('data-anim', 'true');
  }
  }
+*/
 
+/*
  //faq
  if(document.querySelector('body.faq')){
  console.log('FAQ page');
@@ -1623,100 +1637,109 @@ function initZonColModalPage() {
  }
 
  }
-
- //news
- if(document.querySelector('body.news')){
-
- var newsItems = [];
- var numbCol = 1;
-
- if(window.innerWidth > 1400) numbCol = 4;
- else if(window.innerWidth > 1024) numbCol = 3;
- else if(window.innerWidth > 640)  numbCol = 2;
+*/
 
 
+//news
+function initNewsPage() {
+  var newsItems = [];
+  var numbCol = 1;
 
- $(window).on('resize', function(){
- if(window.innerWidth > 1400) {
- if(numbCol != 4){ numbCol = 4; initNewsGrid();}
- }
- else if(window.innerWidth > 1024) {
- if(numbCol != 3){ numbCol = 3; initNewsGrid();}
- }
- else if(window.innerWidth > 640) {
- if(numbCol != 2){ numbCol = 2; initNewsGrid();}
- }
- else { numbCol = 1; initNewsGrid(); }
- });
-
- $(document).ready(function () {
- setTimeout(function(){  $('.wrap-banner-cont').attr('data-anim', 'true');       },  500);
- setTimeout(function(){  $('.wrap-news-types-list').attr('data-anim', 'true');   },  800);
- setTimeout(function(){  $('.wrap-news-list').attr('data-anim', 'true');         }, 1150);
+  if (window.innerWidth > 1400) numbCol = 4;
+  else if (window.innerWidth > 1024) numbCol = 3;
+  else if (window.innerWidth > 640) numbCol = 2;
 
 
- // ============= REMAPING NEWS=================
- initNewsGrid();
- // END ============= REMAPINK NEWS=============
-
- if(mainScroll)  scrollFunc();
-
-
- var newsTypeList = $('#wrap-news-type');
- newsTypeList.find('.curr-news-type').text( newsTypeList.find('ul.news-types-list li.active a').text() );
- });
-
-
- function scrollFunc() {
- mainScroll.addListener(function(){
- var lenFooterPath = $('footer').offset().top - (window.innerHeight*0.1);
- document.getElementById('wrapper-bg-news').style.opacity = -(1200 - lenFooterPath) / 730;
- })
- }
-
-
- $(window).on('scroll', function(event){
- if(!mainScroll){
- var currScrolled = $(document).scrollTop();
-
- var lenFooterPath = $('footer').offset().top - (window.innerHeight*0.1) - currScrolled;
- document.getElementById('wrapper-bg-news').style.opacity = -(1200 - lenFooterPath) / 730;
- }
- });
+  $(window).on('resize', function () {
+    if (window.innerWidth > 1400) {
+      if (numbCol != 4) {
+        numbCol = 4;
+        initNewsGrid();
+      }
+    }
+    else if (window.innerWidth > 1024) {
+      if (numbCol != 3) {
+        numbCol = 3;
+        initNewsGrid();
+      }
+    }
+    else if (window.innerWidth > 640) {
+      if (numbCol != 2) {
+        numbCol = 2;
+        initNewsGrid();
+      }
+    }
+    else {
+      numbCol = 1;
+      initNewsGrid();
+    }
+  });
 
 
- function initNewsGrid() {
- newsItems = $('#news-list .news-item');
 
- for(var i=0;i<numbCol;i++){
- $("#news-list").append("<div class='news-col'></div>");
- }
-
- newsItems.each(function(key, el) {
- $(".news-col").eq(key%numbCol).append(el);
- });
-
- $('.news-col').each(function() {
- var $this = $(this);
- if($this.html().replace(/\s|&nbsp;/g, '').length == 0)
- $this.remove();
- });
-
- if(mainScroll)  mainScroll.update();
- }
-
- $('.news-item a').on('click', function(e){
- e.preventDefault();
+  setTimeout(function () {
+    $('.wrap-banner-cont').attr('data-anim', 'true');
+  }, 500);
+  setTimeout(function () {
+    $('.wrap-news-types-list').attr('data-anim', 'true');
+  }, 800);
+  setTimeout(function () {
+    $('.wrap-news-list').attr('data-anim', 'true');
+  }, 1150);
 
 
- zcScroll = Scrollbar.init(document.getElementById('zones-modal'),{  damping: 0.2  });
- zcScroll.setPosition(0,0);
+  // ============= REMAPING NEWS=================
+  initNewsGrid();
+  // END ============= REMAPINK NEWS=============
 
- $('#zones-modal').removeClass('hide').addClass('show');
- $('body').toggleClass('overfl-h');
- });
- }
- */
+  if (mainScroll) scrollFunc();
+
+
+  var newsTypeList = $('#wrap-news-type');
+  newsTypeList.find('.curr-news-type').text(newsTypeList.find('ul.news-types-list li.active a').text());
+
+
+  function scrollFunc() {
+    mainScroll.addListener(function(){
+      if(document.querySelector("main[data-page='/news']")) {
+        var lenFooterPath = $('footer').offset().top - (window.innerHeight * 0.1);
+        document.getElementById('wrapper-bg-news').style.opacity = -(1200 - lenFooterPath) / 730;
+      }
+    })
+  }
+
+
+  $(window).on('scroll', function (event) {
+    if (!mainScroll && document.querySelector("main[data-page='/news']")) {
+      var currScrolled = $(document).scrollTop();
+
+      var lenFooterPath = $('footer').offset().top - (window.innerHeight * 0.1) - currScrolled;
+      document.getElementById('wrapper-bg-news').style.opacity = -(1200 - lenFooterPath) / 730;
+    }
+  });
+
+
+  function initNewsGrid() {
+    newsItems = $('#news-list .news-item');
+
+    for (var i = 0; i < numbCol; i++) {
+      $("#news-list").append("<div class='news-col'></div>");
+    }
+
+    newsItems.each(function (key, el) {
+      $(".news-col").eq(key % numbCol).append(el);
+    });
+
+    $('.news-col').each(function () {
+      var $this = $(this);
+      if ($this.html().replace(/\s|&nbsp;/g, '').length == 0)
+        $this.remove();
+    });
+
+    if (mainScroll) mainScroll.update();
+  }
+}
+
 
 
 //zone-col
@@ -1762,7 +1785,11 @@ function initZenCollPage() {
 
   function scrollFunc() {
     mainScroll.addListener(function () {
-      if (document.querySelector('main')) {
+      if(document.querySelector("main[data-page='/zones']")      ||
+        document.querySelector("main[data-page='/collections']") ||
+        document.querySelector("main[data-page^='/zones/']")     ||
+        document.querySelector("main[data-page^='/collections/']")
+      ) {
         var mainOffset = $('main').offset().top;
 
         document.getElementById('wrapper-bg-zone-col').style.opacity = 1 - (1 / (lenFooterPath / -mainOffset));
@@ -1771,7 +1798,12 @@ function initZenCollPage() {
   }
 
   $(window).on('scroll', function (event) {
-    if (!mainScroll && document.querySelector('main')) {
+    if (!mainScroll &&
+      (document.querySelector("main[data-page='/zones']")       ||
+        document.querySelector("main[data-page='/collections']") ||
+        document.querySelector("main[data-page^='/zones/']")     ||
+        document.querySelector("main[data-page^='/collections/']")
+      )) {
       var currScrolled = $(document).scrollTop();
       var mainOffset = $('main').offset().top - currScrolled;
 
@@ -1834,7 +1866,7 @@ function initCataloguePage() {
 
 
   $('.disactive-item').on('click', function () {
-    $(this).closest('.active').removeClass('active')
+    $(this).siblings('a').click();
   });
 
 
@@ -2276,64 +2308,68 @@ function initCataloguePage() {
  }
  });
  }
-
- //profile
- if(document.querySelector('body.profile')){
- console.log('Profile page');
-
- var swiperProfile;
-
- $(document).ready(function () {
- setTimeout(function(){   $('.small-page-title.hide').attr('data-anim', 'true')   }, 300);
- setTimeout(function(){   $('.wrap-catal.hide').attr('data-anim', 'true')   }, 500);
- setTimeout(function(){   if(mainScroll) mainScroll.update();   }, 100);
-
- if(window.innerWidth > 1024){
- var activeZonColList = $('.zon-col-side-toggle a.active').attr('for');
- $('.zon-col-list-catal').hide();
- $('.zon-col-list-catal.'+activeZonColList).show()
- }
-
- swiperProfile = new Swiper('.wrap-profile-swiper', {
- slidesPerView: 1,
- centeredSlides: true,
- speed: 700,
- spaceBetween: 240,
- followFinger: false,
- simulateTouch: false,
- // autoHeight: true,
- effect: "coverflow",
- coverflow: { slideShadows : false },
- prevButton: '.item-log_reg-toggle.log',
- nextButton: '.item-log_reg-toggle.reg',
- });
- });
-
- $('.row-short-data').on('click', function(event){
- $(this).closest('.row-order_list').toggleClass('close open');
-
- // var self = this;
- // var prevH;
- // var int = setInterval(function(){
- //   console.log(prevH, $(self).closest('.row-order_list').height());
- //
- //   if(prevH != $(self).closest('.row-order_list').height()){
- //     swiperProfile.update();
- //     prevH = $(self).closest('.row-order_list').height();
- //   }
- //   else clearInterval(int);
- // }, 50);
- // swiperProfile.update();
- // setTimeout(function(){
- //   swiperProfile.update();
- // //   console.log(123)
- // //   swiperProfile.update();
- // //   // swiperProfile.updateContainerSize();
- // }, 300)
-
- })
- }
  */
+//initDashboardPage
+function initDashboardPage() {
+  console.log('Profile page');
+
+  var swiperProfile;
+
+  setTimeout(function () {
+    $('.small-page-title.hide').attr('data-anim', 'true')
+  }, 300);
+  setTimeout(function () {
+    $('.wrap-catal.hide').attr('data-anim', 'true')
+  }, 500);
+  setTimeout(function () {
+    if (mainScroll) mainScroll.update();
+  }, 100);
+
+  if (window.innerWidth > 1024) {
+    var activeZonColList = $('.zon-col-side-toggle a.active').attr('for');
+    $('.zon-col-list-catal').hide();
+    $('.zon-col-list-catal.' + activeZonColList).show()
+  }
+
+  swiperProfile = new Swiper('.wrap-profile-swiper', {
+    slidesPerView: 1,
+    centeredSlides: true,
+    speed: 700,
+    spaceBetween: 240,
+    followFinger: false,
+    simulateTouch: false,
+    // autoHeight: true,
+    effect: "coverflow",
+    coverflow: {slideShadows: false},
+    prevButton: '.item-log_reg-toggle.log',
+    nextButton: '.item-log_reg-toggle.reg',
+  });
+
+
+  $('.row-short-data').on('click', function (event) {
+    $(this).closest('.row-order_list').toggleClass('close open');
+
+    // var self = this;
+    // var prevH;
+    // var int = setInterval(function(){
+    //   console.log(prevH, $(self).closest('.row-order_list').height());
+    //
+    //   if(prevH != $(self).closest('.row-order_list').height()){
+    //     swiperProfile.update();
+    //     prevH = $(self).closest('.row-order_list').height();
+    //   }
+    //   else clearInterval(int);
+    // }, 50);
+    // swiperProfile.update();
+    // setTimeout(function(){
+    //   swiperProfile.update();
+    // //   console.log(123)
+    // //   swiperProfile.update();
+    // //   // swiperProfile.updateContainerSize();
+    // }, 300)
+
+  })
+}
 
 
 $(document).on('click', '#order-now', function (e) {
@@ -2361,7 +2397,8 @@ function initBasketPage() {
     itemStash.addClass('remove');
 
     setTimeout(function (e) {
-      itemStash.remove()
+      console.log('itemStash.remove start');
+      itemStash.remove();
     }, 600);
   });
 
@@ -2682,7 +2719,6 @@ function initProductCardPage() {
     slidesPerView: 1,
     speed: 700,
     initialSlide: $('ul.card-varians-list >li.active').attr('data-photo'),
-    autoHeight: true,
     followFinger: false,
     simulateTouch: false,
     spaceBetween: 0,
@@ -3179,15 +3215,19 @@ $('#ty-ok-p').on('click', function (e) {
 });
 
 // CLOSE MODALS
-$(document).on('click', '.zone-col-modal, .close-modal', function (event) {
+$(document).on('click', '.zone-col-modal', function (event) {
+  console.log(123456)
   var isModalSider = !$(event.target).closest('.inner-zone-col-modal').length;
 
   if (isModalSider || $(event.target).hasClass('btn-close-modal')) {
     $(this).attr('data-anim', 'false');
     $('body').removeClass('overfl-h');
 
-    var pathToBack = location.pathname.substr(0, location.pathname.lastIndexOf('/'));
-    App.goToPage(pathToBack);
+
+    if(!App.goPopupBack()){
+      var pathToBack = location.pathname.substr(0, location.pathname.lastIndexOf('/'));
+      App.goToPage(pathToBack);
+    }
 
 
     // RESET AND CLEAR FORM DATA =========

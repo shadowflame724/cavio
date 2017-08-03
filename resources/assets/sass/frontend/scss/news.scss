@@ -6,7 +6,7 @@ section#news-data{
 }
 
 
-body#news{
+main[data-page='/news']{
   section.wrap-banner{
     height:auto;
   }
@@ -215,7 +215,7 @@ html:not(.mobile-platform) ul.news-types-list li a:hover{ color: white; }
     margin-right: $containerMarginMobile;
   }
 
-  body#news .wrap-banner-cont{ margin-bottom: 30vh; }
+  main[data-page='/news'] .wrap-banner-cont{ margin-bottom: 30vh; }
 
   .news-col{ width: 100%; }
 

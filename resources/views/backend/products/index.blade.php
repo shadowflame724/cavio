@@ -26,7 +26,7 @@
                     <thead>
                     <tr>
                         <th>{{ trans('labels.backend.access.product.table.id') }}</th>
-                        <th>{{ trans('labels.backend.access.product.table.code') }}</th>
+                        <th>{{ trans('labels.backend.access.product.table.parent_code') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.slug') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.name') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.created_at') }}</th>

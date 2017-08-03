@@ -7,7 +7,8 @@ var App = (function () {
         'collections': [],
         'page': 1,
       },
-      _loadedPages = {};
+      _loadedPages = {},
+      _backFromProduct;
 
   function _start() {
     $('body')
@@ -17,27 +18,40 @@ var App = (function () {
         var $el = $(this),
           $prnt = $el.parent(),
           type = $el.attr('data-filter-name'),
-          val = $el.attr('data-filter-val');
+          val = $el.attr('data-filter-val'),
+          pageNew = false;
 
         if(_catalogParams[type]) {
-          if(type === 'sale') {
+          if (type === 'sale') {
+            var prevVal = JSON.stringify(_catalogParams.sale);
             _catalogParams.sale = (val === 'true') ? true : false;
+            if (prevVal !== JSON.stringify(_catalogParams.sale)) {
+              pageNew = true;
+            }
+            console.log(prevVal,' !== ',JSON.stringify(_catalogParams.sale));
           }
-          if(type === 'zones' || type === 'collections') {
-            var rem = $prnt.hasClass('active') ? false : true;
-            if(rem){
+          if (type === 'zones' || type === 'collections') {
+            var rem = $prnt.hasClass('active') ? false : true,
+                prevVal = JSON.stringify(_catalogParams[type]);
+            if (rem) {
               var index = _catalogParams[type].indexOf(val);
               if (index > -1) {
                 _catalogParams[type].splice(index, 1);
               }
-            }else{
+            } else {
               _catalogParams[type].push(val);
             }
+            console.log(prevVal,' !== ',JSON.stringify(_catalogParams[type]));
+            if (prevVal !== JSON.stringify(_catalogParams[type])) {
+              pageNew = true;
+            }
           }
-          if(type === 'page') {
+          if (pageNew) {
+            _catalogParams.page = 1;
+          }
+          if (type === 'page') {
             _catalogParams.page = parseInt(val);
           }
-
           var link = '';
           $.each(_catalogParams, function (tp, vl) {
             link += (link === '') ? '?' : '';
@@ -45,13 +59,9 @@ var App = (function () {
             link += tp + '=' + vl;
           });
 
-          console.log('::', link, JSON.stringify(_catalogParams));
-
-          // alert(type + '=' + val);
+          // console.log('::', link, JSON.stringify(_catalogParams));
           page('/catalogue'+link);
         }
-        //   console.warn('внутренний переход на',link);
-        //   page(link);
         return false;
       })
 
@@ -71,9 +81,13 @@ var App = (function () {
         if($el.attr('target') === '_blank'){
           isRoute = false;
         }
-        if($el.attr('data-type') === 'notApp'){
+        if($el.attr('data-type') === 'notApp') {
           window.location.href = link;
           isRoute = false;
+        }
+        console.log('location.href', location.pathname, link)
+        if(link.indexOf('/product/') !== -1){
+          _backFromProduct = location.pathname;
         }
         if (isRoute && !isLang && !isSocial) {
           console.warn('внутренний переход на',link);
@@ -154,6 +168,7 @@ var App = (function () {
         _editHeadHtml(obj.headHtml, function () {
           _editHeadSEO(obj.head);
           _editAfterFooter(obj.afterFooterHtml);
+          _editBeforeHeader(obj.beforeHeaderHtml);
           _editContentHtml(obj.contentHtml, obj.dataPage, function () {
             setTimeout(function() {
               _reInit(function() {
@@ -181,7 +196,7 @@ var App = (function () {
       // var needPageData = _loadedPages[ctx.pathname];
       var needPageData = _loadedPages[ctx.canonicalPath];
 
-      if (!_.isEmpty(needPageData)) { // если есть в сохраненных достаем из массива
+      if (!_.isEmpty(needPageData) && ctx.canonicalPath !== '/basket') { // если есть в сохраненных достаем из массива и это не страница корзины
         // console.info('this page is loaded in _loadedPages');
         toggleHidenClass(true);
         setTimeout(function () {
@@ -198,14 +213,16 @@ var App = (function () {
             headHtml = $html.find('#header').html(),
             dataPage = $html.find('#content').attr('data-page'),
             contentHtml = $html.find('#content').html(),
-            afterFooterHtml = $html.find('#after_footer').html();
+            afterFooterHtml = $html.find('#after_footer').html(),
+            beforeHeaderHtml = $html.find('#before_header').html();
 
           needPageData = {
             'head': head,
             'headHtml': headHtml,
             'dataPage': dataPage,
             'contentHtml': contentHtml,
-            'afterFooterHtml': afterFooterHtml
+            'afterFooterHtml': afterFooterHtml,
+            'beforeHeaderHtml': beforeHeaderHtml
           };
           _loadedPages[ctx.canonicalPath] = needPageData;
           insertInHtml(needPageData);
@@ -276,6 +293,10 @@ var App = (function () {
     $('#after_footer').html(html);
     // clbk();
   }
+  function _editBeforeHeader(html, clbk) {
+    $('#before_header').html(html);
+    // clbk();
+  }
 
   function _editHeadHtml(html, clbk) {
     $('.header-mob').html(html);
@@ -289,7 +310,7 @@ var App = (function () {
       }
     });
     $('main .scroll-content footer').before(html);
-    mainScroll.scrollTo(0, 0, 1300);
+    mainScroll.setPosition(0, 0);
     $('main').attr('data-page', pageName);
     clbk();
   }
@@ -305,6 +326,14 @@ var App = (function () {
     },
     goToPage: function (link) {
       _goPage(link);
+    },
+    goPopupBack: function () {
+      if(_backFromProduct) {
+        page(_backFromProduct);
+        _backFromProduct = undefined;
+        return true;
+      }
+      return false;
     },
     goBack: function () {
       history.go(-1);

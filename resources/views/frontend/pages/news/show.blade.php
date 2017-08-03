@@ -7,15 +7,20 @@
 @endsection
 
 @section('content')
-  <section id="top-waves" class="relative" data-page-type="popup"></section>
-  <section>
-    <div class="container cont-priv_pol">
-      <div class="wrap-privacy-policy hide">
-        <div class=title-priv_pol>{!! $news['name'.$langSuf] !!}</div>
-        @if($news->image)<div class=text-priv_pol><img src="/upload/images/{!! $news->image !!}"></div>@endif
-        <div class=text-priv_pol>{!! $news['body'.$langSuf] !!}</div>
-
+<section id="news-item" class="zone-col-modal item_cart news-modal" data-page-type="popup" data-anim="false">
+  <div class="wrapper-zone-col-modal">
+    <div class="scroller scroller-zc-modal">
+      <div class="scroller-inner">
+        <div class="close-modal"></div>
+        <div class="inner-zone-col-modal bg-white-marmur relative">
+          <div class="wrap-privacy-policy news">
+            <div class="title-priv_pol">{!! $news['title'.$langSuf] !!}</div>
+            @if($news->image)<div class="text-priv_pol"><img src="/upload/images/{!! $news->image !!}"></div>@endif
+            <div class="text-priv_pol">{!! $news['body'.$langSuf] !!}</div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 @endsection

@@ -126,6 +126,18 @@ return [
         'register' => 'Register',
     ],
 
+    'thankForSubscribe' => [
+        'title' => 'Thank You For Subscribing!',
+        'body' => 'Thank You For Subscribing!222'
+    ],
+    'press-design' => [
+        'press_kit' => 'Press kit',
+        'design_kit' => 'Design kit',
+        'links' => 'Download links',
+        'file_name' => 'File name',
+        'date' => 'Date'
+    ],
+
     'thankForOrderModal' => [
         'title' => 'Thank you for order',
         'body' => 'Manager will call you soon. To confirm order and calculate shipping
