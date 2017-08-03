@@ -29,7 +29,15 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->showOneCategView('', [], $request);
+        $data = [
+            'colls' => null,
+            'zones' => null,
+            'sale' => null,
+        ];
+        $data['colls'] = (!empty($request->input('collections'))) ? explode(',', $request->input('collections')) : null;
+        $data['zones'] = (!empty($request->input('zones'))) ? explode(',', $request->input('zones')) : null;
+        $data['sale'] = ($request->input('sale') == 'true') ? true : false;
+        return $this->showOneCategView('', $data);
 
         $page = $this->page('catalogue');
         $model = $this->product->getAll();
@@ -45,17 +53,22 @@ class ProductController extends Controller
      */
     public function catOne($slug, Request $request)
     {
-        return $this->showOneCategView($slug, [], $request);
+        $data = [
+            'colls' => null,
+            'zones' => null,
+            'sale' => null,
+        ];
+        $data['colls'] = (!empty($request->input('collections'))) ? explode(',', $request->input('collections')) : null;
+        $data['zones'] = (!empty($request->input('zones'))) ? explode(',', $request->input('zones')) : null;
+        $data['sale'] = ($request->input('sale') == 'true') ? true : false;
+        return $this->showOneCategView($slug, $data);
     }
     /**
      * @return \Illuminate\View\View
      */
-    public function showOneCategView($slug = '', $data = [], $request)
+    public function showOneCategView($slug = '', $data = [])
     {
-        $colls = (!empty($request->input('collections'))) ? explode(',', $request->input('collections')) : null;
-        $zones = (!empty($request->input('zones'))) ? explode(',', $request->input('zones')) : null;
-        $sale = ($request->input('sale') == 'true') ? true : false;
-//        dd($sale);
+//        dd($data);
         $catsMenu = [];
         $categories = Category::all();
         $productCatsIds = [];
