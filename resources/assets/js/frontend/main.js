@@ -2693,7 +2693,7 @@ function initProductCardPage() {
   $('.wrap-carousel-card').each(function (key) {
     cardModalSwip[key] && cardModalSwip[key].destroy();
     cardModalSwip[key] = new Swiper(this, {
-      slidesPerView: 1.25,
+      slidesPerView: 1.4,
       loopAdditionalSlides: 3,
       centeredSlides: true,
       speed: 700,
@@ -3215,7 +3215,6 @@ $('#ty-ok-p').on('click', function (e) {
 
 // CLOSE MODALS
 $(document).on('click', '.zone-col-modal', function (event) {
-  console.log(123456)
   var isModalSider = !$(event.target).closest('.inner-zone-col-modal').length;
 
   if (isModalSider || $(event.target).hasClass('btn-close-modal')) {

@@ -80,6 +80,8 @@ var App = (function () {
 
     page('*', function (ctx, next) {
       console.log('PAGE ctx (*)', ctx.pathname)
+      hideTopMenu();
+      hideLeftMenu();
       // console.dir(ctx)
       // console.log(next)
       var prevPath = $('main').attr('data-page'),

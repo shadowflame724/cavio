@@ -1856,14 +1856,14 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
 }
 
 .card-modal-slide{
-  max-height: 80vh;
+  height: 80vh;
   position: relative;
   background-size: cover;
   pointer-events: all !important;
   &:not(.swiper-slide-active){
-    &.swiper-slide-prev img{ transform: scale(0.8) translateX( 5.5%); &:hover{ transform: scale(0.85) translateX( 5.5%);} }
-    &.swiper-slide-next img{ transform: scale(0.8) translateX(-5.5%); &:hover{ transform: scale(0.85) translateX(-5.5%);} }
-    img{
+    &.swiper-slide-prev .slide-inner-bg{ transform: scale(0.8) translateX( 5.5%); &:hover{ transform: scale(0.85) translateX( 5.5%);} }
+    &.swiper-slide-next .slide-inner-bg{ transform: scale(0.8) translateX(-5.5%); &:hover{ transform: scale(0.85) translateX(-5.5%);} }
+    .slide-inner-bg{
       cursor: pointer;
       //transform: scale(0.8);
       opacity: 0.2;
@@ -1875,7 +1875,13 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
     }
   }
 
-  img{ width: 100%; transition: .4s; }
+  .slide-inner-bg{
+    height: 100%;
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    transition: .4s;
+  }
 }
 
 .outer-slide{
