@@ -37,7 +37,9 @@
             $path = '';
         }
     @endphp
-        @yield('before_header')
+        <div id="before_header">
+            @yield('before_header')
+        </div>
         @include('frontend.includes.header')
         @include('frontend.includes.login_modal')
         @include('frontend.includes.popups')
