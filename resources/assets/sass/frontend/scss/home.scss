@@ -1856,6 +1856,7 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
 }
 
 .card-modal-slide{
+  max-height: 80vh;
   position: relative;
   background-size: cover;
   pointer-events: all !important;

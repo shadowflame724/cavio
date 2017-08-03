@@ -324,7 +324,7 @@ ul.list-pagination{
   list-style: none;
   padding: 0;
 
-  li{
+  >li{
     display: block;
     float: left;
     line-height: 59px;
@@ -339,13 +339,17 @@ ul.list-pagination{
     border: 1px solid transparent;
     transition: .7s;
 
+    &.disabled{ color: gray; }
+
     &.active{
       color: white;
       background: #3f372e;
     }
+
+    >a{ display: block; color: black; }
   }
 }
-html:not(.mobile-platform) ul.list-pagination li:not(.active):hover{ border-color: #3f372e; } //#3f372e
+html:not(.mobile-platform) ul.list-pagination li:not(.disabled):not(.active):hover{ border-color: #3f372e; >a{ color: black; } } //#3f372e
 
 .inner-catal-side-items{ position: relative; }
 
