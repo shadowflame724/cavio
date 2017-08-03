@@ -94,7 +94,7 @@ class ProductRepository extends BaseRepository
         if(isset($data['colls']) || isset($data['zones'])){
             $col_zon_prods = $this->getCollZones($data['colls'], $data['zones']);
         }
-        dd($col_zon_prods);
+//        dd($col_zon_prods);
         if($paginCnt > 0) {
             $model = Product::where('published', 1)
                 ->orderBy($order_by, $sort)
