@@ -240,6 +240,17 @@ $(document).ready(function () {
     return false;
   });
 
+
+  //subscribe
+  $('body').on('click', '[data-filter-name="sale"]', function () {
+    var flag = $(this).attr('data-filter-val');
+
+    $.get(_action + '?email=' + mail, function (data) {
+      alert("subscribe success SEND");
+    });
+    return false;
+  });
+
   //user_profile update
   $('body').on('submit', '.user_profile', function () {
     var _form = $(this),
