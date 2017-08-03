@@ -31,9 +31,10 @@
                     <thead>
                     <tr>
                         <th>{{ trans('labels.backend.access.product.table.price') }}</th>
+                        <th>{{ trans('labels.backend.access.product.table.parent_code') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.child_code') }}</th>
-                        <th>{{ trans('labels.backend.access.product.table.child_name') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.parent_name') }}</th>
+                        <th>{{ trans('labels.backend.access.product.table.child_name') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.photo') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.collection_name') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.zone_name') }}</th>
@@ -41,6 +42,7 @@
                         <th>{{ trans('labels.backend.access.product.table.finish') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.tissue') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.category') }}</th>
+                        <th>{{ trans('labels.backend.access.product.table.comments') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.created_at') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.updated_at') }}</th>
                     </tr>
@@ -85,16 +87,20 @@
                         name: 'price'
                     },
                     {
+                        data: 'parent_code',
+                        name: 'parent_code'
+                    },
+                    {
                         data: 'child_product_code',
                         name: 'child_product_code'
                     },
                     {
-                        data: 'child_product_name',
-                        name: 'child_product_name'
-                    },
-                    {
                         data: 'parent_name',
                         name: 'parent_name'
+                    },
+                    {
+                        data: 'child_product_name',
+                        name: 'child_product_name'
                     },
                     {
                         data: 'photos',
@@ -102,7 +108,7 @@
                     },
                     {
                         data: 'collection_name',
-                        name: 'collection_'
+                        name: 'collection_name'
                     },
                     {
                         data: 'zones_name',
@@ -123,6 +129,10 @@
                     {
                         data: 'categories_name',
                         name: 'categories_name'
+                    },
+                    {
+                        data: 'comments',
+                        name: 'comments'
                     },
                     {
                         data: 'parent_created_at',

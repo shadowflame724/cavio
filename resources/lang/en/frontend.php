@@ -48,6 +48,7 @@ return [
         'shopByCollection' => 'Shop by Collection',
         'shopByCategory' => 'Shop by Category',
         'moreCategories' => ':count more categories',
+        'products' => 'Products',
         'showAll' => 'show All',
         'new' => 'new',
         'okay' => 'okay',

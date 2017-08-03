@@ -21,9 +21,29 @@
                 @include('backend.zones.zone-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab" data-toggle="tab">EN</a>
+            </li>
+            <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
+            <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+        </ul>
 
         <div class="box-body">
             @include('backend.zones._form')
+            <div class="form-group">
+                {{ Form::label(
+                    'sort',
+                    trans('validation.attributes.backend.access.roles.sort'),
+                    ['class' => 'col-lg-2 control-label']
+                ) }}
+                <div class="col-lg-10">
+                    {{ Form::text(
+                        'sort',
+                        null,
+                        ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']
+                    ) }}
+                </div>
+            </div>
         </div><!-- /.box-body -->
 
         <div class="box-footer">
