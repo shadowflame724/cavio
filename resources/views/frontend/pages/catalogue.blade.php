@@ -4,6 +4,7 @@
 
 @section('before_header', '')
 
+
 @section('content')
 
     <section id="top-waves" class="relative"></section>
