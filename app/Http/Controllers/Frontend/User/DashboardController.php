@@ -48,7 +48,6 @@ class DashboardController extends Controller
                     }
                 }
 
-
                 $summ = [
                     'summ_vat' => $summ_vat,
                     'summ_default' => $summ_default,
@@ -62,7 +61,8 @@ class DashboardController extends Controller
 
 
         return view('frontend.user.dashboard',[
-            'orders' => $orders
+            'orders' => $orders,
+            'config' => $config
         ]);
     }
 }

@@ -113,7 +113,10 @@
                 @endif
               </div>
               <div class="total-basket-main">
-                @include('frontend.includes.total_basket',['summ' => $summ])
+                @include('frontend.includes.total_basket',[
+                'summ' => $summ,
+                'config' => $config
+                ])
               </div>
           </div>
             <div class="wrap-stash_order clearfix">

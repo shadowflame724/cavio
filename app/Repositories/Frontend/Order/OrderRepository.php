@@ -151,7 +151,6 @@ class OrderRepository extends BaseRepository
                 }
             }
 
-
             $orders[] = [
                 'id' => $order->id,
                 'uid' => $order->uid,

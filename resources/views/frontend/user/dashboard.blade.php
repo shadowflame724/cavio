@@ -320,13 +320,12 @@
                                             </div>
                                         </div>
                                         @endforeach
-
                                         <div class="item-detail-order-data-wrap_anim order total_result clearfix">
                                             <div class="wrap-total_result-ord_it order">
                                                 <div class="label-total">{{ trans('frontend.shoppingCart.totalAmount') }}:</div>
                                                 <div class="total_price-ord_it">{{$order['sum']['summ_default']}} €</div>
                                                 <div class="crossed-price">{{$order['sum']['summ_vat']}} €</div>
-                                                <div class="price-vat">{{ trans('frontend.shoppingCart.including') }} 22% ({{round($order['sum']['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}</div>
+                                                <div class="price-vat">{{ trans('frontend.shoppingCart.including') }} {{$config['vat_data']}}% ({{round($order['sum']['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}</div>
                                             </div>
                                         </div>
                                     </div>
