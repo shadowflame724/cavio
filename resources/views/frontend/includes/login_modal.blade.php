@@ -7,7 +7,7 @@
                 <div class="wrap-swiper-log_reg inner-zone-col-modal relative">
 
                     <div class="wrap-log_reg-toggle">
-                        <div class="item-log_reg-toggle log">{{ trans('frontend.login_modal.login') }}</div>
+                        <div class="item-log_reg-toggle log">{{ trans('frontend.header.login') }}</div>
                         <div class="item-log_reg-toggle reg">{{ trans('frontend.login_modal.register') }}</div>
                     </div>
 
