@@ -323,17 +323,17 @@
                                         <div class="item-detail-order-data-wrap_anim order total_result clearfix">
                                             <div class="wrap-total_result-ord_it order">
                                                 <div class="label-total">{{ trans('frontend.shoppingCart.totalAmount') }}:</div>
-                                                @if($order['sum']['discount_all'] > 0)
-                                                    <div class="total_price-ord_it">{{$order['sum']['summ_default']}} €</div>
-                                                    <div class="crossed-price">{{$order['sum']['summ_vat']}} €</div>
+                                                @if($order['sum']->discount_all > 0)
+                                                    <div class="total_price-ord_it">{{$order['sum']->summ_default}} €</div>
+                                                    <div class="crossed-price">{{$order['sum']->summ_vat}} €</div>
                                                 @else
-                                                    <div class="crossed-price">{{$order['sum']['summ_vat']}} €</div>
+                                                    <div class="crossed-price">{{$order['sum']->summ_vat}} €</div>
                                                 @endif
 
-                                                <div class="price-vat">{{ trans('frontend.shoppingCart.including') }} {{$config['vat_data']}}% ({{round($order['sum']['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}
-                                                @if($order['sum']['discount_all'] > 0)
-                                                    @php($summF = $order['sum']['summ_vat']*$order['sum']['discount_all']/100)
-                                                    ,and Additional discount {{$order['sum']['discount_all']}}% ({{round($summF)}}€)
+                                                <div class="price-vat">{{ trans('frontend.shoppingCart.including') }} {{$config['vat_data']}}% ({{round($order['sum']->summ_default*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}
+                                                @if($order['sum']->discount_all > 0)
+                                                    @php($summF = $order['sum']->summ_vat*$order['sum']->discount_all/100)
+                                                    ,and Additional discount {{$order['sum']->discount_all}}% ({{round($summF)}}€)
                                                 @endif
                                                 </div>
                                             </div>

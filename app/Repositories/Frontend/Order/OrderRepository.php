@@ -151,6 +151,9 @@ class OrderRepository extends BaseRepository
                 }
             }
 
+            $product_data = json_decode($order->product_data);
+            $summ = (isset($product_data->cart_summ_data)) ? $product_data->cart_summ_data : [];
+
             $orders[] = [
                 'id' => $order->id,
                 'uid' => $order->uid,
@@ -158,6 +161,7 @@ class OrderRepository extends BaseRepository
                 'status' => $statusArr[$order->status],
                 'date' => $date,
                 'orderProduct' => $orderProductArr,
+                'sum' => $summ
             ];
         }
 
