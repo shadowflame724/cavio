@@ -446,6 +446,10 @@ function initPageAfterLoading() {
   // CATALOGUE ========
   if(document.querySelector("main[data-page='/catalogue']"))  initCataloguePage();
 
+
+  // DASHBOARD
+  if(document.querySelector("main[data-page='/dashboard']"))  initDashboardPage();
+
   mainScroll.update();
 }
 
@@ -2276,64 +2280,68 @@ function initCataloguePage() {
  }
  });
  }
+*/
+ //initDashboardPage
+function initDashboardPage() {
+  console.log('Profile page');
 
- //profile
- if(document.querySelector('body.profile')){
- console.log('Profile page');
+  var swiperProfile;
 
- var swiperProfile;
+  setTimeout(function () {
+    $('.small-page-title.hide').attr('data-anim', 'true')
+  }, 300);
+  setTimeout(function () {
+    $('.wrap-catal.hide').attr('data-anim', 'true')
+  }, 500);
+  setTimeout(function () {
+    if (mainScroll) mainScroll.update();
+  }, 100);
 
- $(document).ready(function () {
- setTimeout(function(){   $('.small-page-title.hide').attr('data-anim', 'true')   }, 300);
- setTimeout(function(){   $('.wrap-catal.hide').attr('data-anim', 'true')   }, 500);
- setTimeout(function(){   if(mainScroll) mainScroll.update();   }, 100);
+  if (window.innerWidth > 1024) {
+    var activeZonColList = $('.zon-col-side-toggle a.active').attr('for');
+    $('.zon-col-list-catal').hide();
+    $('.zon-col-list-catal.' + activeZonColList).show()
+  }
 
- if(window.innerWidth > 1024){
- var activeZonColList = $('.zon-col-side-toggle a.active').attr('for');
- $('.zon-col-list-catal').hide();
- $('.zon-col-list-catal.'+activeZonColList).show()
- }
+  swiperProfile = new Swiper('.wrap-profile-swiper', {
+    slidesPerView: 1,
+    centeredSlides: true,
+    speed: 700,
+    spaceBetween: 240,
+    followFinger: false,
+    simulateTouch: false,
+    // autoHeight: true,
+    effect: "coverflow",
+    coverflow: {slideShadows: false},
+    prevButton: '.item-log_reg-toggle.log',
+    nextButton: '.item-log_reg-toggle.reg',
+  });
 
- swiperProfile = new Swiper('.wrap-profile-swiper', {
- slidesPerView: 1,
- centeredSlides: true,
- speed: 700,
- spaceBetween: 240,
- followFinger: false,
- simulateTouch: false,
- // autoHeight: true,
- effect: "coverflow",
- coverflow: { slideShadows : false },
- prevButton: '.item-log_reg-toggle.log',
- nextButton: '.item-log_reg-toggle.reg',
- });
- });
 
- $('.row-short-data').on('click', function(event){
- $(this).closest('.row-order_list').toggleClass('close open');
+  $('.row-short-data').on('click', function (event) {
+    $(this).closest('.row-order_list').toggleClass('close open');
 
- // var self = this;
- // var prevH;
- // var int = setInterval(function(){
- //   console.log(prevH, $(self).closest('.row-order_list').height());
- //
- //   if(prevH != $(self).closest('.row-order_list').height()){
- //     swiperProfile.update();
- //     prevH = $(self).closest('.row-order_list').height();
- //   }
- //   else clearInterval(int);
- // }, 50);
- // swiperProfile.update();
- // setTimeout(function(){
- //   swiperProfile.update();
- // //   console.log(123)
- // //   swiperProfile.update();
- // //   // swiperProfile.updateContainerSize();
- // }, 300)
+    // var self = this;
+    // var prevH;
+    // var int = setInterval(function(){
+    //   console.log(prevH, $(self).closest('.row-order_list').height());
+    //
+    //   if(prevH != $(self).closest('.row-order_list').height()){
+    //     swiperProfile.update();
+    //     prevH = $(self).closest('.row-order_list').height();
+    //   }
+    //   else clearInterval(int);
+    // }, 50);
+    // swiperProfile.update();
+    // setTimeout(function(){
+    //   swiperProfile.update();
+    // //   console.log(123)
+    // //   swiperProfile.update();
+    // //   // swiperProfile.updateContainerSize();
+    // }, 300)
 
- })
- }
- */
+  })
+}
 
 
 $(document).on('click', '#order-now', function (e) {
@@ -3186,8 +3194,12 @@ $(document).on('click', '.zone-col-modal, .close-modal', function (event) {
     $(this).attr('data-anim', 'false');
     $('body').removeClass('overfl-h');
 
-    var pathToBack = location.pathname.substr(0, location.pathname.lastIndexOf('/'));
-    App.goToPage(pathToBack);
+
+    if(!App.goPopupBack()){
+      console.log('222222')
+      var pathToBack = location.pathname.substr(0, location.pathname.lastIndexOf('/'));
+      App.goToPage(pathToBack);
+    }
 
 
     // RESET AND CLEAR FORM DATA =========
