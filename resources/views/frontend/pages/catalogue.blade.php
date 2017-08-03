@@ -147,12 +147,6 @@
                 // TODO: Вывести пагинацию
                 ?>
                 {{ $model->links() }}
-                <ul class="list-pagination clearfix">
-                  <li class="pag-item active">1</li>
-                  <li class="pag-item">2</li>
-                  <li class="pag-item">3</li>
-                  <li class="pag-item">4</li>
-                </ul>
               </div>
               @else
                 <h2 class="no-products">{{ trans('frontend.catalogue.no_products') }}</h2>
