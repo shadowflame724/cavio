@@ -40,7 +40,7 @@
             $path .= $getParams;
         }
     @endphp
-        <div id="before_header">
+        <div id="before_header" data-anim="false">
             @yield('before_header')
         </div>
         @include('frontend.includes.header')
