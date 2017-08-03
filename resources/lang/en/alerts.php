@@ -59,10 +59,11 @@ return [
             'deleted' => 'The zone was successfully deleted.',
             'updated' => 'The zone was successfully updated.',
         ],
-        'goods' => [
-            'created' => 'The goods was successfully created.',
-            'deleted' => 'The goods was successfully deleted.',
-            'updated' => 'The goods was successfully updated.',
+        'products' => [
+            'created' => 'The product was successfully created.',
+            'duplicate_created' => 'The product copy was successfully created.',
+            'deleted' => 'The product was successfully deleted.',
+            'updated' => 'The product was successfully updated.',
         ],
         'popup' => [
             'updated' => 'The popup was successfully updated.'
