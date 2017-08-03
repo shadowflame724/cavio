@@ -147,6 +147,13 @@ a{
   &.v-centering{ padding-top: 12vh; }
 }
 
+#banner{
+  transition: 1s;
+
+  &[data-anim='true']{ opacity: 1;  }
+  &[data-anim='false']{ opacity: 0; transform: scale(.96); }
+}
+
 .center{
   margin-left: auto;
   margin-right: auto;
