@@ -36,6 +36,9 @@
         if($path == '/'){
             $path = '';
         }
+        if(isset($getParams) && !empty($getParams)){
+            $path .= $getParams;
+        }
     @endphp
         <div id="before_header">
             @yield('before_header')

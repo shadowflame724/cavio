@@ -24,11 +24,14 @@
             <div class="wrap-catal-side-items">
               <div class="wrap-percents">
                 <ul class="catal-perc clearfix">
-                  <li data-filter-name="sale" data-filter-val="false" class="active">{{ trans('frontend.catalogue.all') }}</li>
-                    <?php
-                    // TODO: Сделать фильтр по скидкам (?sale=true)
-                    ?>
-                  <li data-filter-name="sale" data-filter-val="true">{{ trans('frontend.catalogue.sale') }} %</li>
+                  <li @if(!$getData['sale'])class="active" @endif
+                      data-filter-name="sale"
+                      data-filter-val="false"
+                  >{{ trans('frontend.catalogue.all') }}</li>
+                  <li @if($getData['sale'])class="active" @endif
+                      data-filter-name="sale"
+                      data-filter-val="true"
+                  >{{ trans('frontend.catalogue.sale') }} %</li>
                 </ul>
 
               </div>
@@ -69,7 +72,17 @@
                       // TODO: Сделать фильтр по зонам (?zone=slug)
                     ?>
                     @foreach($zones as $zone)
-                      <li>
+                      @php
+                        $isActive = false;
+                        if(isset($getData['zones']) && !empty($getData['zones'])){
+                          foreach ($getData['zones'] as $zoneFromGet) {
+                            if($zoneFromGet == $zone->slug){
+                              $isActive = true;
+                            }
+                          }
+                        }
+                      @endphp
+                      <li @if($isActive)class="active" @endif>
                         <a href="#zone={{ $zone->slug }}"
                            data-filter-name="zones" data-filter-val="{{ $zone->slug }}"
                            class="anim-underline">{{ $zone->{'title'.$langSuf} }}</a>
@@ -86,7 +99,17 @@
                     // TODO: Сделать фильтр по колекциям (?collection=slug)
                     ?>
                     @foreach($collections as $collection)
-                      <li>
+                      @php
+                        $isActive = false;
+                        if(isset($getData['colls']) && !empty($getData['colls'])){
+                          foreach ($getData['colls'] as $collFromGet) {
+                            if($collFromGet == $collection->slug){
+                              $isActive = true;
+                            }
+                          }
+                        }
+                      @endphp
+                      <li @if($isActive)class="active" @endif>
                         <a href="#collection={{ $collection->slug }}"
                            data-filter-name="collections" data-filter-val="{{ $collection->slug }}"
                            class="anim-underline">

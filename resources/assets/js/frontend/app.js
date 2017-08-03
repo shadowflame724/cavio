@@ -21,14 +21,15 @@ var App = (function () {
           val = $el.attr('data-filter-val'),
           pageNew = false;
 
-        if(_catalogParams[type]) {
+        if(typeof _catalogParams[type] !== 'undefined') {
           if (type === 'sale') {
             var prevVal = JSON.stringify(_catalogParams.sale);
             _catalogParams.sale = (val === 'true') ? true : false;
             if (prevVal !== JSON.stringify(_catalogParams.sale)) {
               pageNew = true;
             }
-            console.log(prevVal,' !== ',JSON.stringify(_catalogParams.sale));
+            $prnt.find('li').removeClass('active');
+            $el.addClass('active');
           }
           if (type === 'zones' || type === 'collections') {
             var rem = $prnt.hasClass('active') ? false : true,
@@ -41,7 +42,6 @@ var App = (function () {
             } else {
               _catalogParams[type].push(val);
             }
-            console.log(prevVal,' !== ',JSON.stringify(_catalogParams[type]));
             if (prevVal !== JSON.stringify(_catalogParams[type])) {
               pageNew = true;
             }
@@ -144,14 +144,7 @@ var App = (function () {
       var prevPath = $('main').attr('data-page'),
       toggleHidenClass = function (isAdd) {
         if(isAdd) {
-          // $('main')
-          //   .find('.small-page-title,.wrap-catal')
-          //   .addClass('hide');
-          // $('main .show')
-          //   .removeClass('show');
-
-
-          // $('main [data-anim]').attr('data-anim', 'false');
+          $('main [data-anim]').attr('data-anim', 'false');
         } else {
           // $('main')
           //   .find('.zon-col-list,.wrap-banner-cont')

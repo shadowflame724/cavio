@@ -140,7 +140,9 @@ class ProductController extends Controller
         return view('frontend.pages.catalogue', [
             'page' => $page,
             'cats' => $catsMenu,
-            'model' => $products
+            'model' => $products,
+            'getData' => $data,
+            'getParams' => $data['getParams']
         ]);
     }
 

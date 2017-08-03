@@ -93,6 +93,7 @@ class ProductController extends Controller
 
         });
 
+        dd($results);
         $resDatas = $results->skipRows(3)->get();
         $resTitles = $results->skipRows(1)->takeRows(1)->get();
         $res = [];

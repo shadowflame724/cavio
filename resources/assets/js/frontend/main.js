@@ -449,7 +449,7 @@ function initPageAfterLoading() {
 
 
   // CATALOGUE ========
-  if(document.querySelector("main[data-page='/catalogue']"))  initCataloguePage();
+  if(document.querySelector("main[data-page^='/catalogue']"))  initCataloguePage();
 
 
   // DASHBOARD
@@ -1894,12 +1894,6 @@ function initCataloguePage() {
     }
   });
 
-  $('ul.catal-perc li').on('click', function (e) {
-    if ($(this).hasClass('active'))  return;
-
-    $(this).siblings('.active').removeClass('active');
-    this.className += ' active';
-  });
 }
 
 
@@ -3614,7 +3608,7 @@ function initWaves() {
     svgWaveWrap = document.querySelector('#dealers');
   }
   if (document.querySelector("main[data-page='/showrooms']")) svgWaveWrap = document.querySelector('#waves-content');
-  if (document.querySelector("main[data-page='/catalogue']") ||
+  if (document.querySelector("main[data-page^='/catalogue']") ||
     document.querySelector("main[data-page='/press-design']") ||
     document.querySelector("main[data-page='/finish-tissue']") ||
     document.querySelector("main[data-page='/privacy-policy']") ||

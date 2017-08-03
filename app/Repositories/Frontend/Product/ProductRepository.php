@@ -94,15 +94,19 @@ class ProductRepository extends BaseRepository
         if(isset($data['colls']) || isset($data['zones'])){
             $col_zon_prods = $this->getCollZones($data['colls'], $data['zones']);
         }
-//        dd($col_zon_prods);
-        if($paginCnt > 0) {
-            $model = Product::where('published', 1)
-                ->orderBy($order_by, $sort)
-                ->paginate($paginCnt);
+        $model = Product::query()->where('published', 1);
+        if(count($col_zon_prods) > 0){
+            $model = $model->whereIn('id', $col_zon_prods);
+        }
+        if(isset($data['sale']) && $data['sale']){
+            $model = $model->where('main_photo_data', 'like', '%"isDiscount":true%');
+        }
+        $model = $model->orderBy($order_by, $sort);
+
+        if ($paginCnt > 0) {
+            $model = $model->paginate($paginCnt);
         } else {
-            $model = Product::where('published', 1)
-                ->orderBy($order_by, $sort)
-                ->get();
+            $model = $model->get();
         }
 
         if(isset($model)) {
@@ -232,46 +236,70 @@ class ProductRepository extends BaseRepository
 
     public function catOne($slug, $order_by = 'sort', $sort = 'asc', $paginCnt = 0, $data = [])
     {
+        $res = [];
         $categoryModel = $this->getCatBySlug($slug);
 
         $product_ids = '';
-        if($categoryModel->parent_id == null){
+        if ($categoryModel->parent_id == null) {
             $ids = [];
-            foreach($categoryModel->children as $child){
-                if(!empty($child->product_ids)){
-                    $prIds = explode(',',$child->product_ids);
+            foreach ($categoryModel->children as $child) {
+                if (!empty($child->product_ids)) {
+                    $prIds = explode(',', $child->product_ids);
                     foreach ($prIds as $prId) {
                         $id = (int)$prId;
-                        if($id > 0){
+                        if ($id > 0) {
                             $ids[$id] = $id;
                         }
                     }
                 }
             }
             $product_ids = implode(',', $ids);
-        } elseif(!empty($categoryModel->product_ids)) {
+        } elseif (!empty($categoryModel->product_ids)) {
             $product_ids = $categoryModel->product_ids;
         }
 
-        if(!empty($product_ids)){
-            $res = [];
-            $prodIds = explode(',',$product_ids);
-            if($paginCnt > 0) {
-                $model = Product::whereIn('id', $prodIds)
-                    ->where('published', 1)
-                    ->paginate($paginCnt);
+        if (!empty($product_ids)) {
+            $prodIds = [];
+            $product_ids = explode(',', $product_ids);
+            $col_zon_prods = [];
+            if(isset($data['colls']) || isset($data['zones'])){
+                $col_zon_prods = $this->getCollZones($data['colls'], $data['zones']);
+            }
+            foreach ($product_ids as $product_id) {
+                $is = false;
+                $id = (int)$product_id;
+                if (count($col_zon_prods) > 0) {
+                    foreach ($col_zon_prods as $zid) {
+                        if ($id === (int)$zid) $is = true;
+                    }
+                } else {
+                    $is = true;
+                }
+                if ($is) {
+                    $prodIds[$id] = $id;
+                }
+            }
+
+            $model = Product::query()
+                ->where('published', 1)
+                ->whereIn('id', $prodIds);
+            if(isset($data['sale']) && $data['sale']){
+                $model = $model->where('main_photo_data', 'like', '%"isDiscount":true%');
+            }
+            $model = $model->orderBy($order_by, $sort);
+
+            if ($paginCnt > 0) {
+                $model = $model->paginate($paginCnt);
             } else {
-                $model = Product::whereIn('id', $prodIds)->where('published', 1)->get();
+                $model = $model->get();
             }
 
-            if(isset($model)) {
-                return $model;
+            if (isset($model)) {
+                $res = $model;
             }
-
-            return $res;
         }
 
-        return [];
+        return $res;
     }
 
     public function getBySlug($slug, $with = null)
