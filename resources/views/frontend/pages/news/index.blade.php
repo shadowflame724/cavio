@@ -33,7 +33,7 @@
 
               <div class="news-item">
                 @if($item->image)
-                  <a href="{{ route('frontend.news', $item->slug) }}"><img class="news-item-img"
+                  <a href="{{ route('frontend.news.show', $item->slug) }}"><img class="news-item-img"
                                                                            src="upload/images/{{ $item->image }}"></a>
                 @endif
                 <div class="news-date">{{ $item->created_at->diffForHumans() }}</div>

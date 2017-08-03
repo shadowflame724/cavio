@@ -109,7 +109,7 @@ var App = (function () {
         _editHeadHtml(obj.headHtml, function () {
           _editHeadSEO(obj.head);
           _editAfterFooter(obj.afterFooterHtml);
-          _editAfterHeader(obj.afterHeaderHtml);
+          _editBeforeHeader(obj.beforeHeaderHtml);
           _editContentHtml(obj.contentHtml, obj.dataPage, function () {
             setTimeout(function() {
               _reInit(function() {
@@ -155,14 +155,15 @@ var App = (function () {
             dataPage = $html.find('#content').attr('data-page'),
             contentHtml = $html.find('#content').html(),
             afterFooterHtml = $html.find('#after_footer').html(),
-            afterHeaderHtml = $html.find('#before_header').html();
+            beforeHeaderHtml = $html.find('#before_header').html();
 
           needPageData = {
             'head': head,
             'headHtml': headHtml,
             'dataPage': dataPage,
             'contentHtml': contentHtml,
-            'afterFooterHtml': afterFooterHtml
+            'afterFooterHtml': afterFooterHtml,
+            'beforeHeaderHtml': beforeHeaderHtml
           };
           _loadedPages[ctx.canonicalPath] = needPageData;
           insertInHtml(needPageData);
@@ -233,7 +234,7 @@ var App = (function () {
     $('#after_footer').html(html);
     // clbk();
   }
-  function _editAfterHeader(html, clbk) {
+  function _editBeforeHeader(html, clbk) {
     $('#before_header').html(html);
     // clbk();
   }

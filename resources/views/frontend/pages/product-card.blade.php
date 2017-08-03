@@ -290,7 +290,7 @@
                                                 @foreach($photo['collection'] as $img)
                                                 @if(!empty($img))
                                                 <div class="swiper-slide card-modal-slide bg-white-marmur">
-                                                    <img src="//cvo-dev.spongeservice.com.ua/upload/images/zone/horizontal/{{$img}}" alt="">
+                                                    <img src="//cvo-dev.spongeservice.com.ua/upload/images/zone/original/{{$img}}" alt="">
                                                 </div>
                                                 @endif
                                                 @endforeach
