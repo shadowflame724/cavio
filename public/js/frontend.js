@@ -1838,7 +1838,7 @@ function initCataloguePage() {
 
 
   $('.disactive-item').on('click', function () {
-    $(this).closest('.active').removeClass('active')
+    $(this).siblings('a').click();
   });
 
 
