@@ -2369,7 +2369,8 @@ function initBasketPage() {
     itemStash.addClass('remove');
 
     setTimeout(function (e) {
-      itemStash.remove()
+      console.log('itemStash.remove start');
+      itemStash.remove();
     }, 600);
   });
 
