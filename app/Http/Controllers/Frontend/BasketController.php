@@ -281,7 +281,7 @@ class BasketController extends Controller
                 $orderOne->save();
                 $this->carts->destroy($item['price_id']);
             }
-            $user->notify(new NewOrder($order));
+            access()->user()->notify(new NewOrder($order));
         }
 
         return response()->json($response, $statusCode);
