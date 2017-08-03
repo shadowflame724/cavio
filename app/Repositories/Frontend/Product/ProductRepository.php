@@ -4,6 +4,9 @@ namespace App\Repositories\Frontend\Product;
 
 use App\Models\Dimensions\Dimensions;
 use App\Models\Category\Category;
+use App\Models\Collection\Collection;
+use App\Models\Zone\Zone;
+use App\Models\CollectionZone\CollectionZone;
 use App\Models\Product\Product;
 use App\Models\Product\ProductChild;
 use App\Models\Product\ProductPhoto;
@@ -12,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CollectionZone\CollectionZone;
 use App\Models\FinishTissue\FinishTissue;
 
 /**
@@ -25,15 +27,74 @@ class ProductRepository extends BaseRepository
      */
     const MODEL = Product::class;
 
+    public function getCollZones($colls = null, $zones = null)
+    {
+        $res = [];
+        $cIds = [];
+        $zIds = [];
+        if(!empty($colls)){
+            $modelColls = Collection::select('id','slug')
+                ->whereIn('slug', $colls)
+                ->orderBy('sort', 'desc')
+                ->get();
+            foreach ($modelColls as $coll){
+                $cIds[$coll->id] = $coll->id;
+            }
+        }
+        if(!empty($zones)){
+            $modelZones = Zone::select('id','slug')
+                ->whereIn('slug', $zones)
+                ->orderBy('sort', 'desc')
+                ->get();
+            foreach ($modelZones as $zone){
+                $zIds[$zone->id] = $zone->id;
+            }
+        }
+        if(!empty($cIds) || !empty($zIds)){
+            $modelOne = CollectionZone::select('id','product_ids')
+                ->where(function ($query) use ($cIds,$zIds){
+                    if(count($cIds) > 0 && count($zIds) > 0){
+                        $query
+                            ->whereIn('collection_id', $cIds)
+                            ->whereIn('zone_id', $zIds);
+                    }elseif(count($cIds) > 0){
+                        $query
+                            ->whereIn('collection_id', $cIds);
+                    }elseif(count($zIds) > 0){
+                        $query
+                            ->whereIn('zone_id', $zIds);
+                    }
+                })
+                ->orderBy('sort', 'desc')
+                ->get();
+            foreach ($modelOne as $item) {
+                $product_ids = explode(',', $item->product_ids);
+                foreach ($product_ids as $product_id) {
+                    $pr_id = (int)$product_id;
+                    if ($pr_id > 0) {
+                        $res[$pr_id] = $pr_id;
+                    }
+                }
+            }
+        }
+
+        return $res;
+    }
+
     /**
      * @param string $order_by
      * @param string $sort
      *
      * @return mixed
      */
-    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = 0)
+    public function getAll($order_by = 'sort', $sort = 'asc', $paginCnt = 0, $data = [])
     {
         $res = [];
+        $col_zon_prods = [];
+        if(isset($data['colls']) || isset($data['zones'])){
+            $col_zon_prods = $this->getCollZones($data['colls'], $data['zones']);
+        }
+        dd($col_zon_prods);
         if($paginCnt > 0) {
             $model = Product::where('published', 1)
                 ->orderBy($order_by, $sort)
@@ -169,7 +230,7 @@ class ProductRepository extends BaseRepository
         return $res;
     }
 
-    public function catOne($slug, $paginCnt = 0)
+    public function catOne($slug, $order_by = 'sort', $sort = 'asc', $paginCnt = 0, $data = [])
     {
         $categoryModel = $this->getCatBySlug($slug);
 

@@ -18,27 +18,40 @@ var App = (function () {
         var $el = $(this),
           $prnt = $el.parent(),
           type = $el.attr('data-filter-name'),
-          val = $el.attr('data-filter-val');
+          val = $el.attr('data-filter-val'),
+          pageNew = false;
 
         if(_catalogParams[type]) {
-          if(type === 'sale') {
+          if (type === 'sale') {
+            var prevVal = JSON.stringify(_catalogParams.sale);
             _catalogParams.sale = (val === 'true') ? true : false;
+            if (prevVal !== JSON.stringify(_catalogParams.sale)) {
+              pageNew = true;
+            }
+            console.log(prevVal,' !== ',JSON.stringify(_catalogParams.sale));
           }
-          if(type === 'zones' || type === 'collections') {
-            var rem = $prnt.hasClass('active') ? false : true;
-            if(rem){
+          if (type === 'zones' || type === 'collections') {
+            var rem = $prnt.hasClass('active') ? false : true,
+                prevVal = JSON.stringify(_catalogParams[type]);
+            if (rem) {
               var index = _catalogParams[type].indexOf(val);
               if (index > -1) {
                 _catalogParams[type].splice(index, 1);
               }
-            }else{
+            } else {
               _catalogParams[type].push(val);
             }
+            console.log(prevVal,' !== ',JSON.stringify(_catalogParams[type]));
+            if (prevVal !== JSON.stringify(_catalogParams[type])) {
+              pageNew = true;
+            }
           }
-          if(type === 'page') {
+          if (pageNew) {
+            _catalogParams.page = 1;
+          }
+          if (type === 'page') {
             _catalogParams.page = parseInt(val);
           }
-
           var link = '';
           $.each(_catalogParams, function (tp, vl) {
             link += (link === '') ? '?' : '';
@@ -46,13 +59,9 @@ var App = (function () {
             link += tp + '=' + vl;
           });
 
-          console.log('::', link, JSON.stringify(_catalogParams));
-
-          // alert(type + '=' + val);
+          // console.log('::', link, JSON.stringify(_catalogParams));
           page('/catalogue'+link);
         }
-        //   console.warn('внутренний переход на',link);
-        //   page(link);
         return false;
       })
 
