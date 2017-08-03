@@ -102,6 +102,10 @@ return [
         'from' => 'от',
         'customDiscount' => 'персональная скидка',
         'totalAmount' => 'Общая стоимость',
+        'amount' => 'Количество',
+        'date' => 'Дата',
+        'order' => 'Покупки',
+        'status' => 'Статус',
         'additionalDiscounts' => 'Дополнительная скидка',
         'totalToPay' => 'Всего к оплате',
         'including' => 'Включая',
@@ -156,6 +160,13 @@ return [
         'collections' => 'Коллекции',
         'no_products' => 'Нет товаров для показа',
 
+    ],
+
+    'orders' => [
+        'new' => 'Новый',
+        'sent' => 'Отправлен',
+        'delivered' => 'Доставляется',
+        'done' => 'Завершен'
     ]
 
 ];

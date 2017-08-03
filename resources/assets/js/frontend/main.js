@@ -240,6 +240,17 @@ $(document).ready(function () {
     return false;
   });
 
+
+  //subscribe
+  $('body').on('click', '[data-filter-name="sale"]', function () {
+    var flag = $(this).attr('data-filter-val');
+
+    $.get(_action + '?email=' + mail, function (data) {
+      alert("subscribe success SEND");
+    });
+    return false;
+  });
+
   //user_profile update
   $('body').on('submit', '.user_profile', function () {
     var _form = $(this),
@@ -2387,16 +2398,6 @@ function initBasketPage() {
   }, 500);
 
 
-  // $('.kick-ord_it').on('click', function (e) {
-  //   var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
-  //   itemStash.addClass('remove');
-  //
-  //   setTimeout(function (e) {
-  //     console.log('itemStash.remove start');
-  //     itemStash.remove();
-  //   }, 600);
-  // });
-
   $('.kick-ord_it').on('click', function(e){
     var itemStash = $(this).closest('.item-detail-order-data-wrap_anim');
     var priceid = $(this).attr('data-priceid');
@@ -2405,32 +2406,6 @@ function initBasketPage() {
 
     setTimeout(function(e){   itemStash.remove()  }, 600);
   });
-
-  // $('.calc_it').on('click', function (e) {
-  //   if ($(this).hasClass('disabled'))  return;
-  //
-  //   var itemNumbValEl = $(this).siblings(".ord_it-numb-val");
-  //
-  //   var plusVal = 1;
-  //   itemNumbValEl.removeClass('plus minus');
-  //   if ($(this).hasClass('minus')) {
-  //     plusVal = -1;
-  //     setTimeout(function () {
-  //       itemNumbValEl.addClass('minus')
-  //     }, 1);
-  //   } else {
-  //     setTimeout(function () {
-  //       itemNumbValEl.addClass('plus')
-  //     }, 1);
-  //   }
-  //
-  //   itemNumbValEl.text(+itemNumbValEl.text() + plusVal);
-  //
-  //   var btnMinus = $(this).closest(".ord_it-numb").find('.calc_it.minus');
-  //
-  //   if (+itemNumbValEl.text() <= 1) btnMinus.addClass('disabled');
-  //   else                             btnMinus.removeClass("disabled");
-  // });
 
   $('.calc_it').on('click', function(e){
     if($(this).hasClass('disabled'))  return;

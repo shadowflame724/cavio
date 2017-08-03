@@ -234,6 +234,107 @@ class ProductRepository extends BaseRepository
         return $res;
     }
 
+    public function getProductsbyPriceId($price_id)
+    {
+        $res = [];
+        $products = [];
+
+        if(!empty($ids)){
+            $prod = ProductPrice::where('id', $price_id)
+                ->where('published', 1)
+                ->first();
+        }
+
+        if(!empty($product)){
+            $nativePrice = $prod->price;
+            $discountPrice = 0;
+            if($prod->discount > 0){
+                $nativePrice = round($nativePrice*((100-$prod->discount)/100));
+            }
+            $vatPrice = round($nativePrice*1.22);
+
+            //Photo
+            $productPhoto = ProductPhoto::where('id',$prod->product_photo_id)->first();
+            if($productPhoto->published){
+                $productPhotos = (!empty($productPhoto->photos)) ? explode(',',$productPhoto->photos) : [];
+
+                $finish = [];
+                $finish_ids = (!empty($productPhoto->finish_ids)) ? explode(',',$productPhoto->finish_ids) : [];
+                $finishModel = FinishTissue::whereIn('id',$finish_ids)->get();
+                foreach ($finishModel as $item) {
+                    $finish[] = $item->title;
+                }
+
+                $tissue = [];
+                $tissue_ids = (!empty($productPhoto->tissue_ids)) ? explode(',',$productPhoto->tissue_ids) : [];
+                $tissueModel = FinishTissue::whereIn('id',$tissue_ids)->get();
+                foreach ($tissueModel as $item) {
+                    $tissue[] = $item->title;
+                }
+
+                $productPhotosArrRes = [
+                    'id' => $productPhoto->id,
+                    'product_id' => $productPhoto->product_id,
+                    'photos' => $productPhotos,
+                    'finish' => $finish,
+                    'tissue' => $tissue,
+                    'prev' => $productPhoto->prev,
+                    'prev_ru' => $productPhoto->prev_ru,
+                    'prev_it' => $productPhoto->prev_it,
+                    'main' => $productPhoto->main,
+                ];
+                $ids = explode(',',$productPhoto->collection_ids);
+                $colsArrModel = CollectionZone::whereIn('id',$ids)->with('collection')->get();
+                $collsRes = [];
+
+                if(!empty($colsArrModel)){
+                    foreach ($colsArrModel as $colsArr){
+                        $collsRes['zone'][] = $colsArr->title;
+
+                        if(isset($colsArr->collection)){
+                            $collsRes['collection'][] = $colsArr->collection->title;
+                        }
+                    }
+                }
+
+            }
+
+            //Childs
+            $productChildsRes = [];
+            $productChild = ProductChild::where('id',$prod->product_child_id)->first();
+            if($productChild->published){
+                $dimensions = (!empty($productChild->dimensions)) ? \GuzzleHttp\json_decode($productChild->dimensions) : [];
+                $productChildsRes = [
+                    'id' => $productChild->id,
+                    'product_id' => $productChild->product_id,
+                    'code' => $productChild->code,
+                    'name' => $productChild->name,
+                    'name_ru' => $productChild->name_ru,
+                    'name_it' => $productChild->name_it,
+                    'prev' => $productChild->prev,
+                    'prev_ru' => $productChild->prev_ru,
+                    'prev_it' => $productChild->prev_it,
+                    'dimensions' => $dimensions
+                ];
+            }
+
+            $res[] = [
+                'id' => $prod->id,
+                'price_old' => $prod->price,
+                'price_new' => $nativePrice,
+                'price_vat' => $vatPrice,
+                'price_vat_def' => $vatPrice,
+                'discount' => $prod->discount,
+                'productChilds' => $productChildsRes,
+                'productPhotos' => $productPhotosArrRes,
+                'collections' => $collsRes
+            ];
+        }
+
+        return $res;
+    }
+
+
     public function catOne($slug, $order_by = 'sort', $sort = 'asc', $paginCnt = 0, $data = [])
     {
         $res = [];

@@ -103,6 +103,10 @@ return [
         'from' => 'From',
         'customDiscount' => 'custom discount',
         'totalAmount' => 'Total amount',
+        'amount' => 'Amount',
+        'date' => 'Date',
+        'order' => 'Order',
+        'status' => 'Status',
         'additionalDiscounts' => 'Additional discounts',
         'totalToPay' => 'Total to pay',
         'including' => 'Including',
@@ -159,6 +163,13 @@ return [
         'no_products' => 'No products to show',
 
 
+    ],
+
+    'orders' => [
+        'new' => 'New',
+        'sent' => 'Sent',
+        'delivered' => 'Delivered',
+        'done' => 'Completed'
     ]
 
 

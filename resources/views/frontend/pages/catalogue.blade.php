@@ -33,7 +33,6 @@
                       data-filter-val="true"
                   >{{ trans('frontend.catalogue.sale') }} %</li>
                 </ul>
-
               </div>
               <div class="inner-catal-side-items">
                 @foreach($cats as $category)

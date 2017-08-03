@@ -227,207 +227,113 @@
                     <div class="swiper-slide profile-item log swiper-slide-next">
                         <div class="wrap-order_list-profile">
                             <div class="head-order_list clearfix">
-                                <div class="td date">Date</div>
-                                <div class="td order">Order</div>
-                                <div class="td status">Status</div>
+                                <div class="td date">{{ trans('frontend.shoppingCart.date') }}</div>
+                                <div class="td order">{{ trans('frontend.shoppingCart.order') }}</div>
+                                <div class="td status">{{ trans('frontend.shoppingCart.status') }}</div>
                             </div>
                             <div class="body-order_list">
+                                @if(!empty($orders))
+                                @foreach($orders as $order)
                                 <div class="row-order_list close">
                                     <div class="row-short-data clearfix">
                                         <div class="td date">
-                                            <span class="label-short_data">date</span>14.02.2017</div>
+                                            <span class="label-short_data">{{ trans('frontend.shoppingCart.date') }}</span>{{$order['date']}}</div>
                                         <div class="td order">
-                                            <span class="label-short_data">order</span>
-                                            <span class="wrap-for_arrow">#325747</span>
+                                            <span class="label-short_data">{{ trans('frontend.shoppingCart.order') }}</span>
+                                            <span class="wrap-for_arrow">#{{$order['uid']}}</span>
                                         </div>
                                         <div class="td status">
-                                            <span class="label-short_data">status</span>Awaiting payment</div>
+                                            <span class="label-short_data">{{ trans('frontend.shoppingCart.status') }}</span>
+                                            {{ trans('frontend.orders.'.$order['status']) }}
+                                        </div>
                                     </div>
                                     <div class="detail-order-data clearfix">
-                                        <div class="item-detail-order-data-wrap_anim order profile-item discount">
+                                        @foreach($order['orderProduct'] as $product)
+                                        <div class="item-detail-order-data-wrap_anim order profile-item @if($product['product']['discount'] > 0) discount @endif">
                                             <div class="item-detail-order-data stash">
                                                 <div class="inner-order-item-img">
                                                     <div class="for-disp_discount">
-                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
-
-                                                        </div>
+                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['product']['productPhotos']['photos'][0]}})"></div>
                                                     </div>
                                                 </div>
                                                 <div class="wrap-center-order_it-data stash">
                                                     <div>
                                                         <div class="wrap-head-ord_it-for_mobile stash">
                                                             <div class="top-center-ord_it-data clearfix">
-                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
+                                                                <div class="ord_it-name">{{$product['product']['productChilds']['name']}}</div>
                                                                 <div class="wrap-calc_price">
                                                                     <div class="ord_it-numb">
-                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
-                                                                    <div class="ord_it-price">1445 €</div>
+                                                                        <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.amount') }}</div>{{$product['count']}}</div>
+                                                                    <div class="ord_it-price">{{$product['product']['price_vat'] * $product['count']}} €</div>
                                                                 </div>
                                                             </div>
                                                             <div class="mibble-center-ord_it-data order stash">
-                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="bottom-center-ord_it-data clearfix">
-                                                            <span class="material-ord_it">
-                                                                <div class="label-bot-ord_it-data">finish</div>
-                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> <span class="inner-nowrap">Ebano Lucido</span> <span class="inner-nowrap">Ebano Scuro</span> </span>
-                                                            <span class="material-ord_it-code">
-                                                                <div class="label-bot-ord_it-data">Tissue</div>
-                                                                <span class="inner-nowrap">TS445</span> <span class="inner-nowrap">TS111</span> <span class="inner-nowrap">TS222</span> <span class="inner-nowrap">TS333</span> </span>
-                                                            <span class="size-ord_it">
-                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-detail-order-data-wrap_anim order profile-item">
-                                            <div class="item-detail-order-data stash">
-                                                <div class="inner-order-item-img">
-                                                    <div class="for-disp_discount">
-                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
+                                                                <span class="ord_it-code">{{$product['product']['productChilds']['code']}}</span>
+                                                                @if(!empty($product['product']['collections']['zone']))
+                                                                    @foreach($product['product']['collections']['zone'] as $zone)
+                                                                        <span class="catal-type">{{$zone}}</span>
+                                                                    @endforeach
+                                                                @endif
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="wrap-center-order_it-data stash">
-                                                    <div>
-                                                        <div class="wrap-head-ord_it-for_mobile stash">
-                                                            <div class="top-center-ord_it-data clearfix">
-                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
-                                                                <div class="wrap-calc_price">
-                                                                    <div class="ord_it-numb">
-                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
-                                                                    <div class="ord_it-price">1445 €</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mibble-center-ord_it-data order stash">
-                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span>
+                                                                @if(!empty($product['product']['collections']['collection']))
+                                                                    @foreach($product['product']['collections']['collection'] as $collection)
+                                                                        <span class="catal-item-numb">{{$collection}}</span>
+                                                                    @endforeach
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="bottom-center-ord_it-data clearfix">
                                                             <span class="material-ord_it">
-                                                                <div class="label-bot-ord_it-data">finish</div>
-                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> </span>
+                                                                <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.finishing') }}</div>
+                                                                @if(isset($product['product']['productPhotos']['finish']))
+                                                                @foreach($product['product']['productPhotos']['finish'] as $one)
+                                                                <span class="inner-nowrap">{{$one}}</span>
+                                                                @endforeach
+                                                                @endif
+                                                            </span>
                                                             <span class="material-ord_it-code">
-                                                                <div class="label-bot-ord_it-data">Tissue</div>
-                                                                <span class="inner-nowrap">TS445</span> </span>
+                                                                <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.tissue') }}</div>
+                                                                @if(isset($product['product']['productPhotos']['tissue']))
+                                                                @foreach($product['product']['productPhotos']['tissue'] as $one)
+                                                                <span class="inner-nowrap">{{$one}}</span>
+                                                                @endforeach
+                                                                @endif
+                                                            </span>
                                                             <span class="size-ord_it">
-                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
+                                                                <div class="label-bot-ord_it-data">{{ trans('frontend.shoppingCart.dimensions') }}</div>
+                                                                @if(isset($product['product']['productChilds']['dimensions']->length) && !empty($product['product']['productChilds']['dimensions']->length))
+                                                                    L: {{$product['product']['productChilds']['dimensions']->length}},
+                                                                @endif
+                                                                @if(isset($product['product']['productChilds']['dimensions']->width) && !empty($product['product']['productChilds']['dimensions']->width))
+                                                                    W: {{$product['product']['productChilds']['dimensions']->width}},
+                                                                @endif
+                                                                @if(isset($product['product']['productChilds']['dimensions']->height) && !empty($product['product']['productChilds']['dimensions']->height))
+                                                                    H: {{$product['product']['productChilds']['dimensions']->height}},
+                                                                @endif
+                                                                @if(isset($product['product']['productChilds']['dimensions']->mattress) && !empty($product['product']['productChilds']['dimensions']->mattress))
+                                                                    Mattress: {{$product['product']['productChilds']['dimensions']->mattress}},
+                                                                @endif
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="item-detail-order-data-wrap_anim order profile-item">
-                                            <div class="item-detail-order-data stash">
-                                                <div class="inner-order-item-img">
-                                                    <div class="for-disp_discount">
-                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
+                                        @endforeach
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="wrap-center-order_it-data stash">
-                                                    <div>
-                                                        <div class="wrap-head-ord_it-for_mobile stash">
-                                                            <div class="top-center-ord_it-data clearfix">
-                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
-                                                                <div class="wrap-calc_price">
-                                                                    <div class="ord_it-numb">
-                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
-                                                                    <div class="ord_it-price">1445 €</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mibble-center-ord_it-data order stash">
-                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="bottom-center-ord_it-data clearfix">
-                                                            <span class="material-ord_it">
-                                                                <div class="label-bot-ord_it-data">finish</div>
-                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> </span>
-                                                            <span class="material-ord_it-code">
-                                                                <div class="label-bot-ord_it-data">Tissue</div>
-                                                                <span class="inner-nowrap">TS445</span> </span>
-                                                            <span class="size-ord_it">
-                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="item-detail-order-data-wrap_anim order total_result clearfix">
                                             <div class="wrap-total_result-ord_it order">
-                                                <div class="label-total">total:</div>
-                                                <div class="total_price-ord_it">9 500 €</div>
-                                                <div class="crossed-price">10 000 €</div>
-                                                <div class="price-vat">Including 22% (220€) VAT</div>
+                                                <div class="label-total">{{ trans('frontend.shoppingCart.totalAmount') }}:</div>
+                                                <div class="total_price-ord_it">{{$order['sum']['summ_default']}} €</div>
+                                                <div class="crossed-price">{{$order['sum']['summ_vat']}} €</div>
+                                                <div class="price-vat">{{ trans('frontend.shoppingCart.including') }} 22% ({{round($order['sum']['summ_default']*0.22)}}€) {{ trans('frontend.shoppingCart.vat') }}</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row-order_list close">
-                                    <div class="row-short-data clearfix">
-                                        <div class="td date">
-                                            <span class="label-short_data">date</span>14.02.2017</div>
-                                        <div class="td order">
-                                            <span class="label-short_data">order</span>
-                                            <span class="wrap-for_arrow">#325747</span>
-                                        </div>
-                                        <div class="td status">
-                                            <span class="label-short_data">status</span>Awaiting payment</div>
-                                    </div>
-                                    <div class="detail-order-data clearfix">
-                                        <div class="item-detail-order-data-wrap_anim order profile-item discount">
-                                            <div class="item-detail-order-data stash">
-                                                <div class="inner-order-item-img">
-                                                    <div class="for-disp_discount">
-                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(images/order-litem-1.jpg)">
+                                @endforeach
+                                @endif
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="wrap-center-order_it-data stash">
-                                                    <div>
-                                                        <div class="wrap-head-ord_it-for_mobile stash">
-                                                            <div class="top-center-ord_it-data clearfix">
-                                                                <div class="ord_it-name">Sofa 2 Seats Folding</div>
-                                                                <div class="wrap-calc_price">
-                                                                    <div class="ord_it-numb">
-                                                                        <div class="label-bot-ord_it-data">amount</div>1</div>
-                                                                    <div class="ord_it-price">1445 €</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mibble-center-ord_it-data order stash">
-                                                                <span class="ord_it-code">FR2272</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-type">dinning</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span> <span class="catal-item-numb">Villa Cannes</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="bottom-center-ord_it-data clearfix">
-                                                            <span class="material-ord_it">
-                                                                <div class="label-bot-ord_it-data">finish</div>
-                                                                <span class="inner-nowrap">Ebano Lucido Scuro</span> <span class="inner-nowrap">Ebano Lucido</span> <span class="inner-nowrap">Ebano Scuro</span> </span>
-                                                            <span class="material-ord_it-code">
-                                                                <div class="label-bot-ord_it-data">Tissue</div>
-                                                                <span class="inner-nowrap">TS445</span> <span class="inner-nowrap">TS111</span> <span class="inner-nowrap">TS222</span> <span class="inner-nowrap">TS333</span> </span>
-                                                            <span class="size-ord_it">
-                                                                <div class="label-bot-ord_it-data">Dimensions</div>L: 205, W: 100, H: 50, Mattress: 70x195x14</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-detail-order-data-wrap_anim order total_result clearfix">
-                                            <div class="wrap-total_result-ord_it order">
-                                                <div class="label-total">total:</div>
-                                                <div class="total_price-ord_it">10 235 €</div>
-                                                <div class="crossed-price">10 735 €</div>
-                                                <div class="price-vat">Including 22% (2 364€) VAT</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

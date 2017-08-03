@@ -74,12 +74,6 @@ class BasketController extends Controller
             }
         }
 
-//        if($summ_vat >= 5000 && $summ_vat <= 10000){
-//            $discount = 5;
-//        }
-//        if($summ_vat >= 10001 && $summ_vat <= 20000){
-//            $discount = 10;
-//        }
 
         $summ = [
             'summ_vat' => $summ_vat,
