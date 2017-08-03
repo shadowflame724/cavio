@@ -50,8 +50,8 @@ class AppServiceProvider extends ServiceProvider
             $settings['soc_links'] = $soc;
             $disc = json_decode($settingModel->discount_data, true);
             $settings['discount_data'] = $disc;
-            $settings['koef_data'] = $settingModel->koef_data;
-            $settings['vat_data'] = $settingModel->vat_data;
+            $settings['koef_data'] = (float)$settingModel->koef_data;
+            $settings['vat_data'] = (float)$settingModel->vat_data;
         }
         config(['app.settings' => $settings]);
 
