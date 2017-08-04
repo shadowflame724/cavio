@@ -110,7 +110,7 @@
   function formatState (state) {
     if (!state.id) { return state.text; }
     var temp = '<div class="pop-img" ' +
-      'style="background-image: url(/api/product-image/'+state.text+')">' +
+      'style="background-image: url(/upload/products/'+state.text+')">' +
       '<span>'+state.text+'</span></div>';
 
     var $state = $(temp);
@@ -119,7 +119,7 @@
   function formatSelection (state) {
     if (!state.id) { return state.text; }
     var temp = '<div class="pop-sel-img" ' +
-      'style="background-image: url(/api/product-image/'+state.text+')">';
+      'style="background-image: url(/upload/products/'+state.text+')">';
 
     var $state = $(temp);
     return $state;
