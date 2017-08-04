@@ -22,6 +22,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $langSuf = '';
+        if (\Lang::getLocale() == 'ru') {
+            $langSuf = '_ru';
+        } elseif (\Lang::getLocale() == 'it') {
+            $langSuf = '_it';
+        }
+
         $catList = Category::all();
         $res = [];
         foreach ($catList as $cat) {
@@ -32,7 +39,7 @@ class CategoryController extends Controller
             $res[] = [
                 'id' => $cat->id,
                 'parent' => $parentId,
-                'text' => $cat->name,
+                'text' => $cat['name'. $langSuf],
                 'state' => ['opened' => true]
             ];
         }
@@ -67,6 +74,12 @@ class CategoryController extends Controller
             $cat->name = $request->name;
             $cat->name_ru = $request->name_ru;
             $cat->name_it = $request->name_it;
+            $cat->title = $request->title;
+            $cat->title_ru = $request->title_ru;
+            $cat->title_it = $request->title_it;
+            $cat->description = $request->description;
+            $cat->description_ru = $request->description_ru;
+            $cat->description_it = $request->description_it;
             $cat->image = $request->image;
 
             if ($p_id != null) {
@@ -109,6 +122,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->name_ru = $request->name_ru;
         $category->name_it = $request->name_it;
+        $category->title = $request->title;
+        $category->title_ru = $request->title_ru;
+        $category->title_it = $request->title_it;
+        $category->description = $request->description;
+        $category->description_ru = $request->description_ru;
+        $category->description_it = $request->description_it;
         $category->image = $request->image;
 
         if ($category->save()) {
@@ -127,11 +146,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $cat = Category::find($id);
-        $imgName = $cat->image;
         if ($cat->children()->get()->isEmpty()) {
             $cat->delete();
             event(new CategoryDeleted($cat));
-            $this->deleteImg($imgName);
             return redirect()->route('admin.category.index')->withFlashSuccess(trans('alerts.backend.category.deleted'));
         } else {
             throw new GeneralException(trans('exceptions.backend.access.category.delete_with_children'));

@@ -203,6 +203,12 @@ return [
                     'name_ru' => 'Nome[RU]*',
                     'name_it' => 'Nome[IT]*',
                     'image' => 'Immagine',
+                    'title' => 'Titolo*',
+                    'title_ru' => 'Titolo[RU]*',
+                    'title_it' => 'Titolo[IT]*',
+                    'description' => 'SEO*',
+                    'description_ru' => 'SEO[RU]*',
+                    'description_it' => 'SEO[IT]*',
                     'image_select' => 'Selezionare l\'immagine',
                 ],
 

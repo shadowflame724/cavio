@@ -29,7 +29,13 @@ class UpdateCategoryRequest extends Request
         return [
             'name' => 'required|min:3|max:35',
             'name_ru' => 'required|min:3|max:35',
-            'name_it' => 'required|min:3|max:35'
+            'name_it' => 'required|min:3|max:35',
+            'title' => 'required|max:191',
+            'title_ru' => 'required|max:191',
+            'title_it' => 'required|max:191',
+            'description' => 'required',
+            'description_ru' => 'required',
+            'description_it' => 'required',
         ];
     }
 }
