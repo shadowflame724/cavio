@@ -252,13 +252,18 @@ $(document).ready(function () {
       _action = _form.attr('action'),
       name = _form.find('input[name="name"]').val() || false,
       email = _form.find('input[name="email"]').val() || false,
-      message = _form.find('input[name="message"]').val() || false,
+      message = _form.find('textarea[name="message"]').val() || false,
 
       thanksTitle = _form.find('.thanks-title').html(),
       thanksBody = _form.find('.thanks-body').html();
 
     _form.removeClass('input-error');
     $('#form-contacts input').each(function (el) {
+      if($( this ).val() == ''){
+        $( this ).addClass('input-error');
+      }
+    });
+    $('#form-contacts textarea').each(function (el) {
       if($( this ).val() == ''){
         $( this ).addClass('input-error');
       }
