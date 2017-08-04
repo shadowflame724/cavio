@@ -253,7 +253,7 @@
                                             <div class="item-detail-order-data stash">
                                                 <div class="inner-order-item-img">
                                                     <div class="for-disp_discount">
-                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['product']['productPhotos']['photos'][0]}})"></div>
+                                                        <div class="order-item-img bg-white-marmur" style="background-image: url(/upload/products/{{$product['product']['productPhotos']['photos'][0]}})"></div>
                                                     </div>
                                                 </div>
                                                 <div class="wrap-center-order_it-data stash">

@@ -21,7 +21,7 @@
                   <div class="for-disp_discount">
                     @if(isset($product['productPhotos']['photos'][0]))
                         <div class="order-item-img bg-white-marmur"
-                         style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$product['productPhotos']['photos'][0]}})"></div>
+                         style="background-image: url(/upload/products/{{$product['productPhotos']['photos'][0]}})"></div>
                     @endif
                   </div>
                 </div>

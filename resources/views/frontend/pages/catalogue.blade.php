@@ -153,7 +153,7 @@
                     <a class="new-products-right-inner-item" href="/product/{{$product->slug}}">
                       <div class="product-img-table">
                         <div class="wrap-new-product-img bg-white-marmur"
-                           @if(!empty($prodData['photos'])) style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$prodData['photos']}})" @endif>
+                           @if(!empty($prodData['photos'])) style="background-image: url(/upload/products/{{$prodData['photos']}})" @endif>
                         </div>
                       </div>
                       <div class="wrap-new-product-data">
