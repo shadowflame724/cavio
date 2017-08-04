@@ -168,6 +168,7 @@ return [
                     'tissue' => 'Tissue[IT]',
                     'category' => 'Categories[IT]',
                     'comments' => 'Comments[IT]',
+                    'published' => 'Published',
 
                     'created_at' => 'Created at[IT]',
                     'updated_at' => 'Updated at[IT]'

@@ -140,6 +140,7 @@ return [
                     'tissue' => 'Отделка(Т)',
                     'category' => 'Категории',
                     'comments' => 'Коментарии',
+                    'published' => 'Опубликовано',
 
                     'created_at' => 'Создан',
                     'updated_at' => 'Обновлен'

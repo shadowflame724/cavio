@@ -76,6 +76,7 @@ class ProductRepository extends BaseRepository
                 config('product_table') . '.code',
                 config('product_table') . '.slug',
                 config('product_table') . '.name',
+                config('product_table') . '.published',
                 config('product_table') . '.created_at',
             ]);
     }
@@ -212,6 +213,10 @@ class ProductRepository extends BaseRepository
                 'product_photos.tissue_ids as tissue_ids',
                 'product_photos.tissue_ids as collection_zone_ids',
                 'products.category_ids as categories_ids',
+                'product_prices.published as price_published',
+                'product_childs.published as child_published',
+                'product_photos.published as photo_published',
+                'products.published as product_published',
                 'products.created_at as parent_created_at',
                 'products.updated_at as parent_updated_at'
             )
@@ -382,6 +387,7 @@ class ProductRepository extends BaseRepository
         if ((int)$product_id > 0) {
             $oneProdIds = explode(',', $product_ids);
             $notInCat = true;
+//            dd($oneProdIds);
             foreach ($oneProdIds as $oneProdId) {
                 if ((int)$oneProdId == (int)$product_id) {
                     $notInCat = false;
@@ -396,6 +402,8 @@ class ProductRepository extends BaseRepository
                     }
                 }
                 return implode(',', $arr);
+            } else {
+                return $product_ids;
             }
         }
         return false;
@@ -434,6 +442,7 @@ class ProductRepository extends BaseRepository
     {
         $remArr = array_diff($oldIds, $newIds);
         $addArr = array_diff($newIds, $oldIds);
+//        dd([$oldIds,$newIds,$product_id]);
 
         foreach ($remArr as $new_id) {
             $catModel = Category::find($new_id);

@@ -79,6 +79,9 @@ class ProductTableController extends Controller
             ->editColumn('created_at', function ($product) {
                 return $product->created_at ? with(new Carbon($product->created_at))->format('m/d/Y') : '';
             })
+            ->editColumn('published', function ($product) {
+                return $product->published ? 'Yes' : 'No';
+            })
             ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
             })
@@ -109,6 +112,17 @@ class ProductTableController extends Controller
         $products = Datatables::of($this->product->getForPricesDataTable($this->getLangSuf()))
             ->editColumn('parent_created_at', function ($product) {
                 return $product->parent_created_at ? with(new Carbon($product->parent_created_at))->format('m/d/Y') : '';
+            })
+            ->addColumn('published', function ($product) {
+                $price_published = $product->price_published;
+                $child_published = $product->child_published;
+                $photo_published = $product->photo_published;
+                $product_published = $product->product_published;
+                $publish = 'No';
+                if($price_published && $child_published && $photo_published && $product_published){
+                    $publish = 'Yes';
+                }
+                return $publish;
             })
             ->filterColumn('parent_created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);

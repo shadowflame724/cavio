@@ -88,7 +88,9 @@
             .find('.fa')
             .removeClass('fa-dot-circle-o')
             .addClass('fa-refresh fa-spin');
-          slug = transliterate(code).replace(/\s+/g,'-') + '-' + transliterate(name).replace(/\s+/g,'-');
+          var slCode = transliterate(code).replace(/\s+/g,'-').replace(/[,.+!@#$%^&*/()]+/g,'');
+          var slName = transliterate(name).replace(/\s+/g,'-').replace(/[,.+!@#$%^&*/()]+/g,'');
+          slug = slCode + '-' + slName;
           $.get('/admin/product/slug/'+slug).done(function (serverFromSlug) {
             $inp.val(serverFromSlug);
           }).fail(function () {
@@ -108,18 +110,22 @@
       });
 
   function formatState (state) {
-    if (!state.id) { return state.text; }
+    if (!state.id) {
+      return state.text;
+    }
     var temp = '<div class="pop-img" ' +
-      'style="background-image: url(/api/product-image/'+state.text+')">' +
-      '<span>'+state.text+'</span></div>';
+      'style="background-image: url(/upload/products/' + state.text + ')">' +
+      '<span>' + state.text + '</span></div>';
 
     var $state = $(temp);
     return $state;
   };
   function formatSelection (state) {
-    if (!state.id) { return state.text; }
+    if (!state.id) {
+      return state.text;
+    }
     var temp = '<div class="pop-sel-img" ' +
-      'style="background-image: url(/api/product-image/'+state.text+')">';
+      'style="background-image: url(/upload/products/' + state.text + ')">';
 
     var $state = $(temp);
     return $state;
