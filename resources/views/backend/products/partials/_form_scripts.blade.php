@@ -88,7 +88,9 @@
             .find('.fa')
             .removeClass('fa-dot-circle-o')
             .addClass('fa-refresh fa-spin');
-          slug = transliterate(code).replace(/\s+/g,'-') + '-' + transliterate(name).replace(/\s+/g,'-');
+          var slCode = transliterate(code).replace(/\s+/g,'-').replace(/[,.+!@#$%^&*/()]+/g,'');
+          var slName = transliterate(name).replace(/\s+/g,'-').replace(/[,.+!@#$%^&*/()]+/g,'');
+          slug = slCode + '-' + slName;
           $.get('/admin/product/slug/'+slug).done(function (serverFromSlug) {
             $inp.val(serverFromSlug);
           }).fail(function () {

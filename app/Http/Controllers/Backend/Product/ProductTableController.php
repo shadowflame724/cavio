@@ -113,6 +113,17 @@ class ProductTableController extends Controller
             ->editColumn('parent_created_at', function ($product) {
                 return $product->parent_created_at ? with(new Carbon($product->parent_created_at))->format('m/d/Y') : '';
             })
+            ->addColumn('published', function ($product) {
+                $price_published = $product->price_published;
+                $child_published = $product->child_published;
+                $photo_published = $product->photo_published;
+                $product_published = $product->product_published;
+                $publish = 'No';
+                if($price_published && $child_published && $photo_published && $product_published){
+                    $publish = 'Yes';
+                }
+                return $publish;
+            })
             ->filterColumn('parent_created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
             })

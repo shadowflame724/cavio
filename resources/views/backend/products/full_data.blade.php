@@ -43,6 +43,7 @@
                         <th>{{ trans('labels.backend.access.product.table.tissue') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.category') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.comments') }}</th>
+                        <th>{{ trans('labels.backend.access.product.table.published') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.created_at') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.updated_at') }}</th>
                     </tr>
@@ -133,6 +134,10 @@
                     {
                         data: 'comments',
                         name: 'comments'
+                    },
+                    {
+                        data: 'published',
+                        name: 'published'
                     },
                     {
                         data: 'parent_created_at',
