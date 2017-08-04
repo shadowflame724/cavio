@@ -69,14 +69,26 @@ class FinishTissueRepository extends BaseRepository
             $finishTissue->title_ru = $input['title_ru'];
             $finishTissue->title_it = $input['title_it'];
             $finishTissue->comment = $input['comment'];
-            $finishTissue->parent_id = $input['parent'];
             $finishTissue->short = $input['short'];
             $finishTissue->image = $input['photo'];
-            if($input['parent'] != "null"){
-                $finishTissue->type = FinishTissue::find($input['parent'])->type;
-            }else{
-                $finishTissue->parent_id = null;
-                $finishTissue->type = $input['type'];
+
+            switch ($input['parent']) {
+                case 'rootFinish': {
+                    $finishTissue->parent_id = null;
+                    $finishTissue->type = 'finish';
+                    break;
+                }
+                case 'rootTissue': {
+                    $finishTissue->parent_id = null;
+                    $finishTissue->type = 'tissue';
+                    break;
+                }
+                default: {
+                    $parent = FinishTissue::find($input['parent']);
+                    $finishTissue->parent_id = $parent->id;
+                    $finishTissue->type = $parent->type;
+                }
+
             }
 
             if ($finishTissue->save()) {
@@ -104,12 +116,31 @@ class FinishTissueRepository extends BaseRepository
         $finishTissue->title_it = $input['title_it'];
         $finishTissue->comment = $input['comment'];
         $finishTissue->short = $input['short'];
-        $finishTissue->image = $input['photo'];
-        $finishTissue->parent_id = $input['parent'];
-        if($input['parent'] != "null"){
-            $finishTissue->type = FinishTissue::find($input['parent'])->type;
-        }else{
-            $finishTissue->type = $input['type'];
+
+        switch ($input['parent']) {
+            case 'rootFinish': {
+                $finishTissue->parent_id = null;
+                $finishTissue->type = 'finish';
+                break;
+            }
+            case 'rootTissue': {
+                $finishTissue->parent_id = null;
+                $finishTissue->type = 'tissue';
+                break;
+            }
+            default: {
+                $parent = FinishTissue::find($input['parent']);
+                $finishTissue->parent_id = $parent->id;
+                $finishTissue->type = $parent->type;
+                $finishTissue->image = $input['photo'];
+
+            }
+
+        }
+
+        foreach ($finishTissue->children as $child) {
+            $child->type = $finishTissue->type;
+            $child->save();
         }
 
         DB::transaction(function () use ($finishTissue, $input) {

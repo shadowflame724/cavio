@@ -2,8 +2,6 @@
 
 namespace App\Models\FinishTissue;
 
-use App\Models\Good\Good;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class FinishTissue extends Model

@@ -311,7 +311,7 @@ return [
                     'type' => 'Type',
                     'type_finish' => 'Finish',
                     'type_tissue' => 'Tissue',
-                    'parent' => 'Parent',
+                    'parent' => 'Parent-Type',
                     'comment' => 'Comment',
                     'short' => 'Short name',
 

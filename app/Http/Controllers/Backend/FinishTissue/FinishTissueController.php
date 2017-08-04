@@ -59,13 +59,12 @@ class FinishTissueController extends Controller
      */
     public function store(StoreFinishTissueRequest $request)
     {
-        if ($request->parent != "null") {
-
-            $this->validate($request, [
-                'photo' => 'required',
-            ]);
-        }
-
+        if ($request->parent != 'rootFinish' AND $request->parent != 'rootTissue') {
+        $this->validate($request, [
+            'short' => 'required|max:10',
+            'photo' => 'required',
+        ]);
+    }
         $this->finishTissue->create($request->all());
 
         $this->moveImg($request->photo);
@@ -98,14 +97,14 @@ class FinishTissueController extends Controller
     public function update(FinishTissue $finishTissue, UpdateFinishTissueRequest $request)
     {
         $oldName = $finishTissue->image;
-        if ($request->parent != "null") {
-
+        if ($request->parent != 'rootFinish' AND $request->parent != 'rootTissue') {
             $this->validate($request, [
                 'short' => 'required|max:10',
                 'photo' => 'required',
             ]);
         }
         $this->finishTissue->update($finishTissue, $request->all());
+
         $this->moveImg($request->photo, $oldName);
 
         return redirect()->route('admin.finish-tissue.index')->withFlashSuccess(trans('alerts.backend.finishtissue.updated'));

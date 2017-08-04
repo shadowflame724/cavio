@@ -39,58 +39,39 @@
                 <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
             </ul>
             <div class="box-body">
-                @if($finishTissue->parent_id == null)
-                    <div class="form-group">
-                        {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            <select name="type" class="form-control">
-                                @if($finishTissue->type == "finish")
-                                    <option selected
-                                            value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
-                                    <option
-                                            value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
-                                @else
-                                    <option
-                                            value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
-                                    <option selected
-                                            value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
-                                @endif
-                            </select>
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-                @endif
 
-                @if($finishTissue->parent_id != null)
-                    <div class="form-group">
-                        {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            <select class="form-control"
-                                    name="parent">
-                                @if($finishTissue->parent_id == null)
-                                    <option value="null" selected>Root</option>
-                                @endif
-                                <optgroup label="Finish">
-                                    @foreach($parents as $parent)
-                                        @if($parent->type == 'finish')
-                                            <option value="{{ $parent->id }}"
-                                                    @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}
-                                            </option>
-                                        @endif
-                                    @endforeach
-                                </optgroup>
-                                    <optgroup label="Tissue">
-                                        @foreach($parents as $parent)
-                                            @if($parent->type == 'tissue')
-                                                <option value="{{ $parent->id }}"
-                                                        @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </optgroup>
-                            </select>
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-                @endif
+
+                <div class="form-group">
+                    {{ Form::label('parent', trans('validation.attributes.backend.access.finishtissue.parent'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <select name="parent" class="form-control" id="parentSelector">
+                            <option value="rootFinish"
+                                    @if($finishTissue->parent_id == null AND $finishTissue->type == 'finish')
+                            selected @endif>Root Finish</option>
+                            <option value="rootTissue"
+                                    @if($finishTissue->parent_id == null AND $finishTissue->type == 'tissue')
+                            selected @endif>Root Tissue</option>
+                            <optgroup label="Finish">
+                                @foreach($parents as $parent)
+                                    @if($parent->type == 'finish')
+                                        <option @if($finishTissue->parent_id == $parent->id)
+                                                selected @endif
+                                        value="{{ $parent->id }}">{{ $parent->title }}</option>
+                                    @endif
+                                @endforeach
+                            </optgroup>
+                            <optgroup label="Tissue">
+                                @foreach($parents as $parent)
+                                    @if($parent->type == 'tissue')
+                                        <option @if($finishTissue->parent_id == $parent->id)
+                                                selected @endif value="{{ $parent->id }}">{{ $parent->title }}</option>
+                                    @endif
+                                @endforeach
+                            </optgroup>
+                        </select>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="en">
@@ -138,10 +119,10 @@
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
-                @if($finishTissue->parent_id != null)
 
 
-                    <div class="form-group">
+                    <div class="form-group" id="forChild" @if($finishTissue->parent_id == null) hidden @endif>
+
                         {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
                             <div class="dropzone" id="dz_photo"></div>
@@ -159,7 +140,6 @@
                             @endif
                         </div>
                     </div><!--form control-->
-                @endif
 
             </div>
         </div>
@@ -187,6 +167,19 @@
     {{ Html::script('js/backend/plugin/dropzone/dropzone.js') }}
     {{ Html::script('js/backend/plugin/cropperjs/dist/cropper.js') }}
     <script>
+        $(parentSelector).on('change', function () {
+            var x = this.value;
+            if (x != "rootFinish" && x != "rootTissue") {
+                $(forChild).fadeIn('slow');
+            } else {
+                $(forChild).fadeOut('slow');
+                photo = document.getElementsByClassName('photo');
+                $(document.getElementById('hiddenPhoto')).val('');
+                $(photo).removeClass('active');
+                $(photo).find('img').remove();
+            }
+        });
+        var mimeType;
         var cropper;
         var modalTemplate = '' +
             '<div class="modal fade" tabindex="-1" role="dialog">' +
@@ -199,6 +192,8 @@
             '<label class="input-group-addon" for="dataWidth">Width</label>' +
             '<input type="text" class="form-control" id="dataWidth" placeholder="Width">' +
             '<span class="input-group-addon">px</span>' +
+            '</div>' +
+            '<div class="input-group input-group-sm">' +
             '<label class="input-group-addon" for="dataHeight">Height</label>' +
             '<input type="text" class="form-control" id="dataHeight" placeholder="height">' +
             '<span class="input-group-addon">px</span>' +
@@ -216,14 +211,74 @@
             '</div>' +
             '';
 
+        // transform cropper dataURI output to a Blob which Dropzone accepts
         function dataURItoBlob(dataURI) {
+            // convert base64 to raw binary data held in a string
+            // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
             var byteString = atob(dataURI.split(',')[1]);
+
+            // separate out the mime component
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+            // write the bytes of the string to an ArrayBuffer
             var ab = new ArrayBuffer(byteString.length);
+
+            // create a view into the buffer
             var ia = new Uint8Array(ab);
+
+            // set the bytes of the buffer to the correct values
             for (var i = 0; i < byteString.length; i++) {
                 ia[i] = byteString.charCodeAt(i);
             }
-            return new Blob([ab], {type: 'image/jpeg'});
+
+            // write the ArrayBuffer to a blob, and you're done
+            var blob = new Blob([ab], {type: mimeString});
+            return blob;
+        }
+        function dataURLtoMimeType(dataURL) {
+            var BASE64_MARKER = ';base64,';
+            var data;
+
+            if (dataURL.indexOf(BASE64_MARKER) == -1) {
+                var parts = dataURL.split(',');
+                var contentType = parts[0].split(':')[1];
+                data = decodeURIComponent(parts[1]);
+            } else {
+                var parts = dataURL.split(BASE64_MARKER);
+                var contentType = parts[0].split(':')[1];
+                var raw = window.atob(parts[1]);
+                var rawLength = raw.length;
+
+                data = new Uint8Array(rawLength);
+
+                for (var i = 0; i < rawLength; ++i) {
+                    data[i] = raw.charCodeAt(i);
+                }
+            }
+
+            var arr = data.subarray(0, 4);
+            var header = "";
+            for(var i = 0; i < arr.length; i++) {
+                header += arr[i].toString(16);
+            }
+            switch (header) {
+                case "89504e47":
+                    mimeType = "image/png";
+                    break;
+                case "47494638":
+                    mimeType = "image/gif";
+                    break;
+                case "ffd8ffe0":
+                case "ffd8ffe1":
+                case "ffd8ffe2":
+                    mimeType = "image/jpeg";
+                    break;
+                default:
+                    mimeType = ""; // Or you can use the blob.type as fallback
+                    break;
+            }
+
+            return mimeType;
         }
 
         var myDropzone = [];
@@ -260,6 +315,7 @@
                                 $('.photo').eq(key).addClass('active');
                             }
                             inp = $('.photo').eq(key).find(":hidden");
+                            console.log(inp.val(), res['success']['imgName']);
 
                             inp.val(res['success']['imgName']);
 
@@ -324,7 +380,7 @@
                 reader.readAsDataURL(file);
                 $cropperModal.modal('show');
                 $uploadCrop.on('click', function () {
-                    var blob = cropper.getCroppedCanvas().toDataURL();
+                    var blob = cropper.getCroppedCanvas().toDataURL(mimeType);
                     var newFile = dataURItoBlob(blob);
                     newFile.cropped = true;
                     newFile.name = cachedFilename;
