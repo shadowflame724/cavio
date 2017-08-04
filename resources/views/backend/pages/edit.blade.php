@@ -50,6 +50,14 @@
                         </div><!--col-lg-10-->
                     </div>
 
+                    <div class="form-group">
+                        {{ Form::label('description', trans('validation.attributes.backend.access.page.description'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('description', $page->description, [ 'class' => 'form-control']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
 
                     <div class="form-group">
                         {{ Form::label('body', trans('validation.attributes.backend.access.page.body'), ['class' => 'col-lg-2 control-label']) }}
@@ -71,6 +79,14 @@
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
+                    <div class="form-group">
+                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.page.description_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('description_ru', $page->description_ru, [ 'class' => 'form-control']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
 
                     <div class="form-group">
                         {{ Form::label('body', trans('validation.attributes.backend.access.page.body_ru'), ['class' => 'col-lg-2 control-label']) }}
@@ -86,6 +102,14 @@
 
                         <div class="col-lg-10">
                             {{ Form::text('title_it', $page->title_it, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required' ]) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_it', trans('validation.attributes.backend.access.page.description_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('description_it', $page->description_it, [ 'class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
