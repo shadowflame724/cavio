@@ -146,7 +146,6 @@ var App = (function () {
       var prevPath = $('main').attr('data-page'),
       toggleHidenClass = function (isAdd) {
         if(isAdd) {
-          console.log('intervalNewProdDot', ctx)
           clearInterval(intervalNewProdDot);
           hideElemsBeforeBack();
 
