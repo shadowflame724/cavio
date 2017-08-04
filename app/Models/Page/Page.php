@@ -10,7 +10,8 @@ class Page extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['pageKey',
+    protected $fillable = [
+        'name', 'name_ru', 'name_it',
         'title', 'title_ru', 'title_it',
         'description', 'description_ru', 'description_it',
         'prev', 'prev_ru', 'prev_it',
@@ -26,7 +27,7 @@ class Page extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }

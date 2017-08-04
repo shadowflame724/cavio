@@ -27,7 +27,7 @@
                     <tr>
                         <th>{{ trans('labels.backend.access.page.table.id') }}</th>
                         <th>{{ trans('labels.backend.access.page.table.pageKey') }}</th>
-                        <th>{{ trans('labels.backend.access.page.table.title') }}</th>
+                        <th>{{ trans('labels.backend.access.page.table.name') }}</th>
                         <th>{{ trans('labels.backend.access.page.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
@@ -65,12 +65,13 @@
                 columns: [
                     {data: 'id', name: 'id' },
                     {data: 'slug', name: 'slug' },
-                    {data: 'title' + langSuf, name: 'title' + langSuf},
+                    {data: 'name' + langSuf, name: 'name' + langSuf},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[3, "asc"]],
-                searchDelay: 500
+                searchDelay: 500,
+                lengthMenu:  [25, 50, "All"]
             });
         });
     </script>

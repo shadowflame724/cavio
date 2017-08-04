@@ -63,7 +63,7 @@ return [
                 'table' => [
                     'id' => 'Id',
                     'pageKey' => 'Page Key',
-                    'title' => 'Title',
+                    'name' => 'Name',
                     'created_at' => 'Created at'
                 ],
             ],
@@ -86,7 +86,7 @@ return [
 
                 'table' => [
                     'id' => 'Id',
-                    'title' => 'Title',
+                    'title' => 'Name',
                     'type' => 'Type',
                     'image' => 'Image Name',
                     'created_at' => 'Created at'
@@ -105,7 +105,7 @@ return [
 
                 'table' => [
                     'id' => 'Id',
-                    'title' => 'Title',
+                    'title' => 'Name',
                     'image' => 'Image Name',
                     'banner' => 'Banner',
                     'created_at' => 'Created at'
@@ -139,7 +139,7 @@ return [
 
                 'table' => [
                     'id' => 'Id',
-                    'title' => 'Title',
+                    'title' => 'Name',
                     'image' => 'Image Name',
                     'created_at' => 'Created at'
                 ],

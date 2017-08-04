@@ -12,7 +12,6 @@ var topMenuScroll;
 var itemOffsetCollection;
 
 var scrollFunc;
-var zcScroll;
 
 var wavesBg_1;
 
@@ -210,7 +209,7 @@ $(document).ready(function () {
 
 
   if (allow_CustomScroll) {
-    mainScroll = Scrollbar.init(document.getElementById('main-scrollbar'));
+    mainScroll = Scrollbar.init(document.getElementById('main-scrollbar'), {damping: 0.19});
   }
 
 
@@ -417,17 +416,20 @@ function initPageAfterLoading() {
   }
 
 
-  mainScroll.addListener(function () {
-    if (view_HeaderFooter) {
-      if (mainScroll.offset.y > 0) $('header:not(.scroll)').addClass('scroll');
-      else                         $('header.scroll').removeClass('scroll');
-
-      $(window).on('scroll', function () {
-        if ($(document).scrollTop()) $('header:not(.scroll)').addClass('scroll');
+  if(mainScroll){
+    mainScroll.options.speed = 1;
+    mainScroll.addListener(function () {
+      if (view_HeaderFooter) {
+        if (mainScroll.offset.y > 0) $('header:not(.scroll)').addClass('scroll');
         else                         $('header.scroll').removeClass('scroll');
-      });
-    }
-  });
+
+        $(window).on('scroll', function () {
+          if ($(document).scrollTop()) $('header:not(.scroll)').addClass('scroll');
+          else                         $('header.scroll').removeClass('scroll');
+        });
+      }
+    });
+  }
 
 
   // POPUP ZONES OR POPUP COLLECTIONS ============
@@ -1182,7 +1184,7 @@ function initMainPage() {
 
       setTimeout(function () {
         $('.new-products-right-side').scrollLeft(0);
-      }, 130);
+      }, 150);
       $(wrapRightSlidexbox).find('.new-products-right-item').each(function (key, el) {
         setTimeout(function () {
           el.classList.remove('hide');
@@ -1227,7 +1229,7 @@ function initMainPage() {
 
     setTimeout(function () {
       $('.new-products-right-side').scrollLeft(0);
-    }, 130);
+    }, 150);
     $(wrapRightSlidexbox).find('.new-products-right-item').each(function (key, el) {
       setTimeout(function () {
         el.classList.remove('hide');
@@ -2365,10 +2367,10 @@ function initDashboardPage() {
   var swiperProfile;
 
   setTimeout(function () {
-    $('.small-page-title.hide').attr('data-anim', 'true')
+    $('.small-page-title').attr('data-anim', 'true')
   }, 300);
   setTimeout(function () {
-    $('.wrap-catal.hide').attr('data-anim', 'true')
+    $('.wrap-catal').attr('data-anim', 'true')
   }, 500);
   setTimeout(function () {
     if (mainScroll) mainScroll.update();
@@ -2380,7 +2382,7 @@ function initDashboardPage() {
     $('.zon-col-list-catal.' + activeZonColList).show()
   }
 
-  swiperProfile = new Swiper('.wrap-profile-swiper', {
+  new Swiper('.wrap-profile-swiper', {
     slidesPerView: 1,
     centeredSlides: true,
     speed: 700,
@@ -2799,7 +2801,7 @@ function initProductCardPage() {
   swiperCard[0] = new Swiper('.wrap-bigest-swiper', {
     slidesPerView: 1,
     speed: 700,
-    initialSlide: $('ul.card-varians-list >li.active').attr('data-photo'),
+    initialSlide: 0,
     followFinger: false,
     simulateTouch: false,
     spaceBetween: 0,
@@ -2810,7 +2812,7 @@ function initProductCardPage() {
   swiperCard[1] = new Swiper('.wrap-swiper-related', {
     slidesPerView: 1,
     speed: 700,
-    initialSlide: $('ul.card-varians-list >li.active').attr('data-photo'),
+    initialSlide: 0,
     autoHeight: true,
     followFinger: false,
     simulateTouch: false,
@@ -3037,7 +3039,6 @@ $('ul.card-varians-list >li').on('click', function (e) {
 
   var indexCurr = $('ul.card-varians-list li.active').index();
   var indexNew = $(this).index();
-  var curPhotoId = $('ul.card-varians-list li.active').attr('data-photo');
   var newPhotoId = $(this).attr('data-photo');
   var curChildId = $(".swiper-slide.card_item-params[data-photo='" + newPhotoId + "'] ul.wrap-dimensions-values >li.active").attr('data-child');
 
@@ -3048,6 +3049,13 @@ $('ul.card-varians-list >li').on('click', function (e) {
   $('.wrap-card-view .wrap-curr-card-view').eq(indexCurr).toggleClass('hide show');
   $('.wrap-card-view .wrap-curr-card-view').eq(indexNew).toggleClass('hide show');
 
+
+  var indexBigSwiperSlide = $(".wrap-bigest-swiper .outer-slide[data-photo='"+ newPhotoId +"']").index();
+  console.log(indexBigSwiperSlide, newPhotoId)
+  swiperCard.forEach(function (el) {
+    el.slideTo(indexBigSwiperSlide);
+  });
+
   // slide all swipers =========
   $(".wrap-swiper-card_price .wrap-card-price").removeClass('active');
   $(".wrap-swiper-card_price .wrap-card-price[data-photo='" + newPhotoId + "'][data-child='" + curChildId + "']").addClass('active');
@@ -3056,9 +3064,6 @@ $('ul.card-varians-list >li').on('click', function (e) {
   var idCartSlide = $(".card_item-params[data-photo='" + newPhotoId + "'][data-child='" + curChildId + "']").index();
 
 
-  swiperCard.forEach(function (el) {
-    el.slideTo(newPhotoId)
-  });
   swiperCardBig.slideTo(idCartSlide);
   //  ===========================
 });
@@ -3919,9 +3924,19 @@ var App = (function () {
       var prevPath = $('main').attr('data-page'),
       toggleHidenClass = function (isAdd) {
         if(isAdd) {
-          console.log('intervalNewProdDot', intervalNewProdDot)
+          console.log('intervalNewProdDot', ctx)
           clearInterval(intervalNewProdDot);
           hideElemsBeforeBack();
+
+          if((ctx.pathname.indexOf('/collections/')  != -1 && (ctx.pathname.split("/").length - 1) == 3) ||
+             (ctx.pathname.indexOf('/zones/')        != -1 && (ctx.pathname.split("/").length - 1) == 3) ||
+              ctx.pathname.indexOf('/news/')         != -1                                               ||
+              ctx.pathname.indexOf('/product/')      != -1                                               ||
+              ctx.pathname.indexOf('/press-design') != -1
+          )
+          {
+            hideHeader();
+          }
         } else {
           //
         }
@@ -4091,9 +4106,15 @@ var App = (function () {
       _goPage(link);
     },
     goPopupBack: function () {
+      console.log('_backFromProduct', _backFromProduct)
       if(_backFromProduct) {
         page(_backFromProduct);
         _backFromProduct = undefined;
+        return true;
+      }
+
+      if(location.pathname.indexOf('product/') != -1) {
+        page('/catalogue');
         return true;
       }
       return false;

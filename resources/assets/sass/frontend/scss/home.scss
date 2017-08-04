@@ -39,14 +39,6 @@ body{
 }
 
 
-#before_header{
-  transition: opacity 1s;
-
-  &[data-anim='false']{ opacity: 0; }
-  &[data-anim='true']{ opacity: 1; }
-}
-
-
 //SWIPER WILL CHANGE HEIGHT ===================
 .wrap-swiper-log_reg, .wrap-profile-swiper{
   will-change: height;
@@ -845,9 +837,6 @@ html.mobile-platform .new-products-right-inner-item{
     height: 100%;
     padding-left: 70px;
     padding-right: 90px;
-    transition: .5s;
-
-    &.hide{ opacity: 0; pointer-events: none; }
 
     .new-products-right-item{
       transform: translate(0);
@@ -856,6 +845,7 @@ html.mobile-platform .new-products-right-inner-item{
       &.hide{
         opacity: 0;
         transform: translateY(45px);
+        pointer-events: none;
         transition: opacity .2s ease, transform .1s .2s;
       }
     }
@@ -1627,6 +1617,7 @@ section#shop-by-cat{ margin-bottom: 130px; }
 }
 
 .wrapper-card-price{
+  background: $mainActiveColor;
   position: relative;
   height: 100%;
 }
@@ -1639,14 +1630,11 @@ section#shop-by-cat{ margin-bottom: 130px; }
   position: absolute;
   left: 0;
   top: 0;
-  transform: translate(101%);
-  will-change: transform;
-  transition: transform .25s;
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s;
 
-  &.active{
-    transform: translate(0);
-    transition: transform .7s .25s;
-  }
+  &.active{ opacity: 1; pointer-events: all; }
 }
 
 .t_cell{
