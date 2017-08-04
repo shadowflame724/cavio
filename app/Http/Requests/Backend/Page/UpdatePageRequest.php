@@ -30,7 +30,6 @@ class UpdatePageRequest extends Request
             'title' => "required|min:3|max:35",
             'title_ru' => "required|min:3|max:35",
             'title_it' => "required|min:3|max:35",
-            'description' => "required|min:3",
             'body' => "required|min:3",
             'body_ru' => "required|min:3",
             'body_it' => "required|min:3",

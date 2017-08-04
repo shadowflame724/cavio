@@ -52,7 +52,7 @@
                         {{ Form::label('description', trans('validation.attributes.backend.access.category.description'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('description', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('description', null, ['class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -77,7 +77,7 @@
                         {{ Form::label('description_ru', trans('validation.attributes.backend.access.category.description_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('description_ru', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('description_ru', null, ['class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -102,7 +102,7 @@
                         {{ Form::label('description_it', trans('validation.attributes.backend.access.category.description_it'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
-                            {{ Form::textarea('description_it', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            {{ Form::textarea('description_it', null, ['class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>

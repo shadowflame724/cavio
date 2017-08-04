@@ -61,7 +61,7 @@ class PageController extends Controller
     public function store(StorePageRequest $request)
     {
 
-        $this->page->create($request->only( 'title', 'title_ru', 'title_it', 'description', 'body', 'body_ru', 'body_it', 'admin_comment'));
+        $this->page->create($request->all());
 
         return redirect()->route('admin.page.index')->withFlashSuccess(trans('alerts.backend.page.created'));
     }
@@ -156,7 +156,7 @@ class PageController extends Controller
         }
 
 
-        $this->page->update($page, $request->only( 'title', 'title_ru', 'title_it', 'description', 'body', 'body_ru', 'body_it', 'admin_comment'));
+        $this->page->update($page, $request->all());
 
         return redirect()->route('admin.page.index')->withFlashSuccess(trans('alerts.backend.page.updated'));
     }

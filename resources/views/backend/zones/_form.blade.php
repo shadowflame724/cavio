@@ -10,7 +10,7 @@
                 {{ Form::text(
                     'title',
                     null,
-                    ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']
+                    ['class' => 'form-control', 'maxlength' => '191', 'autofocus' => 'autofocus']
                 ) }}
             </div>
         </div>
@@ -38,7 +38,7 @@
                 {{ Form::textarea(
                     'description',
                     null,
-                    ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']
+                    ['class' => 'form-control', 'maxlength' => '1000', 'autofocus' => 'autofocus']
                 ) }}
             </div>
         </div>
@@ -132,4 +132,18 @@
         </div>
     </div>
 
+</div>
+<div class="form-group">
+    {{ Form::label(
+        'sort',
+        trans('validation.attributes.backend.access.roles.sort'),
+        ['class' => 'col-lg-2 control-label']
+    ) }}
+    <div class="col-lg-10">
+        {{ Form::text(
+            'sort',
+            null,
+            ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']
+        ) }}
+    </div>
 </div>

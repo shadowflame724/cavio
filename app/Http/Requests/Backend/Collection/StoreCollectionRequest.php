@@ -28,18 +28,12 @@ class StoreCollectionRequest extends Request
     public function rules()
     {
         return [
-            'title' => "required|min:3|max:35",
-            'title_ru' => "required|min:3|max:35",
-            'title_it' => "required|min:3|max:35",
             'name' => "required|min:3|max:35",
             'name_ru' => "required|min:3|max:35",
             'name_it' => "required|min:3|max:35",
             'prev' => "required|min:3|max:400",
             'prev_ru' => "required|min:3|max:400",
             'prev_it' => "required|min:3|max:400",
-            'description' => "required|min:3|max:400",
-            'description_ru' => "required|min:3|max:400",
-            'description_it' => "required|min:3|max:400",
             'photo' => 'required',
 
         ];
