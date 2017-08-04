@@ -12,7 +12,6 @@ var topMenuScroll;
 var itemOffsetCollection;
 
 var scrollFunc;
-var zcScroll;
 
 var wavesBg_1;
 
@@ -1128,7 +1127,7 @@ function initMainPage() {
 
       setTimeout(function () {
         $('.new-products-right-side').scrollLeft(0);
-      }, 130);
+      }, 150);
       $(wrapRightSlidexbox).find('.new-products-right-item').each(function (key, el) {
         setTimeout(function () {
           el.classList.remove('hide');
@@ -1173,7 +1172,7 @@ function initMainPage() {
 
     setTimeout(function () {
       $('.new-products-right-side').scrollLeft(0);
-    }, 130);
+    }, 150);
     $(wrapRightSlidexbox).find('.new-products-right-item').each(function (key, el) {
       setTimeout(function () {
         el.classList.remove('hide');
@@ -2311,10 +2310,10 @@ function initDashboardPage() {
   var swiperProfile;
 
   setTimeout(function () {
-    $('.small-page-title.hide').attr('data-anim', 'true')
+    $('.small-page-title').attr('data-anim', 'true')
   }, 300);
   setTimeout(function () {
-    $('.wrap-catal.hide').attr('data-anim', 'true')
+    $('.wrap-catal').attr('data-anim', 'true')
   }, 500);
   setTimeout(function () {
     if (mainScroll) mainScroll.update();
@@ -2326,7 +2325,7 @@ function initDashboardPage() {
     $('.zon-col-list-catal.' + activeZonColList).show()
   }
 
-  swiperProfile = new Swiper('.wrap-profile-swiper', {
+  new Swiper('.wrap-profile-swiper', {
     slidesPerView: 1,
     centeredSlides: true,
     speed: 700,

@@ -922,6 +922,11 @@ h3.section-title{
     background: url(images/section-title-label.svg) no-repeat center center;
     background-size: contain;
   }
+
+  //&[data-anim='false']{
+  //  opacity: 0;
+  //  tra
+  //}
 }
 
 
