@@ -33,66 +33,135 @@
                 </div>
             </div><!--form control-->
             {{ Form::model($showroom, ['route' => ['admin.showroom.update', $showroom], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH']) }}
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab"
+                                                          data-toggle="tab">EN</a>
+                </li>
+                <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
+                <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+            </ul>
+            <div class="box-body">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="en">
+                        <div class="form-group">
+                            {{ Form::label('country', trans('validation.attributes.backend.access.showroom.country'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('country', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
+                        <div class="form-group">
+                            {{ Form::label('city', trans('validation.attributes.backend.access.showroom.city'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('city', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('country', trans('validation.attributes.backend.access.showroom.country'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('country', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('name', trans('validation.attributes.backend.access.showroom.name'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('city', trans('validation.attributes.backend.access.showroom.city'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('city', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('address', trans('validation.attributes.backend.access.showroom.address'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('address', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="ru">
+                        <div class="form-group">
+                            {{ Form::label('country_ru', trans('validation.attributes.backend.access.showroom.country_ru'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('country_ru', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('name', trans('validation.attributes.backend.access.showroom.name'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('city_ru', trans('validation.attributes.backend.access.showroom.city_ru'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('city_ru', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('address', trans('validation.attributes.backend.access.showroom.address'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('address', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('name_ru', trans('validation.attributes.backend.access.showroom.name_ru'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('name_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('phone', trans('validation.attributes.backend.access.showroom.phone'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::number('phone', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('address_ru', trans('validation.attributes.backend.access.showroom.address_ru'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('address_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="it">
+                        <div class="form-group">
+                            {{ Form::label('country_it', trans('validation.attributes.backend.access.showroom.country_it'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('country_it', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('phone2', trans('validation.attributes.backend.access.showroom.phone2'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::number('phone2', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('city_it', trans('validation.attributes.backend.access.showroom.city_it'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('city_it', null, ['class' => 'form-control', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('fax', trans('validation.attributes.backend.access.showroom.fax'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::number('fax', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('name_it', trans('validation.attributes.backend.access.showroom.name_it'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('name_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
 
-            <div class="form-group">
-                {{ Form::label('email', trans('validation.attributes.backend.access.showroom.email'), ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::email('email', null, ['class' => 'form-control', 'maxlength' => '35', 'autofocus' => 'autofocus']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                        <div class="form-group">
+                            {{ Form::label('address_it', trans('validation.attributes.backend.access.showroom.address_it'), ['class' => 'col-lg-2 control-label']) }}
+                            <div class="col-lg-10">
+                                {{ Form::text('address_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                            </div><!--col-lg-10-->
+                        </div><!--form control-->
+                    </div>
+                </div>
 
-            {{ Form::hidden('lat', null, ['class' => 'form-control', 'placeholder' => 'lat', 'id' => 'lat']) }}
-            {{ Form::hidden('lng', null, ['class' => 'form-control', 'placeholder' => 'lng', 'id' => 'lng']) }}
+                <div class="form-group">
+                    {{ Form::label('phone', trans('validation.attributes.backend.access.showroom.phone'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        {{ Form::number('phone', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div class="form-group">
+                    {{ Form::label('phone2', trans('validation.attributes.backend.access.showroom.phone2'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        {{ Form::number('phone2', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div class="form-group">
+                    {{ Form::label('fax', trans('validation.attributes.backend.access.showroom.fax'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        {{ Form::number('fax', null, ['class' => 'form-control', 'maxlength' => '20', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div class="form-group">
+                    {{ Form::label('email', trans('validation.attributes.backend.access.showroom.email'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        {{ Form::email('email', null, ['class' => 'form-control', 'maxlength' => '35', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                {{ Form::hidden('lat', null, ['class' => 'form-control', 'placeholder' => 'lat', 'id' => 'lat']) }}
+                {{ Form::hidden('lng', null, ['class' => 'form-control', 'placeholder' => 'lng', 'id' => 'lng']) }}
+            </div>
 
         </div>
     </div><!-- /.box-body -->

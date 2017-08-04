@@ -285,9 +285,17 @@ return [
 
                 'showroom' => [
                     'country' => 'Nazione*',
+                    'country_ru' => 'Nazione[RU]*',
+                    'country_it' => 'Nazione[IT]*',
                     'city' => 'Città*',
+                    'city_ru' => 'Città[RU]*',
+                    'city_it' => 'Città[IT]*',
                     'name' => 'Nome*',
+                    'name_ru' => 'Nome[RU]*',
+                    'name_it' => 'Nome[IT]*',
                     'address' => 'Indirizzo',
+                    'address_ru' => 'Indirizzo[RU]',
+                    'address_it' => 'Indirizzo[IT]',
                     'phone' => 'Telefono',
                     'phone2' => 'Telefono aggiuntivo',
                     'fax' => 'Fax',
