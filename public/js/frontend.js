@@ -257,7 +257,9 @@ $(document).ready(function () {
       thanksTitle = _form.find('.thanks-title').html(),
       thanksBody = _form.find('.thanks-body').html();
 
-    _form.removeClass('input-error');
+    $('#form-contacts input').removeClass('input-error');
+    $('#form-contacts textarea').removeClass('input-error');
+
     $('#form-contacts input').each(function (el) {
       if($( this ).val() == ''){
         $( this ).addClass('input-error');
@@ -268,6 +270,9 @@ $(document).ready(function () {
         $( this ).addClass('input-error');
       }
     });
+    if(!validateEmail(email)){
+      _form.find('input[name="email"]').addClass('input-error');
+    }
 
     if (email && validateEmail(email) && name && message) {
       var data = {
