@@ -219,6 +219,7 @@ $(document).ready(function () {
     var $_count = 1;
 
     basket.add($_price_id, $_count);
+    return false;
   });
 
   //subscribe
@@ -532,7 +533,7 @@ function initPageAfterLoading() {
 
 
   // OTHER PAGE
-  if(otherPage = false;) { $("main [data-anim='false']").attr('data-anim', 'true'); }
+  if(otherPage) { $("main [data-anim='false']").attr('data-anim', 'true'); }
 
   mainScroll.update();
 }
