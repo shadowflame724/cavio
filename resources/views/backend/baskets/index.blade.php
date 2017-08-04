@@ -27,6 +27,7 @@
                         <th>{{ trans('labels.backend.access.baskets.table.id') }}</th>
                         <th>{{ trans('labels.backend.access.baskets.table.user_id') }}</th>
                         <th>{{ trans('labels.backend.access.baskets.table.summ') }}</th>
+                        <th>{{ trans('labels.backend.access.product.table.updated_at') }}</th>
                         <th>{{ trans('labels.backend.access.baskets.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
@@ -65,6 +66,7 @@
                     {data: 'id', name: 'id' },
                     {data: 'user_id', name: 'user_id'},
                     {data: 'summ', name: 'summ'},
+                    {data: 'updated_at', name: 'updated_at'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],

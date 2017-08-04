@@ -113,7 +113,7 @@
                     {{ Form::textarea('admin_comment', null, ['class' => 'form-control', 'required' => 'required']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
-            @if(!emptyArray($page->blocks))
+            @if($page->blocks->isNotEmpty())
 
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ trans('labels.backend.access.block.management') }}</h3>

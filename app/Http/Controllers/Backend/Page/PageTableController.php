@@ -34,7 +34,7 @@ class PageTableController extends Controller
      */
     public function __invoke(ManagePageRequest $request)
     {
-        $pages = Page::select(['id', 'slug', 'title', 'created_at']);
+        $pages = Page::select(['id', 'slug', 'title', 'created_at', 'notRemoved']);
 
         return Datatables::of($pages)
             ->editColumn('created_at', function ($page) {
@@ -44,8 +44,17 @@ class PageTableController extends Controller
                 $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
             })
             ->addColumn('actions', function ($page) {
-                return '<a href="'.route('admin.page.edit', array('page' => $page->id)).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i></a>
-                ';
+                $buttons = '<a href="' . route('admin.page.edit', array('page' => $page->id)) . '" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i></a>';
+
+                if ($page->notRemoved == null) {
+                    $buttons .= '<a data-method="delete" data-trans-button-cancel="Cancel" data-trans-button-confirm="Delete" data-trans-title="Are you sure you want to do this?" class="btn btn-xs btn-danger" style="cursor:pointer;" onclick="$(this).find("form").submit();"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                    <form action="' . route('admin.page.destroy', array('page' => $page->id)) . '"  method="POST" name="delete_item" style="display:none">
+   <input type="hidden" name="_method" value="delete">
+   <input type="hidden" name="_token" value="' . csrf_token() . '">
+</form>';
+                }
+
+                return $buttons;
             })
             ->rawColumns(['actions'])
             ->make(true);

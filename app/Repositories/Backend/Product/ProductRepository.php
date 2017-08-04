@@ -103,6 +103,7 @@ class ProductRepository extends BaseRepository
                 'product_childs.name' . $langSuf . ' as child_product_name',
                 'products.name' . $langSuf . ' as parent_product_name',
                 'product_photos.photos',
+                'products.code as parent_code',
                 'collections.name' . $langSuf . ' as collection_name',
                 'collection_zones.name' . $langSuf . ' as collection_zones_name',
                 'zones.name' . $langSuf . ' as zones_name',

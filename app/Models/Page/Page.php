@@ -15,7 +15,7 @@ class Page extends Model
         'description', 'description_ru', 'description_it',
         'prev', 'prev_ru', 'prev_it',
         'body', 'body_ru', 'body_it',
-        'image'];
+        'image', 'notRemoved'];
 
     /**
      * Return the sluggable configuration array for this model.
