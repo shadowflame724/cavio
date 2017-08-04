@@ -77,6 +77,8 @@ return [
         'email' => 'E-mail',
         'message' => 'Message',
         'sendMessage' => 'Send Message',
+        'thanksTitle' => 'Thank you',
+        'thanksBody' => 'Your message was successfully sent.',
     ],
 
     'showrooms' => [

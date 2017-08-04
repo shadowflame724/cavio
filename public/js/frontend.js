@@ -240,6 +240,50 @@ $(document).ready(function () {
     return false;
   });
 
+  var showDefaultModal = function (title,body) {
+    $('#modal-thank_you_default').find('.section-title').html(title);
+    $('#modal-thank_you_default').find('.ty-text').html(body);
+    $('#modal-thank_you_default').attr('data-anim', 'true');
+  };
+
+  //contacts form
+  $('body').on('submit', '#form-contacts', function () {
+    var _form = $(this),
+      _action = _form.attr('action'),
+      name = _form.find('input[name="name"]').val() || false,
+      email = _form.find('input[name="email"]').val() || false,
+      message = _form.find('input[name="message"]').val() || false,
+
+      thanksTitle = _form.find('.thanks-title').html(),
+      thanksBody = _form.find('.thanks-body').html();
+
+    _form.removeClass('input-error');
+    $('#form-contacts input').each(function (el) {
+      if($( this ).val() == ''){
+        $( this ).addClass('input-error');
+      }
+    });
+
+    if (email && validateEmail(email) && name && message) {
+      var data = {
+        name:name,
+        email:email,
+        message:message
+      };
+
+      $.ajax({
+        url : _action,
+        data : data,
+        type : 'POST',
+      })
+      .done(function() {
+        console.log('contacts form success SEND');
+        showDefaultModal(thanksTitle,thanksBody);
+      });
+    }
+    return false;
+  });
+
   //user_profile update
   $('body').on('submit', '.user_profile', function () {
     var _form = $(this),
@@ -3212,6 +3256,13 @@ $('#ty-ok-p').on('click', function (e) {
 
   // $('#modal-order').attr('data-anim', 'false');
   $('#modal-thank_you_profile').attr('data-anim', 'false');
+  $('body').toggleClass('overfl-h');
+});
+
+$('#ty-ok-def-f').on('click', function (e) {
+  e.preventDefault();
+
+  $('#modal-thank_you_default').attr('data-anim', 'false');
   $('body').toggleClass('overfl-h');
 });
 
