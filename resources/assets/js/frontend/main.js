@@ -240,6 +240,40 @@ $(document).ready(function () {
     return false;
   });
 
+  //contacts form
+  $('body').on('submit', '#form-contacts', function () {
+    var _form = $(this),
+      _action = _form.attr('action'),
+      name = _form.find('input[name="name"]').val() || false,
+      email = _form.find('input[name="email"]').val() || false,
+      message = _form.find('input[name="message"]').val() || false;
+
+    _form.removeClass('input-error');
+    $('#form-contacts input').each(function (el) {
+      if($( this ).val() == ''){
+        $( this ).addClass('input-error');
+      }
+    });
+
+    if (email && validateEmail(email) && name && message) {
+      var data = {
+        name:name,
+        email:email,
+        message:message
+      };
+
+      $.ajax({
+        url : _action,
+        data : data,
+        type : 'POST',
+      })
+      .done(function() {
+        console.log('contacts form success SEND');
+      });
+    }
+    return false;
+  });
+
   //user_profile update
   $('body').on('submit', '.user_profile', function () {
     var _form = $(this),

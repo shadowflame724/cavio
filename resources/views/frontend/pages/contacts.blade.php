@@ -61,7 +61,7 @@
                             {{ trans('frontend.contacts.sayHello') }}!
                         </div>
 
-                        <form action="{{ route('frontend.message.store') }}" method="post" class=clearfix>
+                        <form id="form-contacts" action="{{ route('frontend.message.store') }}" method="post" class=clearfix>
                             <div class="clearfix">
                                 <div class="cont-input-wrap"><input name="name"
                                                                     placeholder="{{ trans('frontend.contacts.name') }}">
