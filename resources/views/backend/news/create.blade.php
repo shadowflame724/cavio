@@ -52,26 +52,10 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="en">
                     <div class="form-group">
-                        {{ Form::label('title', trans('validation.attributes.backend.access.news.title'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('title', null, ['class' => 'form-control']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
                         {{ Form::label('name', trans('validation.attributes.backend.access.news.name'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
                             {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description', trans('validation.attributes.backend.access.news.description'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('description', null, ['class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -89,30 +73,31 @@
                             {{ Form::textarea('body', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('title', trans('validation.attributes.backend.access.news.title'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title', null, ['class' => 'form-control']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description', trans('validation.attributes.backend.access.news.description'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('description', null, ['class' => 'form-control']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
                 </div>
 
                 <div role="tabpanel" class="tab-pane fade" id="ru">
-                    <div class="form-group">
-                        {{ Form::label('title_ru', trans('validation.attributes.backend.access.news.title_ru'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('title_ru', null, ['class' => 'form-control']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
 
                     <div class="form-group">
                         {{ Form::label('name_ru', trans('validation.attributes.backend.access.news.name_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
                             {{ Form::text('name_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-                    <div class="form-group">
-                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.news.description_ru'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('description_ru', null, ['class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -130,31 +115,30 @@
                             {{ Form::textarea('body_ru', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('title_ru', trans('validation.attributes.backend.access.news.title_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title_ru', null, ['class' => 'form-control']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.news.description_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('description_ru', null, ['class' => 'form-control']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
                 </div>
 
                 <div role="tabpanel" class="tab-pane fade" id="it">
-                    <div class="form-group">
-                        {{ Form::label('title_it', trans('validation.attributes.backend.access.news.title_it'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('title_it', null, ['class' => 'form-control']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
 
                     <div class="form-group">
                         {{ Form::label('name_it', trans('validation.attributes.backend.access.news.name_it'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-10">
                             {{ Form::text('name_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        </div><!--col-lg-10-->
-                    </div><!--form control-->
-
-
-                    <div class="form-group">
-                        {{ Form::label('description_it', trans('validation.attributes.backend.access.news.description_it'), ['class' => 'col-lg-2 control-label']) }}
-
-                        <div class="col-lg-10">
-                            {{ Form::text('description_it', null, ['class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
 
@@ -170,6 +154,21 @@
                         {{ Form::label('body_it', trans('validation.attributes.backend.access.news.body_it'), ['class' => 'col-lg-2 control-label']) }}
                         <div class="col-lg-10">
                             {{ Form::textarea('body_it', null, ['class' => 'form-control redactor', 'required' => 'required', 'minlength' => '3', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('title_it', trans('validation.attributes.backend.access.news.title_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title_it', null, ['class' => 'form-control']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_it', trans('validation.attributes.backend.access.news.description_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('description_it', null, ['class' => 'form-control']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>

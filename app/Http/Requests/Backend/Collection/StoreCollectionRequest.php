@@ -35,6 +35,12 @@ class StoreCollectionRequest extends Request
             'prev_ru' => "required|min:3|max:400",
             'prev_it' => "required|min:3|max:400",
             'photo' => 'required',
+            'title' => "max:191",
+            'title_ru' => "max:191",
+            'title_it' => "max:191",
+            'description' => "max:1000",
+            'description_ru' => "max:1000",
+            'description_it' => "max:1000",
 
         ];
 

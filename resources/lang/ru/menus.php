@@ -110,11 +110,11 @@ return [
                 'management'    => 'Управление посредниками',
             ],
             'finishtissue' => [
-                'all'           => 'Все ткани',
-                'create'        => 'Создать ткань',
-                'edit'          => 'Редактировать ткань',
-                'main'          => 'Ткани',
-                'management'    => 'Управление тканями',
+                'all'           => 'Все FinishTissue',
+                'create'        => 'Создать FinishTissue',
+                'edit'          => 'Редактировать FinishTissue',
+                'main'          => 'FinishTissues',
+                'management'    => 'Управление FinishTissue',
             ],
             'popup' => [
                 'edit'          => 'Редактировать объявление',

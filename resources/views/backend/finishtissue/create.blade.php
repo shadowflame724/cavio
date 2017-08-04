@@ -39,10 +39,10 @@
             </ul>
 
             <div class="box-body">
-                <div class="form-group" id="typeSelector">
+                <div class="form-group">
                     {{ Form::label('type', trans('validation.attributes.backend.access.finishtissue.type'), ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
-                        <select name="type" class="form-control">
+                        <select name="type" class="form-control" id="typeSelector">
                             <option value="finish">{{ trans("validation.attributes.backend.access.finishtissue.type_finish") }}</option>
                             <option value="tissue">{{ trans("validation.attributes.backend.access.finishtissue.type_tissue") }}</option>
                         </select>
@@ -54,9 +54,16 @@
                     <div class="col-lg-10">
                         <select name="parent" class="form-control" id="parentSelector">
                             <option value="null" selected>Root</option>
-                            @foreach($parents as $parent)
-                                <option value="{{ $parent->id }}">{{ $parent->title }}</option>
-                            @endforeach
+                                @foreach($parents as $parent)
+                                    @if($parent->type == 'finish')
+                                        <option class="finish" value="{{ $parent->id }}">{{ $parent->title }}</option>
+                                    @endif
+                                @endforeach
+                                @foreach($parents as $parent)
+                                    @if($parent->type == 'tissue')
+                                        <option class="tissue hide" value="{{ $parent->id }}">{{ $parent->title }}</option>
+                                    @endif
+                                @endforeach
                         </select>
                     </div><!--col-lg-10-->
                 </div><!--form control-->
@@ -73,7 +80,7 @@
                     </div><!--form control-->
                     <div role="tabpanel" class="tab-pane fade" id="ru">
                         <div class="form-group">
-                            {{ Form::label('title_ru', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
+                            {{ Form::label('title_ru', trans('validation.attributes.backend.access.finishtissue.title_ru'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
                                 {{ Form::text('title_ru', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
@@ -82,7 +89,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="it">
                         <div class="form-group">
-                            {{ Form::label('title_it', trans('validation.attributes.backend.access.finishtissue.title'), ['class' => 'col-lg-2 control-label']) }}
+                            {{ Form::label('title_it', trans('validation.attributes.backend.access.finishtissue.title_it'), ['class' => 'col-lg-2 control-label']) }}
 
                             <div class="col-lg-10">
                                 {{ Form::text('title_it', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
@@ -90,20 +97,19 @@
                         </div><!--form control-->
                     </div><!--form control-->
                 </div>
+                <div class="form-group">
+                    {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
 
                 <div class="form-group">
                     {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
-
-                <div class="form-group">
-                    {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
-
-                    <div class="col-lg-10">
-                        {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div id="forChild" hidden>
@@ -151,14 +157,25 @@
         var parentSelector = document.getElementById('parentSelector');
         var typeSelector = document.getElementById('typeSelector');
         var photo;
+        $(typeSelector).on('change', function () {
+            var x = this.value;
+            if (x == "finish") {
+                parentSelector.value = null;
+                $('.tissue').addClass('hide');
+                $('.finish').removeClass('hide');
+            } else if (x == "tissue") {
+                parentSelector.value = null;
+                $('.finish').addClass('hide');
+                $('.tissue').removeClass('hide');
+            }
+        });
+
         $(parentSelector).on('change', function () {
             var x = this.value;
             if (x !== "null") {
                 $(forChild).fadeIn('slow');
-                $(typeSelector).fadeOut('slow');
             } else if (x == "null") {
                 $(forChild).fadeOut('slow');
-                $(typeSelector).fadeIn('slow');
                 photo = document.getElementsByClassName('photo');
                 $(document.getElementById('hiddenPhoto')).val('');
                 $(photo).removeClass('active');

@@ -6,7 +6,7 @@
     {{ Html::style("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css") }}
     <style>
         .table_photo {
-            max-height:48px;
+            max-height: 48px;
         }
     </style>
 @endsection
@@ -67,7 +67,6 @@
 @section('after-scripts')
 
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
-
 
     <script>
         var langSuf = '{{$langSuf}}';
@@ -144,8 +143,13 @@
                     }
                 ],
                 order: [[1, "asc"]],
-                searchDelay: 500
+                lengthMenu: [100, 200, "All"],
+                searchDelay: null
             });
+        });
+        $(document).ajaxComplete(function () {
+            console.log('ajax end');
+            $('[data-toggle="popover"]').popover();
         });
     </script>
 @endsection

@@ -31,6 +31,12 @@ class StoreCategoryRequest extends Request
             'name' => 'required|min:3|max:35',
             'name_ru' => 'required|min:3|max:35',
             'name_it' => 'required|min:3|max:35',
+            'title' => "max:191",
+            'title_ru' => "max:191",
+            'title_it' => "max:191",
+            'description' => "max:1000",
+            'description_ru' => "max:1000",
+            'description_it' => "max:1000",
         ];
 
     }

@@ -39,6 +39,12 @@ class UpdateCollectionRequest extends Request
             'zones.*.name_it' => "required|min:3|max:35",
             'zones.*.photo' => "required",
             'zones.*.zone_id' => "required",
+            'title' => "max:191",
+            'title_ru' => "max:191",
+            'title_it' => "max:191",
+            'description' => "max:1000",
+            'description_ru' => "max:1000",
+            'description_it' => "max:1000",
         ];
     }
 }

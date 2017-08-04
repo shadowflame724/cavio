@@ -158,6 +158,7 @@
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
+                lengthMenu:  [25, 50, "All"],
                 searchDelay: 500
             });
         });
@@ -177,6 +178,7 @@
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
+                lengthMenu:  [25, 50, "All"],
                 searchDelay: 500
             });
         });
@@ -196,6 +198,7 @@
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
+                lengthMenu:  [25, 50, "All"],
                 searchDelay: 500
             });
         });
@@ -215,6 +218,7 @@
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
+                lengthMenu:  [25, 50, "All"],
                 searchDelay: 500
             });
         });

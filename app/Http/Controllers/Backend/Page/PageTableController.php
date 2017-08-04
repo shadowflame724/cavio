@@ -34,7 +34,7 @@ class PageTableController extends Controller
      */
     public function __invoke(ManagePageRequest $request)
     {
-        $pages = Page::select(['id', 'slug', 'title', 'created_at', 'notRemoved']);
+        $pages = Page::select(['id', 'slug', 'name', 'name_ru', 'name_it', 'created_at', 'notRemoved']);
 
         return Datatables::of($pages)
             ->editColumn('created_at', function ($page) {
