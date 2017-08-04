@@ -283,7 +283,7 @@
                                 <div class="swiper-wrapper overfl-h">
                                     @if(isset($product['photos']) && !empty($product['photos']))
                                     @foreach($product['photos'] as $photo)
-                                    <div class="swiper-slide outer-slide bg-white-marmur">
+                                    <div class="swiper-slide outer-slide bg-white-marmur" data-photo="{{$photo['id']}}">
                                         <div class="wrap-carousel-card">
                                             <div class="swiper-wrapper">
                                                 @if(!empty($photo['collection']))

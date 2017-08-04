@@ -2747,7 +2747,7 @@ function initProductCardPage() {
   swiperCard[0] = new Swiper('.wrap-bigest-swiper', {
     slidesPerView: 1,
     speed: 700,
-    initialSlide: $('ul.card-varians-list >li.active').attr('data-photo'),
+    initialSlide: 0,
     followFinger: false,
     simulateTouch: false,
     spaceBetween: 0,
@@ -2758,7 +2758,7 @@ function initProductCardPage() {
   swiperCard[1] = new Swiper('.wrap-swiper-related', {
     slidesPerView: 1,
     speed: 700,
-    initialSlide: $('ul.card-varians-list >li.active').attr('data-photo'),
+    initialSlide: 0,
     autoHeight: true,
     followFinger: false,
     simulateTouch: false,
@@ -2995,6 +2995,13 @@ $('ul.card-varians-list >li').on('click', function (e) {
   $('.wrap-card-view .wrap-curr-card-view').eq(indexCurr).toggleClass('hide show');
   $('.wrap-card-view .wrap-curr-card-view').eq(indexNew).toggleClass('hide show');
 
+
+  var indexBigSwiperSlide = $(".wrap-bigest-swiper .outer-slide[data-photo='"+ newPhotoId +"']").index();
+  console.log(indexBigSwiperSlide, newPhotoId)
+  swiperCard.forEach(function (el) {
+    el.slideTo(indexBigSwiperSlide);
+  });
+
   // slide all swipers =========
   $(".wrap-swiper-card_price .wrap-card-price").removeClass('active');
   $(".wrap-swiper-card_price .wrap-card-price[data-photo='" + newPhotoId + "'][data-child='" + curChildId + "']").addClass('active');
@@ -3003,9 +3010,6 @@ $('ul.card-varians-list >li').on('click', function (e) {
   var idCartSlide = $(".card_item-params[data-photo='" + newPhotoId + "'][data-child='" + curChildId + "']").index();
 
 
-  swiperCard.forEach(function (el) {
-    el.slideTo(newPhotoId)
-  });
   swiperCardBig.slideTo(idCartSlide);
   //  ===========================
 });
