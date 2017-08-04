@@ -403,6 +403,36 @@ class ProductRepository extends BaseRepository
         return $res;
     }
 
+    public function getRelationProducts($product_id, $product_ids_from_coll_zones, $col_zone_parent_ids)
+    {
+        if(!empty($product_ids_from_coll_zones)){
+            $product_ids_from_coll_zones = array_unique($product_ids_from_coll_zones);
+            unset($product_ids_from_coll_zones[array_search($product_id, $product_ids_from_coll_zones)]);
+        }
+
+        $relationProductArr = [];
+        $product_ids_from_coll = [];
+        if(empty($product_ids_from_coll_zones)){
+            $colsArrModel = Collection::whereIn('id',$col_zone_parent_ids)->get();
+            foreach ($colsArrModel as $colOne){
+                $idsCols = explode(',',$colOne->product_ids);
+                $product_ids_from_coll = array_merge($product_ids_from_coll,$idsCols);
+            }
+            $relationProductIds = [];
+            if(!empty($product_ids_from_coll)){
+                $relationProductIds = array_unique($product_ids_from_coll);
+                unset($relationProductIds[array_search($product_id, $relationProductIds)]);
+            }
+            if(!empty($relationProductIds)){
+                $relationProductArr = $this->whereInIds($relationProductIds);
+            }
+        }else{
+            $relationProductArr = $this->whereInIds($product_ids_from_coll_zones);
+        }
+
+        return $relationProductArr;
+    }
+
     public function getBySlug($slug, $with = null)
     {
         $model = [];
@@ -518,18 +548,25 @@ class ProductRepository extends BaseRepository
 
                         //CollectionZone
                         $ids = explode(',',$photo->collection_ids);
-                        $colsArrModel = CollectionZone::whereIn('id',$ids)->with('collection')->get();
+                        $colsZoneArrModel = CollectionZone::whereIn('id',$ids)->with('collection')->get();
                         $collsNameRes = [];
 
-                        if(!empty($colsArrModel)){
-                            foreach ($colsArrModel as $colsArr){
+                        $product_ids_from_coll_zones = [];
+                        $col_zone_parent_ids = [];
+                        if(!empty($colsZoneArrModel)){
+                            foreach ($colsZoneArrModel as $colsArr){
                                 $collsNameRes['zone'][] = $colsArr->title;
 
                                 if(isset($colsArr->collection)){
                                     $collsNameRes['collection'][] = $colsArr->collection->title;
                                 }
+                                $idsColsZone = explode(',',$colsArr->product_ids);
+                                $product_ids_from_coll_zones = array_merge($product_ids_from_coll_zones,$idsColsZone);
+                                $col_zone_parent_ids[] = $colsArr->collection_id;
                             }
                         }
+
+                        $relationProductArr =  $this->getRelationProducts($photo->product_id, $product_ids_from_coll_zones, $col_zone_parent_ids);
 
                         $photosArr[$photo->id] = [
                             'id' => $photo->id,
@@ -544,7 +581,8 @@ class ProductRepository extends BaseRepository
                             'prev_it' => $photo->prev_it,
                             'main' => $photo->main,
                             'colls_name' => $collsNameRes,
-                            'prices' => $prices
+                            'prices' => $prices,
+                            'relationProducts' => $relationProductArr
                         ];
 
                         $ids = explode(',',$photo->collection_ids);
@@ -567,9 +605,9 @@ class ProductRepository extends BaseRepository
             $res['prices'] = $prices;
             //collections
             $collIds = array_unique($collIds);
-            $colsArrModel = CollectionZone::whereIn('id',$collIds)->get();
+            $colsZoneArrModel = CollectionZone::whereIn('id',$collIds)->get();
             $collsRes = [];
-            foreach ($colsArrModel as $cols){
+            foreach ($colsZoneArrModel as $cols){
                 if(!empty($cols->image)){
                     $colsImages = explode(',',$cols->image);
                     $collsRes = array_merge($colsImages,$collsRes);

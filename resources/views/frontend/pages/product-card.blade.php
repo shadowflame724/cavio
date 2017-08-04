@@ -25,8 +25,8 @@
                                             @foreach($product['prices'] as $one)
                                             @if(isset($one['photosArr']['photos'][0]) && !empty($one['photosArr']['photos'][0]))
                                             <div class="wrap-curr-card-view  @if($i==1) show @else hide @endif">
-                                                <div class="curr-card-view bg-white-marmur discount"
-                                                     style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{$one['photosArr']['photos'][0]}})"></div>
+                                                <div class="curr-card-view bg-white-marmur @if($one['discount'] > 0) discount @endif"
+                                                     style="background-image: url(/upload/products/{{$one['photosArr']['photos'][0]}})"></div>
                                             </div>
                                             <?php $i++;?>
                                             @endif
@@ -44,7 +44,7 @@
                                                     <li @if(!$i) class="active" @endif data-photo="{{$photo['id']}}">
                                                         <div
                                                             class="dot-card_item bg-white-marmur"
-                                                            style="background-image: url(//cvo-dev.spongeservice.com.ua/api/product-image/{{ $img }})"></div>
+                                                            style="background-image: url(/upload/products/{{ $img }})"></div>
                                                     </li>
                                                     @php($i++)
                                                     @endforeach
@@ -308,182 +308,29 @@
 
                                 <div class="wrap-swiper-related overfl-h">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide wrap-also-buy-items">
-                                            <div class="new-products-right-item grid cart_item discount">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-1.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
+                                    @if(isset($product['photos']) && !empty($product['photos']))
+                                    @foreach($product['photos'] as $photo)
+                                    <div class="swiper-slide wrap-also-buy-items">
+                                        @if(!empty($photo['relationProducts']))
+                                        @foreach($photo['relationProducts'] as $relationProduct)
+                                        <div class="new-products-right-item grid cart_item @if($relationProduct['isDiscount']) discount @endif">
+                                            <a class="new-products-right-inner-item" href="/product/{{$relationProduct['slug']}}">
+                                                <div class="product-img-table">
+                                                    <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(/upload/products/{{$relationProduct['image']}})">
                                                     </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1195 € </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-2.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1195 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-3.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1195 € - 1295 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-3.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">895 € - 1295 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                </div>
+                                                <div class="wrap-new-product-data">
+                                                    <div class="product-code">#{{$relationProduct['code']}}</div>
+                                                    <div class="product-name">{{$relationProduct['name']}}</div>
+                                                    <div class="product-price">{{$relationProduct['prices']}}</div>
+                                                </div>
+                                            </a>
                                         </div>
-
-                                        <div class="swiper-slide wrap-also-buy-items">
-                                            <div class="new-products-right-item grid cart_item discount">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-2.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">795 € - 1495 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item discount">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-3.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">2295 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-3.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1295 € - 1395 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item discount">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-3.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1195 € - 1295 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="swiper-slide wrap-also-buy-items">
-                                            <div class="new-products-right-item grid cart_item">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-1.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1395 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item discount">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-1.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1195 € - 1895 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item discount">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-1.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">195 € - 295 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="new-products-right-item grid cart_item">
-                                                <a class="new-products-right-inner-item" href="#">
-                                                    <div class="product-img-table">
-                                                        <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(images/un_banner-1-2.jpg)">
-                                                            <!--<img src="/upload/images/un_banner-1-3.jpg" alt="">-->
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-new-product-data">
-                                                        <div class="product-code">#pr117</div>
-                                                        <div class="product-name">Bench</div>
-                                                        <div class="product-price">1195 € - 1200 €</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        @endforeach
+                                        @endif
+                                    </div>
+                                    @endforeach
+                                    @endif
                                     </div>
                                 </div>
                             </div>
