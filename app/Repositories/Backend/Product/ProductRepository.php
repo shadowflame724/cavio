@@ -76,6 +76,7 @@ class ProductRepository extends BaseRepository
                 config('product_table') . '.code',
                 config('product_table') . '.slug',
                 config('product_table') . '.name',
+                config('product_table') . '.published',
                 config('product_table') . '.created_at',
             ]);
     }

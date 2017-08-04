@@ -79,6 +79,9 @@ class ProductTableController extends Controller
             ->editColumn('created_at', function ($product) {
                 return $product->created_at ? with(new Carbon($product->created_at))->format('m/d/Y') : '';
             })
+            ->editColumn('published', function ($product) {
+                return $product->published ? 'Yes' : 'No';
+            })
             ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
             })

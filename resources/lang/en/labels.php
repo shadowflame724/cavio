@@ -168,6 +168,8 @@ return [
                     'category' => 'Categories',
                     'comments' => 'Comments',
 
+                    'published' => 'Published',
+
                     'created_at' => 'Created at',
                     'updated_at' => 'Updated at'
                 ],
