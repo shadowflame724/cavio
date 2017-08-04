@@ -74,6 +74,9 @@
                             <textarea name="message" placeholder="{{ trans('frontend.contacts.message') }}"></textarea>
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}"/>
 
+                            <div class="thanks-title" style="display: none">{{ trans('frontend.contacts.thanksTitle') }}</div>
+                            <div class="thanks-body" style="display: none">{{ trans('frontend.contacts.thanksBody') }}</div>
+
                             <button class="btn small-txt p-0"
                                     content="{{ trans('frontend.contacts.sendMessage') }}">{{ trans('frontend.contacts.sendMessage') }}</button>
                         </form>
