@@ -69,10 +69,24 @@
                                 @if($finishTissue->parent_id == null)
                                     <option value="null" selected>Root</option>
                                 @endif
-                                @foreach($parents as $parent)
-                                    <option value="{{ $parent->id }}"
-                                            @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}</option>
-                                @endforeach
+                                <optgroup label="Finish">
+                                    @foreach($parents as $parent)
+                                        @if($parent->type == 'finish')
+                                            <option value="{{ $parent->id }}"
+                                                    @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </optgroup>
+                                    <optgroup label="Tissue">
+                                        @foreach($parents as $parent)
+                                            @if($parent->type == 'tissue')
+                                                <option value="{{ $parent->id }}"
+                                                        @if($finishTissue->parent_id == $parent->id) selected="selected"@endif>{{ $parent->title }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
                             </select>
                         </div><!--col-lg-10-->
                     </div><!--form control-->
@@ -108,20 +122,19 @@
                         </div><!--form control-->
                     </div><!--form control-->
                 </div>
+                <div class="form-group">
+                    {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
 
                 <div class="form-group">
                     {{ Form::label('comment', trans('validation.attributes.backend.access.finishtissue.comment'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::textarea('comment', null, [ 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
-
-                <div class="form-group">
-                    {{ Form::label('short', trans('validation.attributes.backend.access.finishtissue.short'), ['class' => 'col-lg-2 control-label']) }}
-
-                    <div class="col-lg-10">
-                        {{ Form::text('short', null, [ 'class' => 'form-control', 'maxlength' => '10', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 

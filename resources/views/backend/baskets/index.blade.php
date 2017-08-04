@@ -70,7 +70,8 @@
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
-                searchDelay: 500
+                searchDelay: 500,
+                lengthMenu:  [50, 100, "All"]
             });
         });
     </script>

@@ -65,7 +65,7 @@ return [
                 'table' => [
                     'id' => 'Id',
                     'pageKey' => 'Page Key',
-                    'title' => 'Titulo',
+                    'name' => 'Nome',
                     'created_at' => 'Creato a'
                 ],
             ],
@@ -88,7 +88,7 @@ return [
 
                 'table' => [
                     'id' => 'Id',
-                    'title' => 'Titulo',
+                    'title' => 'Nome',
                     'type' => 'Tipo',
                     'image' => 'Immagine',
                     'created_at' => 'Creato a'

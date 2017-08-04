@@ -65,6 +65,7 @@
                     { data: 'name' + langSuf, name: 'name' + langSuf },
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}                ],
                 order: [[3, "asc"]],
+                lengthMenu:  [50, 100, "All"],
                 searchDelay: 500
             });
         });

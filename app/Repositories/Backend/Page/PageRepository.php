@@ -45,9 +45,9 @@ class PageRepository extends BaseRepository
             ->select([
                 config('pages_table') . '.id',
                 config('pages_table') . '.slug',
-                config('pages_table') . '.title',
-                config('pages_table') . '.title_ru',
-                config('pages_table') . '.title_it',
+                config('pages_table') . '.name',
+                config('pages_table') . '.name_ru',
+                config('pages_table') . '.name_it',
                 config('pages_table') . '.created_at',
             ]);
     }
@@ -65,10 +65,12 @@ class PageRepository extends BaseRepository
         DB::transaction(function () use ($input) {
             $page = self::MODEL;
             $page = new $page();
+            $page->name = $input['name'];
+            $page->name_ru = $input['name_ru'];
+            $page->name_it = $input['name_it'];
             $page->title = $input['title'];
             $page->title_ru = $input['title_ru'];
             $page->title_it = $input['title_it'];
-
             $page->description = $input['description'];
             $page->description_ru = $input['description_ru'];
             $page->description_it = $input['description_it'];
@@ -100,14 +102,15 @@ class PageRepository extends BaseRepository
      */
     public function update(Model $page, array $input)
     {
+        $page->name = $input['name'];
+        $page->name_ru = $input['name_ru'];
+        $page->name_it = $input['name_it'];
         $page->title = $input['title'];
         $page->title_ru = $input['title_ru'];
         $page->title_it = $input['title_it'];
-
         $page->description = $input['description'];
         $page->description_ru = $input['description_ru'];
         $page->description_it = $input['description_it'];
-
         $page->body = /*EMTypograph::fast_apply(*/
             clean($input['body']);
         $page->body_ru = /*EMTypograph::fast_apply(*/

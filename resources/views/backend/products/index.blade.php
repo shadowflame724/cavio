@@ -75,6 +75,7 @@
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[5, "asc"]],
+                lengthMenu:  [100, 200, "All"],
                 searchDelay: 500
             });
         });

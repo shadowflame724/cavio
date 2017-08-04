@@ -95,7 +95,7 @@ class UploadController extends Controller
 
     public function uploadFinishTissue(Request $request)
     {
-        $json = $this->uploadImg($request->file('file'), 230, 230);
+        $json = $this->uploadImg($request->file('file'), 480, 480);
 
         return response()->json($json);
     }
