@@ -328,9 +328,15 @@ var App = (function () {
       _goPage(link);
     },
     goPopupBack: function () {
+      console.log('_backFromProduct', _backFromProduct)
       if(_backFromProduct) {
         page(_backFromProduct);
         _backFromProduct = undefined;
+        return true;
+      }
+
+      if(location.pathname.indexOf('product/') != -1) {
+        page('/catalogue');
         return true;
       }
       return false;

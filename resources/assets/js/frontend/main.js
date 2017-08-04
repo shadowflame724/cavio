@@ -209,7 +209,7 @@ $(document).ready(function () {
 
 
   if (allow_CustomScroll) {
-    mainScroll = Scrollbar.init(document.getElementById('main-scrollbar'));
+    mainScroll = Scrollbar.init(document.getElementById('main-scrollbar'), {damping: 0.19});
   }
 
 
@@ -362,17 +362,20 @@ function initPageAfterLoading() {
   }
 
 
-  mainScroll.addListener(function () {
-    if (view_HeaderFooter) {
-      if (mainScroll.offset.y > 0) $('header:not(.scroll)').addClass('scroll');
-      else                         $('header.scroll').removeClass('scroll');
-
-      $(window).on('scroll', function () {
-        if ($(document).scrollTop()) $('header:not(.scroll)').addClass('scroll');
+  if(mainScroll){
+    mainScroll.options.speed = 1;
+    mainScroll.addListener(function () {
+      if (view_HeaderFooter) {
+        if (mainScroll.offset.y > 0) $('header:not(.scroll)').addClass('scroll');
         else                         $('header.scroll').removeClass('scroll');
-      });
-    }
-  });
+
+        $(window).on('scroll', function () {
+          if ($(document).scrollTop()) $('header:not(.scroll)').addClass('scroll');
+          else                         $('header.scroll').removeClass('scroll');
+        });
+      }
+    });
+  }
 
 
   // POPUP ZONES OR POPUP COLLECTIONS ============
@@ -2982,7 +2985,6 @@ $('ul.card-varians-list >li').on('click', function (e) {
 
   var indexCurr = $('ul.card-varians-list li.active').index();
   var indexNew = $(this).index();
-  var curPhotoId = $('ul.card-varians-list li.active').attr('data-photo');
   var newPhotoId = $(this).attr('data-photo');
   var curChildId = $(".swiper-slide.card_item-params[data-photo='" + newPhotoId + "'] ul.wrap-dimensions-values >li.active").attr('data-child');
 
