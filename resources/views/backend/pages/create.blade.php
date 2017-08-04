@@ -25,11 +25,15 @@
         </div><!-- /.box-header -->
 
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab"
-                                                      data-toggle="tab">EN</a>
+            <li role="presentation" class="active">
+                <a href="#en" aria-controls="en" role="tab" data-toggle="tab">EN</a>
             </li>
-            <li role="presentation"><a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a></li>
-            <li role="presentation"><a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a></li>
+            <li role="presentation">
+                <a href="#ru" aria-controls="ru" role="tab" data-toggle="tab">RU</a>
+            </li>
+            <li role="presentation">
+                <a href="#it" aria-controls="it" role="tab" data-toggle="tab">IT</a>
+            </li>
         </ul>
         <div class="box-body">
 

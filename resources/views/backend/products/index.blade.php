@@ -29,6 +29,7 @@
                         <th>{{ trans('labels.backend.access.product.table.parent_code') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.slug') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.name') }}</th>
+                        <th>{{ trans('labels.backend.access.product.table.published') }}</th>
                         <th>{{ trans('labels.backend.access.product.table.created_at') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
@@ -69,6 +70,7 @@
                     {data: 'code', name: 'code'},
                     {data: 'slug', name: 'slug'},
                     {data: 'name', name: 'name'},
+                    {data: 'published', name: 'published'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],

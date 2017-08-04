@@ -75,6 +75,8 @@ return [
         'email' => 'Е-мейл',
         'message' => 'Сообщение',
         'sendMessage' => 'Отправить сообщение',
+        'thanksTitle' => 'Спасибо',
+        'thanksBody' => 'Ваше сообщение успешно отправлено.',
     ],
 
     'showrooms' => [

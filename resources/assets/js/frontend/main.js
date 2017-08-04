@@ -240,6 +240,60 @@ $(document).ready(function () {
     return false;
   });
 
+  var showDefaultModal = function (title,body) {
+    $('#modal-thank_you_default').find('.section-title').html(title);
+    $('#modal-thank_you_default').find('.ty-text').html(body);
+    $('#modal-thank_you_default').attr('data-anim', 'true');
+  };
+
+  //contacts form
+  $('body').on('submit', '#form-contacts', function () {
+    var _form = $(this),
+      _action = _form.attr('action'),
+      name = _form.find('input[name="name"]').val() || false,
+      email = _form.find('input[name="email"]').val() || false,
+      message = _form.find('textarea[name="message"]').val() || false,
+
+      thanksTitle = _form.find('.thanks-title').html(),
+      thanksBody = _form.find('.thanks-body').html();
+
+    $('#form-contacts input').removeClass('input-error');
+    $('#form-contacts textarea').removeClass('input-error');
+
+    $('#form-contacts input').each(function (el) {
+      if($( this ).val() == ''){
+        $( this ).addClass('input-error');
+      }
+    });
+    $('#form-contacts textarea').each(function (el) {
+      if($( this ).val() == ''){
+        $( this ).addClass('input-error');
+      }
+    });
+    if(!validateEmail(email)){
+      _form.find('input[name="email"]').addClass('input-error');
+    }
+
+    if (email && validateEmail(email) && name && message) {
+      var data = {
+        name:name,
+        email:email,
+        message:message
+      };
+
+      $.ajax({
+        url : _action,
+        data : data,
+        type : 'POST',
+      })
+      .done(function() {
+        console.log('contacts form success SEND');
+        showDefaultModal(thanksTitle,thanksBody);
+      });
+    }
+    return false;
+  });
+
   //user_profile update
   $('body').on('submit', '.user_profile', function () {
     var _form = $(this),
@@ -1093,8 +1147,7 @@ function initMainPage() {
   }
 
   function autoChangeActiveNewProdDot() {
-    // intervalNewProdDot = setInterval(
-      function q() {
+    intervalNewProdDot = setInterval(function () {
       var nextNewProdDot = $('.new-products-dots .new-prod-dot.active').next()[0];
       if (!nextNewProdDot) nextNewProdDot = $('.new-products-dots .new-prod-dot').eq(0);
 
@@ -1133,11 +1186,10 @@ function initMainPage() {
       $(wrapRightSlidexbox).find('.new-products-right-item').each(function (key, el) {
         setTimeout(function () {
           el.classList.remove('hide');
-        }, 130 * key);
+        }, 150 * key);
       });
 
-    }
-    // , timeChangeAutoNewProdDot);
+    }, timeChangeAutoNewProdDot);
   }
 
   $('.new-products-dots .new-prod-dot').on('click', function () {
@@ -1179,7 +1231,7 @@ function initMainPage() {
     $(wrapRightSlidexbox).find('.new-products-right-item').each(function (key, el) {
       setTimeout(function () {
         el.classList.remove('hide');
-      }, 130 * key);
+      }, 150 * key);
     });
   });
 
@@ -1271,14 +1323,24 @@ function initMainPage() {
     $('.new-products-left-side').attr('data-anim', 'true');
     $('#banner').attr('data-anim', 'true');
   }, 1);
-  // setTimeout(function () {
-  //   $('#banner').attr('data-anim', 'true');
-  // }, 1);
   setTimeout(function () {
     $('.new-products-right-side, .wrap-new-products-gradiet').attr('data-anim', 'true');
+
+    setTimeout(function () {
+      var $_firstWrapRightSlidebox = $('.new-products-right-side .wrap-right-slidebox').eq(0);
+      $_firstWrapRightSlidebox.removeClass('hide');
+      $_firstWrapRightSlidebox.find('.new-products-right-item').each(function (key, el) {
+        setTimeout(function () {
+          el.classList.remove('hide');
+        }, 150 * key);
+      });
+    }, 400);
+
   }, 300);
 
   // AUTO CLICK NewProdDot =========
+  console.log('-----------------')
+
   autoChangeActiveNewProdDot();
   // ===============================
 
@@ -3212,6 +3274,13 @@ $('#ty-ok-p').on('click', function (e) {
 
   // $('#modal-order').attr('data-anim', 'false');
   $('#modal-thank_you_profile').attr('data-anim', 'false');
+  $('body').toggleClass('overfl-h');
+});
+
+$('#ty-ok-def-f').on('click', function (e) {
+  e.preventDefault();
+
+  $('#modal-thank_you_default').attr('data-anim', 'false');
   $('body').toggleClass('overfl-h');
 });
 
