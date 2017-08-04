@@ -219,6 +219,7 @@ $(document).ready(function () {
     var $_count = 1;
 
     basket.add($_price_id, $_count);
+    return false;
   });
 
   //subscribe
