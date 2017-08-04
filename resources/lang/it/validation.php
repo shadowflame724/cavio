@@ -312,7 +312,7 @@ return [
                     'type_finish' => 'Fazzoletto di carta',
                     'type_tissue' => 'Tissue',
                     'image' => 'Immagine',
-                    'parent' => 'Parent',
+                    'parent' => 'Parent-Type',
                     'comment' => 'Comment',
                     'short' => 'Short name',
                 ],
