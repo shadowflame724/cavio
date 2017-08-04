@@ -221,11 +221,12 @@ class ProductTableController extends Controller
                 return rtrim($string, ', ');
             })
             ->addColumn('comments', function ($product) {
-                $string = '<button type="button" class="btn btn-default comments" data-container="body" data-toggle="popover" data-placement="left" data-content="' . $product->parent_prev . '">
-  Parent comment</button><button type="button" class="btn btn-default comments" data-container="body" data-toggle="popover" data-placement="left" data-content="' . $product->child_product_prev . '">
-  Child comment</button><button type="button" class="btn btn-default comments" data-container="body" data-toggle="popover" data-placement="left" data-content="' . $product->photos_prev . '">
-  Photo comment</button>';
-
+                $string = '<button type="button" '.
+                    'class="btn btn-xs btn-default comments" data-container="body" '.
+                    'data-toggle="popover" data-placement="left" data-html="true" '.
+                    'data-content="<b>Product:</b> ' . $product->parent_prev . '<br>
+<b>Child:</b> ' . $product->child_product_prev . '<br>
+<b>Photo:</b> ' . $product->photos_prev . '">See comments</button>';
                 return $string;
             })
             ->addColumn('zones_name', function ($product) {
