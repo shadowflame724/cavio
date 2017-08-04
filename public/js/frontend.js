@@ -348,6 +348,8 @@ $(document).ready(function () {
 
 function initPageAfterLoading() {
 
+  var otherPage = true;
+
   var view_HeaderFooter = !document.querySelector('section[data-page-type="popup"]');
 
   if (view_HeaderFooter) {
@@ -380,6 +382,7 @@ function initPageAfterLoading() {
 
   // POPUP ZONES OR POPUP COLLECTIONS ============
   if (document.getElementById('zones-modal') || document.getElementById('collections-modal')) {
+    otherPage = false;
     initZonColModalPage();
     $('#zones-modal, #collections-modal').attr('data-anim', 'true');
   }
@@ -388,6 +391,7 @@ function initPageAfterLoading() {
 
   // product-card =============================
   if (document.getElementById('product-card')) {
+    otherPage = false;
     initProductCardPage();
     $('#product-card').attr('data-anim', 'true');
   }
@@ -396,6 +400,7 @@ function initPageAfterLoading() {
 
   // news-item =============================
   if (document.getElementById('news-item')) {
+    otherPage = false;
     $('#news-item').attr('data-anim', 'true');
   }
   // END news-item =============================
@@ -426,10 +431,10 @@ function initPageAfterLoading() {
   }
 
   // MAIN ========
-  if (document.querySelector("main[data-page='/']")) initMainPage();
+  if (document.querySelector("main[data-page='/']")) { otherPage = false; initMainPage(); }
 
   // BASKET ========
-  if (document.querySelector("main[data-page$='/basket']")) initBasketPage();
+  if (document.querySelector("main[data-page$='/basket']")) { otherPage = false; initBasketPage(); }
 
   // ZONES / COLLECTIONS ========
   if(document.querySelector("main[data-page='/zones']")       ||
@@ -437,38 +442,43 @@ function initPageAfterLoading() {
     document.querySelector("main[data-page^='/zones/']")     ||
     document.querySelector("main[data-page^='/collections/']")
   ) {
+    otherPage = false;
     initZenCollPage();
   }
 
   // NEWS ========
-  if(document.querySelector("main[data-page='/news']"))  initNewsPage();
+  if(document.querySelector("main[data-page='/news']"))  { otherPage = false; initNewsPage(); }
 
   // CATALOGUE ========
-  if(document.querySelector("main[data-page^='/catalogue']"))  initCataloguePage();
+  if(document.querySelector("main[data-page^='/catalogue']"))  { otherPage = false; initCataloguePage(); }
 
   // DASHBOARD
-  if(document.querySelector("main[data-page='/dashboard']"))  initDashboardPage();
+  if(document.querySelector("main[data-page='/dashboard']"))  { otherPage = false; initDashboardPage(); }
 
   // ABOUT ========
-  if(document.querySelector("main[data-page='/about']")) initAboutPage();
+  if(document.querySelector("main[data-page='/about']")) { otherPage = false; initAboutPage(); }
 
   // PrivacyPolicy ========
-  if(document.querySelector("main[data-page='/privacy-policy']")) initPrivacyPolicyPage();
+  if(document.querySelector("main[data-page='/privacy-policy']")) { otherPage = false; initPrivacyPolicyPage(); }
 
   // SHOWROOMS
-  if(document.querySelector("main[data-page='/showrooms']")) initShowroomsPage();
+  if(document.querySelector("main[data-page='/showrooms']")) { otherPage = false; initShowroomsPage(); }
 
   // CONTACTS
-  if(document.querySelector("main[data-page='/contacts']")) initContactsPage();
+  if(document.querySelector("main[data-page='/contacts']")) { otherPage = false; initContactsPage(); }
 
   // FAQ
-  if(document.querySelector("main[data-page='/faq']")) initFAQPage();
+  if(document.querySelector("main[data-page='/faq']")) { otherPage = false; initFAQPage(); }
 
   // PRESS-DESIGN
-  if(document.querySelector("main[data-page='/press-design']")) initPresDesignPage();
+  if(document.querySelector("main[data-page='/press-design']")) { otherPage = false; initPresDesignPage(); }
 
   // FINISH-TISSUE
-  if(document.querySelector("main[data-page='/finish-tissue']")) initFinTishPage();
+  if(document.querySelector("main[data-page='/finish-tissue']")) { otherPage = false; initFinTishPage(); }
+
+
+  // OTHER PAGE
+  if(otherPage = false;) { $("main [data-anim='false']").attr('data-anim', 'true'); }
 
   mainScroll.update();
 }
@@ -2730,10 +2740,10 @@ function initProductCardPage() {
       loop: true,
     });
 
-    $(document).on('click', '.card-modal-slide', function (event) {
+    $(document).on('click', '.wrap-nav-img_coll .nav-arrow', function (event) {
       var indexOuterSwiper = $('.wrap-bigest-swiper .outer-slide.swiper-slide-active').index();
-      if ($(event.target).closest('.card-modal-slide').hasClass('swiper-slide-prev')) cardModalSwip[indexOuterSwiper].slidePrev();
-      if ($(event.target).closest('.card-modal-slide').hasClass('swiper-slide-next')) cardModalSwip[indexOuterSwiper].slideNext();
+      if ($(event.target).hasClass('prev')) cardModalSwip[indexOuterSwiper].slidePrev();
+      if ($(event.target).hasClass('next')) cardModalSwip[indexOuterSwiper].slideNext();
     });
   });
 

@@ -228,6 +228,7 @@ section.zone-col-modal{
 }
 
 
+
 .wrap-zone-col-modal{
   position: relative;
 }
@@ -328,7 +329,7 @@ section.zone-col-modal{
   transition: all .4s ease;
 
   &:before{
-    content: '→';
+    content: '';
     position: absolute;
     font-size: 30px;
     color: $colorMarnur;
@@ -339,14 +340,13 @@ section.zone-col-modal{
     top: 0;
     bottom: 0;
     margin: auto;
+    background: url("/images/arrow.svg") 50% no-repeat;
+    transform: scaleY(0.75);
   }
 
-  &.prev{
-    left: 60px;
-    transform: rotate(180deg);
-  }
+  &.prev{ left: 60px; }
 
-  &.next{ right: 60px; }
+  &.next{ right: 60px; transform: scaleX(-1); }
 }
 html:not(.mobile-platform) .zc-modal-swip-arrow{
   &:hover, &.hov {
