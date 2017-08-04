@@ -60,12 +60,7 @@ class BasketController extends Controller
         foreach ($productData->product_price_ids as $productPrice) {
             $iDs[] = $productPrice->price_id;
         }
-        $langSuf = '';
-        if (\Lang::getLocale() == 'ru') {
-            $langSuf = '_ru';
-        } elseif (\Lang::getLocale() == 'it') {
-            $langSuf = '_it';
-        }
+        $langSuf = $this->getLangSuf();
 
         $products = ProductRepository::getProdsDataByPriceIds($iDs, $langSuf);
 

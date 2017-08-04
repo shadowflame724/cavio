@@ -43,7 +43,9 @@ class ZoneRepository extends BaseRepository
         return $this->query()
             ->select([
                 config('zones_table') . '.id',
-                config('zones_table') . '.title',
+                config('zones_table') . '.name',
+                config('zones_table') . '.name_ru',
+                config('zones_table') . '.name_it',
                 config('zones_table') . '.sort',
                 config('zones_table') . '.created_at',
             ]);

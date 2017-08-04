@@ -142,6 +142,7 @@
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
 
     <script>
+        var langSuf = '{{ $langSuf }}';
         $(function() {
             $('#all-finishes').DataTable({
                 processing: true,
@@ -153,7 +154,7 @@
                 columns: [
                     {data: 'id', name: 'id' },
                     {data: 'short', name: 'short'},
-                    {data: 'title', name: 'title'},
+                    {data: 'title' + langSuf, name: 'title' + langSuf},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
@@ -172,7 +173,7 @@
                 columns: [
                     {data: 'id', name: 'id' },
                     {data: 'short', name: 'short'},
-                    {data: 'title', name: 'title'},
+                    {data: 'title' + langSuf, name: 'title' + langSuf},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
@@ -191,7 +192,7 @@
                 columns: [
                     {data: 'id', name: 'id' },
                     {data: 'short', name: 'short'},
-                    {data: 'title', name: 'title'},
+                    {data: 'title' + langSuf, name: 'title' + langSuf},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],
@@ -210,7 +211,7 @@
                 columns: [
                     {data: 'id', name: 'id' },
                     {data: 'short', name: 'short'},
-                    {data: 'title', name: 'title'},
+                    {data: 'title' + langSuf, name: 'title' + langSuf},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],
                 order: [[1, "asc"]],

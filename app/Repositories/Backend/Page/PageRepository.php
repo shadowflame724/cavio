@@ -46,6 +46,8 @@ class PageRepository extends BaseRepository
                 config('pages_table') . '.id',
                 config('pages_table') . '.slug',
                 config('pages_table') . '.title',
+                config('pages_table') . '.title_ru',
+                config('pages_table') . '.title_it',
                 config('pages_table') . '.created_at',
             ]);
     }

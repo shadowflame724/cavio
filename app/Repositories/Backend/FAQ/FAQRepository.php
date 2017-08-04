@@ -43,7 +43,11 @@ class FAQRepository extends BaseRepository
             ->select([
                 config('faqs_table') . '.id',
                 config('faqs_table') . '.question',
+                config('faqs_table') . '.question_ru',
+                config('faqs_table') . '.question_it',
                 config('faqs_table') . '.answer',
+                config('faqs_table') . '.answer_ru',
+                config('faqs_table') . '.answer_it',
                 config('faqs_table') . '.created_at',
             ]);
     }

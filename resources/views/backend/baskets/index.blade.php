@@ -53,7 +53,6 @@
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
 
     <script>
-
         $(function() {
             $('#baskets-table').DataTable({
                 processing: true,

@@ -44,7 +44,13 @@ class ShowroomRepository extends BaseRepository
                 config('showroom_table') . '.id',
                 config('showroom_table') . '.country',
                 config('showroom_table') . '.city',
-                config('showroom_table') . '.name'
+                config('showroom_table') . '.name',
+                config('showroom_table') . '.country_ru',
+                config('showroom_table') . '.city_ru',
+                config('showroom_table') . '.name_ru',
+                config('showroom_table') . '.country_it',
+                config('showroom_table') . '.city_it',
+                config('showroom_table') . '.name_it'
             ]);
     }
 

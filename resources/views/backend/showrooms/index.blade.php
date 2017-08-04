@@ -49,6 +49,7 @@
 @section('after-scripts')
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
     <script>
+        var langSuf = '{{ $langSuf }}';
         $(function() {
             $('#showrooms-table').DataTable({
                 processing: true,
@@ -59,9 +60,9 @@
                 },
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'country', name: 'country' },
-                    { data: 'city', name: 'city' },
-                    { data: 'name', name: 'name' },
+                    { data: 'country' + langSuf, name: 'country' + langSuf },
+                    { data: 'city' + langSuf, name: 'city' + langSuf },
+                    { data: 'name' + langSuf, name: 'name' + langSuf },
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}                ],
                 order: [[3, "asc"]],
                 searchDelay: 500

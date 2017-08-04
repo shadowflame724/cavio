@@ -44,7 +44,9 @@ class CollectionRepository extends BaseRepository
         return $this->query()
             ->select([
                 config('collections_table') . '.id',
-                config('collections_table') . '.title',
+                config('collections_table') . '.name',
+                config('collections_table') . '.name_ru',
+                config('collections_table') . '.name_it',
                 config('collections_table') . '.image',
                 config('collections_table') . '.banner',
                 config('collections_table') . '.created_at',

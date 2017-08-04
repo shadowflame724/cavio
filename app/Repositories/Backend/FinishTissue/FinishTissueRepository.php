@@ -43,6 +43,8 @@ class FinishTissueRepository extends BaseRepository
             ->select([
                 config('finish_tissue_table') . '.id',
                 config('finish_tissue_table') . '.title',
+                config('finish_tissue_table') . '.title_ru',
+                config('finish_tissue_table') . '.title_it',
                 config('finish_tissue_table') . '.type',
                 config('finish_tissue_table') . '.image',
             ])
