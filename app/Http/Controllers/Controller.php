@@ -87,9 +87,8 @@ class Controller extends BaseController
 
     public function page($pageKey)
     {
-        $page = Page::where('slug', $pageKey)->get();
-
-        return $page[0];
+        $page = Page::where('slug', $pageKey)->firstOrFail();
+        return $page;
     }
 
     public function getLangSuf()

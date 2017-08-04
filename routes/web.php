@@ -34,3 +34,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
      */
     includeRouteFiles(__DIR__.'/Backend/');
 });
+
+/*
+ * Other pages
+ */
+Route::get('/{slug}', 'Frontend\FrontendController@staticPage')->name('static-page');
