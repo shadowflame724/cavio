@@ -26,7 +26,7 @@
                     <thead>
                     <tr>
                         <th>{{ trans('labels.backend.access.news.table.id') }}</th>
-                        <th>{{ trans('labels.backend.access.news.table.name') }}</th>
+                        <th>{{ trans('labels.backend.access.news.table.title') }}</th>
                         <th>{{ trans('labels.backend.access.news.table.image') }}</th>
                         <th>{{ trans('labels.backend.access.news.table.type') }}</th>
                         <th>{{ trans('labels.backend.access.news.table.created_at') }}</th>

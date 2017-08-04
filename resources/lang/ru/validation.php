@@ -140,6 +140,8 @@ return [
                     'pageKey' => 'Ключ страницы',
                     'title' => 'Заголовок*',
                     'description' => 'Описание*',
+                    'description_ru' => 'Описание[RU]*',
+                    'description_it' => 'Описание[IT]*',
                     'body' => 'Контент*',
                     'title_ru' => 'Заголовок[RU]*',
                     'body_ru' => 'Контент[RU]*',

@@ -28,9 +28,6 @@ class StoreNewsRequest extends Request
     public function rules()
     {
         return [
-            'title' => "required|min:3|max:191",
-            'title_ru' => "required|min:3|max:191",
-            'title_it' => "required|min:3|max:191",
             'name' => "required|min:3|max:191",
             'name_ru' => "required|min:3|max:191",
             'name_it' => "required|min:3|max:191",

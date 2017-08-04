@@ -146,6 +146,8 @@ return [
                     'pageKey' => 'Page key',
                     'title' => 'Titolo*',
                     'description' => 'Descrizione*',
+                    'description_ru' => 'Description[RU]*',
+                    'description_it' => 'Description[IT]*',
                     'body' => 'Soddisfare*',
                     'title_ru' => 'Titolo[RU]*',
                     'body_ru' => 'Soddisfare[RU]*',

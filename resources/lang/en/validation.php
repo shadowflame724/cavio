@@ -154,6 +154,8 @@ return [
                     'title_it' => 'Title[IT]*',
                     'body_it' => 'Content[IT]*',
                     'description' => 'Description*',
+                    'description_ru' => 'Description[RU]*',
+                    'description_it' => 'Description[IT]*',
                 ],
                 'block' => [
                     'title' => 'Title*',
