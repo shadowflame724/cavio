@@ -22,7 +22,7 @@
 
         <div class="box-body">
             <div class="table-responsive">
-                <table id="news-table" class="table table-condensed table-hover">
+                <table id="collections-table" class="table table-condensed table-hover">
                     <thead>
                     <tr>
                         <th>{{ trans('labels.backend.access.collection.table.id') }}</th>
@@ -55,8 +55,9 @@
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
 
     <script>
+        var langSuf = '{{ $langSuf }}';
         $(function () {
-            $('#news-table').DataTable({
+            $('#collections-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -65,7 +66,7 @@
                 },
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'title', name: 'title'},
+                    {data: 'name' + langSuf, name: 'name' + langSuf},
                     {data: 'image', name: 'image'},
                     {data: 'banner', name: 'banner'},
                     {data: 'created_at', name: 'created_at'},

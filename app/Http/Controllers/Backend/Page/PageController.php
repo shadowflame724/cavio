@@ -160,5 +160,16 @@ class PageController extends Controller
 
         return redirect()->route('admin.page.index')->withFlashSuccess(trans('alerts.backend.page.updated'));
     }
+    /**
+     * @param Page $page
+     * @param ManagePageRequest $request
+     *
+     * @return mixed
+     */
+    public function destroy(Page $page, ManagePageRequest $request)
+    {
+        $this->page->delete($page);
 
+        return redirect()->route('admin.page.index')->withFlashSuccess(trans('alerts.backend.page.deleted'));
+    }
 }

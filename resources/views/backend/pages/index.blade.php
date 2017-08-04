@@ -53,6 +53,7 @@
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
 
     <script>
+        var langSuf = '{{ $langSuf }}';
         $(function() {
             $('#pages-table').DataTable({
                 processing: true,
@@ -64,7 +65,7 @@
                 columns: [
                     {data: 'id', name: 'id' },
                     {data: 'slug', name: 'slug' },
-                    {data: 'title', name: 'title'},
+                    {data: 'title' + langSuf, name: 'title' + langSuf},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ],

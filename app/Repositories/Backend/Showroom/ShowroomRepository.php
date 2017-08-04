@@ -44,7 +44,13 @@ class ShowroomRepository extends BaseRepository
                 config('showroom_table') . '.id',
                 config('showroom_table') . '.country',
                 config('showroom_table') . '.city',
-                config('showroom_table') . '.name'
+                config('showroom_table') . '.name',
+                config('showroom_table') . '.country_ru',
+                config('showroom_table') . '.city_ru',
+                config('showroom_table') . '.name_ru',
+                config('showroom_table') . '.country_it',
+                config('showroom_table') . '.city_it',
+                config('showroom_table') . '.name_it'
             ]);
     }
 
@@ -62,9 +68,17 @@ class ShowroomRepository extends BaseRepository
             $showroom = self::MODEL;
             $showroom = new $showroom();
             $showroom->country = $input['country'];
+            $showroom->country_ru = $input['country_ru'];
+            $showroom->country_it = $input['country_it'];
             $showroom->city = $input['city'];
+            $showroom->city_ru = $input['city_ru'];
+            $showroom->city_it = $input['city_it'];
             $showroom->name = $input['name'];
+            $showroom->name_ru = $input['name_ru'];
+            $showroom->name_it = $input['name_it'];
             $showroom->address = $input['address'];
+            $showroom->address_ru = $input['address_ru'];
+            $showroom->address_it = $input['address_it'];
             $showroom->phone = $input['phone'];
             $showroom->phone2 = $input['phone2'];
             $showroom->fax = $input['fax'];
@@ -93,9 +107,17 @@ class ShowroomRepository extends BaseRepository
     public function update(Model $showroom, array $input)
     {
         $showroom->country = $input['country'];
+        $showroom->country_ru = $input['country_ru'];
+        $showroom->country_it = $input['country_it'];
         $showroom->city = $input['city'];
+        $showroom->city_ru = $input['city_ru'];
+        $showroom->city_it = $input['city_it'];
         $showroom->name = $input['name'];
+        $showroom->name_ru = $input['name_ru'];
+        $showroom->name_it = $input['name_it'];
         $showroom->address = $input['address'];
+        $showroom->address_ru = $input['address_ru'];
+        $showroom->address_it = $input['address_it'];
         $showroom->phone = $input['phone'];
         $showroom->phone2 = $input['phone2'];
         $showroom->fax = $input['fax'];

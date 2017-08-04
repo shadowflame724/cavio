@@ -88,7 +88,7 @@
                                                             <h3>{{ $product->parent_product_name }}</h3>
                                                             <small>
                                                                 <b>{{  trans('validation.attributes.backend.access.orders.product.code') }}
-                                                                    : </b>{{ $product->child_product_code }}</small>
+                                                                    : </b>{{ $product->parent_code }} > {{ $product->child_product_code }}</small>
                                                             <p>
                                                                 <b>{{ $product->collection_name }}>
                                                                     {{ $product->zones_name }}>

@@ -39,7 +39,23 @@
                             {{ Form::text('name', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
-                </div><!-- /.box-body -->
+
+                    <div class="form-group">
+                        {{ Form::label('title', trans('validation.attributes.backend.access.category.title'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description', trans('validation.attributes.backend.access.category.description'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('description', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                </div>
 
                 <div role="tabpanel" class="tab-pane fade" id="ru">
                     <div class="form-group">
@@ -47,6 +63,21 @@
 
                         <div class="col-lg-10">
                             {{ Form::text('name_ru', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('title_ru', trans('validation.attributes.backend.access.category.title_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title_ru', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_ru', trans('validation.attributes.backend.access.category.description_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('description_ru', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
                 </div>
@@ -59,6 +90,21 @@
                             {{ Form::text('name_it', null, ['class' => 'form-control', 'minlength' => '3', 'maxlength' => '35', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         </div><!--col-lg-10-->
                     </div><!--form control-->
+                    <div class="form-group">
+                        {{ Form::label('title_it', trans('validation.attributes.backend.access.category.title_ru'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::text('title_it', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
+                        {{ Form::label('description_it', trans('validation.attributes.backend.access.category.description_it'), ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-10">
+                            {{ Form::textarea('description_it', null, ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        </div><!--col-lg-10-->
+                    </div><!--form control-->
                 </div>
 
                 <input type="text" hidden name="p_id" value="{{$p_id}}">
@@ -66,7 +112,7 @@
                 <div class="form-group">
                     {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
-                        {{Form::textarea('image', null, [ 'class' => 'form-control', 'minlength' => '3', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        {{Form::textarea('image', null, [ 'class' => 'form-control']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
             </div>

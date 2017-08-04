@@ -12,7 +12,8 @@ class Category extends Node
 
     protected $table = 'categories';
 
-    protected $fillable = ['name', 'name_ru', 'name_it', 'product_ids', 'to_home'];
+    protected $fillable = ['name', 'name_ru', 'name_it', 'product_ids', 'to_home',
+        'title', 'title_ru', 'title_it', 'description', 'description_ru', 'description_it'];
 
     // 'parent_id' column name
     protected $parentColumn = 'parent_id';

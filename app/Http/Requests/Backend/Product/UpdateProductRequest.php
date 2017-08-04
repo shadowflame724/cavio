@@ -33,9 +33,9 @@ class UpdateProductRequest extends Request
             'name' => "required|min:3|max:191",
             'name_ru' => "required|min:3|max:191",
             'name_it' => "required|min:3|max:191",
-            'prev' => "required|min:3|max:191",
-            'prev_ru' => "required|min:3|max:191",
-            'prev_it' => "required|min:3|max:191",
+            'prev' => "required|min:3|max:1000",
+            'prev_ru' => "required|min:3|max:1000",
+            'prev_it' => "required|min:3|max:1000",
 
         ];
     }

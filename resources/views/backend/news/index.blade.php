@@ -51,11 +51,9 @@
     </div><!--box box-success-->
 @endsection
 @section('after-scripts')
-
     {{ Html::script("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js") }}
-
-
     <script>
+        var langSuf = '{{ $langSuf }}';
         $(function() {
             $('#news-table').DataTable({
                 processing: true,
@@ -66,7 +64,7 @@
                 },
                 columns: [
                     {data: 'id', name: 'id' },
-                    {data: 'name', name: 'name'},
+                    {data: 'name' + langSuf, name: 'name' + langSuf},
                     {data: 'image', name: 'image'},
                     {data: 'type', name: 'type'},
                     {data: 'created_at', name: 'created_at'},

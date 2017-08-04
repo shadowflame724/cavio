@@ -80,12 +80,15 @@
         <div class="container pad_0">
             <div class="wrap-carousel-show_r">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide show_r-slide"><img src="/upload/images/{{ $page->blocks->get(0)->image }}"
-                                                                alt=""></div>
-                    <div class="swiper-slide show_r-slide"><img src="/upload/images/{{ $page->blocks->get(1)->image }}"
-                                                                alt=""></div>
-                    <div class="swiper-slide show_r-slide"><img src="/upload/images/{{ $page->blocks->get(2)->image }}"
-                                                                alt=""></div>
+                    <div class="swiper-slide show_r-slide">
+                        <img src="/upload/images/{{ $page->blocks->get(0)->image }}" alt="">
+                    </div>
+                    <div class="swiper-slide show_r-slide">
+                        <img src="/upload/images/{{ $page->blocks->get(1)->image }}" alt="">
+                    </div>
+                    <div class="swiper-slide show_r-slide">
+                        <img src="/upload/images/{{ $page->blocks->get(2)->image }}" alt="">
+                    </div>
                 </div>
             </div>
         </div>

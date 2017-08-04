@@ -43,8 +43,9 @@ class TemplateMessageRepository extends BaseRepository
             ->select([
                 config('template_messages_table') . '.id',
                 config('template_messages_table') . '.title',
-                config('template_messages_table') . '.type',
-                config('template_messages_table') . '.created_at',
+                config('template_messages_table') . '.title_ru',
+                config('template_messages_table') . '.title_it',
+                config('template_messages_table') . '.type'
             ]);
     }
 

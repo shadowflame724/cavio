@@ -39,6 +39,14 @@ body{
 }
 
 
+#before_header{
+  transition: opacity 1s;
+
+  &[data-anim='false']{ opacity: 0; }
+  &[data-anim='true']{ opacity: 1; }
+}
+
+
 //SWIPER WILL CHANGE HEIGHT ===================
 .wrap-swiper-log_reg, .wrap-profile-swiper{
   will-change: height;
@@ -837,6 +845,9 @@ html.mobile-platform .new-products-right-inner-item{
     height: 100%;
     padding-left: 70px;
     padding-right: 90px;
+    transition: .5s;
+
+    &.hide{ opacity: 0; pointer-events: none; }
 
     .new-products-right-item{
       transform: translate(0);

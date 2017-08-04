@@ -146,7 +146,9 @@ var App = (function () {
       var prevPath = $('main').attr('data-page'),
       toggleHidenClass = function (isAdd) {
         if(isAdd) {
-          $('main [data-anim]').attr('data-anim', 'false');
+          console.log('intervalNewProdDot', intervalNewProdDot)
+          clearInterval(intervalNewProdDot);
+          hideElemsBeforeBack();
         } else {
           //
         }

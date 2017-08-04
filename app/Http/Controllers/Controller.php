@@ -31,31 +31,31 @@ class Controller extends BaseController
         return true;
     }
 
-    public function moveThreeSizeImg($newName, $oldName = null, $type='collection')
+    public function moveThreeSizeImg($newName, $oldName = null, $type = 'collection')
     {
-        if (!file_exists(public_path('/upload/images/'.$type.'/original'))) {
-            mkdir(public_path('/upload/images/'.$type.'/original'), 0777, true);
+        if (!file_exists(public_path('/upload/images/' . $type . '/original'))) {
+            mkdir(public_path('/upload/images/' . $type . '/original'), 0777, true);
         }
-        if (!file_exists(public_path('/upload/images/'.$type.'/horizontal'))) {
-            mkdir(public_path('/upload/images/'.$type.'/horizontal'), 0777, true);
+        if (!file_exists(public_path('/upload/images/' . $type . '/horizontal'))) {
+            mkdir(public_path('/upload/images/' . $type . '/horizontal'), 0777, true);
         }
-        if (!file_exists(public_path('/upload/images/'.$type.'/thumb'))) {
-            mkdir(public_path('/upload/images/'.$type.'/thumb'), 0777, true);
+        if (!file_exists(public_path('/upload/images/' . $type . '/thumb'))) {
+            mkdir(public_path('/upload/images/' . $type . '/thumb'), 0777, true);
         }
-        $tmpFile = public_path('upload/tmp/'.$type.'/original/') . $newName;
-        $file = public_path('upload/images/'.$type.'/original/') . $newName;
-        if ($newName != $oldName AND $oldName != null AND file_exists('upload/images/'.$type.'/original/' . $oldName)) {
-            unlink(public_path('upload/images/'.$type.'/original/' . $oldName));
-            unlink(public_path('upload/images/'.$type.'/horizontal/' . $oldName));
-            unlink(public_path('upload/images/'.$type.'/thumb/' . $oldName));
+        $tmpFile = public_path('upload/tmp/' . $type . '/original/') . $newName;
+        $file = public_path('upload/images/' . $type . '/original/') . $newName;
+        if ($newName != $oldName AND $oldName != null AND file_exists('upload/images/' . $type . '/original/' . $oldName)) {
+            unlink(public_path('upload/images/' . $type . '/original/' . $oldName));
+            unlink(public_path('upload/images/' . $type . '/horizontal/' . $oldName));
+            unlink(public_path('upload/images/' . $type . '/thumb/' . $oldName));
         }
 
         if ($newName != null AND file_exists($tmpFile)) {
             rename($tmpFile, $file);
-            rename(public_path('upload/tmp/'.$type.'/horizontal/') . $newName,
-                public_path('upload/images/'.$type.'/horizontal/') . $newName);
-            rename(public_path('upload/tmp/'.$type.'/thumb/') . $newName,
-                public_path('upload/images/'.$type.'/thumb/') . $newName);
+            rename(public_path('upload/tmp/' . $type . '/horizontal/') . $newName,
+                public_path('upload/images/' . $type . '/horizontal/') . $newName);
+            rename(public_path('upload/tmp/' . $type . '/thumb/') . $newName,
+                public_path('upload/images/' . $type . '/thumb/') . $newName);
         }
 
         return true;
@@ -70,16 +70,16 @@ class Controller extends BaseController
         return true;
     }
 
-    public function deleteThreeSizeImg($name, $type='collection')
+    public function deleteThreeSizeImg($name, $type = 'collection')
     {
-        if (file_exists('upload/images/'.$type.'/original/' . $name) AND $name != null) {
-            unlink(public_path('upload/images/'.$type.'/original/' . $name));
+        if (file_exists('upload/images/' . $type . '/original/' . $name) AND $name != null) {
+            unlink(public_path('upload/images/' . $type . '/original/' . $name));
         }
-        if (file_exists('upload/images/'.$type.'/horizontal/' . $name) AND $name != null) {
-            unlink(public_path('upload/images/'.$type.'/horizontal/' . $name));
+        if (file_exists('upload/images/' . $type . '/horizontal/' . $name) AND $name != null) {
+            unlink(public_path('upload/images/' . $type . '/horizontal/' . $name));
         }
-        if (file_exists('upload/images/'.$type.'/thumb/' . $name) AND $name != null) {
-            unlink(public_path('upload/images/'.$type.'/thumb/' . $name));
+        if (file_exists('upload/images/' . $type . '/thumb/' . $name) AND $name != null) {
+            unlink(public_path('upload/images/' . $type . '/thumb/' . $name));
         }
 
         return true;
@@ -90,6 +90,18 @@ class Controller extends BaseController
         $page = Page::where('slug', $pageKey)->get();
 
         return $page[0];
+    }
+
+    public function getLangSuf()
+    {
+        $langSuf = '';
+        if (\Lang::getLocale() == 'ru') {
+            $langSuf = '_ru';
+        } elseif (\Lang::getLocale() == 'it') {
+            $langSuf = '_it';
+        }
+
+        return $langSuf;
     }
 
 }

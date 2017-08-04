@@ -43,6 +43,8 @@ class NewsRepository extends BaseRepository
             ->select([
                 config('news_table') . '.id',
                 config('news_table') . '.name',
+                config('news_table') . '.name_ru',
+                config('news_table') . '.name_it',
                 config('news_table') . '.type',
                 config('news_table') . '.image',
                 config('news_table') . '.created_at',

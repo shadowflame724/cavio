@@ -104,7 +104,7 @@ class OrderController extends Controller
             'order' => $order,
             'orderData' => $productData->order_data,
             'products' => $products,
-            'vat' => str_replace('"', '', $settings->vat_data)
+            'vat' => $settings->vat_data
         ]);
     }
 
