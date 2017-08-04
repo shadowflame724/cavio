@@ -50,6 +50,18 @@ class FrontendController extends Controller
     /**
      * @return \Illuminate\View\View
      */
+    public function about()
+    {
+        $page = $this->page('about');
+
+        return view('frontend.pages.about', [
+            'page' => $page
+        ]);
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
     public function macros()
     {
         return view('frontend.macros');
@@ -58,11 +70,11 @@ class FrontendController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function about()
+    public function staticPage($slug)
     {
-        $page = $this->page('about');
+        $page = $this->page($slug);
 
-        return view('frontend.pages.about', [
+        return view('frontend.pages.static', [
             'page' => $page
         ]);
     }

@@ -6,6 +6,7 @@
  */
 Route::get('/', 'FrontendController@index')->name('index');
 
+
 Route::get('about', 'FrontendController@about')->name('about');
 Route::get('faq', 'FrontendController@faq')->name('faq');
 Route::get('news', 'NewsController@index')->name('news');
@@ -15,7 +16,7 @@ Route::get('news/{news}', 'NewsController@show')->name('news.show');
 Route::get('contacts', 'FrontendController@contacts')->name('contacts');
 Route::post('message', 'MessageController@store')->name('message.store');
 
-Route::get('payments', 'FrontendController@payments')->name('payments');
+//Route::get('payments', 'FrontendController@payments')->name('payments');
 Route::get('showrooms', 'FrontendController@showrooms')->name('showrooms');
 Route::get('privacy-policy', 'FrontendController@privacyPolicy')->name('privacy-policy');
 Route::get('stash', 'FrontendController@stash')->name('stash');
@@ -39,7 +40,6 @@ Route::get('subscribe', 'MailchimpController@subscribeNews')->name('subscribe');
 Route::get('unsubscribe', 'MailchimpController@unsubscribeNews')->name('unsubscribe');
 
 Route::get('press-design', 'FrontendController@pressDesign')->name('press-design');
-
 
 /**
  * Корзина

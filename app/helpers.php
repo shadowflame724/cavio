@@ -173,3 +173,49 @@ if ( ! function_exists('cart'))
         return app('cart');
     }
 }
+if ( ! function_exists('centimeters_conventer'))
+{
+    function centimeters_conventer($item)
+    {
+//        $item = '(200/150)';
+        if(!empty($item)){
+            $findmeArr = ['/','x'];
+            $vowels = ['(',')'];
+            $flag = false;
+            $flagBox = false;
+            $foundSibmol = null;
+            $itemRes = null;
+
+            foreach ($findmeArr as $findme){
+                $flag = stripos($item, $findme);
+                $flagBox = stripos($item, '(');
+                if($flag){
+                    $foundSibmol = $findme;
+                    break;
+                }
+            }
+            if($flag){
+                $item = str_replace($vowels , "", $item);
+                $itemExplode = explode($foundSibmol,$item);
+                $itemResArr = [];
+                foreach ($itemExplode as $itemExplodeOne){
+                    $sum = (float)$itemExplodeOne * 0.39;
+                    $itemResArr[] = number_format($sum, 1, '.', ' ');
+                }
+                if(!empty($itemResArr)){
+                    if($flagBox !== false){
+                        $itemRes = '('.$itemResArr[0].$foundSibmol.$itemResArr[1].')';
+                    }else{
+                        $itemRes = $itemResArr[0].$foundSibmol.$itemResArr[1];
+                    }
+                }
+            }else{
+                $sum = (float)$item * 0.39;
+                $itemRes = $sum;
+            }
+
+            return $itemRes;
+        }
+        return null;
+    }
+}
