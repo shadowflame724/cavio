@@ -838,6 +838,8 @@ html.mobile-platform .new-products-right-inner-item{
     padding-left: 70px;
     padding-right: 90px;
 
+    &.hide{ z-index: -1;}
+
     .new-products-right-item{
       transform: translate(0);
       transition: opacity .8s ease, transform .8s ease;
