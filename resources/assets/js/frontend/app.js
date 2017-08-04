@@ -146,9 +146,19 @@ var App = (function () {
       var prevPath = $('main').attr('data-page'),
       toggleHidenClass = function (isAdd) {
         if(isAdd) {
-          console.log('intervalNewProdDot', intervalNewProdDot)
+          console.log('intervalNewProdDot', ctx)
           clearInterval(intervalNewProdDot);
           hideElemsBeforeBack();
+
+          if((ctx.pathname.indexOf('/collections/')  != -1 && (ctx.pathname.split("/").length - 1) == 3) ||
+             (ctx.pathname.indexOf('/zones/')        != -1 && (ctx.pathname.split("/").length - 1) == 3) ||
+              ctx.pathname.indexOf('/news/')         != -1                                               ||
+              ctx.pathname.indexOf('/product/')      != -1                                               ||
+              ctx.pathname.indexOf('/press-design') != -1
+          )
+          {
+            hideHeader();
+          }
         } else {
           //
         }
@@ -318,9 +328,15 @@ var App = (function () {
       _goPage(link);
     },
     goPopupBack: function () {
+      console.log('_backFromProduct', _backFromProduct)
       if(_backFromProduct) {
         page(_backFromProduct);
         _backFromProduct = undefined;
+        return true;
+      }
+
+      if(location.pathname.indexOf('product/') != -1) {
+        page('/catalogue');
         return true;
       }
       return false;
