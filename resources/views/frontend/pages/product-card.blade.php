@@ -174,7 +174,9 @@
                                             <div class="wrap-card-dimensions">
                                                 <div class="wrap-card-block-title clearfix">
                                                     <div class="block_title-card">Dimensions</div>
-                                                    <div class="toggle-cent_inch"><span class="toggle-inner-length hov-colMain_clack active">Centimeters</span> / <span class="toggle-inner-length hov-colMain_clack">inches</span></div>
+                                                    <div class="toggle-cent_inch"><span class="toggle-inner-length hov-colMain_clack active">Centimeters</span>
+                                                    /
+                                                    <span class="toggle-inner-length hov-colMain_clack">inches</span></div>
                                                 </div>
                                                 <div class="wrap-table-dimensions clearfix">
                                                     <ul class="wrap-dimensions-values clearfix">
@@ -192,11 +194,11 @@
                                                                         <li>{{$child['dimensions']->niche}}</li>
                                                                     </ul>
                                                                     <ul class="swiper-slide dimensions-values-item bg-white-marmur inch">
-                                                                        <li>{{$child['dimensions']->length}}</li>
-                                                                        <li>{{$child['dimensions']->width}}</li>
-                                                                        <li>{{$child['dimensions']->height}}</li>
-                                                                        <li>{{$child['dimensions']->mattress}}</li>
-                                                                        <li>{{$child['dimensions']->niche}}</li>
+                                                                        <li>{{centimeters_conventer($child['dimensions']->length)}}</li>
+                                                                        <li>{{centimeters_conventer($child['dimensions']->width)}}</li>
+                                                                        <li>{{centimeters_conventer($child['dimensions']->height)}}</li>
+                                                                        <li>{{centimeters_conventer($child['dimensions']->mattress)}}</li>
+                                                                        <li>{{centimeters_conventer($child['dimensions']->niche)}}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
