@@ -308,29 +308,29 @@
 
                                 <div class="wrap-swiper-related overfl-h">
                                     <div class="swiper-wrapper">
-                                    @if(isset($product['photos']) && !empty($product['photos']))
-                                    @foreach($product['photos'] as $photo)
-                                    <div class="swiper-slide wrap-also-buy-items">
-                                        @if(!empty($photo['relationProducts']))
-                                        @foreach($photo['relationProducts'] as $relationProduct)
-                                        <div class="new-products-right-item grid cart_item @if($relationProduct['isDiscount']) discount @endif">
-                                            <a class="new-products-right-inner-item" href="/product/{{$relationProduct['slug']}}">
-                                                <div class="product-img-table">
-                                                    <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(/upload/products/{{$relationProduct['image']}})">
+                                            @if(isset($product['photos']) && !empty($product['photos']))
+                                                @foreach($product['photos'] as $photo)
+                                                    <div class="swiper-slide wrap-also-buy-items">
+                                                    @if(!empty($photo['relationProducts']))
+                                                    @foreach($photo['relationProducts'] as $relationProduct)
+                                                        <div class="new-products-right-item grid cart_item @if($relationProduct['isDiscount']) discount @endif">
+                                                            <a class="new-products-right-inner-item" href="/product/{{$relationProduct['slug']}}">
+                                                                <div class="product-img-table">
+                                                                    <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(/upload/products/{{$relationProduct['image']}})">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="wrap-new-product-data">
+                                                                    <div class="product-code">#{{$relationProduct['code']}}</div>
+                                                                    <div class="product-name">{{$relationProduct['name']}}</div>
+                                                                    <div class="product-price">{{$relationProduct['prices']}}</div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                    @endif
                                                     </div>
-                                                </div>
-                                                <div class="wrap-new-product-data">
-                                                    <div class="product-code">#{{$relationProduct['code']}}</div>
-                                                    <div class="product-name">{{$relationProduct['name']}}</div>
-                                                    <div class="product-price">{{$relationProduct['prices']}}</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        @endforeach
-                                        @endif
-                                    </div>
-                                    @endforeach
-                                    @endif
+                                                @endforeach
+                                            @endif
                                     </div>
                                 </div>
                             </div>
