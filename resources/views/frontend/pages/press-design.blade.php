@@ -79,10 +79,11 @@
                                         <div class="td download_link">
                                             <div class="tabel-field-name">{{ trans('frontend.press-design.links') }}</div>
                                             {!! $document->link !!}</div>
-                                    </div>
+                        
                                     <div class="td date">
                                         <div class="tabel-field-name">{{ trans('frontend.press-design.date') }}</div>
                                         {{ $document->created_at->diffForHumans() }}
+                                    </div>
                                     </div>
                                 @endif
                             @endforeach
