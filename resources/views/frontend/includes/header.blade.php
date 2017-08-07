@@ -89,7 +89,7 @@
                                     <a href="{{ route('frontend.faq') }}">{{ trans('frontend.header.faq') }}</a>
                                 </li>
                                 <li>
-                                    <a href="#">{{ trans('frontend.header.payment') }}</a>
+                                    <a href="{{ route('static-page', 'payments') }}">{{ trans('frontend.header.payment') }}</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('frontend.contacts') }}">{{ trans('frontend.header.contact') }}</a>
