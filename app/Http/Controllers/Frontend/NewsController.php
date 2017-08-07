@@ -14,12 +14,22 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $config = config('app.settings');
         $news = News::all();
         $page = $this->page('news');
 
+        if(!empty($config['news_types_data']) && !empty($news)){
+            $news_types_data = [];
+            foreach ($news as $newsOne){
+                $news_types_data[$newsOne['type']] = $config['news_types_data'][$newsOne['type']];
+            }
+            ksort($news_types_data);
+        }
+
         return view('frontend.pages.news.index', [
             'news' => $news,
-            'page' => $page
+            'page' => $page,
+            'news_types_data' => $news_types_data
         ]);
     }
 
