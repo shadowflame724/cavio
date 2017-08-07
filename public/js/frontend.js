@@ -594,7 +594,7 @@ function initPageAfterLoading() {
   // OTHER PAGE
   if(otherPage) { $("main [data-anim='false']").attr('data-anim', 'true'); }
 
-  mainScroll.update();
+  mainScroll && mainScroll.update();
 }
 
 
@@ -3502,7 +3502,7 @@ function hideLeftMenu() {
   $('.btn-top-menu.active').removeClass('active');
   $('.top-menu-box.show').removeClass('show');
   $('header').removeClass('show-left-menu');
-  $(document.body).toggleClass('overfl-h');
+  $(document.body).removeClass('overfl-h');
 }
 
 function blendModeDef() {
