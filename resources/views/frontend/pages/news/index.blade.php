@@ -33,20 +33,17 @@
 
               <div class="news-item">
                 @if($item->image)
-                  <a href="{{ route('frontend.news.show', $item->slug) }}"><img class="news-item-img"
-                                                                           src="upload/images/{{ $item->image }}"></a>
+                  <a href="{{ route('frontend.news.show', $item->slug) }}">
+                      <img class="news-item-img" src="upload/images/{{ $item->image }}">
+                  </a>
                 @endif
                 <div class="news-date">{{ $item->created_at->diffForHumans() }}</div>
-                <a href="{{ route('frontend.news', $item->slug) }}" class="news-title">
-                  {{ $item->{'title'.$langSuf} }}
-
-                </a>
+                <a href="{{ route('frontend.news.show', $item->slug) }}"
+                   class="news-title"
+                >{{ $item->{'title'.$langSuf} }}</a>
                 @if($item->preview)
-                  <div class="news-text">
-                    {!! $item->{'preview'.$langSuf} !!}
-
-                    <a href="{{  route('frontend.news', $item->slug) }}"
-                       class="link-arrow">→</a>
+                  <div class="news-text">{!! $item->{'preview'.$langSuf} !!}
+                    <a href="{{  route('frontend.news.show', $item->slug) }}" class="link-arrow">→</a>
                   </div>
                 @endif
               </div>
