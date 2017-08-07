@@ -30,7 +30,6 @@
         <div class="wrap-news-list" data-anim="false">
           <div id="news-list" class="clearfix">
             @foreach($news as $item)
-
               <div class="news-item">
                 @if($item->image)
                   <a href="{{ route('frontend.news.show', $item->slug) }}">
