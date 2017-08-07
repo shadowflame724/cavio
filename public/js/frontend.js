@@ -227,6 +227,8 @@ $(document).ready(function () {
       'cy': cy
     });
 
+    console.log($('#circle-stash circle:animated'));
+
     $('#circle-stash, #circle-stash circle').finish();
     setTimeout(function () {
       $('#circle-stash, #circle-stash circle').finish();
@@ -236,7 +238,7 @@ $(document).ready(function () {
     setTimeout(function () {
       $('#btn_to_stash').addClass('clicked');
       $('#circle-stash circle').animate({
-        'r': '80'
+        'r': '100'
       },{
         duration: 500,
         complete: function () {

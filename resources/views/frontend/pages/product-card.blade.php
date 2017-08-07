@@ -301,6 +301,10 @@
                                                 @endforeach
                                                 @endif
                                             </div>
+                                            <div class="wrap-nav-img_coll">
+                                              <div class="nav-arrow prev"></div>
+                                              <div class="nav-arrow next"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     @endforeach
