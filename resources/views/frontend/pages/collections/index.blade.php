@@ -33,7 +33,7 @@
               </div>
               <div>
                 <div class=coll-name>
-                  {{ $collection->{'title'.$langSuf} }}
+                  {{ $collection->{'name'.$langSuf} }}
                   <span class="wrap-coll-name-arrow"><span class="coll-name-arrow">→</span></span>
                 </div>
                 <div class="numb-prod">69 {{ trans('frontend.zones-collections.products') }}</div>

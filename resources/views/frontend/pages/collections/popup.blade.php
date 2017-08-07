@@ -45,7 +45,7 @@
                         <div class=zon-col-upper_list>
                             <div class="wrap-descr_and_title clearfix">
                                 <div class=wrap-name-and-prod_numb>
-                                    <div class=descr-zon_col-item-name>{{ $collection->{'title'.$langSuf} }}</div>
+                                    <div class=descr-zon_col-item-name>{{ $collection->{'name'.$langSuf} }}</div>
                                     @if(count($products))
                                     <div class=zc-modal-prod-numb>
                                         <span class="prod-numb">{{ count($products) }}</span>
@@ -53,7 +53,7 @@
                                     </div>
                                     @endif
                                 </div>
-                                <div class=descr-zon_col-item>{{ $collection->{'description'.$langSuf} }}</div>
+                                <div class=descr-zon_col-item>{{ $collection->{'prev'.$langSuf} }}</div>
                             </div>
                         </div>
                         @if(count($products))

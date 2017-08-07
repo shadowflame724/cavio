@@ -9,7 +9,7 @@
 @section('content')
     <section id="" class="wrap-banner no_space">
         <div class="wrap-banner-cont" data-anim="false">
-            <h3 class="section-title">{{ $collection->{'title'.$langSuf} }}
+            <h3 class="section-title">{{ $collection->{'name'.$langSuf} }}
                 <a href="{{ route('frontend.collections') }}" class="back-zol_col anim-underline">← {{ trans('frontend.zones-collections.backToCollections') }}</a>
             </h3>
         </div>
@@ -34,7 +34,7 @@
                                 <img src=/upload/images/zone/horizontal/{{ $img }} alt="">
                             </div>
                             <div>
-                                <div class=coll-name>{{ $item->{'title'.$langSuf} }}
+                                <div class=coll-name>{{ $item->{'name'.$langSuf} }}
                                     {{--{{ $item->mainZone->{'title'.$langSuf} }}--}}
                                     <span class=wrap-coll-name-arrow>
                                         <span class=coll-name-arrow>→</span>

@@ -9,7 +9,7 @@
 @section('content')
     <section class="wrap-banner no_space">
         <div class=wrap-banner-cont data-anim="false">
-            <h3 class=section-title>{{ $zone->{'title'.$langSuf} }}
+            <h3 class=section-title>{{ $zone->{'name'.$langSuf} }}
                 <a href="{{ route('frontend.zones') }}"
                    class="back-zol_col anim-underline">← {{ trans('frontend.zones-collections.backToZones') }}</a>
                 <svg class=title-wave viewBox="0 0 1395.63 1237.68">
@@ -36,7 +36,7 @@
                             <img src=/upload/images/collection/horizontal/{{ $img }} alt="">
                         </div>
                         <div>
-                            <div class=coll-name>{{ $item->collection->{'title'.$langSuf} }}
+                            <div class=coll-name>{{ $item->collection->{'name'.$langSuf} }}
                                 <span class=wrap-coll-name-arrow><span class=coll-name-arrow>→</span></span>
                             </div>
                             @if($cnt)

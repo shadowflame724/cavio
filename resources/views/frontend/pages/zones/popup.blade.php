@@ -21,7 +21,7 @@
                             <ul class="zc-modal-types clearfix">
                                 @foreach($collectionAll as $item)
                                 <li @if($item->slug == $collection->slug)class="active"@endif>
-                                    <a href="{{ route('frontend.zones.show_popup', [$zone->slug, $item->slug]) }}">{{ $item->{'title'.$langSuf} }}</a>
+                                    <a href="{{ route('frontend.zones.show_popup', [$zone->slug, $item->slug]) }}">{{ $item->{'name'.$langSuf} }}</a>
                                 </li>
                                 @endforeach
                             </ul>
@@ -46,7 +46,7 @@
                     <div class="wrap-zc-modal-product-list">
                         <div class="zon-col-upper_list">
                             <div class="wrap-descr_and_title col clearfix">
-                                <div class="descr-zon_col-item-name col">{{ $zone->{'title'.$langSuf} }}</div>
+                                <div class="descr-zon_col-item-name col">{{ $zone->{'name'.$langSuf} }}</div>
                             </div>
                             @if(count($products))
                             <div class="zc-modal-prod-numb">

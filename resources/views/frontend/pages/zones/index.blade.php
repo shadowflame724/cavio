@@ -37,7 +37,7 @@
                   <img src="/upload/images/zone/thumb/{{ $image }}" alt="">
                 </div>
                 <div>
-                  <div class=coll-name>{{ $zone->{'title'.$langSuf} }}
+                  <div class=coll-name>{{ $zone->{'name'.$langSuf} }}
                     <span class=wrap-coll-name-arrow><span class=coll-name-arrow>→</span></span>
                   </div>
                   <div class=numb-prod>00 {{ trans('frontend.zones-collections.products') }}</div>
