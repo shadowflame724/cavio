@@ -47,11 +47,11 @@
                                     'required' => 'required',
                                     'placeholder' => trans('validation.attributes.frontend.password')
                                 ]) }}
-                                <label>
-                                    {{ Form::checkbox('remember') }} {{ trans('labels.frontend.auth.remember_me') }}
+                                <label class="wrap-remember-login">
+                                    {{ Form::checkbox('remember') }} <span>{{ trans('labels.frontend.auth.remember_me') }}</span>
                                 </label>
                                 {{ Form::submit(trans('frontend.header.login'), ['class' => 'btn small login_reg-submit']) }}
-                                {{ link_to_route('frontend.auth.password.reset', trans('labels.frontend.passwords.forgot_password')) }}
+                                {{ link_to_route('frontend.auth.password.reset', trans('labels.frontend.passwords.forgot_password'), '', ['class'=>'reset-link']) }}
 
                             {{ Form::close() }}
                         </div>

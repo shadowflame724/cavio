@@ -746,6 +746,7 @@ html.mobile-platform .new-products-right-item.more .new-products-more-widt{
       text-transform: uppercase;
       color: #493a2f;
       font-size: 12px;
+      margin-bottom: 4px;
       letter-spacing: 2.5px;
     }
 
@@ -754,7 +755,8 @@ html.mobile-platform .new-products-right-item.more .new-products-more-widt{
       position: relative;
       color: black;
       pointer-events: all;
-      display: inline-block;
+      display: inline;
+      border-bottom: 1px solid transparent;
       margin-top: 4px;
       font-size: 30px;
       transition: all .4s;
@@ -786,9 +788,9 @@ html.mobile-platform .new-products-right-item.more .new-products-more-widt{
   }
 }
 html:not(.mobile-platform) .new-products-right-inner-item:hover{
-  .wrap-new-product-data .product-name:after{ right: 0; }
+  //.wrap-new-product-data .product-name:after{ right: 0; }
   .wrap-new-product-img{ transform: scale(1.0); }
-  .product-name{ color: $mainActiveColor !important; }
+  .product-name{ color: $mainActiveColor !important; border-color: $mainActiveColor !important; }
 }
 html.mobile-platform .new-products-right-inner-item{
   .wrap-new-product-img{ transform: scale(1.0); }
@@ -837,8 +839,6 @@ html.mobile-platform .new-products-right-inner-item{
     height: 100%;
     padding-left: 70px;
     padding-right: 90px;
-
-    &.hide{ z-index: -1;}
 
     .new-products-right-item{
       transform: translate(0);
@@ -1822,6 +1822,39 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
 .wrap-bigest-swiper{
   margin-left: -110px;
   margin-right: -110px;
+}
+
+.wrap-nav-img_coll{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .nav-arrow{
+    position: absolute;
+    width: 100px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+    cursor: pointer;
+    background-size: contain;
+    &:before{
+      content: '';
+      background: url("/images/arrow.svg") 50% no-repeat;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 5%;
+      width: 95px;
+    }
+
+    //background: #000;
+
+    &.prev{ left:  0; &:before{  }}
+    &.next{ right: 0; &:before{ transform: scale(-1); }}
+  }
 }
 
 .wrap-card-dimensions{

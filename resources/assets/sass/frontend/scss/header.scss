@@ -22,6 +22,12 @@ header{ pointer-events: none; }
   &.hide{ opacity: 0; pointer-events: none; transform: translate(0, -30px); }
 }
 
+#banner{
+  transition: .8s;
+
+  [data-anim='true']{ opacity: 1; }
+  [data-anim='false']{ opacity: 0; }
+}
 
 .header-bg{
   position: absolute;

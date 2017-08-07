@@ -478,7 +478,7 @@ function initPageAfterLoading() {
 
 
   // OTHER PAGE
-  if(otherPage = false;) { $("main [data-anim='false']").attr('data-anim', 'true'); }
+  if(otherPage) { $("main [data-anim='false']").attr('data-anim', 'true'); }
 
   mainScroll.update();
 }
@@ -3240,6 +3240,12 @@ $('#ty-ok-p').on('click', function (e) {
 
 // CLOSE MODALS
 $(document).on('click', '.zone-col-modal', function (event) {
+  if($(event.target).closest('main').length == 0) {
+
+
+    return;
+  }
+
   var isModalSider = !$(event.target).closest('.inner-zone-col-modal').length;
 
   if (isModalSider || $(event.target).hasClass('btn-close-modal')) {
