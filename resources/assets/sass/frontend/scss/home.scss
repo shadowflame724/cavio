@@ -839,6 +839,9 @@ html.mobile-platform .new-products-right-inner-item{
     height: 100%;
     padding-left: 70px;
     padding-right: 90px;
+    transition: z-index 0s .2s;
+
+    &.hide{ z-index: -1; }
 
     .new-products-right-item{
       transform: translate(0);
@@ -2234,6 +2237,18 @@ form.login_reg{
   }
 }
 
+.wrap-remember-login{
+  input{
+    height: auto !important;
+    margin: 0 !important;
+  }
+}
+
+a.forgot-pwd{
+  color: black;
+}
+html:not(.mobile-platform) a.forgot-pwd{
+}
 
 
 .wrap-item-soc_log{
