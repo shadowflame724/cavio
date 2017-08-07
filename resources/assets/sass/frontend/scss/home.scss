@@ -777,6 +777,7 @@ html.mobile-platform .new-products-right-item.more .new-products-more-widt{
       font-family: 'ProbaPro', sans-serif;
       color: #8f8f8f;
       font-size:14px;
+      margin-top: 3px;
     }
 
     .product-price{
@@ -1619,6 +1620,7 @@ section#shop-by-cat{ margin-bottom: 130px; }
   float: left;
   height: 100%;
   width: 240px;
+  background: $mainActiveColor;
 }
 
 .wrapper-card-price{
@@ -2370,3 +2372,4 @@ svg.login-soc_icon{
     }
   }
 }
+

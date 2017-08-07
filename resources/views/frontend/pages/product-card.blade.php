@@ -97,7 +97,6 @@
                                                       <polygon points="47.7,49.6 33.6,35.5 36.7,32.3 47.7,43.3 58.5,32.5 61.6,35.6  "></polygon>
                                                     </g>
                                                   </svg>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -176,9 +175,11 @@
                                             <div class="wrap-card-dimensions">
                                                 <div class="wrap-card-block-title clearfix">
                                                     <div class="block_title-card">Dimensions</div>
-                                                    <div class="toggle-cent_inch"><span class="toggle-inner-length hov-colMain_clack active">Centimeters</span>
-                                                    /
-                                                    <span class="toggle-inner-length hov-colMain_clack">inches</span></div>
+                                                    <div class="toggle-cent_inch">
+                                                        <span class="toggle-inner-length hov-colMain_clack active">Centimeters</span>
+                                                        /
+                                                        <span class="toggle-inner-length hov-colMain_clack">inches</span>
+                                                    </div>
                                                 </div>
                                                 <div class="wrap-table-dimensions clearfix">
                                                     <ul class="wrap-dimensions-values clearfix">
@@ -312,29 +313,29 @@
 
                                 <div class="wrap-swiper-related overfl-h">
                                     <div class="swiper-wrapper">
-                                            @if(isset($product['photos']) && !empty($product['photos']))
-                                                @foreach($product['photos'] as $photo)
-                                                    <div class="swiper-slide wrap-also-buy-items">
-                                                    @if(!empty($photo['relationProducts']))
-                                                    @foreach($photo['relationProducts'] as $relationProduct)
-                                                        <div class="new-products-right-item grid cart_item @if($relationProduct['isDiscount']) discount @endif">
-                                                            <a class="new-products-right-inner-item" href="/product/{{$relationProduct['slug']}}">
-                                                                <div class="product-img-table">
-                                                                    <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(/upload/products/{{$relationProduct['image']}})">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="wrap-new-product-data">
-                                                                    <div class="product-code">#{{$relationProduct['code']}}</div>
-                                                                    <div class="product-name">{{$relationProduct['name']}}</div>
-                                                                    <div class="product-price">{{$relationProduct['prices']}}</div>
-                                                                </div>
-                                                            </a>
+                                    @if(isset($product['photos']) && !empty($product['photos']))
+                                        @foreach($product['photos'] as $photo)
+                                            <div class="swiper-slide wrap-also-buy-items">
+                                            @if(!empty($photo['relationProducts']))
+                                            @foreach($photo['relationProducts'] as $relationProduct)
+                                                <div class="new-products-right-item grid cart_item @if($relationProduct['isDiscount']) discount @endif">
+                                                    <a class="new-products-right-inner-item" href="/product/{{$relationProduct['slug']}}">
+                                                        <div class="product-img-table">
+                                                            <div class="wrap-new-product-img bg-white-marmur" style="background-image: url(/upload/products/{{$relationProduct['image']}})">
+                                                            </div>
                                                         </div>
-                                                    @endforeach
-                                                    @endif
-                                                    </div>
-                                                @endforeach
+                                                        <div class="wrap-new-product-data">
+                                                            <div class="product-code">#{{$relationProduct['code']}}</div>
+                                                            <div class="product-name">{{$relationProduct['name']}}</div>
+                                                            <div class="product-price">{{$relationProduct['prices']}}</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endforeach
                                             @endif
+                                            </div>
+                                        @endforeach
+                                    @endif
                                     </div>
                                 </div>
                             </div>
