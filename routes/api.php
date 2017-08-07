@@ -37,8 +37,8 @@ Route::get('/product-image/{file}', function (Request $request, $file) {
 
 Route::get('/basket/count', function (Request $request, CartContract $carts) {
     $count = 0;
-    $basket = $carts->findAll();
-    $basket = Crypt::decrypt($basket);
+    $basketCookies = $carts->findAll();
+    $basket = Crypt::decrypt($basketCookies);
     if(!empty($basket)){
         foreach ($basket as $item) {
             $count = (int)$count + (int)$item['count'];
