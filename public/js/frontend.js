@@ -227,7 +227,7 @@ $(document).ready(function () {
       'cy': cy
     });
 
-    console.log($('#circle-stash circle:animated'));
+   if($('#circle-stash:animated, #circle-stash circle:animated').length != 0)  return;
 
     $('#circle-stash, #circle-stash circle').finish();
     setTimeout(function () {

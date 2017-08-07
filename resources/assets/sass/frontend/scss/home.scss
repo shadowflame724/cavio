@@ -1867,10 +1867,9 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
       top: 0;
       bottom: 0;
       left: 5%;
-      width: 95px;
+      width: 80px;
     }
 
-    //background: #000;
 
     &.prev{ left:  0; &:before{  }}
     &.next{ right: 0; &:before{ transform: scale(-1); }}
