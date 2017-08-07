@@ -44,7 +44,7 @@
                 <div class="col-lg-10">
                     <select name="type" class="form-control">
                         @foreach($newsTypes as $key => $type)
-                            <option value="{{ $type->name }}">{!! $type->{'name'.$langSuf} !!}</option>
+                            <option value="{{ $key }}">{!! $type->{'name'.$langSuf} !!}</option>
                         @endforeach
                     </select>
                 </div><!--col-lg-10-->

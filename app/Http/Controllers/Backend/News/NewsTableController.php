@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\Backend\News\NewsRepository;
 use App\Http\Requests\Backend\News\ManageNewsRequest;
+use App\Models\Settings\Settings;
 
 /**
  * Class NewsTableController.
@@ -33,9 +34,14 @@ class NewsTableController extends Controller
      */
     public function __invoke(ManageNewsRequest $request)
     {
+        $newsTypes = json_decode(Settings::find(1)->getAttributeValue('news_types_data'));
+        $suf = (isset(config('app.langs')['suf'])) ? config('app.langs')['suf'] : '';
         return Datatables::of($this->news->getForDataTable())
             ->editColumn('created_at', function ($news) {
                 return $news->created_at ? with(new Carbon($news->created_at))->format('m/d/Y') : '';
+            })
+            ->editColumn('type', function ($news) use($newsTypes, $suf) {
+                return (isset($newsTypes[$news->type])) ? $newsTypes[$news->type]->{'name'.$suf} : $news->type;
             })
             ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%m/%d/%Y') like ?", ["%$keyword%"]);
