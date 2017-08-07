@@ -631,6 +631,8 @@ hr.top-menu-line{
   opacity: .4;
   border: none;
   margin: 0 auto;
+  position: relative;
+  z-index: 3;
 }
 
 header.scroll{
