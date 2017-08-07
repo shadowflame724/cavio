@@ -21,16 +21,18 @@
           <span class="curr-news-type"></span>
           <ul class="news-types-list">
             <li class="active"><a href=#>{{ trans('frontend.news.allNews') }}</a>
-            <li><a href=#>{{ trans('frontend.news.pressa') }}</a>
-            <li><a href=#>{{ trans('frontend.news.video') }}</a>
-            <li><a href=#>{{ trans('frontend.news.showrooms') }}</a>
+            @if(!empty($news_types_data))
+            @foreach($news_types_data as $key => $news_type)
+            <li><a href=# data-type="{{$key}}">{{$news_type['name'.$langSuf]}}</a>
+            @endforeach
+            @endif
           </ul>
         </div>
 
         <div class="wrap-news-list" data-anim="false">
           <div id="news-list" class="clearfix">
             @foreach($news as $item)
-              <div class="news-item">
+              <div class="news-item" data-type="{{$item->type}}">
                 @if($item->image)
                   <a href="{{ route('frontend.news.show', $item->slug) }}">
                       <img class="news-item-img" src="upload/images/{{ $item->image }}">

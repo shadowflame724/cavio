@@ -20,13 +20,13 @@
 
                     <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group">
-                            {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                <p class="form-control-static">{{ $email }}</p>
-                                {{ Form::hidden('email', $email, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.email')]) }}
-                            </div><!--col-md-6-->
-                        </div><!--form-group-->
+                    <div class="form-group">
+                        {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{ $email }}</p>
+                            {{ Form::hidden('email', $email, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.email')]) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
 
                     <div class="form-group">
                         {{ Form::label('password', trans('validation.attributes.frontend.password'), ['class' => 'col-md-4 control-label']) }}

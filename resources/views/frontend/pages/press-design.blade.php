@@ -82,7 +82,7 @@
                         
                                     <div class="td date">
                                         <div class="tabel-field-name">{{ trans('frontend.press-design.date') }}</div>
-                                        {{ $document->created_at->diffForHumans() }}
+                                        {{ $document->created_at->format('d.m.Y') }}
                                     </div>
                                     </div>
                                 @endif

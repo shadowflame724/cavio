@@ -7,11 +7,18 @@
                 <div class="wrap-swiper-log_reg inner-zone-col-modal relative">
 
                     <div class="wrap-log_reg-toggle">
-                        <div class="item-log_reg-toggle log">{{ trans('frontend.header.login') }}</div>
+                        <div class="item-log_reg-toggle log swiper-button-disabled">{{ trans('frontend.header.login') }}</div>
                         <div class="item-log_reg-toggle reg">{{ trans('frontend.login_modal.register') }}</div>
                     </div>
 
                     <div class="swiper-wrapper wrap-log_reg-items">
+                        <div class="swiper-slide log_reg-item forgot_pwd">
+                            {{ Form::open(['route' => 'frontend.auth.password.reset', 'class' => 'form-horizontal']) }}
+
+
+                            {{ Form::close() }}
+                        </div>
+
                         <div class="swiper-slide log_reg-item log">
 
                             <div class="wrap-login-social clearfix">

@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\Frontend\Cart\CartContract;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,3 +35,10 @@ Route::get('/product-image/{file}', function (Request $request, $file) {
     }
 });
 
+Route::get('/basket/count', function (CartContract $carts, Request $request) {
+    $count = 0;
+    $basket = $carts->findAll();
+    dd($basket);
+    dd($count);
+    return $count;
+});

@@ -10,6 +10,7 @@ Route::get('/', 'FrontendController@index')->name('index');
 Route::get('about', 'FrontendController@about')->name('about');
 Route::get('faq', 'FrontendController@faq')->name('faq');
 Route::get('news', 'NewsController@index')->name('news');
+//Route::post('news/{id}', 'NewsController@filter')->name('filter');
 Route::get('news/{news}', 'NewsController@show')->name('news.show');
 
 

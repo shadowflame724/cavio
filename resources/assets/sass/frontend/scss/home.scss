@@ -1655,20 +1655,35 @@ section#shop-by-cat{ margin-bottom: 130px; }
   letter-spacing: 1.4px;
 }
 
+#circle-stash{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  fill: $mainActiveColor;
+
+  //circle{ transition: 1s; }
+}
+
 .card-to_stash{
   float: left;
   width: 140px;
   height: 100%;
   background: #101010;
   margin-left: 2px;
-  //display: table-cell;
   text-align: center;
   position: relative;
   border-left: 2px transparent;
   cursor: pointer;
   z-index: 1;
+
+  &.clicked{ .stash-arrow { animation: animCardStashClick .8s; }}
 }
-html:not(.mobile-platform) .card-to_stash:hover .stash-arrow{ animation: animCardStashHov .8s; }
+//html:not(.mobile-platform) .card-to_stash:hover .stash-arrow{ animation: animCardStashHov .8s; }
+
+@keyframes animCardStashClick{
+  50% { transform: translateY(15px); }
+}
 
 @keyframes animCardStashHov{
   50% { transform: translateY(15px); }
