@@ -246,6 +246,27 @@ $(document).ready(function () {
     $('#modal-thank_you_default').attr('data-anim', 'true');
   };
 
+  //filter news
+  $('body').on('click', '.news-types-list li a', function () {
+    var id = $(this).attr('data-type') || false;
+
+    if (id === false) {
+      $('.news-item[data-type]').show();
+    } else {
+      $('.news-types-list li').removeClass('active');
+      $(this).parent('li').addClass('active');
+      $('.news-item[data-type]').hide();
+      $('.news-item[data-type="' + id + '"]').show();
+    }
+    return false;
+  });
+
+  var showDefaultModal = function (title,body) {
+    $('#modal-thank_you_default').find('.section-title').html(title);
+    $('#modal-thank_you_default').find('.ty-text').html(body);
+    $('#modal-thank_you_default').attr('data-anim', 'true');
+  };
+
   //contacts form
   $('body').on('submit', '#form-contacts', function () {
     var _form = $(this),

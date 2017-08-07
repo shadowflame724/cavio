@@ -32,7 +32,7 @@
         <div class="wrap-news-list" data-anim="false">
           <div id="news-list" class="clearfix">
             @foreach($news as $item)
-              <div class="news-item">
+              <div class="news-item" data-type="{{$item->type}}">
                 @if($item->image)
                   <a href="{{ route('frontend.news.show', $item->slug) }}">
                       <img class="news-item-img" src="upload/images/{{ $item->image }}">
