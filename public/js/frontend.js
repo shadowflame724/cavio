@@ -240,12 +240,12 @@ $(document).ready(function () {
       $('#circle-stash circle').animate({
         'r': '80'
       },{
-        duration: 700,
+        duration: 500,
         complete: function () {
           $('#circle-stash').animate({
             'opacity': '0'
           },{
-            duration: 400,
+            duration: 300,
             complete: function () {
               $('#circle-stash').css('opacity', 1);
               $('#circle-stash circle').css('r', 0);
@@ -2897,12 +2897,6 @@ function initProductCardPage() {
     simulateTouch: false,
     spaceBetween: 0,
     effect: 'fade',
-    cube: {
-      slideShadows: false,
-      shadow: false,
-      shadowOffset: 20,
-      shadowScale: 0.94
-    }
   });
 
   swiperCardBig = new Swiper('.wrap-card-params-right', {
