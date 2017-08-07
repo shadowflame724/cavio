@@ -8,7 +8,9 @@
                 <div class="coppyright-block"><span class="upper">© 2017. Cavio • Casa</span><br>
                     <a href="#" class="colored anim-underline">
                         {{ trans('frontend.footer.termsAndConditions') }}
-                    </a><br><a href="{{ route('frontend.privacy-policy') }}" class="colored anim-underline">
+                    </a>
+                    <br>
+                    <a href="{{ route('static-page', 'privacy-policy') }}" class="colored anim-underline">
                         {{ trans('frontend.footer.privacyPolicy') }}
                     </a></div>
                 <div class="footer-address">Viale Europa, 6/a, 37050<br>San Pietro di Morubio (VR) Italia</div>

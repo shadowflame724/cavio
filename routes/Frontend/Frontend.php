@@ -18,7 +18,7 @@ Route::post('message', 'MessageController@store')->name('message.store');
 
 //Route::get('payments', 'FrontendController@payments')->name('payments');
 Route::get('showrooms', 'FrontendController@showrooms')->name('showrooms');
-Route::get('privacy-policy', 'FrontendController@privacyPolicy')->name('privacy-policy');
+//Route::get('privacy-policy', 'FrontendController@privacyPolicy')->name('privacy-policy');
 Route::get('stash', 'FrontendController@stash')->name('stash');
 Route::get('finish-tissue', 'FrontendController@finishTissue')->name('finish-tissue');
 
