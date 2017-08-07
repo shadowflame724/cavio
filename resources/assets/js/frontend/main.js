@@ -214,9 +214,47 @@ $(document).ready(function () {
 
 
   //Add to cart
-  $('body').on('click', '#add_to_cart', function () {
+  $('body').on('click', '#btn_to_stash', function (e) {
+
     var $_price_id = $('.swiper-slide.wrap-card-price.active').find('.card-price').attr('data-id') || false;
     var $_count = 1;
+
+    // $('#circle-stash circle').css({ 'cx': });
+    var cx = (-($('#btn_to_stash').offset().left-e.clientX)/2);
+    var cy = (-($('#btn_to_stash').offset().top-e.clientY)/2);
+
+
+    $('#circle-stash circle').attr({
+      'cx': cx,
+      'cy': cy
+    });
+
+    $('#circle-stash, #circle-stash circle').finish();
+    setTimeout(function () {
+      $('#circle-stash, #circle-stash circle').finish();
+      $('#btn_to_stash').removeClass('clicked');
+    }, 1);
+
+    setTimeout(function () {
+      $('#btn_to_stash').addClass('clicked');
+      $('#circle-stash circle').animate({
+        'r': '80'
+      },{
+        duration: 700,
+        complete: function () {
+          $('#circle-stash').animate({
+            'opacity': '0'
+          },{
+            duration: 400,
+            complete: function () {
+              $('#circle-stash').css('opacity', 1);
+              $('#circle-stash circle').css('r', 0);
+              $('#btn_to_stash').removeClass('clicked');
+            }
+          });
+        }
+      });
+    }, 10)
 
     basket.add($_price_id, $_count);
   });
@@ -3240,13 +3278,6 @@ $('#ty-ok-p').on('click', function (e) {
 
 // CLOSE MODALS
 $(document).on('click', '.zone-col-modal', function (event) {
-  if($(event.target).closest('main').length == 0) {
-
-
-
-    return;
-  }
-
   var isModalSider = !$(event.target).closest('.inner-zone-col-modal').length;
 
   if (isModalSider || $(event.target).hasClass('btn-close-modal')) {
@@ -3254,7 +3285,7 @@ $(document).on('click', '.zone-col-modal', function (event) {
     $('body').removeClass('overfl-h');
 
 
-    if(!App.goPopupBack()){
+    if($(event.target).closest('main').length != 0 && !App.goPopupBack()){
       var pathToBack = location.pathname.substr(0, location.pathname.lastIndexOf('/'));
       App.goToPage(pathToBack);
     }
@@ -3690,6 +3721,7 @@ function initWaves() {
 function initLogRegSwiper() {
   var swiperLogReg = new Swiper('#modal-log_reg .wrap-swiper-log_reg', {
     slidesPerView: 1,
+    initialSlide: 1,
     centeredSlides: true,
     speed: 700,
     spaceBetween: 140,
@@ -3699,8 +3731,24 @@ function initLogRegSwiper() {
     // autoHeight: true,
     effect: "coverflow",
     coverflow: {slideShadows: false},
-    prevButton: '.item-log_reg-toggle.log',
-    nextButton: '.item-log_reg-toggle.reg',
+    // prevButton: '.item-log_reg-toggle.log',
+    // nextButton: '.item-log_reg-toggle.reg',
+  });
+
+  $('.wrap-log_reg-toggle .item-log_reg-toggle').on('click', function(){
+    if($(this).hasClass('swiper-button-disabled'))  return;
+
+    $(this).closest('.wrap-log_reg-toggle').find('.item-log_reg-toggle').removeClass('swiper-button-disabled');
+    if($(this).hasClass('log')) { swiperLogReg.slideTo(1); $('.wrap-log_reg-toggle .item-log_reg-toggle').eq(0).addClass('swiper-button-disabled'); }
+    else                        { swiperLogReg.slideTo(2); $('.wrap-log_reg-toggle .item-log_reg-toggle').eq(1).addClass('swiper-button-disabled'); }
+  });
+
+
+  $('.forgot-pwd').on('click', function(e){
+    e.preventDefault();
+
+    swiperLogReg.slideTo(0);
+    $('.wrap-log_reg-toggle .item-log_reg-toggle').removeClass('swiper-button-disabled');
   });
 }
 

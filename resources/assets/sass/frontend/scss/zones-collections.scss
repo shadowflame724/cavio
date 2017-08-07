@@ -186,7 +186,6 @@ section.zone-col-modal{
   &[data-anim='false']{
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-60px);
 
     .scroller-inner{ transform: translate(0, -60px); }
   }
