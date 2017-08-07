@@ -3243,6 +3243,7 @@ $(document).on('click', '.zone-col-modal', function (event) {
   if($(event.target).closest('main').length == 0) {
 
 
+
     return;
   }
 

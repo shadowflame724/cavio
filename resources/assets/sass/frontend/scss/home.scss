@@ -2238,6 +2238,8 @@ form.login_reg{
 }
 
 .wrap-remember-login{
+  float: left;
+
   input{
     height: auto !important;
     margin: 0 !important;
@@ -2245,6 +2247,7 @@ form.login_reg{
 }
 
 a.forgot-pwd{
+  float: right;
   color: black;
 }
 html:not(.mobile-platform) a.forgot-pwd{
