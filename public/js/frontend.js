@@ -3306,7 +3306,7 @@ $('.btn-top-menu').on('mouseenter', function () {
 });
 
 $('header').on('mouseleave', function () {
-  // hideTopMenu()
+  hideTopMenu()
 });
 
 $('.nav-icon, .svg-main-logo, .lang-panel, .open-modal-login, .svg-stash').on('mouseenter', function () {
