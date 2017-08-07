@@ -147,6 +147,7 @@ main[data-page^='/collections'], main[data-page^='/zones']{
   background-position: center center;
   background-repeat: no-repeat;
   background-color: black;
+  background-size: contain;
 }
 
 
@@ -435,7 +436,7 @@ html:not(.mobile-platform) .zc-modal-swip-arrow{
 
 ul.zc-modal-types{
   list-style: none;
-  padding: 40px 90px;
+  padding: 40px;
   margin: 0;
 
   li{
