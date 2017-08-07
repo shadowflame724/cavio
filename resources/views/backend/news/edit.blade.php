@@ -43,7 +43,7 @@
                 <div class="col-lg-10">
                     <select name="type" class="form-control">
                         @foreach($newsTypes as $key => $type)
-                            <option @if($news->type == $type)) selected @endif value="{{ $type->name }}">{!! $type->{'name'.$langSuf} !!}</option>
+                        <option @if($news->type == $key)) selected @endif value="{{ $key }}">{!! $type->{'name'.$langSuf} !!}</option>
                         @endforeach
                     </select>
                 </div><!--col-lg-10-->

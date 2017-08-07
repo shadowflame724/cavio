@@ -315,6 +315,9 @@ html:not(.mobile-platform) button.search-loupe:hover{ opacity: 0.5; }
 
 .new-products-right-item.w33{
   width: 33.333%;
+  display: inline-block;
+  float: none;
+  vertical-align: top;
 
   &:nth-child(3n+1){ margin-left: -1.5%; }
 }
