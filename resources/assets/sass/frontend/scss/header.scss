@@ -215,8 +215,8 @@ html:not(.mobile-platform) .btn-top-menu:hover{ color: $mainActiveColor !importa
   margin-left: 145px;
 }
 
-.svg-stash{
-  fill: white;
+.wrap-stash-ico a{
+  position: absolute;
   width: 49px;
   height: 37px;
   cursor: pointer;
@@ -225,12 +225,34 @@ html:not(.mobile-platform) .btn-top-menu:hover{ color: $mainActiveColor !importa
   top: -4px;
   bottom: 0;
   margin: auto;
+}
+
+.svg-stash{
+  fill: white;
+  width: 100%;
+  height: 100%;
   transition: .4s;
 
   &.dark{ fill: #3f372e; }
 }
 html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
 
+.stash-cnt{
+  font-family: ProbaPro Lt,sans-serif;
+  font-style: normal;
+  position: absolute;
+  top: -6px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 50%;
+  background: #b56349;
+
+  &:empty{ opacity: 0; pointer-events: none; }
+}
 
 .svg-main-logo{
   height: 40px;
