@@ -1853,26 +1853,37 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
 
   .nav-arrow{
     position: absolute;
-    width: 100px;
+    width: 130px;
     top: 0;
     bottom: 0;
     margin: auto;
     z-index: 1;
     cursor: pointer;
     background-size: contain;
-    &:before{
+
+    &:before, &:after{
       content: '';
-      background: url("/images/arrow.svg") 50% no-repeat;
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 5%;
-      width: 80px;
+      width: 60%;
+      transition: .5s;
     }
 
+    &:before{ background: url("/images/arrow.svg")      50% no-repeat; }
+    &:after { background: url("/images/arrow-dark.svg") 50% no-repeat; opacity: 0; }
 
-    &.prev{ left:  0; &:before{  }}
-    &.next{ right: 0; &:before{ transform: scale(-1); }}
+    &.prev{ left:  0;  &:before, &:after{ left:  40%; }}
+    &.next{ right: 0;  &:before, &:after{ right: 40%; transform: scale(-1); }}
+
+
+    &:hover{
+      &:before{ opacity: 0; }
+      &:after { opacity: 1; }
+
+      &.prev{ &:before,&:after{ transform: translateX(-15%); }}
+      &.next{ &:before,&:after{ transform: translateX( 15%) scale(-1); }}
+    }
   }
 }
 
@@ -1921,18 +1932,9 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
   background-size: cover;
   pointer-events: all !important;
   &:not(.swiper-slide-active){
-    &.swiper-slide-prev .slide-inner-bg{ transform: scale(0.8) translateX( 5.5%); &:hover{ transform: scale(0.85) translateX( 5.5%);} }
-    &.swiper-slide-next .slide-inner-bg{ transform: scale(0.8) translateX(-5.5%); &:hover{ transform: scale(0.85) translateX(-5.5%);} }
-    .slide-inner-bg{
-      cursor: pointer;
-      //transform: scale(0.8);
-      opacity: 0.2;
-
-      &:hover{
-        //transform: scale(0.87);
-        opacity: 0.5;
-      }
-    }
+    &.swiper-slide-prev .slide-inner-bg{ transform: scale(0.8) translateX( 5.5%); }
+    &.swiper-slide-next .slide-inner-bg{ transform: scale(0.8) translateX(-5.5%); }
+    .slide-inner-bg{ opacity: 0.2; }
   }
 
   .slide-inner-bg{
@@ -2371,4 +2373,3 @@ svg.login-soc_icon{
     }
   }
 }
-
