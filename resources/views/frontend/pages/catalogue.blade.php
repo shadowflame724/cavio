@@ -141,8 +141,8 @@
                 <?php
                 // TODO: Вывести выбраные фильтры
                 ?>
-                <span class="catal-type">dinning</span>
-                <span class="catal-item-numb"><span class="numb">{{ count($model) }}</span> {{ trans('frontend.header.products') }}</span>
+                {{--<span class="catal-type">dinning</span>--}}
+                <span class="catal-item-numb"><span class="numb">{{ $model->total() }}</span> {{ trans('frontend.header.products') }}</span>
               </div>
               @if(isset($model) && !empty($model))
               <div class="wrap-catal-list">
