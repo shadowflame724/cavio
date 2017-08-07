@@ -11,6 +11,7 @@ var App = (function () {
       _backFromProduct;
 
   function _start() {
+    _getCntBasket();
     $('body')
 
       .on('click', '[data-filter-name]', function (e) {
@@ -119,6 +120,11 @@ var App = (function () {
       });
   }
 
+  function _getCntBasket() {
+    $.get('/api/basket/count').done(function (answer) {
+      $('header .wrap-stash-ico').append('<i class="stash-cnt">'+answer+'</i>');
+    })
+  }
   function _hidePopup() {
     // hideTopMenu();
     // hideLeftMenu();
