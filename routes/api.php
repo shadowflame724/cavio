@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\Frontend\Cart\CartContract;
-use Illuminate\Cookie\Middleware\EncryptCookies;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,12 +36,9 @@ Route::get('/product-image/{file}', function (Request $request, $file) {
 
 Route::get('/basket/count', function (Request $request, CartContract $carts) {
     $count = 0;
-    $basketCookies = $carts->findAll();
-    $basket = Crypt::decrypt($basketCookies);
-    if(!empty($basket)){
-        foreach ($basket as $item) {
-            $count = (int)$count + (int)$item['count'];
-        }
+    $basket = $carts->findAll();
+    foreach ($basket as $item) {
+        $count = (int)$count + (int)$item['count'];
     }
     return $count;
 });
