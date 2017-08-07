@@ -63,9 +63,9 @@
                             @endforeach
                         </div>
                         <div class=zc-modal-product-show-more>
-                            <button class="btn dark"
+                            <a href="{{ route('frontend.catalogue', 'zones='.$zone->slug) }}" class="btn dark"
                                     content="{{ trans('frontend.zones-collections.showMore') }}"
-                            >{{ trans('frontend.zones-collections.showMore') }}</button>
+                            >{{ trans('frontend.zones-collections.showMore') }}</a>
                         </div>
                         @endif
                     </div>
