@@ -2886,15 +2886,18 @@ function initProductCardPage() {
     spaceBetween: 0,
   });
 
-  swiperDim = new Swiper('.wrap-dim-swiper', {
-    slidesPerView: 1,
-    speed: 700,
-    autoHeight: true,
-    followFinger: false,
-    simulateTouch: false,
-    spaceBetween: 0,
-    effect: 'fade',
+  $('.wrap-dim-swiper').each(function (key, el) {
+    swiperDim[key] = new Swiper(el, {
+      slidesPerView: 1,
+      speed: 700,
+      autoHeight: true,
+      followFinger: false,
+      simulateTouch: false,
+      spaceBetween: 0,
+      effect: 'fade',
+    });
   });
+
 
   swiperCardBig = new Swiper('.wrap-card-params-right', {
     slidesPerView: 1,
