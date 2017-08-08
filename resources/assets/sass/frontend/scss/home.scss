@@ -838,6 +838,7 @@ html.mobile-platform .new-products-right-inner-item{
     top: 0;
     left: 0;
     height: 100%;
+    overflow: hidden;
     padding-left: 70px;
     padding-right: 90px;
     transition: z-index 0s .2s;
@@ -2407,3 +2408,7 @@ svg.login-soc_icon{
   }
 }
 
+.new-products-right-side {
+  article.scroll-content{ height: 100%; }
+  .scrollbar-track-x{ display: none !important; }
+}
