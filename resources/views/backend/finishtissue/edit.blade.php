@@ -47,16 +47,18 @@
                         <select name="parent" class="form-control" id="parentSelector">
                             <option value="rootFinish"
                                     @if($finishTissue->parent_id == null AND $finishTissue->type == 'finish')
-                            selected @endif>Root Finish</option>
+                                    selected @endif>Root Finish
+                            </option>
                             <option value="rootTissue"
                                     @if($finishTissue->parent_id == null AND $finishTissue->type == 'tissue')
-                            selected @endif>Root Tissue</option>
+                                    selected @endif>Root Tissue
+                            </option>
                             <optgroup label="Finish">
                                 @foreach($parents as $parent)
                                     @if($parent->type == 'finish')
                                         <option @if($finishTissue->parent_id == $parent->id)
                                                 selected @endif
-                                        value="{{ $parent->id }}">{{ $parent->title }}</option>
+                                                value="{{ $parent->id }}">{{ $parent->title }}</option>
                                     @endif
                                 @endforeach
                             </optgroup>
@@ -120,26 +122,25 @@
                 </div><!--form control-->
 
 
+                <div class="form-group" id="forChild" @if($finishTissue->parent_id == null) hidden @endif>
 
-                    <div class="form-group" id="forChild" @if($finishTissue->parent_id == null) hidden @endif>
-
-                        {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
-                        <div class="col-lg-10">
-                            <div class="dropzone" id="dz_photo"></div>
-                            @if($finishTissue->image)
-                                <div class="photo active">
-                                    {{ Form::hidden('photo', $finishTissue->image, ['id' => 'photo']) }}
-                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                    <img id="add_photo" src="/upload/images/{{ $finishTissue->image  }}" alt="">
-                                </div>
-                            @else
-                                <div class="photo">
-                                    {{ Form::hidden('photo', null, ['id' => 'photo']) }}
-                                    <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
-                                </div>
-                            @endif
-                        </div>
-                    </div><!--form control-->
+                    {{ Form::label('photo', trans('validation.attributes.backend.access.category.image'), ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <div class="dropzone" id="dz_photo"></div>
+                        @if($finishTissue->image)
+                            <div class="photo active">
+                                {{ Form::hidden('photo', $finishTissue->image, ['id' => 'photo']) }}
+                                <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                                <img id="add_photo" src="/upload/images/{{ $finishTissue->image  }}" alt="">
+                            </div>
+                        @else
+                            <div class="photo">
+                                {{ Form::hidden('photo', null, ['id' => 'photo']) }}
+                                <div class="btn glyphicon glyphicon-remove dlt_photo"></div>
+                            </div>
+                        @endif
+                    </div>
+                </div><!--form control-->
 
             </div>
         </div>
@@ -235,6 +236,7 @@
             var blob = new Blob([ab], {type: mimeString});
             return blob;
         }
+
         function dataURLtoMimeType(dataURL) {
             var BASE64_MARKER = ';base64,';
             var data;
@@ -258,7 +260,7 @@
 
             var arr = data.subarray(0, 4);
             var header = "";
-            for(var i = 0; i < arr.length; i++) {
+            for (var i = 0; i < arr.length; i++) {
                 header += arr[i].toString(16);
             }
             switch (header) {
@@ -367,6 +369,8 @@
                         autoCropArea: 1,
                         aspectRatio: 1,
                         movable: false,
+                        zoomOnWheel: false,
+                        viewMode: 3,
                         cropBoxResizable: true,
                         minContainerHeight: 320,
                         minContainerWidth: 568,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\File;
 
+use Eventviva\ImageResize;
 use JBZoo\Image\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,10 +15,9 @@ class UploadController extends Controller
     {
         $imgName = time() . '.' . $file->getClientOriginalExtension();
         $path = $file->getRealPath();
-        $img = new Image($path);
-        $img->setQuality(100);
-        $imgWidth = $img->getWidth();
-        $imgHeight = $img->getHeight();
+        $img = new ImageResize($path);
+        $imgWidth = $img->getSourceWidth();
+        $imgHeight = $img->getSourceHeight();
         if (!file_exists(public_path('/upload/tmp'))) {
             mkdir(public_path('/upload/tmp'), 0777, true);
         }
@@ -31,9 +31,9 @@ class UploadController extends Controller
             return $json;
         } else {
             if ($flug == false) {
-                $img->thumbnail($width, $height)->saveAs(public_path('/upload/tmp/' . $imgName));
+                $img->resizeToBestFit($width, $height)->save(public_path('/upload/tmp/' . $imgName));
             } else {
-                $img->saveAs(public_path('/upload/tmp/' . $imgName));
+                $img->save(public_path('/upload/tmp/' . $imgName));
             }
 
             $json = [
@@ -41,7 +41,7 @@ class UploadController extends Controller
                     'title' => 'Done',
                     'text' => 'Photo upload',
                     'imgName' => $imgName,
-                    'path' => $img->getPath()
+                    'path' => 'upload/tmp/' . $imgName
                 ]
             ];
 

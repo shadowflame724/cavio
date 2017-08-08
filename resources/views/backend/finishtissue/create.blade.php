@@ -363,6 +363,8 @@
                         autoCropArea: 1,
                         aspectRatio: 1,
                         movable: false,
+                        zoomOnWheel: false,
+                        viewMode: 3,
                         cropBoxResizable: true,
                         minContainerHeight: 320,
                         minContainerWidth: 568,
