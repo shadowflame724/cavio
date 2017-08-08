@@ -450,6 +450,8 @@
 
 
   .wrap-media-ind_pop, .wrap-text-ind_pop{ padding: 0 10px; }
+
+  .wrap-nav-img_coll .nav-arrow{ width: 100px; }
 }
 // END ================== $breakPointTablet ========================
 
@@ -654,7 +656,7 @@
     &.dark-profile{ width: 100%; }
   }
 
-//  LOG REG ============
+  //  LOG REG ============
   .wrap-item-soc_log{
     width: 48%;
     height: 38px;
@@ -813,6 +815,12 @@
     width: 100%;
     float: none;
     margin-top: 30px;
+  }
+
+  .wrap-nav-img_coll .nav-arrow {
+    width: 60px;
+    .prev{ &:before, &:after{ left:  20%; }}
+    .next{ &:before, &:after{ right: 20%; }}
   }
 }
 

@@ -155,7 +155,7 @@ main[data-page^='/collections'], main[data-page^='/zones']{
 
 section.zone-col-modal{
   z-index: 1000;
-  background: $mainBGColor;
+  //background: $mainBGColor;
   transition: .9s;
 
   &.modal-log_reg{
@@ -165,17 +165,17 @@ section.zone-col-modal{
     overflow: auto;
   }
 
-  &:before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: .6;
-    background: url("/images/banner-zone-col.jpg") no-repeat;
-    background-size: cover;
-  }
+  //&:before{
+  //  content: '';
+  //  position: absolute;
+  //  top: 0;
+  //  left: 0;
+  //  right: 0;
+  //  bottom: 0;
+  //  opacity: .6;
+  //  background: url("/images/banner-zone-col.jpg") no-repeat;
+  //  background-size: cover;
+  //}
 
   &[data-anim='true']{
     opacity: 1;

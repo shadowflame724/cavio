@@ -186,7 +186,7 @@
                                                         @if(isset($product['childs']) && !empty($product['childs']))
                                                         @foreach($product['childs'] as $child)
                                                         <li data-child="{{$child['id']}}" @if($child['id'] == $one['product_child_id']) class="active" @endif>
-                                                            <div class="dimensions-item-numb">1</div>
+                                                            <div class="dimensions-item-numb"></div>
                                                             <div class="wrap-dim-swiper">
                                                                 <div class="swiper-wrapper">
                                                                     <ul class="swiper-slide dimensions-values-item bg-white-marmur cent">

@@ -235,7 +235,7 @@ html:not(.mobile-platform) .btn-top-menu:hover{ color: $mainActiveColor !importa
 
   &.dark{ fill: #3f372e; }
 }
-html:not(.mobile-platform) .svg-stash:hover{ fill: $mainActiveColor; }
+html:not(.mobile-platform) .wrap-stash-ico a:hover{ .svg-stash{ fill: $mainActiveColor; }}
 
 .stash-cnt{
   font-family: ProbaPro Lt,sans-serif;
@@ -909,7 +909,6 @@ html:not(.mobile-platform) .top-menu-title:hover{ color: $mainActiveColor; }
   .wrap-logo{ z-index: 1; }
   .header-bg{
     height: 80px;
-    opacity: 1;
     background: linear-gradient(180deg,rgba(0,0,0,.5) 0,transparent);
   }
 
