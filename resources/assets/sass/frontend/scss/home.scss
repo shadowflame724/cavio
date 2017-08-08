@@ -838,6 +838,7 @@ html.mobile-platform .new-products-right-inner-item{
     top: 0;
     left: 0;
     height: 100%;
+    overflow: hidden;
     padding-left: 70px;
     padding-right: 90px;
     transition: z-index 0s .2s;
@@ -892,6 +893,16 @@ h3.section-title{
   position: relative;
   margin: 0;
   transition: transform 1s, opacity 1s;
+
+  &[data-anim='false']{
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  &[data-anim='true']{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   &.small{
     font-size: 90px;
     &:after{ bottom: -45px; }
@@ -943,7 +954,7 @@ h3.section-title{
   max-width: 1600px;
   width: 100% !important;
   height: auto!important;
-  transition: opacity 2s ease;
+  transition: opacity 2s;
 }
 
 .cont-coll{
@@ -1138,6 +1149,12 @@ html:not(.mobile-platform) .item-coll.coll-swiper-arr{
   position: relative;
   width: 100%;
   font-size: 0;
+
+  &[data-anim='false']{
+    opacity: 0;
+
+    .bg-wave{ opacity: 0; }
+  }
 }
 
 .phil-left{
@@ -1175,6 +1192,9 @@ html:not(.mobile-platform) .item-coll.coll-swiper-arr{
   .wrap-img-bg .img-back{ transition: transform 1s; }
 
   &[data-anim='true']{
+    opacity: 1;
+
+    .bg-wave{ opacity: 1; }
     .phil-left{ opacity: 1; }
     .wrap-img-bg .img-back{ transform: translate(-40px, -30px); }
     .philosophy-img{ transform: scale(1); }
@@ -1704,6 +1724,7 @@ section#shop-by-cat{ margin-bottom: 130px; }
   top: 50px;
   height: 140px;
   overflow: hidden;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
 
 .svg-card-to_stash{
@@ -1726,7 +1747,7 @@ ul.size-name{
   float: left;
 }
 
-.dimensions-item-numb{ display: none; }
+.dimensions-item-numb{ position: relative ;display: none; }
 .wrap-table-dimensions{ margin-top: 20px; }
 
 ul.wrap-dimensions-values{
@@ -1756,6 +1777,19 @@ ul.wrap-dimensions-values{
       border-color: rgba(0,0,0, 0.1);
       color: #101010;
     }
+
+    .dimensions-item-numb:after{
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    &:nth-child(1) .dimensions-item-numb:after{ content: '1' }
+    &:nth-child(2) .dimensions-item-numb:after{ content: '2' }
+    &:nth-child(3) .dimensions-item-numb:after{ content: '3' }
+    &:nth-child(4) .dimensions-item-numb:after{ content: '4' }
   }
 }
 
@@ -1853,27 +1887,37 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
 
   .nav-arrow{
     position: absolute;
-    width: 100px;
+    width: 130px;
     top: 0;
     bottom: 0;
     margin: auto;
     z-index: 1;
     cursor: pointer;
     background-size: contain;
-    &:before{
+
+    &:before, &:after{
       content: '';
-      background: url("/images/arrow.svg") 50% no-repeat;
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 5%;
-      width: 95px;
+      width: 60%;
+      transition: .5s;
     }
 
-    //background: #000;
+    &:before{ background: url("/images/arrow.svg")      50% no-repeat; }
+    &:after { background: url("/images/arrow-dark.svg") 50% no-repeat; opacity: 0; }
 
-    &.prev{ left:  0; &:before{  }}
-    &.next{ right: 0; &:before{ transform: scale(-1); }}
+    &.prev{ left:  0;  &:before, &:after{ left:  40%; }}
+    &.next{ right: 0;  &:before, &:after{ right: 40%; transform: scale(-1); }}
+
+
+    &:hover{
+      &:before{ opacity: 0; }
+      &:after { opacity: 1; }
+
+      &.prev{ &:before,&:after{ transform: translateX(-15%); }}
+      &.next{ &:before,&:after{ transform: translateX( 15%) scale(-1); }}
+    }
   }
 }
 
@@ -1922,18 +1966,9 @@ html:not(.mobile-platform) .share-social-link:hover .svg-share_social-icon{ fill
   background-size: cover;
   pointer-events: all !important;
   &:not(.swiper-slide-active){
-    &.swiper-slide-prev .slide-inner-bg{ transform: scale(0.8) translateX( 5.5%); &:hover{ transform: scale(0.85) translateX( 5.5%);} }
-    &.swiper-slide-next .slide-inner-bg{ transform: scale(0.8) translateX(-5.5%); &:hover{ transform: scale(0.85) translateX(-5.5%);} }
-    .slide-inner-bg{
-      cursor: pointer;
-      //transform: scale(0.8);
-      opacity: 0.2;
-
-      &:hover{
-        //transform: scale(0.87);
-        opacity: 0.5;
-      }
-    }
+    &.swiper-slide-prev .slide-inner-bg{ transform: scale(0.8) translateX( 5.5%); }
+    &.swiper-slide-next .slide-inner-bg{ transform: scale(0.8) translateX(-5.5%); }
+    .slide-inner-bg{ opacity: 0.2; }
   }
 
   .slide-inner-bg{
@@ -2373,3 +2408,7 @@ svg.login-soc_icon{
   }
 }
 
+.new-products-right-side {
+  article.scroll-content{ height: 100%; }
+  .scrollbar-track-x{ display: none !important; }
+}
